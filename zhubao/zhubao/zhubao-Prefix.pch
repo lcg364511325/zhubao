@@ -13,4 +13,13 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+
+/*接口地址*/
+//域名
+#define domainser  @"http://183.31.132.240:9044/"
+#define domainwebservice @"http://192.168.0.11:8011/visa/PROXY/VisaCenterProxy?wsdl"
+
+//页面行数
+#define PSize @"10"
+
 #endif
