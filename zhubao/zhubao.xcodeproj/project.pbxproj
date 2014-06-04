@@ -102,6 +102,11 @@
 		7B7FFDAB193853CA008712CB /* view.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7FFD71193853CA008712CB /* view.png */; };
 		7B7FFDAC193853CA008712CB /* vip.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7FFD72193853CA008712CB /* vip.png */; };
 		7B7FFDAE19385596008712CB /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7FFDAD19385596008712CB /* image.png */; };
+		7C1BE671193EFEC00000E397 /* Commons.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE66C193EFEC00000E397 /* Commons.m */; };
+		7C1BE672193EFEC00000E397 /* DataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE66E193EFEC00000E397 /* DataService.m */; };
+		7C1BE673193EFEC00000E397 /* WebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE670193EFEC00000E397 /* WebService.m */; };
+		7C1BE677193EFECF0000E397 /* LoginEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE676193EFECF0000E397 /* LoginEntity.m */; };
+		7C1BE67B193EFEDA0000E397 /* LoginApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE67A193EFEDA0000E397 /* LoginApi.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -223,6 +228,16 @@
 		7B7FFD71193853CA008712CB /* view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view.png; sourceTree = "<group>"; };
 		7B7FFD72193853CA008712CB /* vip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vip.png; sourceTree = "<group>"; };
 		7B7FFDAD19385596008712CB /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
+		7C1BE66B193EFEC00000E397 /* Commons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Commons.h; sourceTree = "<group>"; };
+		7C1BE66C193EFEC00000E397 /* Commons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Commons.m; sourceTree = "<group>"; };
+		7C1BE66D193EFEC00000E397 /* DataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataService.h; sourceTree = "<group>"; };
+		7C1BE66E193EFEC00000E397 /* DataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataService.m; sourceTree = "<group>"; };
+		7C1BE66F193EFEC00000E397 /* WebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebService.h; sourceTree = "<group>"; };
+		7C1BE670193EFEC00000E397 /* WebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebService.m; sourceTree = "<group>"; };
+		7C1BE675193EFECF0000E397 /* LoginEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginEntity.h; sourceTree = "<group>"; };
+		7C1BE676193EFECF0000E397 /* LoginEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginEntity.m; sourceTree = "<group>"; };
+		7C1BE679193EFEDA0000E397 /* LoginApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginApi.h; sourceTree = "<group>"; };
+		7C1BE67A193EFEDA0000E397 /* LoginApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginApi.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,21 +264,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2C01B4EF1939A64F00C08C2E /* extend */ = {
-			isa = PBXGroup;
-			children = (
-				2C01B4F01939A65C00C08C2E /* Helper */,
-			);
-			name = extend;
-			sourceTree = "<group>";
-		};
-		2C01B4F01939A65C00C08C2E /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Helper;
-			sourceTree = "<group>";
-		};
 		2C5C97EB19349E2100004343 = {
 			isa = PBXGroup;
 			children = (
@@ -297,7 +297,9 @@
 		2C5C97FD19349E2100004343 /* zhubao */ = {
 			isa = PBXGroup;
 			children = (
-				2C01B4EF1939A64F00C08C2E /* extend */,
+				7C1BE678193EFEDA0000E397 /* ServiceApi */,
+				7C1BE674193EFECF0000E397 /* Model */,
+				7C1BE66A193EFEC00000E397 /* Helper */,
 				7B7FFD38193853CA008712CB /* image */,
 				2C5C984C1934A0E900004343 /* iPad */,
 				2C5C980619349E2100004343 /* AppDelegate.h */,
@@ -441,6 +443,37 @@
 				7B7FFD72193853CA008712CB /* vip.png */,
 			);
 			path = image;
+			sourceTree = "<group>";
+		};
+		7C1BE66A193EFEC00000E397 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				7C1BE66B193EFEC00000E397 /* Commons.h */,
+				7C1BE66C193EFEC00000E397 /* Commons.m */,
+				7C1BE66D193EFEC00000E397 /* DataService.h */,
+				7C1BE66E193EFEC00000E397 /* DataService.m */,
+				7C1BE66F193EFEC00000E397 /* WebService.h */,
+				7C1BE670193EFEC00000E397 /* WebService.m */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		7C1BE674193EFECF0000E397 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7C1BE675193EFECF0000E397 /* LoginEntity.h */,
+				7C1BE676193EFECF0000E397 /* LoginEntity.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7C1BE678193EFEDA0000E397 /* ServiceApi */ = {
+			isa = PBXGroup;
+			children = (
+				7C1BE679193EFEDA0000E397 /* LoginApi.h */,
+				7C1BE67A193EFEDA0000E397 /* LoginApi.m */,
+			);
+			path = ServiceApi;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -617,10 +650,15 @@
 				2C5C980819349E2100004343 /* AppDelegate.m in Sources */,
 				2C01B4FF1939C7DC00C08C2E /* test.m in Sources */,
 				2C15F832193708BA00E8935B /* member.m in Sources */,
+				7C1BE671193EFEC00000E397 /* Commons.m in Sources */,
 				2C15F34D1936D31400E8935B /* diploma.m in Sources */,
 				2C01B4FA1939BBD100C08C2E /* ceshi.m in Sources */,
 				2C5C98631935BDA000004343 /* NakedDiamond.m in Sources */,
+				7C1BE67B193EFEDA0000E397 /* LoginApi.m in Sources */,
+				7C1BE673193EFEC00000E397 /* WebService.m in Sources */,
 				2C5C983319349ED800004343 /* Index.m in Sources */,
+				7C1BE672193EFEC00000E397 /* DataService.m in Sources */,
+				7C1BE677193EFECF0000E397 /* LoginEntity.m in Sources */,
 				2C5C980419349E2100004343 /* main.m in Sources */,
 				2C5C98501935793B00004343 /* product.m in Sources */,
 				2C5C98991935DD7E00004343 /* ustomtailor.m in Sources */,
