@@ -18,6 +18,9 @@
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondaryView;
 @property (retain, nonatomic) IBOutlet UIView *primaryShadeView;
+@property (weak, nonatomic) IBOutlet UITableView *textureselect;
+@property (strong, nonatomic) NSArray *mainlist;
+@property (weak, nonatomic) IBOutlet UITextField *texturetext;
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;

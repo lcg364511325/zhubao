@@ -40,6 +40,9 @@
 		2C5C98641935BDA000004343 /* NakedDiamond.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5C98621935BDA000004343 /* NakedDiamond.xib */; };
 		2C5C98991935DD7E00004343 /* ustomtailor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5C98971935DD7E00004343 /* ustomtailor.m */; };
 		2C5C989A1935DD7E00004343 /* ustomtailor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5C98981935DD7E00004343 /* ustomtailor.xib */; };
+		2C6CDCE5193F24E3008EAAFB /* bg_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C6CDCE2193F24E3008EAAFB /* bg_1.png */; };
+		2C6CDCE6193F24E3008EAAFB /* bg_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C6CDCE3193F24E3008EAAFB /* bg_2.png */; };
+		2C6CDCE7193F24E3008EAAFB /* bg_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C6CDCE4193F24E3008EAAFB /* bg_3.png */; };
 		7B7FFD73193853CA008712CB /* 0008.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7FFD39193853CA008712CB /* 0008.png */; };
 		7B7FFD74193853CA008712CB /* 0013.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7FFD3A193853CA008712CB /* 0013.png */; };
 		7B7FFD75193853CA008712CB /* 0018.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7FFD3B193853CA008712CB /* 0018.png */; };
@@ -158,6 +161,9 @@
 		2C5C98961935DD7E00004343 /* ustomtailor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ustomtailor.h; sourceTree = "<group>"; };
 		2C5C98971935DD7E00004343 /* ustomtailor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ustomtailor.m; sourceTree = "<group>"; };
 		2C5C98981935DD7E00004343 /* ustomtailor.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ustomtailor.xib; sourceTree = "<group>"; };
+		2C6CDCE2193F24E3008EAAFB /* bg_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_1.png; sourceTree = "<group>"; };
+		2C6CDCE3193F24E3008EAAFB /* bg_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_2.png; sourceTree = "<group>"; };
+		2C6CDCE4193F24E3008EAAFB /* bg_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_3.png; sourceTree = "<group>"; };
 		7B7FFD39193853CA008712CB /* 0008.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0008.png; sourceTree = "<group>"; };
 		7B7FFD3A193853CA008712CB /* 0013.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0013.png; sourceTree = "<group>"; };
 		7B7FFD3B193853CA008712CB /* 0018.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0018.png; sourceTree = "<group>"; };
@@ -368,6 +374,9 @@
 		7B7FFD38193853CA008712CB /* image */ = {
 			isa = PBXGroup;
 			children = (
+				2C6CDCE2193F24E3008EAAFB /* bg_1.png */,
+				2C6CDCE3193F24E3008EAAFB /* bg_2.png */,
+				2C6CDCE4193F24E3008EAAFB /* bg_3.png */,
 				2C2A207A193D674B00A57C00 /* magnifier2.png */,
 				2C14E999193965E20084E8FE /* logo.png */,
 				2C14E99A193965E20084E8FE /* pageindex.png */,
@@ -536,6 +545,7 @@
 				2C5C981019349E2100004343 /* Images.xcassets in Resources */,
 				7B7FFD73193853CA008712CB /* 0008.png in Resources */,
 				7B7FFDAE19385596008712CB /* image.png in Resources */,
+				2C6CDCE6193F24E3008EAAFB /* bg_2.png in Resources */,
 				7B7FFD8D193853CA008712CB /* diamonds.png in Resources */,
 				2C2A207B193D674B00A57C00 /* magnifier2.png in Resources */,
 				2C5C980219349E2100004343 /* InfoPlist.strings in Resources */,
@@ -559,6 +569,7 @@
 				7B7FFD92193853CA008712CB /* home.png in Resources */,
 				2C15F34E1936D31400E8935B /* diploma.xib in Resources */,
 				7B7FFD86193853CA008712CB /* diamond05.png in Resources */,
+				2C6CDCE7193F24E3008EAAFB /* bg_3.png in Resources */,
 				7B7FFDA3193853CA008712CB /* ring.png in Resources */,
 				7B7FFD98193853CA008712CB /* install.png in Resources */,
 				7B7FFD76193853CA008712CB /* 04.png in Resources */,
@@ -580,6 +591,7 @@
 				7B7FFD91193853CA008712CB /* frame.png in Resources */,
 				7B7FFD78193853CA008712CB /* 11.png in Resources */,
 				7B7FFD7A193853CA008712CB /* bg.png in Resources */,
+				2C6CDCE5193F24E3008EAAFB /* bg_1.png in Resources */,
 				7B7FFD83193853CA008712CB /* diamond02.png in Resources */,
 				2C5C980B19349E2100004343 /* Main.storyboard in Resources */,
 				7B7FFD9F193853CA008712CB /* pwd_submit.png in Resources */,

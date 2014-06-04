@@ -14,6 +14,16 @@
 #import "member.h"
 
 @interface NakedDiamond : UIViewController
+{
+    NSMutableArray *shapearray;
+    NSMutableArray *colorarray;
+    NSMutableArray *netarray;
+    NSMutableArray *cutarray;
+    NSMutableArray *chasingarray;
+    NSMutableArray *symmetryarray;
+    NSMutableArray *fluorescencearray;
+    NSMutableArray *diplomaarray;
+}
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondaryView;

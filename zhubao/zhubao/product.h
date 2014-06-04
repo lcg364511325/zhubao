@@ -20,6 +20,19 @@
 @property (retain, nonatomic) IBOutlet UIView *primaryShadeView;
 @property (retain, nonatomic) IBOutlet UIView *thridaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondShadeView;
+@property (weak, nonatomic) IBOutlet UITableView *mianselect;
+@property (weak, nonatomic) IBOutlet UITableView *netselect;
+@property (weak, nonatomic) IBOutlet UITableView *colorselect;
+@property (weak, nonatomic) IBOutlet UITableView *textureselect;
+@property (strong, nonatomic) NSArray *mainlist;
+@property (strong, nonatomic) NSArray *netlist;
+@property (strong, nonatomic) NSArray *colorlist;
+@property (strong, nonatomic) NSArray *texturelist;
+@property (weak, nonatomic) IBOutlet UITextField *maintext;
+@property (weak, nonatomic) IBOutlet UITextField *nettext;
+@property (weak, nonatomic) IBOutlet UITextField *colortext;
+@property (weak, nonatomic) IBOutlet UITextField *texturetext;
+
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;

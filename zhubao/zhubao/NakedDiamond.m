@@ -22,6 +22,15 @@
 @synthesize fourtharyView;
 @synthesize thirdShadeView;
 
+NSArray *shapearray=nil;
+NSArray *colorarray=nil;
+NSArray *netarray=nil;
+NSArray *cutarray=nil;
+NSArray *chasingarray=nil;
+NSArray *symmetryarray=nil;
+NSArray *fluorescencearray=nil;
+NSArray *diplomaarray=nil;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -35,6 +44,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    shapearray = [[NSMutableArray alloc] init];
+    colorarray = [[NSMutableArray alloc] init];
+    netarray = [[NSMutableArray alloc] init];
+    cutarray = [[NSMutableArray alloc] init];
+    chasingarray = [[NSMutableArray alloc] init];
+    symmetryarray = [[NSMutableArray alloc] init];
+    fluorescencearray = [[NSMutableArray alloc] init];
+    diplomaarray = [[NSMutableArray alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -115,6 +132,355 @@
 {
     fourtharyView.hidden = YES;
     thirdShadeView.alpha=0;
+}
+
+//选择形状
+-(IBAction)shapeselect:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    NSInteger btntag=[btn tag];
+    NSString * shape=nil;
+    if (btntag==0) {
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==1){
+        shape=@"RB";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==2){
+        shape=@"PE";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==3){
+        shape=@"EM";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==4){
+        shape=@"RD";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==5){
+        shape=@"OL";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==6){
+        shape=@"MQ";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==7){
+        shape=@"CU";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==8){
+        shape=@"PR";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==9){
+        shape=@"HT";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==10){
+        shape=@"ASH";
+        btn.backgroundColor=[UIColor yellowColor];
+    }
+    NSUInteger len=[shapearray count];
+    int i;
+    BOOL isequal=NO;
+    for (i=0; i<len; i++) {
+        NSString * value=[shapearray objectAtIndex:i];
+        isequal = [shape isEqualToString:value];
+        if (isequal) {
+            [shapearray removeObjectAtIndex:i];
+            btn.backgroundColor=[UIColor whiteColor];
+        }
+    }
+    if (!isequal) {
+        [shapearray addObject:shape];
+    }
+}
+
+// 选择颜色
+-(IBAction)colorselect:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    NSInteger btntag=[btn tag];
+    NSString * color=nil;
+    if (btntag==0) {
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==1){
+        color=@"D";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==2){
+        color=@"E";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==3){
+        color=@"F";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==4){
+        color=@"G";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==5){
+        color=@"H";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==6){
+        color=@"I";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==7){
+        color=@"J";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==8){
+        color=@"K";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==9){
+        color=@"L";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==10){
+        color=@"M";
+        btn.backgroundColor=[UIColor yellowColor];
+    }
+    NSUInteger len=[colorarray count];
+    int i;
+    BOOL isequal=NO;
+    for (i=0; i<len; i++) {
+        NSString * value=[colorarray objectAtIndex:i];
+        isequal = [color isEqualToString:value];
+        if (isequal) {
+            [colorarray removeObjectAtIndex:i];
+            btn.backgroundColor=[UIColor whiteColor];
+        }
+    }
+    if (!isequal) {
+        [colorarray addObject:color];
+    }
+}
+// 选择净度
+-(IBAction)netselect:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    NSInteger btntag=[btn tag];
+    NSString * net=nil;
+    if (btntag==0) {
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==1){
+        net=@"FL";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==2){
+        net=@"IF";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==3){
+        net=@"VVS1";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==4){
+        net=@"VVS2";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==5){
+        net=@"VS1";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==6){
+        net=@"VS2";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==7){
+        net=@"SI1";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==8){
+        net=@"SI2";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==9){
+        net=@"I1";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==10){
+        net=@"I2";
+        btn.backgroundColor=[UIColor yellowColor];
+    }
+    NSUInteger len=[netarray count];
+    int i;
+    BOOL isequal=NO;
+    for (i=0; i<len; i++) {
+        NSString * value=[netarray objectAtIndex:i];
+        isequal = [net isEqualToString:value];
+        if (isequal) {
+            [netarray removeObjectAtIndex:i];
+            btn.backgroundColor=[UIColor whiteColor];
+        }
+    }
+    if (!isequal) {
+        [netarray addObject:net];
+    }
+}
+
+//选择切工
+-(IBAction)cutselect:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    NSInteger btntag=[btn tag];
+    NSString * cut=nil;
+    if (btntag==0) {
+        cut=@"EX";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==1){
+        cut=@"VG";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==2){
+        cut=@"GD";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==3){
+        cut=@"Fair";
+        btn.backgroundColor=[UIColor yellowColor];
+    }
+    NSUInteger len=[cutarray count];
+    int i;
+    BOOL isequal=NO;
+    for (i=0; i<len; i++) {
+        NSString * value=[cutarray objectAtIndex:i];
+        isequal = [cut isEqualToString:value];
+        if (isequal) {
+            [cutarray removeObjectAtIndex:i];
+            btn.backgroundColor=[UIColor whiteColor];
+        }
+    }
+    if (!isequal) {
+        [cutarray addObject:cut];
+    }
+}
+
+//选择抛光
+-(IBAction)chasingselect:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    NSInteger btntag=[btn tag];
+    NSString * chasing=nil;
+    if (btntag==0) {
+        chasing=@"EX";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==1){
+        chasing=@"VG";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==2){
+        chasing=@"GD";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==3){
+        chasing=@"Fair";
+        btn.backgroundColor=[UIColor yellowColor];
+    }
+    NSUInteger len=[chasingarray count];
+    int i;
+    BOOL isequal=NO;
+    for (i=0; i<len; i++) {
+        NSString * value=[chasingarray objectAtIndex:i];
+        isequal = [chasing isEqualToString:value];
+        if (isequal) {
+            [chasingarray removeObjectAtIndex:i];
+            btn.backgroundColor=[UIColor whiteColor];
+        }
+    }
+    if (!isequal) {
+        [chasingarray addObject:chasing];
+    }
+}
+
+//选择对称
+-(IBAction)symmetryselect:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    NSInteger btntag=[btn tag];
+    NSString * symmetry=nil;
+    if (btntag==0) {
+        symmetry=@"EX";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==1){
+        symmetry=@"VG";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==2){
+        symmetry=@"GD";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==3){
+        symmetry=@"Fair";
+        btn.backgroundColor=[UIColor yellowColor];
+    }
+    NSUInteger len=[symmetryarray count];
+    int i;
+    BOOL isequal=NO;
+    for (i=0; i<len; i++) {
+        NSString * value=[symmetryarray objectAtIndex:i];
+        isequal = [symmetry isEqualToString:value];
+        if (isequal) {
+            [symmetryarray removeObjectAtIndex:i];
+            btn.backgroundColor=[UIColor whiteColor];
+        }
+    }
+    if (!isequal) {
+        [symmetryarray addObject:symmetry];
+    }
+}
+
+//选择荧光
+-(IBAction)fluorescenceselect:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    NSInteger btntag=[btn tag];
+    NSString * fluorescence=nil;
+    if (btntag==0) {
+        fluorescence=@"N";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==1){
+        fluorescence=@"F";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==2){
+        fluorescence=@"M";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==3){
+        fluorescence=@"S";
+        btn.backgroundColor=[UIColor yellowColor];
+    }else if (btntag==4){
+        fluorescence=@"VS";
+        btn.backgroundColor=[UIColor yellowColor];
+    }
+    NSUInteger len=[fluorescencearray count];
+    int i;
+    BOOL isequal=NO;
+    for (i=0; i<len; i++) {
+        NSString * value=[fluorescencearray objectAtIndex:i];
+        isequal = [fluorescence isEqualToString:value];
+        if (isequal) {
+            [fluorescencearray removeObjectAtIndex:i];
+            btn.backgroundColor=[UIColor whiteColor];
+        }
+    }
+    if (!isequal) {
+        [fluorescencearray addObject:fluorescence];
+    }
+}
+
+//选择证书
+-(IBAction)diplomaselect:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    NSInteger btntag=[btn tag];
+    NSString * diploma=nil;
+    if (btntag==0) {
+        diploma=@"GIA";
+        btn.backgroundColor=[UIColor yellowColor];
+        //[btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateSelected];
+    }else if (btntag==1){
+        diploma=@"IGI";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateSelected];
+    }else if (btntag==2){
+        diploma=@"NGTC";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateSelected];
+    }else if (btntag==3){
+        diploma=@"HRD";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateSelected];
+    }else if (btntag==4){
+        diploma=@"EGL";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateSelected];
+    }else if (btntag==5){
+        diploma=@"Other";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateSelected];
+    }
+    NSUInteger len=[diplomaarray count];
+    int i;
+    BOOL isequal=NO;
+    for (i=0; i<len; i++) {
+        NSString * value=[diplomaarray objectAtIndex:i];
+        isequal = [diploma isEqualToString:value];
+        if (isequal) {
+            [diplomaarray removeObjectAtIndex:i];
+            btn.backgroundColor=[UIColor whiteColor];
+        }
+    }
+    if (!isequal) {
+        [diplomaarray addObject:diploma];
+    }
 }
 
 @end

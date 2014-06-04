@@ -17,6 +17,9 @@
 @synthesize primaryView;
 @synthesize secondaryView;
 @synthesize primaryShadeView;
+@synthesize textureselect;
+@synthesize mainlist=_mainlist;
+@synthesize texturetext;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,6 +34,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    NSArray *mainarray = [[NSArray alloc] initWithObjects:@"18K黄", @"18K白",
+                          @"18K双色", @"18K玫瑰金", @"PT900", @"Pt950", @"PD950",nil];
+    self.mainlist = mainarray;
+    texturetext.userInteractionEnabled=NO;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,6 +93,53 @@
 {
     primaryShadeView.alpha=0;
     secondaryView.hidden = YES;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [_mainlist count];
+    //只有一组，数组数即为行数。
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *TableSampleIdentifier = @"TableSampleIdentifier";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+                             TableSampleIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]
+                initWithStyle:UITableViewCellStyleDefault
+                reuseIdentifier:TableSampleIdentifier];
+    }
+    
+    NSUInteger row = [indexPath row];
+    cell.textLabel.text = [self.mainlist objectAtIndex:row];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *rowString = [self.mainlist objectAtIndex:[indexPath row]];
+    texturetext.text=rowString;
+    textureselect.hidden=YES;
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint pt = [touch locationInView:self.view];
+    //点击其他地方消失
+    if (!CGRectContainsPoint([textureselect frame], pt)) {
+        //to-do
+        textureselect.hidden=YES;
+    }
+}
+
+- (IBAction)mianselect:(id)sender
+{
+    textureselect.hidden=NO;
 }
 
 @end
