@@ -19,6 +19,7 @@
 @synthesize primaryShadeView;
 @synthesize thridaryView;
 @synthesize fourtharyView;
+@synthesize fiftharyView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -109,6 +110,18 @@
 - (IBAction)closeAction2:(id)sender
 {
     fourtharyView.hidden = YES;
+}
+
+//设置页面跳转
+-(IBAction)setup:(id)sender
+{
+     fiftharyView.hidden=NO;
+    fiftharyView.frame=CGRectMake(750, 70, fiftharyView.frame.size.width, fiftharyView.frame.size.height);
+}
+//设置页面关闭
+-(IBAction)closesetup:(id)sender
+{
+    fiftharyView.hidden=YES;
 }
 
 @end

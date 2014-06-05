@@ -17,6 +17,7 @@
 @synthesize primaryView;
 @synthesize secondaryView;
 @synthesize primaryShadeView;
+@synthesize thirdaryView;
 @synthesize textureselect;
 @synthesize mainlist=_mainlist;
 @synthesize texturetext;
@@ -93,6 +94,18 @@
 {
     primaryShadeView.alpha=0;
     secondaryView.hidden = YES;
+}
+
+//设置页面跳转
+-(IBAction)setup:(id)sender
+{
+    thirdaryView.hidden=NO;
+    thirdaryView.frame=CGRectMake(750, 70, thirdaryView.frame.size.width, thirdaryView.frame.size.height);
+}
+//设置页面关闭
+-(IBAction)closesetup:(id)sender
+{
+    thirdaryView.hidden=YES;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

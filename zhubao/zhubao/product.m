@@ -19,6 +19,7 @@
 @synthesize primaryShadeView;
 @synthesize thridaryView;
 @synthesize secondShadeView;
+@synthesize fourthView;
 @synthesize mianselect;
 @synthesize netselect;
 @synthesize colorselect;
@@ -31,6 +32,17 @@
 @synthesize nettext;
 @synthesize colortext;
 @synthesize texturetext;
+@synthesize modellable;
+@synthesize weightlable;
+@synthesize mainlable;
+@synthesize fitNolable;
+@synthesize fitweightlable;
+@synthesize sizetext;
+@synthesize fonttext;
+@synthesize numbertext;
+@synthesize title1lable;
+@synthesize pricelable;
+@synthesize productimageview;
 
 //判定点击来哪个tableview
 NSInteger selecttype=0;
@@ -53,12 +65,10 @@ NSInteger selecttype=0;
                       @"0.08-0.17", @"0.18-0.12", @"0.13－0.17", @"0.18-0.22", @"0.23-0.28",
                       @"0.29-0.39" , @"0.40" , @"0.50" , @"0.60" , @"0.70" ,
                       @"0.80" ,@"0.90" ,@"一克拉以上" ,nil];
-    NSArray *netarray = [[NSArray alloc] initWithObjects:@"FL", @"IF",
-                          @"WS1", @"WS2", @"VS1", @"VS2", @"SI1",
-                          @"SI2" , @"I1" , @"I2" , nil];
-    NSArray *colorarray = [[NSArray alloc] initWithObjects:@"D", @"E",
-                          @"F", @"G", @"H", @"I", @"J",
-                          @"K" , @"L" , @"M",nil];
+    NSArray *netarray = [[NSArray alloc] initWithObjects:@"VVS", @"VS",
+                          @"SI", @"P", nil];
+    NSArray *colorarray = [[NSArray alloc] initWithObjects:@"D-E", @"F-G",
+                          @"H", @"I-J", @"K-L", @"M-N",nil];
     NSArray *texturearray = [[NSArray alloc] initWithObjects:@"18K黄", @"18K白",
                           @"18K双色", @"18K玫瑰金", @"PT900", @"Pt950", @"PD950",nil];
     self.mainlist = mainarray;
@@ -69,6 +79,7 @@ NSInteger selecttype=0;
     nettext.userInteractionEnabled=NO;
     colortext.userInteractionEnabled=NO;
     texturetext.userInteractionEnabled=NO;
+    fonttext.placeholder=@"           8至12个字符";
 }
 
 - (void)didReceiveMemoryWarning
@@ -117,6 +128,21 @@ NSInteger selecttype=0;
     primaryShadeView.alpha=0.5;
     secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.height);
     secondaryView.hidden = NO;
+    productimageview.image=[UIImage imageNamed:@"diamonds.png"];
+    title1lable.text=@"18K钻石女戒 18K/0.12克拉S03651W(C20455031)";
+    pricelable.text=@"¥18507";
+    modellable.text=@"S036531W";
+    weightlable.text=@"2.21g";
+    mainlable.text=@"1颗";
+    fitNolable.text=@"0颗";
+    fitweightlable.text=@"0.00ct";
+    maintext.text=@"0.400";
+    nettext.text=@"SI";
+    colortext.text=@"H";
+    texturetext.text=@"18K黄";
+    sizetext.text=@"7";
+    fonttext.text=nil;
+    numbertext.text=@"1";
 }
 
 - (IBAction)closeAction:(id)sender
@@ -136,6 +162,18 @@ NSInteger selecttype=0;
 {
     thridaryView.hidden = YES;
     secondShadeView.alpha=0;
+}
+
+//设置页面跳转
+-(IBAction)setup:(id)sender
+{
+    fourthView.hidden=NO;
+    fourthView.frame=CGRectMake(750, 70, fourthView.frame.size.width, fourthView.frame.size.height);
+}
+//设置页面关闭
+-(IBAction)closesetup:(id)sender
+{
+    fourthView.hidden=YES;
 }
 
 
@@ -284,6 +322,18 @@ NSInteger selecttype=0;
 {
     UIButton* btn = (UIButton*)sender;
     NSInteger btntag=[btn tag];
+    NSString * serie=nil;
+    if (btntag==1) {
+        serie=@"1";
+    }else if(btntag==2){
+        serie=@"ture";
+    }
+}
+
+-(IBAction)addshopcart:(id)sender{
+    NSString *rowString =@"成功加入购物车！";
+    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alter show];
 }
 
 @end

@@ -17,6 +17,7 @@
 @synthesize primaryView;
 @synthesize secondaryView;
 @synthesize primaryShadeView;
+@synthesize thridView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -79,7 +80,7 @@
 - (IBAction)goAction:(id)sender
 {
     primaryShadeView.alpha=0.5;
-    secondaryView.frame = CGRectMake(140, 95, 720, 550);
+    secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.width);
     secondaryView.hidden = NO;
 }
 
@@ -87,6 +88,17 @@
 {
     secondaryView.hidden = YES;
     primaryShadeView.alpha=0;
+}
+
+-(IBAction)setup:(id)sender
+{
+    thridView.hidden=NO;
+    thridView.frame=CGRectMake(750, 70, thridView.frame.size.width, thridView.frame.size.height);
+}
+
+-(IBAction)closesetup:(id)sender
+{
+    thridView.hidden=YES;
 }
 
 @end

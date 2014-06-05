@@ -20,6 +20,7 @@
 @property (retain, nonatomic) IBOutlet UIView *primaryShadeView;
 @property (retain, nonatomic) IBOutlet UIView *thridaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondShadeView;
+@property (retain, nonatomic) IBOutlet UIView *fourthView;
 @property (weak, nonatomic) IBOutlet UITableView *mianselect;
 @property (weak, nonatomic) IBOutlet UITableView *netselect;
 @property (weak, nonatomic) IBOutlet UITableView *colorselect;
@@ -32,6 +33,17 @@
 @property (weak, nonatomic) IBOutlet UITextField *nettext;
 @property (weak, nonatomic) IBOutlet UITextField *colortext;
 @property (weak, nonatomic) IBOutlet UITextField *texturetext;
+@property (weak, nonatomic) IBOutlet UILabel *modellable;
+@property (weak, nonatomic) IBOutlet UILabel *weightlable;
+@property (weak, nonatomic) IBOutlet UILabel *mainlable;
+@property (weak, nonatomic) IBOutlet UILabel *fitNolable;
+@property (weak, nonatomic) IBOutlet UILabel *fitweightlable;
+@property (weak, nonatomic) IBOutlet UITextField *sizetext;
+@property (weak, nonatomic) IBOutlet UITextField *fonttext;
+@property (weak, nonatomic) IBOutlet UITextField *numbertext;
+@property (weak, nonatomic) IBOutlet UILabel *title1lable;
+@property (weak, nonatomic) IBOutlet UILabel *pricelable;
+@property (weak, nonatomic) IBOutlet UIImageView *productimageview;
 
 
 - (IBAction)goAction:(id)sender;

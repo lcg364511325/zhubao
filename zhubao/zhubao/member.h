@@ -20,6 +20,7 @@
 @property (retain, nonatomic) IBOutlet UIView *primaryShadeView;
 @property (retain, nonatomic) IBOutlet UIView *thridaryView;
 @property (retain, nonatomic) IBOutlet UIView *fourtharyView;
+@property (retain, nonatomic) IBOutlet UIView *fiftharyView;
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;

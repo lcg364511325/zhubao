@@ -17,6 +17,7 @@
 @synthesize primaryView;
 @synthesize secondaryView;
 @synthesize primaryShadeView;
+@synthesize thirdView;
 @synthesize DiplomaSelect;
 @synthesize selecttext;
 @synthesize list = _list;
@@ -35,9 +36,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSArray *array = [[NSArray alloc] initWithObjects:@"美国", @"菲律宾",
-                      @"黄岩岛", @"中国", @"泰国", @"越南", @"老挝",
-                      @"日本" , nil];
+    NSArray *array = [[NSArray alloc] initWithObjects:@"GIA", @"NGTC",
+                      @"IGI", @"HRD", @"AGS", @"EGL", nil];
     self.list = array;
     selecttext.userInteractionEnabled=NO;
 }
@@ -96,6 +96,19 @@
     secondaryView.hidden = YES;
 }
 
+//设置页面跳转
+-(IBAction)setup:(id)sender
+{
+    thirdView.hidden=NO;
+    thirdView.frame=CGRectMake(750, 70, thirdView.frame.size.width, thirdView.frame.size.height);
+}
+//设置页面关闭
+-(IBAction)closesetup:(id)sender
+{
+    thirdView.hidden=YES;
+}
+
+//初始化tableview数据
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [_list count];
@@ -120,6 +133,7 @@
     return cell;
 }
 
+//tableview点击操作
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *rowString = [self.list objectAtIndex:[indexPath row]];
@@ -127,6 +141,7 @@
     DiplomaSelect.hidden=YES;
 }
 
+//点击tableview以外得地方关闭
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];

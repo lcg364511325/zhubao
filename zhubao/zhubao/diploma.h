@@ -18,6 +18,7 @@
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondaryView;
 @property (retain, nonatomic) IBOutlet UIView *primaryShadeView;
+@property (retain, nonatomic) IBOutlet UIView *thirdView;
 @property (weak, nonatomic) IBOutlet UITableView *DiplomaSelect;
 @property (weak, nonatomic) IBOutlet UITextField *selecttext;
 @property (strong, nonatomic) NSArray *list;

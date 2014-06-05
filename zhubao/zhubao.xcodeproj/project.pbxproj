@@ -43,6 +43,10 @@
 		2C6CDCE5193F24E3008EAAFB /* bg_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C6CDCE2193F24E3008EAAFB /* bg_1.png */; };
 		2C6CDCE6193F24E3008EAAFB /* bg_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C6CDCE3193F24E3008EAAFB /* bg_2.png */; };
 		2C6CDCE7193F24E3008EAAFB /* bg_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C6CDCE4193F24E3008EAAFB /* bg_3.png */; };
+		2CA56BA0193FFE0600904BC4 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA56B9F193FFE0600904BC4 /* background.png */; };
+		2CA56BA2194007BC00904BC4 /* 021.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA56BA1194007BC00904BC4 /* 021.png */; };
+		2CA56BA6194055F700904BC4 /* NakedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA56BA4194055F700904BC4 /* NakedCell.m */; };
+		2CA56BA7194055F700904BC4 /* NakedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CA56BA5194055F700904BC4 /* NakedCell.xib */; };
 		7B7FFD73193853CA008712CB /* 0008.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7FFD39193853CA008712CB /* 0008.png */; };
 		7B7FFD74193853CA008712CB /* 0013.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7FFD3A193853CA008712CB /* 0013.png */; };
 		7B7FFD75193853CA008712CB /* 0018.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7FFD3B193853CA008712CB /* 0018.png */; };
@@ -169,6 +173,11 @@
 		2C6CDCE2193F24E3008EAAFB /* bg_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_1.png; sourceTree = "<group>"; };
 		2C6CDCE3193F24E3008EAAFB /* bg_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_2.png; sourceTree = "<group>"; };
 		2C6CDCE4193F24E3008EAAFB /* bg_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_3.png; sourceTree = "<group>"; };
+		2CA56B9F193FFE0600904BC4 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		2CA56BA1194007BC00904BC4 /* 021.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 021.png; sourceTree = "<group>"; };
+		2CA56BA3194055F700904BC4 /* NakedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedCell.h; sourceTree = "<group>"; };
+		2CA56BA4194055F700904BC4 /* NakedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedCell.m; sourceTree = "<group>"; };
+		2CA56BA5194055F700904BC4 /* NakedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NakedCell.xib; sourceTree = "<group>"; };
 		7B7FFD39193853CA008712CB /* 0008.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0008.png; sourceTree = "<group>"; };
 		7B7FFD3A193853CA008712CB /* 0013.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0013.png; sourceTree = "<group>"; };
 		7B7FFD3B193853CA008712CB /* 0018.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0018.png; sourceTree = "<group>"; };
@@ -333,6 +342,9 @@
 				2C01B4FC1939C7DC00C08C2E /* test.h */,
 				2C01B4FD1939C7DC00C08C2E /* test.m */,
 				2C01B4FE1939C7DC00C08C2E /* test.xib */,
+				2CA56BA3194055F700904BC4 /* NakedCell.h */,
+				2CA56BA4194055F700904BC4 /* NakedCell.m */,
+				2CA56BA5194055F700904BC4 /* NakedCell.xib */,
 			);
 			path = zhubao;
 			sourceTree = "<group>";
@@ -376,6 +388,8 @@
 		7B7FFD38193853CA008712CB /* image */ = {
 			isa = PBXGroup;
 			children = (
+				2CA56BA1194007BC00904BC4 /* 021.png */,
+				2CA56B9F193FFE0600904BC4 /* background.png */,
 				2C6CDCE2193F24E3008EAAFB /* bg_1.png */,
 				2C6CDCE3193F24E3008EAAFB /* bg_2.png */,
 				2C6CDCE4193F24E3008EAAFB /* bg_3.png */,
@@ -561,6 +575,7 @@
 				7B7FFD75193853CA008712CB /* 0018.png in Resources */,
 				7B7FFD8E193853CA008712CB /* drop-down.png in Resources */,
 				7B7FFDA5193853CA008712CB /* search.png in Resources */,
+				2CA56BA0193FFE0600904BC4 /* background.png in Resources */,
 				7B7FFD85193853CA008712CB /* diamond04.png in Resources */,
 				7B7FFD7E193853CA008712CB /* data.png in Resources */,
 				7B7FFDA0193853CA008712CB /* Reset.png in Resources */,
@@ -589,6 +604,7 @@
 				7B7FFD77193853CA008712CB /* 10.png in Resources */,
 				2C01B5001939C7DC00C08C2E /* test.xib in Resources */,
 				7B7FFDAA193853CA008712CB /* upload.png in Resources */,
+				2CA56BA7194055F700904BC4 /* NakedCell.xib in Resources */,
 				2C01B4FB1939BBD100C08C2E /* ceshi.xib in Resources */,
 				7B7FFDA2193853CA008712CB /* revise_password.png in Resources */,
 				7B7FFD9A193853CA008712CB /* magnifier1.png in Resources */,
@@ -614,6 +630,7 @@
 				7B7FFD9B193853CA008712CB /* option.png in Resources */,
 				7B7FFD90193853CA008712CB /* exhibition.png in Resources */,
 				7B7FFDAC193853CA008712CB /* vip.png in Resources */,
+				2CA56BA2194007BC00904BC4 /* 021.png in Resources */,
 				2C5C98511935793B00004343 /* product.xib in Resources */,
 				7B7FFD7C193853CA008712CB /* consort.png in Resources */,
 				7B7FFDA1193853CA008712CB /* revise.png in Resources */,
@@ -655,6 +672,7 @@
 				2C01B4FA1939BBD100C08C2E /* ceshi.m in Sources */,
 				2C5C98631935BDA000004343 /* NakedDiamond.m in Sources */,
 				7C1BE67B193EFEDA0000E397 /* LoginApi.m in Sources */,
+				2CA56BA6194055F700904BC4 /* NakedCell.m in Sources */,
 				7C1BE673193EFEC00000E397 /* WebService.m in Sources */,
 				2C5C983319349ED800004343 /* Index.m in Sources */,
 				7C1BE672193EFEC00000E397 /* DataService.m in Sources */,
