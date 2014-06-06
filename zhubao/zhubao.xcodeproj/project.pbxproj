@@ -174,6 +174,7 @@
 		7C10775E1941AFF4005187B9 /* Seq_v04_640x378_72.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7C1077151941AFF4005187B9 /* Seq_v04_640x378_72.jpg */; };
 		7C10775F1941AFF4005187B9 /* Seq_v04_640x378_8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7C1077161941AFF4005187B9 /* Seq_v04_640x378_8.jpg */; };
 		7C1077601941AFF4005187B9 /* Seq_v04_640x378_9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7C1077171941AFF4005187B9 /* Seq_v04_640x378_9.jpg */; };
+		7C1077621941B476005187B9 /* FVImageSequenceDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1077611941B476005187B9 /* FVImageSequenceDemoViewController.xib */; };
 		7C1BE677193EFECF0000E397 /* LoginEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE676193EFECF0000E397 /* LoginEntity.m */; };
 		7C1BE67B193EFEDA0000E397 /* LoginApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE67A193EFEDA0000E397 /* LoginApi.m */; };
 		7C1BE680193F25D30000E397 /* login.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE67E193F25D30000E397 /* login.m */; };
@@ -399,6 +400,7 @@
 		7C1077151941AFF4005187B9 /* Seq_v04_640x378_72.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Seq_v04_640x378_72.jpg; sourceTree = "<group>"; };
 		7C1077161941AFF4005187B9 /* Seq_v04_640x378_8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Seq_v04_640x378_8.jpg; sourceTree = "<group>"; };
 		7C1077171941AFF4005187B9 /* Seq_v04_640x378_9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Seq_v04_640x378_9.jpg; sourceTree = "<group>"; };
+		7C1077611941B476005187B9 /* FVImageSequenceDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FVImageSequenceDemoViewController.xib; sourceTree = "<group>"; };
 		7C1BE675193EFECF0000E397 /* LoginEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginEntity.h; sourceTree = "<group>"; };
 		7C1BE676193EFECF0000E397 /* LoginEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginEntity.m; sourceTree = "<group>"; };
 		7C1BE679193EFEDA0000E397 /* LoginApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginApi.h; sourceTree = "<group>"; };
@@ -667,6 +669,7 @@
 		7C1076C71941AF1D005187B9 /* show3Dphoto */ = {
 			isa = PBXGroup;
 			children = (
+				7C1077611941B476005187B9 /* FVImageSequenceDemoViewController.xib */,
 				7C1076CE1941AFF3005187B9 /* images */,
 				7C1076C81941AF44005187B9 /* FVImageSequence.h */,
 				7C1076C91941AF44005187B9 /* FVImageSequence.m */,
@@ -971,6 +974,7 @@
 				7C10774E1941AFF4005187B9 /* Seq_v04_640x378_58.jpg in Resources */,
 				7C10772C1941AFF4005187B9 /* Seq_v04_640x378_27.jpg in Resources */,
 				7B7FFD8A193853CA008712CB /* diamond09.png in Resources */,
+				7C1077621941B476005187B9 /* FVImageSequenceDemoViewController.xib in Resources */,
 				7C10774C1941AFF4005187B9 /* Seq_v04_640x378_56.jpg in Resources */,
 				7B7FFD97193853CA008712CB /* inquiry.png in Resources */,
 				7C1077601941AFF4005187B9 /* Seq_v04_640x378_9.jpg in Resources */,

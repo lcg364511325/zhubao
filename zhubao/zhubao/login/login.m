@@ -102,8 +102,8 @@
                     
                     //登录成功，进入系统首页
                     NSLog(@"登录成功，进入系统首页");
-                    //Index *sysmenu=[[Index alloc] init];
-                    FVImageSequenceDemoViewController *sysmenu=[[FVImageSequenceDemoViewController alloc] init];
+                    Index *sysmenu=[[Index alloc] init];
+                    //FVImageSequenceDemoViewController *sysmenu=[[FVImageSequenceDemoViewController alloc] init];
                     [self.navigationController pushViewController:sysmenu animated:NO];
                     
                     
