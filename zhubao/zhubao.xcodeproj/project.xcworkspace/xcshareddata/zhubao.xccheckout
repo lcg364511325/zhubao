@@ -36,6 +36,14 @@
 			<key>IDESourceControlWCCName</key>
 			<string>zhubao</string>
 		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>937134E1-DA2C-42BB-A5B0-E98781B3749E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>zhubao</string>
+		</dict>
 	</array>
 </dict>
 </plist>
