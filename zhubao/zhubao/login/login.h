@@ -10,6 +10,7 @@
 #import "Index.h"
 #import "LoginApi.h"
 #import "AutoGetData.h"
+#import "FVImageSequenceDemoViewController.h"
 
 @interface login : UIViewController
 
