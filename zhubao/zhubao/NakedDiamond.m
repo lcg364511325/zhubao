@@ -113,6 +113,8 @@
     primaryShadeView.alpha=0.5;
     secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.height);
     secondaryView.hidden = NO;
+    sqlService *product=[[sqlService alloc] init];
+    productlist=[product GetProductdiaList:@"1" type2:@"1" type3:@"1" type4:@"1" type5:@"1" type6:@"1" type7:@"1" type8:@"1" type9:@"1" type10:@"1" type11:@"1" page:1 pageSize:10];
 }
 
 - (IBAction)closeAction:(id)sender
@@ -177,7 +179,7 @@
 //初始化tableview数据
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return [productlist count];
     //只有一组，数组数即为行数。
 }
 
@@ -190,7 +192,20 @@
         NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"NakedCell" owner:self options:nil];
         cell=[nib objectAtIndex:0];
     }
-    cell.modellable.text=@"ccc";
+    for (productdia *entity in productlist) {
+        cell.prodectimageview.image=[UIImage imageNamed:@"diamond01"];
+        cell.modellable.text=entity.Dia_Shape;
+        cell.numberlable.text=entity.Dia_Corp;
+        cell.weightlable.text=entity.Dia_Carat;
+        cell.colorlable.text=entity.Dia_Col;
+        cell.netlable.text=entity.Dia_Clar;
+        cell.cutlable.text=entity.Dia_Cut;
+        cell.chasinglable.text=@"cc";
+        cell.symmetrylable.text=entity.Dia_Sym;
+        cell.diplomalable.text=entity.Dia_Lab;
+        cell.pricelable.text=entity.Dia_Price;
+    }
+    cell.chasinglable.text=@"cc";
     return cell;
 }
 

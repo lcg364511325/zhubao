@@ -12,6 +12,7 @@
 #import "ustomtailor.h"
 #import "diploma.h"
 #import "member.h"
+#import "sqlService.h"
 
 @interface product : UIViewController
 

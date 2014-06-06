@@ -282,6 +282,30 @@ NSInteger selecttype=0;
 {
     UIButton* btn = (UIButton*)sender;
     NSInteger btntag=[btn tag];
+    NSString * style=nil;
+    if (btntag==0) {
+        style=nil;
+    }else if (btntag==1){
+        style=@"1";
+    }else if (btntag==2){
+        style=@"2";
+    }else if (btntag==3){
+        style=@"3";
+    }else if (btntag==4){
+        style=@"4";
+    }else if (btntag==5){
+        style=@"5";
+    }else if (btntag==6){
+        style=@"6";
+    }else if (btntag==7){
+        style=@"7";
+    }else if (btntag==8){
+        style=@"8";
+    }else if (btntag==9){
+        style=@"9";
+    }
+    sqlService *productlist =[[sqlService alloc] init];
+    NSMutableArray *list=[productlist GetProductList:style type2:nil type3:nil type4:nil page:0 pageSize:10];
 }
 
 

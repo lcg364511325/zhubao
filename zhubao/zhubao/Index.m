@@ -82,6 +82,8 @@
     primaryShadeView.alpha=0.5;
     secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.width);
     secondaryView.hidden = NO;
+    sqlService *shopcar=[[sqlService alloc] init];
+    //NSMutableArray *shoppingcart=[shopcar GetBuyproductList:(NSString *)]
     
 }
 
@@ -102,44 +104,44 @@
     thridView.hidden=YES;
 }
 
-//初始化tableview数据
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 1;
-    //只有一组，数组数即为行数。
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *TableSampleIdentifier = @"shoppingcart";
-    
-    shoppingcart *cell = [tableView dequeueReusableCellWithIdentifier:TableSampleIdentifier];
-    if (cell == nil) {
-        NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"shoppingcart" owner:self options:nil];
-        cell=[nib objectAtIndex:0];
-    }
-    cell.productImageView.image=[UIImage imageNamed:@"diamond01"];
-    cell.modelLable.text=@"测试 ";
-    cell.diplomaLable.text=@"测试 ";
-    cell.numberLable.text=@"测试 ";
-    cell.model1Lable.text=@"测试 ";
-    cell.weightLable.text=@"测试 ";
-    cell.colorLable.text=@"测试 ";
-    cell.modelLable.text=@"测试 ";
-    cell.netLable.text=@"测试 ";
-    cell.cutLable.text=@"测试 ";
-    cell.chasingLable.text=@"测试 ";
-    cell.symmetryLable.text=@"测试 ";
-    cell.buyNoLable.text=@"测试 ";
-    return cell;
-}
-
-//tableview点击操作
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //NSString *rowString = [self.list objectAtIndex:[indexPath row]];
-    //Nakeddisplay.hidden=YES;
-}
+////初始化tableview数据
+//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    return 1;
+//    //只有一组，数组数即为行数。
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    static NSString *TableSampleIdentifier = @"shoppingcart";
+//    
+//    shoppingcart *cell = [tableView dequeueReusableCellWithIdentifier:TableSampleIdentifier];
+//    if (cell == nil) {
+//        NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"shoppingcart" owner:self options:nil];
+//        cell=[nib objectAtIndex:0];
+//    }
+//    cell.productImageView.image=[UIImage imageNamed:@"diamond01"];
+//    cell.modelLable.text=@"测试 ";
+//    cell.diplomaLable.text=@"测试 ";
+//    cell.numberLable.text=@"测试 ";
+//    cell.model1Lable.text=@"测试 ";
+//    cell.weightLable.text=@"测试 ";
+//    cell.colorLable.text=@"测试 ";
+//    cell.modelLable.text=@"测试 ";
+//    cell.netLable.text=@"测试 ";
+//    cell.cutLable.text=@"测试 ";
+//    cell.chasingLable.text=@"测试 ";
+//    cell.symmetryLable.text=@"测试 ";
+//    //cell.buyNoLable.text=@"测试 ";
+//    return cell;
+//}
+//
+////tableview点击操作
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    //NSString *rowString = [self.list objectAtIndex:[indexPath row]];
+//    //Nakeddisplay.hidden=YES;
+//}
 
 //购物车删除
 -(IBAction)deleteshoppingcart:(id)sender

@@ -13,6 +13,7 @@
 #import "diploma.h"
 #import "member.h"
 #import "NakedCell.h"
+#import "sqlService.h"
 
 @interface NakedDiamond : UIViewController
 {
@@ -24,6 +25,7 @@
     NSMutableArray *symmetryarray;
     NSMutableArray *fluorescencearray;
     NSMutableArray *diplomaarray;
+    NSMutableArray * productlist;
 }
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
