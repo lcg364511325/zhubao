@@ -667,6 +667,11 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "SUNYEARS___FULLUSERNAME";
+				TargetAttributes = {
+					2C5C981419349E2100004343 = {
+						TestTargetID = 2C5C97F319349E2100004343;
+					};
+				};
 			};
 			buildConfigurationList = 2C5C97EF19349E2100004343 /* Build configuration list for PBXProject "zhubao" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -975,6 +980,7 @@
 		2C5C982A19349E2100004343 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/zhubao.app/zhubao";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -988,6 +994,7 @@
 				);
 				INFOPLIST_FILE = "zhubaoTests/zhubaoTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -995,6 +1002,7 @@
 		2C5C982B19349E2100004343 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/zhubao.app/zhubao";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1004,6 +1012,7 @@
 				GCC_PREFIX_HEADER = "zhubao/zhubao-Prefix.pch";
 				INFOPLIST_FILE = "zhubaoTests/zhubaoTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
