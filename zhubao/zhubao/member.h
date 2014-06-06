@@ -20,6 +20,17 @@
 @property (retain, nonatomic) IBOutlet UIView *primaryShadeView;
 @property (retain, nonatomic) IBOutlet UIView *thridaryView;
 @property (retain, nonatomic) IBOutlet UIView *fourtharyView;
+@property (retain, nonatomic) IBOutlet UIView *fiftharyView;
+@property (weak, nonatomic) IBOutlet UITableView *selectTableView;
+//@property (strong, nonatomic) NSArray *provincelist;
+//@property (strong, nonatomic) NSArray *citylist;
+//@property (strong, nonatomic) NSArray *Divisionlist;
+@property (strong,nonatomic) NSArray *provincelist;
+@property (strong,nonatomic) NSArray *citylist;
+@property (strong,nonatomic) NSArray *Divisionlist;
+@property (weak, nonatomic) IBOutlet UITextField *provinceText;
+@property (weak, nonatomic) IBOutlet UITextField *cityText;
+@property (weak, nonatomic) IBOutlet UITextField *divisionText;
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;

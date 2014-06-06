@@ -12,8 +12,19 @@
 #import "ustomtailor.h"
 #import "diploma.h"
 #import "member.h"
+#import "NakedCell.h"
 
 @interface NakedDiamond : UIViewController
+{
+    NSMutableArray *shapearray;
+    NSMutableArray *colorarray;
+    NSMutableArray *netarray;
+    NSMutableArray *cutarray;
+    NSMutableArray *chasingarray;
+    NSMutableArray *symmetryarray;
+    NSMutableArray *fluorescencearray;
+    NSMutableArray *diplomaarray;
+}
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondaryView;
@@ -22,6 +33,30 @@
 @property (retain, nonatomic) IBOutlet UIView *secondShadeView;
 @property (retain, nonatomic) IBOutlet UIView *fourtharyView;
 @property (retain, nonatomic) IBOutlet UIView *thirdShadeView;
+@property (retain, nonatomic) IBOutlet UIView *fivetharyView;
+@property (weak, nonatomic) IBOutlet UITextField *weightmin;
+@property (weak, nonatomic) IBOutlet UITextField *weightmax;
+@property (weak, nonatomic) IBOutlet UITextField *pricemin;
+@property (weak, nonatomic) IBOutlet UITextField *pricemax;
+@property (weak, nonatomic) IBOutlet UITextField *DiamondNo;
+@property (weak, nonatomic) IBOutlet UITableView *Nakeddisplay;
+@property (weak, nonatomic) IBOutlet UIImageView *productimageview;
+@property (weak, nonatomic) IBOutlet UILabel *titleLable;
+@property (weak, nonatomic) IBOutlet UILabel *modelLable;
+@property (weak, nonatomic) IBOutlet UILabel *productNoLable;
+@property (weak, nonatomic) IBOutlet UILabel *weightLable;
+@property (weak, nonatomic) IBOutlet UILabel *colorLable;
+@property (weak, nonatomic) IBOutlet UILabel *netLable;
+@property (weak, nonatomic) IBOutlet UILabel *cutLable;
+@property (weak, nonatomic) IBOutlet UILabel *chasingLable;
+@property (weak, nonatomic) IBOutlet UILabel *symmetryLable;
+@property (weak, nonatomic) IBOutlet UILabel *depthLable;
+@property (weak, nonatomic) IBOutlet UILabel *tableLable;
+@property (weak, nonatomic) IBOutlet UILabel *sizeLable;
+@property (weak, nonatomic) IBOutlet UILabel *fluorescenceLable;
+@property (weak, nonatomic) IBOutlet UILabel *diplomaLable;
+@property (weak, nonatomic) IBOutlet UILabel *priceLable;
+
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;

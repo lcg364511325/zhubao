@@ -13,12 +13,14 @@
 #import "diploma.h"
 #import "member.h"
 #import "test.h"
+#import "shoppingcart.h"
 
 @interface Index : UIViewController
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondaryView;
 @property (retain, nonatomic) IBOutlet UIView *primaryShadeView;
+@property (retain, nonatomic) IBOutlet UIView *thridView;
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;

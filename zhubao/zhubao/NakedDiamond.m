@@ -21,6 +21,28 @@
 @synthesize secondShadeView;
 @synthesize fourtharyView;
 @synthesize thirdShadeView;
+@synthesize fivetharyView;
+@synthesize weightmin;
+@synthesize weightmax;
+@synthesize pricemin;
+@synthesize pricemax;
+@synthesize DiamondNo;
+@synthesize Nakeddisplay;
+@synthesize titleLable;
+@synthesize modelLable;
+@synthesize productNoLable;
+@synthesize weightLable;
+@synthesize colorLable;
+@synthesize netLable;
+@synthesize cutLable;
+@synthesize chasingLable;
+@synthesize symmetryLable;
+@synthesize depthLable;
+@synthesize tableLable;
+@synthesize sizeLable;
+@synthesize fluorescenceLable;
+@synthesize diplomaLable;
+@synthesize priceLable;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,6 +57,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    shapearray = [[NSMutableArray alloc] init];
+    colorarray = [[NSMutableArray alloc] init];
+    netarray = [[NSMutableArray alloc] init];
+    cutarray = [[NSMutableArray alloc] init];
+    chasingarray = [[NSMutableArray alloc] init];
+    symmetryarray = [[NSMutableArray alloc] init];
+    fluorescencearray = [[NSMutableArray alloc] init];
+    diplomaarray = [[NSMutableArray alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -96,6 +126,21 @@
     secondShadeView.alpha=0.5;
     thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.height);
     thridaryView.hidden = NO;
+    titleLable.text=@"string";
+    modelLable.text=@"string";
+    productNoLable.text=@"string";
+    weightLable.text=@"string";
+    colorLable.text=@"string";
+    netLable.text=@"string";
+    cutLable.text=@"string";
+    chasingLable.text=@"string";
+    symmetryLable.text=@"string";
+    depthLable.text=@"string";
+    tableLable.text=@"string";
+    sizeLable.text=@"string";
+    fluorescenceLable.text=@"string";
+    diplomaLable.text=@"string";
+    priceLable.text=@"string";
 }
 
 - (IBAction)closeAction1:(id)sender
@@ -115,6 +160,414 @@
 {
     fourtharyView.hidden = YES;
     thirdShadeView.alpha=0;
+}
+
+//设置页面跳转
+-(IBAction)setup:(id)sender
+{
+    fivetharyView.hidden=NO;
+    fivetharyView.frame=CGRectMake(750, 70, fivetharyView.frame.size.width, fivetharyView.frame.size.height);
+}
+//设置页面关闭
+-(IBAction)closesetup:(id)sender
+{
+    fivetharyView.hidden=YES;
+}
+
+//初始化tableview数据
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+    //只有一组，数组数即为行数。
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *TableSampleIdentifier = @"NakedCell";
+    
+    NakedCell *cell = [tableView dequeueReusableCellWithIdentifier:TableSampleIdentifier];
+    if (cell == nil) {
+        NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"NakedCell" owner:self options:nil];
+        cell=[nib objectAtIndex:0];
+    }
+    cell.modellable.text=@"ccc";
+    return cell;
+}
+
+//tableview点击操作
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //NSString *rowString = [self.list objectAtIndex:[indexPath row]];
+    //Nakeddisplay.hidden=YES;
+}
+
+//选择形状
+-(IBAction)shapeselect:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    NSInteger btntag=[btn tag];
+    NSString * shape=nil;
+    if (btntag==0) {
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==1){
+        shape=@"RB";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==2){
+        shape=@"PE";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==3){
+        shape=@"EM";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==4){
+        shape=@"RD";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==5){
+        shape=@"OL";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==6){
+        shape=@"MQ";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==7){
+        shape=@"CU";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==8){
+        shape=@"PR";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==9){
+        shape=@"HT";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==10){
+        shape=@"ASH";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }
+    if (shape) {
+        NSUInteger len=[shapearray count];
+        NSUInteger i;
+        BOOL isequal=NO;
+        for (i=0; i<len; i++) {
+            NSString * value=[shapearray objectAtIndex:i];
+            isequal = [shape isEqualToString:value];
+            if (isequal) {
+                [shapearray removeObjectAtIndex:i];
+                [btn setBackgroundImage:[UIImage imageNamed:@"background"] forState:UIControlStateNormal];
+                i=len;
+            }
+        }
+        if (!isequal) {
+            [shapearray addObject:shape];
+        }
+    }
+}
+
+// 选择颜色
+-(IBAction)colorselect:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    NSInteger btntag=[btn tag];
+    NSString * color=nil;
+    if (btntag==0) {
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==1){
+        color=@"D";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==2){
+        color=@"E";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==3){
+        color=@"F";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==4){
+        color=@"G";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==5){
+        color=@"H";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==6){
+        color=@"I";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==7){
+        color=@"J";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==8){
+        color=@"K";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==9){
+        color=@"L";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==10){
+        color=@"M";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }
+    if (color) {
+        NSUInteger len=[colorarray count];
+        NSUInteger i;
+        BOOL isequal=NO;
+        for (i=0; i<len; i++) {
+            NSString * value=[colorarray objectAtIndex:i];
+            isequal = [color isEqualToString:value];
+            if (isequal) {
+                [colorarray removeObjectAtIndex:i];
+                [btn setBackgroundImage:[UIImage imageNamed:@"background"] forState:UIControlStateNormal];
+                i=len;
+            }
+        }
+        if (!isequal) {
+            [colorarray addObject:color];
+        }
+    }
+}
+// 选择净度
+-(IBAction)netselect:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    NSInteger btntag=[btn tag];
+    NSString * net=nil;
+    if (btntag==0) {
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==1){
+        net=@"FL";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==2){
+        net=@"IF";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==3){
+        net=@"VVS1";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==4){
+        net=@"VVS2";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==5){
+        net=@"VS1";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==6){
+        net=@"VS2";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==7){
+        net=@"SI1";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==8){
+        net=@"SI2";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==9){
+        net=@"I1";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==10){
+        net=@"I2";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }
+    if (net) {
+        NSUInteger len=[netarray count];
+        NSUInteger i;
+        BOOL isequal=NO;
+        for (i=0; i<len; i++) {
+            NSString * value=[netarray objectAtIndex:i];
+            isequal = [net isEqualToString:value];
+            if (isequal) {
+                [netarray removeObjectAtIndex:i];
+                [btn setBackgroundImage:[UIImage imageNamed:@"background"] forState:UIControlStateNormal];
+                i=len;
+            }
+        }
+        if (!isequal) {
+            [netarray addObject:net];
+        }
+    }
+}
+
+//选择切工
+-(IBAction)cutselect:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    NSInteger btntag=[btn tag];
+    NSString * cut=nil;
+    if (btntag==0) {
+        cut=@"EX";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==1){
+        cut=@"VG";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==2){
+        cut=@"GD";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==3){
+        cut=@"Fair";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }
+    NSUInteger len=[cutarray count];
+    NSUInteger i;
+    BOOL isequal=NO;
+    for (i=0; i<len; i++) {
+        NSString * value=[cutarray objectAtIndex:i];
+        isequal = [cut isEqualToString:value];
+        if (isequal) {
+            [cutarray removeObjectAtIndex:i];
+            [btn setBackgroundImage:[UIImage imageNamed:@"background"] forState:UIControlStateNormal];
+            i=len;
+        }
+    }
+    if (!isequal) {
+        [cutarray addObject:cut];
+    }
+}
+
+//选择抛光
+-(IBAction)chasingselect:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    NSInteger btntag=[btn tag];
+    NSString * chasing=nil;
+    if (btntag==0) {
+        chasing=@"EX";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==1){
+        chasing=@"VG";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==2){
+        chasing=@"GD";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==3){
+        chasing=@"Fair";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }
+    NSUInteger len=[chasingarray count];
+    NSUInteger i;
+    BOOL isequal=NO;
+    for (i=0; i<len; i++) {
+        NSString * value=[chasingarray objectAtIndex:i];
+        isequal = [chasing isEqualToString:value];
+        if (isequal) {
+            [chasingarray removeObjectAtIndex:i];
+            [btn setBackgroundImage:[UIImage imageNamed:@"background"] forState:UIControlStateNormal];
+            i=len;
+        }
+    }
+    if (!isequal) {
+        [chasingarray addObject:chasing];
+    }
+}
+
+//选择对称
+-(IBAction)symmetryselect:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    NSInteger btntag=[btn tag];
+    NSString * symmetry=nil;
+    if (btntag==0) {
+        symmetry=@"EX";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==1){
+        symmetry=@"VG";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==2){
+        symmetry=@"GD";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==3){
+        symmetry=@"Fair";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }
+    NSUInteger len=[symmetryarray count];
+    NSUInteger i;
+    BOOL isequal=NO;
+    for (i=0; i<len; i++) {
+        NSString * value=[symmetryarray objectAtIndex:i];
+        isequal = [symmetry isEqualToString:value];
+        if (isequal) {
+            [symmetryarray removeObjectAtIndex:i];
+            [btn setBackgroundImage:[UIImage imageNamed:@"background"] forState:UIControlStateNormal];
+            i=len;
+        }
+    }
+    if (!isequal) {
+        [symmetryarray addObject:symmetry];
+    }
+}
+
+//选择荧光
+-(IBAction)fluorescenceselect:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    NSInteger btntag=[btn tag];
+    NSString * fluorescence=nil;
+    if (btntag==0) {
+        fluorescence=@"N";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==1){
+        fluorescence=@"F";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==2){
+        fluorescence=@"M";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==3){
+        fluorescence=@"S";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==4){
+        fluorescence=@"VS";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }
+    NSUInteger len=[fluorescencearray count];
+    NSUInteger i;
+    BOOL isequal=NO;
+    for (i=0; i<len; i++) {
+        NSString * value=[fluorescencearray objectAtIndex:i];
+        isequal = [fluorescence isEqualToString:value];
+        if (isequal) {
+            [fluorescencearray removeObjectAtIndex:i];
+            [btn setBackgroundImage:[UIImage imageNamed:@"background"] forState:UIControlStateNormal];
+            i=len;
+        }
+    }
+    if (!isequal) {
+        [fluorescencearray addObject:fluorescence];
+    }
+}
+
+//选择证书
+-(IBAction)diplomaselect:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    NSInteger btntag=[btn tag];
+    NSString * diploma=nil;
+    if (btntag==0) {
+        diploma=@"GIA";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==1){
+        diploma=@"IGI";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==2){
+        diploma=@"NGTC";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==3){
+        diploma=@"HRD";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==4){
+        diploma=@"EGL";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }else if (btntag==5){
+        diploma=@"Other";
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+    }
+    NSUInteger len=[diplomaarray count];
+    NSUInteger i;
+    BOOL isequal=NO;
+    for (i=0; i<len; i++) {
+        NSString * value=[diplomaarray objectAtIndex:i];
+        isequal = [diploma isEqualToString:value];
+        if (isequal) {
+            [diplomaarray removeObjectAtIndex:i];
+            [btn setBackgroundImage:[UIImage imageNamed:@"background"] forState:UIControlStateNormal];
+            i=len;
+        }
+    }
+    if (!isequal) {
+        [diplomaarray addObject:diploma];
+    }
+}
+
+//加入购物车
+-(IBAction)addshopcart:(id)sender{
+    NSString *rowString =@"成功加入购物车！";
+    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alter show];
 }
 
 @end

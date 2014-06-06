@@ -19,6 +19,19 @@
 @synthesize primaryShadeView;
 @synthesize thridaryView;
 @synthesize fourtharyView;
+@synthesize fiftharyView;
+@synthesize selectTableView;
+@synthesize provincelist=_provincelist;
+@synthesize citylist=_citylist;
+@synthesize Divisionlist=_Divisionlist;
+@synthesize provinceText;
+@synthesize cityText;
+@synthesize divisionText;
+
+
+//判定点击来哪个tableview
+NSInteger selecttable=0;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,6 +46,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    NSArray *Divisionarray = [[NSArray alloc] initWithObjects:@"办公室", @"市场部",
+                         @"采购部", @"技术部",@"人力资源", nil];
+    self.Divisionlist=Divisionarray;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -109,6 +126,103 @@
 - (IBAction)closeAction2:(id)sender
 {
     fourtharyView.hidden = YES;
+}
+
+//设置页面跳转
+-(IBAction)setup:(id)sender
+{
+     fiftharyView.hidden=NO;
+    fiftharyView.frame=CGRectMake(750, 70, fiftharyView.frame.size.width, fiftharyView.frame.size.height);
+}
+//设置页面关闭
+-(IBAction)closesetup:(id)sender
+{
+    fiftharyView.hidden=YES;
+}
+//下拉框
+-(IBAction)selecttableview:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    NSInteger btntag=[btn tag];
+    selecttable=btntag;
+    selectTableView.hidden=NO;
+    if (btntag==0) {
+        selectTableView.frame=CGRectMake(297, 267, 93, 100);
+        [selectTableView reloadData];
+    }else if (btntag==1){
+        selectTableView.frame=CGRectMake(403, 267, 90, 100);
+        [selectTableView reloadData];
+    }else if (btntag==2){
+        selectTableView.frame=CGRectMake(293, 348, 97, 100);
+        [selectTableView reloadData];
+    }
+}
+
+//初始化tableview数据
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSArray * list=nil;
+    if (selecttable==0) {
+        list=self.provincelist;
+    }else if (selecttable==1){
+        list=self.citylist;
+    }else if (selecttable==2){
+        list=self.Divisionlist;
+    }
+    return [list count];
+    //只有一组，数组数即为行数。
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *TableSampleIdentifier = @"TableSampleIdentifier";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+                             TableSampleIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]
+                initWithStyle:UITableViewCellStyleDefault
+                reuseIdentifier:TableSampleIdentifier];
+    }
+    
+    NSUInteger row = [indexPath row];
+    if (selecttable==0) {
+        cell.textLabel.text = [self.provincelist objectAtIndex:row];
+    }else if (selecttable==1){
+        cell.textLabel.text = [self.citylist objectAtIndex:row];
+    }else if (selecttable==2){
+        cell.textLabel.text = [self.Divisionlist objectAtIndex:row];
+    }
+    return cell;
+}
+
+//tableview点击操作
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (selecttable==0) {
+        NSString *rowString = [self.provincelist objectAtIndex:[indexPath row]];
+        provinceText.text=rowString;
+    }else if (selecttable==1){
+        NSString *rowString = [self.citylist objectAtIndex:[indexPath row]];
+        cityText.text=rowString;
+    }else if (selecttable==2){
+        NSString *rowString = [self.Divisionlist objectAtIndex:[indexPath row]];
+        divisionText.text=rowString;
+    }
+    selectTableView.hidden=YES;
+}
+
+//点击tableview以外得地方关闭
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint pt = [touch locationInView:self.view];
+    //点击其他地方消失
+    if (!CGRectContainsPoint([selectTableView frame], pt)) {
+        //to-do
+        selectTableView.hidden=YES;
+    }
 }
 
 @end
