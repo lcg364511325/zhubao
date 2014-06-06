@@ -22,7 +22,7 @@
     
     //系统新安装未初始化
     Index *test1 = [[Index alloc] initWithNibName:@"Index" bundle:nil] ;
-    //ceshi *test1 = [[ceshi alloc] initWithNibName:@"ceshi" bundle:nil] ;
+    //test *test1 = [[test alloc] initWithNibName:@"test" bundle:nil] ;
     
     UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:test1];
     
