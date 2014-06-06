@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>BFE1982F-642E-417A-B557-9F893F8AC1D6</string>
+	<string>8B2E199F-7C81-4352-8343-0D0128E363CB</string>
 	<key>IDESourceControlProjectName</key>
 	<string>zhubao</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -28,14 +28,6 @@
 	<string>937134E1-DA2C-42BB-A5B0-E98781B3749E</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>937134E1-DA2C-42BB-A5B0-E98781B3749E</string>
-			<key>IDESourceControlWCCName</key>
-			<string>zhubao</string>
-		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
