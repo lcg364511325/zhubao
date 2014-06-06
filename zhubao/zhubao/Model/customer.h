@@ -1,18 +1,14 @@
 //
-//  LoginEntity.h
-//  uih
+//  customer.h
+//  zhubao
 //
-//  Created by xing on 13-7-14.
-//  Copyright (c) 2013年 才国. All rights reserved.
+//  Created by moko on 14-6-4.
+//  Copyright (c) 2014年 SUNYEARS___FULLUSERNAME. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-//验证登录实体类
-@interface LoginEntity : NSObject
-@property (nonatomic, retain) NSString * result;
-@property (nonatomic, retain) NSString * info;
-@property (nonatomic, retain) NSString * webcode;
+@interface customer : NSObject
 
 @property (nonatomic, retain) NSString * uId;
 @property (nonatomic, retain) NSString * userType;

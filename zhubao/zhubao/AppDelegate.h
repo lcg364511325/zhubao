@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "Index.h"
-#import "ceshi.h"
+#import "login.h"
+#import "sqlService.h"
+#import "FileHelpers.h"
+#import "LoginEntity.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property(retain , nonatomic) LoginEntity * entityl;//保存登录的用户信息
 
 @end

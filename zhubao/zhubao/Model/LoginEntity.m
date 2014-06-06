@@ -11,8 +11,5 @@
 
 @implementation LoginEntity
 
-@synthesize result;
-@synthesize info;
-@synthesize webcode;
 
 @end

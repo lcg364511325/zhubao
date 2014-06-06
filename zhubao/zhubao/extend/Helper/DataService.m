@@ -66,6 +66,25 @@
     return dict;
 }
 
++(NSString *)GetDataServiceToNsstring:(NSString*) URL
+{
+    NSLog(@"%@",URL);
+    
+    //加载一个NSURL对象
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:URL]];
+    //将请求的url数据放到NSData对象中
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+
+    if (response) {
+        NSString *str = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+        return str;
+    }else{
+        
+        return @"亲，请求服务器出错！";
+    }
+    
+}
+
 //post请求服务器
 +(NSMutableDictionary*)PostDataService:(NSString*) URL postDatas:(NSString*)str
 {
