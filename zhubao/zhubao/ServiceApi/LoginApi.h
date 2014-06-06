@@ -17,5 +17,5 @@
 
 -(LoginEntity*)login:(NSString *)username password:(NSString *)password verlity:(NSString*)verlity;
 
- 
+
 @end
