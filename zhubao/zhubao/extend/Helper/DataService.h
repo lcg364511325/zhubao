@@ -16,6 +16,9 @@
 //get请求服务器
 +(NSMutableDictionary*)GetDataService:(NSString*) URL;
 
+//get请求服务器
++(NSString *)GetDataServiceToNsstring:(NSString*) URL;
+
 //post请求服务器
 +(NSMutableDictionary*)PostDataService:(NSString*) URL postDatas:(NSString*)str;
 //post请求服务器

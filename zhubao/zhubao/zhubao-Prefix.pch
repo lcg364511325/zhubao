@@ -13,4 +13,19 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+
+/*接口地址*/
+//域名
+#define domainser  @"http://app.seyuu.com"
+#define domainwebservice @"http://192.168.0.11:8011/visa/PROXY/VisaCenterProxy?wsdl"
+#define imagepath  @"http://seyuu.com"
+//请求地址时写死的key值
+#define apikey  @"cceeaaffgg_(zcxfesqrtvkKdse132_)app.seyuu.comiphone_ipad_Android_2013_sssse#2!#@9.."
+
+//页面行数
+#define PSize @"10"
+#define kFileallname  @"zhubao.sqlite"
+#define kfilename  @"zhubao"
+#define kfiletype  @"sqlite"
+
 #endif

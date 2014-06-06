@@ -61,25 +61,7 @@ NSInteger selecttype=0;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.navigationController setNavigationBarHidden:YES];
-    NSArray *mainarray = [[NSArray alloc] initWithObjects:@"0.00-0.02", @"0.03－0.07",
-                      @"0.08-0.17", @"0.18-0.12", @"0.13－0.17", @"0.18-0.22", @"0.23-0.28",
-                      @"0.29-0.39" , @"0.40" , @"0.50" , @"0.60" , @"0.70" ,
-                      @"0.80" ,@"0.90" ,@"一克拉以上" ,nil];
-    NSArray *netarray = [[NSArray alloc] initWithObjects:@"VVS", @"VS",
-                          @"SI", @"P", nil];
-    NSArray *colorarray = [[NSArray alloc] initWithObjects:@"D-E", @"F-G",
-                          @"H", @"I-J", @"K-L", @"M-N",nil];
-    NSArray *texturearray = [[NSArray alloc] initWithObjects:@"18K黄", @"18K白",
-                          @"18K双色", @"18K玫瑰金", @"PT900", @"Pt950", @"PD950",nil];
-    self.mainlist = mainarray;
-    self.netlist=netarray;
-    self.colorlist=colorarray;
-    self.texturelist=texturearray;
-    maintext.userInteractionEnabled=NO;
-    nettext.userInteractionEnabled=NO;
-    colortext.userInteractionEnabled=NO;
-    texturetext.userInteractionEnabled=NO;
-    fonttext.placeholder=@"           8至12个字符";
+
 }
 
 - (void)didReceiveMemoryWarning

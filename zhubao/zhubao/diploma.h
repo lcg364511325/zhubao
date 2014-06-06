@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Index.h"
-#import "product.h"
+#import "productEntity.h"
 #import "NakedDiamond.h"
 #import "ustomtailor.h"
 #import "member.h"
