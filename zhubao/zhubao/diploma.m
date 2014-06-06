@@ -36,8 +36,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSArray *array = [[NSArray alloc] initWithObjects:@"GIA", @"NGTC",
-                      @"IGI", @"HRD", @"AGS", @"EGL", nil];
+    NSArray *array = [[NSArray alloc] initWithObjects:@"GIA(美国宝石学院)", @"NGTC(国家珠宝玉石质量监督中心)",
+                      @"IGI(世界宝石学院)", @"HRD(比利时钻石高阶层会议)", @"AGS(美国宝石学学会)", @"EGL(欧洲宝石学院)", nil];
     self.list = array;
     selecttext.userInteractionEnabled=NO;
 }

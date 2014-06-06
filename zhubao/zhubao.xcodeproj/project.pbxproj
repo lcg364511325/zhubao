@@ -47,6 +47,8 @@
 		2CA56BA2194007BC00904BC4 /* 021.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA56BA1194007BC00904BC4 /* 021.png */; };
 		2CA56BA6194055F700904BC4 /* NakedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA56BA4194055F700904BC4 /* NakedCell.m */; };
 		2CA56BA7194055F700904BC4 /* NakedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CA56BA5194055F700904BC4 /* NakedCell.xib */; };
+		2CA56BAB19407B0100904BC4 /* shoppingcart.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA56BA919407B0100904BC4 /* shoppingcart.m */; };
+		2CA56BAC19407B0100904BC4 /* shoppingcart.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CA56BAA19407B0100904BC4 /* shoppingcart.xib */; };
 		7B7FFD73193853CA008712CB /* 0008.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7FFD39193853CA008712CB /* 0008.png */; };
 		7B7FFD74193853CA008712CB /* 0013.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7FFD3A193853CA008712CB /* 0013.png */; };
 		7B7FFD75193853CA008712CB /* 0018.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7FFD3B193853CA008712CB /* 0018.png */; };
@@ -178,6 +180,9 @@
 		2CA56BA3194055F700904BC4 /* NakedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedCell.h; sourceTree = "<group>"; };
 		2CA56BA4194055F700904BC4 /* NakedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedCell.m; sourceTree = "<group>"; };
 		2CA56BA5194055F700904BC4 /* NakedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NakedCell.xib; sourceTree = "<group>"; };
+		2CA56BA819407B0100904BC4 /* shoppingcart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shoppingcart.h; sourceTree = "<group>"; };
+		2CA56BA919407B0100904BC4 /* shoppingcart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shoppingcart.m; sourceTree = "<group>"; };
+		2CA56BAA19407B0100904BC4 /* shoppingcart.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = shoppingcart.xib; sourceTree = "<group>"; };
 		7B7FFD39193853CA008712CB /* 0008.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0008.png; sourceTree = "<group>"; };
 		7B7FFD3A193853CA008712CB /* 0013.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0013.png; sourceTree = "<group>"; };
 		7B7FFD3B193853CA008712CB /* 0018.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0018.png; sourceTree = "<group>"; };
@@ -345,6 +350,9 @@
 				2CA56BA3194055F700904BC4 /* NakedCell.h */,
 				2CA56BA4194055F700904BC4 /* NakedCell.m */,
 				2CA56BA5194055F700904BC4 /* NakedCell.xib */,
+				2CA56BA819407B0100904BC4 /* shoppingcart.h */,
+				2CA56BA919407B0100904BC4 /* shoppingcart.m */,
+				2CA56BAA19407B0100904BC4 /* shoppingcart.xib */,
 			);
 			path = zhubao;
 			sourceTree = "<group>";
@@ -617,6 +625,7 @@
 				7B7FFDA9193853CA008712CB /* submit.png in Resources */,
 				7B7FFD92193853CA008712CB /* home.png in Resources */,
 				2C15F34E1936D31400E8935B /* diploma.xib in Resources */,
+				2CA56BAC19407B0100904BC4 /* shoppingcart.xib in Resources */,
 				7B7FFD86193853CA008712CB /* diamond05.png in Resources */,
 				2C6CDCE7193F24E3008EAAFB /* bg_3.png in Resources */,
 				7B7FFDA3193853CA008712CB /* ring.png in Resources */,
@@ -672,6 +681,7 @@
 				2C01B4FA1939BBD100C08C2E /* ceshi.m in Sources */,
 				2C5C98631935BDA000004343 /* NakedDiamond.m in Sources */,
 				7C1BE67B193EFEDA0000E397 /* LoginApi.m in Sources */,
+				2CA56BAB19407B0100904BC4 /* shoppingcart.m in Sources */,
 				2CA56BA6194055F700904BC4 /* NakedCell.m in Sources */,
 				7C1BE673193EFEC00000E397 /* WebService.m in Sources */,
 				2C5C983319349ED800004343 /* Index.m in Sources */,

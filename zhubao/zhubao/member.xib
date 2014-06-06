@@ -6,11 +6,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="member">
             <connections>
+                <outlet property="cityText" destination="KcZ-yS-o67" id="cyV-da-kDG"/>
+                <outlet property="divisionText" destination="D5s-SP-acP" id="rbp-A2-SK9"/>
                 <outlet property="fiftharyView" destination="cdw-GJ-RCD" id="LfB-tK-d5z"/>
                 <outlet property="fourtharyView" destination="4jS-ys-oRo" id="0Jl-Za-YWt"/>
                 <outlet property="primaryShadeView" destination="YLI-q6-9sF" id="DHJ-hq-8BF"/>
                 <outlet property="primaryView" destination="EPy-8T-Lay" id="PSH-Um-Nap"/>
+                <outlet property="provinceText" destination="2Z2-Ap-M4O" id="OQh-Rf-mFW"/>
                 <outlet property="secondaryView" destination="bHf-yE-TJ2" id="Eoz-gJ-ae5"/>
+                <outlet property="selectTableView" destination="I0x-25-KIh" id="kb6-Cz-C7s"/>
                 <outlet property="thridaryView" destination="N91-go-KzI" id="Loh-rI-HIF"/>
                 <outlet property="view" destination="NGs-tk-oMz" id="NFY-Mw-2kY"/>
             </connections>
@@ -346,13 +350,29 @@
                             <state key="normal" title="省" image="drop-down.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="selecttableview:" destination="-1" eventType="touchDown" id="qSK-qu-atp"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2H-Pz-i8d">
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2H-Pz-i8d">
                             <rect key="frame" x="463" y="237" width="30" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="市" image="drop-down.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="selecttableview:" destination="-1" eventType="touchDown" id="MMt-dy-sqP"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F8h-Db-tce" userLabel="Button - 部门">
+                            <rect key="frame" x="360" y="318" width="30" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="省" image="drop-down.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="selecttableview:" destination="-1" eventType="touchDown" id="hQq-Bf-KnR"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhD-3W-grk">
                             <rect key="frame" x="293" y="356" width="150" height="40"/>
@@ -371,6 +391,15 @@
                                 <action selector="closeAction2:" destination="-1" eventType="touchDown" id="4sm-I6-dzi"/>
                             </connections>
                         </button>
+                        <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="30" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="I0x-25-KIh">
+                            <rect key="frame" x="181" y="138" width="362" height="275"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="d3T-ms-Uko"/>
+                                <outlet property="delegate" destination="-1" id="DYe-qh-fi2"/>
+                            </connections>
+                        </tableView>
                     </subviews>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>

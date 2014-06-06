@@ -13,6 +13,7 @@
 #import "diploma.h"
 #import "member.h"
 #import "test.h"
+#import "shoppingcart.h"
 
 @interface Index : UIViewController
 
