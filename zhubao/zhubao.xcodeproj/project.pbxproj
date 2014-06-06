@@ -11,6 +11,10 @@
 		2C01B4FB1939BBD100C08C2E /* ceshi.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C01B4F91939BBD100C08C2E /* ceshi.xib */; };
 		2C01B4FF1939C7DC00C08C2E /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C01B4FD1939C7DC00C08C2E /* test.m */; };
 		2C01B5001939C7DC00C08C2E /* test.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C01B4FE1939C7DC00C08C2E /* test.xib */; };
+		2C0DEEEB1941B259000D74A4 /* 1-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C0DEEE71941B259000D74A4 /* 1-1.jpg */; };
+		2C0DEEEC1941B259000D74A4 /* 1-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C0DEEE81941B259000D74A4 /* 1-2.jpg */; };
+		2C0DEEED1941B259000D74A4 /* 1-3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C0DEEE91941B259000D74A4 /* 1-3.jpg */; };
+		2C0DEEEE1941B259000D74A4 /* 1-4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C0DEEEA1941B259000D74A4 /* 1-4.jpg */; };
 		2C14E99B193965E20084E8FE /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C14E999193965E20084E8FE /* logo.png */; };
 		2C14E99C193965E20084E8FE /* pageindex.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C14E99A193965E20084E8FE /* pageindex.png */; };
 		2C15F34D1936D31400E8935B /* diploma.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C15F34B1936D31400E8935B /* diploma.m */; };
@@ -132,6 +136,10 @@
 		2C01B4FC1939C7DC00C08C2E /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
 		2C01B4FD1939C7DC00C08C2E /* test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
 		2C01B4FE1939C7DC00C08C2E /* test.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = test.xib; sourceTree = "<group>"; };
+		2C0DEEE71941B259000D74A4 /* 1-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "1-1.jpg"; sourceTree = "<group>"; };
+		2C0DEEE81941B259000D74A4 /* 1-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "1-2.jpg"; sourceTree = "<group>"; };
+		2C0DEEE91941B259000D74A4 /* 1-3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "1-3.jpg"; sourceTree = "<group>"; };
+		2C0DEEEA1941B259000D74A4 /* 1-4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "1-4.jpg"; sourceTree = "<group>"; };
 		2C14E999193965E20084E8FE /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		2C14E99A193965E20084E8FE /* pageindex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pageindex.png; sourceTree = "<group>"; };
 		2C15F34A1936D31400E8935B /* diploma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = diploma.h; sourceTree = "<group>"; };
@@ -396,6 +404,10 @@
 		7B7FFD38193853CA008712CB /* image */ = {
 			isa = PBXGroup;
 			children = (
+				2C0DEEE71941B259000D74A4 /* 1-1.jpg */,
+				2C0DEEE81941B259000D74A4 /* 1-2.jpg */,
+				2C0DEEE91941B259000D74A4 /* 1-3.jpg */,
+				2C0DEEEA1941B259000D74A4 /* 1-4.jpg */,
 				2CA56BA1194007BC00904BC4 /* 021.png */,
 				2CA56B9F193FFE0600904BC4 /* background.png */,
 				2C6CDCE2193F24E3008EAAFB /* bg_1.png */,
@@ -589,6 +601,7 @@
 				7B7FFDA0193853CA008712CB /* Reset.png in Resources */,
 				2C15F833193708BA00E8935B /* member.xib in Resources */,
 				7B7FFD8A193853CA008712CB /* diamond09.png in Resources */,
+				2C0DEEEB1941B259000D74A4 /* 1-1.jpg in Resources */,
 				7B7FFD97193853CA008712CB /* inquiry.png in Resources */,
 				7B7FFD7F193853CA008712CB /* delete.png in Resources */,
 				7B7FFD82193853CA008712CB /* diamond01.png in Resources */,
@@ -633,12 +646,15 @@
 				7B7FFD76193853CA008712CB /* 04.png in Resources */,
 				7B7FFD8F193853CA008712CB /* drop-down_select.png in Resources */,
 				7B7FFD8B193853CA008712CB /* diamond10.png in Resources */,
+				2C0DEEEE1941B259000D74A4 /* 1-4.jpg in Resources */,
 				7B7FFD89193853CA008712CB /* diamond08.png in Resources */,
 				7B7FFD7B193853CA008712CB /* close.png in Resources */,
 				7B7FFDA7193853CA008712CB /* shopping_cart.png in Resources */,
+				2C0DEEED1941B259000D74A4 /* 1-3.jpg in Resources */,
 				7B7FFD9B193853CA008712CB /* option.png in Resources */,
 				7B7FFD90193853CA008712CB /* exhibition.png in Resources */,
 				7B7FFDAC193853CA008712CB /* vip.png in Resources */,
+				2C0DEEEC1941B259000D74A4 /* 1-2.jpg in Resources */,
 				2CA56BA2194007BC00904BC4 /* 021.png in Resources */,
 				2C5C98511935793B00004343 /* product.xib in Resources */,
 				7B7FFD7C193853CA008712CB /* consort.png in Resources */,
