@@ -213,14 +213,33 @@
     return cell;
 }
 
-//tableview点击操作
+//tableview点击操作，裸钻详情页面显示
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     productdia *entity = [productlist objectAtIndex:[indexPath row]];
     
-    NSString *rowString =[NSString stringWithFormat:@"你点击了：%@",entity.Dia_CertNo];
-    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-    [alter show];
+//    NSString *rowString =[NSString stringWithFormat:@"你点击了：%@",entity.Dia_CertNo];
+//    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//    [alter show];
+    secondShadeView.alpha=0.5;
+    thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.height);
+    thridaryView.hidden = NO;
+    //_productimageview.image=[UIImage imageNamed:@"10"];
+    titleLable.text=@"string";
+    modelLable.text=entity.Dia_Shape;
+    productNoLable.text=entity.Dia_CertNo;
+    weightLable.text=entity.Dia_Carat;
+    colorLable.text=entity.Dia_Col;
+    netLable.text=entity.Dia_Clar;
+    cutLable.text=entity.Dia_Cut;
+    chasingLable.text=entity.Dia_Pol;
+    symmetryLable.text=entity.Dia_Sym;
+    depthLable.text=entity.Dia_Dep;
+    tableLable.text=entity.Dia_Tab;
+    sizeLable.text=entity.Dia_Meas;
+    fluorescenceLable.text=entity.Dia_Flor;
+    diplomaLable.text=entity.Dia_Lab;
+    priceLable.text=entity.Dia_Price;
     
     //Nakeddisplay.hidden=YES;
 }
