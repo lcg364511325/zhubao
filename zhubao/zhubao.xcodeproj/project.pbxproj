@@ -198,6 +198,8 @@
 		7C1BE6DF193F493D0000E397 /* getNowTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE6DE193F493D0000E397 /* getNowTime.m */; };
 		7C1BE6E2193F4C220000E397 /* AutoGetData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE6E1193F4C220000E397 /* AutoGetData.m */; };
 		7CE3FFCA1941CA32002E9FAD /* LoginApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE67A193EFEDA0000E397 /* LoginApi.m */; };
+		7CEF7EFE19420F93005DF8A9 /* NoticeReportCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEF7EFC19420F93005DF8A9 /* NoticeReportCell.m */; };
+		7CEF7F0119421AC3005DF8A9 /* NoticeReportCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEF7F0019421AC3005DF8A9 /* NoticeReportCell.xib */; };
 		7CF5EA3F19401B3300C63E6D /* zhubao.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 7CF5EA3E19401B3300C63E6D /* zhubao.sqlite */; };
 		7CF5EA4219401F0500C63E6D /* customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF5EA4119401F0500C63E6D /* customer.m */; };
 		7CF5EA451940203800C63E6D /* productEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF5EA441940203800C63E6D /* productEntity.m */; };
@@ -448,6 +450,9 @@
 		7C1BE6DE193F493D0000E397 /* getNowTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = getNowTime.m; sourceTree = "<group>"; };
 		7C1BE6E0193F4C220000E397 /* AutoGetData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoGetData.h; sourceTree = "<group>"; };
 		7C1BE6E1193F4C220000E397 /* AutoGetData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoGetData.m; sourceTree = "<group>"; };
+		7CEF7EFB19420F93005DF8A9 /* NoticeReportCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeReportCell.h; sourceTree = "<group>"; };
+		7CEF7EFC19420F93005DF8A9 /* NoticeReportCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeReportCell.m; sourceTree = "<group>"; };
+		7CEF7F0019421AC3005DF8A9 /* NoticeReportCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticeReportCell.xib; sourceTree = "<group>"; };
 		7CF5EA3E19401B3300C63E6D /* zhubao.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = zhubao.sqlite; sourceTree = SOURCE_ROOT; };
 		7CF5EA4019401F0500C63E6D /* customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = customer.h; sourceTree = "<group>"; };
 		7CF5EA4119401F0500C63E6D /* customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = customer.m; sourceTree = "<group>"; };
@@ -536,6 +541,7 @@
 		2C5C97FD19349E2100004343 /* zhubao */ = {
 			isa = PBXGroup;
 			children = (
+				7CEF7EFA19420F70005DF8A9 /* TableCell */,
 				7C1BE68F193F3C5F0000E397 /* extend */,
 				7C1BE67C193F25A80000E397 /* login */,
 				7C1BE678193EFEDA0000E397 /* ServiceApi */,
@@ -898,6 +904,16 @@
 			path = sqlite;
 			sourceTree = "<group>";
 		};
+		7CEF7EFA19420F70005DF8A9 /* TableCell */ = {
+			isa = PBXGroup;
+			children = (
+				7CEF7F0019421AC3005DF8A9 /* NoticeReportCell.xib */,
+				7CEF7EFB19420F93005DF8A9 /* NoticeReportCell.h */,
+				7CEF7EFC19420F93005DF8A9 /* NoticeReportCell.m */,
+			);
+			path = TableCell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -983,6 +999,7 @@
 				7C1077421941AFF4005187B9 /* Seq_v04_640x378_47.jpg in Resources */,
 				7B7FFD80193853CA008712CB /* diamant.png in Resources */,
 				7C1077571941AFF4005187B9 /* Seq_v04_640x378_66.jpg in Resources */,
+				7CEF7F0119421AC3005DF8A9 /* NoticeReportCell.xib in Resources */,
 				7C1077431941AFF4005187B9 /* Seq_v04_640x378_48.jpg in Resources */,
 				7B7FFD96193853CA008712CB /* import.png in Resources */,
 				7B7FFD88193853CA008712CB /* diamond07.png in Resources */,
@@ -1177,6 +1194,7 @@
 				7CF5EA481940235B00C63E6D /* productdia.m in Sources */,
 				7CF5EA6019405D0D00C63E6D /* buyproduct.m in Sources */,
 				2C5C980419349E2100004343 /* main.m in Sources */,
+				7CEF7EFE19420F93005DF8A9 /* NoticeReportCell.m in Sources */,
 				7CF5EA451940203800C63E6D /* productEntity.m in Sources */,
 				2C5C98501935793B00004343 /* product.m in Sources */,
 				7C1076CC1941AF44005187B9 /* FVImageSequence.m in Sources */,

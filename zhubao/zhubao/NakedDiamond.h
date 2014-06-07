@@ -12,7 +12,7 @@
 #import "ustomtailor.h"
 #import "diploma.h"
 #import "member.h"
-#import "NakedCell.h"
+#import "NoticeReportCell.h"
 #import "sqlService.h"
 
 @interface NakedDiamond : UIViewController

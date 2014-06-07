@@ -115,6 +115,9 @@
     secondaryView.hidden = NO;
     sqlService *product=[[sqlService alloc] init];
     productlist=[product GetProductdiaList:@"1" type2:@"1" type3:@"1" type4:@"1" type5:@"1" type6:@"1" type7:@"1" type8:@"1" type9:@"1" type10:@"1" type11:@"1" page:1 pageSize:10];
+    
+    [Nakeddisplay reloadData];
+    
 }
 
 - (IBAction)closeAction:(id)sender
@@ -185,34 +188,40 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *TableSampleIdentifier = @"NakedCell";
+    static NSString *TableSampleIdentifier = @"NoticeReportCell";
     
-    NakedCell *cell = [tableView dequeueReusableCellWithIdentifier:TableSampleIdentifier];
+    NoticeReportCell *cell = [tableView dequeueReusableCellWithIdentifier:TableSampleIdentifier];
     if (cell == nil) {
-        NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"NakedCell" owner:self options:nil];
+        NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"NoticeReportCell" owner:self options:nil];
         cell=[nib objectAtIndex:0];
     }
     for (productdia *entity in productlist) {
-        cell.prodectimageview.image=[UIImage imageNamed:@"diamond01"];
-        cell.modellable.text=entity.Dia_Shape;
-        cell.numberlable.text=entity.Dia_Corp;
-        cell.weightlable.text=entity.Dia_Carat;
-        cell.colorlable.text=entity.Dia_Col;
-        cell.netlable.text=entity.Dia_Clar;
-        cell.cutlable.text=entity.Dia_Cut;
-        cell.chasinglable.text=@"cc";
-        cell.symmetrylable.text=entity.Dia_Sym;
-        cell.diplomalable.text=entity.Dia_Lab;
-        cell.pricelable.text=entity.Dia_Price;
+        cell.showimage.image=[UIImage imageNamed:@"diamond01"];
+        cell.notice.text=entity.Dia_Shape;
+        cell.noticeDate.text=entity.Dia_Corp;
+        cell.tuDate.text=entity.Dia_Carat;
+        cell.Dia_Col.text=entity.Dia_Col;
+        cell.Dia_Clar.text=entity.Dia_Clar;
+        cell.Dia_Cut.text=entity.Dia_Cut;
+        cell.chasinglable.text=entity.Dia_Price;
+        cell.Dia_Sym.text=entity.Dia_Sym;
+        cell.Dia_Lab.text=entity.Dia_Lab;
+        cell.Dia_Price.text=entity.Dia_Price;
+        cell.teslable.text=@"查看";
     }
-    cell.chasinglable.text=@"cc";
+    
     return cell;
 }
 
 //tableview点击操作
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //NSString *rowString = [self.list objectAtIndex:[indexPath row]];
+    productdia *entity = [productlist objectAtIndex:[indexPath row]];
+    
+    NSString *rowString =[NSString stringWithFormat:@"你点击了：%@",entity.Dia_CertNo];
+    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alter show];
+    
     //Nakeddisplay.hidden=YES;
 }
 

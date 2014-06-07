@@ -46,13 +46,21 @@
 
 -(id)autogetData{
     @try {
+        
+        [_submitlogin setTitle:@"正更新数据中..." forState:UIControlStateNormal];
+        [_submitlogin setTag:1];
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // 耗时的操作（异步操作）
-        
+            
             AutoGetData * getdata=[[AutoGetData alloc] init];
             [getdata getDataInsertTable];
         
             dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [_submitlogin setTitle:@"登录" forState:UIControlStateNormal];
+                [_submitlogin setTag:0];
+                
                 // 更新界面（处理结果）
                 NSDate *  senddate=[NSDate date];
                 NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
@@ -79,6 +87,8 @@
     @try {
         
         UIButton *resultButton = (UIButton *)sender;
+        
+        if(resultButton.tag==1)return;
         
         [resultButton setTitle:@"正努力登录中..." forState:UIControlStateNormal];
         [resultButton setTag:1];
@@ -113,6 +123,9 @@
                     NSString *info=@"登录失败！";
                     // NSLog(@"登录失败------:%@",info);
                     [[[UIAlertView alloc] initWithTitle:@"信息提示" message:info delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil] show];
+                    
+                    //Index *sysmenu=[[Index alloc] init];
+                    //[self.navigationController pushViewController:sysmenu animated:NO];
                 }
                 
                 [resultButton setTitle:@"登录" forState:UIControlStateNormal];

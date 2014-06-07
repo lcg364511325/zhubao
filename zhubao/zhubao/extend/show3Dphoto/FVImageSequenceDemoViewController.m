@@ -29,5 +29,12 @@
 	return NO;
 }
 
+-(IBAction)goAction:(id)sender
+{
+    //[self dismissViewControllerAnimated:YES completion:nil];
+    
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
 
 @end

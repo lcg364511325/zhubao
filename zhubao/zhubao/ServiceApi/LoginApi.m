@@ -13,7 +13,8 @@
 //登录接口
 -(LoginEntity *)login:(NSString *)username password:(NSString *)password verlity:(NSString*)verlity
 {
-    
+    @try {
+
     getNowTime * time=[[getNowTime alloc] init];
     NSString * nowt=[time nowTime];
     
@@ -86,6 +87,14 @@
     }
     else if (error != nil){
         NSLog(@"发生致命错误：%@", error);
+    }
+    
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+    @finally {
+        
     }
     
     return nil;

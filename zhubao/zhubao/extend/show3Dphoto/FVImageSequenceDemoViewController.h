@@ -13,5 +13,7 @@
 	IBOutlet FVImageSequence *imageSquence;
 }
 
+- (IBAction)goAction:(id)sender;
+
 @end
 

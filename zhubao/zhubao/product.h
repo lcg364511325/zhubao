@@ -13,6 +13,7 @@
 #import "diploma.h"
 #import "member.h"
 #import "sqlService.h"
+#import "FVImageSequenceDemoViewController.h"
 
 @interface product : UIViewController
 
@@ -51,5 +52,6 @@
 - (IBAction)closeAction:(id)sender;
 - (IBAction)goAction1:(id)sender;
 - (IBAction)closeAction1:(id)sender;
+- (IBAction)threeddAction:(id)sender;
 
 @end

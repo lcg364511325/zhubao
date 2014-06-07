@@ -146,6 +146,14 @@ NSInteger selecttype=0;
     secondShadeView.alpha=0;
 }
 
+- (IBAction)threeddAction:(id)sender
+{
+    
+    FVImageSequenceDemoViewController *sysmenu=[[FVImageSequenceDemoViewController alloc] init];
+    [self.navigationController pushViewController:sysmenu animated:NO];
+    
+}
+
 //设置页面跳转
 -(IBAction)setup:(id)sender
 {
