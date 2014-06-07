@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="product">
@@ -10,6 +10,7 @@
                 <outlet property="colortext" destination="4pl-CM-hDc" id="gUX-nc-aKZ"/>
                 <outlet property="fitNolable" destination="oUw-LK-NHX" id="qn5-sT-n1f"/>
                 <outlet property="fitweightlable" destination="z7S-oE-hQl" id="lKJ-hP-Ano"/>
+                <outlet property="fontText" destination="aOE-Py-StE" id="Vwk-Ln-d1o"/>
                 <outlet property="fonttext" destination="aOE-Py-StE" id="jQa-o4-DnK"/>
                 <outlet property="fourthView" destination="Gkx-7H-byA" id="XdG-tn-7aZ"/>
                 <outlet property="mainlable" destination="Frm-s8-2aR" id="wWb-Xf-OUP"/>
@@ -18,6 +19,7 @@
                 <outlet property="modellable" destination="dlN-rs-pIN" id="POZ-ig-CNA"/>
                 <outlet property="netselect" destination="d7Z-yo-VeN" id="oLV-IR-r4g"/>
                 <outlet property="nettext" destination="ZOB-Rg-xjR" id="WWv-uO-OSC"/>
+                <outlet property="numberText" destination="Dwh-1h-eH4" id="SyV-jc-mDJ"/>
                 <outlet property="numbertext" destination="Dwh-1h-eH4" id="PP0-v0-1lr"/>
                 <outlet property="pricelable" destination="mG0-9m-Vdl" id="VEb-fJ-gA5"/>
                 <outlet property="primaryShadeView" destination="pSa-na-GF5" id="adN-VY-9Ce"/>
@@ -25,6 +27,7 @@
                 <outlet property="productimageview" destination="fOh-xR-5sS" id="fKN-mR-e1G"/>
                 <outlet property="secondShadeView" destination="0GJ-x7-Tsu" id="5oV-wd-0Ri"/>
                 <outlet property="secondaryView" destination="lrm-nX-2Fp" id="8I6-uf-fPY"/>
+                <outlet property="sizeText" destination="Tu0-9I-sxq" id="M1S-EJ-98e"/>
                 <outlet property="sizetext" destination="Tu0-9I-sxq" id="zEG-O6-6ic"/>
                 <outlet property="textureselect" destination="Awj-bV-th0" id="oIx-b5-PZW"/>
                 <outlet property="texturetext" destination="JJg-kh-cNp" id="Eg1-t7-2TV"/>

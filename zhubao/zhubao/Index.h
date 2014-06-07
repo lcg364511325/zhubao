@@ -14,13 +14,19 @@
 #import "member.h"
 #import "test.h"
 #import "sqlService.h"
+#import "shoppingcartCell.h"
+#import "AppDelegate.h"
 
 @interface Index : UIViewController
+{
+    NSMutableArray *shoppingcartlist;
+}
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondaryView;
 @property (retain, nonatomic) IBOutlet UIView *primaryShadeView;
 @property (retain, nonatomic) IBOutlet UIView *thridView;
+@property (weak, nonatomic) IBOutlet UITableView *goodsview;
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;

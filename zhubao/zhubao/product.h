@@ -14,6 +14,7 @@
 #import "member.h"
 #import "sqlService.h"
 #import "FVImageSequenceDemoViewController.h"
+#import "sqlService.h"
 
 @interface product : UIViewController
 
@@ -35,6 +36,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *nettext;
 @property (weak, nonatomic) IBOutlet UITextField *colortext;
 @property (weak, nonatomic) IBOutlet UITextField *texturetext;
+@property (weak, nonatomic) IBOutlet UITextField *sizeText;
+@property (weak, nonatomic) IBOutlet UITextField *fontText;
+@property (weak, nonatomic) IBOutlet UITextField *numberText;
 @property (weak, nonatomic) IBOutlet UILabel *modellable;
 @property (weak, nonatomic) IBOutlet UILabel *weightlable;
 @property (weak, nonatomic) IBOutlet UILabel *mainlable;

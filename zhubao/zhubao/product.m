@@ -32,6 +32,9 @@
 @synthesize nettext;
 @synthesize colortext;
 @synthesize texturetext;
+@synthesize sizeText;
+@synthesize fontText;
+@synthesize numberText;
 @synthesize modellable;
 @synthesize weightlable;
 @synthesize mainlable;
@@ -46,6 +49,7 @@
 
 //判定点击来哪个tableview
 NSInteger selecttype=0;
+NSString * productnumber=nil;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -61,6 +65,22 @@ NSInteger selecttype=0;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.navigationController setNavigationBarHidden:YES];
+    //主石重量
+    NSArray *mainarray = [[NSArray alloc]initWithObjects:@"0.00-0.02",@"0.03-0.07",@"0.08-0.12",@"0.13-0.17",@"0.18-0.22",@"0.23-0.28",@"0.29-0.39",@"0.40",@"0.50",@"0.60",@"0.70",@"0.80",@"0.90",@"一克拉以上", nil];
+    //净度
+    NSArray *netarray = [[NSArray alloc]initWithObjects:@"VVS",@"VS",@"SI",@"P", nil];
+    //颜色
+    NSArray *colorarray = [[NSArray alloc]initWithObjects:@"D-E",@"F-G",@"H",@"I-J",@"K-L",@"M-N", nil];
+    //材质
+    NSArray *texturearray = [[NSArray alloc]initWithObjects:@"18K黄",@"18K白",@"18K双色",@"18K玫瑰金",@"PT900",@"PT950",@"PD950", nil];
+    self.mainlist=mainarray;
+    self.netlist=netarray;
+    self.colorlist=colorarray;
+    self.texturelist=texturearray;
+    maintext.userInteractionEnabled=NO;
+    nettext.userInteractionEnabled=NO;
+    colortext.userInteractionEnabled=NO;
+    texturetext.userInteractionEnabled=NO;
 
 }
 
@@ -110,19 +130,22 @@ NSInteger selecttype=0;
     primaryShadeView.alpha=0.5;
     secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.height);
     secondaryView.hidden = NO;
+    sqlService * sql=[[sqlService alloc] init];
+    productnumber=@"36530";
+    productEntity *goods=[sql GetProductDetail:productnumber];
     productimageview.image=[UIImage imageNamed:@"diamonds.png"];
-    title1lable.text=@"18K钻石女戒 18K/0.12克拉S03651W(C20455031)";
-    pricelable.text=@"¥18507";
-    modellable.text=@"S036531W";
-    weightlable.text=@"2.21g";
-    mainlable.text=@"1颗";
-    fitNolable.text=@"0颗";
-    fitweightlable.text=@"0.00ct";
-    maintext.text=@"0.400";
-    nettext.text=@"SI";
-    colortext.text=@"H";
+    title1lable.text=goods.Pro_name;
+    pricelable.text=[@"¥" stringByAppendingString:goods.Pro_price];
+    modellable.text=goods.Pro_model;
+    weightlable.text=goods.Pro_goldWeight;
+    mainlable.text=goods.Pro_Z_count;
+    fitNolable.text=goods.Pro_f_count;
+    fitweightlable.text=goods.Pro_f_weight;
+    maintext.text=goods.Pro_Z_weight;
+    nettext.text=goods.Pro_f_clarity;
+    colortext.text=goods.Pro_Z_color;
     texturetext.text=@"18K黄";
-    sizetext.text=@"7";
+    sizetext.text=goods.Pro_goldsize;
     fonttext.text=nil;
     numbertext.text=@"1";
 }
@@ -272,6 +295,7 @@ NSInteger selecttype=0;
     selecttype=btntag;
     if(btntag==0){
        mianselect.hidden=NO;
+        [mianselect reloadData];
     }else if(btntag==1){
         netselect.hidden=NO;
         [netselect reloadData];
@@ -344,10 +368,32 @@ NSInteger selecttype=0;
     }
 }
 
+
+//商品添加到购物车
 -(IBAction)addshopcart:(id)sender{
-    NSString *rowString =@"成功加入购物车！";
-    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-    [alter show];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    buyproduct * entity=[[buyproduct alloc]init];
+    entity.producttype=@"0";
+    entity.productid=productnumber;
+    entity.pcount=numberText.text;
+    entity.pcolor=colortext.text;
+    entity.pdetail=fontText.text;
+    entity.pvvs=nettext.text;
+    entity.psize=sizeText.text;
+    entity.pgoldtype=texturetext.text;
+    entity.pweight=maintext.text;
+    entity.customerid=myDelegate.entityl.uId;
+    sqlService *sql=[[sqlService alloc]init];
+    buyproduct *successadd=[sql addToBuyproduct:entity];
+    if (successadd) {
+        NSString *rowString =@"成功加入购物车！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    } else{
+        NSString *rowString =@"加入购物车失败！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }
 }
 
 @end

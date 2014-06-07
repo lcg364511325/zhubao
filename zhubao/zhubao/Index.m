@@ -18,6 +18,7 @@
 @synthesize secondaryView;
 @synthesize primaryShadeView;
 @synthesize thridView;
+@synthesize goodsview;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -82,9 +83,10 @@
     primaryShadeView.alpha=0.5;
     secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.width);
     secondaryView.hidden = NO;
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     sqlService *shopcar=[[sqlService alloc] init];
-    //NSMutableArray *shoppingcart=[shopcar GetBuyproductList:(NSString *)]
-    
+    shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
+    [goodsview reloadData];
 }
 
 - (IBAction)closeAction:(id)sender
@@ -104,44 +106,83 @@
     thridView.hidden=YES;
 }
 
-////初始化tableview数据
-//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    return 1;
-//    //只有一组，数组数即为行数。
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    static NSString *TableSampleIdentifier = @"shoppingcart";
-//    
-//    shoppingcart *cell = [tableView dequeueReusableCellWithIdentifier:TableSampleIdentifier];
-//    if (cell == nil) {
-//        NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"shoppingcart" owner:self options:nil];
-//        cell=[nib objectAtIndex:0];
-//    }
-//    cell.productImageView.image=[UIImage imageNamed:@"diamond01"];
-//    cell.modelLable.text=@"测试 ";
-//    cell.diplomaLable.text=@"测试 ";
-//    cell.numberLable.text=@"测试 ";
-//    cell.model1Lable.text=@"测试 ";
-//    cell.weightLable.text=@"测试 ";
-//    cell.colorLable.text=@"测试 ";
-//    cell.modelLable.text=@"测试 ";
-//    cell.netLable.text=@"测试 ";
-//    cell.cutLable.text=@"测试 ";
-//    cell.chasingLable.text=@"测试 ";
-//    cell.symmetryLable.text=@"测试 ";
-//    //cell.buyNoLable.text=@"测试 ";
-//    return cell;
-//}
-//
-////tableview点击操作
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    //NSString *rowString = [self.list objectAtIndex:[indexPath row]];
-//    //Nakeddisplay.hidden=YES;
-//}
+//初始化tableview数据
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [shoppingcartlist count];
+    //只有一组，数组数即为行数。
+}
+
+// 购物车数据显示
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *TableSampleIdentifier = @"shoppingcartCell";
+    
+    shoppingcartCell *cell = [tableView dequeueReusableCellWithIdentifier:TableSampleIdentifier];
+    if (cell == nil) {
+        NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"shoppingcartCell" owner:self options:nil];
+        cell=[nib objectAtIndex:0];
+    }
+    for (buyproduct *goods in shoppingcartlist) {
+        BOOL iseuqal=[goods.producttype isEqualToString:@"1"];
+        if (iseuqal) {
+            cell.showImage.image=[UIImage imageNamed:@"diamond01"];
+            cell.modelLable.text=goods.diaentiy.Dia_Shape;
+            cell.numberLable.text=[@"编号:" stringByAppendingString:goods.diaentiy.Dia_ART];
+            cell.model1Lable.text=[@"形状:" stringByAppendingString:goods.diaentiy.Dia_Shape];
+            cell.weightLable.text=[@"钻重:" stringByAppendingString:goods.pweight];
+            cell.colorLable.text=[@"颜色:" stringByAppendingString:goods.pweight];
+            cell.netLable.text=[@"净度:" stringByAppendingString:goods.pvvs];
+            cell.cutLable.text=[@"切工:" stringByAppendingString:goods.diaentiy.Dia_Cut];
+            cell.chasing.text=[@"抛光:" stringByAppendingString:goods.diaentiy.Dia_Pol];
+            cell.fluLable.text=[@"对称:" stringByAppendingString:goods.diaentiy.Dia_Sym];
+            cell.priceLable.text=goods.pcount;
+        }else{
+            cell.showImage.image=[UIImage imageNamed:@"diamond01"];
+            if (goods.proentiy.Pro_number) {
+                cell.modelLable.text=goods.proentiy.Pro_number;
+            }else{
+                cell.modelLable.text=nil;
+            }
+            if (goods.diaentiy.Dia_ART) {
+                cell.numberLable.text=goods.diaentiy.Dia_ART;
+            }else{
+                cell.numberLable.text=nil;
+            }
+            cell.model1Lable.text=[@"金重:" stringByAppendingString:goods.proentiy.Pro_goldWeight];
+            cell.weightLable.text=[@"材质:" stringByAppendingString:goods.pgoldtype];
+            if (goods.proentiy.Pro_Z_weight) {
+                cell.colorLable.text=[@"钻重:" stringByAppendingString:goods.proentiy.Pro_Z_weight];
+            }else{
+                cell.colorLable.text=nil;
+            }
+            if (goods.proentiy.Pro_f_clarity) {
+                cell.netLable.text=[@"净度:" stringByAppendingString:goods.proentiy.Pro_f_clarity];
+            }else{
+                cell.netLable.text=nil;
+            }
+            if (goods.proentiy.Pro_Z_color) {
+                cell.cutLable.text=[@"颜色:" stringByAppendingString:goods.proentiy.Pro_Z_color];
+            }else{
+                cell.cutLable.text=nil;
+            }
+            if (goods.proentiy.Pro_goldsize) {
+                cell.chasing.text=[@"尺寸:" stringByAppendingString:goods.proentiy.Pro_goldsize];
+            }else{
+                cell.chasing.text=nil;
+            }
+            cell.priceLable.text=goods.pcount;
+        }
+    }
+    return cell;
+}
+
+//tableview点击操作
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //NSString *rowString = [self.list objectAtIndex:[indexPath row]];
+    //Nakeddisplay.hidden=YES;
+}
 
 //购物车删除
 -(IBAction)deleteshoppingcart:(id)sender
