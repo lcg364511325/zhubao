@@ -731,7 +731,7 @@
         
         sqlite3_stmt *statement = nil;
         //sql语句
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT buy.Id,buy.pcolor,buy.pcount,buy.pdetail,buy.psize,buy.pprice,buy.producttype,buy.pvvs,buy.pweight,buy.pgoldtype,pro.Pro_name,pro.Pro_State,pro.Pro_smallpic,pro.Pro_bigpic,pro.Pro_info,pro.Pro_goldWeight from buyproduct as buy,product as pro where pro.Id=buy.productid and buy.customerid=%@ ",customerid];
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT buy.Id,buy.pcolor,buy.pcount,buy.pdetail,buy.psize,buy.pprice,buy.producttype,buy.pvvs,buy.pweight,buy.pgoldtype,pro.Pro_name,pro.Pro_State,pro.Pro_smallpic,pro.Pro_bigpic,pro.Pro_info,pro.Pro_goldWeight,pro.Pro_goldsize,pro.Pro_goldset,pro.Pro_FingerSize,pro.Pro_gongfei,pro.Pro_MarketPrice,pro.Pro_price,pro.Pro_OKdays,pro.Pro_hotE  from buyproduct as buy,product as pro where pro.Id=buy.productid and buy.customerid=%@ and buy.producttype=0 union all SELECT buy.Id,buy.pcolor,buy.pcount,buy.pdetail,buy.psize,buy.pprice,buy.producttype,buy.pvvs,buy.pweight,buy.pgoldtype,pro.Dia_Lab,pro.Dia_CertNo,pro.Dia_Carat,pro.Dia_Clar,pro.Dia_Col,pro.Dia_Cut,pro.Dia_Pol,pro.Dia_Sym,pro.Dia_Shape,pro.Dia_Dep,pro.Dia_Tab,pro.Dia_Meas,pro.Dia_Flor,pro.Dia_Price from buyproduct as buy,productdia as pro where pro.Id=buy.productid and buy.customerid=%@ and buy.producttype=1 ",customerid,customerid];
         
         const char *sql = [querySQL UTF8String];
         if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
@@ -742,6 +742,8 @@
             //查询结果集中一条一条的遍历所有的记录，这里的数字对应的是列值。
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 buyproduct * entity = [[buyproduct alloc] init];
+                entity.proentiy=[[productEntity alloc] init];
+                entity.diaentiy=[[productdia alloc] init];
                 
                 char * Id   = (char *)sqlite3_column_text(statement,0);
                 if(Id != nil)
@@ -783,29 +785,99 @@
                 if(pgoldtype != nil)
                     entity.pgoldtype = [NSString stringWithUTF8String:pgoldtype];
                 
+                
                 char * Pro_name   = (char *)sqlite3_column_text(statement,10);
-                if(Pro_name != nil)
-                    entity.proentiy.Pro_name = [NSString stringWithUTF8String:Pro_name];
+                if(Pro_name != nil){
+                    if([entity.producttype isEqualToString:@"0"])entity.proentiy.Pro_name = [NSString stringWithUTF8String:Pro_name];
+                    else entity.diaentiy.Dia_Lab = [NSString stringWithUTF8String:Pro_name];
+                }
                 
                 char * Pro_State   = (char *)sqlite3_column_text(statement,11);
-                if(Pro_State != nil)
-                    entity.proentiy.Pro_State = [NSString stringWithUTF8String:Pro_State];
+                if(Pro_State != nil){
+                    if([entity.producttype isEqualToString:@"0"])entity.proentiy.Pro_State = [NSString stringWithUTF8String:Pro_State];
+                    else entity.diaentiy.Dia_CertNo = [NSString stringWithUTF8String:Pro_State];
+                }
                 
                 char * Pro_smallpic   = (char *)sqlite3_column_text(statement,12);
-                if(Pro_smallpic != nil)
-                    entity.proentiy.Pro_smallpic = [NSString stringWithUTF8String:Pro_smallpic];
+                if(Pro_smallpic != nil){
+                    if([entity.producttype isEqualToString:@"0"])entity.proentiy.Pro_smallpic = [NSString stringWithUTF8String:Pro_smallpic];
+                    else entity.diaentiy.Dia_Carat = [NSString stringWithUTF8String:Pro_smallpic];
+                }
                 
                 char * Pro_bigpic   = (char *)sqlite3_column_text(statement,13);
-                if(Pro_bigpic != nil)
-                    entity.proentiy.Pro_bigpic = [NSString stringWithUTF8String:Pro_bigpic];
+                if(Pro_bigpic != nil){
+                    if([entity.producttype isEqualToString:@"0"]){entity.proentiy.Pro_bigpic = [NSString stringWithUTF8String:Pro_bigpic];
+                    }else {entity.diaentiy.Dia_Clar = [NSString stringWithUTF8String:Pro_bigpic];}
+                }
                 
                 char * Pro_info   = (char *)sqlite3_column_text(statement,14);
-                if(Pro_info != nil)
-                    entity.proentiy.Pro_info = [NSString stringWithUTF8String:Pro_info];
+                if(Pro_info != nil){
+                    if([entity.producttype isEqualToString:@"0"]){entity.proentiy.Pro_info = [NSString stringWithUTF8String:Pro_info];
+                    }else {entity.diaentiy.Dia_Col = [NSString stringWithUTF8String:Pro_info];}
+                }
                 
-                char * Pro_goldWeight   = (char *)sqlite3_column_text(statement,14);
-                if(Pro_goldWeight != nil)
-                    entity.proentiy.Pro_goldWeight = [NSString stringWithUTF8String:Pro_goldWeight];
+                char * Pro_goldWeight   = (char *)sqlite3_column_text(statement,15);
+                if(Pro_goldWeight != nil){
+                    if([entity.producttype isEqualToString:@"0"]){entity.proentiy.Pro_goldWeight = [NSString stringWithUTF8String:Pro_goldWeight];
+                    }else{ entity.diaentiy.Dia_Cut = [NSString stringWithUTF8String:Pro_goldWeight];}
+                }
+                
+                char * Pro_goldsize   = (char *)sqlite3_column_text(statement,16);
+                if(Pro_goldsize != nil)
+                {
+                    if([entity.producttype isEqualToString:@"0"]){entity.proentiy.Pro_goldsize = [NSString stringWithUTF8String:Pro_goldsize];
+                    }else{ entity.diaentiy.Dia_Pol = [NSString stringWithUTF8String:Pro_goldsize];}
+                }
+                
+                char * Pro_goldset   = (char *)sqlite3_column_text(statement,17);
+                if(Pro_goldset != nil)
+                {
+                    if([entity.producttype isEqualToString:@"0"]){entity.proentiy.Pro_goldset = [NSString stringWithUTF8String:Pro_goldset];
+                    }else{ entity.diaentiy.Dia_Sym = [NSString stringWithUTF8String:Pro_goldset];}
+                }
+                
+                char * Pro_FingerSize   = (char *)sqlite3_column_text(statement,18);
+                if(Pro_FingerSize != nil)
+                {
+                    if([entity.producttype isEqualToString:@"0"]){entity.proentiy.Pro_FingerSize = [NSString stringWithUTF8String:Pro_FingerSize];
+                    }else{ entity.diaentiy.Dia_Shape = [NSString stringWithUTF8String:Pro_FingerSize];}
+                }
+                
+                char * Pro_gongfei   = (char *)sqlite3_column_text(statement,19);
+                if(Pro_gongfei != nil)
+                {
+                    if([entity.producttype isEqualToString:@"0"]){entity.proentiy.Pro_gongfei = [NSString stringWithUTF8String:Pro_gongfei];
+                    }else{ entity.diaentiy.Dia_Dep = [NSString stringWithUTF8String:Pro_gongfei];}
+                }
+                
+                char * Pro_MarketPrice   = (char *)sqlite3_column_text(statement,20);
+                if(Pro_MarketPrice != nil)
+                {
+                    if([entity.producttype isEqualToString:@"0"]){entity.proentiy.Pro_MarketPrice = [NSString stringWithUTF8String:Pro_MarketPrice];
+                    }else{ entity.diaentiy.Dia_Tab = [NSString stringWithUTF8String:Pro_MarketPrice];}
+                }
+                
+                char * Pro_price   = (char *)sqlite3_column_text(statement,21);
+                if(Pro_price != nil)
+                {
+                    if([entity.producttype isEqualToString:@"0"]){entity.proentiy.Pro_price = [NSString stringWithUTF8String:Pro_price];
+                    }else{ entity.diaentiy.Dia_Meas = [NSString stringWithUTF8String:Pro_price];}
+                }
+                
+                char * Pro_OKdays   = (char *)sqlite3_column_text(statement,22);
+                if(Pro_OKdays != nil)
+                {
+                    if([entity.producttype isEqualToString:@"0"]){entity.proentiy.Pro_OKdays = [NSString stringWithUTF8String:Pro_OKdays];
+                    }else{ entity.diaentiy.Dia_Flor = [NSString stringWithUTF8String:Pro_OKdays];}
+                }
+                
+                char * Pro_hotE   = (char *)sqlite3_column_text(statement,23);
+                if(Pro_hotE != nil)
+                    entity.proentiy.Pro_hotE = [NSString stringWithUTF8String:Pro_hotE];
+                {
+                    if([entity.producttype isEqualToString:@"0"]){entity.proentiy.Pro_hotE = [NSString stringWithUTF8String:Pro_hotE];
+                    }else{ entity.diaentiy.Dia_Price = [NSString stringWithUTF8String:Pro_hotE];}
+                }
                 
                 [array addObject:entity];
             }

@@ -13,6 +13,8 @@
 #import "buyproduct.h"
 #import "productphotos.h"
 #import "customer.h"
+#import "productEntity.h"
+#import "productdia.h"
 
 @interface sqlService : NSObject
 {
