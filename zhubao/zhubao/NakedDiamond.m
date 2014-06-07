@@ -203,10 +203,10 @@
         cell.Dia_Col.text=entity.Dia_Col;
         cell.Dia_Clar.text=entity.Dia_Clar;
         cell.Dia_Cut.text=entity.Dia_Cut;
-        cell.chasinglable.text=entity.Dia_Price;
+        cell.chasinglable.text=[@"¥" stringByAppendingString:entity.Dia_Price];
         cell.Dia_Sym.text=entity.Dia_Sym;
         cell.Dia_Lab.text=entity.Dia_Lab;
-        cell.Dia_Price.text=entity.Dia_Price;
+        cell.Dia_Price.text=entity.Dia_Pol;
         cell.teslable.text=@"查看";
     }
     
@@ -239,7 +239,7 @@
     sizeLable.text=entity.Dia_Meas;
     fluorescenceLable.text=entity.Dia_Flor;
     diplomaLable.text=entity.Dia_Lab;
-    priceLable.text=entity.Dia_Price;
+    priceLable.text=[@"¥" stringByAppendingString:entity.Dia_Price];
     
     //Nakeddisplay.hidden=YES;
 }

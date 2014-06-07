@@ -11,6 +11,7 @@
 @interface shoppingcartCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *showImage;
 @property (weak, nonatomic) IBOutlet UILabel *modelLable;
+@property (weak, nonatomic) IBOutlet UILabel *dipLable;
 @property (weak, nonatomic) IBOutlet UILabel *numberLable;
 @property (weak, nonatomic) IBOutlet UILabel *model1Lable;
 @property (weak, nonatomic) IBOutlet UILabel *weightLable;
