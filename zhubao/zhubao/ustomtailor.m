@@ -163,9 +163,48 @@
     textureselect.hidden=NO;
 }
 
+//确认定制
 -(IBAction)orderOfGoods:(id)sender
 {
-    
+    sqlService * sql=[[sqlService alloc] init];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    buyproduct * entity=[[buyproduct alloc]init];
+    entity.producttype=@"2";
+    entity.customerid=myDelegate.entityl.uId;
+    entity.photos=@"1";
+    entity.photom=@"2";
+    entity.photob=@"3";
+    entity.pgoldtype=texturetext.text;
+    entity.pweight=goldweightText.text;
+    entity.Dia_Z_weight=miandiaText.text;
+    entity.Dia_Z_count=mianNoText.text;
+    entity.Dia_F_weight=fitDiaText.text;
+    entity.Dia_F_count=fitNoText.text;
+    entity.psize=sizeText.text;
+    entity.pdetail=fontText.text;
+    buyproduct *successadd=[sql addToBuyproduct:entity];
+    if (successadd) {
+        NSString *rowString =@"成功加入购物车！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    } else{
+        NSString *rowString =@"加入购物车失败！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }
+}
+
+//重置数据
+-(IBAction)resetdata:(id)sender
+{
+    texturetext.text=nil;
+    goldweightText.text=nil;
+    miandiaText.text=nil;
+    mianNoText.text=nil;
+    fitDiaText.text=nil;
+    fitNoText.text=nil;
+    sizeText.text=nil;
+    fontText.text=nil;
 }
 
 @end
