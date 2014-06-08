@@ -130,7 +130,7 @@
 
                     //同时更新本的数据库用户表
                     sqlService *sqlser= [[sqlService alloc]init];
-                    [sqlser updateCustomer:n];
+                    [sqlser updateCustomerNoApi:n];
                     
                     
                     //登录成功，进入系统首页
