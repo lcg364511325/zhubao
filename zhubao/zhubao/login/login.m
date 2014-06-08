@@ -110,6 +110,29 @@
                     
                     myDelegate.entityl=result;
                     
+                    customer * n = [[customer alloc] init];
+                    n.uId = result.uId;
+                    n.userType = result.userType;
+                    n.userName = result.userName;
+                    n.userPass = result.userPass;
+                    n.userDueDate = result.userDueDate;
+                    n.userTrueName = result.userTrueName;
+                    n.sfUrl = result.sfUrl;
+                    n.lxrName = result.lxrName;
+                    n.Sex = result.Sex;
+                    n.bmName = result.bmName;
+                    n.Email = result.Email;
+                    n.Phone = result.Phone;
+                    n.Lxphone = result.Lxphone;
+                    n.Sf = result.Sf;
+                    n.Cs = result.Cs;
+                    n.Address = result.Address;
+
+                    //同时更新本的数据库用户表
+                    sqlService *sqlser= [[sqlService alloc]init];
+                    [sqlser updateCustomer:n];
+                    
+                    
                     //登录成功，进入系统首页
                     NSLog(@"登录成功，进入系统首页");
                     Index *sysmenu=[[Index alloc] init];

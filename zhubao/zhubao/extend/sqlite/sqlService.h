@@ -15,6 +15,8 @@
 #import "customer.h"
 #import "productEntity.h"
 #import "productdia.h"
+#import "customerApi.h"
+#import "myinfo.h"
 
 @interface sqlService : NSObject
 {
@@ -38,6 +40,9 @@
 //新加商品
 -(productEntity*)saveProduct:(productEntity *)entity;
 
+//删除商品信息
+-(NSString*)deleteProduct:(NSString *)pid;
+
 //查询裸钻列表
 -(NSMutableArray*)GetProductdiaList:(NSString *)type1 type2:(NSString *)type2 type3:(NSString *)type3 type4:(NSString *)type4 type5:(NSString *)type5 type6:(NSString *)type6 type7:(NSString *)type7 type8:(NSString *)type8 type9:(NSString *)type9 type10:(NSString *)type10 type11:(NSString *)type11 page:(int)page pageSize:(int)pageSize;
 
@@ -56,10 +61,26 @@
 //查询商品的3d图片
 -(NSMutableArray*)getProductRAR:(NSString *)pid;
 
+//更新当前用户的基本信息(不调用接口更新服务器的信息)
+-(customer*)updateCustomerNoApi:(customer *)entity;
+
 //查询当前用户的基本信息
 -(customer*)getCustomer:(NSString *)uid;
 
+//更新当前用户的基本信息
+-(customer*)updateCustomer:(customer *)entity;
+
+//更新当前用户的密码
+-(customer*)updateCustomerPasswrod:(customer *)entity;
+
 //根据编号查询上次更新数据的时间
 -(NSString*)getUpdateTime:(NSString *)code;
+
+
+//查询当前公司的资料
+-(myinfo*)getMyinfo:(NSString *)code;
+
+//更新当前当前公司的资料
+-(myinfo*)updateMyinfo:(myinfo *)entity;
 
 @end

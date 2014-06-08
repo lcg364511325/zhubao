@@ -199,6 +199,7 @@
 		7C1BE6DC193F3D1A0000E397 /* sqlService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE6D3193F3D190000E397 /* sqlService.m */; };
 		7C1BE6DF193F493D0000E397 /* getNowTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE6DE193F493D0000E397 /* getNowTime.m */; };
 		7C1BE6E2193F4C220000E397 /* AutoGetData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE6E1193F4C220000E397 /* AutoGetData.m */; };
+		7CB203241944450000FA7FD5 /* myinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB203231944450000FA7FD5 /* myinfo.m */; };
 		7CE3FFCA1941CA32002E9FAD /* LoginApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE67A193EFEDA0000E397 /* LoginApi.m */; };
 		7CEF7EFE19420F93005DF8A9 /* NoticeReportCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEF7EFC19420F93005DF8A9 /* NoticeReportCell.m */; };
 		7CEF7F0119421AC3005DF8A9 /* NoticeReportCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEF7F0019421AC3005DF8A9 /* NoticeReportCell.xib */; };
@@ -452,6 +453,8 @@
 		7C1BE6DE193F493D0000E397 /* getNowTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = getNowTime.m; sourceTree = "<group>"; };
 		7C1BE6E0193F4C220000E397 /* AutoGetData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoGetData.h; sourceTree = "<group>"; };
 		7C1BE6E1193F4C220000E397 /* AutoGetData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoGetData.m; sourceTree = "<group>"; };
+		7CB203221944450000FA7FD5 /* myinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myinfo.h; sourceTree = "<group>"; };
+		7CB203231944450000FA7FD5 /* myinfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myinfo.m; sourceTree = "<group>"; };
 		7CEF7EFB19420F93005DF8A9 /* NoticeReportCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeReportCell.h; sourceTree = "<group>"; };
 		7CEF7EFC19420F93005DF8A9 /* NoticeReportCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeReportCell.m; sourceTree = "<group>"; };
 		7CEF7F0019421AC3005DF8A9 /* NoticeReportCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticeReportCell.xib; sourceTree = "<group>"; };
@@ -812,6 +815,8 @@
 				7CF5EA501940250100C63E6D /* withmouth.m */,
 				7CF5EA5E19405D0D00C63E6D /* buyproduct.h */,
 				7CF5EA5F19405D0D00C63E6D /* buyproduct.m */,
+				7CB203221944450000FA7FD5 /* myinfo.h */,
+				7CB203231944450000FA7FD5 /* myinfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1205,6 +1210,7 @@
 				7C1BE6D8193F3D1A0000E397 /* ImageCacher.m in Sources */,
 				2C5C98991935DD7E00004343 /* ustomtailor.m in Sources */,
 				7C1BE6DC193F3D1A0000E397 /* sqlService.m in Sources */,
+				7CB203241944450000FA7FD5 /* myinfo.m in Sources */,
 				2C20C3D81942B0E000A272A6 /* shoppingcartCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

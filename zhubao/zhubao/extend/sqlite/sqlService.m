@@ -731,7 +731,7 @@
         
         sqlite3_stmt *statement = nil;
         //sql语句
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT buy.Id,buy.pcolor,buy.pcount,buy.pdetail,buy.psize,buy.pprice,buy.producttype,buy.pvvs,buy.pweight,buy.pgoldtype,pro.Pro_name,pro.Pro_State,pro.Pro_smallpic,pro.Pro_bigpic,pro.Pro_info,pro.Pro_goldWeight,pro.Pro_goldsize,pro.Pro_goldset,pro.Pro_FingerSize,pro.Pro_gongfei,pro.Pro_MarketPrice,pro.Pro_price,pro.Pro_OKdays,pro.Pro_hotE  from buyproduct as buy,product as pro where pro.Id=buy.productid and buy.customerid=%@ and buy.producttype=0 union all SELECT buy.Id,buy.pcolor,buy.pcount,buy.pdetail,buy.psize,buy.pprice,buy.producttype,buy.pvvs,buy.pweight,buy.pgoldtype,pro.Dia_Lab,pro.Dia_CertNo,pro.Dia_Carat,pro.Dia_Clar,pro.Dia_Col,pro.Dia_Cut,pro.Dia_Pol,pro.Dia_Sym,pro.Dia_Shape,pro.Dia_Dep,pro.Dia_Tab,pro.Dia_Meas,pro.Dia_Flor,pro.Dia_Price from buyproduct as buy,productdia as pro where pro.Id=buy.productid and buy.customerid=%@ and buy.producttype=1 ",customerid,customerid];
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT buy.Id,buy.pcolor,buy.pcount,buy.pdetail,buy.psize,buy.pprice,buy.producttype,buy.pvvs,buy.pweight,buy.pgoldtype,pro.Pro_name,pro.Pro_State,pro.Pro_smallpic,pro.Pro_bigpic,pro.Pro_info,pro.Pro_goldWeight,pro.Pro_goldsize,pro.Pro_goldset,pro.Pro_FingerSize,pro.Pro_gongfei,pro.Pro_MarketPrice,pro.Pro_price,pro.Pro_OKdays,pro.Pro_hotE,buy.pname from buyproduct as buy,product as pro where pro.Id=buy.productid and buy.customerid=%@ and buy.producttype=0 union all SELECT buy.Id,buy.pcolor,buy.pcount,buy.pdetail,buy.psize,buy.pprice,buy.producttype,buy.pvvs,buy.pweight,buy.pgoldtype,pro.Dia_Lab,pro.Dia_CertNo,pro.Dia_Carat,pro.Dia_Clar,pro.Dia_Col,pro.Dia_Cut,pro.Dia_Pol,pro.Dia_Sym,pro.Dia_Shape,pro.Dia_Dep,pro.Dia_Tab,pro.Dia_Meas,pro.Dia_Flor,pro.Dia_Price,buy.pname from buyproduct as buy,productdia as pro where pro.Id=buy.productid and buy.customerid=%@ and buy.producttype=1 union all SELECT buy.Id,buy.pcolor,buy.pcount,buy.pdetail,buy.psize,buy.pprice,buy.producttype,buy.pvvs,buy.pweight,buy.pgoldtype,buy.photos,buy.photom,buy.photob,buy.Dia_Z_weight,buy.Dia_Z_count,buy.Dia_F_weight,buy.Dia_F_count,0 as Dia_Sym,0 as Dia_Shape,0 as Dia_Dep,0 as Dia_Tab,0 as Dia_Meas,0 as Dia_Flor,0 as Dia_Price,buy.pname from buyproduct as buy where buy.customerid=%@ and buy.producttype=2 ",customerid,customerid,customerid];
         
         const char *sql = [querySQL UTF8String];
         if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
@@ -789,44 +789,51 @@
                 char * Pro_name   = (char *)sqlite3_column_text(statement,10);
                 if(Pro_name != nil){
                     if([entity.producttype isEqualToString:@"0"])entity.proentiy.Pro_name = [NSString stringWithUTF8String:Pro_name];
-                    else entity.diaentiy.Dia_Lab = [NSString stringWithUTF8String:Pro_name];
+                    else if([entity.producttype isEqualToString:@"1"]) entity.diaentiy.Dia_Lab = [NSString stringWithUTF8String:Pro_name];
+                    else entity.photos= [NSString stringWithUTF8String:Pro_name];
                 }
                 
                 char * Pro_State   = (char *)sqlite3_column_text(statement,11);
                 if(Pro_State != nil){
                     if([entity.producttype isEqualToString:@"0"])entity.proentiy.Pro_State = [NSString stringWithUTF8String:Pro_State];
-                    else entity.diaentiy.Dia_CertNo = [NSString stringWithUTF8String:Pro_State];
+                    else if([entity.producttype isEqualToString:@"1"]) entity.diaentiy.Dia_CertNo = [NSString stringWithUTF8String:Pro_State];
+                    else entity.photom= [NSString stringWithUTF8String:Pro_State];
                 }
                 
                 char * Pro_smallpic   = (char *)sqlite3_column_text(statement,12);
                 if(Pro_smallpic != nil){
                     if([entity.producttype isEqualToString:@"0"])entity.proentiy.Pro_smallpic = [NSString stringWithUTF8String:Pro_smallpic];
-                    else entity.diaentiy.Dia_Carat = [NSString stringWithUTF8String:Pro_smallpic];
+                    else if([entity.producttype isEqualToString:@"1"]) entity.diaentiy.Dia_Carat = [NSString stringWithUTF8String:Pro_smallpic];
+                    else entity.photob= [NSString stringWithUTF8String:Pro_smallpic];
                 }
                 
                 char * Pro_bigpic   = (char *)sqlite3_column_text(statement,13);
                 if(Pro_bigpic != nil){
                     if([entity.producttype isEqualToString:@"0"]){entity.proentiy.Pro_bigpic = [NSString stringWithUTF8String:Pro_bigpic];
-                    }else {entity.diaentiy.Dia_Clar = [NSString stringWithUTF8String:Pro_bigpic];}
+                    }else if([entity.producttype isEqualToString:@"1"]) {entity.diaentiy.Dia_Clar = [NSString stringWithUTF8String:Pro_bigpic];}
+                    else entity.Dia_Z_weight= [NSString stringWithUTF8String:Pro_bigpic];
                 }
-                
+
                 char * Pro_info   = (char *)sqlite3_column_text(statement,14);
                 if(Pro_info != nil){
                     if([entity.producttype isEqualToString:@"0"]){entity.proentiy.Pro_info = [NSString stringWithUTF8String:Pro_info];
-                    }else {entity.diaentiy.Dia_Col = [NSString stringWithUTF8String:Pro_info];}
+                    }else if([entity.producttype isEqualToString:@"1"]) {entity.diaentiy.Dia_Col = [NSString stringWithUTF8String:Pro_info];}
+                    else entity.Dia_Z_count= [NSString stringWithUTF8String:Pro_info];
                 }
                 
                 char * Pro_goldWeight   = (char *)sqlite3_column_text(statement,15);
                 if(Pro_goldWeight != nil){
                     if([entity.producttype isEqualToString:@"0"]){entity.proentiy.Pro_goldWeight = [NSString stringWithUTF8String:Pro_goldWeight];
-                    }else{ entity.diaentiy.Dia_Cut = [NSString stringWithUTF8String:Pro_goldWeight];}
+                    }else if([entity.producttype isEqualToString:@"1"]){ entity.diaentiy.Dia_Cut = [NSString stringWithUTF8String:Pro_goldWeight];}
+                    else entity.Dia_F_weight= [NSString stringWithUTF8String:Pro_goldWeight];
                 }
                 
                 char * Pro_goldsize   = (char *)sqlite3_column_text(statement,16);
                 if(Pro_goldsize != nil)
                 {
                     if([entity.producttype isEqualToString:@"0"]){entity.proentiy.Pro_goldsize = [NSString stringWithUTF8String:Pro_goldsize];
-                    }else{ entity.diaentiy.Dia_Pol = [NSString stringWithUTF8String:Pro_goldsize];}
+                    }else if([entity.producttype isEqualToString:@"1"]){ entity.diaentiy.Dia_Pol = [NSString stringWithUTF8String:Pro_goldsize];}
+                    else entity.Dia_F_count= [NSString stringWithUTF8String:Pro_goldsize];
                 }
                 
                 char * Pro_goldset   = (char *)sqlite3_column_text(statement,17);
@@ -873,11 +880,15 @@
                 
                 char * Pro_hotE   = (char *)sqlite3_column_text(statement,23);
                 if(Pro_hotE != nil)
-                    entity.proentiy.Pro_hotE = [NSString stringWithUTF8String:Pro_hotE];
                 {
                     if([entity.producttype isEqualToString:@"0"]){entity.proentiy.Pro_hotE = [NSString stringWithUTF8String:Pro_hotE];
                     }else{ entity.diaentiy.Dia_Price = [NSString stringWithUTF8String:Pro_hotE];}
                 }
+                
+                char * pname   = (char *)sqlite3_column_text(statement,24);
+                if(pname != nil)
+                    entity.pname = [NSString stringWithUTF8String:pname];
+
                 
                 [array addObject:entity];
             }
@@ -1058,22 +1069,21 @@
     return @"0";
 }
 
-
 //新加商品
 -(productEntity*)saveProduct:(productEntity *)entity{
 
     @try {
-//        NSString *tablekey=@"productid,pcolor,pcount,pdetail,psize,pprice,customerid,producttype,pvvs,pweight,pgoldtype";
-//        
-//        NSString * values =[NSString stringWithFormat:@"'%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@'",entity.productid,entity.pcolor,entity.pcount,entity.pdetail,entity.psize,entity.pprice,entity.customerid,entity.producttype,entity.pvvs,entity.pweight,entity.pgoldtype];
-//        
-//        NSString * sql=[NSString stringWithFormat:@"insert into buyproduct(%@)values(%@)",tablekey,values];
-//        
-//        NSLog(@"--------------:%@",sql);
-//        
-//        if (![self HandleSql:sql]) {
-//            return nil;
-//        }
+        NSString *tablekey=@"Id,Pro_model,Pro_name,Pro_State,Pro_Class,Pro_Type,Pro_smallpic,Pro_bigpic,Pro_typeWenProId,Pro_info,Pro_lock,Pro_IsDel,Pro_author,Pro_Order,Pro_addtime,Pro_goldType,Pro_goldWeight,Pro_goldsize,Pro_goldset,Pro_FingerSize,Pro_gongfei,Pro_MarketPrice,Pro_price,Pro_OKdays,Pro_Salenums,Pro_hotA,Pro_hotB,Pro_hotC,Pro_hotD,Pro_hotE,Pro_Z_count,Pro_Z_GIA,Pro_Z_number,Pro_Z_weight,Pro_Z_color,Pro_Z_cut,Pro_Z_clarity,Pro_Z_polish,Pro_Z_pair,Pro_Z_price,Pro_f_count,Pro_F_GIA,Pro_f_number,Pro_f_weight,Pro_f_color,Pro_f_cut,Pro_f_clarity,Pro_f_polish,Pro_f_pair,Pro_f_price,Pro_D_Hand,Pro_D_Width,Pro_D_Dia,Pro_D_Bangle,Pro_D_Ear,Pro_D_Height,Pro_SmallClass,IsCaijin,Di_DiaShape,Pro_GroupSerial,Pro_FactoryNumber,Pro_domondB,Pro_domondE,Pro_ChiCun,Pro_goldWeightB,Pro_gongfeiB,Pro_zhuanti,location,zWeight,AuWeight,ptWeight,producttype";
+        
+        NSString * values =[NSString stringWithFormat:@"'%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@'",entity.Id,entity.Pro_model,entity.Pro_name,entity.Pro_State,entity.Pro_Class,entity.Pro_Type,entity.Pro_smallpic,entity.Pro_bigpic,entity.Pro_typeWenProId,entity.Pro_info,entity.Pro_lock,entity.Pro_IsDel,entity.Pro_author,entity.Pro_Order,entity.Pro_addtime,entity.Pro_goldType,entity.Pro_goldWeight,entity.Pro_goldsize,entity.Pro_goldset,entity.Pro_FingerSize,entity.Pro_gongfei,entity.Pro_MarketPrice,entity.Pro_price,entity.Pro_OKdays,entity.Pro_Salenums,entity.Pro_hotA,entity.Pro_hotB,entity.Pro_hotC,entity.Pro_hotD,entity.Pro_hotE,entity.Pro_Z_count,entity.Pro_Z_GIA,entity.Pro_Z_number,entity.Pro_Z_weight,entity.Pro_Z_color,entity.Pro_Z_cut,entity.Pro_Z_clarity,entity.Pro_Z_polish,entity.Pro_Z_pair,entity.Pro_Z_price,entity.Pro_f_count,entity.Pro_F_GIA,entity.Pro_f_number,entity.Pro_f_weight,entity.Pro_f_color,entity.Pro_f_cut,entity.Pro_f_clarity,entity.Pro_f_polish,entity.Pro_f_pair,entity.Pro_f_price,entity.Pro_D_Hand,entity.Pro_D_Width,entity.Pro_D_Dia,entity.Pro_D_Bangle,entity.Pro_D_Ear,entity.Pro_D_Height,entity.Pro_SmallClass,entity.IsCaijin,entity.Di_DiaShape,entity.Pro_GroupSerial,entity.Pro_FactoryNumber,entity.Pro_domondB,entity.Pro_domondE,entity.Pro_ChiCun,entity.Pro_goldWeightB,entity.Pro_gongfeiB,entity.Pro_zhuanti,entity.location,entity.zWeight,entity.AuWeight,entity.ptWeight,entity.producttype];
+        
+        NSString * sql=[NSString stringWithFormat:@"insert into product(%@)values(%@)",tablekey,values];
+        
+        NSLog(@"--------------:%@",sql);
+        
+        if (![self HandleSql:sql]) {
+            return nil;
+        }
         
     }
     @catch (NSException *exception) {
@@ -1084,18 +1094,41 @@
     }
     
     return entity;
+
+}
+
+//删除商品信息
+-(NSString*)deleteProduct:(NSString *)pid{
     
+    @try {
+        //只能删除自己新加的商品
+        NSString * sql=[NSString stringWithFormat:@"delete from product where Id=%@ and producttype=1",pid];
+        
+        NSLog(@"--------------:%@",sql);
+        
+        if (![self HandleSql:sql]) {
+            return nil;
+        }
+        
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+    @finally {
+        
+    }
     
-    return entity;
+    return pid;
 }
 
 //新加到购物车信息
 -(buyproduct*)addToBuyproduct:(buyproduct *)entity{
     
     @try {
-        NSString *tablekey=@"productid,pcolor,pcount,pdetail,psize,pprice,customerid,producttype,pvvs,pweight,pgoldtype";
         
-        NSString * values =[NSString stringWithFormat:@"'%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@'",entity.productid,entity.pcolor,entity.pcount,entity.pdetail,entity.psize,entity.pprice,entity.customerid,entity.producttype,entity.pvvs,entity.pweight,entity.pgoldtype];
+        NSString *tablekey=@"productid,pcolor,pcount,pdetail,psize,pprice,customerid,producttype,pvvs,pweight,pgoldtype,pname,photos,photom,photob,Dia_Z_weight,Dia_Z_count,Dia_F_weight,Dia_F_count";
+        
+        NSString * values =[NSString stringWithFormat:@"'%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@'",entity.productid,entity.pcolor,entity.pcount,entity.pdetail,entity.psize,entity.pprice,entity.customerid,entity.producttype,entity.pvvs,entity.pweight,entity.pgoldtype,entity.pname,entity.photos,entity.photom,entity.photob,entity.Dia_Z_weight,entity.Dia_Z_count,entity.Dia_F_weight,entity.Dia_F_count];
         
         NSString * sql=[NSString stringWithFormat:@"insert into buyproduct(%@)values(%@)",tablekey,values];
         
@@ -1140,5 +1173,183 @@
     return pid;
 }
 
+//更新当前用户的基本信息(不调用接口更新服务器的信息)
+-(customer*)updateCustomerNoApi:(customer *)entity{
+    
+    @try {
+            //先删除之前的用户信息
+            [self HandleSql:[NSString stringWithFormat:@"delete from customer where uId='%@'",entity.uId]];
+            
+            NSString *tablekey=@"uId,userType,userName,userPass,userDueDate,userTrueName,sfUrl,lxrName,Sex,bmName,Email,Phone,Lxphone,Sf,Cs,Address";
+            
+            NSString * values =[NSString stringWithFormat:@"'%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@'",entity.uId,entity.userType,entity.userName,entity.userPass,entity.userDueDate,entity.userTrueName,entity.sfUrl,entity.lxrName,entity.Sex,entity.bmName,entity.Email,entity.Phone,entity.Lxphone,entity.Sf,entity.Cs,entity.Address];
+            
+            NSString * sql=[NSString stringWithFormat:@"insert into customer(%@)values(%@)",tablekey,values];
+            
+            NSLog(@"--------------:%@",sql);
+            
+            if (![self HandleSql:sql]) {
+                return nil;
+            }
+
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+    @finally {
+        
+    }
+    
+    return entity;
+}
+
+//更新当前用户的基本信息
+-(customer*)updateCustomer:(customer *)entity{
+    
+    @try {
+        
+        //先调接口更新服务器的信息先
+        customerApi * api=[[customerApi alloc] init];
+
+        if([api updateCustomer:entity]){
+            //先删除之前的用户信息
+            [self HandleSql:[NSString stringWithFormat:@"delete from customer where uId='%@'",entity.uId]];
+            
+            NSString *tablekey=@"uId,userType,userName,userPass,userDueDate,userTrueName,sfUrl,lxrName,Sex,bmName,Email,Phone,Lxphone,Sf,Cs,Address";
+            
+            NSString * values =[NSString stringWithFormat:@"'%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@'",entity.uId,entity.userType,entity.userName,entity.userPass,entity.userDueDate,entity.userTrueName,entity.sfUrl,entity.lxrName,entity.Sex,entity.bmName,entity.Email,entity.Phone,entity.Lxphone,entity.Sf,entity.Cs,entity.Address];
+            
+            NSString * sql=[NSString stringWithFormat:@"insert into customer(%@)values(%@)",tablekey,values];
+            
+            NSLog(@"--------------:%@",sql);
+            
+            if (![self HandleSql:sql]) {
+                return nil;
+            }
+        }else
+            return nil;
+
+        
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+    @finally {
+        
+    }
+    
+    return entity;
+}
+
+//更新当前用户的密码
+-(customer*)updateCustomerPasswrod:(customer *)entity{
+    
+    @try {
+        
+        //先调接口更新服务器的信息先
+        customerApi * api=[[customerApi alloc] init];
+        
+        if([api updateCustomerPassword:entity]){
+        
+            NSString * sql=[NSString stringWithFormat:@"update customer set userPass='%@' where uId=%@",entity.userPass,entity.uId];
+        
+            NSLog(@"--------------:%@",sql);
+        
+            if (![self HandleSql:sql]) {
+                return nil;
+            }
+            
+        }else
+            return nil;
+        
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+    @finally {
+        
+    }
+    
+    return entity;
+}
+
+//查询当前公司的资料
+-(myinfo*)getMyinfo:(NSString *)code{
+    
+    //判断数据库是否打开
+    if ([self openDB]) {
+        
+        sqlite3_stmt *statement = nil;
+        //sql语句
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT uId,logopath,details,name,logopathsm,companycode from myinfo where code=%@ ",code];
+        
+        const char *sql = [querySQL UTF8String];
+        if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
+            //NSLog(@"Error: failed to prepare statement with message:search TB_MyDoor.");
+            return NO;
+        } else {
+            
+            //查询结果集中一条一条的遍历所有的记录，这里的数字对应的是列值。
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                myinfo * entity = [[myinfo alloc] init];
+                
+                char * uId   = (char *)sqlite3_column_text(statement,0);
+                if(uId != nil)
+                    entity.uId = [NSString stringWithUTF8String:uId];
+                
+                char * logopath   = (char *)sqlite3_column_text(statement,1);
+                if(logopath != nil)
+                    entity.logopath = [NSString stringWithUTF8String:logopath];
+                
+                char * details   = (char *)sqlite3_column_text(statement,2);
+                if(details != nil)
+                    entity.details = [NSString stringWithUTF8String:details];
+                
+                char * name   = (char *)sqlite3_column_text(statement,3);
+                if(name != nil)
+                    entity.name = [NSString stringWithUTF8String:name];
+                
+                char * logopathsm   = (char *)sqlite3_column_text(statement,4);
+                if(logopathsm != nil)
+                    entity.logopathsm = [NSString stringWithUTF8String:logopathsm];
+                
+                char * companycode   = (char *)sqlite3_column_text(statement,5);
+                if(companycode != nil)
+                    entity.companycode = [NSString stringWithUTF8String:companycode];
+                
+                return entity;
+            }
+        }
+        
+        sqlite3_finalize(statement);
+        sqlite3_close(_database);
+    }
+    
+    return nil;
+}
+
+//更新当前当前公司的资料
+-(myinfo*)updateMyinfo:(myinfo *)entity{
+    
+    @try {
+            
+            NSString * sql=[NSString stringWithFormat:@"update myinfo set logopath='%@',logopathsm='%@',name='%@' where uId=%@",entity.logopath,entity.logopathsm,entity.name,entity.uId];
+            
+            NSLog(@"--------------:%@",sql);
+            
+            if (![self HandleSql:sql]) {
+                return nil;
+            }
+
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+    @finally {
+        
+    }
+    
+    return entity;
+}
 
 @end

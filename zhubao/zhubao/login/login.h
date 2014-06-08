@@ -11,6 +11,8 @@
 #import "LoginApi.h"
 #import "AutoGetData.h"
 #import "FVImageSequenceDemoViewController.h"
+#import "sqlService.h"
+#import "customer.h"
 
 @interface login : UIViewController
 
