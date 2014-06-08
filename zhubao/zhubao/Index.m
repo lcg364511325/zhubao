@@ -20,6 +20,8 @@
 @synthesize thridView;
 @synthesize goodsview;
 
+NSInteger tim=0;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -123,7 +125,7 @@
         NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"shoppingcartCell" owner:self options:nil];
         cell=[nib objectAtIndex:0];
     }
-    for (buyproduct *goods in shoppingcartlist) {
+    buyproduct *goods =[shoppingcartlist objectAtIndex:tim];
         BOOL iseuqal=[goods.producttype isEqualToString:@"1"];
         if (iseuqal) {
             cell.showImage.image=[UIImage imageNamed:@"diamond01"];
@@ -173,7 +175,7 @@
             }
             cell.priceLable.text=goods.pcount;
         }
-    }
+    tim++;
     return cell;
 }
 

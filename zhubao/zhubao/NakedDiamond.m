@@ -44,6 +44,8 @@
 @synthesize diplomaLable;
 @synthesize priceLable;
 
+NSInteger mint=0;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -195,7 +197,7 @@
         NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"NoticeReportCell" owner:self options:nil];
         cell=[nib objectAtIndex:0];
     }
-    for (productdia *entity in productlist) {
+    productdia *entity =[productlist objectAtIndex:mint];
         cell.showimage.image=[UIImage imageNamed:@"diamond01"];
         cell.notice.text=entity.Dia_Shape;
         cell.noticeDate.text=entity.Dia_Corp;
@@ -208,7 +210,7 @@
         cell.Dia_Lab.text=entity.Dia_Lab;
         cell.Dia_Price.text=entity.Dia_Pol;
         cell.teslable.text=@"查看";
-    }
+    mint++;
     
     return cell;
 }
