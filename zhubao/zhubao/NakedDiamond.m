@@ -45,6 +45,7 @@
 @synthesize priceLable;
 
 NSInteger mint=0;
+NSString * nakedno=nil;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -197,6 +198,9 @@ NSInteger mint=0;
         NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"NoticeReportCell" owner:self options:nil];
         cell=[nib objectAtIndex:0];
     }
+    if (mint>=[productlist count]) {
+        mint=0;
+    }
     productdia *entity =[productlist objectAtIndex:mint];
         cell.showimage.image=[UIImage imageNamed:@"diamond01"];
         cell.notice.text=entity.Dia_Shape;
@@ -219,7 +223,7 @@ NSInteger mint=0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     productdia *entity = [productlist objectAtIndex:[indexPath row]];
-    
+    nakedno=entity.Id;
 //    NSString *rowString =[NSString stringWithFormat:@"你点击了：%@",entity.Dia_CertNo];
 //    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
 //    [alter show];
@@ -610,9 +614,29 @@ NSInteger mint=0;
 
 //加入购物车
 -(IBAction)addshopcart:(id)sender{
-    NSString *rowString =@"成功加入购物车！";
-    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-    [alter show];
+    sqlService * sql=[[sqlService alloc]init];
+    productdia * proentity=[sql GetProductdiaDetail:nakedno];
+    buyproduct * entity=[[buyproduct alloc]init];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    entity.producttype=@"1";
+    entity.productid=nakedno;
+    entity.pcount=@"1";
+    entity.pcolor=proentity.Dia_Col;
+    entity.pvvs=proentity.Dia_Clar;
+    entity.psize=proentity.Dia_Meas;
+    entity.pweight=proentity.Dia_Carat;
+    entity.customerid=myDelegate.entityl.uId;
+    entity.pprice=proentity.Dia_Price;
+    buyproduct *successadd=[sql addToBuyproduct:entity];
+    if (successadd) {
+        NSString *rowString =@"成功加入购物车！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    } else{
+        NSString *rowString =@"加入购物车失败！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }
 }
 
 @end

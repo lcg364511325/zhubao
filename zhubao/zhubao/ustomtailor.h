@@ -13,8 +13,15 @@
 #import "diploma.h"
 #import "member.h"
 
-@interface ustomtailor : UIViewController
-
+@interface ustomtailor : UIViewController<UITextViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+{
+    //下拉菜单
+    UIActionSheet *myActionSheet;
+    
+    
+    //图片2进制路径
+    NSString* filePath;
+}
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondaryView;
 @property (retain, nonatomic) IBOutlet UIView *primaryShadeView;
@@ -22,6 +29,13 @@
 @property (weak, nonatomic) IBOutlet UITableView *textureselect;
 @property (strong, nonatomic) NSArray *mainlist;
 @property (weak, nonatomic) IBOutlet UITextField *texturetext;
+@property (weak, nonatomic) IBOutlet UITextField *goldweightText;
+@property (weak, nonatomic) IBOutlet UITextField *miandiaText;
+@property (weak, nonatomic) IBOutlet UITextField *mianNoText;
+@property (weak, nonatomic) IBOutlet UITextField *fitDiaText;
+@property (weak, nonatomic) IBOutlet UITextField *fitNoText;
+@property (weak, nonatomic) IBOutlet UITextField *sizeText;
+@property (weak, nonatomic) IBOutlet UITextField *fontText;
 
 
 - (IBAction)goAction:(id)sender;

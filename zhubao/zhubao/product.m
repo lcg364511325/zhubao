@@ -371,6 +371,8 @@ NSString * productnumber=nil;
 
 //商品添加到购物车
 -(IBAction)addshopcart:(id)sender{
+    sqlService * sql=[[sqlService alloc] init];
+    productEntity *goods=[sql GetProductDetail:productnumber];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     buyproduct * entity=[[buyproduct alloc]init];
     entity.producttype=@"0";
@@ -383,7 +385,7 @@ NSString * productnumber=nil;
     entity.pgoldtype=texturetext.text;
     entity.pweight=maintext.text;
     entity.customerid=myDelegate.entityl.uId;
-    sqlService *sql=[[sqlService alloc]init];
+    entity.pprice=goods.Pro_price;
     buyproduct *successadd=[sql addToBuyproduct:entity];
     if (successadd) {
         NSString *rowString =@"成功加入购物车！";

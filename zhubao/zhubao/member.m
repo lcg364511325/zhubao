@@ -27,6 +27,14 @@
 @synthesize provinceText;
 @synthesize cityText;
 @synthesize divisionText;
+@synthesize companyText;
+@synthesize cusnameText;
+@synthesize mobileText;
+@synthesize telText;
+@synthesize addressText;
+@synthesize oldpassword;
+@synthesize newpassword;
+@synthesize affirmpassword;
 
 
 //判定点击来哪个tableview
@@ -47,7 +55,7 @@ NSInteger selecttable=0;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     NSArray *Divisionarray = [[NSArray alloc] initWithObjects:@"办公室", @"市场部",
-                         @"采购部", @"技术部",@"人力资源", nil];
+                         @"采购部", @"技术部",@"人力资源",@"其他", nil];
     self.Divisionlist=Divisionarray;
     
 }
@@ -93,6 +101,8 @@ NSInteger selecttable=0;
     [self.navigationController pushViewController:_diploma animated:NO];
 }
 
+
+//购物车页面跳转
 - (IBAction)goAction:(id)sender
 {
     primaryShadeView.alpha=0.5;
@@ -106,6 +116,7 @@ NSInteger selecttable=0;
     secondaryView.hidden = YES;
 }
 
+//会员密码修改页面跳转
 - (IBAction)goAction1:(id)sender
 {
     thridaryView.frame = CGRectMake(195, 90, thridaryView.frame.size.width, thridaryView.frame.size.height);
@@ -117,10 +128,34 @@ NSInteger selecttable=0;
     thridaryView.hidden = YES;
 }
 
+//会员资料修改页面跳转
 - (IBAction)goAction2:(id)sender
 {
     fourtharyView.frame = CGRectMake(195, 90, fourtharyView.frame.size.width, fourtharyView.frame.size.height);
     fourtharyView.hidden = NO;
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    companyText.text=myDelegate.entityl.userTrueName;
+    cusnameText.text=myDelegate.entityl.lxrName;
+    mobileText.text=myDelegate.entityl.Phone;
+    telText.text=myDelegate.entityl.Lxphone;
+    provinceText.text=myDelegate.entityl.Sf;
+    cityText.text=myDelegate.entityl.Cs;
+    addressText.text=myDelegate.entityl.Address;
+    NSString *division=nil;
+    if ([ myDelegate.entityl.bmName isEqualToString:@"1"]) {
+        division=@"办公室";
+    }else if ([ myDelegate.entityl.bmName isEqualToString:@"2"]){
+        division=@"市场部";
+    }else if ([ myDelegate.entityl.bmName isEqualToString:@"3"]){
+        division=@"采购部";
+    }else if ([ myDelegate.entityl.bmName isEqualToString:@"4"]){
+        division=@"技术部";
+    }else if ([ myDelegate.entityl.bmName isEqualToString:@"5"]){
+        division=@"人力资源";
+    }else if ([ myDelegate.entityl.bmName isEqualToString:@"6"]){
+        division=@"其他";
+    }
+    divisionText.text=division;
 }
 
 - (IBAction)closeAction2:(id)sender
@@ -222,6 +257,49 @@ NSInteger selecttable=0;
     if (!CGRectContainsPoint([selectTableView frame], pt)) {
         //to-do
         selectTableView.hidden=YES;
+    }
+}
+
+
+//会员资料修改保存操作
+-(IBAction)updatemember:(id)sender
+{
+    customer *man=[[customer alloc]init];
+    man.userTrueName=companyText.text;
+    man.lxrName=cusnameText.text;
+    man.Phone=mobileText.text;
+    man.Lxphone=telText.text;
+    man.Sf=provinceText.text;
+    man.Cs=cityText.text;
+    man.Address=addressText.text;
+    if ([divisionText.text isEqualToString:@"办公室"]) {
+        man.bmName=@"1";
+    }else if ([divisionText.text isEqualToString:@"市场部"]){
+        man.bmName=@"2";
+    }else if ([divisionText.text isEqualToString:@"采购部"]){
+        man.bmName=@"3";
+    }else if ([divisionText.text isEqualToString:@"技术部"]){
+        man.bmName=@"4";
+    }else if ([divisionText.text isEqualToString:@"人力资源"]){
+        man.bmName=@"5";
+    }else if ([divisionText.text isEqualToString:@"其他"]){
+        man.bmName=@"6";
+    }
+    NSString *rowString =@"修改成功！";
+    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alter show];
+}
+
+//密码修改
+-(IBAction)updatepassword:(id)sender
+{
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    if ([oldpassword.text  isEqualToString:myDelegate.entityl.userPass]) {
+        myDelegate.entityl.userPass=newpassword.text;
+    }else{
+        NSString *rowString =@"请输入正确的原密码！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
     }
 }
 

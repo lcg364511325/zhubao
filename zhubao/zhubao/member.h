@@ -12,6 +12,7 @@
 #import "NakedDiamond.h"
 #import "ustomtailor.h"
 #import "diploma.h"
+#import "sqlService.h"
 
 @interface member : UIViewController
 
@@ -31,6 +32,14 @@
 @property (weak, nonatomic) IBOutlet UITextField *provinceText;
 @property (weak, nonatomic) IBOutlet UITextField *cityText;
 @property (weak, nonatomic) IBOutlet UITextField *divisionText;
+@property (weak, nonatomic) IBOutlet UITextField *companyText;
+@property (weak, nonatomic) IBOutlet UITextField *cusnameText;
+@property (weak, nonatomic) IBOutlet UITextField *mobileText;
+@property (weak, nonatomic) IBOutlet UITextField *telText;
+@property (weak, nonatomic) IBOutlet UITextField *addressText;
+@property (weak, nonatomic) IBOutlet UITextField *oldpassword;
+@property (weak, nonatomic) IBOutlet UITextField *newpassword;
+@property (weak, nonatomic) IBOutlet UITextField *affirmpassword;
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;

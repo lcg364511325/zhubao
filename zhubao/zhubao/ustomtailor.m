@@ -21,6 +21,13 @@
 @synthesize textureselect;
 @synthesize mainlist=_mainlist;
 @synthesize texturetext;
+@synthesize goldweightText;
+@synthesize miandiaText;
+@synthesize mianNoText;
+@synthesize fitDiaText;
+@synthesize fitNoText;
+@synthesize sizeText;
+@synthesize fontText;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -150,9 +157,15 @@
     }
 }
 
+// 材质下拉框
 - (IBAction)mianselect:(id)sender
 {
     textureselect.hidden=NO;
+}
+
+-(IBAction)orderOfGoods:(id)sender
+{
+    
 }
 
 @end

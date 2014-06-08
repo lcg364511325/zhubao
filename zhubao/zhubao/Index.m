@@ -125,22 +125,63 @@ NSInteger tim=0;
         NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"shoppingcartCell" owner:self options:nil];
         cell=[nib objectAtIndex:0];
     }
+    if (tim>=[shoppingcartlist count]) {
+        tim=0;
+    }
     buyproduct *goods =[shoppingcartlist objectAtIndex:tim];
         BOOL iseuqal=[goods.producttype isEqualToString:@"1"];
         if (iseuqal) {
             cell.showImage.image=[UIImage imageNamed:@"diamond01"];
             cell.modelLable.text=goods.diaentiy.Dia_Shape;
-            cell.numberLable.text=[@"编号:" stringByAppendingString:goods.diaentiy.Dia_ART];
+            if (goods.diaentiy.Dia_Lab) {
+                cell.dipLable.text=[@"证书:" stringByAppendingString:goods.diaentiy.Dia_Lab];
+            }else{
+                cell.dipLable.text=nil;
+            }
+            if (goods.diaentiy.Dia_ART) {
+                cell.numberLable.text=[@"编号:" stringByAppendingString:goods.diaentiy.Dia_ART];
+            }else{
+                cell.numberLable.text=nil;
+            }
             cell.model1Lable.text=[@"形状:" stringByAppendingString:goods.diaentiy.Dia_Shape];
-            cell.weightLable.text=[@"钻重:" stringByAppendingString:goods.pweight];
-            cell.colorLable.text=[@"颜色:" stringByAppendingString:goods.pweight];
-            cell.netLable.text=[@"净度:" stringByAppendingString:goods.pvvs];
-            cell.cutLable.text=[@"切工:" stringByAppendingString:goods.diaentiy.Dia_Cut];
-            cell.chasing.text=[@"抛光:" stringByAppendingString:goods.diaentiy.Dia_Pol];
-            cell.fluLable.text=[@"对称:" stringByAppendingString:goods.diaentiy.Dia_Sym];
+            if (goods.pweight) {
+                cell.weightLable.text=[@"钻重:" stringByAppendingString:goods.pweight];
+            }else{
+                cell.weightLable.text=nil;
+            }
+            if (goods.pcolor) {
+                cell.netLable.text=[@"颜色:" stringByAppendingString:goods.pcolor];
+            }else{
+                cell.netLable.text=nil;
+            }
+            if (goods.pvvs) {
+                cell.colorLable.text=[@"净度:" stringByAppendingString:goods.pvvs];
+            }else{
+                cell.colorLable.text=nil;
+            }
+            if (goods.diaentiy.Dia_Cut) {
+                cell.cutLable.text=[@"切工:" stringByAppendingString:goods.diaentiy.Dia_Cut];
+            }else{
+                cell.cutLable.text=nil;
+            }
+            if (goods.diaentiy.Dia_Pol) {
+                cell.chasing.text=[@"抛光:" stringByAppendingString:goods.diaentiy.Dia_Pol];
+            }else{
+                cell.chasing.text=nil;
+            }
+            if (goods.diaentiy.Dia_Sym) {
+                cell.fluLable.text=[@"对称:" stringByAppendingString:goods.diaentiy.Dia_Sym];
+            }else{
+                cell.fluLable.text=nil;
+            }
             cell.priceLable.text=goods.pcount;
         }else{
             cell.showImage.image=[UIImage imageNamed:@"diamond01"];
+            if (goods.proentiy.Pro_number) {
+                cell.dipLable.text=goods.proentiy.Pro_number;
+            }else{
+                cell.dipLable.text=nil;
+            }
             if (goods.proentiy.Pro_number) {
                 cell.modelLable.text=goods.proentiy.Pro_number;
             }else{
@@ -173,6 +214,7 @@ NSInteger tim=0;
             }else{
                 cell.chasing.text=nil;
             }
+            cell.fluLable.text=nil;
             cell.priceLable.text=goods.pcount;
         }
     tim++;
@@ -189,7 +231,31 @@ NSInteger tim=0;
 //购物车删除
 -(IBAction)deleteshoppingcart:(id)sender
 {
-    
+    UIButton* btn = (UIButton*)sender;
+    UITableViewCell *cell = (UITableViewCell *)[[[btn superview] superview] superview];
+    NSIndexPath *indexPath = [goodsview indexPathForCell:cell];
+    buyproduct *entity = [shoppingcartlist objectAtIndex:[indexPath row]];
+    sqlService * sql=[[sqlService alloc]init];
+    NSString *successdelete=[sql deleteBuyproduct:entity.Id];
+    if (successdelete) {
+        NSString *rowString =@"删除成功！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }else{
+        NSString *rowString =@"删除失败！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }
+    //[goodsview reloadData];
+}
+
+//alertview响应事件
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    sqlService *shopcar=[[sqlService alloc] init];
+    shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
+    [goodsview reloadData];
 }
 
 @end

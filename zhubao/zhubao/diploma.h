@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *DiplomaSelect;
 @property (weak, nonatomic) IBOutlet UITextField *selecttext;
 @property (strong, nonatomic) NSArray *list;
+@property (weak, nonatomic) IBOutlet UITextField *dipomaNoText;
+@property (weak, nonatomic) IBOutlet UITextField *diamondWeightText;
 
 
 - (IBAction)goAction:(id)sender;

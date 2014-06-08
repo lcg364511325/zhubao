@@ -20,8 +20,12 @@
 @synthesize thirdView;
 @synthesize DiplomaSelect;
 @synthesize selecttext;
+@synthesize dipomaNoText;
+@synthesize diamondWeightText;
 @synthesize list = _list;
 
+//证书类型
+NSInteger diptype=0;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -137,6 +141,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *rowString = [self.list objectAtIndex:[indexPath row]];
+    diptype=[indexPath row];
     selecttext.text=rowString;
     DiplomaSelect.hidden=YES;
 }
@@ -153,9 +158,48 @@
     }
 }
 
+//证书下拉选择
 - (IBAction)diplomaselect:(id)sender
 {
     DiplomaSelect.hidden=NO;
+}
+
+
+//证书查询浏览器页面跳转
+//0为GIA，1为NGTC，2为IGI，3为HRD，4为AGS，5为EGL
+-(IBAction)diplomasearch:(id)sender
+{
+    if (diptype==0) {
+        NSString *url=[@"https://myapps.gia.edu/ReportCheckPortal/getReportData.do?&reportno=" stringByAppendingString:dipomaNoText.text];
+        url=[url stringByAppendingString:@"&weight="];
+        url=[url stringByAppendingString:diamondWeightText.text];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }else if (diptype==1){
+        NSString *url=[@"HTTP://seyuu.com/Unrelated/TurnTongtc.asp?reportno=" stringByAppendingString:dipomaNoText.text];
+        url=[url stringByAppendingString:@"&weight="];
+        url=[url stringByAppendingString:diamondWeightText.text];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }else if (diptype==2){
+        NSString *url=[@"HTTP://seyuu.com/Unrelated/TurnToIGI.asp?reportno=" stringByAppendingString:dipomaNoText.text];
+        url=[url stringByAppendingString:@"&weight="];
+        url=[url stringByAppendingString:diamondWeightText.text];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }else if (diptype==3){
+        NSString *url=[@"http://www.hrdantwerplink.be/?record_number=" stringByAppendingString:dipomaNoText.text];
+        url=[url stringByAppendingString:@"&weight="];
+        url=[url stringByAppendingString:diamondWeightText.text];
+        url=[url stringByAppendingString:@"&L="];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }else if (diptype==4){
+        NSString *url=[@"http://agslab.com/reportTypes/dqr.php?StoneID=" stringByAppendingString:dipomaNoText.text];
+        url=[url stringByAppendingString:@"&Weight="];
+        url=[url stringByAppendingString:diamondWeightText.text];
+        url=[url stringByAppendingString:@"&D=1"];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }else if (diptype==5){
+        NSString *url=[@"http://www.eglusa.com/oresults/SearchPage3.php?st_num=" stringByAppendingString:dipomaNoText.text];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }
 }
 
 @end

@@ -6,9 +6,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ustomtailor">
             <connections>
+                <outlet property="fitDiaText" destination="oRs-uU-Mxj" id="mwx-gV-VAT"/>
+                <outlet property="fitNoText" destination="Kxs-yo-4Gh" id="3JU-Y6-ngS"/>
+                <outlet property="fontText" destination="xGU-2C-vpp" id="bQc-uq-Wwz"/>
+                <outlet property="goldweightText" destination="pj6-8F-WIE" id="4ze-fv-bkx"/>
+                <outlet property="mianNoText" destination="371-8y-UeR" id="Uux-9O-4w7"/>
+                <outlet property="miandiaText" destination="26n-N8-9AH" id="hHt-Rk-W8o"/>
                 <outlet property="primaryShadeView" destination="1kb-d0-nNB" id="EAC-Z4-Fml"/>
                 <outlet property="primaryView" destination="sqs-kM-nSO" id="xN9-es-sOl"/>
                 <outlet property="secondaryView" destination="IIx-4g-o7c" id="yUE-27-wsM"/>
+                <outlet property="sizeText" destination="p9y-lJ-7qM" id="9Sy-h0-kJd"/>
                 <outlet property="textureselect" destination="46E-xb-bnG" id="hYQ-13-qcZ"/>
                 <outlet property="texturetext" destination="kC5-GK-EVc" id="x4g-85-Pvg"/>
                 <outlet property="thirdaryView" destination="Ob0-CM-lfM" id="Epd-bF-u1u"/>
@@ -95,6 +102,9 @@
                             <state key="normal" image="shoppingcart.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="goAction:" destination="-1" eventType="touchDown" id="PII-6z-CfE"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcm-RL-L2r" userLabel="Button-设置">
                             <rect key="frame" x="836" y="37" width="30" height="30"/>
@@ -136,7 +146,7 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yiK-wO-mSt">
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yiK-wO-mSt">
                             <rect key="frame" x="505" y="337" width="120" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="上传反面照" image="upload.png">
@@ -150,7 +160,7 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ko6-cQ-tlW">
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ko6-cQ-tlW">
                             <rect key="frame" x="741" y="335" width="120" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="上传侧面照" image="upload.png">

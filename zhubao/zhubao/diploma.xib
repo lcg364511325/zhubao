@@ -7,6 +7,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="diploma">
             <connections>
                 <outlet property="DiplomaSelect" destination="Rqw-ke-YlM" id="R48-FP-z5K"/>
+                <outlet property="diamondWeightText" destination="vqE-m6-JKH" id="Ql9-o4-r6y"/>
+                <outlet property="dipomaNoText" destination="uzv-dC-mSW" id="E7N-CL-2DG"/>
                 <outlet property="primaryShadeView" destination="tbp-Yz-hoN" id="IEI-VN-mo8"/>
                 <outlet property="primaryView" destination="iVk-Zb-8Rj" id="wbS-1u-eYj"/>
                 <outlet property="secondaryView" destination="JwI-wT-h0D" id="Fo6-Sf-Xt1"/>
@@ -95,6 +97,9 @@
                             <state key="normal" image="shoppingcart.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="goAction:" destination="-1" eventType="touchDown" id="wLG-wr-5Jx"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SX2-Bf-WkZ" userLabel="Button-设置">
                             <rect key="frame" x="836" y="37" width="30" height="30"/>
@@ -102,6 +107,9 @@
                             <state key="normal" image="install.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="setup:" destination="-1" eventType="touchDown" id="jot-eP-kcI"/>
+                            </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="frame.png" translatesAutoresizingMaskIntoConstraints="NO" id="Iod-Zd-HZJ" userLabel="Image View - 证书查询">
                             <rect key="frame" x="466" y="235" width="365" height="281"/>
@@ -148,6 +156,9 @@
                             <state key="normal" title="查询" image="inquiry.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="diplomasearch:" destination="-1" eventType="touchDown" id="QdP-Kb-Y1R"/>
+                            </connections>
                         </button>
                         <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="36" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Rqw-ke-YlM">
                             <rect key="frame" x="576" y="350" width="220" height="233"/>
