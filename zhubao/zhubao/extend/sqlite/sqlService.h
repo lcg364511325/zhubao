@@ -50,6 +50,9 @@
 //新加到购物车信息
 -(buyproduct*)addToBuyproduct:(buyproduct *)entity;
 
+//删除购物车信息
+-(NSString*)deleteBuyproduct:(NSString *)pid;
+
 //查询商品的3d图片
 -(NSMutableArray*)getProductRAR:(NSString *)pid;
 

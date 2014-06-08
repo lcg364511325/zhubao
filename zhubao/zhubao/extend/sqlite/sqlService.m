@@ -1116,4 +1116,29 @@
     return entity;
 }
 
+//删除购物车信息
+-(NSString*)deleteBuyproduct:(NSString *)pid{
+    
+    @try {
+        
+        NSString * sql=[NSString stringWithFormat:@"delete from buyproduct where Id=%@",pid];
+        
+        NSLog(@"--------------:%@",sql);
+        
+        if (![self HandleSql:sql]) {
+            return nil;
+        }
+        
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+    @finally {
+        
+    }
+    
+    return pid;
+}
+
+
 @end
