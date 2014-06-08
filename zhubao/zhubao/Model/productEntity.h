@@ -10,7 +10,7 @@
 
 @interface productEntity : NSObject
 
-@property (nonatomic, retain) NSString * Id;
+@property (nonatomic, retain) NSString * Id;//商品id
 @property (nonatomic, retain) NSString * Pro_model;
 @property (nonatomic, retain) NSString * Pro_number;
 @property (nonatomic, retain) NSString * Pro_name;
@@ -83,6 +83,6 @@
 @property (nonatomic, retain) NSString * AuWeight;
 @property (nonatomic, retain) NSString * ptWeight;
 
-@property (nonatomic, retain) NSString * producttype;
+@property (nonatomic, retain) NSString * producttype;//0是服务器商品，1是自已新加的商品
 
 @end
