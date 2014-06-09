@@ -111,13 +111,94 @@ NSString * nakedno=nil;
     [self.navigationController pushViewController:_member animated:NO];
 }
 
+//搜索
 - (IBAction)goAction:(id)sender
 {
     primaryShadeView.alpha=0.5;
     secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.height);
     secondaryView.hidden = NO;
     sqlService *product=[[sqlService alloc] init];
-    productlist=[product GetProductdiaList:@"1" type2:@"1" type3:@"1" type4:@"1" type5:@"1" type6:@"1" type7:@"1" type8:@"1" type9:@"1" type10:@"1" type11:@"1" page:1 pageSize:10];
+    //形状参数
+    NSMutableString *shape=[[NSMutableString alloc] init];
+    for (NSString *index in shapearray) {
+        if (shape.length!=0) {
+            [shape appendString:@","];
+            [shape appendString:index];
+        }else{
+            [shape appendString:index];
+        }
+    }
+    //颜色参数
+    NSMutableString *color=[[NSMutableString alloc] init];
+    for (NSString *index in colorarray) {
+        if (color.length!=0) {
+            [color appendString:@","];
+            [color appendString:index];
+        }else{
+            [color appendString:index];
+        }
+    }
+    //净度参数
+    NSMutableString *net=[[NSMutableString alloc] init];
+    for (NSString *index in netarray) {
+        if (net.length!=0) {
+            [net appendString:@","];
+            [net appendString:index];
+        }else{
+            [net appendString:index];
+        }
+    }
+    //切工参数
+    NSMutableString *cut=[[NSMutableString alloc] init];
+    for (NSString *index in cutarray) {
+        if (cut.length!=0) {
+            [cut appendString:@","];
+            [cut appendString:index];
+        }else{
+            [cut appendString:index];
+        }
+    }
+    //抛光参数
+    NSMutableString *chasing=[[NSMutableString alloc] init];
+    for (NSString *index in chasingarray) {
+        if (chasing.length!=0) {
+            [chasing appendString:@","];
+            [chasing appendString:index];
+        }else{
+            [chasing appendString:index];
+        }
+    }
+    //对称参数
+    NSMutableString *symmetry=[[NSMutableString alloc] init];
+    for (NSString *index in symmetryarray) {
+        if (symmetry.length!=0) {
+            [symmetry appendString:@","];
+            [symmetry appendString:index];
+        }else{
+            [symmetry appendString:index];
+        }
+    }
+    //荧光参数
+    NSMutableString *fluorescence=[[NSMutableString alloc] init];
+    for (NSString *index in fluorescencearray) {
+        if (fluorescence.length!=0) {
+            [fluorescence appendString:@","];
+            [fluorescence appendString:index];
+        }else{
+            [fluorescence appendString:index];
+        }
+    }
+    //证书参数
+    NSMutableString *diploma=[[NSMutableString alloc] init];
+    for (NSString *index in diplomaarray) {
+        if (diploma.length!=0) {
+            [diploma appendString:@","];
+            [diploma appendString:index];
+        }else{
+            [diploma appendString:index];
+        }
+    }
+    productlist=[product GetProductdiaList:shape type2:@"1" type3:@"1" type4:color type5:net type6:cut type7:chasing type8:symmetry type9:fluorescence type10:diploma type11:@"1" page:1 pageSize:10];
     
     [Nakeddisplay reloadData];
     
@@ -210,9 +291,9 @@ NSString * nakedno=nil;
         cell.Dia_Clar.text=entity.Dia_Clar;
         cell.Dia_Cut.text=entity.Dia_Cut;
         cell.chasinglable.text=[@"¥" stringByAppendingString:entity.Dia_Price];
-        cell.Dia_Sym.text=entity.Dia_Sym;
-        cell.Dia_Lab.text=entity.Dia_Lab;
-        cell.Dia_Price.text=entity.Dia_Pol;
+        cell.Dia_Sym.text=entity.Dia_Lab;
+        cell.Dia_Lab.text=entity.Dia_Pol;
+        cell.Dia_Price.text=entity.Dia_Sym;
         cell.teslable.text=@"查看";
     mint++;
     
