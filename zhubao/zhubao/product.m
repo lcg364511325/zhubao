@@ -133,31 +133,6 @@ NSInteger enno=0;
     [self.navigationController pushViewController:_member animated:NO];
 }
 
-- (IBAction)goAction:(id)sender
-{
-    primaryShadeView.alpha=0.5;
-    secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.height);
-    secondaryView.hidden = NO;
-    sqlService * sql=[[sqlService alloc] init];
-    productnumber=@"36536";
-    productEntity *goods=[sql GetProductDetail:productnumber];
-    productimageview.image=[UIImage imageNamed:@"diamonds.png"];
-    title1lable.text=goods.Pro_name;
-    pricelable.text=[@"¥" stringByAppendingString:goods.Pro_price];
-    modellable.text=goods.Pro_model;
-    weightlable.text=goods.Pro_goldWeight;
-    mainlable.text=goods.Pro_Z_count;
-    fitNolable.text=goods.Pro_f_count;
-    fitweightlable.text=goods.Pro_f_weight;
-    maintext.text=goods.Pro_Z_weight;
-    nettext.text=goods.Pro_f_clarity;
-    colortext.text=goods.Pro_Z_color;
-    texturetext.text=@"18K黄";
-    sizetext.text=goods.Pro_goldsize;
-    fonttext.text=nil;
-    numbertext.text=@"1";
-}
-
 - (IBAction)closeAction:(id)sender
 {
     primaryShadeView.alpha=0;
@@ -432,7 +407,28 @@ NSInteger enno=0;
 //点击事件
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    productEntity *entity = [list objectAtIndex:[indexPath row]];
+    primaryShadeView.alpha=0.5;
+    secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.height);
+    secondaryView.hidden = NO;
+    sqlService * sql=[[sqlService alloc] init];
+    productnumber=entity.Id;
+    productEntity *goods=[sql GetProductDetail:productnumber];
+    productimageview.image=[UIImage imageNamed:@"diamonds.png"];
+    title1lable.text=goods.Pro_name;
+    pricelable.text=[@"¥" stringByAppendingString:goods.Pro_price];
+    modellable.text=goods.Pro_model;
+    weightlable.text=goods.Pro_goldWeight;
+    mainlable.text=goods.Pro_Z_count;
+    fitNolable.text=goods.Pro_f_count;
+    fitweightlable.text=goods.Pro_f_weight;
+    maintext.text=goods.Pro_Z_weight;
+    nettext.text=goods.Pro_f_clarity;
+    colortext.text=goods.Pro_Z_color;
+    texturetext.text=@"18K黄";
+    sizetext.text=goods.Pro_goldsize;
+    fonttext.text=nil;
+    numbertext.text=@"1";
 }
 
 @end
