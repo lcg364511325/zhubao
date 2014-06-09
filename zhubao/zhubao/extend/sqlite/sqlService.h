@@ -29,9 +29,12 @@
 -(BOOL) openDB;
 -(BOOL) HandleSql:(NSString*)sql;
 -(BOOL) execSql:(NSString*)sql;
+//执行sql
+-(BOOL) execSqlandClose:(NSString *)sql;
 //关闭数据库连接
 -(BOOL) closeDB;
-
+//查询记录的条数
+- (int)getcount:(NSString *)sqls;
 
 //查询商品列表
 -(NSMutableArray*)GetProductList:(NSString *)type1 type2:(NSString *)type2 type3:(NSString *)type3 type4:(NSString *)type4 page:(int)page pageSize:(int)pageSize;

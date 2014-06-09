@@ -142,7 +142,7 @@
         //将SQL语句放入sqlite3_stmt中
         int success = sqlite3_prepare_v2(_database, sqlT, -1, &statement, NULL);
         if (success != SQLITE_OK) {
-            //NSLog(@"Error: failed to delete:TB_User");
+            NSLog(@"Error: SQL语句 failed to HandleSql:%@",sql);
             sqlite3_close(_database);
             return NO;
         }
@@ -154,7 +154,7 @@
         
         //如果执行失败
         if (success == SQLITE_ERROR) {
-            //NSLog(@"Error: failed to delete the database with message.");
+            NSLog(@"Error: 执行失败 HandleSql:%@",sql);
             //关闭数据库
             sqlite3_close(_database);
             return NO;
@@ -188,6 +188,35 @@
         //NSLog(@"%@",insertSql);
         
         //sqlite3_close(_database);
+        
+        return YES;
+        
+    }
+    return NO;
+}
+
+//执行sql
+-(BOOL) execSqlandClose:(NSString *)sql {
+    
+    //先判断数据库是否打开
+    if ([self openDB]) {
+        
+        char *errorMsg = nil;
+        
+        if(SQLITE_OK != sqlite3_exec(_database, [sql UTF8String],NULL,NULL,&errorMsg))
+        {
+            sqlite3_close(_database);
+            
+            NSLog(@"error:%@",sql);
+            
+            NSLog(@"error:%s",errorMsg);
+            
+            return NO;
+        }
+        
+        //NSLog(@"%@",insertSql);
+        
+        sqlite3_close(_database);
         
         return YES;
         
@@ -251,7 +280,35 @@
     return NO;
 }
 
-
+//查询记录的条数
+- (int)getcount:(NSString *)sqls {
+    
+    //判断数据库是否打开
+    if ([self openDB]) {
+        
+        sqlite3_stmt *statement = nil;
+        
+        const char *sql = [sqls UTF8String];
+        if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
+            //NSLog(@"Error: failed to prepare statement with message:search TB_MyDoor.");
+            return 0;
+        } else {
+            int row=0;
+            //查询结果集中一条一条的遍历所有的记录，这里的数字对应的是列值。
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                row++;
+            }
+            
+            return row;
+            
+        }
+        
+        sqlite3_finalize(statement);
+        sqlite3_close(_database);
+    }
+    
+    return 0;
+}
 
 
 
@@ -263,7 +320,7 @@
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:10];
     //判断数据库是否打开
     if ([self openDB]) {
-        
+        page=page==0?1:page;
         int offsetcount=page*pageSize-1*pageSize;
         
         sqlite3_stmt *statement = nil;
@@ -453,7 +510,7 @@
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:10];
     //判断数据库是否打开
     if ([self openDB]) {
-        
+        page=page==0?1:page;
         int offsetcount=page*pageSize-1*pageSize;
         
         sqlite3_stmt *statement = nil;
@@ -1143,7 +1200,7 @@
         
         NSLog(@"--------------:%@",sql);
         
-        if (![self HandleSql:sql]) {
+        if (![self execSqlandClose:sql]) {
             return nil;
         }
         
@@ -1152,7 +1209,7 @@
         return nil;
     }
     @finally {
-        
+        [self closeDB];
     }
     
     return entity;
@@ -1168,7 +1225,7 @@
         
         NSLog(@"--------------:%@",sql);
         
-        if (![self HandleSql:sql]) {
+        if (![self execSqlandClose:sql]) {
             return nil;
         }
         
@@ -1177,7 +1234,7 @@
         return nil;
     }
     @finally {
-        
+        [self closeDB];
     }
     
     return pid;
@@ -1196,7 +1253,7 @@
         
         NSLog(@"--------------:%@",sql);
         
-        if (![self HandleSql:sql]) {
+        if (![self execSqlandClose:sql]) {
             return nil;
         }
         
@@ -1205,7 +1262,7 @@
         return nil;
     }
     @finally {
-        
+        [self closeDB];
     }
 
     return entity;
@@ -1216,11 +1273,11 @@
     
     @try {
         
-        NSString * sql=[NSString stringWithFormat:@"delete from buyproduct where Id=%@",pid];
+        NSString * sql=[NSString stringWithFormat:@"DELETE from [buyproduct] where Id=%@",pid];
         
         NSLog(@"--------------:%@",sql);
         
-        if (![self HandleSql:sql]) {
+        if (![self execSqlandClose:sql]) {
             return nil;
         }
         
@@ -1229,7 +1286,7 @@
         return nil;
     }
     @finally {
-        
+        [self closeDB];
     }
     
     return pid;
@@ -1240,7 +1297,7 @@
     
     @try {
             //先删除之前的用户信息
-            [self HandleSql:[NSString stringWithFormat:@"delete from customer where uId='%@'",entity.uId]];
+            //[self ClearTableDatas:[NSString stringWithFormat:@" [customer] where uId='%@'",entity.uId]];
             
             NSString *tablekey=@"uId,userType,userName,userPass,userDueDate,userTrueName,sfUrl,lxrName,Sex,bmName,Email,Phone,Lxphone,Sf,Cs,Address";
             
@@ -1250,7 +1307,7 @@
             
             NSLog(@"--------------:%@",sql);
             
-            if (![self HandleSql:sql]) {
+            if (![self execSqlandClose:sql]) {
                 return nil;
             }
 
@@ -1259,7 +1316,7 @@
         return nil;
     }
     @finally {
-        
+        [self closeDB];
     }
     
     return entity;
@@ -1275,7 +1332,7 @@
 
         if([api updateCustomer:entity]){
             //先删除之前的用户信息
-            [self HandleSql:[NSString stringWithFormat:@"delete from customer where uId='%@'",entity.uId]];
+            //[self ClearTableDatas:[NSString stringWithFormat:@" customer where uId='%@'",entity.uId]];
             
             NSString *tablekey=@"uId,userType,userName,userPass,userDueDate,userTrueName,sfUrl,lxrName,Sex,bmName,Email,Phone,Lxphone,Sf,Cs,Address";
             
@@ -1285,7 +1342,7 @@
             
             NSLog(@"--------------:%@",sql);
             
-            if (![self HandleSql:sql]) {
+            if (![self execSqlandClose:sql]) {
                 return nil;
             }
         }else
@@ -1297,7 +1354,7 @@
         return nil;
     }
     @finally {
-        
+        [self closeDB];
     }
     
     return entity;
@@ -1317,7 +1374,7 @@
         
             NSLog(@"--------------:%@",sql);
         
-            if (![self HandleSql:sql]) {
+            if (![self execSqlandClose:sql]) {
                 return nil;
             }
             
@@ -1329,7 +1386,7 @@
         return nil;
     }
     @finally {
-        
+        [self closeDB];
     }
     
     return entity;
@@ -1399,7 +1456,7 @@
             
             NSLog(@"--------------:%@",sql);
             
-            if (![self HandleSql:sql]) {
+            if (![self execSqlandClose:sql]) {
                 return nil;
             }
 
@@ -1408,7 +1465,7 @@
         return nil;
     }
     @finally {
-        
+        [self closeDB];
     }
     
     return entity;

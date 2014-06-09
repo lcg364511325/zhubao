@@ -37,14 +37,16 @@
     [dateformatter setDateFormat:@"YYYYMMdd"];
     NSString *  locationString=[dateformatter stringFromDate:senddate];
     
+    //[self autogetData];
+    
     //判断当前天是否已经有更新过数据了
     if (![locationString isEqualToString:(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"autodata"]]) {
         
         [self autogetData];
     }else{
-        AutoGetData * getdata=[[AutoGetData alloc] init];
+        //AutoGetData * getdata=[[AutoGetData alloc] init];
         //不同步数据，但去下载图片组
-        [getdata getAllZIPPhotos];
+        //[getdata getAllZIPPhotos];
     }
 }
 

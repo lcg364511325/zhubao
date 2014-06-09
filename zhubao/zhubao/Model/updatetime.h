@@ -11,6 +11,6 @@
 @interface updatetime : NSObject
 
 @property (nonatomic, retain) NSString * updateCode;
-@property (nonatomic, retain) NSString * updatetime;
+@property (nonatomic, retain) NSString * updatetimevalue;
 
 @end
