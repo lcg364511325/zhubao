@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView contentMode="scaleAspectFit" image="Seq_v04_640x378_1.jpg" id="8" customClass="FVImageSequence">
+                <imageView contentMode="scaleAspectFit" image="image.png" id="8" customClass="FVImageSequence">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -38,6 +38,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Seq_v04_640x378_1.jpg" width="640" height="378"/>
+        <image name="image.png" width="400" height="400"/>
     </resources>
 </document>

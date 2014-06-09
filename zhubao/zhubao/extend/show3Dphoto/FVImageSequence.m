@@ -61,9 +61,9 @@
     // 解压缩文件夹路径
     NSString* unzipPath = [dcoumentpath stringByAppendingString:@"/images"];
     
-    NSLog(@"---------------本地的图片:%@", [NSString stringWithFormat:@"%@/%@",unzipPath,path]);
+    NSLog(@"---------------本地的图片:%@", [NSString stringWithFormat:@"%@/%@.%@",unzipPath,path,extension]);
     
-    NSData *data = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",unzipPath,path]];
+    NSData *data = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@.%@",unzipPath,path,extension]];
 	
 	//path = [[NSBundle mainBundle] pathForResource:path ofType:extension];
 	

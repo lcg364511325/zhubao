@@ -16,6 +16,7 @@
 #import "FVImageSequenceDemoViewController.h"
 #import "sqlService.h"
 #import "ProductCell.h"
+#import "ImageCacher.h"
 
 @interface product : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate>
 

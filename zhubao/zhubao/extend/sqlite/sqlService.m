@@ -1225,7 +1225,7 @@
         
         NSLog(@"--------------:%@",sql);
         
-        if (![self execSqlandClose:sql]) {
+        if (![self HandleSql:sql]) {
             return nil;
         }
         
@@ -1277,7 +1277,7 @@
         
         NSLog(@"--------------:%@",sql);
         
-        if (![self execSqlandClose:sql]) {
+        if (![self HandleSql:sql]) {
             return nil;
         }
         
