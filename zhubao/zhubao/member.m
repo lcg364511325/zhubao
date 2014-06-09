@@ -264,7 +264,9 @@ NSInteger selecttable=0;
 //会员资料修改保存操作
 -(IBAction)updatemember:(id)sender
 {
-    customer *man=[[customer alloc]init];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    sqlService *sql=[[sqlService alloc]init];
+    customer *man=[sql getCustomer:myDelegate.entityl.uId];
     man.userTrueName=companyText.text;
     man.lxrName=cusnameText.text;
     man.Phone=mobileText.text;
@@ -285,17 +287,38 @@ NSInteger selecttable=0;
     }else if ([divisionText.text isEqualToString:@"其他"]){
         man.bmName=@"6";
     }
-    NSString *rowString =@"修改成功！";
-    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-    [alter show];
+    customer *updateman=[sql updateCustomer:man];
+    if (updateman) {
+        NSString *rowString =@"修改成功！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }else{
+        NSString *rowString =@"修改失败！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }
 }
 
 //密码修改
 -(IBAction)updatepassword:(id)sender
 {
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    if ([oldpassword.text  isEqualToString:myDelegate.entityl.userPass]) {
-        myDelegate.entityl.userPass=newpassword.text;
+    sqlService *sql=[[sqlService alloc]init];
+    customer *newnam=[sql getCustomer:myDelegate.entityl.uId];
+    if ([[Commons md5:[NSString stringWithFormat:@"%@",oldpassword.text]]  isEqualToString:myDelegate.entityl.userPass]) {
+        newnam.userPass=[Commons md5:[NSString stringWithFormat:@"%@",newpassword.text]];
+        newnam.oldpassword=[Commons md5:[NSString stringWithFormat:@"%@",oldpassword.text]];
+        customer *updatesuccess=[sql updateCustomerPasswrod:newnam];
+        if (updatesuccess) {
+            NSString *rowString =@"修改成功！";
+            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alter show];
+             myDelegate.entityl.userPass=[Commons md5:[NSString stringWithFormat:@"%@",newpassword.text]];
+        }else{
+            NSString *rowString =@"修改失败！";
+            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alter show];
+        }
     }else{
         NSString *rowString =@"请输入正确的原密码！";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];

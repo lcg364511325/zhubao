@@ -46,10 +46,17 @@
 @synthesize title1lable;
 @synthesize pricelable;
 @synthesize productimageview;
+@synthesize productcollect;
+@synthesize countLable;
 
 //判定点击来哪个tableview
 NSInteger selecttype=0;
+//产品id
 NSString * productnumber=nil;
+//查询结果
+NSMutableArray *list=nil;
+//控制cell
+NSInteger enno=0;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -81,6 +88,7 @@ NSString * productnumber=nil;
     nettext.userInteractionEnabled=NO;
     colortext.userInteractionEnabled=NO;
     texturetext.userInteractionEnabled=NO;
+    [self.productcollect registerClass:[ProductCell class] forCellWithReuseIdentifier:@"ProductCell"];
 
 }
 
@@ -131,7 +139,7 @@ NSString * productnumber=nil;
     secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.height);
     secondaryView.hidden = NO;
     sqlService * sql=[[sqlService alloc] init];
-    productnumber=@"36530";
+    productnumber=@"36536";
     productEntity *goods=[sql GetProductDetail:productnumber];
     productimageview.image=[UIImage imageNamed:@"diamonds.png"];
     title1lable.text=goods.Pro_name;
@@ -337,7 +345,8 @@ NSString * productnumber=nil;
         style=@"9";
     }
     sqlService *productlist =[[sqlService alloc] init];
-    NSMutableArray *list=[productlist GetProductList:style type2:nil type3:nil type4:nil page:0 pageSize:10];
+    list=[productlist GetProductList:style type2:nil type3:nil type4:nil page:0 pageSize:10];
+    [productcollect reloadData];
 }
 
 
@@ -396,6 +405,34 @@ NSString * productnumber=nil;
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
     }
+}
+
+//搜索结果数目
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return [list count];
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ProductCell *cell = (ProductCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ProductCell" forIndexPath:indexPath];
+    if (enno>=[list count]) {
+        enno=0;
+    }
+    productEntity *entity=[list objectAtIndex:enno];
+    //NSString *imageToLoad = [NSString stringWithFormat:@"image.png", indexPath.row];
+    
+    cell.productImage.image = [UIImage imageNamed:@"image"];
+    
+    cell.productLable.text = entity.Pro_number;
+    enno++;
+    return cell;
+}
+
+//点击事件
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
 }
 
 @end

@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProductCell.h"
 
-@interface test : UIViewController<UIScrollViewDelegate>
-@property (strong,nonatomic)UIScrollView *scrollView;
-@property (strong,nonatomic)NSMutableArray *slideImages;
-@property (strong,nonatomic)UIPageControl *pageControl;
+@interface test : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate> 
+@property (weak, nonatomic) IBOutlet UICollectionView *productCollection;
 
 @end

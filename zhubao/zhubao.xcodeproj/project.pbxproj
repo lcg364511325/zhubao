@@ -19,6 +19,8 @@
 		2C20C3D81942B0E000A272A6 /* shoppingcartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C3D61942B0E000A272A6 /* shoppingcartCell.m */; };
 		2C20C3D91942B0E000A272A6 /* shoppingcartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C20C3D71942B0E000A272A6 /* shoppingcartCell.xib */; };
 		2C2A207B193D674B00A57C00 /* magnifier2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C2A207A193D674B00A57C00 /* magnifier2.png */; };
+		2C427E3D194561CC00D71776 /* ProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C427E3C194561CC00D71776 /* ProductCell.m */; };
+		2C427E3F1945620900D71776 /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C427E3E1945620900D71776 /* ProductCell.xib */; };
 		2C5C97F819349E2100004343 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C97F719349E2100004343 /* Foundation.framework */; };
 		2C5C97FA19349E2100004343 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C97F919349E2100004343 /* CoreGraphics.framework */; };
 		2C5C97FC19349E2100004343 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C97FB19349E2100004343 /* UIKit.framework */; };
@@ -265,6 +267,9 @@
 		2C20C3D61942B0E000A272A6 /* shoppingcartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shoppingcartCell.m; sourceTree = "<group>"; };
 		2C20C3D71942B0E000A272A6 /* shoppingcartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = shoppingcartCell.xib; sourceTree = "<group>"; };
 		2C2A207A193D674B00A57C00 /* magnifier2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnifier2.png; sourceTree = "<group>"; };
+		2C427E3B194561CC00D71776 /* ProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductCell.h; sourceTree = "<group>"; };
+		2C427E3C194561CC00D71776 /* ProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCell.m; sourceTree = "<group>"; };
+		2C427E3E1945620900D71776 /* ProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCell.xib; sourceTree = "<group>"; };
 		2C5C97F419349E2100004343 /* zhubao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zhubao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5C97F719349E2100004343 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2C5C97F919349E2100004343 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1043,6 +1048,9 @@
 				2C20C3D51942B0E000A272A6 /* shoppingcartCell.h */,
 				2C20C3D61942B0E000A272A6 /* shoppingcartCell.m */,
 				2C20C3D71942B0E000A272A6 /* shoppingcartCell.xib */,
+				2C427E3B194561CC00D71776 /* ProductCell.h */,
+				2C427E3C194561CC00D71776 /* ProductCell.m */,
+				2C427E3E1945620900D71776 /* ProductCell.xib */,
 			);
 			path = TableCell;
 			sourceTree = "<group>";
@@ -1126,6 +1134,7 @@
 				7C10772E1941AFF4005187B9 /* Seq_v04_640x378_29.jpg in Resources */,
 				7C1077261941AFF4005187B9 /* Seq_v04_640x378_21.jpg in Resources */,
 				7B7FFDA8193853CA008712CB /* shoppingcart.png in Resources */,
+				2C427E3F1945620900D71776 /* ProductCell.xib in Resources */,
 				7B7FFD94193853CA008712CB /* image1.png in Resources */,
 				7C10775D1941AFF4005187B9 /* Seq_v04_640x378_71.jpg in Resources */,
 				7C1077511941AFF4005187B9 /* Seq_v04_640x378_60.jpg in Resources */,
@@ -1340,6 +1349,7 @@
 				7CF5EA481940235B00C63E6D /* productdia.m in Sources */,
 				7CF5EA6019405D0D00C63E6D /* buyproduct.m in Sources */,
 				2C5C980419349E2100004343 /* main.m in Sources */,
+				2C427E3D194561CC00D71776 /* ProductCell.m in Sources */,
 				7CEF7EFE19420F93005DF8A9 /* NoticeReportCell.m in Sources */,
 				7CF5EA451940203800C63E6D /* productEntity.m in Sources */,
 				2C5C98501935793B00004343 /* product.m in Sources */,

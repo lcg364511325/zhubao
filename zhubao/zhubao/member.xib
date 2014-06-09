@@ -273,6 +273,9 @@
                             <state key="normal" title="确定" image="pwd_submit.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="updatepassword:" destination="-1" eventType="touchDown" id="Gzc-mo-kxq"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oPg-SK-YLn">
                             <rect key="frame" x="704" y="-18" width="40" height="40"/>

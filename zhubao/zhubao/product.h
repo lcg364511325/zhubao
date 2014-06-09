@@ -15,8 +15,9 @@
 #import "sqlService.h"
 #import "FVImageSequenceDemoViewController.h"
 #import "sqlService.h"
+#import "ProductCell.h"
 
-@interface product : UIViewController
+@interface product : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate>
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondaryView;
@@ -50,6 +51,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *title1lable;
 @property (weak, nonatomic) IBOutlet UILabel *pricelable;
 @property (weak, nonatomic) IBOutlet UIImageView *productimageview;
+@property (weak, nonatomic) IBOutlet UICollectionView *productcollect;
+@property (weak, nonatomic) IBOutlet UILabel *countLable;
 
 
 - (IBAction)goAction:(id)sender;

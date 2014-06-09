@@ -192,8 +192,16 @@ NSInteger tim=0;
             }else{
                 cell.numberLable.text=nil;
             }
-            cell.model1Lable.text=[@"金重:" stringByAppendingString:goods.proentiy.Pro_goldWeight];
-            cell.weightLable.text=[@"材质:" stringByAppendingString:goods.pgoldtype];
+            if (goods.proentiy.Pro_goldWeight) {
+                cell.model1Lable.text=[@"金重:" stringByAppendingString:goods.proentiy.Pro_goldWeight];
+            }else{
+                cell.model1Lable.text=nil;
+            }
+            if (goods.pgoldtype) {
+                cell.weightLable.text=[@"材质:" stringByAppendingString:goods.pgoldtype];
+            }else{
+                cell.weightLable.text=nil;
+            }
             if (goods.proentiy.Pro_Z_weight) {
                 cell.colorLable.text=[@"钻重:" stringByAppendingString:goods.proentiy.Pro_Z_weight];
             }else{

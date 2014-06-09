@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="colorselect" destination="9Qg-bk-K1R" id="01s-5C-5LC"/>
                 <outlet property="colortext" destination="4pl-CM-hDc" id="gUX-nc-aKZ"/>
+                <outlet property="countLable" destination="FRE-oe-p86" id="hbc-Hz-HpF"/>
                 <outlet property="fitNolable" destination="oUw-LK-NHX" id="qn5-sT-n1f"/>
                 <outlet property="fitweightlable" destination="z7S-oE-hQl" id="lKJ-hP-Ano"/>
                 <outlet property="fontText" destination="aOE-Py-StE" id="Vwk-Ln-d1o"/>
@@ -24,6 +25,7 @@
                 <outlet property="pricelable" destination="mG0-9m-Vdl" id="VEb-fJ-gA5"/>
                 <outlet property="primaryShadeView" destination="pSa-na-GF5" id="adN-VY-9Ce"/>
                 <outlet property="primaryView" destination="cHw-ci-yep" id="SnW-jH-zWj"/>
+                <outlet property="productcollect" destination="nJJ-ZS-2gV" id="oiq-uL-3Ae"/>
                 <outlet property="productimageview" destination="fOh-xR-5sS" id="fKN-mR-e1G"/>
                 <outlet property="secondShadeView" destination="0GJ-x7-Tsu" id="5oV-wd-0Ri"/>
                 <outlet property="secondaryView" destination="lrm-nX-2Fp" id="8I6-uf-fPY"/>
@@ -599,74 +601,28 @@
                                 <action selector="serie:" destination="-1" eventType="touchDown" id="5jw-mY-tfU"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytV-5b-iMx">
-                            <rect key="frame" x="134" y="268" width="200" height="200"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="共有首饰" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRE-oe-p86">
+                            <rect key="frame" x="509" y="200" width="200" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="image.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="goAction:" destination="-1" eventType="touchDown" id="e6L-XF-Cjt"/>
-                            </connections>
-                        </button>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="S000001W" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37B-jm-TMj">
-                            <rect key="frame" x="192" y="476" width="76" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="0.93000637760000004" green="0.78031748329999995" blue="0.12850490010000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mrh-QG-89w">
-                            <rect key="frame" x="359" y="268" width="200" height="200"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="image.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="nJJ-ZS-2gV">
+                            <rect key="frame" x="150" y="272" width="848" height="452"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6Ax-ey-Bdy">
+                                <size key="itemSize" width="200" height="221"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <cells/>
                             <connections>
-                                <action selector="goAction:" destination="-1" eventType="touchDown" id="sGy-x8-sh5"/>
+                                <outlet property="dataSource" destination="-1" id="Ixv-DE-ade"/>
+                                <outlet property="delegate" destination="-1" id="V5f-RS-OUN"/>
                             </connections>
-                        </button>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="S000001W" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sw7-O2-98I">
-                            <rect key="frame" x="421" y="476" width="76" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="0.93000637760000004" green="0.78031748329999995" blue="0.12850490010000001" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qRm-VA-vL7">
-                            <rect key="frame" x="583" y="268" width="200" height="200"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="image.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="goAction:" destination="-1" eventType="touchDown" id="HRD-gT-eUe"/>
-                            </connections>
-                        </button>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="S000001W" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zWP-nA-O40">
-                            <rect key="frame" x="645" y="476" width="76" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="0.93000637760000004" green="0.78031748329999995" blue="0.12850490010000001" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oq7-B7-zAQ">
-                            <rect key="frame" x="809" y="268" width="200" height="200"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="image.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="goAction:" destination="-1" eventType="touchDown" id="ovU-Ls-GJV"/>
-                            </connections>
-                        </button>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="S000001W" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBb-WV-IAC">
-                            <rect key="frame" x="871" y="476" width="76" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="0.93000637760000004" green="0.78031748329999995" blue="0.12850490010000001" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        </collectionView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -1054,7 +1010,6 @@
         <image name="drop-down.png" width="62" height="62"/>
         <image name="exhibition.png" width="277" height="106"/>
         <image name="home.png" width="68" height="81"/>
-        <image name="image.png" width="400" height="400"/>
         <image name="install.png" width="54" height="57"/>
         <image name="magnifier.png" width="81" height="90"/>
         <image name="magnifier2.png" width="246" height="46"/>
