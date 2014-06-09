@@ -12,11 +12,17 @@
 #import "sqlService.h"
 #import "FileHelpers.h"
 #import "LoginEntity.h"
+#import "ASINetworkQueue.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property(retain , nonatomic) LoginEntity * entityl;//保存登录的用户信息
+
+@property(retain , nonatomic) ASINetworkQueue *queue;//下载的队列
+
+//是否接着开始下载
+-(void)beginRequest:(NSString *)fileurl fileName:(NSString *)fileName version:(NSString *)version;
 
 @end

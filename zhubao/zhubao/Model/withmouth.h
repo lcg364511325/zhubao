@@ -16,5 +16,6 @@
 @property (nonatomic, retain) NSString * AuWeight;
 @property (nonatomic, retain) NSString * ptWeight;
 @property (nonatomic, retain) NSString * IsComm;
+@property (nonatomic, retain) NSString * Pro_number;
 
 @end

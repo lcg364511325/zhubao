@@ -7,7 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "buyproduct.h"
+#import "AppDelegate.h"
+#import "DataService.h"
+#import "Commons.h"
+#import "getNowTime.h"
+#import "sqlService.h"
+#import "ASIHTTPRequest.h"
+#import "ASINetworkQueue.h"
 
 @interface orderApi : NSObject
+
+//提交订单
+-(buyproduct*)submitOrder:(buyproduct *)entity;
 
 @end

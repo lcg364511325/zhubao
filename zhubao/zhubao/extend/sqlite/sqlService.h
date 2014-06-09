@@ -29,6 +29,8 @@
 -(BOOL) openDB;
 -(BOOL) HandleSql:(NSString*)sql;
 -(BOOL) execSql:(NSString*)sql;
+//关闭数据库连接
+-(BOOL) closeDB;
 
 
 //查询商品列表
@@ -60,6 +62,9 @@
 
 //查询商品的3d图片
 -(NSMutableArray*)getProductRAR:(NSString *)pid;
+
+//查询所有的商品的3d图片
+-(NSMutableArray*)getAllProductRAR;
 
 //更新当前用户的基本信息(不调用接口更新服务器的信息)
 -(customer*)updateCustomerNoApi:(customer *)entity;

@@ -10,18 +10,34 @@
 
 @implementation AutoGetData
 
+sqlService *sqlser;
+AppDelegate * app;
 
 //同步数据到数据库里面
 -(NSString *)getDataInsertTable
 {
+    sqlser= [[sqlService alloc]init];
+    
     getNowTime * time=[[getNowTime alloc] init];
     NSString * nowt=[time nowTime];
     
     [self getProduct:nowt];//同步商品数据
+    
+    //重新获取时间
+    nowt=[time nowTime];
     [self getProductdia:nowt];//裸钻数据获取
+    
+    //重新获取时间
+    nowt=[time nowTime];
     [self getproductphotos:nowt];//3D旋转ZIP套图数据获取
+    
+    //重新获取时间
+    nowt=[time nowTime];
     [self getwithmouth:nowt];//镶口数据获取
-
+    
+    //关闭数据库
+    [sqlser closeDB];
+    
     return @"";
 }
 
@@ -31,8 +47,6 @@
 {
     @try {
         //NSString * adminss=[Commons md5:[NSString stringWithFormat:@"%@%@%@%@%@%@",@"0",@"100",@"0",apikey,@"1402023598",@"0"]];
-        
-    sqlService *sqlser= [[sqlService alloc]init];
     
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     
@@ -84,11 +98,11 @@
                     
                     NSLog(@"--------------:%@",sql);
                     
-                    [sqlser HandleSql:sql];
+                    [sqlser execSql:sql];
 
                 }
                 //先删除之前的更新时间
-                [sqlser HandleSql:[NSString stringWithFormat:@"delete from updatetime where updateCode='%@'",timecode]];
+                [sqlser execSql:[NSString stringWithFormat:@"delete from updatetime where updateCode='%@'",timecode]];
                 
                 NSString * uptime=[d objectForKey:@"uptime"];
                 //更新时间表记录
@@ -96,7 +110,7 @@
                 
                 NSLog(@"--------------:%@",sql1);
                 
-                [sqlser HandleSql:sql1];
+                [sqlser execSql:sql1];
                 
             }else if ([jsonObject isKindOfClass:[NSArray class]]){
 //                NSArray * objArray = (NSArray *)jsonObject;
@@ -138,7 +152,7 @@
 {
     @try {
     
-    sqlService *sqlser= [[sqlService alloc]init];
+    //sqlService *sqlser= [[sqlService alloc]init];
     
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     
@@ -190,11 +204,11 @@
                     
                     NSLog(@"--------------:%@",sql);
                     
-                    [sqlser HandleSql:sql];
+                    [sqlser execSql:sql];
                     
                 }
                 //先删除之前的更新时间
-                [sqlser HandleSql:[NSString stringWithFormat:@"delete from updatetime where updateCode='%@'",timecode]];
+                [sqlser execSql:[NSString stringWithFormat:@"delete from updatetime where updateCode='%@'",timecode]];
                 
                 NSString * uptime=[d objectForKey:@"uptime"];
                 //更新时间表记录
@@ -202,7 +216,7 @@
                 
                 NSLog(@"--------------:%@",sql1);
                 
-                [sqlser HandleSql:sql1];
+                [sqlser execSql:sql1];
                 
             }else if ([jsonObject isKindOfClass:[NSArray class]]){
                 //                NSArray * objArray = (NSArray *)jsonObject;
@@ -243,7 +257,7 @@
 -(BOOL *)getproductphotos:(NSString *)Nowt
 {
     @try {
-    sqlService *sqlser= [[sqlService alloc]init];
+    //sqlService *sqlser= [[sqlService alloc]init];
     
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     
@@ -295,11 +309,11 @@
                     
                     NSLog(@"--------------:%@",sql);
                     
-                    [sqlser HandleSql:sql];
+                    [sqlser execSql:sql];
                     
                 }
                 //先删除之前的更新时间
-                [sqlser HandleSql:[NSString stringWithFormat:@"delete from updatetime where updateCode='%@'",timecode]];
+                [sqlser execSql:[NSString stringWithFormat:@"delete from updatetime where updateCode='%@'",timecode]];
                 
                 NSString * uptime=[d objectForKey:@"uptime"];
                 //更新时间表记录
@@ -307,7 +321,7 @@
                 
                 NSLog(@"--------------:%@",sql1);
                 
-                [sqlser HandleSql:sql1];
+                [sqlser execSql:sql1];
                 
             }else if ([jsonObject isKindOfClass:[NSArray class]]){
                 //                NSArray * objArray = (NSArray *)jsonObject;
@@ -350,7 +364,7 @@
 {
     @try {
     
-    sqlService *sqlser= [[sqlService alloc]init];
+    //sqlService *sqlser= [[sqlService alloc]init];
     
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     
@@ -396,17 +410,17 @@
                         [values appendString:[NSString stringWithFormat:@"'%@'",valuearray[j]]];
                     }
                     
-                    NSString *tablekey=@"Id,Proid,zWeight,AuWeight,ptWeight,IsComm";
+                    NSString *tablekey=@"Id,Proid,zWeight,AuWeight,ptWeight,IsComm,Pro_number";
                     
                     NSString * sql=[NSString stringWithFormat:@"insert into withmouth(%@)values(%@)",tablekey,(NSString *)values];
                     
                     NSLog(@"--------------:%@",sql);
                     
-                    [sqlser HandleSql:sql];
+                    [sqlser execSql:sql];
                     
                 }
                 //先删除之前的更新时间
-                [sqlser HandleSql:[NSString stringWithFormat:@"delete from updatetime where updateCode='%@'",timecode]];
+                [sqlser execSql:[NSString stringWithFormat:@"delete from updatetime where updateCode='%@'",timecode]];
                 
                 NSString * uptime=[d objectForKey:@"uptime"];
                 //更新时间表记录
@@ -414,7 +428,7 @@
                 
                 NSLog(@"--------------:%@",sql1);
                 
-                [sqlser HandleSql:sql1];
+                [sqlser execSql:sql1];
                 
             }else if ([jsonObject isKindOfClass:[NSArray class]]){
                 //                NSArray * objArray = (NSArray *)jsonObject;
@@ -451,5 +465,65 @@
         
     return FALSE;
 }
+
+//查询所有的商品的3d图片，并且下载压缩文件里面的图片
+-(BOOL *)getAllZIPPhotos
+{
+    @try {
+        app=(AppDelegate *)[[UIApplication sharedApplication]delegate];
+        sqlser= [[sqlService alloc]init];
+        //查询图片的压缩文件
+        NSMutableArray * array=[sqlser getAllProductRAR];
+        
+        for (id key in array){
+            productphotos * entity=(productphotos *)key;
+            
+            [self getZIPPhotosData:entity.zipUrl];
+        }
+
+    }@catch (NSException *exception) {
+        
+    }
+    @finally {
+        
+    }
+    
+    return FALSE;
+}
+
+
+//上载压缩文件里面的图片
+-(BOOL *)getZIPPhotosData:(NSString *)zippath
+{
+    @try {
+        
+        NSString * surl = [NSString stringWithFormat:@"%@",zippath];
+        NSString * fileName=[zippath lastPathComponent];//从路径中获得完整的文件名（带后缀）
+        
+        //初始化Documents路径
+        NSString *downloadPath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",fileName]];
+        
+        //NSLog(@"压缩文件存放的路径------%@",downloadPath);
+        
+        if ([[NSFileManager defaultManager] fileExistsAtPath:downloadPath]) {
+            NSLog(@"------有了，不再下载");
+        }else {
+            NSLog(@"------没有，所以要下载");
+            //去下载
+            [app beginRequest:surl fileName:fileName version:@"1"];
+        }
+
+    }@catch (NSException *exception) {
+        
+    }
+    @finally {
+        
+    }
+    
+    return FALSE;
+}
+
+
+
 
 @end

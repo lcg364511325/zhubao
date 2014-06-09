@@ -11,6 +11,7 @@
 @implementation AppDelegate
 @synthesize window = _window;
 @synthesize entityl;
+@synthesize queue;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -44,6 +45,12 @@
     //初始化实体
     self.entityl=[[LoginEntity alloc] init];
     entityl.uId=@"0";
+    
+    //创建队列
+    queue = [[ASINetworkQueue alloc] init];
+    //[queue reset];//重置
+    [queue setShowAccurateProgress:YES];//高精度进度
+    [queue go];//启动
     
     //系统新安装未初始化
     login * lo = [[login alloc] init];
@@ -142,4 +149,108 @@
     //END:code.DatabaseShoppingList.copyDatabaseFileToDocuments
 }
 
+-(void)beginRequest:(NSString *)fileurl fileName:(NSString *)fileName version:(NSString *)version
+{
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    
+    //如果不存在则创建临时存储目录
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    if(![fileManager fileExistsAtPath:[Tool getTempFolderPath]])
+    {
+        [fileManager createDirectoryAtPath:[Tool getTempFolderPath] withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    
+    NSLog(@"创建请求----文件名：%@------请求路径：%@",fileName,fileurl);
+    //初始化Documents路径
+    NSString *downloadPath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",fileName]];
+    NSString *tempPath = [[Tool getTempFolderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.temp",fileName]];
+    NSURL *url = [NSURL URLWithString:fileurl];
+    
+    //创建请求
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    request.delegate = self;//代理
+    [request setDownloadDestinationPath:downloadPath];//下载路径
+    [request setTemporaryFileDownloadPath:tempPath];//缓存路径
+    [request setAllowResumeForFileDownloads:YES];//断点续传
+    [request setNumberOfTimesToRetryOnTimeout:5];//设置请求超时时，设置重试的次数
+    [request setTimeOutSeconds:60.0f];//设置超时的时间
+    request.downloadProgressDelegate = self;//下载进度代理
+    
+    [request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:downloadPath, @"downloadPath", version, @"version", nil]];//设置上下文的文件基本信息
+    
+    [queue addOperation:request];//添加到队列，队列启动后不需重新启动
+    if ([[NSFileManager defaultManager] fileExistsAtPath:tempPath]) {
+        NSLog(@"有了--------");
+    }
+    else {
+        NSLog(@"没有--------");
+    }
+}
+
+#pragma ASIHttpRequest回调委托
+
+//出错了，如果是等待超时，则继续下载
+-(void)requestFailed:(ASIHTTPRequest *)request
+{
+    NSError *error=[request error];
+    NSLog(@"ASIHttpRequest出错了!%@",error);
+    //[request cancel];
+    //request=nil;
+}
+
+-(void)requestStarted:(ASIHTTPRequest *)request
+{
+    NSLog(@"开始了!");
+}
+
+-(void)requestReceivedResponseHeaders:(ASIHTTPRequest *)request
+{
+    
+    NSLog(@"收到回复了！------:%@",[[request responseHeaders] objectForKey:@"Content-Length"]);
+    
+}
+
+//将下载完成了
+-(void)requestFinished:(ASIHTTPRequest *)request
+{
+    NSLog(@"将下载完成了!");//
+    
+    NSString *downloadPath=(NSString *)[request.userInfo objectForKey:@"downloadPath"];
+    //NSString *version=(NSString *)[request.userInfo objectForKey:@"version"];
+    
+    NSLog(@"downloadPath======:%@",downloadPath);
+    
+    //    NSString *string = [[NSString alloc]initWithContentsOfFile:downloadPath encoding:NSUTF8StringEncoding error:nil];
+    //
+    //    NSLog(@"------------- this is :%@",string);
+    //    NSArray  * array= [string componentsSeparatedByString:@"\r\n"];//换行符
+    //
+    //    //运行下载的内容（正常下是sql）
+    //    sqlService * ser=[[sqlService alloc] init];
+    
+    //解压文件
+    ZipArchive *zip = [[ZipArchive alloc] init];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *dcoumentpath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    // 压缩文件路径
+    NSString* zipFilePath = downloadPath;//[dcoumentpath stringByAppendingString:@"/1.zip"];
+    // 解压缩文件夹路径
+    NSString* unzipPath = [dcoumentpath stringByAppendingString:@"/test"];
+    
+    NSLog(@"解压后的路径------%@",unzipPath);
+    
+    // 开始解压缩
+    if([zip UnzipOpenFile:zipFilePath])
+    {
+        if(![zip UnzipFileTo:unzipPath overWrite:YES])
+        {
+            NSLog(@"-----------:解压失败");
+        }
+        [zip UnzipCloseFile];
+    }
+    
+    
+    [request cancel];
+    request=nil;
+}
 @end

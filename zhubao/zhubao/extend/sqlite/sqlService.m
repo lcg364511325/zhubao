@@ -93,6 +93,9 @@
 //创建，打开数据库
 - (BOOL)openDB {
     
+    //如果数据库已经打开了，则直接返回
+    if(_database)return TRUE;
+    
     //获取数据库路径
     NSString *path = [self dataFilePath];
     
@@ -163,6 +166,7 @@
     return NO;
 }
 
+//此方法不关闭数据库，要手动关闭调方法closeDB关闭
 -(BOOL) execSql:(NSString *)sql {
     
     //先判断数据库是否打开
@@ -172,22 +176,40 @@
         
         if(SQLITE_OK != sqlite3_exec(_database, [sql UTF8String],NULL,NULL,&errorMsg))
         {
-            sqlite3_close(_database);
+            //sqlite3_close(_database);
             
             NSLog(@"error:%@",sql);
             
-            //NSLog(@"error:%s",errorMsg);
+            NSLog(@"error:%s",errorMsg);
             
             return NO;
         }
         
         //NSLog(@"%@",insertSql);
         
-        sqlite3_close(_database);
+        //sqlite3_close(_database);
         
         return YES;
         
     }
+    return NO;
+}
+
+//关闭数据库连接
+-(BOOL) closeDB
+{
+    @try {
+        
+        if(_database)sqlite3_close(_database);
+        return YES;
+    }
+    @catch (NSException *exception) {
+        
+    }
+    @finally {
+        
+    }
+
     return NO;
 }
 
@@ -911,6 +933,46 @@
         sqlite3_stmt *statement = nil;
         //sql语句
         NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,zipUrl from productphotos where Id=%@ ",pid];
+        
+        const char *sql = [querySQL UTF8String];
+        if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
+            //NSLog(@"Error: failed to prepare statement with message:search TB_MyDoor.");
+            return NO;
+        } else {
+            
+            //查询结果集中一条一条的遍历所有的记录，这里的数字对应的是列值。
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                productphotos * entity = [[productphotos alloc] init];
+                
+                char * Id   = (char *)sqlite3_column_text(statement,0);
+                if(Id != nil)
+                    entity.Id = [NSString stringWithUTF8String:Id];
+                
+                char * zipUrl   = (char *)sqlite3_column_text(statement,1);
+                if(zipUrl != nil)
+                    entity.zipUrl = [NSString stringWithUTF8String:zipUrl];
+                
+                [array addObject:entity];
+            }
+        }
+        
+        sqlite3_finalize(statement);
+        sqlite3_close(_database);
+    }
+    
+    return array ;
+}
+
+//查询所有的商品的3d图片
+-(NSMutableArray*)getAllProductRAR{
+    
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:10];
+    //判断数据库是否打开
+    if ([self openDB]) {
+        
+        sqlite3_stmt *statement = nil;
+        //sql语句
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,zipUrl from productphotos "];
         
         const char *sql = [querySQL UTF8String];
         if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {

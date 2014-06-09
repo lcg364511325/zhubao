@@ -41,6 +41,10 @@
     if (![locationString isEqualToString:(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"autodata"]]) {
         
         [self autogetData];
+    }else{
+        AutoGetData * getdata=[[AutoGetData alloc] init];
+        //不同步数据，但去下载图片组
+        [getdata getAllZIPPhotos];
     }
 }
 
@@ -69,7 +73,10 @@
                 
                 //标识今天已经更新过数据了
                 [[NSUserDefaults standardUserDefaults]setObject:locationString forKey:@"autodata"];
-
+                
+                //同步完数据了，则再去下载图片组
+                [getdata getAllZIPPhotos];
+                
             });
         });
     }
