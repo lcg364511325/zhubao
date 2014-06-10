@@ -198,10 +198,32 @@ NSString * nakedno=nil;
             [diploma appendString:index];
         }
     }
-    productlist=[product GetProductdiaList:shape type2:@"1" type3:@"1" type4:color type5:net type6:cut type7:chasing type8:symmetry type9:fluorescence type10:diploma type11:@"1" page:1 pageSize:10];
+    //钻重参数
+    NSString *weight=nil;
+    if (weightmax.text) {
+        weight=[[weightmin.text stringByAppendingString:@","] stringByAppendingString:weightmax.text];
+    }else{
+        weight=weightmin.text;
+    }
+    //价钱参数
+    NSString *price=nil;
+    if (pricemax.text) {
+        price=[[pricemin.text stringByAppendingString:@","] stringByAppendingString:pricemax.text];
+    }else{
+        price=pricemin.text;
+    }
+    //编号参数
+    NSString *number=DiamondNo.text;
+    productlist=[product GetProductdiaList:shape type2:weight type3:price type4:color type5:net type6:cut type7:chasing type8:symmetry type9:fluorescence type10:diploma type11:number page:1 pageSize:10];
     
     [Nakeddisplay reloadData];
     
+}
+
+//重置页面
+-(IBAction)resetview:(id)sender
+{
+    [self.view reloadInputViews];
 }
 
 - (IBAction)closeAction:(id)sender
@@ -396,7 +418,7 @@ NSString * nakedno=nil;
     NSInteger btntag=[btn tag];
     NSString * color=nil;
     if (btntag==0) {
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateSelected];
     }else if (btntag==1){
         color=@"D";
         [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
