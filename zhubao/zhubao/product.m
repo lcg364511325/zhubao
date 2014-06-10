@@ -81,16 +81,22 @@ NSString * Pro_author;
     //颜色
     NSArray *colorarray = [[NSArray alloc]initWithObjects:@"D-E",@"F-G",@"H",@"I-J",@"K-L",@"M-N", nil];
     //材质
-    NSArray *texturearray = [[NSArray alloc]initWithObjects:@"18K黄",@"18K白",@"18K双色",@"18K玫瑰金",@"PT900",@"PT950",@"PD950", nil];
+    NSArray *texture1array = [[NSArray alloc]initWithObjects:@"18K黄",@"18K白",@"18K双色",@"18K玫瑰金",@"PT900",@"PT950",@"PD950", nil];
     self.mainlist=mainarray;
     self.netlist=netarray;
     self.colorlist=colorarray;
-    self.texturelist=texturearray;
+    self.texturelist=texture1array;
     maintext.userInteractionEnabled=NO;
     nettext.userInteractionEnabled=NO;
     colortext.userInteractionEnabled=NO;
     texturetext.userInteractionEnabled=NO;
     [self.productcollect registerClass:[ProductCell class] forCellWithReuseIdentifier:@"ProductCell"];
+    stylearray = [[NSMutableArray alloc] init];
+    texturearray = [[NSMutableArray alloc] init];
+    inlayarray = [[NSMutableArray alloc] init];
+    seriearray = [[NSMutableArray alloc] init];
+    list=nil;
+    countLable.text=nil;
 
 }
 
@@ -302,28 +308,94 @@ NSString * Pro_author;
     NSInteger btntag=[btn tag];
     NSString * style=nil;
     if (btntag==0) {
-        style=nil;
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==1){
         style=@"1";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==2){
         style=@"2";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==3){
         style=@"3";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==4){
         style=@"4";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==5){
         style=@"5";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==6){
         style=@"6";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==7){
         style=@"7";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==8){
         style=@"8";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==9){
         style=@"9";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }
-    sqlService *productlist =[[sqlService alloc] init];
-    list=[productlist GetProductList:style type2:nil type3:nil type4:nil page:0 pageSize:10];
+    if (style) {
+        NSUInteger len=[stylearray count];
+        NSUInteger i;
+        BOOL isequal=NO;
+        for (i=0; i<len; i++) {
+            NSString * value=[stylearray objectAtIndex:i];
+            isequal = [style isEqualToString:value];
+            if (isequal) {
+                [stylearray removeObjectAtIndex:i];
+                [btn setBackgroundImage:[UIImage imageNamed:@"backgroundcolor"] forState:UIControlStateNormal];
+                i=len;
+            }
+        }
+        if (!isequal) {
+            [stylearray addObject:style];
+        }
+    }
+    //款式
+    NSMutableString *styleindex=[[NSMutableString alloc] init];
+    for (NSString *index in stylearray) {
+        if (styleindex.length!=0) {
+            [styleindex appendString:@","];
+            [styleindex appendString:index];
+        }else{
+            [styleindex appendString:index];
+        }
+    }
+    //材质
+    NSMutableString *textrueindex=[[NSMutableString alloc] init];
+    for (NSString *index in texturearray) {
+        if (textrueindex.length!=0) {
+            [textrueindex appendString:@","];
+            [textrueindex appendString:index];
+        }else{
+            [textrueindex appendString:index];
+        }
+    }
+    //镶口
+    NSMutableString *inlayindex=[[NSMutableString alloc] init];
+    for (NSString *index in inlayarray) {
+        if (inlayindex.length!=0) {
+            [inlayindex appendString:@","];
+            [inlayindex appendString:index];
+        }else{
+            [inlayindex appendString:index];
+        }
+    }
+    //系列
+    NSMutableString *serieindex=[[NSMutableString alloc] init];
+    for (NSString *index in seriearray) {
+        if (serieindex.length!=0) {
+            [serieindex appendString:@","];
+            [serieindex appendString:index];
+        }else{
+            [serieindex appendString:index];
+        }
+    }
+    sqlService *sql=[[sqlService alloc]init];
+    list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:100];
     [productcollect reloadData];
 }
 
@@ -333,6 +405,91 @@ NSString * Pro_author;
 {
     UIButton* btn = (UIButton*)sender;
     NSInteger btntag=[btn tag];
+    NSString *texture=nil;
+    if (btntag==0) {
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==1){
+        texture=@"1";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==2){
+        texture=@"2";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==3){
+        texture=@"3";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==4){
+        texture=@"4";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==5){
+        texture=@"5";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==6){
+        texture=@"6";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==7){
+        texture=@"7";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }
+    if (texture) {
+        NSUInteger len=[texturearray count];
+        NSUInteger i;
+        BOOL isequal=NO;
+        for (i=0; i<len; i++) {
+            NSString * value=[texturearray objectAtIndex:i];
+            isequal = [texture isEqualToString:value];
+            if (isequal) {
+                [texturearray removeObjectAtIndex:i];
+                [btn setBackgroundImage:[UIImage imageNamed:@"backgroundcolor"] forState:UIControlStateNormal];
+                i=len;
+            }
+        }
+        if (!isequal) {
+            [texturearray addObject:texture];
+        }
+    }
+    //款式
+    NSMutableString *styleindex=[[NSMutableString alloc] init];
+    for (NSString *index in stylearray) {
+        if (styleindex.length!=0) {
+            [styleindex appendString:@","];
+            [styleindex appendString:index];
+        }else{
+            [styleindex appendString:index];
+        }
+    }
+    //材质
+    NSMutableString *textrueindex=[[NSMutableString alloc] init];
+    for (NSString *index in texturearray) {
+        if (textrueindex.length!=0) {
+            [textrueindex appendString:@","];
+            [textrueindex appendString:index];
+        }else{
+            [textrueindex appendString:index];
+        }
+    }
+    //镶口
+    NSMutableString *inlayindex=[[NSMutableString alloc] init];
+    for (NSString *index in inlayarray) {
+        if (inlayindex.length!=0) {
+            [inlayindex appendString:@","];
+            [inlayindex appendString:index];
+        }else{
+            [inlayindex appendString:index];
+        }
+    }
+    //系列
+    NSMutableString *serieindex=[[NSMutableString alloc] init];
+    for (NSString *index in seriearray) {
+        if (serieindex.length!=0) {
+            [serieindex appendString:@","];
+            [serieindex appendString:index];
+        }else{
+            [serieindex appendString:index];
+        }
+    }
+    sqlService *sql=[[sqlService alloc]init];
+    list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:100];
+    [productcollect reloadData];
 }
 
 //镶口选择
@@ -340,6 +497,115 @@ NSString * Pro_author;
 {
     UIButton* btn = (UIButton*)sender;
     NSInteger btntag=[btn tag];
+    NSString *inlay=nil;
+    if (btntag==0) {
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==1){
+        inlay=@"1";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==2){
+        inlay=@"2";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==3){
+        inlay=@"3";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==4){
+        inlay=@"4";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==5){
+        inlay=@"5";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==6){
+        inlay=@"6";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==7){
+        inlay=@"7";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==8){
+        inlay=@"8";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==9){
+        inlay=@"9";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==10){
+        inlay=@"10";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==11){
+        inlay=@"11";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==12){
+        inlay=@"12";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==13){
+        inlay=@"13";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==14){
+        inlay=@"14";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==15){
+        inlay=@"15";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }
+    if (inlay) {
+        NSUInteger len=[inlayarray count];
+        NSUInteger i;
+        BOOL isequal=NO;
+        for (i=0; i<len; i++) {
+            NSString * value=[inlayarray objectAtIndex:i];
+            isequal = [inlay isEqualToString:value];
+            if (isequal) {
+                [inlayarray removeObjectAtIndex:i];
+                [btn setBackgroundImage:[UIImage imageNamed:@"backgroundcolor"] forState:UIControlStateNormal];
+                i=len;
+            }
+        }
+        if (!isequal) {
+            [inlayarray addObject:inlay];
+        }
+    }
+    //款式
+    NSMutableString *styleindex=[[NSMutableString alloc] init];
+    for (NSString *index in stylearray) {
+        if (styleindex.length!=0) {
+            [styleindex appendString:@","];
+            [styleindex appendString:index];
+        }else{
+            [styleindex appendString:index];
+        }
+    }
+    //材质
+    NSMutableString *textrueindex=[[NSMutableString alloc] init];
+    for (NSString *index in texturearray) {
+        if (textrueindex.length!=0) {
+            [textrueindex appendString:@","];
+            [textrueindex appendString:index];
+        }else{
+            [textrueindex appendString:index];
+        }
+    }
+    //镶口
+    NSMutableString *inlayindex=[[NSMutableString alloc] init];
+    for (NSString *index in inlayarray) {
+        if (inlayindex.length!=0) {
+            [inlayindex appendString:@","];
+            [inlayindex appendString:index];
+        }else{
+            [inlayindex appendString:index];
+        }
+    }
+    //系列
+    NSMutableString *serieindex=[[NSMutableString alloc] init];
+    for (NSString *index in seriearray) {
+        if (serieindex.length!=0) {
+            [serieindex appendString:@","];
+            [serieindex appendString:index];
+        }else{
+            [serieindex appendString:index];
+        }
+    }
+    sqlService *sql=[[sqlService alloc]init];
+    list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:100];
+    [productcollect reloadData];
 }
 
 //系列
@@ -349,10 +615,72 @@ NSString * Pro_author;
     NSInteger btntag=[btn tag];
     NSString * serie=nil;
     if (btntag==1) {
-        serie=@"1";
+        serie=@"Pro_hotE=1";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if(btntag==2){
-        serie=@"ture";
+        serie=@"Pro_f_pair='ture'";
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }
+    if (serie) {
+        NSUInteger len=[seriearray count];
+        NSUInteger i;
+        BOOL isequal=NO;
+        for (i=0; i<len; i++) {
+            NSString * value=[seriearray objectAtIndex:i];
+            isequal = [serie isEqualToString:value];
+            if (isequal) {
+                [seriearray removeObjectAtIndex:i];
+                [btn setBackgroundImage:[UIImage imageNamed:@"backgroundcolor"] forState:UIControlStateNormal];
+                i=len;
+            }
+        }
+        if (!isequal) {
+            [seriearray addObject:serie];
+        }
+    }
+    //款式
+    NSMutableString *styleindex=[[NSMutableString alloc] init];
+    for (NSString *index in stylearray) {
+        if (styleindex.length!=0) {
+            [styleindex appendString:@","];
+            [styleindex appendString:index];
+        }else{
+            [styleindex appendString:index];
+        }
+    }
+    //材质
+    NSMutableString *textrueindex=[[NSMutableString alloc] init];
+    for (NSString *index in texturearray) {
+        if (textrueindex.length!=0) {
+            [textrueindex appendString:@","];
+            [textrueindex appendString:index];
+        }else{
+            [textrueindex appendString:index];
+        }
+    }
+    //镶口
+    NSMutableString *inlayindex=[[NSMutableString alloc] init];
+    for (NSString *index in inlayarray) {
+        if (inlayindex.length!=0) {
+            [inlayindex appendString:@","];
+            [inlayindex appendString:index];
+        }else{
+            [inlayindex appendString:index];
+        }
+    }
+    //系列
+    NSMutableString *serieindex=[[NSMutableString alloc] init];
+    for (NSString *index in seriearray) {
+        if (serieindex.length!=0) {
+            [serieindex appendString:@","];
+            [serieindex appendString:index];
+        }else{
+            [serieindex appendString:index];
+        }
+    }
+    sqlService *sql=[[sqlService alloc]init];
+    list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:100];
+    [productcollect reloadData];
 }
 
 
@@ -398,9 +726,18 @@ NSString * Pro_author;
         enno=0;
     }
     productEntity *entity=[list objectAtIndex:enno];
-    //NSString *imageToLoad = [NSString stringWithFormat:@"image.png", indexPath.row];
-    
-    cell.productImage.image = [UIImage imageNamed:@"image"];
+    NSString *count=[NSString stringWithFormat:@"%lu",(unsigned long)[list count]];
+    countLable.text=[[@"共有首饰" stringByAppendingString:count] stringByAppendingString:@"件"];
+    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",entity.Pro_smallpic]];
+    if (hasCachedImage(imgUrl)) {
+        cell.productImage.image=[UIImage imageWithContentsOfFile:pathForURL(imgUrl)];
+    }else
+    {
+        cell.productImage.image=[UIImage imageNamed:@"diamonds"];
+        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",self.productimageview,@"imageView",nil];
+        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+        
+    }
     
     cell.productLable.text = entity.Pro_number;
     enno++;
@@ -435,7 +772,7 @@ NSString * Pro_author;
     fonttext.text=nil;
     numbertext.text=@"1";
     
-    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://app.seyuu.com%@",goods.Pro_smallpic]];
+    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",goods.Pro_smallpic]];
     if (hasCachedImage(imgUrl)) {
         [self.productimageview setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
     }else

@@ -19,6 +19,12 @@
 #import "ImageCacher.h"
 
 @interface product : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate>
+{
+    NSMutableArray *stylearray;
+    NSMutableArray *texturearray;
+    NSMutableArray *inlayarray;
+    NSMutableArray *seriearray;
+}
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondaryView;
@@ -56,7 +62,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *countLable;
 
 
-- (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;
 - (IBAction)goAction1:(id)sender;
 - (IBAction)closeAction1:(id)sender;
