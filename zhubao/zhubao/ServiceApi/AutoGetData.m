@@ -102,11 +102,17 @@ AppDelegate * app;
 
                 }
                 //先删除之前的更新时间
-                [sqlser execSql:[NSString stringWithFormat:@"delete from updatetime where updateCode='%@'",timecode]];
+                //[sqlser execSql:[NSString stringWithFormat:@"delete from updatetime where updateCode='%@'",timecode]];
                 
                 NSString * uptime=[d objectForKey:@"uptime"];
                 //更新时间表记录
-                NSString * sql1=[NSString stringWithFormat:@"insert into updatetime(updateCode,updatetime)values('%@','%@')",timecode,uptime];
+                NSString * sql1=[NSString stringWithFormat:@"insert into updatetime(updateCode,updatetimevalue)values('%@','%@')",timecode,uptime];
+                
+                //判断此值是否已经有了，如果已经有了，则不再插入
+                int count=[sqlser getcount:[NSString stringWithFormat:@"select updatetimevalue from updatetime where updateCode='%@'",timecode]];
+                if(count>0){
+                    sql1=[NSString stringWithFormat:@"update updatetime set updatetimevalue='%@' where updateCode='%@'",uptime,timecode];
+                }
                 
                 NSLog(@"--------------:%@",sql1);
                 
@@ -208,11 +214,17 @@ AppDelegate * app;
                     
                 }
                 //先删除之前的更新时间
-                [sqlser execSql:[NSString stringWithFormat:@"delete from updatetime where updateCode='%@'",timecode]];
+                //[sqlser execSql:[NSString stringWithFormat:@"delete from updatetime where updateCode='%@'",timecode]];
                 
                 NSString * uptime=[d objectForKey:@"uptime"];
                 //更新时间表记录
-                NSString * sql1=[NSString stringWithFormat:@"insert into updatetime(updateCode,updatetime)values('%@','%@')",timecode,uptime];
+                NSString * sql1=[NSString stringWithFormat:@"insert into updatetime(updateCode,updatetimevalue)values('%@','%@')",timecode,uptime];
+                
+                //判断此值是否已经有了，如果已经有了，则不再插入
+                int count=[sqlser getcount:[NSString stringWithFormat:@"select updatetimevalue from updatetime where updateCode='%@'",timecode]];
+                if(count>0){
+                    sql1=[NSString stringWithFormat:@"update updatetime set updatetimevalue='%@' where updateCode='%@'",uptime,timecode];
+                }
                 
                 NSLog(@"--------------:%@",sql1);
                 
@@ -313,11 +325,17 @@ AppDelegate * app;
                     
                 }
                 //先删除之前的更新时间
-                [sqlser execSql:[NSString stringWithFormat:@"delete from updatetime where updateCode='%@'",timecode]];
+                //[sqlser execSql:[NSString stringWithFormat:@"delete from updatetime where updateCode='%@'",timecode]];
                 
                 NSString * uptime=[d objectForKey:@"uptime"];
                 //更新时间表记录
-                NSString * sql1=[NSString stringWithFormat:@"insert into updatetime(updateCode,updatetime)values('%@','%@')",timecode,uptime];
+                NSString * sql1=[NSString stringWithFormat:@"insert into updatetime(updateCode,updatetimevalue)values('%@','%@')",timecode,uptime];
+                
+                //判断此值是否已经有了，如果已经有了，则不再插入
+                int count=[sqlser getcount:[NSString stringWithFormat:@"select updatetimevalue from updatetime where updateCode='%@'",timecode]];
+                if(count>0){
+                    sql1=[NSString stringWithFormat:@"update updatetime set updatetimevalue='%@' where updateCode='%@'",uptime,timecode];
+                }
                 
                 NSLog(@"--------------:%@",sql1);
                 
@@ -420,11 +438,17 @@ AppDelegate * app;
                     
                 }
                 //先删除之前的更新时间
-                [sqlser execSql:[NSString stringWithFormat:@"delete from updatetime where updateCode='%@'",timecode]];
+                //[sqlser execSql:[NSString stringWithFormat:@"delete from updatetime where updateCode='%@'",timecode]];
                 
                 NSString * uptime=[d objectForKey:@"uptime"];
                 //更新时间表记录
-                NSString * sql1=[NSString stringWithFormat:@"insert into updatetime(updateCode,updatetime)values('%@','%@')",timecode,uptime];
+                NSString * sql1=[NSString stringWithFormat:@"insert into updatetime(updateCode,updatetimevalue)values('%@','%@')",timecode,uptime];
+                
+                //判断此值是否已经有了，如果已经有了，则不再插入
+                int count=[sqlser getcount:[NSString stringWithFormat:@"select updatetimevalue from updatetime where updateCode='%@'",timecode]];
+                if(count>0){
+                    sql1=[NSString stringWithFormat:@"update updatetime set updatetimevalue='%@' where updateCode='%@'",uptime,timecode];
+                }
                 
                 NSLog(@"--------------:%@",sql1);
                 

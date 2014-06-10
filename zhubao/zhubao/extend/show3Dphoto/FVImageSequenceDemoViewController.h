@@ -13,6 +13,8 @@
 	IBOutlet FVImageSequence *imageSquence;
 }
 
+@property(retain , nonatomic) NSString * code;//
+
 - (IBAction)goAction:(id)sender;
 
 @end

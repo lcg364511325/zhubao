@@ -10,6 +10,8 @@
 
 @implementation FVImageSequenceDemoViewController
 
+@synthesize code;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
@@ -17,10 +19,11 @@
 	[imageSquence setExtension:@"jpg"];
 	
 	//Set slide prefix prefix
-	[imageSquence setPrefix:@"Seq_v04_640x378_"];
+	//[imageSquence setPrefix:@"Seq_v04_640x378_"];
+    [imageSquence setPrefix:[NSString stringWithFormat:@"%@_",code]];
 	
 	//Set number of slides
-	[imageSquence setNumberOfImages:72];
+	[imageSquence setNumberOfImages:60];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

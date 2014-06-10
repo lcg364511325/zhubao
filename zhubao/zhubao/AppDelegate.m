@@ -37,7 +37,7 @@
         NSLog(@"couldn't 复制数据库到指定的目录");
     }
     //真正初始化数据库
-    if([sqlSer openDB])
+    if(![sqlSer openDB])
     {
         NSLog(@"couldn't 初始化数据库 ");
     }
@@ -235,7 +235,7 @@
     // 压缩文件路径
     NSString* zipFilePath = downloadPath;//[dcoumentpath stringByAppendingString:@"/1.zip"];
     // 解压缩文件夹路径
-    NSString* unzipPath = [dcoumentpath stringByAppendingString:@"/test"];
+    NSString* unzipPath = [dcoumentpath stringByAppendingString:@"/images"];
     
     NSLog(@"解压后的路径------%@",unzipPath);
     

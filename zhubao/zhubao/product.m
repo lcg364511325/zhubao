@@ -57,6 +57,8 @@ NSString * productnumber=nil;
 NSMutableArray *list=nil;
 //控制cell
 NSInteger enno=0;
+//工厂款号
+NSString * Pro_author;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -156,6 +158,7 @@ NSInteger enno=0;
 {
     
     FVImageSequenceDemoViewController *sysmenu=[[FVImageSequenceDemoViewController alloc] init];
+    sysmenu.code=Pro_author;//@"3Y0012";//工厂款号
     [self.navigationController pushViewController:sysmenu animated:NO];
     
 }
@@ -414,7 +417,9 @@ NSInteger enno=0;
     sqlService * sql=[[sqlService alloc] init];
     productnumber=entity.Id;
     productEntity *goods=[sql GetProductDetail:productnumber];
-    productimageview.image=[UIImage imageNamed:@"diamonds.png"];
+    Pro_author=goods.Pro_author;
+    
+    //productimageview.image=[UIImage imageNamed:@"diamonds.png"];
     title1lable.text=goods.Pro_name;
     pricelable.text=[@"¥" stringByAppendingString:goods.Pro_price];
     modellable.text=goods.Pro_model;
@@ -429,6 +434,18 @@ NSInteger enno=0;
     sizetext.text=goods.Pro_goldsize;
     fonttext.text=nil;
     numbertext.text=@"1";
+    
+    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://app.seyuu.com%@",goods.Pro_smallpic]];
+    if (hasCachedImage(imgUrl)) {
+        [self.productimageview setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
+    }else
+    {
+        [self.productimageview setImage:[UIImage imageNamed:@"diamonds"]];
+        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",self.productimageview,@"imageView",nil];
+        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+        
+    }
+    
 }
 
 @end

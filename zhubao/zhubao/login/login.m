@@ -37,6 +37,8 @@
     [dateformatter setDateFormat:@"YYYYMMdd"];
     NSString *  locationString=[dateformatter stringFromDate:senddate];
     
+    //[self autogetData];
+    
     //判断当前天是否已经有更新过数据了
     if (![locationString isEqualToString:(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"autodata"]]) {
         
@@ -154,8 +156,8 @@
                     // NSLog(@"登录失败------:%@",info);
                     [[[UIAlertView alloc] initWithTitle:@"信息提示" message:info delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil] show];
                     
-                    //Index *sysmenu=[[Index alloc] init];
-                    //[self.navigationController pushViewController:sysmenu animated:NO];
+                    Index *sysmenu=[[Index alloc] init];
+                    [self.navigationController pushViewController:sysmenu animated:NO];
                 }
                 
                 [resultButton setTitle:@"登录" forState:UIControlStateNormal];

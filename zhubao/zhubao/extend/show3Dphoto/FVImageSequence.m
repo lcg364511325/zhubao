@@ -42,14 +42,33 @@
 		current = 0;
 	if(current < 0)
 		current = numberOfImages;
+
+	//NSString *path = [NSString stringWithFormat:@"%@%d", prefix, current];
+    
+    NSString * currents=@"";
+    if (current<10) {
+        if(current==0)current=1;
+        currents=[NSString stringWithFormat:@"00%d",current];
+    }else if(current>=10){
+        currents=[NSString stringWithFormat:@"0%d",current];
+    }
+    
+    NSString *path = [NSString stringWithFormat:@"%@%@", prefix, currents];
+    NSLog(@"%@", path);
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *dcoumentpath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    // 解压缩文件夹路径
+    NSString* unzipPath = [dcoumentpath stringByAppendingString:@"/images"];
+    
+    NSLog(@"---------------本地的图片:%@", [NSString stringWithFormat:@"%@/%@.%@",unzipPath,path,extension]);
+    
+    NSData *data = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@.%@",unzipPath,path,extension]];
 	
-	NSString *path = [NSString stringWithFormat:@"%@%d", prefix, current];
-	NSLog(@"%@", path);
-	
-	path = [[NSBundle mainBundle] pathForResource:path ofType:extension];
+	//path = [[NSBundle mainBundle] pathForResource:path ofType:extension];
 	
 	
-	UIImage *img =  [[UIImage alloc] initWithContentsOfFile:path];
+	UIImage *img =  [UIImage imageWithData:data];//[[UIImage alloc] initWithContentsOfFile:path];
 	
 	[self setImage:img];
 	
