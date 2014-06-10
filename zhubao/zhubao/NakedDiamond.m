@@ -263,11 +263,12 @@ NSString * nakedno=nil;
     secondShadeView.alpha=0;
 }
 
+//购物车
 - (IBAction)goAction2:(id)sender
 {
-    thirdShadeView.alpha=0.5;
-    fourtharyView.frame = CGRectMake(140, 95, fourtharyView.frame.size.width, fourtharyView.frame.size.height);
-    fourtharyView.hidden = NO;
+//    thirdShadeView.alpha=0.5;
+//    fourtharyView.frame = CGRectMake(140, 95, fourtharyView.frame.size.width, fourtharyView.frame.size.height);
+//    fourtharyView.hidden = NO;
 }
 
 - (IBAction)closeAction2:(id)sender

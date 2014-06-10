@@ -90,11 +90,12 @@
     [self.navigationController pushViewController:_member animated:NO];
 }
 
+//购物车
 - (IBAction)goAction:(id)sender
 {
-    primaryShadeView.alpha=0.5;
-    secondaryView.frame = CGRectMake(140, 85, secondaryView.frame.size.width, secondaryView.frame.size.height);
-    secondaryView.hidden = NO;
+//    primaryShadeView.alpha=0.5;
+//    secondaryView.frame = CGRectMake(140, 85, secondaryView.frame.size.width, secondaryView.frame.size.height);
+//    secondaryView.hidden = NO;
 }
 
 - (IBAction)closeAction:(id)sender

@@ -147,11 +147,12 @@ NSString * Pro_author;
     secondaryView.hidden = YES;
 }
 
+//购物车
 - (IBAction)goAction1:(id)sender
 {
-    secondShadeView.alpha=0.5;
-    thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.height);
-    thridaryView.hidden = NO;
+//    secondShadeView.alpha=0.5;
+//    thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.height);
+//    thridaryView.hidden = NO;
 }
 
 - (IBAction)closeAction1:(id)sender
@@ -396,6 +397,7 @@ NSString * Pro_author;
     }
     sqlService *sql=[[sqlService alloc]init];
     list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:100];
+    enno=0;
     [productcollect reloadData];
 }
 
@@ -489,6 +491,7 @@ NSString * Pro_author;
     }
     sqlService *sql=[[sqlService alloc]init];
     list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:100];
+    enno=0;
     [productcollect reloadData];
 }
 
@@ -605,6 +608,7 @@ NSString * Pro_author;
     }
     sqlService *sql=[[sqlService alloc]init];
     list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:100];
+    enno=0;
     [productcollect reloadData];
 }
 
@@ -680,6 +684,7 @@ NSString * Pro_author;
     }
     sqlService *sql=[[sqlService alloc]init];
     list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:100];
+    enno=0;
     [productcollect reloadData];
 }
 
@@ -739,7 +744,7 @@ NSString * Pro_author;
         
     }
     
-    cell.productLable.text = entity.Pro_number;
+    cell.productLable.text = entity.Pro_model;
     enno++;
     return cell;
 }
