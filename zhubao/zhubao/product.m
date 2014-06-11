@@ -172,7 +172,9 @@ NSString * Pro_author;
 - (IBAction)threeddAction:(id)sender
 {
     
-    FVImageSequenceDemoViewController *sysmenu=[[FVImageSequenceDemoViewController alloc] init];
+    //FVImageSequenceDemoViewController *sysmenu=[[FVImageSequenceDemoViewController alloc] init];
+    TestViewController *sysmenu=[[TestViewController alloc] init];
+    
     sysmenu.code=Pro_author;//@"3Y0012";//工厂款号
     [self.navigationController pushViewController:sysmenu animated:NO];
     

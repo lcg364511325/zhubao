@@ -32,8 +32,18 @@ NSInteger i=0;
     
     //shengyu    222222
     [self.navigationController setNavigationBarHidden:YES];
-    _account.text=@"shengyu";
-    _password.text=@"222222";
+    
+    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"_account"]) {
+        
+        _account.text=(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"_account"];
+        _password.text=(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"_password"];
+    }
+    
+    //设置此输入框可以隐藏键盘
+    _account.delegate=self;
+    [_account setKeyboardType:UIKeyboardTypeDecimalPad];
+    _password.delegate=self;
+    [_password setKeyboardType:UIKeyboardTypeDecimalPad];
     
     NSDate *  senddate=[NSDate date];
     NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
@@ -118,6 +128,13 @@ NSInteger i=0;
             dispatch_async(dispatch_get_main_queue(), ^{
                 // 更新界面（处理结果）
                 if(result){
+                    
+                    //判断是否要保存密码
+                    if(i==1){
+                        [[NSUserDefaults standardUserDefaults]setObject:account forKey:@"_account"];
+                        [[NSUserDefaults standardUserDefaults]setObject:password forKey:@"_password"];
+                    }
+                    
                     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
                     
                     myDelegate.entityl=result;
@@ -143,8 +160,7 @@ NSInteger i=0;
                     //同时更新本的数据库用户表
                     sqlService *sqlser= [[sqlService alloc]init];
                     [sqlser updateCustomerNoApi:n];
-                    
-                    
+
                     //登录成功，进入系统首页
                     NSLog(@"登录成功，进入系统首页");
                     Index *sysmenu=[[Index alloc] init];
@@ -190,6 +206,42 @@ NSInteger i=0;
         [btn setBackgroundImage:[UIImage imageNamed:@"0001_bg"] forState:UIControlStateNormal];
         i--;
     }
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(done:)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer: tapGestureRecognizer];   //只需要点击非文字输入区域就会响应hideKeyBoard
+    
+    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+    [UIView setAnimationDuration:0.3f];
+    float width=self.view.frame.size.width;
+    float height=self.view.frame.size.height;
+    //CGRect rect=CGRectMake(0.0f,-80*(textField.tag),width,height);//上移80个单位，按实际情况设置
+    CGRect rect=CGRectMake(0.0f,-80,width,height);//上移80个单位，按实际情况设置
+    self.view.frame=rect;
+    [UIView commitAnimations];
+    
+    return YES;
+}
+
+-(void)done:(id)sender
+{
+    [self.view endEditing:YES];
+    
+    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+    [UIView setAnimationDuration:0.3f];
+    float width=self.view.frame.size.width;
+    float height=self.view.frame.size.height;
+    CGRect rect=CGRectMake(0.0f,0.0f,width,height);//上移80个单位，按实际情况设置
+    if ([[[UIDevice currentDevice]systemVersion]floatValue] >= 7.0)
+        //rect=CGRectMake(0.0f,60.0f,width,height);//上移80个单位，按实际情况设置
+    self.view.frame=rect;
+    [UIView commitAnimations];
+    
+    UITapGestureRecognizer *tapGestureRecognizer=(UITapGestureRecognizer *)sender;
+    [tapGestureRecognizer setEnabled:NO];
 }
 
 - (void)didReceiveMemoryWarning
