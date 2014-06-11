@@ -461,6 +461,16 @@
                         <outlet property="delegate" destination="-1" id="zF0-TH-b5N"/>
                     </connections>
                 </collectionView>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" background="yellowcolor.png" translatesAutoresizingMaskIntoConstraints="NO" id="Go7-sK-BRj">
+                    <rect key="frame" x="487" y="234" width="97" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="yellowcolor.png" translatesAutoresizingMaskIntoConstraints="NO" id="lgS-IQ-Syz">
+                    <rect key="frame" x="247" y="234" width="240" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -479,5 +489,6 @@
         <image name="page.png" width="2048" height="1536"/>
         <image name="ring.png" width="82" height="96"/>
         <image name="shoppingcart.png" width="76" height="52"/>
+        <image name="yellowcolor.png" width="126" height="126"/>
     </resources>
 </document>

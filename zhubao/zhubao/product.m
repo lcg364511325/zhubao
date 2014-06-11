@@ -55,8 +55,6 @@ NSInteger selecttype=0;
 NSString * productnumber=nil;
 //查询结果
 NSMutableArray *list=nil;
-//控制cell
-NSInteger enno=0;
 //工厂款号
 NSString * Pro_author;
 
@@ -347,7 +345,7 @@ NSString * Pro_author;
             isequal = [style isEqualToString:value];
             if (isequal) {
                 [stylearray removeObjectAtIndex:i];
-                [btn setBackgroundImage:[UIImage imageNamed:@"backgroundcolor"] forState:UIControlStateNormal];
+                [btn setBackgroundImage:nil forState:UIControlStateNormal];
                 i=len;
             }
         }
@@ -397,7 +395,6 @@ NSString * Pro_author;
     }
     sqlService *sql=[[sqlService alloc]init];
     list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:100];
-    enno=0;
     [productcollect reloadData];
 }
 
@@ -441,7 +438,7 @@ NSString * Pro_author;
             isequal = [texture isEqualToString:value];
             if (isequal) {
                 [texturearray removeObjectAtIndex:i];
-                [btn setBackgroundImage:[UIImage imageNamed:@"backgroundcolor"] forState:UIControlStateNormal];
+                [btn setBackgroundImage:nil forState:UIControlStateNormal];
                 i=len;
             }
         }
@@ -491,7 +488,6 @@ NSString * Pro_author;
     }
     sqlService *sql=[[sqlService alloc]init];
     list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:100];
-    enno=0;
     [productcollect reloadData];
 }
 
@@ -504,49 +500,46 @@ NSString * Pro_author;
     if (btntag==0) {
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==1){
-        inlay=@"1";
+        inlay=@"0.00-0.02";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==2){
-        inlay=@"2";
+        inlay=@"0.03-0.07";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==3){
-        inlay=@"3";
+        inlay=@"0.08-0.12";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==4){
-        inlay=@"4";
+        inlay=@"0.13-0.17";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==5){
-        inlay=@"5";
+        inlay=@"0.18-0.22";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==6){
-        inlay=@"6";
+        inlay=@"0.23-0.28";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==7){
-        inlay=@"7";
+        inlay=@"0.29-0.39";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==8){
-        inlay=@"8";
+        inlay=@"0.40";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==9){
-        inlay=@"9";
+        inlay=@"0.50";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==10){
-        inlay=@"10";
+        inlay=@"0.60";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==11){
-        inlay=@"11";
+        inlay=@"0.70";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==12){
-        inlay=@"12";
+        inlay=@"0.80";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==13){
-        inlay=@"13";
+        inlay=@"0.90";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==14){
-        inlay=@"14";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
-    }else if (btntag==15){
-        inlay=@"15";
+        inlay=@"1";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }
     if (inlay) {
@@ -558,7 +551,7 @@ NSString * Pro_author;
             isequal = [inlay isEqualToString:value];
             if (isequal) {
                 [inlayarray removeObjectAtIndex:i];
-                [btn setBackgroundImage:[UIImage imageNamed:@"backgroundcolor"] forState:UIControlStateNormal];
+                [btn setBackgroundImage:nil forState:UIControlStateNormal];
                 i=len;
             }
         }
@@ -608,7 +601,6 @@ NSString * Pro_author;
     }
     sqlService *sql=[[sqlService alloc]init];
     list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:100];
-    enno=0;
     [productcollect reloadData];
 }
 
@@ -634,7 +626,7 @@ NSString * Pro_author;
             isequal = [serie isEqualToString:value];
             if (isequal) {
                 [seriearray removeObjectAtIndex:i];
-                [btn setBackgroundImage:[UIImage imageNamed:@"backgroundcolor"] forState:UIControlStateNormal];
+                [btn setBackgroundImage:nil forState:UIControlStateNormal];
                 i=len;
             }
         }
@@ -684,7 +676,6 @@ NSString * Pro_author;
     }
     sqlService *sql=[[sqlService alloc]init];
     list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:100];
-    enno=0;
     [productcollect reloadData];
 }
 
@@ -727,9 +718,6 @@ NSString * Pro_author;
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ProductCell *cell = (ProductCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ProductCell" forIndexPath:indexPath];
-    if (enno>=[list count]) {
-        enno=0;
-    }
     productEntity *entity=[list objectAtIndex:[indexPath row]];
     NSString *count=[NSString stringWithFormat:@"%lu",(unsigned long)[list count]];
     countLable.text=[[@"共有首饰" stringByAppendingString:count] stringByAppendingString:@"件"];
@@ -745,7 +733,6 @@ NSString * Pro_author;
     }
     
     cell.productLable.text = entity.Pro_model;
-    enno++;
     return cell;
 }
 

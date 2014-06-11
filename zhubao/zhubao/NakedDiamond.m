@@ -45,7 +45,6 @@
 @synthesize priceLable;
 @synthesize productimageview;
 
-NSInteger mint=0;
 NSString * nakedno=nil;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -227,14 +226,23 @@ NSString * nakedno=nil;
     //钻重参数
     NSString *weight=nil;
     if (weightmax.text) {
-        weight=[[weightmin.text stringByAppendingString:@","] stringByAppendingString:weightmax.text];
+        if (!weightmin.text) {
+            weight=[[@"0" stringByAppendingString:@","] stringByAppendingString:weightmax.text];
+        }else{
+            weight=[[weightmin.text stringByAppendingString:@","] stringByAppendingString:weightmax.text];
+        }
     }else{
         weight=weightmin.text;
     }
     //价钱参数
     NSString *price=nil;
-    if (pricemax.text) {
-        price=[[pricemin.text stringByAppendingString:@","] stringByAppendingString:pricemax.text];
+    if (!pricemax.text) {
+        if (pricemin.text) {
+            
+            price=[[@"0" stringByAppendingString:@","] stringByAppendingString:pricemax.text];
+        }else{
+            price=[[pricemin.text stringByAppendingString:@","] stringByAppendingString:pricemax.text];
+        }
     }else{
         price=pricemin.text;
     }
@@ -330,10 +338,7 @@ NSString * nakedno=nil;
         NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"NoticeReportCell" owner:self options:nil];
         cell=[nib objectAtIndex:0];
     }
-    if (mint>=[productlist count]) {
-        mint=0;
-    }
-    productdia *entity =[productlist objectAtIndex:mint];
+    productdia *entity =[productlist objectAtIndex:[indexPath row]];
     if ([entity.Dia_Shape isEqualToString:@"RB"]) {
         cell.notice.text=@"圆形";
         cell.showimage.image=[UIImage imageNamed:@"round.jpg"];
@@ -374,7 +379,7 @@ NSString * nakedno=nil;
         cell.notice.text=@"镭射刑";
         cell.showimage.image=[UIImage imageNamed:@"Asscher2.jpg"];
     }
-        cell.noticeDate.text=entity.Dia_Corp;
+        cell.noticeDate.text=entity.Dia_CertNo;
         cell.tuDate.text=entity.Dia_Carat;
         cell.Dia_Col.text=entity.Dia_Col;
         cell.Dia_Clar.text=entity.Dia_Clar;
@@ -384,7 +389,6 @@ NSString * nakedno=nil;
         cell.Dia_Lab.text=entity.Dia_Pol;
         cell.Dia_Price.text=entity.Dia_Sym;
         cell.teslable.text=@"查看";
-    mint++;
     
     return cell;
 }
@@ -507,7 +511,7 @@ NSString * nakedno=nil;
             isequal = [shape isEqualToString:value];
             if (isequal) {
                 [shapearray removeObjectAtIndex:i];
-                [btn setBackgroundImage:[UIImage imageNamed:@"backgroundcolor"] forState:UIControlStateNormal];
+                [btn setBackgroundImage:nil forState:UIControlStateNormal];
                 i=len;
             }
         }
@@ -565,7 +569,7 @@ NSString * nakedno=nil;
             isequal = [color isEqualToString:value];
             if (isequal) {
                 [colorarray removeObjectAtIndex:i];
-                [btn setBackgroundImage:[UIImage imageNamed:@"backgroundcolor"] forState:UIControlStateNormal];
+                [btn setBackgroundImage:nil forState:UIControlStateNormal];
                 i=len;
             }
         }
@@ -622,7 +626,7 @@ NSString * nakedno=nil;
             isequal = [net isEqualToString:value];
             if (isequal) {
                 [netarray removeObjectAtIndex:i];
-                [btn setBackgroundImage:[UIImage imageNamed:@"backgroundcolor"] forState:UIControlStateNormal];
+                [btn setBackgroundImage:nil forState:UIControlStateNormal];
                 i=len;
             }
         }
@@ -659,7 +663,7 @@ NSString * nakedno=nil;
         isequal = [cut isEqualToString:value];
         if (isequal) {
             [cutarray removeObjectAtIndex:i];
-            [btn setBackgroundImage:[UIImage imageNamed:@"backgroundcolor"] forState:UIControlStateNormal];
+            [btn setBackgroundImage:nil forState:UIControlStateNormal];
             i=len;
         }
     }
@@ -695,7 +699,7 @@ NSString * nakedno=nil;
         isequal = [chasing isEqualToString:value];
         if (isequal) {
             [chasingarray removeObjectAtIndex:i];
-            [btn setBackgroundImage:[UIImage imageNamed:@"backgroundcolor"] forState:UIControlStateNormal];
+            [btn setBackgroundImage:nil forState:UIControlStateNormal];
             i=len;
         }
     }
@@ -731,7 +735,7 @@ NSString * nakedno=nil;
         isequal = [symmetry isEqualToString:value];
         if (isequal) {
             [symmetryarray removeObjectAtIndex:i];
-            [btn setBackgroundImage:[UIImage imageNamed:@"backgroundcolor"] forState:UIControlStateNormal];
+            [btn setBackgroundImage:nil forState:UIControlStateNormal];
             i=len;
         }
     }
@@ -770,7 +774,7 @@ NSString * nakedno=nil;
         isequal = [fluorescence isEqualToString:value];
         if (isequal) {
             [fluorescencearray removeObjectAtIndex:i];
-            [btn setBackgroundImage:[UIImage imageNamed:@"backgroundcolor"] forState:UIControlStateNormal];
+            [btn setBackgroundImage:nil forState:UIControlStateNormal];
             i=len;
         }
     }
@@ -812,7 +816,7 @@ NSString * nakedno=nil;
         isequal = [diploma isEqualToString:value];
         if (isequal) {
             [diplomaarray removeObjectAtIndex:i];
-            [btn setBackgroundImage:[UIImage imageNamed:@"backgroundcolor"] forState:UIControlStateNormal];
+            [btn setBackgroundImage:nil forState:UIControlStateNormal];
             i=len;
         }
     }

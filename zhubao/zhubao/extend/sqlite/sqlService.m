@@ -334,10 +334,20 @@
             NSString *classsql=[NSString stringWithFormat:@" and Pro_goldType in (%@) ",type2];
             querySQL=[querySQL stringByAppendingString:classsql];
         }
-//        if (type3.length!=0) {
-//            NSString *classsql=[NSString stringWithFormat:@" and Pro_goldsize in (%@) ",type3];
-//            querySQL=[querySQL stringByAppendingString:classsql];
-//        }
+        if (type3.length!=0) {
+            NSString *classsql=nil;
+            NSArray *inlayArray=[type3 componentsSeparatedByString:@","];
+            for (NSString *inlay in inlayArray) {
+                NSArray *inlayfff=[inlay componentsSeparatedByString:@"-"];
+                if (classsql.length!=0) {
+                    classsql=[classsql stringByAppendingString:@" or "];
+                    classsql=[NSString stringWithFormat:@"in (%@,%@)",[inlayfff objectAtIndex:0],[inlayfff objectAtIndex:1]];
+                }else{
+                    classsql=[@" and exists( select * from withmouth where zWeight " stringByAppendingString:[NSString stringWithFormat:@"in (%@,%@)",[inlayfff objectAtIndex:0],[inlayfff objectAtIndex:1]]];
+                }
+            }
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
         if (type4.length!=0) {
             NSString *classsql=[NSString stringWithFormat:@" and %@ ",type4];
             querySQL=[querySQL stringByAppendingString:classsql];
@@ -536,14 +546,26 @@
             NSString *classsql=[NSString stringWithFormat:@" and Dia_Shape in (%@) ",type1];
             querySQL=[querySQL stringByAppendingString:classsql];
         }
-//        if (type2.length!=0) {
-//            NSString *classsql=[NSString stringWithFormat:@" and Dia_Shape in (%@) ",type2];
-//            querySQL=[querySQL stringByAppendingString:classsql];
-//        }
-//        if (type3.length!=0) {
-//            NSString *classsql=[NSString stringWithFormat:@" and Dia_Shape in (%@) ",type3];
-//            querySQL=[querySQL stringByAppendingString:classsql];
-//        }
+        if (type2.length!=0) {
+            NSString *classsql=nil;
+            NSArray *weight=[type2 componentsSeparatedByString:@","];
+            if ([weight count]==2) {
+                classsql=[NSString stringWithFormat:@" and Dia_Carat between '%@' and '%@' ",[weight objectAtIndex:0],[weight objectAtIndex:1]];
+            }else{
+                classsql=[NSString stringWithFormat:@" and Dia_Carat>=%@ ",[weight objectAtIndex:0]];
+            }
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
+        if (type3.length!=0) {
+            NSString *classsql=nil;
+            NSArray *weight=[type3 componentsSeparatedByString:@","];
+            if ([weight count]==2) {
+                classsql=[NSString stringWithFormat:@" and Dia_Price between '%@' and '%@' ",[weight objectAtIndex:0],[weight objectAtIndex:1]];
+            }else{
+                classsql=[NSString stringWithFormat:@" and Dia_Price>=%@ ",[weight objectAtIndex:0]];
+            }
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
         if (type4.length!=0) {
             NSString *classsql=[NSString stringWithFormat:@" and Dia_Col in (%@) ",type4];
             querySQL=[querySQL stringByAppendingString:classsql];
@@ -572,10 +594,10 @@
             NSString *classsql=[NSString stringWithFormat:@" and Dia_Lab in (%@) ",type10];
             querySQL=[querySQL stringByAppendingString:classsql];
         }
-//        if (type11.length!=0) {
-//            NSString *classsql=[NSString stringWithFormat:@" and Dia_Shape in (%@) ",type1];
-//            querySQL=[querySQL stringByAppendingString:classsql];
-//        }
+        if (type11.length!=0) {
+            NSString *classsql=[NSString stringWithFormat:@" and Dia_CertNo like '%%%@%%' ",type11];
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
         querySQL=[querySQL stringByAppendingString:[NSString stringWithFormat:@"limit %d offset %d",pageSize,offsetcount]];
         const char *sql = [querySQL UTF8String];
         if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
