@@ -105,9 +105,9 @@ NSInteger selecttable=0;
 //购物车页面跳转
 - (IBAction)goAction:(id)sender
 {
-    primaryShadeView.alpha=0.5;
-    secondaryView.frame = CGRectMake(145, 90, secondaryView.frame.size.width, secondaryView.frame.size.height);
-    secondaryView.hidden = NO;
+//    primaryShadeView.alpha=0.5;
+//    secondaryView.frame = CGRectMake(145, 90, secondaryView.frame.size.width, secondaryView.frame.size.height);
+//    secondaryView.hidden = NO;
 }
 
 - (IBAction)closeAction:(id)sender

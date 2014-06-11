@@ -19,6 +19,16 @@
 #import "ImageCacher.h"
 
 @interface product : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate>
+{
+    NSMutableArray *stylearray;
+    NSMutableArray *texturearray;
+    NSMutableArray *inlayarray;
+    NSMutableArray *seriearray;
+    NSMutableArray *btnarray1;
+    NSMutableArray *btnarray2;
+    NSMutableArray *btnarray3;
+    NSMutableArray *btnarray4;
+}
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondaryView;
@@ -54,9 +64,12 @@
 @property (weak, nonatomic) IBOutlet UIImageView *productimageview;
 @property (weak, nonatomic) IBOutlet UICollectionView *productcollect;
 @property (weak, nonatomic) IBOutlet UILabel *countLable;
+@property (weak, nonatomic) IBOutlet UIButton *btnstyle;
+@property (weak, nonatomic) IBOutlet UIButton *btntexture;
+@property (weak, nonatomic) IBOutlet UIButton *btninlay;
+@property (weak, nonatomic) IBOutlet UIButton *btnseric;
 
 
-- (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;
 - (IBAction)goAction1:(id)sender;
 - (IBAction)closeAction1:(id)sender;

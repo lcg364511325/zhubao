@@ -14,6 +14,8 @@
 
 @implementation login
 
+NSInteger i=0;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -29,6 +31,7 @@
     // Do any additional setup after loading the view from its nib.
     
     //shengyu    222222
+    [self.navigationController setNavigationBarHidden:YES];
     _account.text=@"shengyu";
     _password.text=@"222222";
     
@@ -175,6 +178,19 @@
     
 }
 
+//记住密码
+-(IBAction)rememberpassword:(id)sender
+{
+    UIButton *btn=(UIButton *)sender;
+    if (i==0) {
+        [btn setBackgroundImage:[UIImage imageNamed:@"sure"] forState:UIControlStateNormal];
+        i++;
+    }else if (i==1)
+    {
+        [btn setBackgroundImage:[UIImage imageNamed:@"0001_bg"] forState:UIControlStateNormal];
+        i--;
+    }
+}
 
 - (void)didReceiveMemoryWarning
 {

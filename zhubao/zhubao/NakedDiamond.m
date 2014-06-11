@@ -43,8 +43,11 @@
 @synthesize fluorescenceLable;
 @synthesize diplomaLable;
 @synthesize priceLable;
+@synthesize productimageview;
+@synthesize modelbtn;
+@synthesize colorbtn;
+@synthesize netbtn;
 
-NSInteger mint=0;
 NSString * nakedno=nil;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -68,6 +71,9 @@ NSString * nakedno=nil;
     symmetryarray = [[NSMutableArray alloc] init];
     fluorescencearray = [[NSMutableArray alloc] init];
     diplomaarray = [[NSMutableArray alloc] init];
+    btnarray1 = [[NSMutableArray alloc] init];
+    btnarray2 = [[NSMutableArray alloc] init];
+    btnarray3 = [[NSMutableArray alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -122,86 +128,144 @@ NSString * nakedno=nil;
     NSMutableString *shape=[[NSMutableString alloc] init];
     for (NSString *index in shapearray) {
         if (shape.length!=0) {
-            [shape appendString:@","];
+            [shape appendString:@",'"];
             [shape appendString:index];
+            [shape appendString:@",'"];
         }else{
+            [shape appendString:@"'"];
             [shape appendString:index];
+            [shape appendString:@"'"];
         }
     }
     //颜色参数
     NSMutableString *color=[[NSMutableString alloc] init];
     for (NSString *index in colorarray) {
         if (color.length!=0) {
-            [color appendString:@","];
+            
+            [color appendString:@",'"];
             [color appendString:index];
+            [color appendString:@"'"];
         }else{
+            [color appendString:@"'"];
             [color appendString:index];
+            [color appendString:@"'"];
         }
     }
     //净度参数
     NSMutableString *net=[[NSMutableString alloc] init];
     for (NSString *index in netarray) {
         if (net.length!=0) {
-            [net appendString:@","];
+            [net appendString:@",'"];
             [net appendString:index];
+            [net appendString:@"'"];
         }else{
+            [net appendString:@"'"];
             [net appendString:index];
+            [net appendString:@"'"];
         }
     }
     //切工参数
     NSMutableString *cut=[[NSMutableString alloc] init];
     for (NSString *index in cutarray) {
         if (cut.length!=0) {
-            [cut appendString:@","];
+            [cut appendString:@",'"];
             [cut appendString:index];
+            [cut appendString:@"'"];
         }else{
+            [cut appendString:@"'"];
             [cut appendString:index];
+            [cut appendString:@"'"];
         }
     }
     //抛光参数
     NSMutableString *chasing=[[NSMutableString alloc] init];
     for (NSString *index in chasingarray) {
         if (chasing.length!=0) {
-            [chasing appendString:@","];
+            [chasing appendString:@",'"];
             [chasing appendString:index];
+            [chasing appendString:@"'"];
         }else{
+            [chasing appendString:@"'"];
             [chasing appendString:index];
+            [chasing appendString:@"'"];
         }
     }
     //对称参数
     NSMutableString *symmetry=[[NSMutableString alloc] init];
     for (NSString *index in symmetryarray) {
         if (symmetry.length!=0) {
-            [symmetry appendString:@","];
+            [symmetry appendString:@",'"];
             [symmetry appendString:index];
+            [symmetry appendString:@"'"];
         }else{
+            [symmetry appendString:@"'"];
             [symmetry appendString:index];
+            [symmetry appendString:@"'"];
         }
     }
     //荧光参数
     NSMutableString *fluorescence=[[NSMutableString alloc] init];
     for (NSString *index in fluorescencearray) {
         if (fluorescence.length!=0) {
-            [fluorescence appendString:@","];
+            [fluorescence appendString:@",'"];
             [fluorescence appendString:index];
+            [fluorescence appendString:@"'"];
         }else{
+            [fluorescence appendString:@"'"];
             [fluorescence appendString:index];
+            [fluorescence appendString:@"'"];
         }
     }
     //证书参数
     NSMutableString *diploma=[[NSMutableString alloc] init];
     for (NSString *index in diplomaarray) {
         if (diploma.length!=0) {
-            [diploma appendString:@","];
+            [diploma appendString:@",'"];
             [diploma appendString:index];
+            [diploma appendString:@"'"];
         }else{
+            [diploma appendString:@"'"];
             [diploma appendString:index];
+            [diploma appendString:@"'"];
         }
     }
-    productlist=[product GetProductdiaList:shape type2:@"1" type3:@"1" type4:color type5:net type6:cut type7:chasing type8:symmetry type9:fluorescence type10:diploma type11:@"1" page:1 pageSize:10];
+    //钻重参数
+    NSString *weight=nil;
+    if (weightmax.text) {
+        if (!weightmin.text) {
+            weight=[[@"0" stringByAppendingString:@","] stringByAppendingString:weightmax.text];
+        }else{
+            weight=[[weightmin.text stringByAppendingString:@","] stringByAppendingString:weightmax.text];
+        }
+    }else{
+        weight=weightmin.text;
+    }
+    //价钱参数
+    NSString *price=nil;
+    if (!pricemax.text) {
+        if (pricemin.text) {
+            
+            price=[[@"0" stringByAppendingString:@","] stringByAppendingString:pricemax.text];
+        }else{
+            price=[[pricemin.text stringByAppendingString:@","] stringByAppendingString:pricemax.text];
+        }
+    }else{
+        price=pricemin.text;
+    }
+    //编号参数
+    NSString *number=DiamondNo.text;
+    productlist=[product GetProductdiaList:shape type2:weight type3:price type4:color type5:net type6:cut type7:chasing type8:symmetry type9:fluorescence type10:diploma type11:number page:1 pageSize:100];
     
     [Nakeddisplay reloadData];
     
+}
+
+//重置页面
+-(IBAction)resetview:(id)sender
+{
+    NakedDiamond * _NakedDiamond = [[NakedDiamond alloc] init];
+    
+    [self.navigationController pushViewController:_NakedDiamond animated:NO];
 }
 
 - (IBAction)closeAction:(id)sender
@@ -238,11 +302,12 @@ NSString * nakedno=nil;
     secondShadeView.alpha=0;
 }
 
+//购物车
 - (IBAction)goAction2:(id)sender
 {
-    thirdShadeView.alpha=0.5;
-    fourtharyView.frame = CGRectMake(140, 95, fourtharyView.frame.size.width, fourtharyView.frame.size.height);
-    fourtharyView.hidden = NO;
+//    thirdShadeView.alpha=0.5;
+//    fourtharyView.frame = CGRectMake(140, 95, fourtharyView.frame.size.width, fourtharyView.frame.size.height);
+//    fourtharyView.hidden = NO;
 }
 
 - (IBAction)closeAction2:(id)sender
@@ -279,13 +344,48 @@ NSString * nakedno=nil;
         NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"NoticeReportCell" owner:self options:nil];
         cell=[nib objectAtIndex:0];
     }
-    if (mint>=[productlist count]) {
-        mint=0;
+    productdia *entity =[productlist objectAtIndex:[indexPath row]];
+    if ([entity.Dia_Shape isEqualToString:@"RB"]) {
+        cell.notice.text=@"圆形";
+        cell.showimage.image=[UIImage imageNamed:@"round.jpg"];
     }
-    productdia *entity =[productlist objectAtIndex:mint];
-        cell.showimage.image=[UIImage imageNamed:@"diamond01"];
-        cell.notice.text=entity.Dia_Shape;
-        cell.noticeDate.text=entity.Dia_Corp;
+    else if ([entity.Dia_Shape isEqualToString:@"PE"]){
+        cell.notice.text=@"公主方";
+        cell.showimage.image=[UIImage imageNamed:@"princess2.jpg"];
+    }
+    else if ([entity.Dia_Shape isEqualToString:@"EM"]){
+        cell.notice.text=@"祖母绿";
+        cell.showimage.image=[UIImage imageNamed:@"Emerald.jpg"];
+    }
+    else if ([entity.Dia_Shape isEqualToString:@"RD"]){
+        cell.notice.text=@"雷蒂恩";
+        cell.showimage.image=[UIImage imageNamed:@"radiant.jpg"];
+    }
+    else if ([entity.Dia_Shape isEqualToString:@"OL"]){
+        cell.notice.text=@"椭圆形";
+        cell.showimage.image=[UIImage imageNamed:@"Oval.jpg"];
+    }
+    else if ([entity.Dia_Shape isEqualToString:@"MQ"]){
+        cell.notice.text=@"橄榄形";
+        cell.showimage.image=[UIImage imageNamed:@"marquise.jpg"];
+    }
+    else if ([entity.Dia_Shape isEqualToString:@"CU"]){
+        cell.notice.text=@"枕形";
+        cell.showimage.image=[UIImage imageNamed:@"cushion.jpg"];
+    }
+    else if ([entity.Dia_Shape isEqualToString:@"PR"]){
+        cell.notice.text=@"梨形";
+        cell.showimage.image=[UIImage imageNamed:@"Pear2.jpg"];
+    }
+    else if ([entity.Dia_Shape isEqualToString:@"HT"]){
+        cell.notice.text=@"心形";
+        cell.showimage.image=[UIImage imageNamed:@"Heart.jpg"];
+    }
+    else if ([entity.Dia_Shape isEqualToString:@"ASH"]){
+        cell.notice.text=@"镭射刑";
+        cell.showimage.image=[UIImage imageNamed:@"Asscher2.jpg"];
+    }
+        cell.noticeDate.text=entity.Dia_CertNo;
         cell.tuDate.text=entity.Dia_Carat;
         cell.Dia_Col.text=entity.Dia_Col;
         cell.Dia_Clar.text=entity.Dia_Clar;
@@ -295,7 +395,6 @@ NSString * nakedno=nil;
         cell.Dia_Lab.text=entity.Dia_Pol;
         cell.Dia_Price.text=entity.Dia_Sym;
         cell.teslable.text=@"查看";
-    mint++;
     
     return cell;
 }
@@ -312,8 +411,47 @@ NSString * nakedno=nil;
     thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.height);
     thridaryView.hidden = NO;
     //_productimageview.image=[UIImage imageNamed:@"10"];
-    titleLable.text=@"string";
-    modelLable.text=entity.Dia_Shape;
+    titleLable.text=[[[[[[[[[[entity.Dia_Lab stringByAppendingString:@"裸钻"] stringByAppendingString:@"    ("] stringByAppendingString:entity.Dia_Carat] stringByAppendingString:@"/"] stringByAppendingString:entity.Dia_Col] stringByAppendingString:@"/"] stringByAppendingString:entity.Dia_Clar] stringByAppendingString:@"/"] stringByAppendingString:entity.Dia_Cut] stringByAppendingString:@")"];
+    if ([entity.Dia_Shape isEqualToString:@"RB"]) {
+        modelLable.text=@"圆形";
+        productimageview.image=[UIImage imageNamed:@"round.jpg"];
+    }
+    else if ([entity.Dia_Shape isEqualToString:@"PE"]){
+        modelLable.text=@"公主方";
+        productimageview.image=[UIImage imageNamed:@"princess2.jpg"];
+    }
+    else if ([entity.Dia_Shape isEqualToString:@"EM"]){
+        modelLable.text=@"祖母绿";
+        productimageview.image=[UIImage imageNamed:@"Emerald.jpg"];
+    }
+    else if ([entity.Dia_Shape isEqualToString:@"RD"]){
+        modelLable.text=@"雷蒂恩";
+        productimageview.image=[UIImage imageNamed:@"radiant.jpg"];
+    }
+    else if ([entity.Dia_Shape isEqualToString:@"OL"]){
+        modelLable.text=@"椭圆形";
+        productimageview.image=[UIImage imageNamed:@"Oval.jpg"];
+    }
+    else if ([entity.Dia_Shape isEqualToString:@"MQ"]){
+        modelLable.text=@"橄榄形";
+        productimageview.image=[UIImage imageNamed:@"marquise.jpg"];
+    }
+    else if ([entity.Dia_Shape isEqualToString:@"CU"]){
+        modelLable.text=@"枕形";
+        productimageview.image=[UIImage imageNamed:@"cushion.jpg"];
+    }
+    else if ([entity.Dia_Shape isEqualToString:@"PR"]){
+        modelLable.text=@"梨形";
+        productimageview.image=[UIImage imageNamed:@"Pear2.jpg"];
+    }
+    else if ([entity.Dia_Shape isEqualToString:@"HT"]){
+        modelLable.text=@"心形";
+        productimageview.image=[UIImage imageNamed:@"Heart.jpg"];
+    }
+    else if ([entity.Dia_Shape isEqualToString:@"ASH"]){
+        modelLable.text=@"镭射刑";
+        productimageview.image=[UIImage imageNamed:@"Asscher2.jpg"];
+    }
     productNoLable.text=entity.Dia_CertNo;
     weightLable.text=entity.Dia_Carat;
     colorLable.text=entity.Dia_Col;
@@ -338,37 +476,50 @@ NSString * nakedno=nil;
     NSInteger btntag=[btn tag];
     NSString * shape=nil;
     if (btntag==0) {
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        for (UIButton* btn1 in btnarray1) {
+            if ([btn1 tag]!=10) {
+                [btn1 setImage:[UIImage imageNamed:[NSString stringWithFormat:@"diamond0%ld",(long)[btn1 tag]]] forState:UIControlStateNormal];
+            }else{
+                [btn1 setImage:[UIImage imageNamed:@"diamond10"] forState:UIControlStateNormal];
+            }
+        }
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btnarray1 removeAllObjects];
+        [shapearray removeAllObjects];
     }else if (btntag==1){
         shape=@"RB";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring01"] forState:UIControlStateNormal];
     }else if (btntag==2){
         shape=@"PE";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring02"] forState:UIControlStateNormal];
     }else if (btntag==3){
         shape=@"EM";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring03"] forState:UIControlStateNormal];
     }else if (btntag==4){
         shape=@"RD";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring04"] forState:UIControlStateNormal];
     }else if (btntag==5){
         shape=@"OL";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring05"] forState:UIControlStateNormal];
     }else if (btntag==6){
         shape=@"MQ";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring06"] forState:UIControlStateNormal];
     }else if (btntag==7){
         shape=@"CU";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring07"] forState:UIControlStateNormal];
     }else if (btntag==8){
         shape=@"PR";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring08"] forState:UIControlStateNormal];
     }else if (btntag==9){
         shape=@"HT";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring09"] forState:UIControlStateNormal];
     }else if (btntag==10){
         shape=@"ASH";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring10"] forState:UIControlStateNormal];
+    }
+    [btnarray1 addObject:btn];
+    if (btntag!=0) {
+        [modelbtn setBackgroundImage:nil forState:UIControlStateNormal];
     }
     if (shape) {
         NSUInteger len=[shapearray count];
@@ -379,7 +530,11 @@ NSString * nakedno=nil;
             isequal = [shape isEqualToString:value];
             if (isequal) {
                 [shapearray removeObjectAtIndex:i];
-                [btn setBackgroundImage:[UIImage imageNamed:@"background"] forState:UIControlStateNormal];
+                if (btntag!=10) {
+                    [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"diamond0%ld",(long)btntag]] forState:UIControlStateNormal];
+                }else{
+                    [btn setImage:[UIImage imageNamed:@"diamond10"] forState:UIControlStateNormal];
+                }
                 i=len;
             }
         }
@@ -396,37 +551,46 @@ NSString * nakedno=nil;
     NSInteger btntag=[btn tag];
     NSString * color=nil;
     if (btntag==0) {
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        for (UIButton * btn2 in btnarray2) {
+            [btn2 setBackgroundImage:nil forState:UIControlStateNormal];
+        }
+        [btnarray2 removeAllObjects];
+        [colorarray removeAllObjects];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==1){
         color=@"D";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==2){
         color=@"E";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==3){
         color=@"F";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==4){
         color=@"G";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==5){
         color=@"H";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==6){
         color=@"I";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==7){
         color=@"J";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==8){
         color=@"K";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==9){
         color=@"L";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==10){
         color=@"M";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }
+    [btnarray2 addObject:btn];
+    if (btntag!=0) {
+        [colorbtn setBackgroundImage:nil forState:UIControlStateNormal];
     }
     if (color) {
         NSUInteger len=[colorarray count];
@@ -437,7 +601,7 @@ NSString * nakedno=nil;
             isequal = [color isEqualToString:value];
             if (isequal) {
                 [colorarray removeObjectAtIndex:i];
-                [btn setBackgroundImage:[UIImage imageNamed:@"background"] forState:UIControlStateNormal];
+                [btn setBackgroundImage:nil forState:UIControlStateNormal];
                 i=len;
             }
         }
@@ -453,37 +617,46 @@ NSString * nakedno=nil;
     NSInteger btntag=[btn tag];
     NSString * net=nil;
     if (btntag==0) {
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        for (UIButton * btn3 in btnarray3) {
+            [btn3 setBackgroundImage:nil forState:UIControlStateNormal];
+        }
+        [btnarray3 removeAllObjects];
+        [netarray removeAllObjects];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==1){
         net=@"FL";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==2){
         net=@"IF";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==3){
         net=@"VVS1";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==4){
         net=@"VVS2";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==5){
         net=@"VS1";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==6){
         net=@"VS2";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==7){
         net=@"SI1";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==8){
         net=@"SI2";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==9){
         net=@"I1";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==10){
         net=@"I2";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }
+    [btnarray3 addObject:btn];
+    if (btntag!=0) {
+        [netbtn setBackgroundImage:nil forState:UIControlStateNormal];
     }
     if (net) {
         NSUInteger len=[netarray count];
@@ -494,7 +667,7 @@ NSString * nakedno=nil;
             isequal = [net isEqualToString:value];
             if (isequal) {
                 [netarray removeObjectAtIndex:i];
-                [btn setBackgroundImage:[UIImage imageNamed:@"background"] forState:UIControlStateNormal];
+                [btn setBackgroundImage:nil forState:UIControlStateNormal];
                 i=len;
             }
         }
@@ -512,16 +685,16 @@ NSString * nakedno=nil;
     NSString * cut=nil;
     if (btntag==0) {
         cut=@"EX";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==1){
         cut=@"VG";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==2){
         cut=@"GD";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==3){
         cut=@"Fair";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }
     NSUInteger len=[cutarray count];
     NSUInteger i;
@@ -531,7 +704,7 @@ NSString * nakedno=nil;
         isequal = [cut isEqualToString:value];
         if (isequal) {
             [cutarray removeObjectAtIndex:i];
-            [btn setBackgroundImage:[UIImage imageNamed:@"background"] forState:UIControlStateNormal];
+            [btn setBackgroundImage:nil forState:UIControlStateNormal];
             i=len;
         }
     }
@@ -548,16 +721,16 @@ NSString * nakedno=nil;
     NSString * chasing=nil;
     if (btntag==0) {
         chasing=@"EX";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==1){
         chasing=@"VG";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==2){
         chasing=@"GD";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==3){
         chasing=@"Fair";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }
     NSUInteger len=[chasingarray count];
     NSUInteger i;
@@ -567,7 +740,7 @@ NSString * nakedno=nil;
         isequal = [chasing isEqualToString:value];
         if (isequal) {
             [chasingarray removeObjectAtIndex:i];
-            [btn setBackgroundImage:[UIImage imageNamed:@"background"] forState:UIControlStateNormal];
+            [btn setBackgroundImage:nil forState:UIControlStateNormal];
             i=len;
         }
     }
@@ -584,16 +757,16 @@ NSString * nakedno=nil;
     NSString * symmetry=nil;
     if (btntag==0) {
         symmetry=@"EX";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==1){
         symmetry=@"VG";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==2){
         symmetry=@"GD";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==3){
         symmetry=@"Fair";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }
     NSUInteger len=[symmetryarray count];
     NSUInteger i;
@@ -603,7 +776,7 @@ NSString * nakedno=nil;
         isequal = [symmetry isEqualToString:value];
         if (isequal) {
             [symmetryarray removeObjectAtIndex:i];
-            [btn setBackgroundImage:[UIImage imageNamed:@"background"] forState:UIControlStateNormal];
+            [btn setBackgroundImage:nil forState:UIControlStateNormal];
             i=len;
         }
     }
@@ -620,19 +793,19 @@ NSString * nakedno=nil;
     NSString * fluorescence=nil;
     if (btntag==0) {
         fluorescence=@"N";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==1){
         fluorescence=@"F";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==2){
         fluorescence=@"M";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==3){
         fluorescence=@"S";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==4){
         fluorescence=@"VS";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }
     NSUInteger len=[fluorescencearray count];
     NSUInteger i;
@@ -642,7 +815,7 @@ NSString * nakedno=nil;
         isequal = [fluorescence isEqualToString:value];
         if (isequal) {
             [fluorescencearray removeObjectAtIndex:i];
-            [btn setBackgroundImage:[UIImage imageNamed:@"background"] forState:UIControlStateNormal];
+            [btn setBackgroundImage:nil forState:UIControlStateNormal];
             i=len;
         }
     }
@@ -659,22 +832,22 @@ NSString * nakedno=nil;
     NSString * diploma=nil;
     if (btntag==0) {
         diploma=@"GIA";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==1){
         diploma=@"IGI";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==2){
         diploma=@"NGTC";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==3){
         diploma=@"HRD";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==4){
         diploma=@"EGL";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==5){
         diploma=@"Other";
-        [btn setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }
     NSUInteger len=[diplomaarray count];
     NSUInteger i;
@@ -684,7 +857,7 @@ NSString * nakedno=nil;
         isequal = [diploma isEqualToString:value];
         if (isequal) {
             [diplomaarray removeObjectAtIndex:i];
-            [btn setBackgroundImage:[UIImage imageNamed:@"background"] forState:UIControlStateNormal];
+            [btn setBackgroundImage:nil forState:UIControlStateNormal];
             i=len;
         }
     }
