@@ -730,7 +730,7 @@ NSString * Pro_author;
     if (enno>=[list count]) {
         enno=0;
     }
-    productEntity *entity=[list objectAtIndex:enno];
+    productEntity *entity=[list objectAtIndex:[indexPath row]];
     NSString *count=[NSString stringWithFormat:@"%lu",(unsigned long)[list count]];
     countLable.text=[[@"共有首饰" stringByAppendingString:count] stringByAppendingString:@"件"];
     NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",entity.Pro_smallpic]];
@@ -772,7 +772,27 @@ NSString * Pro_author;
     maintext.text=goods.Pro_Z_weight;
     nettext.text=goods.Pro_f_clarity;
     colortext.text=goods.Pro_Z_color;
-    texturetext.text=@"18K黄";
+    if ([goods.Pro_goldType isEqualToString:@"1"]) {
+        texturetext.text=@"18K黄";
+    }
+    else if ([goods.Pro_goldType isEqualToString:@"2"]){
+        texturetext.text=@"18K白";
+    }
+    else if ([goods.Pro_goldType isEqualToString:@"3"]){
+        texturetext.text=@"18K双色";
+    }
+    else if ([goods.Pro_goldType isEqualToString:@"4"]){
+        texturetext.text=@"18K玫瑰金";
+    }
+    else if ([goods.Pro_goldType isEqualToString:@"5"]){
+        texturetext.text=@"PT900";
+    }
+    else if ([goods.Pro_goldType isEqualToString:@"6"]){
+        texturetext.text=@"PT950";
+    }
+    else if ([goods.Pro_goldType isEqualToString:@"7"]){
+        texturetext.text=@"PD950";
+    }
     sizetext.text=goods.Pro_goldsize;
     fonttext.text=nil;
     numbertext.text=@"1";

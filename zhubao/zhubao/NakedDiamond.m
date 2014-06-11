@@ -123,80 +123,105 @@ NSString * nakedno=nil;
     NSMutableString *shape=[[NSMutableString alloc] init];
     for (NSString *index in shapearray) {
         if (shape.length!=0) {
-            [shape appendString:@","];
+            [shape appendString:@",'"];
             [shape appendString:index];
+            [shape appendString:@",'"];
         }else{
+            [shape appendString:@"'"];
             [shape appendString:index];
+            [shape appendString:@"'"];
         }
     }
     //颜色参数
     NSMutableString *color=[[NSMutableString alloc] init];
     for (NSString *index in colorarray) {
         if (color.length!=0) {
-            [color appendString:@","];
+            
+            [color appendString:@",'"];
             [color appendString:index];
+            [color appendString:@"'"];
         }else{
+            [color appendString:@"'"];
             [color appendString:index];
+            [color appendString:@"'"];
         }
     }
     //净度参数
     NSMutableString *net=[[NSMutableString alloc] init];
     for (NSString *index in netarray) {
         if (net.length!=0) {
-            [net appendString:@","];
+            [net appendString:@",'"];
             [net appendString:index];
+            [net appendString:@"'"];
         }else{
+            [net appendString:@"'"];
             [net appendString:index];
+            [net appendString:@"'"];
         }
     }
     //切工参数
     NSMutableString *cut=[[NSMutableString alloc] init];
     for (NSString *index in cutarray) {
         if (cut.length!=0) {
-            [cut appendString:@","];
+            [cut appendString:@",'"];
             [cut appendString:index];
+            [cut appendString:@"'"];
         }else{
+            [cut appendString:@"'"];
             [cut appendString:index];
+            [cut appendString:@"'"];
         }
     }
     //抛光参数
     NSMutableString *chasing=[[NSMutableString alloc] init];
     for (NSString *index in chasingarray) {
         if (chasing.length!=0) {
-            [chasing appendString:@","];
+            [chasing appendString:@",'"];
             [chasing appendString:index];
+            [chasing appendString:@"'"];
         }else{
+            [chasing appendString:@"'"];
             [chasing appendString:index];
+            [chasing appendString:@"'"];
         }
     }
     //对称参数
     NSMutableString *symmetry=[[NSMutableString alloc] init];
     for (NSString *index in symmetryarray) {
         if (symmetry.length!=0) {
-            [symmetry appendString:@","];
+            [symmetry appendString:@",'"];
             [symmetry appendString:index];
+            [symmetry appendString:@"'"];
         }else{
+            [symmetry appendString:@"'"];
             [symmetry appendString:index];
+            [symmetry appendString:@"'"];
         }
     }
     //荧光参数
     NSMutableString *fluorescence=[[NSMutableString alloc] init];
     for (NSString *index in fluorescencearray) {
         if (fluorescence.length!=0) {
-            [fluorescence appendString:@","];
+            [fluorescence appendString:@",'"];
             [fluorescence appendString:index];
+            [fluorescence appendString:@"'"];
         }else{
+            [fluorescence appendString:@"'"];
             [fluorescence appendString:index];
+            [fluorescence appendString:@"'"];
         }
     }
     //证书参数
     NSMutableString *diploma=[[NSMutableString alloc] init];
     for (NSString *index in diplomaarray) {
         if (diploma.length!=0) {
-            [diploma appendString:@","];
+            [diploma appendString:@",'"];
             [diploma appendString:index];
+            [diploma appendString:@"'"];
         }else{
+            [diploma appendString:@"'"];
             [diploma appendString:index];
+            [diploma appendString:@"'"];
         }
     }
     //钻重参数
@@ -215,7 +240,7 @@ NSString * nakedno=nil;
     }
     //编号参数
     NSString *number=DiamondNo.text;
-    productlist=[product GetProductdiaList:shape type2:weight type3:price type4:color type5:net type6:cut type7:chasing type8:symmetry type9:fluorescence type10:diploma type11:number page:1 pageSize:10];
+    productlist=[product GetProductdiaList:shape type2:weight type3:price type4:color type5:net type6:cut type7:chasing type8:symmetry type9:fluorescence type10:diploma type11:number page:1 pageSize:100];
     
     [Nakeddisplay reloadData];
     

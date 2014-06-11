@@ -325,8 +325,24 @@
         
         sqlite3_stmt *statement = nil;
         //sql语句
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Pro_model,Pro_number,Pro_name,Pro_State,Pro_smallpic,Pro_bigpic,Pro_info,Pro_goldWeight from product where Pro_IsDel='0' order by Pro_Order limit %d offset %d ",pageSize,offsetcount];
-        
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Pro_model,Pro_number,Pro_name,Pro_State,Pro_smallpic,Pro_bigpic,Pro_info,Pro_goldWeight from product where Pro_IsDel='0'" ];
+        if (type1.length!=0) {
+            NSString *classsql=[NSString stringWithFormat:@" and Pro_Class in (%@) ",type1];
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
+        if (type2.length!=0) {
+            NSString *classsql=[NSString stringWithFormat:@" and Pro_goldType in (%@) ",type2];
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
+//        if (type3.length!=0) {
+//            NSString *classsql=[NSString stringWithFormat:@" and Pro_goldsize in (%@) ",type3];
+//            querySQL=[querySQL stringByAppendingString:classsql];
+//        }
+        if (type4.length!=0) {
+            NSString *classsql=[NSString stringWithFormat:@" and %@ ",type4];
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
+        querySQL=[querySQL stringByAppendingString:[NSString stringWithFormat:@" order by Pro_Order limit %d offset %d ",pageSize,offsetcount]];
         const char *sql = [querySQL UTF8String];
         if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
             //NSLog(@"Error: failed to prepare statement with message:search TB_MyDoor.");
@@ -515,8 +531,52 @@
         
         sqlite3_stmt *statement = nil;
         //sql语句
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Dia_Lab,Dia_CertNo,Dia_Carat,Dia_Clar,Dia_Col,Dia_Cut,Dia_Pol,Dia_Sym,Dia_Shape,Dia_Dep,Dia_Tab,Dia_Meas,Dia_Flor,Dia_Price,Dia_Cost,Dia_ART,Dia_Corp,Dia_Theonly,Dia_Out,Dia_Tj,Dia_Addtime,Dia_XH,ColStep,ColCream,BackFlaw,TabFlaw,location,colordesc from productdia where 1=1 limit %d offset %d",pageSize,offsetcount];
-        
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Dia_Lab,Dia_CertNo,Dia_Carat,Dia_Clar,Dia_Col,Dia_Cut,Dia_Pol,Dia_Sym,Dia_Shape,Dia_Dep,Dia_Tab,Dia_Meas,Dia_Flor,Dia_Price,Dia_Cost,Dia_ART,Dia_Corp,Dia_Theonly,Dia_Out,Dia_Tj,Dia_Addtime,Dia_XH,ColStep,ColCream,BackFlaw,TabFlaw,location,colordesc from productdia where 1=1 "];
+        if (type1.length!=0) {
+            NSString *classsql=[NSString stringWithFormat:@" and Dia_Shape in (%@) ",type1];
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
+//        if (type2.length!=0) {
+//            NSString *classsql=[NSString stringWithFormat:@" and Dia_Shape in (%@) ",type2];
+//            querySQL=[querySQL stringByAppendingString:classsql];
+//        }
+//        if (type3.length!=0) {
+//            NSString *classsql=[NSString stringWithFormat:@" and Dia_Shape in (%@) ",type3];
+//            querySQL=[querySQL stringByAppendingString:classsql];
+//        }
+        if (type4.length!=0) {
+            NSString *classsql=[NSString stringWithFormat:@" and Dia_Col in (%@) ",type4];
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
+        if (type5.length!=0) {
+            NSString *classsql=[NSString stringWithFormat:@" and Dia_Clar in (%@) ",type5];
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
+        if (type6.length!=0) {
+            NSString *classsql=[NSString stringWithFormat:@" and Dia_Cut in (%@) ",type6];
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
+        if (type7.length!=0) {
+            NSString *classsql=[NSString stringWithFormat:@" and Dia_Pol in (%@) ",type7];
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
+        if (type8.length!=0) {
+            NSString *classsql=[NSString stringWithFormat:@" and Dia_Sym in (%@) ",type8];
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
+        if (type9.length!=0) {
+            NSString *classsql=[NSString stringWithFormat:@" and Dia_Flor in (%@) ",type9];
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
+        if (type10.length!=0) {
+            NSString *classsql=[NSString stringWithFormat:@" and Dia_Lab in (%@) ",type10];
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
+//        if (type11.length!=0) {
+//            NSString *classsql=[NSString stringWithFormat:@" and Dia_Shape in (%@) ",type1];
+//            querySQL=[querySQL stringByAppendingString:classsql];
+//        }
+        querySQL=[querySQL stringByAppendingString:[NSString stringWithFormat:@"limit %d offset %d",pageSize,offsetcount]];
         const char *sql = [querySQL UTF8String];
         if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
             //NSLog(@"Error: failed to prepare statement with message:search TB_MyDoor.");
