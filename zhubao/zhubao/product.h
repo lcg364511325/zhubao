@@ -24,6 +24,10 @@
     NSMutableArray *texturearray;
     NSMutableArray *inlayarray;
     NSMutableArray *seriearray;
+    NSMutableArray *btnarray1;
+    NSMutableArray *btnarray2;
+    NSMutableArray *btnarray3;
+    NSMutableArray *btnarray4;
 }
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
@@ -60,6 +64,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *productimageview;
 @property (weak, nonatomic) IBOutlet UICollectionView *productcollect;
 @property (weak, nonatomic) IBOutlet UILabel *countLable;
+@property (weak, nonatomic) IBOutlet UIButton *btnstyle;
+@property (weak, nonatomic) IBOutlet UIButton *btntexture;
+@property (weak, nonatomic) IBOutlet UIButton *btninlay;
+@property (weak, nonatomic) IBOutlet UIButton *btnseric;
 
 
 - (IBAction)closeAction:(id)sender;

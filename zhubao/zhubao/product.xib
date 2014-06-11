@@ -6,6 +6,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="product">
             <connections>
+                <outlet property="btninlay" destination="3Vk-zA-fM9" id="LTL-p9-cgo"/>
+                <outlet property="btnseric" destination="ewn-Mg-eAd" id="tTz-aF-FT1"/>
+                <outlet property="btnstyle" destination="mJH-Ix-NVq" id="ewi-VF-KsJ"/>
+                <outlet property="btntexture" destination="zUS-YU-aFF" id="KjF-Hv-J3k"/>
                 <outlet property="colorselect" destination="9Qg-bk-K1R" id="01s-5C-5LC"/>
                 <outlet property="colortext" destination="4pl-CM-hDc" id="gUX-nc-aKZ"/>
                 <outlet property="countLable" destination="FRE-oe-p86" id="hbc-Hz-HpF"/>

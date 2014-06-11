@@ -10,6 +10,21 @@
 		2C01B4FA1939BBD100C08C2E /* ceshi.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C01B4F81939BBD100C08C2E /* ceshi.m */; };
 		2C01B4FB1939BBD100C08C2E /* ceshi.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C01B4F91939BBD100C08C2E /* ceshi.xib */; };
 		2C01B4FF1939C7DC00C08C2E /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C01B4FD1939C7DC00C08C2E /* test.m */; };
+		2C0BFCA619483C9000844FA2 /* 0001_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCA319483C9000844FA2 /* 0001_bg.png */; };
+		2C0BFCA719483C9000844FA2 /* IMG_0001.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCA419483C9000844FA2 /* IMG_0001.PNG */; };
+		2C0BFCA819483C9000844FA2 /* jz_password.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCA519483C9000844FA2 /* jz_password.png */; };
+		2C0BFCAA19483E0C00844FA2 /* user_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCA919483E0C00844FA2 /* user_bg.png */; };
+		2C0BFCAC1948461B00844FA2 /* sure.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCAB1948461B00844FA2 /* sure.png */; };
+		2C0BFCB7194863EB00844FA2 /* diamond_ring01.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCAD194863EA00844FA2 /* diamond_ring01.png */; };
+		2C0BFCB8194863EB00844FA2 /* diamond_ring02.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCAE194863EA00844FA2 /* diamond_ring02.png */; };
+		2C0BFCB9194863EB00844FA2 /* diamond_ring03.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCAF194863EA00844FA2 /* diamond_ring03.png */; };
+		2C0BFCBA194863EB00844FA2 /* diamond_ring04.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCB0194863EA00844FA2 /* diamond_ring04.png */; };
+		2C0BFCBB194863EB00844FA2 /* diamond_ring05.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCB1194863EA00844FA2 /* diamond_ring05.png */; };
+		2C0BFCBC194863EB00844FA2 /* diamond_ring06.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCB2194863EA00844FA2 /* diamond_ring06.png */; };
+		2C0BFCBD194863EB00844FA2 /* diamond_ring07.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCB3194863EA00844FA2 /* diamond_ring07.png */; };
+		2C0BFCBE194863EB00844FA2 /* diamond_ring08.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCB4194863EA00844FA2 /* diamond_ring08.png */; };
+		2C0BFCBF194863EB00844FA2 /* diamond_ring09.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCB5194863EA00844FA2 /* diamond_ring09.png */; };
+		2C0BFCC0194863EB00844FA2 /* diamond_ring10.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCB6194863EB00844FA2 /* diamond_ring10.png */; };
 		2C14E99B193965E20084E8FE /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C14E999193965E20084E8FE /* logo.png */; };
 		2C14E99C193965E20084E8FE /* pageindex.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C14E99A193965E20084E8FE /* pageindex.png */; };
 		2C15F34D1936D31400E8935B /* diploma.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C15F34B1936D31400E8935B /* diploma.m */; };
@@ -267,6 +282,21 @@
 		2C01B4F91939BBD100C08C2E /* ceshi.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ceshi.xib; sourceTree = "<group>"; };
 		2C01B4FC1939C7DC00C08C2E /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
 		2C01B4FD1939C7DC00C08C2E /* test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
+		2C0BFCA319483C9000844FA2 /* 0001_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0001_bg.png; sourceTree = "<group>"; };
+		2C0BFCA419483C9000844FA2 /* IMG_0001.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMG_0001.PNG; sourceTree = "<group>"; };
+		2C0BFCA519483C9000844FA2 /* jz_password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jz_password.png; sourceTree = "<group>"; };
+		2C0BFCA919483E0C00844FA2 /* user_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_bg.png; sourceTree = "<group>"; };
+		2C0BFCAB1948461B00844FA2 /* sure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sure.png; sourceTree = "<group>"; };
+		2C0BFCAD194863EA00844FA2 /* diamond_ring01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_ring01.png; sourceTree = "<group>"; };
+		2C0BFCAE194863EA00844FA2 /* diamond_ring02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_ring02.png; sourceTree = "<group>"; };
+		2C0BFCAF194863EA00844FA2 /* diamond_ring03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_ring03.png; sourceTree = "<group>"; };
+		2C0BFCB0194863EA00844FA2 /* diamond_ring04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_ring04.png; sourceTree = "<group>"; };
+		2C0BFCB1194863EA00844FA2 /* diamond_ring05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_ring05.png; sourceTree = "<group>"; };
+		2C0BFCB2194863EA00844FA2 /* diamond_ring06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_ring06.png; sourceTree = "<group>"; };
+		2C0BFCB3194863EA00844FA2 /* diamond_ring07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_ring07.png; sourceTree = "<group>"; };
+		2C0BFCB4194863EA00844FA2 /* diamond_ring08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_ring08.png; sourceTree = "<group>"; };
+		2C0BFCB5194863EA00844FA2 /* diamond_ring09.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_ring09.png; sourceTree = "<group>"; };
+		2C0BFCB6194863EB00844FA2 /* diamond_ring10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_ring10.png; sourceTree = "<group>"; };
 		2C14E999193965E20084E8FE /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		2C14E99A193965E20084E8FE /* pageindex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pageindex.png; sourceTree = "<group>"; };
 		2C15F34A1936D31400E8935B /* diploma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = diploma.h; sourceTree = "<group>"; };
@@ -724,6 +754,21 @@
 		7B7FFD38193853CA008712CB /* image */ = {
 			isa = PBXGroup;
 			children = (
+				2C0BFCAD194863EA00844FA2 /* diamond_ring01.png */,
+				2C0BFCAE194863EA00844FA2 /* diamond_ring02.png */,
+				2C0BFCAF194863EA00844FA2 /* diamond_ring03.png */,
+				2C0BFCB0194863EA00844FA2 /* diamond_ring04.png */,
+				2C0BFCB1194863EA00844FA2 /* diamond_ring05.png */,
+				2C0BFCB2194863EA00844FA2 /* diamond_ring06.png */,
+				2C0BFCB3194863EA00844FA2 /* diamond_ring07.png */,
+				2C0BFCB4194863EA00844FA2 /* diamond_ring08.png */,
+				2C0BFCB5194863EA00844FA2 /* diamond_ring09.png */,
+				2C0BFCB6194863EB00844FA2 /* diamond_ring10.png */,
+				2C0BFCAB1948461B00844FA2 /* sure.png */,
+				2C0BFCA919483E0C00844FA2 /* user_bg.png */,
+				2C0BFCA319483C9000844FA2 /* 0001_bg.png */,
+				2C0BFCA419483C9000844FA2 /* IMG_0001.PNG */,
+				2C0BFCA519483C9000844FA2 /* jz_password.png */,
 				2C3AFBE71946E7F500D3D0A2 /* round.jpg */,
 				2C3AFBE31946E37A00D3D0A2 /* Emerald.jpg */,
 				2C3AFBE41946E37A00D3D0A2 /* Heart.jpg */,
@@ -1171,6 +1216,7 @@
 				7C1077421941AFF4005187B9 /* Seq_v04_640x378_47.jpg in Resources */,
 				7B7FFD80193853CA008712CB /* diamant.png in Resources */,
 				7C1077571941AFF4005187B9 /* Seq_v04_640x378_66.jpg in Resources */,
+				2C0BFCA719483C9000844FA2 /* IMG_0001.PNG in Resources */,
 				7CEF7F0119421AC3005DF8A9 /* NoticeReportCell.xib in Resources */,
 				7C1077431941AFF4005187B9 /* Seq_v04_640x378_48.jpg in Resources */,
 				7B7FFD96193853CA008712CB /* import.png in Resources */,
@@ -1196,6 +1242,7 @@
 				7C10772C1941AFF4005187B9 /* Seq_v04_640x378_27.jpg in Resources */,
 				7B7FFD8A193853CA008712CB /* diamond09.png in Resources */,
 				7C1077621941B476005187B9 /* FVImageSequenceDemoViewController.xib in Resources */,
+				2C0BFCB8194863EB00844FA2 /* diamond_ring02.png in Resources */,
 				7C10774C1941AFF4005187B9 /* Seq_v04_640x378_56.jpg in Resources */,
 				7B7FFD97193853CA008712CB /* inquiry.png in Resources */,
 				7C1077601941AFF4005187B9 /* Seq_v04_640x378_9.jpg in Resources */,
@@ -1211,6 +1258,7 @@
 				2C14E99C193965E20084E8FE /* pageindex.png in Resources */,
 				7C1077481941AFF4005187B9 /* Seq_v04_640x378_52.jpg in Resources */,
 				7C10775A1941AFF4005187B9 /* Seq_v04_640x378_69.jpg in Resources */,
+				2C0BFCBA194863EB00844FA2 /* diamond_ring04.png in Resources */,
 				7B7FFD74193853CA008712CB /* 0013.png in Resources */,
 				7B7FFD95193853CA008712CB /* image2.png in Resources */,
 				7C10771E1941AFF4005187B9 /* Seq_v04_640x378_14.jpg in Resources */,
@@ -1220,6 +1268,7 @@
 				7C1077231941AFF4005187B9 /* Seq_v04_640x378_19.jpg in Resources */,
 				7C1077531941AFF4005187B9 /* Seq_v04_640x378_62.jpg in Resources */,
 				7C1077361941AFF4005187B9 /* Seq_v04_640x378_36.jpg in Resources */,
+				2C0BFCA819483C9000844FA2 /* jz_password.png in Resources */,
 				2C3AFBE61946E37A00D3D0A2 /* Heart.jpg in Resources */,
 				2C3AFBDB1946E36100D3D0A2 /* cushion.jpg in Resources */,
 				7B7FFD73193853CA008712CB /* 0008.png in Resources */,
@@ -1232,6 +1281,7 @@
 				2C2A207B193D674B00A57C00 /* magnifier2.png in Resources */,
 				2C5C980219349E2100004343 /* InfoPlist.strings in Resources */,
 				7B7FFD7D193853CA008712CB /* count.png in Resources */,
+				2C0BFCC0194863EB00844FA2 /* diamond_ring10.png in Resources */,
 				2C844E011941C8400029ED13 /* test.xib in Resources */,
 				7B7FFD93193853CA008712CB /* image1 2.png in Resources */,
 				7B7FFDA6193853CA008712CB /* shopping.png in Resources */,
@@ -1252,10 +1302,12 @@
 				7B7FFDAB193853CA008712CB /* view.png in Resources */,
 				7C10774A1941AFF4005187B9 /* Seq_v04_640x378_54.jpg in Resources */,
 				2C5C983419349ED800004343 /* Index.xib in Resources */,
+				2C0BFCA619483C9000844FA2 /* 0001_bg.png in Resources */,
 				7B7FFD87193853CA008712CB /* diamond06.png in Resources */,
 				7B7FFD79193853CA008712CB /* axe.png in Resources */,
 				7C1077371941AFF4005187B9 /* Seq_v04_640x378_37.jpg in Resources */,
 				7C10774D1941AFF4005187B9 /* Seq_v04_640x378_57.jpg in Resources */,
+				2C0BFCAA19483E0C00844FA2 /* user_bg.png in Resources */,
 				7B7FFD99193853CA008712CB /* magnifier.png in Resources */,
 				7C1077551941AFF4005187B9 /* Seq_v04_640x378_64.jpg in Resources */,
 				7B7FFD9D193853CA008712CB /* page.png in Resources */,
@@ -1267,6 +1319,7 @@
 				7C1BE6D9193F3D1A0000E397 /* CHANGELOG.md in Resources */,
 				7C1077401941AFF4005187B9 /* Seq_v04_640x378_45.jpg in Resources */,
 				7B7FFD92193853CA008712CB /* home.png in Resources */,
+				2C0BFCBF194863EB00844FA2 /* diamond_ring09.png in Resources */,
 				2C15F34E1936D31400E8935B /* diploma.xib in Resources */,
 				7C1077391941AFF4005187B9 /* Seq_v04_640x378_39.jpg in Resources */,
 				7B7FFD86193853CA008712CB /* diamond05.png in Resources */,
@@ -1275,12 +1328,15 @@
 				7B7FFD76193853CA008712CB /* 04.png in Resources */,
 				7B7FFD8F193853CA008712CB /* drop-down_select.png in Resources */,
 				7C1077441941AFF4005187B9 /* Seq_v04_640x378_49.jpg in Resources */,
+				2C0BFCBE194863EB00844FA2 /* diamond_ring08.png in Resources */,
+				2C0BFCBC194863EB00844FA2 /* diamond_ring06.png in Resources */,
 				7C10774F1941AFF4005187B9 /* Seq_v04_640x378_59.jpg in Resources */,
 				7B7FFD8B193853CA008712CB /* diamond10.png in Resources */,
 				2C844DFF1941C4080029ED13 /* 1-4.jpg in Resources */,
 				7B7FFD89193853CA008712CB /* diamond08.png in Resources */,
 				7C10773B1941AFF4005187B9 /* Seq_v04_640x378_40.jpg in Resources */,
 				7C1077281941AFF4005187B9 /* Seq_v04_640x378_23.jpg in Resources */,
+				2C0BFCBD194863EB00844FA2 /* diamond_ring07.png in Resources */,
 				7B7FFD7B193853CA008712CB /* close.png in Resources */,
 				7B7FFDA7193853CA008712CB /* shopping_cart.png in Resources */,
 				2C844DFE1941C4080029ED13 /* 1-3.jpg in Resources */,
@@ -1307,10 +1363,14 @@
 				2C5C989A1935DD7E00004343 /* ustomtailor.xib in Resources */,
 				7B7FFDA4193853CA008712CB /* round.png in Resources */,
 				7B7FFD9C193853CA008712CB /* option_num.png in Resources */,
+				2C0BFCBB194863EB00844FA2 /* diamond_ring05.png in Resources */,
+				2C0BFCB9194863EB00844FA2 /* diamond_ring03.png in Resources */,
 				7B7FFD91193853CA008712CB /* frame.png in Resources */,
+				2C0BFCB7194863EB00844FA2 /* diamond_ring01.png in Resources */,
 				7C1077181941AFF4005187B9 /* Seq_v04_640x378_0.jpg in Resources */,
 				7C1077461941AFF4005187B9 /* Seq_v04_640x378_50.jpg in Resources */,
 				7C10771D1941AFF4005187B9 /* Seq_v04_640x378_13.jpg in Resources */,
+				2C0BFCAC1948461B00844FA2 /* sure.png in Resources */,
 				7C1077561941AFF4005187B9 /* Seq_v04_640x378_65.jpg in Resources */,
 				7B7FFD78193853CA008712CB /* 11.png in Resources */,
 				7C1077501941AFF4005187B9 /* Seq_v04_640x378_6.jpg in Resources */,

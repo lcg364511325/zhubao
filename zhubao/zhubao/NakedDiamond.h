@@ -26,6 +26,9 @@
     NSMutableArray *fluorescencearray;
     NSMutableArray *diplomaarray;
     NSMutableArray * productlist;
+    NSMutableArray * btnarray1;
+    NSMutableArray * btnarray2;
+    NSMutableArray * btnarray3;
 }
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
@@ -58,6 +61,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *fluorescenceLable;
 @property (weak, nonatomic) IBOutlet UILabel *diplomaLable;
 @property (weak, nonatomic) IBOutlet UILabel *priceLable;
+@property (weak, nonatomic) IBOutlet UIButton *modelbtn;
+@property (weak, nonatomic) IBOutlet UIButton *colorbtn;
+@property (weak, nonatomic) IBOutlet UIButton *netbtn;
 
 
 - (IBAction)goAction:(id)sender;

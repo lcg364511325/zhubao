@@ -9,29 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "zhubao/product.m"
-            timestampString = "424163051.994035"
+            filePath = "zhubao/NakedDiamond.m"
+            timestampString = "424176245.585112"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "720"
-            endingLineNumber = "720"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "zhubao/extend/sqlite/sqlService.m"
-            timestampString = "424163051.994035"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "601"
-            endingLineNumber = "601"
-            landmarkName = "-GetProductdiaList:type2:type3:type4:type5:type6:type7:type8:type9:type10:type11:page:pageSize:"
+            startingLineNumber = "475"
+            endingLineNumber = "475"
+            landmarkName = "-shapeselect:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

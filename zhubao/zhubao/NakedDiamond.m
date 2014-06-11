@@ -44,6 +44,9 @@
 @synthesize diplomaLable;
 @synthesize priceLable;
 @synthesize productimageview;
+@synthesize modelbtn;
+@synthesize colorbtn;
+@synthesize netbtn;
 
 NSString * nakedno=nil;
 
@@ -68,6 +71,9 @@ NSString * nakedno=nil;
     symmetryarray = [[NSMutableArray alloc] init];
     fluorescencearray = [[NSMutableArray alloc] init];
     diplomaarray = [[NSMutableArray alloc] init];
+    btnarray1 = [[NSMutableArray alloc] init];
+    btnarray2 = [[NSMutableArray alloc] init];
+    btnarray3 = [[NSMutableArray alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -470,37 +476,50 @@ NSString * nakedno=nil;
     NSInteger btntag=[btn tag];
     NSString * shape=nil;
     if (btntag==0) {
+        for (UIButton* btn1 in btnarray1) {
+            if ([btn1 tag]!=10) {
+                [btn1 setImage:[UIImage imageNamed:[NSString stringWithFormat:@"diamond0%ld",(long)[btn1 tag]]] forState:UIControlStateNormal];
+            }else{
+                [btn1 setImage:[UIImage imageNamed:@"diamond10"] forState:UIControlStateNormal];
+            }
+        }
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btnarray1 removeAllObjects];
+        [shapearray removeAllObjects];
     }else if (btntag==1){
         shape=@"RB";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring01"] forState:UIControlStateNormal];
     }else if (btntag==2){
         shape=@"PE";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring02"] forState:UIControlStateNormal];
     }else if (btntag==3){
         shape=@"EM";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring03"] forState:UIControlStateNormal];
     }else if (btntag==4){
         shape=@"RD";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring04"] forState:UIControlStateNormal];
     }else if (btntag==5){
         shape=@"OL";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring05"] forState:UIControlStateNormal];
     }else if (btntag==6){
         shape=@"MQ";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring06"] forState:UIControlStateNormal];
     }else if (btntag==7){
         shape=@"CU";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring07"] forState:UIControlStateNormal];
     }else if (btntag==8){
         shape=@"PR";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring08"] forState:UIControlStateNormal];
     }else if (btntag==9){
         shape=@"HT";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring09"] forState:UIControlStateNormal];
     }else if (btntag==10){
         shape=@"ASH";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"diamond_ring10"] forState:UIControlStateNormal];
+    }
+    [btnarray1 addObject:btn];
+    if (btntag!=0) {
+        [modelbtn setBackgroundImage:nil forState:UIControlStateNormal];
     }
     if (shape) {
         NSUInteger len=[shapearray count];
@@ -511,7 +530,11 @@ NSString * nakedno=nil;
             isequal = [shape isEqualToString:value];
             if (isequal) {
                 [shapearray removeObjectAtIndex:i];
-                [btn setBackgroundImage:nil forState:UIControlStateNormal];
+                if (btntag!=10) {
+                    [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"diamond0%ld",(long)btntag]] forState:UIControlStateNormal];
+                }else{
+                    [btn setImage:[UIImage imageNamed:@"diamond10"] forState:UIControlStateNormal];
+                }
                 i=len;
             }
         }
@@ -528,7 +551,12 @@ NSString * nakedno=nil;
     NSInteger btntag=[btn tag];
     NSString * color=nil;
     if (btntag==0) {
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateSelected];
+        for (UIButton * btn2 in btnarray2) {
+            [btn2 setBackgroundImage:nil forState:UIControlStateNormal];
+        }
+        [btnarray2 removeAllObjects];
+        [colorarray removeAllObjects];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==1){
         color=@"D";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
@@ -560,6 +588,10 @@ NSString * nakedno=nil;
         color=@"M";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }
+    [btnarray2 addObject:btn];
+    if (btntag!=0) {
+        [colorbtn setBackgroundImage:nil forState:UIControlStateNormal];
+    }
     if (color) {
         NSUInteger len=[colorarray count];
         NSUInteger i;
@@ -585,6 +617,11 @@ NSString * nakedno=nil;
     NSInteger btntag=[btn tag];
     NSString * net=nil;
     if (btntag==0) {
+        for (UIButton * btn3 in btnarray3) {
+            [btn3 setBackgroundImage:nil forState:UIControlStateNormal];
+        }
+        [btnarray3 removeAllObjects];
+        [netarray removeAllObjects];
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==1){
         net=@"FL";
@@ -616,6 +653,10 @@ NSString * nakedno=nil;
     }else if (btntag==10){
         net=@"I2";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }
+    [btnarray3 addObject:btn];
+    if (btntag!=0) {
+        [netbtn setBackgroundImage:nil forState:UIControlStateNormal];
     }
     if (net) {
         NSUInteger len=[netarray count];

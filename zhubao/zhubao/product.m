@@ -48,6 +48,10 @@
 @synthesize productimageview;
 @synthesize productcollect;
 @synthesize countLable;
+@synthesize btnstyle;
+@synthesize btntexture;
+@synthesize btninlay;
+@synthesize btnseric;
 
 //判定点击来哪个tableview
 NSInteger selecttype=0;
@@ -93,8 +97,14 @@ NSString * Pro_author;
     texturearray = [[NSMutableArray alloc] init];
     inlayarray = [[NSMutableArray alloc] init];
     seriearray = [[NSMutableArray alloc] init];
-    list=nil;
+    btnarray1 = [[NSMutableArray alloc] init];
+    btnarray2 = [[NSMutableArray alloc] init];
+    btnarray3 = [[NSMutableArray alloc] init];
+    btnarray4 = [[NSMutableArray alloc] init];
     countLable.text=nil;
+    //进来时候加载全部数据
+    sqlService *sql=[[sqlService alloc]init];
+    list=[sql GetProductList:nil type2:nil type3:nil type4:nil page:1 pageSize:100];
 
 }
 
@@ -307,6 +317,11 @@ NSString * Pro_author;
     NSInteger btntag=[btn tag];
     NSString * style=nil;
     if (btntag==0) {
+        for (UIButton * btn1 in btnarray1) {
+            [btn1 setBackgroundImage:nil forState:UIControlStateNormal];
+        }
+        [btnarray1 removeAllObjects];
+        [stylearray removeAllObjects];
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==1){
         style=@"1";
@@ -336,6 +351,10 @@ NSString * Pro_author;
         style=@"9";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }
+    if (btntag!=0) {
+        [btnstyle setBackgroundImage:nil forState:UIControlStateNormal];
+    }
+    [btnarray1 addObject:btn];
     if (style) {
         NSUInteger len=[stylearray count];
         NSUInteger i;
@@ -406,6 +425,11 @@ NSString * Pro_author;
     NSInteger btntag=[btn tag];
     NSString *texture=nil;
     if (btntag==0) {
+        for (UIButton * btn2 in btnarray2) {
+            [btn2 setBackgroundImage:nil forState:UIControlStateNormal];
+        }
+        [btnarray2 removeAllObjects];
+        [texturearray removeAllObjects];
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==1){
         texture=@"1";
@@ -428,6 +452,10 @@ NSString * Pro_author;
     }else if (btntag==7){
         texture=@"7";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }
+    [btnarray2 addObject:btn];
+    if (btntag!=0) {
+        [btntexture setBackgroundImage:nil forState:UIControlStateNormal];
     }
     if (texture) {
         NSUInteger len=[texturearray count];
@@ -498,6 +526,11 @@ NSString * Pro_author;
     NSInteger btntag=[btn tag];
     NSString *inlay=nil;
     if (btntag==0) {
+        for (UIButton * btn3 in btnarray3) {
+            [btn3 setBackgroundImage:nil forState:UIControlStateNormal];
+        }
+        [btnarray3 removeAllObjects];
+        [inlayarray removeAllObjects];
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==1){
         inlay=@"0.00-0.02";
@@ -541,6 +574,10 @@ NSString * Pro_author;
     }else if (btntag==14){
         inlay=@"1";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }
+    [btnarray3 addObject:btn];
+    if (btntag!=0) {
+        [btninlay setBackgroundImage:nil forState:UIControlStateNormal];
     }
     if (inlay) {
         NSUInteger len=[inlayarray count];
@@ -616,6 +653,17 @@ NSString * Pro_author;
     }else if(btntag==2){
         serie=@"Pro_f_pair='ture'";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }else if (btntag==0){
+        for (UIButton * btn4 in btnarray4) {
+            [btn4 setBackgroundImage:nil forState:UIControlStateNormal];
+        }
+        [btnarray4 removeAllObjects];
+        [seriearray removeAllObjects];
+        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+    }
+    [btnarray4 addObject:btn];
+    if (btntag!=0) {
+        [btnseric setBackgroundImage:nil forState:UIControlStateNormal];
     }
     if (serie) {
         NSUInteger len=[seriearray count];

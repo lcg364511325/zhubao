@@ -10,6 +10,7 @@
                 <outlet property="Nakeddisplay" destination="ZZD-uq-s41" id="vgr-70-aRA"/>
                 <outlet property="chasingLable" destination="Q1s-M7-llU" id="JMp-tp-8t5"/>
                 <outlet property="colorLable" destination="91j-VV-xmW" id="oGF-mH-5YG"/>
+                <outlet property="colorbtn" destination="tn7-Du-t9X" id="tx8-JT-zwo"/>
                 <outlet property="cutLable" destination="oSe-pR-ERH" id="53n-KF-6o3"/>
                 <outlet property="depthLable" destination="Oye-I9-DTK" id="Vm1-jv-4z5"/>
                 <outlet property="diplomaLable" destination="nmd-Uy-Lsb" id="cvt-iv-yUv"/>
@@ -17,7 +18,9 @@
                 <outlet property="fluorescenceLable" destination="AvI-UT-fbN" id="dWB-NP-1lw"/>
                 <outlet property="fourtharyView" destination="7cQ-BP-nTw" id="qwX-ZC-cgk"/>
                 <outlet property="modelLable" destination="Xaa-g1-Blg" id="HeW-TN-NP6"/>
+                <outlet property="modelbtn" destination="iBn-GV-7V3" id="zAV-da-L8F"/>
                 <outlet property="netLable" destination="Eg2-t9-eAX" id="3rt-ud-OwN"/>
+                <outlet property="netbtn" destination="3TH-9q-L1I" id="7K5-Ef-V1a"/>
                 <outlet property="priceLable" destination="Zkr-i8-RsH" id="Zeh-HB-Piu"/>
                 <outlet property="pricemax" destination="9Y9-Fc-E22" id="g49-W4-B6P"/>
                 <outlet property="pricemin" destination="FaY-Tm-lGi" id="GX6-Qv-NLH"/>
@@ -155,7 +158,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgO-yX-NAs" userLabel="Button - 圆形">
-                            <rect key="frame" x="357" y="206" width="36" height="50"/>
+                            <rect key="frame" x="347" y="204" width="56" height="54"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Button" image="diamond01.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -171,7 +174,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J2P-ef-kR7" userLabel="Button － 公主方">
-                            <rect key="frame" x="411" y="206" width="36" height="50"/>
+                            <rect key="frame" x="401" y="204" width="56" height="54"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="diamond02.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -187,7 +190,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OHL-b2-fXP" userLabel="Button－祖母绿">
-                            <rect key="frame" x="466" y="206" width="36" height="50"/>
+                            <rect key="frame" x="456" y="204" width="56" height="54"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="diamond03.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -203,7 +206,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpb-Wb-OFe" userLabel="Button－雷蒂恩">
-                            <rect key="frame" x="518" y="206" width="36" height="50"/>
+                            <rect key="frame" x="508" y="204" width="56" height="54"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="diamond04.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -219,7 +222,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CN3-WS-VxL" userLabel="Button－椭圆形">
-                            <rect key="frame" x="572" y="206" width="36" height="50"/>
+                            <rect key="frame" x="562" y="204" width="56" height="54"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="diamond05.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -235,7 +238,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idA-Xs-egG" userLabel="Button－橄榄形">
-                            <rect key="frame" x="627" y="206" width="36" height="50"/>
+                            <rect key="frame" x="617" y="204" width="56" height="54"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="diamond06.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -251,7 +254,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHD-Ui-O9b" userLabel="Button - 枕形">
-                            <rect key="frame" x="678" y="206" width="36" height="50"/>
+                            <rect key="frame" x="668" y="204" width="56" height="54"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Button" image="diamond07.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -267,7 +270,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" tag="8" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XxL-5R-RnC" userLabel="Button - 梨形">
-                            <rect key="frame" x="733" y="206" width="36" height="50"/>
+                            <rect key="frame" x="723" y="204" width="56" height="54"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Button" image="diamond08.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -283,7 +286,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" tag="9" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mx1-i5-S8x" userLabel="Button - 心形">
-                            <rect key="frame" x="788" y="206" width="36" height="50"/>
+                            <rect key="frame" x="778" y="204" width="56" height="54"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Button" image="diamond09.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -299,7 +302,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VlN-yd-iHO" userLabel="Button - 辐射形">
-                            <rect key="frame" x="841" y="206" width="36" height="50"/>
+                            <rect key="frame" x="831" y="204" width="56" height="54"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Button" image="diamond10.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1249,16 +1252,16 @@
         <image name="delete.png" width="154" height="64"/>
         <image name="diamant.png" width="700" height="700"/>
         <image name="diamond.png" width="82" height="87"/>
-        <image name="diamond01.png" width="74" height="105"/>
-        <image name="diamond02.png" width="75" height="111"/>
-        <image name="diamond03.png" width="85" height="105"/>
-        <image name="diamond04.png" width="83" height="105"/>
-        <image name="diamond05.png" width="66" height="111"/>
-        <image name="diamond06.png" width="66" height="112"/>
-        <image name="diamond07.png" width="72" height="109"/>
-        <image name="diamond08.png" width="53" height="112"/>
-        <image name="diamond09.png" width="86" height="109"/>
-        <image name="diamond10.png" width="76" height="109"/>
+        <image name="diamond01.png" width="126" height="126"/>
+        <image name="diamond02.png" width="126" height="126"/>
+        <image name="diamond03.png" width="126" height="126"/>
+        <image name="diamond04.png" width="126" height="126"/>
+        <image name="diamond05.png" width="126" height="126"/>
+        <image name="diamond06.png" width="126" height="126"/>
+        <image name="diamond07.png" width="126" height="126"/>
+        <image name="diamond08.png" width="126" height="126"/>
+        <image name="diamond09.png" width="126" height="126"/>
+        <image name="diamond10.png" width="126" height="126"/>
         <image name="home.png" width="68" height="81"/>
         <image name="install.png" width="54" height="57"/>
         <image name="magnifier.png" width="81" height="90"/>
