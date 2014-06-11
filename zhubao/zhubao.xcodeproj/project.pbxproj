@@ -108,6 +108,7 @@
 		7B7FFDAB193853CA008712CB /* view.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7FFD71193853CA008712CB /* view.png */; };
 		7B7FFDAC193853CA008712CB /* vip.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7FFD72193853CA008712CB /* vip.png */; };
 		7B7FFDAE19385596008712CB /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7FFDAD19385596008712CB /* image.png */; };
+		7C073F2E1948C0C2001BAF12 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C073F2D1948C0C2001BAF12 /* TestViewController.m */; };
 		7C1076CC1941AF44005187B9 /* FVImageSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1076C91941AF44005187B9 /* FVImageSequence.m */; };
 		7C1076CD1941AF44005187B9 /* FVImageSequenceDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1076CB1941AF44005187B9 /* FVImageSequenceDemoViewController.m */; };
 		7C1077181941AFF4005187B9 /* Seq_v04_640x378_0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7C1076CF1941AFF3005187B9 /* Seq_v04_640x378_0.jpg */; };
@@ -370,6 +371,8 @@
 		7B7FFD71193853CA008712CB /* view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view.png; sourceTree = "<group>"; };
 		7B7FFD72193853CA008712CB /* vip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vip.png; sourceTree = "<group>"; };
 		7B7FFDAD19385596008712CB /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
+		7C073F2C1948C0C2001BAF12 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		7C073F2D1948C0C2001BAF12 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		7C1076C81941AF44005187B9 /* FVImageSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FVImageSequence.h; sourceTree = "<group>"; };
 		7C1076C91941AF44005187B9 /* FVImageSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FVImageSequence.m; sourceTree = "<group>"; };
 		7C1076CA1941AF44005187B9 /* FVImageSequenceDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FVImageSequenceDemoViewController.h; sourceTree = "<group>"; };
@@ -781,6 +784,8 @@
 		7C1076C71941AF1D005187B9 /* show3Dphoto */ = {
 			isa = PBXGroup;
 			children = (
+				7C073F2C1948C0C2001BAF12 /* TestViewController.h */,
+				7C073F2D1948C0C2001BAF12 /* TestViewController.m */,
 				7C1077611941B476005187B9 /* FVImageSequenceDemoViewController.xib */,
 				7C1076CE1941AFF3005187B9 /* images */,
 				7C1076C81941AF44005187B9 /* FVImageSequence.h */,
@@ -1337,6 +1342,7 @@
 				2C01B4FA1939BBD100C08C2E /* ceshi.m in Sources */,
 				2C5C98631935BDA000004343 /* NakedDiamond.m in Sources */,
 				7C1BE6E2193F4C220000E397 /* AutoGetData.m in Sources */,
+				7C073F2E1948C0C2001BAF12 /* TestViewController.m in Sources */,
 				7CB203651944620D00FA7FD5 /* ioapi.c in Sources */,
 				2C5C983319349ED800004343 /* Index.m in Sources */,
 				7CB2036E1944620D00FA7FD5 /* zip.c in Sources */,
