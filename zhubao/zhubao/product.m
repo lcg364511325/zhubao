@@ -77,14 +77,12 @@ NSString * Pro_author;
     // Do any additional setup after loading the view from its nib.
     [self.navigationController setNavigationBarHidden:YES];
     //主石重量
-    NSArray *mainarray = [[NSArray alloc]initWithObjects:@"0.00-0.02",@"0.03-0.07",@"0.08-0.12",@"0.13-0.17",@"0.18-0.22",@"0.23-0.28",@"0.29-0.39",@"0.40",@"0.50",@"0.60",@"0.70",@"0.80",@"0.90",@"一克拉以上", nil];
     //净度
     NSArray *netarray = [[NSArray alloc]initWithObjects:@"VVS",@"VS",@"SI",@"P", nil];
     //颜色
     NSArray *colorarray = [[NSArray alloc]initWithObjects:@"D-E",@"F-G",@"H",@"I-J",@"K-L",@"M-N", nil];
     //材质
     NSArray *texture1array = [[NSArray alloc]initWithObjects:@"18K黄",@"18K白",@"18K双色",@"18K玫瑰金",@"PT900",@"PT950",@"PD950", nil];
-    self.mainlist=mainarray;
     self.netlist=netarray;
     self.colorlist=colorarray;
     self.texturelist=texture1array;
@@ -246,17 +244,29 @@ NSString * Pro_author;
         rowString = [self.mainlist objectAtIndex:[indexPath row]];
         maintext.text=rowString;
         mianselect.hidden=YES;
+        colorselect.hidden=YES;
+        netselect.hidden=YES;
+        textureselect.hidden=YES;
     }else if(selecttype==1){
         rowString = [self.netlist objectAtIndex:[indexPath row]];
         nettext.text=rowString;
+        mianselect.hidden=YES;
+        colorselect.hidden=YES;
         netselect.hidden=YES;
+        textureselect.hidden=YES;
     }else if(selecttype==2){
         rowString = [self.colorlist objectAtIndex:[indexPath row]];
         colortext.text=rowString;
+        mianselect.hidden=YES;
         colorselect.hidden=YES;
+        netselect.hidden=YES;
+        textureselect.hidden=YES;
     }else if (selecttype==3){
         rowString = [self.texturelist objectAtIndex:[indexPath row]];
         texturetext.text=rowString;
+        mianselect.hidden=YES;
+        colorselect.hidden=YES;
+        netselect.hidden=YES;
         textureselect.hidden=YES;
     }
 }
@@ -271,20 +281,32 @@ NSString * Pro_author;
         if (!CGRectContainsPoint([mianselect frame], pt)) {
             //to-do
             mianselect.hidden=YES;
+            colorselect.hidden=YES;
+            netselect.hidden=YES;
+            textureselect.hidden=YES;
         }
     }else if(selecttype==1){
         if (!CGRectContainsPoint([netselect frame], pt)) {
             //to-do
+            mianselect.hidden=YES;
+            colorselect.hidden=YES;
             netselect.hidden=YES;
+            textureselect.hidden=YES;
         }
     }else if(selecttype==2){
         if (!CGRectContainsPoint([colorselect frame], pt)) {
             //to-do
+            mianselect.hidden=YES;
             colorselect.hidden=YES;
+            netselect.hidden=YES;
+            textureselect.hidden=YES;
         }
     }else if (selecttype==3){
         if (!CGRectContainsPoint([textureselect frame], pt)) {
             //to-do
+            mianselect.hidden=YES;
+            colorselect.hidden=YES;
+            netselect.hidden=YES;
             textureselect.hidden=YES;
         }
     }
@@ -298,15 +320,27 @@ NSString * Pro_author;
     selecttype=btntag;
     if(btntag==0){
        mianselect.hidden=NO;
+        colorselect.hidden=YES;
+        netselect.hidden=YES;
+        textureselect.hidden=YES;
         [mianselect reloadData];
     }else if(btntag==1){
         netselect.hidden=NO;
+        mianselect.hidden=YES;
+        colorselect.hidden=YES;
+        textureselect.hidden=YES;
         [netselect reloadData];
     }else if (btntag==2){
         colorselect.hidden=NO;
+        mianselect.hidden=YES;
+        netselect.hidden=YES;
+        textureselect.hidden=YES;
         [colorselect reloadData];
     }else if (btntag==3){
         textureselect.hidden=NO;
+        mianselect.hidden=YES;
+        colorselect.hidden=YES;
+        netselect.hidden=YES;
         [textureselect reloadData];
     }
     
@@ -806,9 +840,9 @@ NSString * Pro_author;
     mainlable.text=goods.Pro_Z_count;
     fitNolable.text=goods.Pro_f_count;
     fitweightlable.text=goods.Pro_f_weight;
-    maintext.text=goods.Pro_Z_weight;
-    nettext.text=goods.Pro_f_clarity;
-    colortext.text=goods.Pro_Z_color;
+    maintext.text=[self.mainlist objectAtIndex:0];
+    nettext.text=@"SI";
+    colortext.text=@"I-J";
     if ([goods.Pro_goldType isEqualToString:@"1"]) {
         texturetext.text=@"18K黄";
     }
@@ -833,7 +867,13 @@ NSString * Pro_author;
     sizetext.text=goods.Pro_goldsize;
     fonttext.text=nil;
     numbertext.text=@"1";
-    
+    NSMutableArray *inlayarry=[[NSMutableArray alloc] init];
+    inlayarry=[sql getwithmouths:goods.Id];
+    NSMutableArray *mainarry=[[NSMutableArray alloc] init];
+    for (withmouth *inlay in inlayarry) {
+        [mainarry addObject:inlay.zWeight];
+    }
+    self.mainlist=mainarry;
     NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",goods.Pro_smallpic]];
     if (hasCachedImage(imgUrl)) {
         [self.productimageview setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];

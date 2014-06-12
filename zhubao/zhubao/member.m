@@ -326,4 +326,20 @@ NSInteger selecttable=0;
     }
 }
 
+//订单页面打开
+-(IBAction)openorder:(id)sender
+{
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    //当前时间
+    getNowTime * time=[[getNowTime alloc] init];
+    NSString * Nowt=[time nowTime];
+    //上次更新时间
+    NSString *Upt=@"0";
+    //订单号
+    NSString *orderid=@"0";
+    NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@|%@",myDelegate.entityl.uId,@"601",Upt,apikey,Nowt,orderid]];
+    NSString * surl = [NSString stringWithFormat:@"http://www.seyuu.com/order/myorder.asp?uId=%@&type=601&Upt=%@&Nowt=%@&Kstr=%@&ordid=%@",myDelegate.entityl.uId,Upt,Nowt,Kstr,orderid];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:surl]];
+}
+
 @end

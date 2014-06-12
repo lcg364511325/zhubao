@@ -117,6 +117,8 @@ NSInteger tim=0;
     login * _login=[[login alloc] init];
     
     [self.navigationController pushViewController:_login animated:NO];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    myDelegate.entityl=[[LoginEntity alloc]init];
 }
 //初始化tableview数据
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -274,6 +276,24 @@ NSInteger tim=0;
     sqlService *shopcar=[[sqlService alloc] init];
     shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
     [goodsview reloadData];
+}
+
+
+//订单提交
+-(IBAction)submitorder:(id)sender
+{
+    sqlService *sql=[[sqlService alloc]init];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
+    if (orderinfo) {
+        NSString *rowString =@"提交失败！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }else{
+        NSString *rowString =@"提交失败！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }
 }
 
 @end

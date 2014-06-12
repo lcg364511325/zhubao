@@ -130,7 +130,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ee-hj-rdz">
-                            <rect key="frame" x="700" y="-20" width="40" height="40"/>
+                            <rect key="frame" x="680" y="0.0" width="40" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="关闭" image="close.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -148,11 +148,21 @@
                                 <outlet property="delegate" destination="-1" id="FUs-Ly-MEa"/>
                             </connections>
                         </tableView>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Pn-7d-lY1">
+                            <rect key="frame" x="304.5" y="482.5" width="131" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="提交" image="submit.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="submitorder:" destination="-1" eventType="touchDown" id="SJF-WZ-KWG"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ORn-vH-567">
+                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ORn-vH-567">
                     <rect key="frame" x="750" y="66" width="200" height="200"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
@@ -207,5 +217,6 @@
         <image name="ring.png" width="82" height="96"/>
         <image name="shopping_cart.png" width="1582" height="1208"/>
         <image name="shoppingcart.png" width="76" height="52"/>
+        <image name="submit.png" width="330" height="88"/>
     </resources>
 </document>

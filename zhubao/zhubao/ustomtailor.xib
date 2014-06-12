@@ -328,7 +328,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPf-Kc-YBH">
-                            <rect key="frame" x="700" y="-20" width="40" height="40"/>
+                            <rect key="frame" x="680" y="0.0" width="40" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="关闭" image="close.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -411,7 +411,7 @@
         <image name="consort.png" width="82" height="90"/>
         <image name="delete.png" width="154" height="64"/>
         <image name="diamond.png" width="82" height="87"/>
-        <image name="diamond01.png" width="74" height="105"/>
+        <image name="diamond01.png" width="126" height="126"/>
         <image name="drop-down.png" width="62" height="62"/>
         <image name="home.png" width="68" height="81"/>
         <image name="image1 2.png" width="500" height="500"/>

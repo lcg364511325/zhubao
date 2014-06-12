@@ -14,6 +14,8 @@
 
 @implementation login
 
+@synthesize tipLable;
+
 NSInteger i=0;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -66,7 +68,7 @@ NSInteger i=0;
 -(id)autogetData{
     @try {
         
-        [_submitlogin setTitle:@"正更新数据中..." forState:UIControlStateNormal];
+        tipLable.text=@"正更新数据中...";
         [_submitlogin setTag:1];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -112,7 +114,7 @@ NSInteger i=0;
         
         if(resultButton.tag==1)return;
         
-        [resultButton setTitle:@"正努力登录中..." forState:UIControlStateNormal];
+        tipLable.text=@"正努力登录中...";
         [resultButton setTag:1];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
