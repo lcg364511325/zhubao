@@ -1010,7 +1010,7 @@
         <image name="count.png" width="1830" height="80"/>
         <image name="delete.png" width="154" height="64"/>
         <image name="diamond.png" width="82" height="87"/>
-        <image name="diamond01.png" width="74" height="105"/>
+        <image name="diamond01.png" width="126" height="126"/>
         <image name="drop-down.png" width="62" height="62"/>
         <image name="exhibition.png" width="277" height="106"/>
         <image name="home.png" width="68" height="81"/>
