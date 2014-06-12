@@ -60,7 +60,6 @@ NSInteger tim=0;
 
 -(IBAction)doReg2:(id)sender
 {
-    //ustomtailor * _ustomtailor = [[ustomtailor alloc] init];
     ustomtailor * _ustomtailor=[[ustomtailor alloc] init];
     
     [self.navigationController pushViewController:_ustomtailor animated:NO];
@@ -103,11 +102,24 @@ NSInteger tim=0;
     thridView.frame=CGRectMake(750, 70, thridView.frame.size.width, thridView.frame.size.height);
 }
 
--(IBAction)closesetup:(id)sender
+//软件更新
+-(IBAction)updatesofeware:(id)sender
 {
     thridView.hidden=YES;
+    NSString *rowString =@"当前没有最新版本！";
+    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alter show];
 }
 
+//退出登录
+-(IBAction)logout:(id)sender
+{
+    login * _login=[[login alloc] init];
+    
+    [self.navigationController pushViewController:_login animated:NO];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    myDelegate.entityl=[[LoginEntity alloc]init];
+}
 //初始化tableview数据
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -264,6 +276,24 @@ NSInteger tim=0;
     sqlService *shopcar=[[sqlService alloc] init];
     shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
     [goodsview reloadData];
+}
+
+
+//订单提交
+-(IBAction)submitorder:(id)sender
+{
+    sqlService *sql=[[sqlService alloc]init];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
+    if (orderinfo) {
+        NSString *rowString =@"提交失败！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }else{
+        NSString *rowString =@"提交失败！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }
 }
 
 @end
