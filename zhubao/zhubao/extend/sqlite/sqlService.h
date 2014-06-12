@@ -17,6 +17,7 @@
 #import "productdia.h"
 #import "customerApi.h"
 #import "myinfo.h"
+#import "withmouth.h"
 
 @interface sqlService : NSObject
 {
@@ -90,5 +91,13 @@
 
 //更新当前当前公司的资料
 -(myinfo*)updateMyinfo:(myinfo *)entity;
+
+
+//查询镶口数据
+-(NSMutableArray*)getwithmouths:(NSString *)pid;
+
+//提交当前用户的订单
+-(NSString*)saveOrder:(NSString *)customerid;
+
 
 @end
