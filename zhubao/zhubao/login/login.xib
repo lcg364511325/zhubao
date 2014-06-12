@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="account" destination="50C-IR-ifK" id="SCj-XU-xgu"/>
                 <outlet property="password" destination="w8W-HP-5fB" id="7Ah-dg-ZWE"/>
+                <outlet property="passwordbtn" destination="ecS-ic-mn0" id="nIv-1y-h5I"/>
                 <outlet property="submitlogin" destination="FL6-iA-yeL" id="IxP-aB-8aI"/>
                 <outlet property="tipLable" destination="699-AG-fv7" id="eI0-3A-DEQ"/>
                 <outlet property="view" destination="2" id="3"/>

@@ -36,6 +36,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *fitNoText;
 @property (weak, nonatomic) IBOutlet UITextField *sizeText;
 @property (weak, nonatomic) IBOutlet UITextField *fontText;
+@property (weak, nonatomic) IBOutlet UIImageView *zhengmianview;
+@property (weak, nonatomic) IBOutlet UIImageView *fanmianview;
+@property (weak, nonatomic) IBOutlet UIImageView *cemianview;
 
 
 - (IBAction)goAction:(id)sender;

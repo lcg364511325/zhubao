@@ -231,7 +231,7 @@ NSString * nakedno=nil;
     }
     //钻重参数
     NSString *weight=nil;
-    if (weightmax.text) {
+    if (!weightmax.text) {
         if (!weightmin.text) {
             weight=[[@"0" stringByAppendingString:@","] stringByAppendingString:weightmax.text];
         }else{
@@ -243,7 +243,7 @@ NSString * nakedno=nil;
     //价钱参数
     NSString *price=nil;
     if (!pricemax.text) {
-        if (pricemin.text) {
+        if (!pricemin.text) {
             
             price=[[@"0" stringByAppendingString:@","] stringByAppendingString:pricemax.text];
         }else{

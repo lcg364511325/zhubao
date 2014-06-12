@@ -13,6 +13,7 @@
 #import "FileHelpers.h"
 #import "LoginEntity.h"
 #import "ASINetworkQueue.h"
+#import "ceshi.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

@@ -18,6 +18,7 @@
 #import "AppDelegate.h"
 #import "login.h"
 #import "orderApi.h"
+#import "AutoGetData.h"
 
 @interface Index : UIViewController
 {

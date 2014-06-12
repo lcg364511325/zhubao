@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ceshi : UIViewController
+@interface ceshi : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>
+@property (weak, nonatomic) IBOutlet UIImageView *ceshiview;
 
 @end

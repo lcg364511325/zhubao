@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ceshi">
             <connections>
+                <outlet property="ceshiview" destination="wbt-08-JgE" id="zbY-08-f1T"/>
                 <outlet property="view" destination="l5m-El-i9H" id="UyL-sA-d2Z"/>
             </connections>
         </placeholder>
@@ -113,6 +114,16 @@
                             <state key="normal" title="清除商品数据" image="data.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LOA-5O-VF1">
+                            <rect key="frame" x="412" y="405" width="200" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="选择图片">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="chooseImage:" destination="-1" eventType="touchDown" id="6U7-NX-bAA"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

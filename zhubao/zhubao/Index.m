@@ -296,4 +296,41 @@ NSInteger tim=0;
     }
 }
 
+//更新数据
+-(IBAction)updateProductDate:(id)sender
+{
+    @try {
+        //可以在此加代码提示用户说正在加载数据中
+        NSString *rowString =@"正在更新数据。。。。";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+        [alter show];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            // 耗时的操作（异步操作）
+            
+            AutoGetData * getdata=[[AutoGetData alloc] init];
+            [getdata getDataInsertTable];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                //可以在此加代码提示用户，数据已经加载完毕
+                [alter dismissWithClickedButtonIndex:0 animated:YES];
+                NSString *rowString =@"更新成功！";
+                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alter show];
+                //同步完数据了，则再去下载图片组
+                [getdata getAllZIPPhotos];
+                
+            });
+        });
+        thridView.hidden=YES;
+    }
+    @catch (NSException *exception) {
+        
+    }
+    @finally {
+        
+    }
+}
+
 @end

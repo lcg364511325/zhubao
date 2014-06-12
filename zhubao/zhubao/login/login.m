@@ -15,6 +15,7 @@
 @implementation login
 
 @synthesize tipLable;
+@synthesize passwordbtn;
 
 NSInteger i=0;
 
@@ -39,6 +40,8 @@ NSInteger i=0;
         
         _account.text=(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"_account"];
         _password.text=(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"_password"];
+        [passwordbtn setBackgroundImage:[UIImage imageNamed:@"sure"] forState:UIControlStateNormal];
+        i=1;
     }
     
     //设置此输入框可以隐藏键盘
@@ -135,6 +138,9 @@ NSInteger i=0;
                     if(i==1){
                         [[NSUserDefaults standardUserDefaults]setObject:account forKey:@"_account"];
                         [[NSUserDefaults standardUserDefaults]setObject:password forKey:@"_password"];
+                    }else{
+                        [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"_account"];
+                        [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"_password"];
                     }
                     
                     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];

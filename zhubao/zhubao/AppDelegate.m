@@ -54,7 +54,7 @@
     
     //系统新安装未初始化
     login * lo = [[login alloc] init];
-    //test *lo = [[test alloc] initWithNibName:@"test" bundle:nil] ;
+    //ceshi *lo = [[ceshi alloc] initWithNibName:@"ceshi" bundle:nil] ;
     
     UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:lo];
     
