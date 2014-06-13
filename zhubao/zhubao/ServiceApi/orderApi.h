@@ -15,10 +15,11 @@
 #import "sqlService.h"
 #import "ASIHTTPRequest.h"
 #import "ASINetworkQueue.h"
+#import "ASIFormDataRequest.h"
 
 @interface orderApi : NSObject
 
-//提交订单
--(buyproduct*)submitOrder:(buyproduct *)entity;
+//提交订单  CPInfo商品数组  DZInfo高级定制
+-(BOOL*)submitOrder:(NSString *)CPInfo DZInfo:(NSString *)DZInfo uploadpath:(NSMutableArray *)uploadpath;
 
 @end

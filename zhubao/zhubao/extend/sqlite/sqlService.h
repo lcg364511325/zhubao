@@ -18,6 +18,7 @@
 #import "customerApi.h"
 #import "myinfo.h"
 #import "withmouth.h"
+#import "orderApi.h"
 
 @interface sqlService : NSObject
 {
@@ -36,6 +37,8 @@
 -(BOOL) closeDB;
 //查询记录的条数
 - (int)getcount:(NSString *)sqls;
+//清空数据
+- (BOOL)ClearTableDatas:(NSString *)tableName;
 
 //查询商品列表
 -(NSMutableArray*)GetProductList:(NSString *)type1 type2:(NSString *)type2 type3:(NSString *)type3 type4:(NSString *)type4 page:(int)page pageSize:(int)pageSize;
