@@ -40,7 +40,7 @@
     [btnBack addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     
 	// Do any additional setup after loading the view.
-    CGRect frame= CGRectMake(0, 0, self.view.frame.size.width+220, self.view.frame.size.height);
+    CGRect frame= CGRectMake(0, 0, self.view.frame.size.width+220, self.view.frame.size.height-420);
     UIImageView *animView=[[UIImageView alloc]initWithFrame:frame];
 
     NSMutableArray *imgArray = [NSMutableArray arrayWithCapacity:10];
@@ -67,13 +67,15 @@
         if(img)[imgArray addObject:img];
     }
     //[animView.animationImages initWithArray:imgArray];
-    animView.animationImages=imgArray;
-    
-    animView.animationDuration=8;
-    animView.animationRepeatCount = 0;
-    animView.backgroundColor=[UIColor whiteColor];
-    [self.view addSubview:animView];
-    [animView startAnimating];
+    if(imgArray.count>0){
+        animView.animationImages=imgArray;
+        
+        animView.animationDuration=8;
+        animView.animationRepeatCount = 0;
+        animView.backgroundColor=[UIColor whiteColor];
+        [self.view addSubview:animView];
+        [animView startAnimating];
+    }
     
     [self.view addSubview:btnBack];
 }

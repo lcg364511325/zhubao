@@ -24,7 +24,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *submitlogin;
 @property (weak, nonatomic) IBOutlet UILabel *tipLable;
 @property (weak, nonatomic) IBOutlet UIButton *passwordbtn;
-@property (weak, nonatomic) IBOutlet UILabel *tiplabellog;
 
 - (IBAction)loginAction:(id)sender;
 
