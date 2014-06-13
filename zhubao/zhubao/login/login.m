@@ -58,7 +58,7 @@ NSInteger i=0;
     [dateformatter setDateFormat:@"YYYYMMdd"];
     NSString *  locationString=[dateformatter stringFromDate:senddate];
     
-    [self autogetData];
+    //[self autogetData];
     tiplabellog.lineBreakMode = NSLineBreakByWordWrapping;
     tiplabellog.numberOfLines = 0;
     [tiplabellog setText:@""];
@@ -66,11 +66,11 @@ NSInteger i=0;
     //判断当前天是否已经有更新过数据了
     if (![locationString isEqualToString:(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"autodata"]]) {
         
-        //[self autogetData];
+        [self autogetData];
     }else{
         AutoGetData * getdata=[[AutoGetData alloc] init];
         //不同步数据，但去下载图片组
-        //[getdata getAllZIPPhotos];
+        [getdata getAllZIPPhotos];
     }
 }
 
