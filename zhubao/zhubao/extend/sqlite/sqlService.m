@@ -1684,67 +1684,67 @@
                     [DZInfo appendString:@"["];//高级定制
                     
                     char * pgoldtype   = (char *)sqlite3_column_text(statement,11);//商品材质
-                    if(pgoldtype != nil)
+                    if(pgoldtype != nil && ![[NSString stringWithUTF8String:pgoldtype] isEqualToString:@"(null)"])
                         [DZInfo appendString:[NSString stringWithFormat:@"'%@'",[NSString stringWithUTF8String:pgoldtype]]];
                     else
                         [DZInfo appendString:@"''"];
                     
                     char * pweight   = (char *)sqlite3_column_text(statement,10);//金重
-                    if(pweight != nil)
+                    if(pweight != nil && ![[NSString stringWithUTF8String:pweight] isEqualToString:@"(null)"])
                         [DZInfo appendString:[NSString stringWithFormat:@",'%@'",[NSString stringWithUTF8String:pweight]]];
                     else
                         [DZInfo appendString:@",'0'"];
                     
                     char * Dia_Z_weight   = (char *)sqlite3_column_text(statement,16);//主石重	单位克拉
-                    if(Dia_Z_weight != nil)
+                    if(Dia_Z_weight != nil && ![[NSString stringWithUTF8String:Dia_Z_weight] isEqualToString:@"(null)"])
                         [DZInfo appendString:[NSString stringWithFormat:@",'%@'",[NSString stringWithUTF8String:Dia_Z_weight]]];
                     else
                         [DZInfo appendString:@",'0'"];
                     
                     char * Dia_Z_count   = (char *)sqlite3_column_text(statement,17);//主石数量
-                    if(Dia_Z_count != nil)
+                    if(Dia_Z_count != nil && ![[NSString stringWithUTF8String:Dia_Z_count] isEqualToString:@"(null)"])
                         [DZInfo appendString:[NSString stringWithFormat:@",'%@'",[NSString stringWithUTF8String:Dia_Z_count]]];
                     else
                         [DZInfo appendString:@",'0'"];
                     
                     char * Dia_F_weight   = (char *)sqlite3_column_text(statement,18);//副石重	单位克拉
-                    if(Dia_F_weight != nil)
+                    if(Dia_F_weight != nil && ![[NSString stringWithUTF8String:Dia_F_weight] isEqualToString:@"(null)"])
                         [DZInfo appendString:[NSString stringWithFormat:@",'%@'",[NSString stringWithUTF8String:Dia_F_weight]]];
                     else
                         [DZInfo appendString:@",'0'"];
                     
                     char * Dia_F_count   = (char *)sqlite3_column_text(statement,19);//副石数量
-                    if(Dia_F_count != nil)
+                    if(Dia_F_count != nil && ![[NSString stringWithUTF8String:Dia_F_count] isEqualToString:@"(null)"])
                         [DZInfo appendString:[NSString stringWithFormat:@",'%@'",[NSString stringWithUTF8String:Dia_F_count]]];
                     else
                         [DZInfo appendString:@",'0'"];
                     
                     char * psize   = (char *)sqlite3_column_text(statement,5);//手寸
-                    if(psize != nil)
+                    if(psize != nil && ![[NSString stringWithUTF8String:psize] isEqualToString:@"(null)"])
                         [DZInfo appendString:[NSString stringWithFormat:@",'%@'",[NSString stringWithUTF8String:psize]]];
                     else
                         [DZInfo appendString:@",'0'"];
                     
                     char * pdetail   = (char *)sqlite3_column_text(statement,4);//刻字
-                    if(pdetail != nil)
+                    if(pdetail != nil && ![[NSString stringWithUTF8String:pdetail] isEqualToString:@"(null)"])
                         [DZInfo appendString:[NSString stringWithFormat:@",'%@'",[NSString stringWithUTF8String:pdetail]]];//商品数组
                     else
                         [DZInfo appendString:@",''"];
                     
                     char * pcount   = (char *)sqlite3_column_text(statement,3);//数量
-                    if(pcount != nil)
+                    if(pcount != nil && ![[NSString stringWithUTF8String:pcount] isEqualToString:@"(null)"])
                         [DZInfo appendString:[NSString stringWithFormat:@",'%@'",[NSString stringWithUTF8String:pcount]]];//商品数组
                     else
                         [DZInfo appendString:@",'0'"];
                     
                     char * pvvs   = (char *)sqlite3_column_text(statement,9);//净度
-                    if(pvvs != nil)
+                    if(pvvs != nil && ![[NSString stringWithUTF8String:pvvs] isEqualToString:@"(null)"])
                         [DZInfo appendString:[NSString stringWithFormat:@",'%@'",[NSString stringWithUTF8String:pvvs]]];//商品数组
                     else
                         [DZInfo appendString:@",''"];
                     
                     char * pcolor   = (char *)sqlite3_column_text(statement,2);//颜色
-                    if(pcolor != nil)
+                    if(pcolor != nil && ![[NSString stringWithUTF8String:pcolor] isEqualToString:@"(null)"])
                         [DZInfo appendString:[NSString stringWithFormat:@",'%@'",[NSString stringWithUTF8String:pcolor]]];//商品数组
                     else
                         [DZInfo appendString:@",''"];
@@ -1753,16 +1753,16 @@
                     
                     //有图片，则要上传
                     char * photos   = (char *)sqlite3_column_text(statement,12);
-                    if(photos != nil)
+                    if(photos != nil && ![[NSString stringWithUTF8String:photos] isEqualToString:@"(null)"])
                         [uploadpath addObject:[NSString stringWithUTF8String:photos]];
                     
                     char * photom   = (char *)sqlite3_column_text(statement,13);
-                    if(photom != nil)
-                        [uploadpath addObject:[NSString stringWithUTF8String:photos]];
+                    if(photom != nil && ![[NSString stringWithUTF8String:photom] isEqualToString:@"(null)"])
+                        [uploadpath addObject:[NSString stringWithUTF8String:photom]];
                     
                     char * photob   = (char *)sqlite3_column_text(statement,14);
-                    if(photob != nil)
-                        [uploadpath addObject:[NSString stringWithUTF8String:photos]];
+                    if(photob != nil && ![[NSString stringWithUTF8String:photob] isEqualToString:@"(null)"])
+                        [uploadpath addObject:[NSString stringWithUTF8String:photob]];
                     
                     DZInfocount++;
                     
@@ -1784,7 +1784,7 @@
                     [CPInfo appendString:@"["];//商品数组
                     
                     char * productid   = (char *)sqlite3_column_text(statement,1);//商品Id
-                    if(productid != nil)
+                    if(productid != nil && ![[NSString stringWithUTF8String:productid] isEqualToString:@"(null)"])
                         [CPInfo appendString:[NSString stringWithFormat:@"'%@'",[NSString stringWithUTF8String:productid]]];//商品数组
                     else
                         [CPInfo appendString:@"''"];
@@ -1795,49 +1795,49 @@
                         [CPInfo appendString:@",'2'"];
                     
                     char * pname   = (char *)sqlite3_column_text(statement,15);//商品名称	为钻石时为：石头证书号
-                    if(pname != nil)
+                    if(pname != nil && ![[NSString stringWithUTF8String:pname] isEqualToString:@"(null)"])
                         [CPInfo appendString:[NSString stringWithFormat:@",'%@'",[NSString stringWithUTF8String:pname]]];//商品数组
                     else
                         [CPInfo appendString:@",''"];
                     
                     char * pweight   = (char *)sqlite3_column_text(statement,10);//商品钻重
-                    if(pweight != nil)
+                    if(pweight != nil && ![[NSString stringWithUTF8String:pweight] isEqualToString:@"(null)"])
                         [CPInfo appendString:[NSString stringWithFormat:@",'%@'",[NSString stringWithUTF8String:pweight]]];//商品数组
                     else
                         [CPInfo appendString:@",'0'"];
                     
                     char * pgoldtype   = (char *)sqlite3_column_text(statement,11);//材质
-                    if(pgoldtype != nil)
+                    if(pgoldtype != nil && ![[NSString stringWithUTF8String:pgoldtype] isEqualToString:@"(null)"])
                         [CPInfo appendString:[NSString stringWithFormat:@",'%@'",[NSString stringWithUTF8String:pgoldtype]]];//商品数组
                     else
                         [CPInfo appendString:@",''"];
                     
                     char * psize   = (char *)sqlite3_column_text(statement,5);//手寸
-                    if(psize != nil)
+                    if(psize != nil && ![[NSString stringWithUTF8String:psize] isEqualToString:@"(null)"])
                         [CPInfo appendString:[NSString stringWithFormat:@",'%@'",[NSString stringWithUTF8String:psize]]];//商品数组
                     else
                         [CPInfo appendString:@",'0'"];
                     
                     char * pdetail   = (char *)sqlite3_column_text(statement,4);//刻字
-                    if(pdetail != nil)
+                    if(pdetail != nil && ![[NSString stringWithUTF8String:pdetail] isEqualToString:@"(null)"])
                         [CPInfo appendString:[NSString stringWithFormat:@",'%@'",[NSString stringWithUTF8String:pdetail]]];//商品数组
                     else
                         [CPInfo appendString:@",''"];
                     
                     char * pcount   = (char *)sqlite3_column_text(statement,3);//数量
-                    if(pcount != nil)
+                    if(pcount != nil && ![[NSString stringWithUTF8String:pcount] isEqualToString:@"(null)"])
                         [CPInfo appendString:[NSString stringWithFormat:@",'%@'",[NSString stringWithUTF8String:pcount]]];//商品数组
                     else
                         [CPInfo appendString:@",'0'"];
                     
                     char * pvvs   = (char *)sqlite3_column_text(statement,9);//净度
-                    if(pvvs != nil)
+                    if(pvvs != nil && ![[NSString stringWithUTF8String:pvvs] isEqualToString:@"(null)"])
                         [CPInfo appendString:[NSString stringWithFormat:@",'%@'",[NSString stringWithUTF8String:pvvs]]];//商品数组
                     else
                         [CPInfo appendString:@",''"];
                     
                     char * pcolor   = (char *)sqlite3_column_text(statement,2);//颜色
-                    if(pcolor != nil)
+                    if(pcolor != nil && ![[NSString stringWithUTF8String:pcolor] isEqualToString:@"(null)"])
                         [CPInfo appendString:[NSString stringWithFormat:@",'%@'",[NSString stringWithUTF8String:pcolor]]];//商品数组
                     else
                         [CPInfo appendString:@",''"];

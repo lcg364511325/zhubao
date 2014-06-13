@@ -14,6 +14,7 @@
 #import "member.h"
 #import "NoticeReportCell.h"
 #import "sqlService.h"
+#import "shoppingcartCell.h"
 
 @interface NakedDiamond : UIViewController
 {
@@ -29,6 +30,7 @@
     NSMutableArray * btnarray1;
     NSMutableArray * btnarray2;
     NSMutableArray * btnarray3;
+    NSMutableArray *shoppingcartlist;
 }
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
@@ -64,6 +66,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *modelbtn;
 @property (weak, nonatomic) IBOutlet UIButton *colorbtn;
 @property (weak, nonatomic) IBOutlet UIButton *netbtn;
+@property (weak, nonatomic) IBOutlet UITableView *goodsview;
 
 
 - (IBAction)goAction:(id)sender;

@@ -47,8 +47,10 @@
 @synthesize modelbtn;
 @synthesize colorbtn;
 @synthesize netbtn;
+@synthesize goodsview;
 
 NSString * nakedno=nil;
+NSInteger whichview=0;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -120,6 +122,7 @@ NSString * nakedno=nil;
 //搜索
 - (IBAction)goAction:(id)sender
 {
+    whichview=0;
     primaryShadeView.alpha=0.5;
     secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.height);
     secondaryView.hidden = NO;
@@ -254,7 +257,7 @@ NSString * nakedno=nil;
     }
     //编号参数
     NSString *number=DiamondNo.text;
-    productlist=[product GetProductdiaList:shape type2:weight type3:price type4:color type5:net type6:cut type7:chasing type8:symmetry type9:fluorescence type10:diploma type11:number page:1 pageSize:100];
+    productlist=[product GetProductdiaList:shape type2:weight type3:price type4:color type5:net type6:cut type7:chasing type8:symmetry type9:fluorescence type10:diploma type11:number page:1 pageSize:1500];
     
     [Nakeddisplay reloadData];
     
@@ -305,9 +308,48 @@ NSString * nakedno=nil;
 //购物车
 - (IBAction)goAction2:(id)sender
 {
-//    thirdShadeView.alpha=0.5;
-//    fourtharyView.frame = CGRectMake(140, 95, fourtharyView.frame.size.width, fourtharyView.frame.size.height);
-//    fourtharyView.hidden = NO;
+    whichview=1;
+    thirdShadeView.alpha=0.5;
+    fourtharyView.frame = CGRectMake(140, 95, fourtharyView.frame.size.width, fourtharyView.frame.size.height);
+    fourtharyView.hidden = NO;
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    sqlService *shopcar=[[sqlService alloc] init];
+    shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
+    [goodsview reloadData];
+}
+
+//购物车删除
+-(IBAction)deleteshoppingcart:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    UITableViewCell *cell = (UITableViewCell *)[[[btn superview] superview] superview];
+    NSIndexPath *indexPath = [goodsview indexPathForCell:cell];
+    buyproduct *entity = [shoppingcartlist objectAtIndex:[indexPath row]];
+    sqlService * sql=[[sqlService alloc]init];
+    NSString *successdelete=[sql deleteBuyproduct:entity.Id];
+    if (successdelete) {
+        NSString *rowString =@"删除成功！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }else{
+        NSString *rowString =@"删除失败！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }
+    //[goodsview reloadData];
+}
+
+//订单提交
+-(IBAction)submitorder:(id)sender
+{
+    sqlService *sql=[[sqlService alloc]init];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
+    if (![orderinfo isEqualToString:@""]) {
+        NSString *rowString =orderinfo;
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }
 }
 
 - (IBAction)closeAction2:(id)sender
@@ -322,69 +364,278 @@ NSString * nakedno=nil;
     fivetharyView.hidden=NO;
     fivetharyView.frame=CGRectMake(750, 70, fivetharyView.frame.size.width, fivetharyView.frame.size.height);
 }
-//设置页面关闭
--(IBAction)closesetup:(id)sender
+
+//软件更新
+-(IBAction)updatesofeware:(id)sender
 {
     fivetharyView.hidden=YES;
+    NSString *rowString =@"当前没有最新版本！";
+    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alter show];
+}
+
+//退出登录
+-(IBAction)logout:(id)sender
+{
+    login * _login=[[login alloc] init];
+    
+    [self.navigationController pushViewController:_login animated:NO];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    myDelegate.entityl=[[LoginEntity alloc]init];
+}
+
+//更新数据
+-(IBAction)updateProductDate:(id)sender
+{
+    @try {
+        //可以在此加代码提示用户说正在加载数据中
+        NSString *rowString =@"正在更新数据。。。。";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+        [alter show];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            // 耗时的操作（异步操作）
+            
+            AutoGetData * getdata=[[AutoGetData alloc] init];
+            [getdata getDataInsertTable:nil];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                //可以在此加代码提示用户，数据已经加载完毕
+                [alter dismissWithClickedButtonIndex:0 animated:YES];
+                NSString *rowString =@"更新成功！";
+                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alter show];
+                //同步完数据了，则再去下载图片组
+                [getdata getAllZIPPhotos];
+                
+            });
+        });
+        fivetharyView.hidden=YES;
+    }
+    @catch (NSException *exception) {
+        
+    }
+    @finally {
+        
+    }
 }
 
 //初始化tableview数据
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [productlist count];
+    NSInteger value=0;
+    if (whichview==1) {
+        value=[shoppingcartlist count];
+    }else{
+        value=[productlist count];
+    }
+    return value;
     //只有一组，数组数即为行数。
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *TableSampleIdentifier = @"NoticeReportCell";
-    
-    NoticeReportCell *cell = [tableView dequeueReusableCellWithIdentifier:TableSampleIdentifier];
-    if (cell == nil) {
-        NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"NoticeReportCell" owner:self options:nil];
-        cell=[nib objectAtIndex:0];
-    }
-    productdia *entity =[productlist objectAtIndex:[indexPath row]];
-    if ([entity.Dia_Shape isEqualToString:@"RB"]) {
-        cell.notice.text=@"圆形";
-        cell.showimage.image=[UIImage imageNamed:@"round.jpg"];
-    }
-    else if ([entity.Dia_Shape isEqualToString:@"PE"]){
-        cell.notice.text=@"公主方";
-        cell.showimage.image=[UIImage imageNamed:@"princess2.jpg"];
-    }
-    else if ([entity.Dia_Shape isEqualToString:@"EM"]){
-        cell.notice.text=@"祖母绿";
-        cell.showimage.image=[UIImage imageNamed:@"Emerald.jpg"];
-    }
-    else if ([entity.Dia_Shape isEqualToString:@"RD"]){
-        cell.notice.text=@"雷蒂恩";
-        cell.showimage.image=[UIImage imageNamed:@"radiant.jpg"];
-    }
-    else if ([entity.Dia_Shape isEqualToString:@"OL"]){
-        cell.notice.text=@"椭圆形";
-        cell.showimage.image=[UIImage imageNamed:@"Oval.jpg"];
-    }
-    else if ([entity.Dia_Shape isEqualToString:@"MQ"]){
-        cell.notice.text=@"橄榄形";
-        cell.showimage.image=[UIImage imageNamed:@"marquise.jpg"];
-    }
-    else if ([entity.Dia_Shape isEqualToString:@"CU"]){
-        cell.notice.text=@"枕形";
-        cell.showimage.image=[UIImage imageNamed:@"cushion.jpg"];
-    }
-    else if ([entity.Dia_Shape isEqualToString:@"PR"]){
-        cell.notice.text=@"梨形";
-        cell.showimage.image=[UIImage imageNamed:@"Pear2.jpg"];
-    }
-    else if ([entity.Dia_Shape isEqualToString:@"HT"]){
-        cell.notice.text=@"心形";
-        cell.showimage.image=[UIImage imageNamed:@"Heart.jpg"];
-    }
-    else if ([entity.Dia_Shape isEqualToString:@"ASH"]){
-        cell.notice.text=@"镭射刑";
-        cell.showimage.image=[UIImage imageNamed:@"Asscher2.jpg"];
-    }
+    if (whichview==1) {
+        static NSString *TableSampleIdentifier = @"shoppingcartCell";
+        
+        shoppingcartCell *cell = [tableView dequeueReusableCellWithIdentifier:TableSampleIdentifier];
+        if (cell == nil) {
+            NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"shoppingcartCell" owner:self options:nil];
+            cell=[nib objectAtIndex:0];
+        }
+        buyproduct *goods =[shoppingcartlist objectAtIndex:[indexPath row]];
+        if ([goods.producttype isEqualToString:@"1"]) {
+            cell.showImage.image=[UIImage imageNamed:@"diamond01"];
+            cell.modelLable.text=goods.diaentiy.Dia_Shape;
+            if (goods.diaentiy.Dia_Lab) {
+                cell.dipLable.text=[@"证书:" stringByAppendingString:goods.diaentiy.Dia_Lab];
+            }else{
+                cell.dipLable.text=nil;
+            }
+            if (goods.diaentiy.Dia_ART) {
+                cell.numberLable.text=[@"编号:" stringByAppendingString:goods.diaentiy.Dia_ART];
+            }else{
+                cell.numberLable.text=nil;
+            }
+            cell.model1Lable.text=[@"形状:" stringByAppendingString:goods.diaentiy.Dia_Shape];
+            if (goods.pweight) {
+                cell.weightLable.text=[@"钻重:" stringByAppendingString:goods.pweight];
+            }else{
+                cell.weightLable.text=nil;
+            }
+            if (goods.pcolor) {
+                cell.netLable.text=[@"颜色:" stringByAppendingString:goods.pcolor];
+            }else{
+                cell.netLable.text=nil;
+            }
+            if (goods.pvvs) {
+                cell.colorLable.text=[@"净度:" stringByAppendingString:goods.pvvs];
+            }else{
+                cell.colorLable.text=nil;
+            }
+            if (goods.diaentiy.Dia_Cut) {
+                cell.cutLable.text=[@"切工:" stringByAppendingString:goods.diaentiy.Dia_Cut];
+            }else{
+                cell.cutLable.text=nil;
+            }
+            if (goods.diaentiy.Dia_Pol) {
+                cell.chasing.text=[@"抛光:" stringByAppendingString:goods.diaentiy.Dia_Pol];
+            }else{
+                cell.chasing.text=nil;
+            }
+            if (goods.diaentiy.Dia_Sym) {
+                cell.fluLable.text=[@"对称:" stringByAppendingString:goods.diaentiy.Dia_Sym];
+            }else{
+                cell.fluLable.text=nil;
+            }
+            cell.priceLable.text=goods.pcount;
+        }else if([goods.producttype isEqualToString:@"0"]){
+            cell.showImage.image=[UIImage imageNamed:@"diamond01"];
+            if (goods.proentiy.Pro_number) {
+                cell.dipLable.text=goods.proentiy.Pro_number;
+            }else{
+                cell.dipLable.text=nil;
+            }
+            if (goods.proentiy.Pro_number) {
+                cell.modelLable.text=goods.proentiy.Pro_number;
+            }else{
+                cell.modelLable.text=nil;
+            }
+            if (goods.diaentiy.Dia_ART) {
+                cell.numberLable.text=goods.diaentiy.Dia_ART;
+            }else{
+                cell.numberLable.text=nil;
+            }
+            if (goods.proentiy.Pro_goldWeight) {
+                cell.model1Lable.text=[@"金重:" stringByAppendingString:goods.proentiy.Pro_goldWeight];
+            }else{
+                cell.model1Lable.text=nil;
+            }
+            if (goods.pgoldtype) {
+                cell.weightLable.text=[@"材质:" stringByAppendingString:goods.pgoldtype];
+            }else{
+                cell.weightLable.text=nil;
+            }
+            if (goods.proentiy.Pro_Z_weight) {
+                cell.colorLable.text=[@"钻重:" stringByAppendingString:goods.proentiy.Pro_Z_weight];
+            }else{
+                cell.colorLable.text=nil;
+            }
+            if (goods.proentiy.Pro_f_clarity) {
+                cell.netLable.text=[@"净度:" stringByAppendingString:goods.proentiy.Pro_f_clarity];
+            }else{
+                cell.netLable.text=nil;
+            }
+            if (goods.proentiy.Pro_Z_color) {
+                cell.cutLable.text=[@"颜色:" stringByAppendingString:goods.proentiy.Pro_Z_color];
+            }else{
+                cell.cutLable.text=nil;
+            }
+            if (goods.proentiy.Pro_goldsize) {
+                cell.chasing.text=[@"尺寸:" stringByAppendingString:goods.proentiy.Pro_goldsize];
+            }else{
+                cell.chasing.text=nil;
+            }
+            cell.fluLable.text=nil;
+            cell.priceLable.text=goods.pcount;
+        }
+        else if ([goods.producttype isEqualToString:@"2"])
+        {
+            NSString *fullpath =goods.photos;
+            UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullpath];
+            [cell.showImage setImage:savedImage];
+            if (goods.pgoldtype) {
+                cell.dipLable.text=[@"材质:" stringByAppendingString:goods.pgoldtype];
+            }else{
+                cell.dipLable.text=nil;
+            }
+            if (goods.pweight) {
+                cell.numberLable.text=[NSString stringWithFormat:@"金重:%@g",goods.pweight];
+            }else{
+                cell.numberLable.text=nil;
+            }
+            if (goods.Dia_Z_weight) {
+                cell.model1Lable.text=[NSString stringWithFormat:@"主石重:%@Ct",goods.Dia_Z_count];
+            }else{
+                cell.model1Lable.text=nil;
+            }
+            if (goods.Dia_Z_count) {
+                cell.weightLable.text=[@"主石数:" stringByAppendingString:goods.Dia_Z_count];
+            }else{
+                cell.weightLable.text=nil;
+            }
+            if (goods.Dia_F_weight) {
+                cell.netLable.text=[NSString stringWithFormat:@"副石重:%@Ct",goods.Dia_F_weight];
+            }else{
+                cell.netLable.text=nil;
+            }
+            if (goods.Dia_F_count) {
+                cell.colorLable.text=[@"副石数:" stringByAppendingString:goods.Dia_F_count];
+            }else{
+                cell.colorLable.text=nil;
+            }
+            if (goods.psize) {
+                cell.cutLable.text=[@"手寸:" stringByAppendingString:goods.psize];
+            }else{
+                cell.cutLable.text=nil;
+            }
+            if (goods.pdetail) {
+                cell.fluLable.text=[@"刻字:" stringByAppendingString:goods.pdetail];
+            }else{
+                cell.fluLable.text=nil;
+            }
+            cell.chasing.text=nil;
+        }
+        return cell;
+    }else{
+        static NSString *TableSampleIdentifier = @"NoticeReportCell";
+        
+        NoticeReportCell *cell = [tableView dequeueReusableCellWithIdentifier:TableSampleIdentifier];
+        if (cell == nil) {
+            NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"NoticeReportCell" owner:self options:nil];
+            cell=[nib objectAtIndex:0];
+        }
+        productdia *entity =[productlist objectAtIndex:[indexPath row]];
+        if ([entity.Dia_Shape isEqualToString:@"RB"]) {
+            cell.notice.text=@"圆形";
+            cell.showimage.image=[UIImage imageNamed:@"round.jpg"];
+        }
+        else if ([entity.Dia_Shape isEqualToString:@"PE"]){
+            cell.notice.text=@"公主方";
+            cell.showimage.image=[UIImage imageNamed:@"princess2.jpg"];
+        }
+        else if ([entity.Dia_Shape isEqualToString:@"EM"]){
+            cell.notice.text=@"祖母绿";
+            cell.showimage.image=[UIImage imageNamed:@"Emerald.jpg"];
+        }
+        else if ([entity.Dia_Shape isEqualToString:@"RD"]){
+            cell.notice.text=@"雷蒂恩";
+            cell.showimage.image=[UIImage imageNamed:@"radiant.jpg"];
+        }
+        else if ([entity.Dia_Shape isEqualToString:@"OL"]){
+            cell.notice.text=@"椭圆形";
+            cell.showimage.image=[UIImage imageNamed:@"Oval.jpg"];
+        }
+        else if ([entity.Dia_Shape isEqualToString:@"MQ"]){
+            cell.notice.text=@"橄榄形";
+            cell.showimage.image=[UIImage imageNamed:@"marquise.jpg"];
+        }
+        else if ([entity.Dia_Shape isEqualToString:@"CU"]){
+            cell.notice.text=@"枕形";
+            cell.showimage.image=[UIImage imageNamed:@"cushion.jpg"];
+        }
+        else if ([entity.Dia_Shape isEqualToString:@"PR"]){
+            cell.notice.text=@"梨形";
+            cell.showimage.image=[UIImage imageNamed:@"Pear2.jpg"];
+        }
+        else if ([entity.Dia_Shape isEqualToString:@"HT"]){
+            cell.notice.text=@"心形";
+            cell.showimage.image=[UIImage imageNamed:@"Heart.jpg"];
+        }
+        else if ([entity.Dia_Shape isEqualToString:@"ASH"]){
+            cell.notice.text=@"镭射刑";
+            cell.showimage.image=[UIImage imageNamed:@"Asscher2.jpg"];
+        }
         cell.noticeDate.text=entity.Dia_CertNo;
         cell.tuDate.text=entity.Dia_Carat;
         cell.Dia_Col.text=entity.Dia_Col;
@@ -395,78 +646,84 @@ NSString * nakedno=nil;
         cell.Dia_Lab.text=entity.Dia_Pol;
         cell.Dia_Price.text=entity.Dia_Sym;
         cell.teslable.text=@"查看";
-    
-    return cell;
+        
+        return cell;
+    }
 }
 
 //tableview点击操作，裸钻详情页面显示
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    productdia *entity = [productlist objectAtIndex:[indexPath row]];
-    nakedno=entity.Id;
-//    NSString *rowString =[NSString stringWithFormat:@"你点击了：%@",entity.Dia_CertNo];
-//    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-//    [alter show];
-    secondShadeView.alpha=0.5;
-    thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.height);
-    thridaryView.hidden = NO;
-    //_productimageview.image=[UIImage imageNamed:@"10"];
-    titleLable.text=[[[[[[[[[[entity.Dia_Lab stringByAppendingString:@"裸钻"] stringByAppendingString:@"    ("] stringByAppendingString:entity.Dia_Carat] stringByAppendingString:@"/"] stringByAppendingString:entity.Dia_Col] stringByAppendingString:@"/"] stringByAppendingString:entity.Dia_Clar] stringByAppendingString:@"/"] stringByAppendingString:entity.Dia_Cut] stringByAppendingString:@")"];
-    if ([entity.Dia_Shape isEqualToString:@"RB"]) {
-        modelLable.text=@"圆形";
-        productimageview.image=[UIImage imageNamed:@"round.jpg"];
+    if (whichview==1) {
+        
+    }else{
+        productdia *entity = [productlist objectAtIndex:[indexPath row]];
+        nakedno=entity.Id;
+        //    NSString *rowString =[NSString stringWithFormat:@"你点击了：%@",entity.Dia_CertNo];
+        //    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        //    [alter show];
+        secondShadeView.alpha=0.5;
+        thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.height);
+        thridaryView.hidden = NO;
+        //_productimageview.image=[UIImage imageNamed:@"10"];
+        titleLable.text=[[[[[[[[[[entity.Dia_Lab stringByAppendingString:@"裸钻"] stringByAppendingString:@"    ("] stringByAppendingString:entity.Dia_Carat] stringByAppendingString:@"/"] stringByAppendingString:entity.Dia_Col] stringByAppendingString:@"/"] stringByAppendingString:entity.Dia_Clar] stringByAppendingString:@"/"] stringByAppendingString:entity.Dia_Cut] stringByAppendingString:@")"];
+        if ([entity.Dia_Shape isEqualToString:@"RB"]) {
+            modelLable.text=@"圆形";
+            productimageview.image=[UIImage imageNamed:@"round.jpg"];
+        }
+        else if ([entity.Dia_Shape isEqualToString:@"PE"]){
+            modelLable.text=@"公主方";
+            productimageview.image=[UIImage imageNamed:@"princess2.jpg"];
+        }
+        else if ([entity.Dia_Shape isEqualToString:@"EM"]){
+            modelLable.text=@"祖母绿";
+            productimageview.image=[UIImage imageNamed:@"Emerald.jpg"];
+        }
+        else if ([entity.Dia_Shape isEqualToString:@"RD"]){
+            modelLable.text=@"雷蒂恩";
+            productimageview.image=[UIImage imageNamed:@"radiant.jpg"];
+        }
+        else if ([entity.Dia_Shape isEqualToString:@"OL"]){
+            modelLable.text=@"椭圆形";
+            productimageview.image=[UIImage imageNamed:@"Oval.jpg"];
+        }
+        else if ([entity.Dia_Shape isEqualToString:@"MQ"]){
+            modelLable.text=@"橄榄形";
+            productimageview.image=[UIImage imageNamed:@"marquise.jpg"];
+        }
+        else if ([entity.Dia_Shape isEqualToString:@"CU"]){
+            modelLable.text=@"枕形";
+            productimageview.image=[UIImage imageNamed:@"cushion.jpg"];
+        }
+        else if ([entity.Dia_Shape isEqualToString:@"PR"]){
+            modelLable.text=@"梨形";
+            productimageview.image=[UIImage imageNamed:@"Pear2.jpg"];
+        }
+        else if ([entity.Dia_Shape isEqualToString:@"HT"]){
+            modelLable.text=@"心形";
+            productimageview.image=[UIImage imageNamed:@"Heart.jpg"];
+        }
+        else if ([entity.Dia_Shape isEqualToString:@"ASH"]){
+            modelLable.text=@"镭射刑";
+            productimageview.image=[UIImage imageNamed:@"Asscher2.jpg"];
+        }
+        productNoLable.text=entity.Dia_CertNo;
+        weightLable.text=entity.Dia_Carat;
+        colorLable.text=entity.Dia_Col;
+        netLable.text=entity.Dia_Clar;
+        cutLable.text=entity.Dia_Cut;
+        chasingLable.text=entity.Dia_Pol;
+        symmetryLable.text=entity.Dia_Sym;
+        depthLable.text=entity.Dia_Dep;
+        tableLable.text=entity.Dia_Tab;
+        sizeLable.text=entity.Dia_Meas;
+        fluorescenceLable.text=entity.Dia_Flor;
+        diplomaLable.text=entity.Dia_Lab;
+        priceLable.text=[@"¥" stringByAppendingString:entity.Dia_Price];
+        
+        //Nakeddisplay.hidden=YES;
     }
-    else if ([entity.Dia_Shape isEqualToString:@"PE"]){
-        modelLable.text=@"公主方";
-        productimageview.image=[UIImage imageNamed:@"princess2.jpg"];
-    }
-    else if ([entity.Dia_Shape isEqualToString:@"EM"]){
-        modelLable.text=@"祖母绿";
-        productimageview.image=[UIImage imageNamed:@"Emerald.jpg"];
-    }
-    else if ([entity.Dia_Shape isEqualToString:@"RD"]){
-        modelLable.text=@"雷蒂恩";
-        productimageview.image=[UIImage imageNamed:@"radiant.jpg"];
-    }
-    else if ([entity.Dia_Shape isEqualToString:@"OL"]){
-        modelLable.text=@"椭圆形";
-        productimageview.image=[UIImage imageNamed:@"Oval.jpg"];
-    }
-    else if ([entity.Dia_Shape isEqualToString:@"MQ"]){
-        modelLable.text=@"橄榄形";
-        productimageview.image=[UIImage imageNamed:@"marquise.jpg"];
-    }
-    else if ([entity.Dia_Shape isEqualToString:@"CU"]){
-        modelLable.text=@"枕形";
-        productimageview.image=[UIImage imageNamed:@"cushion.jpg"];
-    }
-    else if ([entity.Dia_Shape isEqualToString:@"PR"]){
-        modelLable.text=@"梨形";
-        productimageview.image=[UIImage imageNamed:@"Pear2.jpg"];
-    }
-    else if ([entity.Dia_Shape isEqualToString:@"HT"]){
-        modelLable.text=@"心形";
-        productimageview.image=[UIImage imageNamed:@"Heart.jpg"];
-    }
-    else if ([entity.Dia_Shape isEqualToString:@"ASH"]){
-        modelLable.text=@"镭射刑";
-        productimageview.image=[UIImage imageNamed:@"Asscher2.jpg"];
-    }
-    productNoLable.text=entity.Dia_CertNo;
-    weightLable.text=entity.Dia_Carat;
-    colorLable.text=entity.Dia_Col;
-    netLable.text=entity.Dia_Clar;
-    cutLable.text=entity.Dia_Cut;
-    chasingLable.text=entity.Dia_Pol;
-    symmetryLable.text=entity.Dia_Sym;
-    depthLable.text=entity.Dia_Dep;
-    tableLable.text=entity.Dia_Tab;
-    sizeLable.text=entity.Dia_Meas;
-    fluorescenceLable.text=entity.Dia_Flor;
-    diplomaLable.text=entity.Dia_Lab;
-    priceLable.text=[@"¥" stringByAppendingString:entity.Dia_Price];
     
-    //Nakeddisplay.hidden=YES;
 }
 
 //选择形状

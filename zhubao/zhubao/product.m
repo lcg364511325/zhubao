@@ -52,6 +52,7 @@
 @synthesize btntexture;
 @synthesize btninlay;
 @synthesize btnseric;
+@synthesize goodsview;
 
 //判定点击来哪个tableview
 NSInteger selecttype=0;
@@ -100,9 +101,11 @@ NSString * Pro_author;
     btnarray3 = [[NSMutableArray alloc] init];
     btnarray4 = [[NSMutableArray alloc] init];
     countLable.text=nil;
+    fonttext.placeholder=@"        8到12个字符";
     //进来时候加载全部数据
     sqlService *sql=[[sqlService alloc]init];
-    list=[sql GetProductList:nil type2:nil type3:nil type4:nil page:1 pageSize:100];
+    list=[sql GetProductList:nil type2:nil type3:nil type4:nil page:1 pageSize:1500];
+    pricelable.text=@"获取价格中。。。";
 
 }
 
@@ -150,7 +153,12 @@ NSString * Pro_author;
 - (IBAction)closeAction:(id)sender
 {
     primaryShadeView.alpha=0;
+    mianselect.hidden=YES;
+    colorselect.hidden=YES;
+    netselect.hidden=YES;
+    textureselect.hidden=YES;
     secondaryView.hidden = YES;
+    pricelable.text=@"获取价格中。。。";
 }
 
 //购物车
@@ -184,10 +192,61 @@ NSString * Pro_author;
     fourthView.hidden=NO;
     fourthView.frame=CGRectMake(750, 70, fourthView.frame.size.width, fourthView.frame.size.height);
 }
-//设置页面关闭
--(IBAction)closesetup:(id)sender
+
+//软件更新
+-(IBAction)updatesofeware:(id)sender
 {
     fourthView.hidden=YES;
+    NSString *rowString =@"当前没有最新版本！";
+    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alter show];
+}
+
+//退出登录
+-(IBAction)logout:(id)sender
+{
+    login * _login=[[login alloc] init];
+    
+    [self.navigationController pushViewController:_login animated:NO];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    myDelegate.entityl=[[LoginEntity alloc]init];
+}
+
+//更新数据
+-(IBAction)updateProductDate:(id)sender
+{
+    @try {
+        //可以在此加代码提示用户说正在加载数据中
+        NSString *rowString =@"正在更新数据。。。。";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+        [alter show];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            // 耗时的操作（异步操作）
+            
+            AutoGetData * getdata=[[AutoGetData alloc] init];
+            [getdata getDataInsertTable:nil];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                //可以在此加代码提示用户，数据已经加载完毕
+                [alter dismissWithClickedButtonIndex:0 animated:YES];
+                NSString *rowString =@"更新成功！";
+                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alter show];
+                //同步完数据了，则再去下载图片组
+                [getdata getAllZIPPhotos];
+                
+            });
+        });
+        fourthView.hidden=YES;
+    }
+    @catch (NSException *exception) {
+        
+    }
+    @finally {
+        
+    }
 }
 
 
@@ -203,6 +262,9 @@ NSString * Pro_author;
         value=[_colorlist count];
     }else if (selecttype==3){
         value=[_texturelist count];
+    }else if (selecttype==4)
+    {
+        value=[shoppingcartlist count];
     }
     return value;
     //只有一组，数组数即为行数。
@@ -211,28 +273,181 @@ NSString * Pro_author;
 //tableview值
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *TableSampleIdentifier = @"TableSampleIdentifier";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
-                             TableSampleIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc]
-                initWithStyle:UITableViewCellStyleDefault
-                reuseIdentifier:TableSampleIdentifier];
+    if (selecttype==4) {
+        static NSString *TableSampleIdentifier = @"shoppingcartCell";
+        
+        shoppingcartCell *cell = [tableView dequeueReusableCellWithIdentifier:TableSampleIdentifier];
+        if (cell == nil) {
+            NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"shoppingcartCell" owner:self options:nil];
+            cell=[nib objectAtIndex:0];
+        }
+        buyproduct *goods =[shoppingcartlist objectAtIndex:[indexPath row]];
+        if ([goods.producttype isEqualToString:@"1"]) {
+            cell.showImage.image=[UIImage imageNamed:@"diamond01"];
+            cell.modelLable.text=goods.diaentiy.Dia_Shape;
+            if (goods.diaentiy.Dia_Lab) {
+                cell.dipLable.text=[@"证书:" stringByAppendingString:goods.diaentiy.Dia_Lab];
+            }else{
+                cell.dipLable.text=nil;
+            }
+            if (goods.diaentiy.Dia_ART) {
+                cell.numberLable.text=[@"编号:" stringByAppendingString:goods.diaentiy.Dia_ART];
+            }else{
+                cell.numberLable.text=nil;
+            }
+            cell.model1Lable.text=[@"形状:" stringByAppendingString:goods.diaentiy.Dia_Shape];
+            if (goods.pweight) {
+                cell.weightLable.text=[@"钻重:" stringByAppendingString:goods.pweight];
+            }else{
+                cell.weightLable.text=nil;
+            }
+            if (goods.pcolor) {
+                cell.netLable.text=[@"颜色:" stringByAppendingString:goods.pcolor];
+            }else{
+                cell.netLable.text=nil;
+            }
+            if (goods.pvvs) {
+                cell.colorLable.text=[@"净度:" stringByAppendingString:goods.pvvs];
+            }else{
+                cell.colorLable.text=nil;
+            }
+            if (goods.diaentiy.Dia_Cut) {
+                cell.cutLable.text=[@"切工:" stringByAppendingString:goods.diaentiy.Dia_Cut];
+            }else{
+                cell.cutLable.text=nil;
+            }
+            if (goods.diaentiy.Dia_Pol) {
+                cell.chasing.text=[@"抛光:" stringByAppendingString:goods.diaentiy.Dia_Pol];
+            }else{
+                cell.chasing.text=nil;
+            }
+            if (goods.diaentiy.Dia_Sym) {
+                cell.fluLable.text=[@"对称:" stringByAppendingString:goods.diaentiy.Dia_Sym];
+            }else{
+                cell.fluLable.text=nil;
+            }
+            cell.priceLable.text=goods.pcount;
+        }else if([goods.producttype isEqualToString:@"0"]){
+            cell.showImage.image=[UIImage imageNamed:@"diamond01"];
+            if (goods.proentiy.Pro_number) {
+                cell.dipLable.text=goods.proentiy.Pro_number;
+            }else{
+                cell.dipLable.text=nil;
+            }
+            if (goods.proentiy.Pro_number) {
+                cell.modelLable.text=goods.proentiy.Pro_number;
+            }else{
+                cell.modelLable.text=nil;
+            }
+            if (goods.diaentiy.Dia_ART) {
+                cell.numberLable.text=goods.diaentiy.Dia_ART;
+            }else{
+                cell.numberLable.text=nil;
+            }
+            if (goods.proentiy.Pro_goldWeight) {
+                cell.model1Lable.text=[@"金重:" stringByAppendingString:goods.proentiy.Pro_goldWeight];
+            }else{
+                cell.model1Lable.text=nil;
+            }
+            if (goods.pgoldtype) {
+                cell.weightLable.text=[@"材质:" stringByAppendingString:goods.pgoldtype];
+            }else{
+                cell.weightLable.text=nil;
+            }
+            if (goods.proentiy.Pro_Z_weight) {
+                cell.colorLable.text=[@"钻重:" stringByAppendingString:goods.proentiy.Pro_Z_weight];
+            }else{
+                cell.colorLable.text=nil;
+            }
+            if (goods.proentiy.Pro_f_clarity) {
+                cell.netLable.text=[@"净度:" stringByAppendingString:goods.proentiy.Pro_f_clarity];
+            }else{
+                cell.netLable.text=nil;
+            }
+            if (goods.proentiy.Pro_Z_color) {
+                cell.cutLable.text=[@"颜色:" stringByAppendingString:goods.proentiy.Pro_Z_color];
+            }else{
+                cell.cutLable.text=nil;
+            }
+            if (goods.proentiy.Pro_goldsize) {
+                cell.chasing.text=[@"尺寸:" stringByAppendingString:goods.proentiy.Pro_goldsize];
+            }else{
+                cell.chasing.text=nil;
+            }
+            cell.fluLable.text=nil;
+            cell.priceLable.text=goods.pcount;
+        }
+        else if ([goods.producttype isEqualToString:@"2"])
+        {
+            NSString *fullpath =goods.photos;
+            UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullpath];
+            [cell.showImage setImage:savedImage];
+            if (goods.pgoldtype) {
+                cell.dipLable.text=[@"材质:" stringByAppendingString:goods.pgoldtype];
+            }else{
+                cell.dipLable.text=nil;
+            }
+            if (goods.pweight) {
+                cell.numberLable.text=[NSString stringWithFormat:@"金重:%@g",goods.pweight];
+            }else{
+                cell.numberLable.text=nil;
+            }
+            if (goods.Dia_Z_weight) {
+                cell.model1Lable.text=[NSString stringWithFormat:@"主石重:%@Ct",goods.Dia_Z_count];
+            }else{
+                cell.model1Lable.text=nil;
+            }
+            if (goods.Dia_Z_count) {
+                cell.weightLable.text=[@"主石数:" stringByAppendingString:goods.Dia_Z_count];
+            }else{
+                cell.weightLable.text=nil;
+            }
+            if (goods.Dia_F_weight) {
+                cell.netLable.text=[NSString stringWithFormat:@"副石重:%@Ct",goods.Dia_F_weight];
+            }else{
+                cell.netLable.text=nil;
+            }
+            if (goods.Dia_F_count) {
+                cell.colorLable.text=[@"副石数:" stringByAppendingString:goods.Dia_F_count];
+            }else{
+                cell.colorLable.text=nil;
+            }
+            if (goods.psize) {
+                cell.cutLable.text=[@"手寸:" stringByAppendingString:goods.psize];
+            }else{
+                cell.cutLable.text=nil;
+            }
+            if (goods.pdetail) {
+                cell.fluLable.text=[@"刻字:" stringByAppendingString:goods.pdetail];
+            }else{
+                cell.fluLable.text=nil;
+            }
+            cell.chasing.text=nil;
+        }
+        return cell;
+    }else{
+        static NSString *TableSampleIdentifier = @"TableSampleIdentifier";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+                                 TableSampleIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc]
+                    initWithStyle:UITableViewCellStyleDefault
+                    reuseIdentifier:TableSampleIdentifier];
+        }
+        
+        NSUInteger row = [indexPath row];
+        if(selecttype==0){
+            cell.textLabel.text = [self.mainlist objectAtIndex:row];
+        }else if(selecttype==1){
+            cell.textLabel.text = [self.netlist objectAtIndex:row];
+        }else if(selecttype==2){
+            cell.textLabel.text = [self.colorlist objectAtIndex:row];
+        }else if (selecttype==3){
+            cell.textLabel.text = [self.texturelist objectAtIndex:row];
+        }
+        return cell;
     }
-    
-    NSUInteger row = [indexPath row];
-    if(selecttype==0){
-        cell.textLabel.text = [self.mainlist objectAtIndex:row];
-    }else if(selecttype==1){
-        cell.textLabel.text = [self.netlist objectAtIndex:row];
-    }else if(selecttype==2){
-        cell.textLabel.text = [self.colorlist objectAtIndex:row];
-    }else if (selecttype==3){
-        cell.textLabel.text = [self.texturelist objectAtIndex:row];
-    }
-    return cell;
 }
 
 
@@ -268,6 +483,58 @@ NSString * Pro_author;
         colorselect.hidden=YES;
         netselect.hidden=YES;
         textureselect.hidden=YES;
+    }
+    //获取商品价格
+    sqlService * sql=[[sqlService alloc] init];
+    productEntity *goods=[sql GetProductDetail:productnumber];
+    NSString *textvalue=nil;
+    if ([texturetext.text isEqualToString:@"18K黄"]) {
+        textvalue=@"1";
+    }
+    else if ([texturetext.text isEqualToString:@"18K白"]){
+        textvalue=@"2";
+    }
+    else if ([texturetext.text isEqualToString:@"18K双色"]){
+        textvalue=@"3";
+    }
+    else if ([texturetext.text isEqualToString:@"18K玫瑰金"]){
+        textvalue=@"4";
+    }
+    else if ([texturetext.text isEqualToString:@"PT900"]){
+        textvalue=@"5";
+    }
+    else if ([texturetext.text isEqualToString:@"PT950"]){
+        textvalue=@"6";
+    }
+    else if ([texturetext.text isEqualToString:@"PD950"]){
+        textvalue=@"7";
+    }
+    @try {
+        //可以在此加代码提示用户说正在加载数据中
+        pricelable.text=@"获取价格中。。。";
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            // 耗时的操作（异步操作）
+            
+            productApi *priceApi=[[productApi alloc]init];
+            NSString *proprice=[priceApi getPrice:goods.Pro_Class goldType:textvalue goldWeight:goods.Pro_goldWeight mDiaWeight:maintext.text mDiaColor:colortext.text mVVS:nettext.text sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                if (proprice) {
+                    //pricelable.text=[@"¥" stringByAppendingString:proprice];
+                    pricelable.text=[NSString stringWithFormat:@"¥%@",proprice];
+                }else{
+                    pricelable.text=@"暂无价格信息";
+                }
+                
+            });
+        });
+    }
+    @catch (NSException *exception) {
+        
+    }
+    @finally {
+        
     }
 }
 
@@ -342,6 +609,15 @@ NSString * Pro_author;
         colorselect.hidden=YES;
         netselect.hidden=YES;
         [textureselect reloadData];
+    }else if (btntag==4)
+    {
+        secondShadeView.alpha=0.5;
+        thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.width);
+        thridaryView.hidden = NO;
+        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+        sqlService *shopcar=[[sqlService alloc] init];
+        shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
+        [goodsview reloadData];
     }
     
 }
@@ -449,7 +725,7 @@ NSString * Pro_author;
         }
     }
     sqlService *sql=[[sqlService alloc]init];
-    list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:100];
+    list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:1500];
     [productcollect reloadData];
 }
 
@@ -551,7 +827,7 @@ NSString * Pro_author;
         }
     }
     sqlService *sql=[[sqlService alloc]init];
-    list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:100];
+    list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:1500];
     [productcollect reloadData];
 }
 
@@ -593,22 +869,22 @@ NSString * Pro_author;
         inlay=@"0.40";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==9){
-        inlay=@"0.50";
+        inlay=@"0.50-0.59";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==10){
-        inlay=@"0.60";
+        inlay=@"0.60-0.69";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==11){
-        inlay=@"0.70";
+        inlay=@"0.70-0.69";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==12){
-        inlay=@"0.80";
+        inlay=@"0.80-0.69";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==13){
-        inlay=@"0.90";
+        inlay=@"0.90-0.69";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==14){
-        inlay=@"1";
+        inlay=@"1-100000";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }
     [btnarray3 addObject:btn];
@@ -673,7 +949,7 @@ NSString * Pro_author;
         }
     }
     sqlService *sql=[[sqlService alloc]init];
-    list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:100];
+    list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:1500];
     [productcollect reloadData];
 }
 
@@ -759,7 +1035,7 @@ NSString * Pro_author;
         }
     }
     sqlService *sql=[[sqlService alloc]init];
-    list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:100];
+    list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:1500];
     [productcollect reloadData];
 }
 
@@ -831,16 +1107,15 @@ NSString * Pro_author;
     productnumber=entity.Id;
     productEntity *goods=[sql GetProductDetail:productnumber];
     Pro_author=goods.Pro_author;
-    
     //productimageview.image=[UIImage imageNamed:@"diamonds.png"];
+    
     title1lable.text=goods.Pro_name;
-    pricelable.text=[@"¥" stringByAppendingString:goods.Pro_price];
     modellable.text=goods.Pro_model;
     weightlable.text=goods.Pro_goldWeight;
     mainlable.text=goods.Pro_Z_count;
     fitNolable.text=goods.Pro_f_count;
     fitweightlable.text=goods.Pro_f_weight;
-    maintext.text=[self.mainlist objectAtIndex:0];
+    //maintext.text=@"111";
     nettext.text=@"SI";
     colortext.text=@"I-J";
     if ([goods.Pro_goldType isEqualToString:@"1"]) {
@@ -874,6 +1149,7 @@ NSString * Pro_author;
         [mainarry addObject:inlay.zWeight];
     }
     self.mainlist=mainarry;
+    maintext.text=[self.mainlist objectAtIndex:0];
     NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",goods.Pro_smallpic]];
     if (hasCachedImage(imgUrl)) {
         [self.productimageview setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
@@ -885,6 +1161,69 @@ NSString * Pro_author;
         
     }
     
+    //获取商品价格
+    @try {
+        //可以在此加代码提示用户说正在加载数据中
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            // 耗时的操作（异步操作）
+            pricelable.text=@"获取价格中。。。";
+            productApi *priceApi=[[productApi alloc]init];
+            NSString *proprice=[priceApi getPrice:goods.Pro_Class goldType:goods.Pro_goldType goldWeight:goods.Pro_goldWeight mDiaWeight:maintext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                if (proprice) {
+                    //pricelable.text=[@"¥" stringByAppendingString:proprice];
+                    pricelable.text=[NSString stringWithFormat:@"¥%@",proprice];
+                }else{
+                    pricelable.text=@"暂无价格信息";
+                }
+                
+            });
+        });
+    }
+    @catch (NSException *exception) {
+        
+    }
+    @finally {
+        
+    }
+    
+}
+
+//购物车删除
+-(IBAction)deleteshoppingcart:(id)sender
+{
+    UIButton* btn = (UIButton*)sender;
+    UITableViewCell *cell = (UITableViewCell *)[[[btn superview] superview] superview];
+    NSIndexPath *indexPath = [goodsview indexPathForCell:cell];
+    buyproduct *entity = [shoppingcartlist objectAtIndex:[indexPath row]];
+    sqlService * sql=[[sqlService alloc]init];
+    NSString *successdelete=[sql deleteBuyproduct:entity.Id];
+    if (successdelete) {
+        NSString *rowString =@"删除成功！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }else{
+        NSString *rowString =@"删除失败！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }
+    //[goodsview reloadData];
+}
+
+//订单提交
+-(IBAction)submitorder:(id)sender
+{
+    sqlService *sql=[[sqlService alloc]init];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
+    if (![orderinfo isEqualToString:@""]) {
+        NSString *rowString =orderinfo;
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }
 }
 
 @end

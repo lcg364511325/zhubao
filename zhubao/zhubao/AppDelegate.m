@@ -298,6 +298,7 @@
             //NSString *photoDescribe=@" ";
             //NSLog(@"photoName=%@",photoName);
             //NSLog(@"photoDescribe=%@",photoDescribe);
+            NSLog(@"图片名字+++++%@",photoName);
             NSLog(@"图片大小+++++%d",[imageData length]/1024);
             //照片content
             //[uploadImageRequest setPostValue:photoDescribe forKey:@"photoContent"];
