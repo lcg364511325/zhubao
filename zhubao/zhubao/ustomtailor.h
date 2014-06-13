@@ -12,6 +12,7 @@
 #import "NakedDiamond.h"
 #import "diploma.h"
 #import "member.h"
+#import "shoppingcartCell.h"
 
 @interface ustomtailor : UIViewController<UITextViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
@@ -21,6 +22,7 @@
     
     //图片2进制路径
     NSString* filePath;
+    NSMutableArray *shoppingcartlist;
 }
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondaryView;
@@ -39,6 +41,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *zhengmianview;
 @property (weak, nonatomic) IBOutlet UIImageView *fanmianview;
 @property (weak, nonatomic) IBOutlet UIImageView *cemianview;
+@property (weak, nonatomic) IBOutlet UITableView *goodsview;
 
 
 - (IBAction)goAction:(id)sender;

@@ -68,13 +68,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IEF-JH-rY5">
-                        <rect key="frame" x="429" y="11" width="62" height="20"/>
+                        <rect key="frame" x="429" y="11" width="99" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axy-d5-jX3">
-                        <rect key="frame" x="91" y="21" width="62" height="20"/>
+                        <rect key="frame" x="91" y="21" width="310" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <nil key="highlightedColor"/>
@@ -115,6 +115,6 @@
     </objects>
     <resources>
         <image name="delete.png" width="154" height="64"/>
-        <image name="diamond01.png" width="74" height="105"/>
+        <image name="diamond01.png" width="126" height="126"/>
     </resources>
 </document>

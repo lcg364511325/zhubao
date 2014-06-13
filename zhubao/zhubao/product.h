@@ -19,6 +19,7 @@
 #import "ImageCacher.h"
 #import "TestViewController.h"
 #import "productApi.h"
+#import "shoppingcartCell.h"
 
 @interface product : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate>
 {
@@ -30,6 +31,7 @@
     NSMutableArray *btnarray2;
     NSMutableArray *btnarray3;
     NSMutableArray *btnarray4;
+    NSMutableArray *shoppingcartlist;
 }
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
@@ -70,6 +72,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btntexture;
 @property (weak, nonatomic) IBOutlet UIButton *btninlay;
 @property (weak, nonatomic) IBOutlet UIButton *btnseric;
+@property (weak, nonatomic) IBOutlet UITableView *goodsview;
 
 
 - (IBAction)closeAction:(id)sender;

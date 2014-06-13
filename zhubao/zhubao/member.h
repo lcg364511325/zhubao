@@ -16,6 +16,9 @@
 #import "getNowTime.h"
 
 @interface member : UIViewController
+{
+    NSMutableArray *shoppingcartlist;
+}
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondaryView;
@@ -41,6 +44,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *oldpassword;
 @property (weak, nonatomic) IBOutlet UITextField *newpassword;
 @property (weak, nonatomic) IBOutlet UITextField *affirmpassword;
+@property (weak, nonatomic) IBOutlet UITableView *goodsview;
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;

@@ -20,7 +20,6 @@
 @synthesize thridView;
 @synthesize goodsview;
 
-NSInteger tim=0;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -137,12 +136,8 @@ NSInteger tim=0;
         NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"shoppingcartCell" owner:self options:nil];
         cell=[nib objectAtIndex:0];
     }
-    if (tim>=[shoppingcartlist count]) {
-        tim=0;
-    }
-    buyproduct *goods =[shoppingcartlist objectAtIndex:tim];
-        BOOL iseuqal=[goods.producttype isEqualToString:@"1"];
-        if (iseuqal) {
+    buyproduct *goods =[shoppingcartlist objectAtIndex:[indexPath row]];
+        if ([goods.producttype isEqualToString:@"1"]) {
             cell.showImage.image=[UIImage imageNamed:@"diamond01"];
             cell.modelLable.text=goods.diaentiy.Dia_Shape;
             if (goods.diaentiy.Dia_Lab) {
@@ -187,7 +182,7 @@ NSInteger tim=0;
                 cell.fluLable.text=nil;
             }
             cell.priceLable.text=goods.pcount;
-        }else{
+        }else if([goods.producttype isEqualToString:@"0"]){
             cell.showImage.image=[UIImage imageNamed:@"diamond01"];
             if (goods.proentiy.Pro_number) {
                 cell.dipLable.text=goods.proentiy.Pro_number;
@@ -237,7 +232,53 @@ NSInteger tim=0;
             cell.fluLable.text=nil;
             cell.priceLable.text=goods.pcount;
         }
-    tim++;
+    else if ([goods.producttype isEqualToString:@"2"])
+    {
+        NSString *fullpath =goods.photos;
+        UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullpath];
+        [cell.showImage setImage:savedImage];
+        if (goods.pgoldtype) {
+            cell.dipLable.text=[@"材质:" stringByAppendingString:goods.pgoldtype];
+        }else{
+            cell.dipLable.text=nil;
+        }
+        if (goods.pweight) {
+            cell.numberLable.text=[NSString stringWithFormat:@"金重:%@g",goods.pweight];
+        }else{
+            cell.numberLable.text=nil;
+        }
+        if (goods.Dia_Z_weight) {
+            cell.model1Lable.text=[NSString stringWithFormat:@"主石重:%@Ct",goods.Dia_Z_count];
+        }else{
+            cell.model1Lable.text=nil;
+        }
+        if (goods.Dia_Z_count) {
+            cell.weightLable.text=[@"主石数:" stringByAppendingString:goods.Dia_Z_count];
+        }else{
+            cell.weightLable.text=nil;
+        }
+        if (goods.Dia_F_weight) {
+            cell.netLable.text=[NSString stringWithFormat:@"副石重:%@Ct",goods.Dia_F_weight];
+        }else{
+            cell.netLable.text=nil;
+        }
+        if (goods.Dia_F_count) {
+            cell.colorLable.text=[@"副石数:" stringByAppendingString:goods.Dia_F_count];
+        }else{
+            cell.colorLable.text=nil;
+        }
+        if (goods.psize) {
+            cell.cutLable.text=[@"手寸:" stringByAppendingString:goods.psize];
+        }else{
+            cell.cutLable.text=nil;
+        }
+        if (goods.pdetail) {
+            cell.fluLable.text=[@"刻字:" stringByAppendingString:goods.pdetail];
+        }else{
+            cell.fluLable.text=nil;
+        }
+        cell.chasing.text=nil;
+    }
     return cell;
 }
 

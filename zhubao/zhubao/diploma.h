@@ -14,6 +14,9 @@
 #import "member.h"
 
 @interface diploma : UIViewController<UITableViewDelegate, UITableViewDataSource>
+{
+    NSMutableArray *shoppingcartlist;
+}
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondaryView;
@@ -24,6 +27,7 @@
 @property (strong, nonatomic) NSArray *list;
 @property (weak, nonatomic) IBOutlet UITextField *dipomaNoText;
 @property (weak, nonatomic) IBOutlet UITextField *diamondWeightText;
+@property (weak, nonatomic) IBOutlet UITableView *goodsview;
 
 
 - (IBAction)goAction:(id)sender;
