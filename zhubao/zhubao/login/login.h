@@ -17,8 +17,6 @@
 @interface login : UIViewController<UITextFieldDelegate>
 
 
-
-
 @property (weak, nonatomic) IBOutlet UITextField *account;
 
 @property (weak, nonatomic) IBOutlet UITextField *password;
@@ -26,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *submitlogin;
 @property (weak, nonatomic) IBOutlet UILabel *tipLable;
 @property (weak, nonatomic) IBOutlet UIButton *passwordbtn;
+@property (weak, nonatomic) IBOutlet UILabel *tiplabellog;
 
 - (IBAction)loginAction:(id)sender;
 
