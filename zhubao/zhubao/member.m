@@ -548,6 +548,26 @@ NSInteger selecttable=0;
     }
     customer *updateman=[sql updateCustomer:man];
     if (updateman) {
+        myDelegate.entityl.userTrueName=companyText.text;
+        myDelegate.entityl.lxrName=cusnameText.text;
+        myDelegate.entityl.Phone=mobileText.text;
+        myDelegate.entityl.Lxphone=telText.text;
+        myDelegate.entityl.Sf=provinceText.text;
+        myDelegate.entityl.Cs=cityText.text;
+        myDelegate.entityl.Address=addressText.text;
+        if ([divisionText.text isEqualToString:@"办公室"]) {
+            myDelegate.entityl.bmName=@"1";
+        }else if ([divisionText.text isEqualToString:@"市场部"]){
+            myDelegate.entityl.bmName=@"2";
+        }else if ([divisionText.text isEqualToString:@"采购部"]){
+            myDelegate.entityl.bmName=@"3";
+        }else if ([divisionText.text isEqualToString:@"技术部"]){
+            myDelegate.entityl.bmName=@"4";
+        }else if ([divisionText.text isEqualToString:@"人力资源"]){
+            myDelegate.entityl.bmName=@"5";
+        }else if ([divisionText.text isEqualToString:@"其他"]){
+            myDelegate.entityl.bmName=@"6";
+        }
         NSString *rowString =@"修改成功！";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
