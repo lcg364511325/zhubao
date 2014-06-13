@@ -82,7 +82,6 @@ NSInteger i=0;
         
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                [_submitlogin setTitle:@"登录" forState:UIControlStateNormal];
                 [_submitlogin setTag:0];
                 
                 // 更新界面（处理结果）
