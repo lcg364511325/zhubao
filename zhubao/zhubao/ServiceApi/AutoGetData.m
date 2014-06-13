@@ -12,14 +12,18 @@
 
 sqlService *sqlser;
 AppDelegate * app;
+UILabel * tiplabel;
 
 //同步数据到数据库里面
--(NSString *)getDataInsertTable
+-(NSString *)getDataInsertTable:(UILabel *)tiplabellog
 {
     sqlser= [[sqlService alloc]init];
-    
+
     getNowTime * time=[[getNowTime alloc] init];
     NSString * nowt=[time nowTime];
+    tiplabel=tiplabellog;
+    if(tiplabel)[tiplabel setText:[NSString stringWithFormat:@"获取当前服务器时间%@",nowt]];
+    if(tiplabellog)[tiplabellog setText:[NSString stringWithFormat:@"获取当前服务器时间%@",nowt]];
     
     [self getProduct:nowt];//同步商品数据
     
@@ -97,6 +101,7 @@ AppDelegate * app;
                     NSString * sql=[NSString stringWithFormat:@"insert into product(%@)values(%@)",tablekey,(NSString *)values];
                     
                     NSLog(@"--------------:%@",sql);
+                    if(tiplabel)[tiplabel setText:[NSString stringWithFormat:@"同步商品数据:%@",sql]];
                     
                     [sqlser execSql:sql];
 
@@ -209,6 +214,7 @@ AppDelegate * app;
                     NSString * sql=[NSString stringWithFormat:@"insert into productdia(%@)values(%@)",tablekey,(NSString *)values];
                     
                     NSLog(@"--------------:%@",sql);
+                    if(tiplabel)[tiplabel setText:[NSString stringWithFormat:@"同步裸钻数据:%@",sql]];
                     
                     [sqlser execSql:sql];
                     
@@ -320,6 +326,7 @@ AppDelegate * app;
                     NSString * sql=[NSString stringWithFormat:@"insert into productphotos(%@)values(%@)",tablekey,(NSString *)values];
                     
                     NSLog(@"--------------:%@",sql);
+                    if(tiplabel)[tiplabel setText:[NSString stringWithFormat:@"同步3D旋转ZIP套图数据:%@",sql]];
                     
                     [sqlser execSql:sql];
                     
@@ -433,6 +440,7 @@ AppDelegate * app;
                     NSString * sql=[NSString stringWithFormat:@"insert into withmouth(%@)values(%@)",tablekey,(NSString *)values];
                     
                     NSLog(@"--------------:%@",sql);
+                    if(tiplabel)[tiplabel setText:[NSString stringWithFormat:@"同步镶口数据:%@",sql]];
                     
                     [sqlser execSql:sql];
                     

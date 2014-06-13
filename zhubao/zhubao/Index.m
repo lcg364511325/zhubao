@@ -305,7 +305,7 @@ NSInteger tim=0;
             // 耗时的操作（异步操作）
             
             AutoGetData * getdata=[[AutoGetData alloc] init];
-            [getdata getDataInsertTable];
+            [getdata getDataInsertTable:nil];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 

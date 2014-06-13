@@ -1844,8 +1844,9 @@
             //如果有数据，则提交定义，否则不提交
             if(CPInfocount>0 || CPInfocount>0){
                 //提交到接口
-                orderApi * order=[[orderApi alloc] init];
-                [order submitOrder:CPInfo DZInfo:DZInfo uploadpath:uploadpath];
+                //orderApi * order=[[orderApi alloc] init];
+                 AppDelegate *app=(AppDelegate *)[[UIApplication sharedApplication]delegate];
+                [app submitOrder:CPInfo DZInfo:DZInfo uploadpath:uploadpath];
             }else{
 //                AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
 //                [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"购物车没有可生成订单的信息" delegate:myDelegate cancelButtonTitle:@"取消" otherButtonTitles:nil, nil] show];

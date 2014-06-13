@@ -16,6 +16,7 @@
 
 @synthesize tipLable;
 @synthesize passwordbtn;
+@synthesize tiplabellog;
 
 NSInteger i=0;
 
@@ -44,6 +45,8 @@ NSInteger i=0;
         i=1;
     }
     
+    [_submitlogin setTitle:@"" forState:UIControlStateNormal];
+    
     //设置此输入框可以隐藏键盘
     _account.delegate=self;
     [_account setKeyboardType:UIKeyboardTypeDecimalPad];
@@ -56,6 +59,9 @@ NSInteger i=0;
     NSString *  locationString=[dateformatter stringFromDate:senddate];
     
     //[self autogetData];
+    tiplabellog.lineBreakMode = NSLineBreakByWordWrapping;
+    tiplabellog.numberOfLines = 0;
+    [tiplabellog setText:@""];
     
     //判断当前天是否已经有更新过数据了
     if (![locationString isEqualToString:(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"autodata"]]) {
@@ -68,6 +74,7 @@ NSInteger i=0;
     }
 }
 
+
 -(id)autogetData{
     @try {
         
@@ -78,11 +85,14 @@ NSInteger i=0;
             // 耗时的操作（异步操作）
             
             AutoGetData * getdata=[[AutoGetData alloc] init];
-            [getdata getDataInsertTable];
-        
+            [getdata getDataInsertTable:tiplabellog];
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 
+                //[_submitlogin setTitle:@"登录" forState:UIControlStateNormal];
                 [_submitlogin setTag:0];
+                
+                tipLable.text=@"";
                 
                 // 更新界面（处理结果）
                 NSDate *  senddate=[NSDate date];
@@ -100,12 +110,12 @@ NSInteger i=0;
         });
     }
     @catch (NSException *exception) {
-    
+        
     }
     @finally {
-    
+        
     }
-
+    
 }
 
 -(IBAction)loginAction:(id)sender
@@ -186,8 +196,9 @@ NSInteger i=0;
                     [self.navigationController pushViewController:sysmenu animated:NO];
                 }
                 
-                [resultButton setTitle:@"登录" forState:UIControlStateNormal];
+                //[resultButton setTitle:@"登录" forState:UIControlStateNormal];
                 [resultButton setTag:0];
+                tipLable.text=@"";
             });
         });
         

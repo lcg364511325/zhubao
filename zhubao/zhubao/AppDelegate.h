@@ -13,6 +13,7 @@
 #import "FileHelpers.h"
 #import "LoginEntity.h"
 #import "ASINetworkQueue.h"
+#import "ASIFormDataRequest.h"
 #import "ceshi.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
@@ -25,5 +26,8 @@
 
 //是否接着开始下载
 -(void)beginRequest:(NSString *)fileurl fileName:(NSString *)fileName version:(NSString *)version;
+
+//提交订单  CPInfo商品数组  DZInfo高级定制
+-(BOOL*)submitOrder:(NSString *)CPInfo DZInfo:(NSString *)DZInfo uploadpath:(NSMutableArray *)uploadpath;
 
 @end
