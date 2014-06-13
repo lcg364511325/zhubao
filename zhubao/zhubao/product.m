@@ -1043,7 +1043,7 @@ NSString * Pro_author;
 //商品添加到购物车
 -(IBAction)addshopcart:(id)sender{
     sqlService * sql=[[sqlService alloc] init];
-    productEntity *goods=[sql GetProductDetail:productnumber];
+    //productEntity *goods=[sql GetProductDetail:productnumber];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     buyproduct * entity=[[buyproduct alloc]init];
     entity.producttype=@"0";
@@ -1056,7 +1056,7 @@ NSString * Pro_author;
     entity.pgoldtype=texturetext.text;
     entity.pweight=maintext.text;
     entity.customerid=myDelegate.entityl.uId;
-    entity.pprice=goods.Pro_price;
+    entity.pprice=0;
     buyproduct *successadd=[sql addToBuyproduct:entity];
     if (successadd) {
         NSString *rowString =@"成功加入购物车！";
@@ -1149,7 +1149,9 @@ NSString * Pro_author;
         [mainarry addObject:inlay.zWeight];
     }
     self.mainlist=mainarry;
+    if(self.mainlist.count>0)
     maintext.text=[self.mainlist objectAtIndex:0];
+    
     NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",goods.Pro_smallpic]];
     if (hasCachedImage(imgUrl)) {
         [self.productimageview setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];

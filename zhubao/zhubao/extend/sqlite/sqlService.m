@@ -318,6 +318,7 @@
 - (NSMutableArray*)GetProductList:(NSString *)type1 type2:(NSString *)type2 type3:(NSString *)type3 type4:(NSString *)type4 page:(int)page pageSize:(int)pageSize{
     
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:10];
+
     //判断数据库是否打开
     if ([self openDB]) {
         page=page==0?1:page;
@@ -417,6 +418,8 @@
 //查询商品明细
 -(productEntity*)GetProductDetail:(NSString *)pid{
     
+    productEntity * entity = [[productEntity alloc] init];
+    
     //判断数据库是否打开
     if ([self openDB]) {
         
@@ -432,8 +435,7 @@
             
             //查询结果集中一条一条的遍历所有的记录，这里的数字对应的是列值。
             while (sqlite3_step(statement) == SQLITE_ROW) {
-                productEntity * entity = [[productEntity alloc] init];
-                
+
                 char * Id   = (char *)sqlite3_column_text(statement,0);
                 if(Id != nil)
                     entity.Id = [NSString stringWithUTF8String:Id];
@@ -522,7 +524,6 @@
                 if(Pro_price != nil)
                     entity.Pro_price = [NSString stringWithUTF8String:Pro_price];
                 
-                return entity;
             }
         }
         
@@ -530,7 +531,7 @@
         sqlite3_close(_database);
     }
     
-    return nil;
+    return entity;
 }
 
 
@@ -743,6 +744,7 @@
 //查询裸钻明细
 -(productdia*)GetProductdiaDetail:(NSString *)pid{
 
+    productdia * entity = [[productdia alloc] init];
     //判断数据库是否打开
     if ([self openDB]) {
         
@@ -758,8 +760,7 @@
             
             //查询结果集中一条一条的遍历所有的记录，这里的数字对应的是列值。
             while (sqlite3_step(statement) == SQLITE_ROW) {
-                productdia * entity = [[productdia alloc] init];
-                
+
                 char * Id   = (char *)sqlite3_column_text(statement,0);
                 if(Id != nil)
                     entity.Id = [NSString stringWithUTF8String:Id];
@@ -875,8 +876,6 @@
                 char * colordesc   = (char *)sqlite3_column_text(statement,28);
                 if(colordesc != nil)
                     entity.colordesc = [NSString stringWithUTF8String:colordesc];
-                
-                return entity;
             }
         }
         
@@ -884,7 +883,7 @@
         sqlite3_close(_database);
     }
     
-    return nil;
+    return entity;
 }
 
 //查询用户的购物车信息
@@ -1149,6 +1148,8 @@
 //查询当前用户的基本信息
 -(customer*)getCustomer:(NSString *)uid{
     
+    customer * entity = [[customer alloc] init];
+    
     //判断数据库是否打开
     if ([self openDB]) {
         
@@ -1164,8 +1165,7 @@
             
             //查询结果集中一条一条的遍历所有的记录，这里的数字对应的是列值。
             while (sqlite3_step(statement) == SQLITE_ROW) {
-                customer * entity = [[customer alloc] init];
-                
+
                 char * uId   = (char *)sqlite3_column_text(statement,0);
                 if(uId != nil)
                     entity.uId = [NSString stringWithUTF8String:uId];
@@ -1230,7 +1230,6 @@
                 if(Address != nil)
                     entity.Address = [NSString stringWithUTF8String:Address];
                 
-                return entity;
             }
         }
         
@@ -1238,11 +1237,13 @@
         sqlite3_close(_database);
     }
     
-    return nil;
+    return entity;
 }
 
 //根据编号查询上次更新数据的时间
 -(NSString*)getUpdateTime:(NSString *)code{
+    
+    NSString *updatetimes=@"0";
     
     //判断数据库是否打开
     if ([self openDB]) {
@@ -1261,9 +1262,7 @@
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 char * updatetime   = (char *)sqlite3_column_text(statement,0);
                 if(updatetime != nil)
-                    return [NSString stringWithUTF8String:updatetime];
-
-                return @"0";
+                    updatetimes=[NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:updatetime]];
             }
         }
         
@@ -1271,7 +1270,7 @@
         sqlite3_close(_database);
     }
     
-    return @"0";
+    return updatetimes;
 }
 
 //新加商品
@@ -1494,6 +1493,7 @@
 //查询当前公司的资料
 -(myinfo*)getMyinfo:(NSString *)code{
     
+    myinfo * entity = [[myinfo alloc] init];
     //判断数据库是否打开
     if ([self openDB]) {
         
@@ -1509,7 +1509,6 @@
             
             //查询结果集中一条一条的遍历所有的记录，这里的数字对应的是列值。
             while (sqlite3_step(statement) == SQLITE_ROW) {
-                myinfo * entity = [[myinfo alloc] init];
                 
                 char * uId   = (char *)sqlite3_column_text(statement,0);
                 if(uId != nil)
@@ -1535,7 +1534,6 @@
                 if(companycode != nil)
                     entity.companycode = [NSString stringWithUTF8String:companycode];
                 
-                return entity;
             }
         }
         
@@ -1543,7 +1541,7 @@
         sqlite3_close(_database);
     }
     
-    return nil;
+    return entity;
 }
 
 //更新当前当前公司的资料
@@ -1848,6 +1846,9 @@
                 }
             }
             
+            sqlite3_finalize(statement);
+            sqlite3_close(_database);
+            
             [CPInfo appendString:@"]"];
             [DZInfo appendString:@"]"];
             
@@ -1869,8 +1870,14 @@
             
         }
         
-        sqlite3_finalize(statement);
-        sqlite3_close(_database);
+        @try {
+            sqlite3_finalize(statement);
+            sqlite3_close(_database);
+        }
+        @catch (NSException *exception) {
+            
+        }
+        
     }
     
     }
