@@ -1331,15 +1331,17 @@
     
     @try {
         
+        //NSString * timesd=[self getTimeNowOT];
+        
         NSString *tablekey=@"productid,pcolor,pcount,pdetail,psize,pprice,customerid,producttype,pvvs,pweight,pgoldtype,pname,photos,photom,photob,Dia_Z_weight,Dia_Z_count,Dia_F_weight,Dia_F_count";
         
         NSString * values =[NSString stringWithFormat:@"'%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@'",entity.productid,entity.pcolor,entity.pcount,entity.pdetail,entity.psize,entity.pprice,entity.customerid,entity.producttype,entity.pvvs,entity.pweight,entity.pgoldtype,entity.pname,entity.photos,entity.photom,entity.photob,entity.Dia_Z_weight,entity.Dia_Z_count,entity.Dia_F_weight,entity.Dia_F_count];
         
-        NSString * sql=[NSString stringWithFormat:@"insert into buyproduct(%@)values(%@)",tablekey,values];
+        NSString * sql=[NSString stringWithFormat:@"insert into [buyproduct](%@)values(%@);",tablekey,values];
         
         NSLog(@"--------------:%@",sql);
-        
-        if (![self execSqlandClose:sql]) {
+        //HandleSql
+        if (![self HandleSql:sql]) {
             return nil;
         }
         
@@ -1352,6 +1354,17 @@
     }
 
     return entity;
+}
+
+- (NSString *)getTimeNowOT
+{
+    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    NSInteger interval = [zone secondsFromGMTForDate:datenow];
+    NSDate *localeDate = [datenow  dateByAddingTimeInterval: interval];
+
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[localeDate timeIntervalSince1970]];
+    return timeSp;
 }
 
 //删除购物车信息
@@ -1389,11 +1402,11 @@
             
             NSString * values =[NSString stringWithFormat:@"'%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@'",entity.uId,entity.userType,entity.userName,entity.userPass,entity.userDueDate,entity.userTrueName,entity.sfUrl,entity.lxrName,entity.Sex,entity.bmName,entity.Email,entity.Phone,entity.Lxphone,entity.Sf,entity.Cs,entity.Address];
             
-            NSString * sql=[NSString stringWithFormat:@"insert into customer(%@)values(%@)",tablekey,values];
+            NSString * sql=[NSString stringWithFormat:@"insert into [customer](%@)values(%@)",tablekey,values];
             
             NSLog(@"--------------:%@",sql);
             
-            if (![self execSqlandClose:sql]) {
+            if (![self HandleSql:sql]) {
                 return nil;
             }
 
@@ -1424,11 +1437,11 @@
             
             NSString * values =[NSString stringWithFormat:@"'%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@'",entity.uId,entity.userType,entity.userName,entity.userPass,entity.userDueDate,entity.userTrueName,entity.sfUrl,entity.lxrName,entity.Sex,entity.bmName,entity.Email,entity.Phone,entity.Lxphone,entity.Sf,entity.Cs,entity.Address];
             
-            NSString * sql=[NSString stringWithFormat:@"insert into customer(%@)values(%@)",tablekey,values];
+            NSString * sql=[NSString stringWithFormat:@"insert into [customer](%@)values(%@)",tablekey,values];
             
             NSLog(@"--------------:%@",sql);
             
-            if (![self execSqlandClose:sql]) {
+            if (![self HandleSql:sql]) {
                 return nil;
             }
         }else

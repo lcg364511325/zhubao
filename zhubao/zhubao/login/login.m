@@ -16,7 +16,6 @@
 
 @synthesize tipLable;
 @synthesize passwordbtn;
-@synthesize tiplabellog;
 
 NSInteger i=0;
 
@@ -34,7 +33,7 @@ NSInteger i=0;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    //shengyu    222222
+    //shengyu    222222   13428706220  111111
     [self.navigationController setNavigationBarHidden:YES];
     
     if ([[NSUserDefaults standardUserDefaults]objectForKey:@"_account"]) {
@@ -53,25 +52,25 @@ NSInteger i=0;
     _password.delegate=self;
     [_password setKeyboardType:UIKeyboardTypeDecimalPad];
     
-    NSDate *  senddate=[NSDate date];
-    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-    [dateformatter setDateFormat:@"YYYYMMdd"];
-    NSString *  locationString=[dateformatter stringFromDate:senddate];
+//    NSDate *  senddate=[NSDate date];
+//    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+//    [dateformatter setDateFormat:@"YYYYMMdd"];
+//    NSString *  locationString=[dateformatter stringFromDate:senddate];
     
     //[self autogetData];
-    tiplabellog.lineBreakMode = NSLineBreakByWordWrapping;
-    tiplabellog.numberOfLines = 0;
-    [tiplabellog setText:@""];
+//    tiplabellog.lineBreakMode = NSLineBreakByWordWrapping;
+//    tiplabellog.numberOfLines = 0;
+//    [tiplabellog setText:@""];
     
     //判断当前天是否已经有更新过数据了
-    if (![locationString isEqualToString:(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"autodata"]]) {
+    //if (![locationString isEqualToString:(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"autodata"]]) {
         
-        [self autogetData];
-    }else{
-        AutoGetData * getdata=[[AutoGetData alloc] init];
+        //[self autogetData];
+    //}else{
+        //AutoGetData * getdata=[[AutoGetData alloc] init];
         //不同步数据，但去下载图片组
-        [getdata getAllZIPPhotos];
-    }
+        //[getdata getAllZIPPhotos];
+    //}
 }
 
 
@@ -85,7 +84,7 @@ NSInteger i=0;
             // 耗时的操作（异步操作）
             
             AutoGetData * getdata=[[AutoGetData alloc] init];
-            [getdata getDataInsertTable:tiplabellog];
+            //[getdata getDataInsertTable:tiplabellog];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
@@ -132,7 +131,7 @@ NSInteger i=0;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // 耗时的操作（异步操作）
             
-            NSString * code = @"";
+            NSString * code = @"0";
             NSString * account = _account.text;
             NSString * password = _password.text;
             
@@ -175,8 +174,8 @@ NSInteger i=0;
                     n.Address = result.Address;
 
                     //同时更新本的数据库用户表
-                    sqlService *sqlser= [[sqlService alloc]init];
-                    [sqlser updateCustomerNoApi:n];
+                    //sqlService *sqlser= [[sqlService alloc]init];
+                    //[sqlser updateCustomerNoApi:n];
 
                     //登录成功，进入系统首页
                     NSLog(@"登录成功，进入系统首页");

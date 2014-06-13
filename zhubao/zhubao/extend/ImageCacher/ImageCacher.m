@@ -74,8 +74,8 @@ static ImageCacher *defaultCacher=nil;
     CGRect newRect;
     newRect.origin= CGPointZero;
     //拉伸到多大
-    newRect.size.width=80;
-    newRect.size.height=80;
+    newRect.size.width=origImageSize.width;
+    newRect.size.height=origImageSize.height;
     
     
     //缩放倍数
@@ -92,22 +92,15 @@ static ImageCacher *defaultCacher=nil;
     projectRect.origin.x= (newRect.size.width -projectRect.size.width)/2.0;
     projectRect.origin.y= (newRect.size.height-projectRect.size.height)/2.0;
     
-    
-
-    
     [image drawInRect:projectRect];
     
 
     UIImage *small = UIGraphicsGetImageFromCurrentImageContext();
 
-    
-   
     //压缩比例
     
-    NSData *smallData=UIImageJPEGRepresentation(small, 0.02);
-    
-    
-    
+    NSData *smallData=UIImageJPEGRepresentation(small, 0.01);
+
     if (smallData) {
         [fileManager createFileAtPath:pathForURL(aURL) contents:smallData attributes:nil];
     }
