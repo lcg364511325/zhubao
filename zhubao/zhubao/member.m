@@ -56,6 +56,8 @@ NSInteger selecttable=0;
     // Do any additional setup after loading the view from its nib.
     NSArray *Divisionarray = [[NSArray alloc] initWithObjects:@"办公室", @"市场部",
                          @"采购部", @"技术部",@"人力资源",@"其他", nil];
+    NSArray *province=[[NSArray alloc] initWithObjects:@"广东",@"广西",@"河北", nil];
+    self.provincelist=province;
     self.Divisionlist=Divisionarray;
     
 }
@@ -183,14 +185,13 @@ NSInteger selecttable=0;
     selectTableView.hidden=NO;
     if (btntag==0) {
         selectTableView.frame=CGRectMake(297, 267, 93, 100);
-        [selectTableView reloadData];
     }else if (btntag==1){
         selectTableView.frame=CGRectMake(403, 267, 90, 100);
-        [selectTableView reloadData];
     }else if (btntag==2){
         selectTableView.frame=CGRectMake(293, 348, 97, 100);
-        [selectTableView reloadData];
+        
     }
+    [selectTableView reloadData];
 }
 
 //初始化tableview数据
@@ -238,6 +239,16 @@ NSInteger selecttable=0;
     if (selecttable==0) {
         NSString *rowString = [self.provincelist objectAtIndex:[indexPath row]];
         provinceText.text=rowString;
+        if ([rowString isEqualToString:@"广东"]) {
+            self.citylist=[[NSArray alloc]initWithObjects:@"中山",@"佛山",@"江门",@"珠海",@"广州",@"深圳", nil];
+        }
+        else if ([rowString isEqualToString:@"广西"]){
+            self.citylist=[[NSArray alloc]initWithObjects:@"桂林",@"南宁",@"江门",@"玉林",@"梧州",@"柳州", nil];
+        }
+        else if ([rowString isEqualToString:@"河北"]){
+            self.citylist=[[NSArray alloc]initWithObjects:@"张家口",@"唐山",@"石家庄",@"唐山",@"保定",@"", nil];
+        }
+        cityText.text=nil;
     }else if (selecttable==1){
         NSString *rowString = [self.citylist objectAtIndex:[indexPath row]];
         cityText.text=rowString;
