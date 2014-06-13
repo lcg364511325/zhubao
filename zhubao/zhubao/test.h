@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "ProductCell.h"
 
-@interface test : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate> 
-@property (weak, nonatomic) IBOutlet UICollectionView *productCollection;
+@interface test : UIViewController<UITextViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+
+- (IBAction)chooseImage:(id)sender;
+
+@property (retain, nonatomic) IBOutlet UIImageView *imageView;
 
 @end

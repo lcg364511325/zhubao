@@ -14,7 +14,7 @@
 #import "sqlService.h"
 #import "customer.h"
 
-@interface login : UIViewController
+@interface login : UIViewController<UITextFieldDelegate>
 
 
 
@@ -25,6 +25,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *submitlogin;
 @property (weak, nonatomic) IBOutlet UILabel *tipLable;
+@property (weak, nonatomic) IBOutlet UIButton *passwordbtn;
 
 - (IBAction)loginAction:(id)sender;
 
