@@ -277,6 +277,10 @@
         
         NSString * URL = [NSString stringWithFormat:@"%@%@",domainser,surl];
         
+        NSLog(@"URL------%@",URL);
+        NSLog(@"CPInfo------%@",CPInfo);
+        NSLog(@"DZInfo------%@",DZInfo);
+        
         //NSMutableDictionary * dict = [DataService PostDataService:URL postDatas:(NSString*)params];//[DataService GetDataService:URL];
         
         ASIFormDataRequest *uploadImageRequest= [ ASIFormDataRequest requestWithURL : [NSURL URLWithString:[URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
@@ -344,7 +348,9 @@
                     NSString * status=[d objectForKey:@"status"];
                     if ([status isEqualToString:@"false"]) {
                         //提交失败
+                        [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"生成订单失败" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil] show];
                         
+                        return;
                     }
                     
                     NSArray * objArray=[d objectForKey:@"result"];

@@ -98,11 +98,10 @@ static ImageCacher *defaultCacher=nil;
     UIImage *small = UIGraphicsGetImageFromCurrentImageContext();
 
     //压缩比例
-    
-    NSData *smallData=UIImageJPEGRepresentation(small, 0.01);
+    NSData *smallData=UIImageJPEGRepresentation(small, 0.02);
 
     if (smallData) {
-        [fileManager createFileAtPath:pathForURL(aURL) contents:smallData attributes:nil];
+        //[fileManager createFileAtPath:pathForURL(aURL) contents:smallData attributes:nil];
     }
     
     UIView *view=[aDic objectForKey:@"imageView"];
