@@ -100,6 +100,7 @@ NSString * Pro_author;
     btnarray3 = [[NSMutableArray alloc] init];
     btnarray4 = [[NSMutableArray alloc] init];
     countLable.text=nil;
+    fonttext.placeholder=@"        8到12个字符";
     //进来时候加载全部数据
     sqlService *sql=[[sqlService alloc]init];
     list=[sql GetProductList:nil type2:nil type3:nil type4:nil page:1 pageSize:100];
@@ -832,9 +833,15 @@ NSString * Pro_author;
     productEntity *goods=[sql GetProductDetail:productnumber];
     Pro_author=goods.Pro_author;
     
+    //获取商品价格
+    productApi *priceApi=[[productApi alloc]init];
+    NSString *proprice=[priceApi getPrice:goods.Pro_Class goldType:goods.Pro_goldType goldWeight:goods.Pro_goldWeight mDiaWeight:goods.Pro_Z_weight mDiaColor:goods.Pro_Z_color mVVS:@"SI" sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
     //productimageview.image=[UIImage imageNamed:@"diamonds.png"];
+    
     title1lable.text=goods.Pro_name;
-    pricelable.text=[@"¥" stringByAppendingString:goods.Pro_price];
+    if (proprice) {
+        pricelable.text=[@"¥" stringByAppendingString:proprice];
+    }
     modellable.text=goods.Pro_model;
     weightlable.text=goods.Pro_goldWeight;
     mainlable.text=goods.Pro_Z_count;

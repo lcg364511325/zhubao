@@ -56,17 +56,10 @@
                     for(int i = 0 ; i < objArray.count ; i++){
                         
                         NSArray * valuearray = objArray[i];
-                        for (int j = 0 ; j < valuearray.count ; j++) {
-                            NSArray * valuearrayone =valuearray[j];
-                            if(valuearrayone && valuearrayone.count>1){
-                                
-                                NSString *proidt=valuearrayone[0];
-                                //如果返回来商品id与传过来的商品id相等，则返回价格
-                                if ([proid isEqualToString:proidt]) {
-                                    return valuearrayone[1];
-                                }
-                            }
+                        if ([valuearray[0] isEqualToString:proid]) {
+                            return valuearray[1];
                         }
+
                     }
 
                     return 0;

@@ -18,6 +18,7 @@
 #import "ProductCell.h"
 #import "ImageCacher.h"
 #import "TestViewController.h"
+#import "productApi.h"
 
 @interface product : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate>
 {
