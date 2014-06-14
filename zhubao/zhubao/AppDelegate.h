@@ -15,12 +15,15 @@
 #import "ASINetworkQueue.h"
 #import "ASIFormDataRequest.h"
 #import "ceshi.h"
+#import "myinfo.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property(retain , nonatomic) LoginEntity * entityl;//保存登录的用户信息
+
+@property(retain , nonatomic) myinfo * myinfol;//保存当前公司的信息
 
 @property(retain , nonatomic) ASINetworkQueue *queue;//下载的队列
 

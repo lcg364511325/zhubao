@@ -46,6 +46,8 @@
     self.entityl=[[LoginEntity alloc] init];
     entityl.uId=@"0";
     
+    self.myinfol=[[myinfo alloc] init];
+    
     //创建队列
     queue = [[ASINetworkQueue alloc] init];
     //[queue reset];//重置
