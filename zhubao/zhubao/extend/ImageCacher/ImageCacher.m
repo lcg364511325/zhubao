@@ -109,13 +109,13 @@ static ImageCacher *defaultCacher=nil;
     
     //判断view是否还存在 如果tablecell已经移出屏幕会被回收 那么什么都不用做，下次滚到该cell 缓存已存在 不需要执行此方法
     if (view!=nil) {
-        CATransition *transtion = [CATransition animation];
-        transtion.duration = 0.5;
-        [transtion setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-        [transtion setType:_type];
-        [transtion setSubtype:kCATransitionFromRight];
-        
-        [view.layer addAnimation:transtion forKey:@"transtionKey"];
+//        CATransition *transtion = [CATransition animation];
+//        transtion.duration = 0.5;
+//        [transtion setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+//        [transtion setType:_type];
+//        [transtion setSubtype:kCATransitionFromRight];
+//        
+//        [view.layer addAnimation:transtion forKey:@"transtionKey"];
         
         
         [(UIImageView*)view setImage:small];
