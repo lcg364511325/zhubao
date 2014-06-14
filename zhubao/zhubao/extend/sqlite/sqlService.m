@@ -1871,8 +1871,8 @@
         }
         
         @try {
-            sqlite3_finalize(statement);
-            sqlite3_close(_database);
+//            sqlite3_finalize(statement);
+//            sqlite3_close(_database);
         }
         @catch (NSException *exception) {
             

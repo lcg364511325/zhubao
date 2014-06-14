@@ -138,8 +138,46 @@
     }
     buyproduct *goods =[shoppingcartlist objectAtIndex:[indexPath row]];
         if ([goods.producttype isEqualToString:@"1"]) {
-            cell.showImage.image=[UIImage imageNamed:@"diamond01"];
-            cell.modelLable.text=goods.diaentiy.Dia_Shape;
+            if ([goods.diaentiy.Dia_Shape isEqualToString:@"RB"]) {
+                cell.modelLable.text=@"圆形";
+                cell.showImage.image=[UIImage imageNamed:@"round.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"PE"]){
+                cell.modelLable.text=@"公主方";
+                cell.showImage.image=[UIImage imageNamed:@"princess2.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"EM"]){
+                cell.modelLable.text=@"祖母绿";
+                cell.showImage.image=[UIImage imageNamed:@"Emerald.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"RD"]){
+                cell.modelLable.text=@"雷蒂恩";
+                cell.showImage.image=[UIImage imageNamed:@"radiant.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"OL"]){
+                cell.modelLable.text=@"椭圆形";
+                cell.showImage.image=[UIImage imageNamed:@"Oval.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"MQ"]){
+                cell.modelLable.text=@"橄榄形";
+                cell.showImage.image=[UIImage imageNamed:@"marquise.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"CU"]){
+                cell.modelLable.text=@"枕形";
+                cell.showImage.image=[UIImage imageNamed:@"cushion.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"PR"]){
+                cell.modelLable.text=@"梨形";
+                cell.showImage.image=[UIImage imageNamed:@"Pear2.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"HT"]){
+                cell.modelLable.text=@"心形";
+                cell.showImage.image=[UIImage imageNamed:@"Heart.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"ASH"]){
+                cell.modelLable.text=@"镭射刑";
+                cell.showImage.image=[UIImage imageNamed:@"Asscher2.jpg"];
+            }
             if (goods.diaentiy.Dia_Lab) {
                 cell.dipLable.text=[@"证书:" stringByAppendingString:goods.diaentiy.Dia_Lab];
             }else{
@@ -183,7 +221,16 @@
             }
             cell.priceLable.text=goods.pcount;
         }else if([goods.producttype isEqualToString:@"0"]){
-            cell.showImage.image=[UIImage imageNamed:@"diamond01"];
+            NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",goods.proentiy.Pro_smallpic]];
+            if (hasCachedImage(imgUrl)) {
+                cell.showImage.image=[UIImage imageWithContentsOfFile:pathForURL(imgUrl)];
+            }else
+            {
+                cell.showImage.image=[UIImage imageNamed:@"diamonds"];
+                NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",cell.showImage,@"imageView",nil];
+                [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+                
+            }
             if (goods.proentiy.Pro_number) {
                 cell.dipLable.text=goods.proentiy.Pro_number;
             }else{
