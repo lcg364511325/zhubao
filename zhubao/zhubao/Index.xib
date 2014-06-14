@@ -28,7 +28,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="nEw-Ns-Qvp">
-                            <rect key="frame" x="15" y="12" width="80" height="80"/>
+                            <rect key="frame" x="20" y="17" width="70" height="70"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="2Qn-13-exQ" userLabel="Image View -选中的按钮背景">

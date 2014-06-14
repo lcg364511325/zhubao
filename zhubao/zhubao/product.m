@@ -625,6 +625,7 @@ NSString * Pro_author;
 //款式选择
 -(IBAction)styleselect:(id)sender
 {
+    countLable.text=nil;
     UIButton* btn = (UIButton*)sender;
     NSInteger btntag=[btn tag];
     NSString * style=nil;
@@ -733,6 +734,7 @@ NSString * Pro_author;
 //材质选择
 -(IBAction)textureselect:(id)sender
 {
+    countLable.text=nil;
     UIButton* btn = (UIButton*)sender;
     NSInteger btntag=[btn tag];
     NSString *texture=nil;
@@ -834,6 +836,7 @@ NSString * Pro_author;
 //镶口选择
 -(IBAction)inlayselect:(id)sender
 {
+    countLable.text=nil;
     UIButton* btn = (UIButton*)sender;
     NSInteger btntag=[btn tag];
     NSString *inlay=nil;
@@ -866,7 +869,7 @@ NSString * Pro_author;
         inlay=@"0.29-0.39";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==8){
-        inlay=@"0.40";
+        inlay=@"0.40-0.49";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==9){
         inlay=@"0.50-0.59";
@@ -956,6 +959,7 @@ NSString * Pro_author;
 //系列
 -(IBAction)serie:(id)sender
 {
+    countLable.text=nil;
     UIButton* btn = (UIButton*)sender;
     NSInteger btntag=[btn tag];
     NSString * serie=nil;

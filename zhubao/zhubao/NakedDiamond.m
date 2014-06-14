@@ -234,8 +234,8 @@ NSInteger whichview=0;
     }
     //钻重参数
     NSString *weight=nil;
-    if (!weightmax.text) {
-        if (!weightmin.text) {
+    if (![weightmax.text isEqualToString:@""]) {
+        if ([weightmin.text isEqualToString:@""]) {
             weight=[[@"0" stringByAppendingString:@","] stringByAppendingString:weightmax.text];
         }else{
             weight=[[weightmin.text stringByAppendingString:@","] stringByAppendingString:weightmax.text];
@@ -245,8 +245,8 @@ NSInteger whichview=0;
     }
     //价钱参数
     NSString *price=nil;
-    if (!pricemax.text) {
-        if (!pricemin.text) {
+    if (![pricemax.text isEqualToString:@""]) {
+        if ([pricemin.text isEqualToString:@""]) {
             
             price=[[@"0" stringByAppendingString:@","] stringByAppendingString:pricemax.text];
         }else{
