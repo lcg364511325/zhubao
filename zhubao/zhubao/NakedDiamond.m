@@ -331,6 +331,12 @@ NSInteger whichview=0;
         NSString *rowString =@"删除成功！";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
+        
+        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+        sqlService *shopcar=[[sqlService alloc] init];
+        shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
+        [goodsview reloadData];
+        
     }else{
         NSString *rowString =@"删除失败！";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];

@@ -40,8 +40,11 @@
     [btnBack addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     
 	// Do any additional setup after loading the view.
-    CGRect frame= CGRectMake(0, 0, self.view.frame.size.width+220, self.view.frame.size.height-420);
-    UIImageView *animView=[[UIImageView alloc]initWithFrame:frame];
+//    CGRect frame= CGRectMake(0, 0, self.view.frame.size.width+220, self.view.frame.size.height-420);
+//    UIImageView *animView=[[UIImageView alloc]initWithFrame:frame];
+    UIImageView *animView=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.center.x/2, 0, self.view.frame.size.width*0.8, self.view.frame.size.height*0.8)];
+    animView.backgroundColor=[UIColor redColor];
+    animView.contentMode=UIViewContentModeScaleAspectFill;
 
     NSMutableArray *imgArray = [NSMutableArray arrayWithCapacity:10];
     for(int i=1;i<60;i++){
