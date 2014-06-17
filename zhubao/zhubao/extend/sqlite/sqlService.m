@@ -1682,9 +1682,11 @@
                     [DZInfo appendString:@"["];//高级定制
                     
                     char * pgoldtype   = (char *)sqlite3_column_text(statement,11);//商品材质
-                    if(pgoldtype != nil && ![[NSString stringWithUTF8String:pgoldtype] isEqualToString:@"(null)"])
-                        [DZInfo appendString:[NSString stringWithFormat:@"\"%@\"",[NSString stringWithUTF8String:pgoldtype]]];
-                    else
+                    if(pgoldtype != nil && ![[NSString stringWithUTF8String:pgoldtype] isEqualToString:@"(null)"]){
+                       [DZInfo appendString:@"\""];
+                        [DZInfo appendString:[self getGoldtype:[NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:pgoldtype]]]];
+                        [DZInfo appendString:@"\""];
+                    }else
                         [DZInfo appendString:@"\"\""];
                     
                     char * pweight   = (char *)sqlite3_column_text(statement,10);//金重
@@ -1805,9 +1807,11 @@
                         [CPInfo appendString:@",\"0\""];
                     
                     char * pgoldtype   = (char *)sqlite3_column_text(statement,11);//材质
-                    if(pgoldtype != nil && ![[NSString stringWithUTF8String:pgoldtype] isEqualToString:@"(null)"])
-                        [CPInfo appendString:[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:pgoldtype]]];//商品数组
-                    else
+                    if(pgoldtype != nil && ![[NSString stringWithUTF8String:pgoldtype] isEqualToString:@"(null)"]){
+                        [CPInfo appendString:@",\""];
+                        [CPInfo appendString:[self getGoldtype:[NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:pgoldtype]]]];//商品数组
+                        [CPInfo appendString:@"\""];
+                    }else
                         [CPInfo appendString:@",\"\""];
                     
                     char * psize   = (char *)sqlite3_column_text(statement,5);//手寸
@@ -1856,7 +1860,7 @@
             NSLog(@"DZInfo------%@",DZInfo);
             
             //如果有数据，则提交定义，否则不提交
-            if(CPInfocount>0 || CPInfocount>0){
+            if(CPInfocount>0 || DZInfocount>0){
                 //提交到接口
                 //orderApi * order=[[orderApi alloc] init];
                  AppDelegate *app=(AppDelegate *)[[UIApplication sharedApplication]delegate];
@@ -1889,6 +1893,81 @@
     }
     
     return @"" ;
+}
+
+//根据名称获取材质的代码值
+-(NSString *)getGoldtype:(NSString *)name{
+
+    NSString *textvalue=name;
+    if ([name isEqualToString:@"18K黄"]) {
+        textvalue=@"1";
+    }
+    else if ([name isEqualToString:@"18K白"]){
+        textvalue=@"2";
+    }
+    else if ([name isEqualToString:@"18K双色"]){
+        textvalue=@"3";
+    }
+    else if ([name isEqualToString:@"18K玫瑰金"]){
+        textvalue=@"4";
+    }
+    else if ([name isEqualToString:@"PT900"]){
+        textvalue=@"5";
+    }
+    else if ([name isEqualToString:@"PT950"]){
+        textvalue=@"6";
+    }
+    else if ([name isEqualToString:@"PD950"]){
+        textvalue=@"7";
+    }
+    
+    return textvalue;
+}
+
+//根据名称获取净度的代码值
+-(NSString *)getVvstype:(NSString *)name{
+    
+    NSString *textvalue=name;
+    if ([name isEqualToString:@"VVS"]) {
+        textvalue=@"VVS";
+    }
+    else if ([name isEqualToString:@"VS"]){
+        textvalue=@"VS";
+    }
+    else if ([name isEqualToString:@"SI"]){
+        textvalue=@"SI";
+    }
+    else if ([name isEqualToString:@"P"]){
+        textvalue=@"P";
+    }
+    
+    return textvalue;
+}
+
+//根据名称获取颜色的代码值
+-(NSString *)getColortype:(NSString *)name{
+    
+    NSString *textvalue=name;
+    if ([name isEqualToString:@"D-E"]) {
+        textvalue=@"1";
+    }
+    else if ([name isEqualToString:@"F-G"]){
+        textvalue=@"2";
+    }
+    else if ([name isEqualToString:@"H"]){
+        textvalue=@"3";
+    }
+    else if ([name isEqualToString:@"I-J"]){
+        textvalue=@"4";
+    }
+    else if ([name isEqualToString:@"K-L"]){
+        textvalue=@"4";
+    }
+    else if ([name isEqualToString:@"M-N"]){
+        textvalue=@"4";
+    }
+    
+    return textvalue;
 }
 
 @end

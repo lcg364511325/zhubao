@@ -28,7 +28,7 @@
         //Kstr=md5(uId|type|Upt|Key|Nowt)
         NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@",uId,@"600",Upt,apikey,Nowt]];
         
-        NSString * surl = [NSString stringWithFormat:@"/app/appinterface.php?uId=%@&type=600&Upt=%@&Nowt=%@&Kstr=%@",uId,Upt,Nowt,Kstr];
+        NSString * surl = [NSString stringWithFormat:@"/app/aiface.php?uId=%@&type=600&Upt=%@&Nowt=%@&Kstr=%@",uId,Upt,Nowt,Kstr];
         
         NSString * URL = [NSString stringWithFormat:@"%@%@",domainser,surl];
         

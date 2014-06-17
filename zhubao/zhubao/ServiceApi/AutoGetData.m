@@ -62,7 +62,7 @@ UILabel * tiplabel;
     //Kstr=md5(uId|type|Upt|Key|Nowt|cid)
     NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@|%@",uId,@"100",Upt,apikey,Nowt,@"0"]];
     
-    NSString * surl = [NSString stringWithFormat:@"/app/appinterface.php?uId=%@&type=100&Upt=%@&Nowt=%@&Kstr=%@&cid=0",uId,Upt,Nowt,Kstr];
+    NSString * surl = [NSString stringWithFormat:@"/app/aiface.php?uId=%@&type=100&Upt=%@&Nowt=%@&Kstr=%@&cid=0",uId,Upt,Nowt,Kstr];
     
     
     NSString * URL = [NSString stringWithFormat:@"%@%@",domainser,surl];
@@ -175,7 +175,7 @@ UILabel * tiplabel;
     //Kstr=md5(uId|type|Upt|Key|Nowt)
     NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@",uId,@"101",Upt,apikey,Nowt]];
     
-    NSString * surl = [NSString stringWithFormat:@"/app/appinterface.php?uId=%@&type=101&Upt=%@&Nowt=%@&Kstr=%@",uId,Upt,Nowt,Kstr];
+    NSString * surl = [NSString stringWithFormat:@"/app/aiface.php?uId=%@&type=101&Upt=%@&Nowt=%@&Kstr=%@",uId,Upt,Nowt,Kstr];
     
     
     NSString * URL = [NSString stringWithFormat:@"%@%@",domainser,surl];
@@ -287,7 +287,7 @@ UILabel * tiplabel;
     //Kstr=md5(uId|type|Upt|Key|Nowt)
     NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@",uId,@"103",Upt,apikey,Nowt]];
     
-    NSString * surl = [NSString stringWithFormat:@"/app/appinterface.php?uId=%@&type=103&Upt=%@&Nowt=%@&Kstr=%@",uId,Upt,Nowt,Kstr];
+    NSString * surl = [NSString stringWithFormat:@"/app/aiface.php?uId=%@&type=103&Upt=%@&Nowt=%@&Kstr=%@",uId,Upt,Nowt,Kstr];
     
     
     NSString * URL = [NSString stringWithFormat:@"%@%@",domainser,surl];
@@ -401,7 +401,7 @@ UILabel * tiplabel;
     //Kstr=md5(uId|type|Upt|Key|Nowt)
     NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@",uId,@"102",Upt,apikey,Nowt]];
     
-    NSString * surl = [NSString stringWithFormat:@"/app/appinterface.php?uId=%@&type=102&Upt=%@&Nowt=%@&Kstr=%@",uId,Upt,Nowt,Kstr];
+    NSString * surl = [NSString stringWithFormat:@"/app/aiface.php?uId=%@&type=102&Upt=%@&Nowt=%@&Kstr=%@",uId,Upt,Nowt,Kstr];
     
     
     NSString * URL = [NSString stringWithFormat:@"%@%@",domainser,surl];
@@ -506,11 +506,36 @@ UILabel * tiplabel;
         sqlser= [[sqlService alloc]init];
         //查询图片的压缩文件
         NSMutableArray * array=[sqlser getAllProductRAR];
-        
+        int i=0;
         for (id key in array){
             productphotos * entity=(productphotos *)key;
             
-            [self getZIPPhotosData:entity.zipUrl];
+            NSString * surl = [NSString stringWithFormat:@"%@",entity.zipUrl];
+            NSString * fileName=[entity.zipUrl lastPathComponent];//从路径中获得完整的文件名（带后缀）
+            
+            //初始化Documents路径
+            NSString *downloadPath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",fileName]];
+            
+            //NSLog(@"压缩文件存放的路径------%@",downloadPath);
+            
+            if ([[NSFileManager defaultManager] fileExistsAtPath:downloadPath]) {
+                //NSLog(@"------有了，不再下载");
+                
+            }else {
+                NSLog(@"------没有，所以要下载");
+                i++;
+                //去下载
+                [app beginRequest:surl fileName:fileName version:entity.Id];
+            }
+            
+            //[self getZIPPhotosData:entity.zipUrl];
+            
+            //if(i==5)break;
+        }
+        
+        if(array.count<=0 || i==0){
+            app.thridView.hidden=YES;
+            [app.alter dismissWithClickedButtonIndex:0 animated:YES];
         }
 
     }@catch (NSException *exception) {
@@ -538,7 +563,7 @@ UILabel * tiplabel;
         //NSLog(@"压缩文件存放的路径------%@",downloadPath);
         
         if ([[NSFileManager defaultManager] fileExistsAtPath:downloadPath]) {
-            NSLog(@"------有了，不再下载");
+            //NSLog(@"------有了，不再下载");
         }else {
             NSLog(@"------没有，所以要下载");
             //去下载

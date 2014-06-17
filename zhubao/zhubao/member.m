@@ -256,9 +256,16 @@ NSInteger selecttable=0;
                 
                 //可以在此加代码提示用户，数据已经加载完毕
                 [alter dismissWithClickedButtonIndex:0 animated:YES];
-                NSString *rowString =@"更新成功！";
-                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                //NSString *rowString =@"更新成功！";
+                //                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                //                [alter show];
+                AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:@"数据更新完，开始下载3d图片集。。。" delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
                 [alter show];
+                
+                myDelegate.alter=alter;
+                myDelegate.thridView=fiftharyView;
+                
                 //同步完数据了，则再去下载图片组
                 [getdata getAllZIPPhotos];
                 
