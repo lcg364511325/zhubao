@@ -10,7 +10,7 @@
 
 //验证登录实体类
 @interface LoginEntity : NSObject
-@property (nonatomic, retain) NSString * result;
+@property (nonatomic, retain) NSString * resultcount;//购物车数量
 @property (nonatomic, retain) NSString * info;
 @property (nonatomic, retain) NSString * webcode;
 

@@ -457,7 +457,7 @@ NSInteger whichview=0;
             cell=[nib objectAtIndex:0];
         }
         buyproduct *goods =[shoppingcartlist objectAtIndex:[indexPath row]];
-        if ([goods.producttype isEqualToString:@"1"]) {
+        if ([goods.producttype isEqualToString:@"3"]) {
             cell.showImage.image=[UIImage imageNamed:@"diamond01"];
             cell.modelLable.text=goods.diaentiy.Dia_Shape;
             if (goods.diaentiy.Dia_Lab) {
@@ -502,7 +502,7 @@ NSInteger whichview=0;
                 cell.fluLable.text=nil;
             }
             cell.priceLable.text=goods.pcount;
-        }else if([goods.producttype isEqualToString:@"0"]){
+        }else if([goods.producttype isEqualToString:@"1"] || [goods.producttype isEqualToString:@"2"]){
             cell.showImage.image=[UIImage imageNamed:@"diamond01"];
             if (goods.proentiy.Pro_number) {
                 cell.dipLable.text=goods.proentiy.Pro_number;
@@ -552,7 +552,7 @@ NSInteger whichview=0;
             cell.fluLable.text=nil;
             cell.priceLable.text=goods.pcount;
         }
-        else if ([goods.producttype isEqualToString:@"2"])
+        else if ([goods.producttype isEqualToString:@"9"])
         {
             NSString *fullpath =goods.photos;
             UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullpath];
@@ -1142,7 +1142,7 @@ NSInteger whichview=0;
     productdia * proentity=[sql GetProductdiaDetail:nakedno];
     buyproduct * entity=[[buyproduct alloc]init];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    entity.producttype=@"1";
+    entity.producttype=@"3";
     entity.productid=nakedno;
     entity.pcount=@"1";
     entity.pcolor=proentity.Dia_Col;
@@ -1151,6 +1151,7 @@ NSInteger whichview=0;
     entity.pweight=proentity.Dia_Carat;
     entity.customerid=myDelegate.entityl.uId;
     entity.pprice=proentity.Dia_Price;
+    entity.pname=proentity.Dia_CertNo;
     sql=[[sqlService alloc]init];
     buyproduct *successadd=[sql addToBuyproduct:entity];
     if (successadd) {

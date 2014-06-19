@@ -244,7 +244,7 @@ NSInteger vvvv=0;
             cell=[nib objectAtIndex:0];
         }
         buyproduct *goods =[shoppingcartlist objectAtIndex:[indexPath row]];
-        if ([goods.producttype isEqualToString:@"1"]) {
+        if ([goods.producttype isEqualToString:@"3"]) {
             cell.showImage.image=[UIImage imageNamed:@"diamond01"];
             cell.modelLable.text=goods.diaentiy.Dia_Shape;
             if (goods.diaentiy.Dia_Lab) {
@@ -289,7 +289,7 @@ NSInteger vvvv=0;
                 cell.fluLable.text=nil;
             }
             cell.priceLable.text=goods.pcount;
-        }else if([goods.producttype isEqualToString:@"0"]){
+        }else if([goods.producttype isEqualToString:@"1"] || [goods.producttype isEqualToString:@"2"]){
             cell.showImage.image=[UIImage imageNamed:@"diamond01"];
             if (goods.proentiy.Pro_number) {
                 cell.dipLable.text=goods.proentiy.Pro_number;
@@ -339,7 +339,7 @@ NSInteger vvvv=0;
             cell.fluLable.text=nil;
             cell.priceLable.text=goods.pcount;
         }
-        else if ([goods.producttype isEqualToString:@"2"])
+        else if ([goods.producttype isEqualToString:@"9"])
         {
             NSString *fullpath =goods.photos;
             UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullpath];

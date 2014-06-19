@@ -137,7 +137,7 @@
         cell=[nib objectAtIndex:0];
     }
     buyproduct *goods =[shoppingcartlist objectAtIndex:[indexPath row]];
-        if ([goods.producttype isEqualToString:@"1"]) {
+        if ([goods.producttype isEqualToString:@"3"]) {
             if ([goods.diaentiy.Dia_Shape isEqualToString:@"RB"]) {
                 cell.modelLable.text=@"圆形";
                 cell.showImage.image=[UIImage imageNamed:@"round.jpg"];
@@ -220,7 +220,7 @@
                 cell.fluLable.text=nil;
             }
             cell.priceLable.text=goods.pcount;
-        }else if([goods.producttype isEqualToString:@"0"]){
+        }else if([goods.producttype isEqualToString:@"1"] || [goods.producttype isEqualToString:@"2"]){
             NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",goods.proentiy.Pro_smallpic]];
             if (hasCachedImage(imgUrl)) {
                 cell.showImage.image=[UIImage imageWithContentsOfFile:pathForURL(imgUrl)];
@@ -279,7 +279,7 @@
             cell.fluLable.text=nil;
             cell.priceLable.text=goods.pcount;
         }
-    else if ([goods.producttype isEqualToString:@"2"])
+    else if ([goods.producttype isEqualToString:@"9"])
     {
         NSString *fullpath =goods.photos;
         UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullpath];

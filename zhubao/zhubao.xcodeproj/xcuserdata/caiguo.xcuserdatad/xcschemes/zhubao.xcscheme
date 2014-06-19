@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2C5C97F319349E2100004343"
-               BuildableName = "zhubao.app"
+               BuildableName = "&#30427;&#35465;&#29664;&#23453;.app"
                BlueprintName = "zhubao"
                ReferencedContainer = "container:zhubao.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2C5C97F319349E2100004343"
-            BuildableName = "zhubao.app"
+            BuildableName = "&#30427;&#35465;&#29664;&#23453;.app"
             BlueprintName = "zhubao"
             ReferencedContainer = "container:zhubao.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2C5C97F319349E2100004343"
-            BuildableName = "zhubao.app"
+            BuildableName = "&#30427;&#35465;&#29664;&#23453;.app"
             BlueprintName = "zhubao"
             ReferencedContainer = "container:zhubao.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2C5C97F319349E2100004343"
-            BuildableName = "zhubao.app"
+            BuildableName = "&#30427;&#35465;&#29664;&#23453;.app"
             BlueprintName = "zhubao"
             ReferencedContainer = "container:zhubao.xcodeproj">
          </BuildableReference>

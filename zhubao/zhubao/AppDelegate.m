@@ -14,6 +14,7 @@
 @synthesize queue;
 @synthesize thridView;
 @synthesize alter;
+@synthesize myinfol;
 int queuecount=0;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
