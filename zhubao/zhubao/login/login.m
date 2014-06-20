@@ -74,6 +74,11 @@ NSInteger i=0;
         //不同步数据，但去下载图片组
         //[getdata getAllZIPPhotos];
     //}
+    
+    
+//    myApi * sd=[[myApi alloc] init];
+//    [sd getMyInfo];
+    
 }
 
 

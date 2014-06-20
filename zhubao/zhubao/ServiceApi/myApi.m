@@ -16,7 +16,7 @@
     @try {
         AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
         
-        NSString * uId=myDelegate.entityl.uId;
+        NSString * uId=@"68";//myDelegate.entityl.uId;
         
         getNowTime * time=[[getNowTime alloc] init];
         NSString * nowt=[time nowTime];
@@ -49,13 +49,14 @@
                     NSDictionary *d = (NSDictionary *)jsonObject;
                     NSArray * objArray=[d objectForKey:@"result"];
                     myinfo * n = [[myinfo alloc] init];
-                    if([(NSString *)objArray[0] isEqualToString:@"true"]){
+                    //if([(NSString *)objArray[0] isEqualToString:@"true"]){
                         //单个对象
                         
                         n.uId = uId;
                         n.logopath = (NSString *)objArray[1];
+                        n.logopathsm = (NSString *)objArray[0];
                         n.details = (NSString *)objArray[2];
-                        n.logopathsm = (NSString *)objArray[3];
+                    
                         n.companycode = uId;
                         
                         myDelegate.myinfol=n;
@@ -70,7 +71,7 @@
                         NSLog(@"--------------:%@",sql1);
                         
                         [sqlser HandleSql:sql1];
-                    }
+                    //}
                     
                     return nil;
                 }
