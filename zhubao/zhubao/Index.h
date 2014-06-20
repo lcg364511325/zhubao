@@ -30,6 +30,8 @@
 @property (retain, nonatomic) IBOutlet UIView *primaryShadeView;
 @property (retain, nonatomic) IBOutlet UIView *thridView;
 @property (weak, nonatomic) IBOutlet UITableView *goodsview;
+@property (weak, nonatomic) IBOutlet UIButton *shopcartcountButton;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;

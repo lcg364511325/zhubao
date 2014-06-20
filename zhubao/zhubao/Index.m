@@ -19,6 +19,8 @@
 @synthesize primaryShadeView;
 @synthesize thridView;
 @synthesize goodsview;
+@synthesize shopcartcountButton;
+@synthesize logoImage;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -35,6 +37,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.navigationController setNavigationBarHidden:YES];
+    NSString *goodscount=@"100";
+    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+        shopcartcountButton.hidden=NO;
+        [shopcartcountButton setTitle:goodscount forState:UIControlStateNormal];
+    }else{
+        shopcartcountButton.hidden=YES;
+    }
+    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@""]];
+    if (hasCachedImage(imgUrl)) {
+        [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
+    }else
+    {
+        [logoImage setImage:[UIImage imageNamed:@"logo"]];
+        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
+        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning

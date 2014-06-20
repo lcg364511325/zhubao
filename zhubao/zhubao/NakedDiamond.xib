@@ -18,6 +18,7 @@
                 <outlet property="fluorescenceLable" destination="AvI-UT-fbN" id="dWB-NP-1lw"/>
                 <outlet property="fourtharyView" destination="7cQ-BP-nTw" id="qwX-ZC-cgk"/>
                 <outlet property="goodsview" destination="zlK-Yb-Kuo" id="v54-yL-vGF"/>
+                <outlet property="logoImage" destination="vNF-i7-p9r" id="t4V-YR-b8f"/>
                 <outlet property="modelLable" destination="Xaa-g1-Blg" id="HeW-TN-NP6"/>
                 <outlet property="modelbtn" destination="iBn-GV-7V3" id="zAV-da-L8F"/>
                 <outlet property="netLable" destination="Eg2-t9-eAX" id="3rt-ud-OwN"/>
@@ -31,6 +32,7 @@
                 <outlet property="productimageview" destination="JVh-Do-fi7" id="yGN-yb-Njh"/>
                 <outlet property="secondShadeView" destination="SGR-ZR-pGN" id="YjT-A7-cII"/>
                 <outlet property="secondaryView" destination="XZO-gD-InY" id="EvG-eS-rNg"/>
+                <outlet property="shopcartcount" destination="Yiv-DO-kzw" id="Azi-0J-7H1"/>
                 <outlet property="sizeLable" destination="c4P-yn-WMW" id="0eJ-Ei-oww"/>
                 <outlet property="symmetryLable" destination="0c5-eU-zHd" id="3ys-u4-9rs"/>
                 <outlet property="tableLable" destination="hOL-w4-Dbf" id="eGq-6s-zQQ"/>
@@ -52,9 +54,13 @@
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="page.png" translatesAutoresizingMaskIntoConstraints="NO" id="LOl-d1-b9Q" userLabel="Image View -背景图">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pageindex.png" translatesAutoresizingMaskIntoConstraints="NO" id="LOl-d1-b9Q" userLabel="Image View -背景图">
                             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="vNF-i7-p9r">
+                            <rect key="frame" x="20" y="17" width="70" height="70"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="Avg-fe-t8o" userLabel="Image View -选中的按钮背景">
                             <rect key="frame" x="1" y="249" width="107" height="66"/>
@@ -136,6 +142,14 @@
                             <connections>
                                 <action selector="setup:" destination="-1" eventType="touchDown" id="ABT-BF-eYQ"/>
                             </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yiv-DO-kzw">
+                            <rect key="frame" x="796.5" y="27.5" width="23" height="23"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <state key="normal" title="100" backgroundImage="shopround.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="0008.png" translatesAutoresizingMaskIntoConstraints="NO" id="cnP-ur-MYa" userLabel="Image View - 全球钻石">
                             <rect key="frame" x="224" y="134" width="680" height="500"/>
@@ -1233,13 +1247,15 @@
         <image name="diamond10.png" width="126" height="126"/>
         <image name="home.png" width="68" height="81"/>
         <image name="install.png" width="54" height="57"/>
+        <image name="logo.png" width="76" height="76"/>
         <image name="magnifier.png" width="81" height="90"/>
-        <image name="page.png" width="2048" height="1536"/>
+        <image name="pageindex.png" width="2048" height="1536"/>
         <image name="ring.png" width="82" height="96"/>
         <image name="search.png" width="330" height="88"/>
         <image name="shopping.png" width="400" height="110"/>
         <image name="shopping_cart.png" width="1582" height="1208"/>
         <image name="shoppingcart.png" width="76" height="52"/>
+        <image name="shopround.png" width="52" height="52"/>
         <image name="submit.png" width="330" height="88"/>
         <image name="yellowcolor.png" width="126" height="126"/>
     </resources>

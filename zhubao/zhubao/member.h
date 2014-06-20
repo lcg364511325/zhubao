@@ -45,6 +45,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *newpassword;
 @property (weak, nonatomic) IBOutlet UITextField *affirmpassword;
 @property (weak, nonatomic) IBOutlet UITableView *goodsview;
+@property (weak, nonatomic) IBOutlet UIButton *shopcartcount;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;

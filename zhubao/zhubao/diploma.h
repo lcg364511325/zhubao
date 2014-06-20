@@ -28,6 +28,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *dipomaNoText;
 @property (weak, nonatomic) IBOutlet UITextField *diamondWeightText;
 @property (weak, nonatomic) IBOutlet UITableView *goodsview;
+@property (weak, nonatomic) IBOutlet UILabel *dipomaIndex;
+@property (weak, nonatomic) IBOutlet UILabel *selectText;
+@property (weak, nonatomic) IBOutlet UIButton *shopcartcount;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 
 
 - (IBAction)goAction:(id)sender;

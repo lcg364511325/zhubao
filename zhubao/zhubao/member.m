@@ -36,6 +36,8 @@
 @synthesize newpassword;
 @synthesize affirmpassword;
 @synthesize goodsview;
+@synthesize shopcartcount;
+@synthesize logoImage;
 
 
 //判定点击来哪个tableview
@@ -60,6 +62,23 @@ NSInteger selecttable=0;
     NSArray *province=[[NSArray alloc] initWithObjects:@"广东",@"广西",@"河北", nil];
     self.provincelist=province;
     self.Divisionlist=Divisionarray;
+    NSString *goodscount=@"100";
+    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+        shopcartcount.hidden=NO;
+        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
+    }else{
+        shopcartcount.hidden=YES;
+    }
+    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@""]];
+    if (hasCachedImage(imgUrl)) {
+        [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
+    }else
+    {
+        [logoImage setImage:[UIImage imageNamed:@"logo"]];
+        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
+        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+        
+    }
     
 }
 
@@ -150,11 +169,13 @@ NSInteger selecttable=0;
 {
     sqlService *sql=[[sqlService alloc]init];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
-    if (![orderinfo isEqualToString:@""]) {
-        NSString *rowString =orderinfo;
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alter show];
+    if (![myDelegate.entityl.userPass isEqualToString:@""] && myDelegate.entityl.userPass!=nil ) {
+        NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
+        if (![orderinfo isEqualToString:@""]) {
+            NSString *rowString =orderinfo;
+            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alter show];
+        }
     }
 }
 

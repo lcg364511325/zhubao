@@ -24,6 +24,10 @@
 @synthesize diamondWeightText;
 @synthesize list = _list;
 @synthesize goodsview;
+@synthesize dipomaIndex;
+@synthesize selectText;
+@synthesize shopcartcount;
+@synthesize logoImage;
 
 //证书类型
 NSInteger diptype=0;
@@ -47,6 +51,27 @@ NSInteger vvvv=0;
                       @"IGI(世界宝石学院)", @"HRD(比利时钻石高阶层会议)", @"AGS(美国宝石学学会)", @"EGL(欧洲宝石学院)", nil];
     self.list = array;
     selecttext.userInteractionEnabled=NO;
+    dipomaIndex.lineBreakMode = NSLineBreakByWordWrapping;
+    dipomaIndex.hidden=YES;
+    selectText.hidden=NO;
+    NSString *goodscount=@"100";
+    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+        shopcartcount.hidden=NO;
+        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
+    }else{
+        shopcartcount.hidden=YES;
+    }
+    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@""]];
+    if (hasCachedImage(imgUrl)) {
+        [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
+    }else
+    {
+        [logoImage setImage:[UIImage imageNamed:@"logo"]];
+        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
+        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+        
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -410,6 +435,31 @@ NSInteger vvvv=0;
     NSString *rowString = [self.list objectAtIndex:[indexPath row]];
     diptype=[indexPath row];
     selecttext.text=rowString;
+    selectText.hidden=YES;
+    dipomaIndex.hidden=NO;
+    if (diptype==0) {
+        dipomaIndex.text=@"美国宝石学院是一家独立的非盈利性组织，作为世界上宝石界的权威，以它的公正而闻名。美国宝石学院(GIA)于 1931 年在洛杉矶成立，总部座落于洛杉矶，它创立并提出了国际分级体系。这个学院的突破性研究及其本身的教育、实验和设备开发过程几乎就是珠宝工业成长的编年史。GIA 在钻石分级和宝石鉴定方面为世界权威，GIA 钻石分级报告被认为是世界第一的宝石证书。各种大小的钻石都从世界各个角落送到 GIA 来进行分析分级。";
+    }
+    else if (diptype==1)
+    {
+        dipomaIndex.text=@"NGTC 全称为国家珠宝玉石质量监督检验中心，隶属于国土资源部珠宝玉石首饰管理中心，长期以来一直致力于珠宝职业教育和国家珠宝玉石标准的推广和普及工作。是国家质量监督检验检疫总局依法授权的国家级珠宝玉石专业质检机构, 先后通过了国家级的计量认证、中国实验室国家认可委员会的实验室ISO/IEC　17025认可、国家产品质量监督检验机构的审查认可，是国内珠宝玉石检测方面的权威机构。";
+    }
+    else if (diptype==2)
+    {
+        dipomaIndex.text=@"国际宝石学院座落于安特卫普，是最古老的宝石学院。1975 年在纽约、曼谷、孟买和东京分别建立了实验室。IGI 钻石报告从本质上说是一份声明，它借助世界认同的体系来验证钻石的真实性，提供可靠正确的钻石身份和级别。每颗钻石都经过几个有着丰富经验的鉴定师通过使用专业仪器分析来得到一个准确的钻石切工质量和特性描述。通过通俗易懂的语言来阐述钻石的详细信息。每颗钻石的级别和品质一般依据于 4C(克拉重量、颜色、净度和切工)作为分析结构记录在 IGI 钻石报告中。";
+    }
+    else if (diptype==3)
+    {
+        dipomaIndex.text=@"比利时钻石高阶层议会是官方认可的代表着比利时钻石商贸行业的机构。议会总部座落于世界钻石中心安特卫普。比利时钻石高阶层议会发布三种证书，其中 HRD 钻石证书也包含了完整的钻石品质描述，包括钻石的形状、重量、净度级别、荧光、颜色级别、规格和抛光级别。这些特有的品质决定了一个钻石的价值。";
+    }
+    else if (diptype==4)
+    {
+        dipomaIndex.text=@"美国宝石学学会通过严格的分级标准和提供详细信息来领导着行业。初级消费者可以借助简单的数字方法来理解钻石分级。钻石加工商和钻石批发商也使用美国宝石学学会钻石证书提供的详细钻石信息在世界上购买成批的钻石。";
+    }
+    else if (diptype==5)
+    {
+        dipomaIndex.text=@"成立于 1974 年，总裁是有地质学位的 Guy Margel，他在比利时开设了安特卫普第一所鉴定中心 EGL。并且以协助消费者购买钻石及贵宝石为使命。30 多年来，EGL 的客户以专业的批发商、零售商及切割工厂为主。EGL 也提供鉴定及教学服务，除此之外，还有钻石重车拋光，EGL 发出的证书足以提供该钻石所有的信息，包括了钻石的重量、颜色、净度、尺寸等物理性质，以供业界及消费者参考。在美国及比利时 EGL 鉴定有一定的专业地位和知名度。";
+    }
     DiplomaSelect.hidden=YES;
 }
 

@@ -7,9 +7,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Index">
             <connections>
                 <outlet property="goodsview" destination="iFN-51-r1N" id="bai-ml-aOJ"/>
+                <outlet property="logoImage" destination="nEw-Ns-Qvp" id="XWP-RZ-Tp8"/>
                 <outlet property="primaryShadeView" destination="aBG-Q3-34l" id="oMz-QS-bX1"/>
                 <outlet property="primaryView" destination="rXR-Pn-ahE" id="sgS-xe-8CZ"/>
                 <outlet property="secondaryView" destination="eEh-DG-jL3" id="c3z-ll-O3P"/>
+                <outlet property="shopcartcountButton" destination="TeR-qJ-vGr" id="fk2-Sg-vQs"/>
                 <outlet property="thridView" destination="ORn-vH-567" id="Vdk-7G-E27"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -110,6 +112,17 @@
                             </state>
                             <connections>
                                 <action selector="setup:" destination="-1" eventType="touchDown" id="e1f-vN-MiU"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TeR-qJ-vGr">
+                            <rect key="frame" x="796.5" y="27.5" width="23" height="23"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <state key="normal" title="100" backgroundImage="shopround.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="goAction:" destination="-1" eventType="touchDown" id="Ccb-mt-1ed"/>
                             </connections>
                         </button>
                     </subviews>
@@ -222,12 +235,13 @@
         <image name="diamond.png" width="82" height="87"/>
         <image name="home.png" width="68" height="81"/>
         <image name="install.png" width="54" height="57"/>
-        <image name="logo.png" width="143" height="147"/>
+        <image name="logo.png" width="76" height="76"/>
         <image name="magnifier.png" width="81" height="90"/>
         <image name="pageindex.png" width="2048" height="1536"/>
         <image name="ring.png" width="82" height="96"/>
         <image name="shopping_cart.png" width="1582" height="1208"/>
         <image name="shoppingcart.png" width="76" height="52"/>
+        <image name="shopround.png" width="52" height="52"/>
         <image name="submit.png" width="330" height="88"/>
     </resources>
 </document>

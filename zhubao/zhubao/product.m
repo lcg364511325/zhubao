@@ -53,6 +53,8 @@
 @synthesize btninlay;
 @synthesize btnseric;
 @synthesize goodsview;
+@synthesize shopcartcount;
+@synthesize logoImage;
 
 //判定点击来哪个tableview
 NSInteger selecttype=0;
@@ -108,6 +110,23 @@ NSString * Pro_type;
     sqlService *sql=[[sqlService alloc]init];
     list=[sql GetProductList:nil type2:nil type3:nil type4:nil page:1 pageSize:1500];
     pricelable.text=@"获取价格中。。。";
+    NSString *goodscount=@"100";
+    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+        shopcartcount.hidden=NO;
+        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
+    }else{
+        shopcartcount.hidden=YES;
+    }
+    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@""]];
+    if (hasCachedImage(imgUrl)) {
+        [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
+    }else
+    {
+        [logoImage setImage:[UIImage imageNamed:@"logo"]];
+        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
+        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+        
+    }
 
 }
 
