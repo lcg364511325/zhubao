@@ -24,11 +24,18 @@
                 <outlet property="maintext" destination="VGB-r5-Hm4" id="50d-Uf-PVh"/>
                 <outlet property="mamColorText" destination="3OT-ac-4cN" id="Gia-wj-Ny2"/>
                 <outlet property="mamMainText" destination="C7I-Yb-59A" id="pIr-zb-cI9"/>
+                <outlet property="manColorLabel" destination="RIV-Jt-3cO" id="tG8-j3-Nwt"/>
+                <outlet property="manColorbutton" destination="T26-e7-gOa" id="ekB-eD-bgA"/>
                 <outlet property="manFontText" destination="sCR-7s-drm" id="DHq-ae-NZ0"/>
-                <outlet property="manMainText" destination="fF8-Mh-uYP" id="mgN-Yp-juX"/>
+                <outlet property="manMainLabel" destination="fF8-Mh-uYP" id="JvY-GP-tcr"/>
+                <outlet property="manMainbutton" destination="afY-iW-ldk" id="NBC-0l-9jd"/>
                 <outlet property="manNetText" destination="PIC-iA-46c" id="FyS-1Y-Z7c"/>
                 <outlet property="manSizeText" destination="sFY-b3-quI" id="MrS-GH-Rmh"/>
                 <outlet property="manTextureText" destination="oX7-Bd-g6o" id="1ZI-9m-Ddf"/>
+                <outlet property="mancjLabel" destination="Wch-E9-zey" id="iad-2c-tRk"/>
+                <outlet property="mancjbutton" destination="75O-uG-DhJ" id="tMy-Mi-oAN"/>
+                <outlet property="manjdLabel" destination="XLE-TP-MlI" id="RYz-Wm-KIO"/>
+                <outlet property="manjdbutton" destination="sFf-pU-ASo" id="cxf-93-xaE"/>
                 <outlet property="mianselect" destination="sh6-T8-Zgd" id="w8D-jt-neb"/>
                 <outlet property="modellable" destination="dlN-rs-pIN" id="POZ-ig-CNA"/>
                 <outlet property="netselect" destination="d7Z-yo-VeN" id="oLV-IR-r4g"/>
@@ -656,6 +663,13 @@
                 <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pSa-na-GF5">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0GJ-x7-Tsu">
+                            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lrm-nX-2Fp">
@@ -1003,11 +1017,6 @@
                     </subviews>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                </view>
-                <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0GJ-x7-Tsu">
-                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nKF-Sp-JA7">
                     <rect key="frame" x="152" y="109" width="720" height="550"/>

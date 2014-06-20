@@ -83,6 +83,15 @@
 @property (weak, nonatomic) IBOutlet UITextField *manSizeText;
 @property (weak, nonatomic) IBOutlet UITextField *manFontText;
 
+@property (weak, nonatomic) IBOutlet UIButton *manMainbutton;
+@property (weak, nonatomic) IBOutlet UIButton *manjdbutton;
+@property (weak, nonatomic) IBOutlet UIButton *manColorbutton;
+@property (weak, nonatomic) IBOutlet UIButton *mancjbutton;
+
+@property (weak, nonatomic) IBOutlet UILabel *manMainLabel;
+@property (weak, nonatomic) IBOutlet UILabel *manjdLabel;
+@property (weak, nonatomic) IBOutlet UILabel *manColorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *mancjLabel;
 
 - (IBAction)closeAction:(id)sender;
 - (IBAction)goAction1:(id)sender;

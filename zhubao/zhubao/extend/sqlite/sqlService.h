@@ -40,6 +40,9 @@
 //清空数据
 - (BOOL)ClearTableDatas:(NSString *)tableName;
 
+//清空数据
+- (BOOL)ClearAllTableDatas;
+
 //查询商品列表
 -(NSMutableArray*)GetProductList:(NSString *)type1 type2:(NSString *)type2 type3:(NSString *)type3 type4:(NSString *)type4 page:(int)page pageSize:(int)pageSize;
 

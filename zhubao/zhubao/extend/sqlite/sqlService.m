@@ -1200,7 +1200,7 @@
         
         sqlite3_stmt *statement = nil;
         //sql语句
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT count(productid) as counts from buyproduct where customerid=%@ ",uid];
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT count(productid) as counts from buyproduct where customerid=%@ and producttype in (1,2,3,9) ",uid];
         
         const char *sql = [querySQL UTF8String];
         if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
@@ -1663,7 +1663,7 @@
         const char *sql = [querySQL UTF8String];
         if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
             //NSLog(@"Error: failed to prepare statement with message:search TB_MyDoor.");
-            return NO;
+            return entity;
         } else {
             
             //查询结果集中一条一条的遍历所有的记录，这里的数字对应的是列值。
@@ -2063,6 +2063,39 @@
     
     return @"" ;
 }
+
+//清空数据
+- (BOOL)ClearAllTableDatas{
+    
+    @try {
+        
+        [self ClearTableDatas:@"product"];
+        
+        [self ClearTableDatas:@"productdia"];
+        
+        [self ClearTableDatas:@"buyproduct"];
+        
+        [self ClearTableDatas:@"withmouth"];
+        
+        [self ClearTableDatas:@"myinfo"];
+        
+        [self ClearTableDatas:@"customer"];
+        
+        [self ClearTableDatas:@"updatetime"];
+
+        [self ClearTableDatas:@"productphotos"];
+
+    }
+    @catch (NSException *exception) {
+        return FALSE;
+    }
+    @finally {
+        
+    }
+    
+    return TRUE;
+}
+
 
 //根据名称获取材质的代码值
 -(NSString *)getGoldtype:(NSString *)name{

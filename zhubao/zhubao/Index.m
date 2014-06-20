@@ -38,11 +38,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.navigationController setNavigationBarHidden:YES];
+     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     
     sqlService * sql=[[sqlService alloc]init];
+    myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
     
-    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    
+    myDelegate.myinfol=[sql getMyinfo:myDelegate.entityl.uId];
+
     NSString *goodscount=myDelegate.entityl.resultcount;
     if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
         shopcartcountButton.hidden=NO;
@@ -381,11 +383,21 @@
     sqlService * sql=[[sqlService alloc]init];
     NSString *successdelete=[sql deleteBuyproduct:entity.Id];
     if (successdelete) {
+        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+        sql=[[sqlService alloc]init];
+        myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
+        NSString *goodscount=myDelegate.entityl.resultcount;
+        if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+            shopcartcountButton.hidden=NO;
+            [shopcartcountButton setTitle:goodscount forState:UIControlStateNormal];
+        }else{
+            shopcartcountButton.hidden=YES;
+        }
+        
         NSString *rowString =@"删除成功！";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
-        
-        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+
         sqlService *shopcar=[[sqlService alloc] init];
         shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
         [goodsview reloadData];

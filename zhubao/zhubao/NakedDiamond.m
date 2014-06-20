@@ -83,6 +83,7 @@ NSInteger whichview=0;
     pricemin.keyboardType=UIKeyboardTypeNumberPad;
     pricemax.keyboardType=UIKeyboardTypeNumberPad;
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    
     NSString *goodscount=myDelegate.entityl.resultcount;
     if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
         shopcartcount.hidden=NO;
@@ -352,11 +353,20 @@ NSInteger whichview=0;
     sqlService * sql=[[sqlService alloc]init];
     NSString *successdelete=[sql deleteBuyproduct:entity.Id];
     if (successdelete) {
+        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+        sql=[[sqlService alloc]init];
+        myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
+        if (myDelegate.entityl.resultcount && ![myDelegate.entityl.resultcount isEqualToString:@""] && ![myDelegate.entityl.resultcount isEqualToString:@"0"]) {
+            shopcartcount.hidden=NO;
+            [shopcartcount setTitle:myDelegate.entityl.resultcount forState:UIControlStateNormal];
+        }else{
+            shopcartcount.hidden=YES;
+        }
+        
         NSString *rowString =@"删除成功！";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
         
-        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
         sqlService *shopcar=[[sqlService alloc] init];
         shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
         [goodsview reloadData];
@@ -1181,6 +1191,11 @@ NSInteger whichview=0;
     sql=[[sqlService alloc]init];
     buyproduct *successadd=[sql addToBuyproduct:entity];
     if (successadd) {
+        sql=[[sqlService alloc]init];
+        myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
+        shopcartcount.hidden=NO;
+        [shopcartcount setTitle:myDelegate.entityl.resultcount forState:UIControlStateNormal];
+        
         NSString *rowString =@"成功加入购物车！";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];

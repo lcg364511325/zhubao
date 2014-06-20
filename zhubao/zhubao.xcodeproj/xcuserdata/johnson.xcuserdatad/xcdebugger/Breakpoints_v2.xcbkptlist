@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "610"
             endingLineNumber = "610"
-            landmarkName = "-GetProductdiaList:type2:type3:type4:type5:type6:type7:type8:type9:type10:type11:page:pageSize:"
+            landmarkName = "-GetProductBoyDetail:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
