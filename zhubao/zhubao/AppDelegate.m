@@ -48,6 +48,7 @@ int queuecount=0;
     //初始化实体
     self.entityl=[[LoginEntity alloc] init];
     entityl.uId=@"0";
+    entityl.resultcount=@"0";
     
     self.myinfol=[[myinfo alloc] init];
     
@@ -59,8 +60,8 @@ int queuecount=0;
     [queue go];//启动
     
     //系统新安装未初始化
-    //login * lo = [[login alloc] init];
-    Index *lo = [[Index alloc] initWithNibName:@"Index" bundle:nil] ;
+    login * lo = [[login alloc] init];
+    //Index *lo = [[Index alloc] initWithNibName:@"Index" bundle:nil] ;
     
     UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:lo];
     

@@ -59,17 +59,14 @@ NSInteger selecttable=0;
     // Do any additional setup after loading the view from its nib.
     NSArray *Divisionarray = [[NSArray alloc] initWithObjects:@"办公室", @"市场部",
                          @"采购部", @"技术部",@"人力资源",@"其他", nil];
-    NSArray *province=[[NSArray alloc] initWithObjects:@"广东",@"广西",@"河北", nil];
+    //NSArray *province=[[NSArray alloc] initWithObjects:@"广东",@"广西",@"河北", nil];
+    NSArray *province = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"city" ofType:@"plist"]];
+    
+    
     self.provincelist=province;
     self.Divisionlist=Divisionarray;
-    NSString *goodscount=@"100";
-    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-        shopcartcount.hidden=NO;
-        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
-    }else{
-        shopcartcount.hidden=YES;
-    }
-    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@""]];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    NSURL *imgUrl=[NSURL URLWithString:myDelegate.myinfol.logopathsm];
     if (hasCachedImage(imgUrl)) {
         [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
     }else
@@ -79,6 +76,15 @@ NSInteger selecttable=0;
         [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
         
     }
+    
+    NSString *goodscount=myDelegate.entityl.resultcount;
+    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+        shopcartcount.hidden=NO;
+        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
+    }else{
+        shopcartcount.hidden=YES;
+    }
+    
     
 }
 
@@ -504,7 +510,9 @@ NSInteger selecttable=0;
         
         NSUInteger row = [indexPath row];
         if (selecttable==0) {
-            cell.textLabel.text = [self.provincelist objectAtIndex:row];
+            NSDictionary *rowString = [self.provincelist objectAtIndex:[indexPath row]];
+            cell.textLabel.text = [rowString objectForKey:@"state"];
+            
         }else if (selecttable==1){
             cell.textLabel.text = [self.citylist objectAtIndex:row];
         }else if (selecttable==2){
@@ -519,21 +527,18 @@ NSInteger selecttable=0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (selecttable==0) {
-        NSString *rowString = [self.provincelist objectAtIndex:[indexPath row]];
-        provinceText.text=rowString;
-        if ([rowString isEqualToString:@"广东"]) {
-            self.citylist=[[NSArray alloc]initWithObjects:@"中山",@"佛山",@"江门",@"珠海",@"广州",@"深圳", nil];
-        }
-        else if ([rowString isEqualToString:@"广西"]){
-            self.citylist=[[NSArray alloc]initWithObjects:@"桂林",@"南宁",@"江门",@"玉林",@"梧州",@"柳州", nil];
-        }
-        else if ([rowString isEqualToString:@"河北"]){
-            self.citylist=[[NSArray alloc]initWithObjects:@"张家口",@"唐山",@"石家庄",@"唐山",@"保定",@"", nil];
-        }
+         NSDictionary *rowString = [self.provincelist objectAtIndex:[indexPath row]];
+        NSString * proname=[rowString objectForKey:@"state"];
+        NSArray * cities=[rowString objectForKey:@"cities"];
+        
+        provinceText.text=proname;
+        self.citylist=cities;
         cityText.text=nil;
+        
     }else if (selecttable==1){
         NSString *rowString = [self.citylist objectAtIndex:[indexPath row]];
         cityText.text=rowString;
+        
     }else if (selecttable==2){
         NSString *rowString = [self.Divisionlist objectAtIndex:[indexPath row]];
         divisionText.text=rowString;

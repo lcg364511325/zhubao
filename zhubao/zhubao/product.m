@@ -25,6 +25,7 @@
 @synthesize colorselect;
 @synthesize textureselect;
 @synthesize mainlist=_mainlist;
+@synthesize mainmanlist;
 @synthesize netlist=_netlist;
 @synthesize colorlist=_colorlist;
 @synthesize texturelist=_texturelist;
@@ -55,6 +56,12 @@
 @synthesize goodsview;
 @synthesize shopcartcount;
 @synthesize logoImage;
+@synthesize mamMainText;
+@synthesize manNetText;
+@synthesize mamColorText;
+@synthesize manTextureText;
+@synthesize manSizeText;
+@synthesize manFontText;
 
 //判定点击来哪个tableview
 NSInteger selecttype=0;
@@ -107,17 +114,18 @@ NSString * Pro_type;
     countLable.text=nil;
     fonttext.placeholder=@"        8到12个字符";
     //进来时候加载全部数据
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     sqlService *sql=[[sqlService alloc]init];
     list=[sql GetProductList:nil type2:nil type3:nil type4:nil page:1 pageSize:1500];
     pricelable.text=@"获取价格中。。。";
-    NSString *goodscount=@"100";
+    NSString *goodscount=myDelegate.entityl.resultcount;
     if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
         shopcartcount.hidden=NO;
         [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
     }else{
         shopcartcount.hidden=YES;
     }
-    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@""]];
+    NSURL *imgUrl=[NSURL URLWithString:myDelegate.myinfol.logopathsm];
     if (hasCachedImage(imgUrl)) {
         [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
     }else
@@ -284,15 +292,18 @@ NSString * Pro_type;
     NSInteger value=0;
     if(selecttype==0){
         value=[_mainlist count];
-    }else if(selecttype==1){
+    }else if(selecttype==1 || selecttype==6){
         value=[_netlist count];
-    }else if(selecttype==2){
+    }else if(selecttype==2 || selecttype==7){
         value=[_colorlist count];
-    }else if (selecttype==3){
+    }else if (selecttype==3 || selecttype==8){
         value=[_texturelist count];
     }else if (selecttype==4)
     {
         value=[shoppingcartlist count];
+    }else if(selecttype==5)
+    {
+        value=[mainmanlist count];
     }
     return value;
     //只有一组，数组数即为行数。
@@ -467,12 +478,15 @@ NSString * Pro_type;
         NSUInteger row = [indexPath row];
         if(selecttype==0){
             cell.textLabel.text = [self.mainlist objectAtIndex:row];
-        }else if(selecttype==1){
+        }else if(selecttype==1 || selecttype==6){
             cell.textLabel.text = [self.netlist objectAtIndex:row];
-        }else if(selecttype==2){
+        }else if(selecttype==2 || selecttype==7){
             cell.textLabel.text = [self.colorlist objectAtIndex:row];
-        }else if (selecttype==3){
+        }else if (selecttype==3 || selecttype==8){
             cell.textLabel.text = [self.texturelist objectAtIndex:row];
+        }else if (selecttype==5)
+        {
+            cell.textLabel.text=[self.mainmanlist objectAtIndex:row];
         }
         return cell;
     }
@@ -618,24 +632,28 @@ NSString * Pro_type;
         colorselect.hidden=YES;
         netselect.hidden=YES;
         textureselect.hidden=YES;
+        mianselect.frame=CGRectMake(544, mianselect.frame.origin.y, mianselect.frame.size.width, mianselect.frame.size.height);
         [mianselect reloadData];
     }else if(btntag==1){
         netselect.hidden=NO;
         mianselect.hidden=YES;
         colorselect.hidden=YES;
         textureselect.hidden=YES;
+        netselect.frame=CGRectMake(544, netselect.frame.origin.y, netselect.frame.size.width, netselect.frame.size.height);
         [netselect reloadData];
     }else if (btntag==2){
         colorselect.hidden=NO;
         mianselect.hidden=YES;
         netselect.hidden=YES;
         textureselect.hidden=YES;
+        colorselect.frame=CGRectMake(544, colorselect.frame.origin.y, colorselect.frame.size.width, colorselect.frame.size.height);
         [colorselect reloadData];
     }else if (btntag==3){
         textureselect.hidden=NO;
         mianselect.hidden=YES;
         colorselect.hidden=YES;
         netselect.hidden=YES;
+        textureselect.frame=CGRectMake(544, textureselect.frame.origin.y, textureselect.frame.size.width, textureselect.frame.size.height);
         [textureselect reloadData];
     }else if (btntag==4)
     {
@@ -646,6 +664,34 @@ NSString * Pro_type;
         sqlService *shopcar=[[sqlService alloc] init];
         shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
         [goodsview reloadData];
+    }else if(btntag==5){
+        mianselect.hidden=NO;
+        colorselect.hidden=YES;
+        netselect.hidden=YES;
+        textureselect.hidden=YES;
+        mianselect.frame=CGRectMake(544+135, mianselect.frame.origin.y, mianselect.frame.size.width, mianselect.frame.size.height);
+        [mianselect reloadData];
+    }else if(btntag==6){
+        netselect.hidden=NO;
+        mianselect.hidden=YES;
+        colorselect.hidden=YES;
+        textureselect.hidden=YES;
+        netselect.frame=CGRectMake(544+135, netselect.frame.origin.y, netselect.frame.size.width, netselect.frame.size.height);
+        [netselect reloadData];
+    }else if (btntag==7){
+        colorselect.hidden=NO;
+        mianselect.hidden=YES;
+        netselect.hidden=YES;
+        textureselect.hidden=YES;
+        colorselect.frame=CGRectMake(544+135, colorselect.frame.origin.y, colorselect.frame.size.width, colorselect.frame.size.height);
+        [colorselect reloadData];
+    }else if (btntag==8){
+        textureselect.hidden=NO;
+        mianselect.hidden=YES;
+        colorselect.hidden=YES;
+        netselect.hidden=YES;
+        textureselect.frame=CGRectMake(544+135, textureselect.frame.origin.y, textureselect.frame.size.width, textureselect.frame.size.height);
+        [textureselect reloadData];
     }
     
 }
@@ -1177,13 +1223,23 @@ NSString * Pro_type;
     fonttext.text=nil;
     numbertext.text=@"1";
     NSMutableArray *inlayarry=[[NSMutableArray alloc] init];
+    NSMutableArray *inlayarryman=[[NSMutableArray alloc] init];
+    NSMutableArray *mainarryman=[[NSMutableArray alloc] init];
     sql=[[sqlService alloc] init];
+    if ([goods.Pro_Class isEqualToString:@"3"]) {
+        productEntity *goodsman=[sql GetProductDetail:productnumber];
+        inlayarryman=[sql getwithmouths:goodsman.Id];
+        for (withmouth *inlayman in inlayarryman) {
+            [mainarryman addObject:inlayman.zWeight];
+        }
+    }
     inlayarry=[sql getwithmouths:goods.Id];
     NSMutableArray *mainarry=[[NSMutableArray alloc] init];
     for (withmouth *inlay in inlayarry) {
         [mainarry addObject:inlay.zWeight];
     }
     self.mainlist=mainarry;
+    self.mainmanlist=mainarryman;
     if(self.mainlist.count>0)
     maintext.text=[self.mainlist objectAtIndex:0];
     

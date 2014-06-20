@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *goodsview;
 @property (weak, nonatomic) IBOutlet UIButton *shopcartcountButton;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
+@property (weak, nonatomic) IBOutlet UIImageView *biglogo;
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;

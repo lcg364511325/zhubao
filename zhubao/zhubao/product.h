@@ -45,6 +45,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *colorselect;
 @property (weak, nonatomic) IBOutlet UITableView *textureselect;
 @property (strong, nonatomic) NSArray *mainlist;
+@property (strong, nonatomic) NSArray *mainmanlist;
 @property (strong, nonatomic) NSArray *netlist;
 @property (strong, nonatomic) NSArray *colorlist;
 @property (strong, nonatomic) NSArray *texturelist;
@@ -75,6 +76,12 @@
 @property (weak, nonatomic) IBOutlet UITableView *goodsview;
 @property (weak, nonatomic) IBOutlet UIButton *shopcartcount;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
+@property (weak, nonatomic) IBOutlet UITextField *mamMainText;
+@property (weak, nonatomic) IBOutlet UITextField *manNetText;
+@property (weak, nonatomic) IBOutlet UITextField *mamColorText;
+@property (weak, nonatomic) IBOutlet UITextField *manTextureText;
+@property (weak, nonatomic) IBOutlet UITextField *manSizeText;
+@property (weak, nonatomic) IBOutlet UITextField *manFontText;
 
 
 - (IBAction)closeAction:(id)sender;
