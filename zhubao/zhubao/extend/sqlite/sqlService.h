@@ -46,6 +46,9 @@
 //查询商品明细
 -(productEntity*)GetProductDetail:(NSString *)pid;
 
+//查询商品明细
+-(productEntity*)GetProductBoyDetail:(NSString *)girlid;
+
 //新加商品
 -(productEntity*)saveProduct:(productEntity *)entity;
 
@@ -66,6 +69,9 @@
 
 //删除购物车信息
 -(NSString*)deleteBuyproduct:(NSString *)pid;
+
+//根据用户的id查询购物车的数量
+-(NSString*)getBuyproductcount:(NSString*)uid;
 
 //查询商品的3d图片
 -(NSMutableArray*)getProductRAR:(NSString *)pid;
