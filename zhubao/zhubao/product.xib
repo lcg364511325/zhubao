@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="product">
@@ -19,6 +19,7 @@
                 <outlet property="fonttext" destination="aOE-Py-StE" id="jQa-o4-DnK"/>
                 <outlet property="fourthView" destination="Yau-vH-R2D" id="jeJ-vu-FVo"/>
                 <outlet property="goodsview" destination="oDv-RG-cIJ" id="Zbj-Kz-MPe"/>
+                <outlet property="logoImage" destination="dUx-sO-BI7" id="xBy-zk-crB"/>
                 <outlet property="mainlable" destination="Frm-s8-2aR" id="wWb-Xf-OUP"/>
                 <outlet property="maintext" destination="VGB-r5-Hm4" id="50d-Uf-PVh"/>
                 <outlet property="mianselect" destination="sh6-T8-Zgd" id="w8D-jt-neb"/>
@@ -34,6 +35,7 @@
                 <outlet property="productimageview" destination="fOh-xR-5sS" id="fKN-mR-e1G"/>
                 <outlet property="secondShadeView" destination="0GJ-x7-Tsu" id="5oV-wd-0Ri"/>
                 <outlet property="secondaryView" destination="lrm-nX-2Fp" id="8I6-uf-fPY"/>
+                <outlet property="shopcartcount" destination="QFd-8q-fBE" id="yEO-Le-gRg"/>
                 <outlet property="sizeText" destination="Tu0-9I-sxq" id="M1S-EJ-98e"/>
                 <outlet property="sizetext" destination="Tu0-9I-sxq" id="zEG-O6-6ic"/>
                 <outlet property="textureselect" destination="Awj-bV-th0" id="oIx-b5-PZW"/>
@@ -53,9 +55,13 @@
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="page.png" translatesAutoresizingMaskIntoConstraints="NO" id="r9W-Ot-eV3" userLabel="Image View -背景图">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pageindex.png" translatesAutoresizingMaskIntoConstraints="NO" id="r9W-Ot-eV3" userLabel="Image View -背景图">
                             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="dUx-sO-BI7">
+                            <rect key="frame" x="20" y="17" width="70" height="70"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="YzN-Fk-zDF" userLabel="Image View -选中的按钮背景">
                             <rect key="frame" x="1" y="181" width="107" height="66"/>
@@ -137,6 +143,14 @@
                             <connections>
                                 <action selector="setup:" destination="-1" eventType="touchDown" id="BU1-ha-1u4"/>
                             </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QFd-8q-fBE">
+                            <rect key="frame" x="796.5" y="27.5" width="23" height="23"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <state key="normal" title="100" backgroundImage="shopround.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="option.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xkm-b8-chc" userLabel="Image View -分类">
                             <rect key="frame" x="110" y="73" width="914" height="119"/>
@@ -983,14 +997,16 @@
         <image name="exhibition.png" width="277" height="106"/>
         <image name="home.png" width="68" height="81"/>
         <image name="install.png" width="54" height="57"/>
+        <image name="logo.png" width="76" height="76"/>
         <image name="magnifier.png" width="81" height="90"/>
         <image name="magnifier2.png" width="246" height="46"/>
         <image name="option.png" width="1830" height="238"/>
-        <image name="page.png" width="2048" height="1536"/>
+        <image name="pageindex.png" width="2048" height="1536"/>
         <image name="ring.png" width="82" height="96"/>
         <image name="shopping.png" width="400" height="110"/>
         <image name="shopping_cart.png" width="1582" height="1208"/>
         <image name="shoppingcart.png" width="76" height="52"/>
+        <image name="shopround.png" width="52" height="52"/>
         <image name="submit.png" width="330" height="88"/>
         <image name="yellowcolor.png" width="126" height="126"/>
     </resources>

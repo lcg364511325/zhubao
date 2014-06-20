@@ -16,6 +16,7 @@
 
 @synthesize tipLable;
 @synthesize passwordbtn;
+@synthesize logoshengyu;
 
 NSInteger i=0;
 
@@ -48,12 +49,22 @@ NSInteger i=0;
     }
     
     [_submitlogin setTitle:@"" forState:UIControlStateNormal];
+    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@""]];
+    if (hasCachedImage(imgUrl)) {
+        [logoshengyu setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
+    }else
+    {
+        [logoshengyu setImage:[UIImage imageNamed:@"logo"]];
+        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoshengyu,@"imageView",nil];
+        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+        
+    }
     
     //设置此输入框可以隐藏键盘
     _account.delegate=self;
-    [_account setKeyboardType:UIKeyboardTypeDecimalPad];
+    //[_account setKeyboardType:UIKeyboardTypeDecimalPad];
     _password.delegate=self;
-    [_password setKeyboardType:UIKeyboardTypeDecimalPad];
+    //[_password setKeyboardType:UIKeyboardTypeDecimalPad];
     
 //    NSDate *  senddate=[NSDate date];
 //    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];

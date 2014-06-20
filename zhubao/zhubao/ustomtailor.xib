@@ -13,11 +13,13 @@
                 <outlet property="fontText" destination="xGU-2C-vpp" id="bQc-uq-Wwz"/>
                 <outlet property="goldweightText" destination="pj6-8F-WIE" id="4ze-fv-bkx"/>
                 <outlet property="goodsview" destination="6G8-eX-ZPW" id="P01-AQ-jdl"/>
+                <outlet property="logoImage" destination="Ywn-DR-tZN" id="CDM-35-kO7"/>
                 <outlet property="mianNoText" destination="371-8y-UeR" id="Uux-9O-4w7"/>
                 <outlet property="miandiaText" destination="26n-N8-9AH" id="hHt-Rk-W8o"/>
                 <outlet property="primaryShadeView" destination="1kb-d0-nNB" id="EAC-Z4-Fml"/>
                 <outlet property="primaryView" destination="sqs-kM-nSO" id="xN9-es-sOl"/>
                 <outlet property="secondaryView" destination="IIx-4g-o7c" id="yUE-27-wsM"/>
+                <outlet property="shopcartcount" destination="9GK-Oa-E87" id="Fbg-J6-Jf5"/>
                 <outlet property="sizeText" destination="p9y-lJ-7qM" id="9Sy-h0-kJd"/>
                 <outlet property="textureselect" destination="46E-xb-bnG" id="hYQ-13-qcZ"/>
                 <outlet property="texturetext" destination="kC5-GK-EVc" id="x4g-85-Pvg"/>
@@ -35,9 +37,13 @@
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="page.png" translatesAutoresizingMaskIntoConstraints="NO" id="Lkn-TH-pxa" userLabel="Image View -背景图">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pageindex.png" translatesAutoresizingMaskIntoConstraints="NO" id="Lkn-TH-pxa" userLabel="Image View -背景图">
                             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ywn-DR-tZN">
+                            <rect key="frame" x="20" y="17" width="70" height="70"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="k0C-tX-pbb" userLabel="Image View -选中的按钮背景">
                             <rect key="frame" x="1" y="318" width="107" height="66"/>
@@ -119,6 +125,14 @@
                             <connections>
                                 <action selector="setup:" destination="-1" eventType="touchDown" id="A8p-RU-gXO"/>
                             </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9GK-Oa-E87">
+                            <rect key="frame" x="796.5" y="27.5" width="23" height="23"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <state key="normal" title="100" backgroundImage="shopround.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="0013.png" translatesAutoresizingMaskIntoConstraints="NO" id="2SB-V0-fQG">
                             <rect key="frame" x="203" y="101" width="724" height="550"/>
@@ -398,11 +412,13 @@
         <image name="image1.png" width="500" height="500"/>
         <image name="image2.png" width="500" height="500"/>
         <image name="install.png" width="54" height="57"/>
+        <image name="logo.png" width="76" height="76"/>
         <image name="magnifier.png" width="81" height="90"/>
-        <image name="page.png" width="2048" height="1536"/>
+        <image name="pageindex.png" width="2048" height="1536"/>
         <image name="ring.png" width="82" height="96"/>
         <image name="shopping_cart.png" width="1582" height="1208"/>
         <image name="shoppingcart.png" width="76" height="52"/>
+        <image name="shopround.png" width="52" height="52"/>
         <image name="submit.png" width="330" height="88"/>
         <image name="upload.png" width="260" height="60"/>
     </resources>

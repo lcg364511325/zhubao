@@ -59,8 +59,8 @@ int queuecount=0;
     [queue go];//启动
     
     //系统新安装未初始化
-    login * lo = [[login alloc] init];
-    //ceshi *lo = [[ceshi alloc] initWithNibName:@"ceshi" bundle:nil] ;
+    //login * lo = [[login alloc] init];
+    Index *lo = [[Index alloc] initWithNibName:@"Index" bundle:nil] ;
     
     UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:lo];
     

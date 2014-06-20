@@ -31,6 +31,8 @@
 @synthesize sizeText;
 @synthesize fontText;
 @synthesize goodsview;
+@synthesize shopcartcount;
+@synthesize logoImage;
 
 //区分图片位置
 NSInteger pictag=0;
@@ -58,6 +60,23 @@ NSInteger vies=0;
                           @"18K双色", @"18K玫瑰金", @"PT900", @"Pt950", @"PD950",nil];
     self.mainlist = mainarray;
     texturetext.userInteractionEnabled=NO;
+    NSString *goodscount=@"100";
+    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+        shopcartcount.hidden=NO;
+        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
+    }else{
+        shopcartcount.hidden=YES;
+    }
+    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@""]];
+    if (hasCachedImage(imgUrl)) {
+        [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
+    }else
+    {
+        [logoImage setImage:[UIImage imageNamed:@"logo"]];
+        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
+        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+        
+    }
     
 }
 
@@ -602,11 +621,11 @@ NSInteger vies=0;
                 case 0:
                     // 取消
                     return;
-                case 1:
-                    // 相机
-                    sourceType = UIImagePickerControllerSourceTypeCamera;
-                    break;
-                    
+//                case 1:
+//                    // 相机
+//                    sourceType = UIImagePickerControllerSourceTypeCamera;
+//                    break;
+//                    
                 case 2:
                     // 相册
                     sourceType = UIImagePickerControllerSourceTypePhotoLibrary;

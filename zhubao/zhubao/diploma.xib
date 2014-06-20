@@ -8,12 +8,16 @@
             <connections>
                 <outlet property="DiplomaSelect" destination="Rqw-ke-YlM" id="R48-FP-z5K"/>
                 <outlet property="diamondWeightText" destination="vqE-m6-JKH" id="Ql9-o4-r6y"/>
+                <outlet property="dipomaIndex" destination="5Or-7y-6cn" id="aqw-zm-rNH"/>
                 <outlet property="dipomaNoText" destination="uzv-dC-mSW" id="E7N-CL-2DG"/>
                 <outlet property="goodsview" destination="v1E-aC-3LJ" id="VaM-GK-ZaU"/>
+                <outlet property="logoImage" destination="PWV-LZ-ZNy" id="E5C-Bf-W4g"/>
                 <outlet property="primaryShadeView" destination="tbp-Yz-hoN" id="IEI-VN-mo8"/>
                 <outlet property="primaryView" destination="iVk-Zb-8Rj" id="wbS-1u-eYj"/>
                 <outlet property="secondaryView" destination="JwI-wT-h0D" id="Fo6-Sf-Xt1"/>
+                <outlet property="selectText" destination="vHG-72-u9R" id="GxS-QS-TyV"/>
                 <outlet property="selecttext" destination="y1U-O6-25G" id="RVD-Gq-Dfm"/>
+                <outlet property="shopcartcount" destination="HDv-eS-1t9" id="SJE-Y5-c1v"/>
                 <outlet property="thirdView" destination="1qx-Sy-Xvy" id="xbc-9W-23r"/>
                 <outlet property="view" destination="5nX-mC-0u5" id="FjM-Op-6uS"/>
             </connections>
@@ -27,9 +31,13 @@
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="page.png" translatesAutoresizingMaskIntoConstraints="NO" id="HSv-V1-1RZ" userLabel="Image View -背景图">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pageindex.png" translatesAutoresizingMaskIntoConstraints="NO" id="HSv-V1-1RZ" userLabel="Image View -背景图">
                             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="PWV-LZ-ZNy">
+                            <rect key="frame" x="20" y="17" width="70" height="70"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="BnG-F8-oeY" userLabel="Image View -选中的按钮背景">
                             <rect key="frame" x="1" y="387" width="107" height="66"/>
@@ -112,6 +120,14 @@
                                 <action selector="setup:" destination="-1" eventType="touchDown" id="jot-eP-kcI"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDv-eS-1t9">
+                            <rect key="frame" x="796.5" y="27.5" width="23" height="23"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <state key="normal" title="100" backgroundImage="shopround.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="frame.png" translatesAutoresizingMaskIntoConstraints="NO" id="Iod-Zd-HZJ" userLabel="Image View - 证书查询">
                             <rect key="frame" x="466" y="235" width="365" height="281"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -121,6 +137,13 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="285" translatesAutoresizingMaskIntoConstraints="NO" id="5Or-7y-6cn">
+                            <rect key="frame" x="152.5" y="170" width="285" height="400"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" background="import.png" translatesAutoresizingMaskIntoConstraints="NO" id="y1U-O6-25G">
@@ -284,11 +307,13 @@
         <image name="import.png" width="484" height="76"/>
         <image name="inquiry.png" width="318" height="90"/>
         <image name="install.png" width="54" height="57"/>
+        <image name="logo.png" width="76" height="76"/>
         <image name="magnifier.png" width="81" height="90"/>
-        <image name="page.png" width="2048" height="1536"/>
+        <image name="pageindex.png" width="2048" height="1536"/>
         <image name="ring.png" width="82" height="96"/>
         <image name="shopping_cart.png" width="1582" height="1208"/>
         <image name="shoppingcart.png" width="76" height="52"/>
+        <image name="shopround.png" width="52" height="52"/>
         <image name="submit.png" width="330" height="88"/>
     </resources>
 </document>

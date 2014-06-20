@@ -73,6 +73,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btninlay;
 @property (weak, nonatomic) IBOutlet UIButton *btnseric;
 @property (weak, nonatomic) IBOutlet UITableView *goodsview;
+@property (weak, nonatomic) IBOutlet UIButton *shopcartcount;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 
 
 - (IBAction)closeAction:(id)sender;

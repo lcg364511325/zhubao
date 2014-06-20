@@ -48,6 +48,8 @@
 @synthesize colorbtn;
 @synthesize netbtn;
 @synthesize goodsview;
+@synthesize shopcartcount;
+@synthesize logoImage;
 
 NSString * nakedno=nil;
 NSInteger whichview=0;
@@ -76,6 +78,27 @@ NSInteger whichview=0;
     btnarray1 = [[NSMutableArray alloc] init];
     btnarray2 = [[NSMutableArray alloc] init];
     btnarray3 = [[NSMutableArray alloc] init];
+    weightmin.keyboardType=UIKeyboardTypeNumberPad;
+    weightmax.keyboardType=UIKeyboardTypeNumberPad;
+    pricemin.keyboardType=UIKeyboardTypeNumberPad;
+    pricemax.keyboardType=UIKeyboardTypeNumberPad;
+    NSString *goodscount=@"100";
+    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+        shopcartcount.hidden=NO;
+        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
+    }else{
+        shopcartcount.hidden=YES;
+    }
+    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@""]];
+    if (hasCachedImage(imgUrl)) {
+        [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
+    }else
+    {
+        [logoImage setImage:[UIImage imageNamed:@"logo"]];
+        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
+        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -133,7 +156,7 @@ NSInteger whichview=0;
         if (shape.length!=0) {
             [shape appendString:@",'"];
             [shape appendString:index];
-            [shape appendString:@",'"];
+            [shape appendString:@"'"];
         }else{
             [shape appendString:@"'"];
             [shape appendString:index];
@@ -1062,19 +1085,19 @@ NSInteger whichview=0;
     NSInteger btntag=[btn tag];
     NSString * fluorescence=nil;
     if (btntag==0) {
-        fluorescence=@"N";
+        fluorescence=@"Non','None";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==1){
-        fluorescence=@"F";
+        fluorescence=@"Fnt";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==2){
-        fluorescence=@"M";
+        fluorescence=@"Med";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==3){
-        fluorescence=@"S";
+        fluorescence=@"SI','Stg";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==4){
-        fluorescence=@"VS";
+        fluorescence=@"Vsl','Vst";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }
     NSUInteger len=[fluorescencearray count];

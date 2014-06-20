@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *submitlogin;
 @property (weak, nonatomic) IBOutlet UILabel *tipLable;
 @property (weak, nonatomic) IBOutlet UIButton *passwordbtn;
+@property (weak, nonatomic) IBOutlet UIImageView *logoshengyu;
 
 - (IBAction)loginAction:(id)sender;
 
