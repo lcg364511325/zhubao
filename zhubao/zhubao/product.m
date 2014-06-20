@@ -62,6 +62,8 @@ NSString * productnumber=nil;
 NSMutableArray *list=nil;
 //工厂款号
 NSString * Pro_author;
+//商品类型
+NSString * Pro_type;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -231,9 +233,16 @@ NSString * Pro_author;
                 
                 //可以在此加代码提示用户，数据已经加载完毕
                 [alter dismissWithClickedButtonIndex:0 animated:YES];
-                NSString *rowString =@"更新成功！";
-                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                //NSString *rowString =@"更新成功！";
+                //                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                //                [alter show];
+                AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:@"数据更新完，开始下载3d图片集。。。" delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
                 [alter show];
+                
+                myDelegate.alter=alter;
+                myDelegate.thridView=fourthView;
+                
                 //同步完数据了，则再去下载图片组
                 [getdata getAllZIPPhotos];
                 
@@ -282,7 +291,7 @@ NSString * Pro_author;
             cell=[nib objectAtIndex:0];
         }
         buyproduct *goods =[shoppingcartlist objectAtIndex:[indexPath row]];
-        if ([goods.producttype isEqualToString:@"1"]) {
+        if ([goods.producttype isEqualToString:@"3"]) {
             cell.showImage.image=[UIImage imageNamed:@"diamond01"];
             cell.modelLable.text=goods.diaentiy.Dia_Shape;
             if (goods.diaentiy.Dia_Lab) {
@@ -327,7 +336,7 @@ NSString * Pro_author;
                 cell.fluLable.text=nil;
             }
             cell.priceLable.text=goods.pcount;
-        }else if([goods.producttype isEqualToString:@"0"]){
+        }else if([goods.producttype isEqualToString:@"1"] || [goods.producttype isEqualToString:@"2"]){
             cell.showImage.image=[UIImage imageNamed:@"diamond01"];
             if (goods.proentiy.Pro_number) {
                 cell.dipLable.text=goods.proentiy.Pro_number;
@@ -377,7 +386,7 @@ NSString * Pro_author;
             cell.fluLable.text=nil;
             cell.priceLable.text=goods.pcount;
         }
-        else if ([goods.producttype isEqualToString:@"2"])
+        else if ([goods.producttype isEqualToString:@"9"])
         {
             NSString *fullpath =goods.photos;
             UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullpath];
@@ -1050,7 +1059,7 @@ NSString * Pro_author;
     //productEntity *goods=[sql GetProductDetail:productnumber];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     buyproduct * entity=[[buyproduct alloc]init];
-    entity.producttype=@"0";
+    entity.producttype=Pro_type;
     entity.productid=productnumber;
     entity.pcount=numberText.text;
     entity.pcolor=colortext.text;
@@ -1061,6 +1070,7 @@ NSString * Pro_author;
     entity.pweight=maintext.text;
     entity.customerid=myDelegate.entityl.uId;
     entity.pprice=0;
+    entity.pname=modellable.text;
     buyproduct *successadd=[sql addToBuyproduct:entity];
     if (successadd) {
         NSString *rowString =@"成功加入购物车！";
@@ -1111,6 +1121,7 @@ NSString * Pro_author;
     productnumber=entity.Id;
     productEntity *goods=[sql GetProductDetail:productnumber];
     Pro_author=goods.Pro_author;
+    Pro_type=goods.Pro_Type;
     //productimageview.image=[UIImage imageNamed:@"diamonds.png"];
     
     title1lable.text=goods.Pro_name;
@@ -1147,6 +1158,7 @@ NSString * Pro_author;
     fonttext.text=nil;
     numbertext.text=@"1";
     NSMutableArray *inlayarry=[[NSMutableArray alloc] init];
+    sql=[[sqlService alloc] init];
     inlayarry=[sql getwithmouths:goods.Id];
     NSMutableArray *mainarry=[[NSMutableArray alloc] init];
     for (withmouth *inlay in inlayarry) {

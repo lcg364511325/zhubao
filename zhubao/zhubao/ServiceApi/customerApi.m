@@ -40,7 +40,7 @@
         //Kstr=md5(uId|type|Upt|Key|Nowt)
         NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@",uId,@"502",Upt,apikey,Nowt]];
         
-        NSString * surl = [NSString stringWithFormat:@"/app/appinterface.php?uId=%@&type=502&Upt=%@&Nowt=%@&Kstr=%@",uId,Upt,Nowt,Kstr];
+        NSString * surl = [NSString stringWithFormat:@"/app/aiface.php?uId=%@&type=502&Upt=%@&Nowt=%@&Kstr=%@",uId,Upt,Nowt,Kstr];
 
         NSString * URL = [NSString stringWithFormat:@"%@%@",domainser,surl];
         
@@ -113,7 +113,7 @@
         //Kstr=md5(uId|type|Upt|Key|Nowt|Password|NewPassword)
         NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@|%@|%@",uId,@"500",Upt,apikey,Nowt,Password,NewPassword]];
         
-        NSString * surl = [NSString stringWithFormat:@"/app/appinterface.php?uId=%@&type=500&Upt=%@&Nowt=%@&Kstr=%@&Password=%@&NewPassword=%@",uId,Upt,Nowt,Kstr,Password,NewPassword];
+        NSString * surl = [NSString stringWithFormat:@"/app/aiface.php?uId=%@&type=500&Upt=%@&Nowt=%@&Kstr=%@&Password=%@&NewPassword=%@",uId,Upt,Nowt,Kstr,Password,NewPassword];
         
         NSString * URL = [NSString stringWithFormat:@"%@%@",domainser,surl];
         

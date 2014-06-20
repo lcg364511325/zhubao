@@ -42,6 +42,9 @@ NSInteger i=0;
         _password.text=(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"_password"];
         [passwordbtn setBackgroundImage:[UIImage imageNamed:@"sure"] forState:UIControlStateNormal];
         i=1;
+    }else{
+        _account.text=@"13428706220";
+        _password.text=@"111111";
     }
     
     [_submitlogin setTitle:@"" forState:UIControlStateNormal];
@@ -191,8 +194,8 @@ NSInteger i=0;
                     // NSLog(@"登录失败------:%@",info);
                     [[[UIAlertView alloc] initWithTitle:@"信息提示" message:info delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil] show];
                     
-                    Index *sysmenu=[[Index alloc] init];
-                    [self.navigationController pushViewController:sysmenu animated:NO];
+                    //Index *sysmenu=[[Index alloc] init];
+                    //[self.navigationController pushViewController:sysmenu animated:NO];
                 }
                 
                 //[resultButton setTitle:@"登录" forState:UIControlStateNormal];

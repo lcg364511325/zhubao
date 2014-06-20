@@ -206,9 +206,17 @@ NSInteger vies=0;
                 
                 //可以在此加代码提示用户，数据已经加载完毕
                 [alter dismissWithClickedButtonIndex:0 animated:YES];
-                NSString *rowString =@"更新成功！";
-                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                //NSString *rowString =@"更新成功！";
+                //                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                //                [alter show];
+                AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:@"数据更新完，开始下载3d图片集。。。" delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
                 [alter show];
+                
+                myDelegate.alter=alter;
+                myDelegate.thridView=thirdaryView;
+                
+                
                 //同步完数据了，则再去下载图片组
                 [getdata getAllZIPPhotos];
                 
@@ -247,7 +255,7 @@ NSInteger vies=0;
             cell=[nib objectAtIndex:0];
         }
         buyproduct *goods =[shoppingcartlist objectAtIndex:[indexPath row]];
-        if ([goods.producttype isEqualToString:@"1"]) {
+        if ([goods.producttype isEqualToString:@"3"]) {
             cell.showImage.image=[UIImage imageNamed:@"diamond01"];
             cell.modelLable.text=goods.diaentiy.Dia_Shape;
             if (goods.diaentiy.Dia_Lab) {
@@ -292,7 +300,7 @@ NSInteger vies=0;
                 cell.fluLable.text=nil;
             }
             cell.priceLable.text=goods.pcount;
-        }else if([goods.producttype isEqualToString:@"0"]){
+        }else if([goods.producttype isEqualToString:@"1"] || [goods.producttype isEqualToString:@"2"]){
             cell.showImage.image=[UIImage imageNamed:@"diamond01"];
             if (goods.proentiy.Pro_number) {
                 cell.dipLable.text=goods.proentiy.Pro_number;
@@ -342,7 +350,7 @@ NSInteger vies=0;
             cell.fluLable.text=nil;
             cell.priceLable.text=goods.pcount;
         }
-        else if ([goods.producttype isEqualToString:@"2"])
+        else if ([goods.producttype isEqualToString:@"9"])
         {
             NSString *fullpath =goods.photos;
             UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullpath];
@@ -436,10 +444,17 @@ NSInteger vies=0;
 //确认定制
 -(IBAction)orderOfGoods:(id)sender
 {
+    if (!pic1 && !pic2 && !pic3) {
+        NSString *rowString =@"至少要选择一张图片！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+        return;
+    }
+    
     sqlService * sql=[[sqlService alloc] init];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     buyproduct * entity=[[buyproduct alloc]init];
-    entity.producttype=@"2";
+    entity.producttype=@"9";
     entity.customerid=myDelegate.entityl.uId;
     entity.photos=pic1;
     entity.photom=pic2;

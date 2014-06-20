@@ -20,7 +20,8 @@
 #define domainwebservice @"http://192.168.0.11:8011/visa/PROXY/VisaCenterProxy?wsdl"
 #define imagepath  @"http://seyuu.com"
 //请求地址时写死的key值
-#define apikey  @"cceeaaffgg_(zcxfesqrtvkKdse132_)app.seyuu.comiphone_ipad_Android_2013_sssse#2!#@9.."
+#define apikey  @"kk3*Hzk@EC1GW~^n*wp8g(nLvmCk#WVk9M+h^p.b*$0vx)vr]KOT]zH[rIqm"
+//@"cceeaaffgg_(zcxfesqrtvkKdse132_)app.seyuu.comiphone_ipad_Android_2013_sssse#2!#@9.."
 
 //页面行数
 #define PSize @"10"

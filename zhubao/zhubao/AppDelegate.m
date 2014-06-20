@@ -12,7 +12,10 @@
 @synthesize window = _window;
 @synthesize entityl;
 @synthesize queue;
-
+@synthesize thridView;
+@synthesize alter;
+@synthesize myinfol;
+int queuecount=0;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -46,10 +49,13 @@
     self.entityl=[[LoginEntity alloc] init];
     entityl.uId=@"0";
     
+    self.myinfol=[[myinfo alloc] init];
+    
     //创建队列
     queue = [[ASINetworkQueue alloc] init];
     //[queue reset];//重置
     [queue setShowAccurateProgress:YES];//高精度进度
+    //[queue setQueueDidFinishSelector:@selector(queueFinished:)];
     [queue go];//启动
     
     //系统新安装未初始化
@@ -151,8 +157,6 @@
 
 -(void)beginRequest:(NSString *)fileurl fileName:(NSString *)fileName version:(NSString *)version
 {
-    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    
     //如果不存在则创建临时存储目录
     NSFileManager *fileManager=[NSFileManager defaultManager];
     if(![fileManager fileExistsAtPath:[Tool getTempFolderPath]])
@@ -160,7 +164,7 @@
         [fileManager createDirectoryAtPath:[Tool getTempFolderPath] withIntermediateDirectories:YES attributes:nil error:nil];
     }
     
-    NSLog(@"创建请求----文件名：%@------请求路径：%@",fileName,fileurl);
+    //NSLog(@"创建请求----文件名：%@------请求路径：%@",fileName,fileurl);
     //初始化Documents路径
     NSString *downloadPath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",fileName]];
     NSString *tempPath = [[Tool getTempFolderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.temp",fileName]];
@@ -179,11 +183,14 @@
     [request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:downloadPath, @"downloadPath", version, @"version", nil]];//设置上下文的文件基本信息
     
     [queue addOperation:request];//添加到队列，队列启动后不需重新启动
+    
+    queuecount++;
+    
     if ([[NSFileManager defaultManager] fileExistsAtPath:tempPath]) {
-        NSLog(@"有了--------");
+        //NSLog(@"有了--------");
     }
     else {
-        NSLog(@"没有--------");
+        //NSLog(@"没有--------");
     }
 }
 
@@ -194,19 +201,31 @@
 {
     NSError *error=[request error];
     NSLog(@"ASIHttpRequest出错了!%@",error);
-    //[request cancel];
-    //request=nil;
+    [request cancel];
+    request=nil;
+    
+    queuecount--;
+    
+    NSString *downloadPath=(NSString *)[request.userInfo objectForKey:@"downloadPath"];
+    NSString *version=(NSString *)[request.userInfo objectForKey:@"version"];
+    [alter setMessage:[NSString stringWithFormat:@"目前准备下载的图片组还剩:%d  商品(%@)3D图片下载失败,保存地址:%@",queuecount,version,downloadPath]];
+    
+    if (queuecount<=0) {
+        thridView.hidden=YES;
+        [alter dismissWithClickedButtonIndex:0 animated:YES];
+    }
+
 }
 
 -(void)requestStarted:(ASIHTTPRequest *)request
 {
-    NSLog(@"开始了!");
+    //NSLog(@"开始了!");
 }
 
 -(void)requestReceivedResponseHeaders:(ASIHTTPRequest *)request
 {
     
-    NSLog(@"收到回复了！------:%@",[[request responseHeaders] objectForKey:@"Content-Length"]);
+    //NSLog(@"收到回复了！------:%@",[[request responseHeaders] objectForKey:@"Content-Length"]);
     
 }
 
@@ -215,10 +234,18 @@
 {
     NSLog(@"将下载完成了!");//
     
-    NSString *downloadPath=(NSString *)[request.userInfo objectForKey:@"downloadPath"];
-    //NSString *version=(NSString *)[request.userInfo objectForKey:@"version"];
+    queuecount--;
     
-    NSLog(@"downloadPath======:%@",downloadPath);
+    NSString *downloadPath=(NSString *)[request.userInfo objectForKey:@"downloadPath"];
+    NSString *version=(NSString *)[request.userInfo objectForKey:@"version"];
+    [alter setMessage:[NSString stringWithFormat:@"目前准备下载的图片组还剩:%d  商品(%@)3D图片下载成功,保存地址:%@",queuecount,version,downloadPath]];
+    
+    if (queuecount<=0) {
+        thridView.hidden=YES;
+        [alter dismissWithClickedButtonIndex:0 animated:YES];
+    }
+    
+    //NSLog(@"downloadPath======:%@",downloadPath);
     
     //    NSString *string = [[NSString alloc]initWithContentsOfFile:downloadPath encoding:NSUTF8StringEncoding error:nil];
     //
@@ -254,13 +281,22 @@
     request=nil;
 }
 
+-(void)queueFinished:(ASINetworkQueue *)queue
+{
+    
+    NSLog(@"全部下载完了");
+    
+    thridView.hidden=YES;
+    [alter dismissWithClickedButtonIndex:0 animated:YES];
+}
 
 //提交订单  CPInfo商品数组  DZInfo高级定制
 -(BOOL*)submitOrder:(NSString *)CPInfo DZInfo:(NSString *)DZInfo uploadpath:(NSMutableArray *)uploadpath{
     
     @try {
-        
-        //AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+
+        alter = [[UIAlertView alloc] initWithTitle:@"提示" message:@"提交订单中..." delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
         
         NSString * uId=entityl.uId;
         NSString * Upt=@"0";//获取上一次的更新时间
@@ -273,7 +309,7 @@
         //Kstr=md5(uId|type|Upt|Key|Nowt)
         NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@",uId,@"600",Upt,apikey,Nowt]];
         
-        NSString * surl = [NSString stringWithFormat:@"/app/appinterface.php?uId=%@&type=600&Upt=%@&Nowt=%@&Kstr=%@",uId,Upt,Nowt,Kstr];
+        NSString * surl = [NSString stringWithFormat:@"/app/aiface.php?uId=%@&type=600&Upt=%@&Nowt=%@&Kstr=%@",uId,Upt,Nowt,Kstr];
         
         NSString * URL = [NSString stringWithFormat:@"%@%@",domainser,surl];
         
@@ -316,7 +352,7 @@
         
         
     }@catch (NSException *exception) {
-        
+        [alter dismissWithClickedButtonIndex:0 animated:YES];
     }
     @finally {
         
@@ -329,6 +365,8 @@
 -(void)responseComplete:(ASIHTTPRequest*)request
 {
     @try {
+        [alter dismissWithClickedButtonIndex:0 animated:YES];
+        
         //Use when fetching text data
         NSString *responseString = [request responseString];
         
@@ -401,7 +439,7 @@
 //提交上传数据失败
 -(void)responseFailed:(ASIHTTPRequest *)request
 {
-    
+    [alter dismissWithClickedButtonIndex:0 animated:YES];
     NSError *error = [request error];
 
     [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"提交订单数据失败" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil] show];
