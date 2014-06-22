@@ -1286,11 +1286,16 @@ NSString *manprice=nil;
         for (withmouth *inlayman in inlayarryman) {
             [mainarryman addObject:inlayman.zWeight];
         }
-        _manMainLabel.text=goodsman.Pro_goldWeight;
-        _manjdLabel.text=goodsman.Pro_Z_count;
-        _manColorLabel.text=goodsman.Pro_f_count;
+        weightlable.text=[NSString stringWithFormat:@"女戒:%@",goods.Pro_goldWeight];
+        mainlable.text=[NSString stringWithFormat:@"女戒:%@",goods.Pro_Z_count];
+        fitNolable.text=[NSString stringWithFormat:@"女戒:%@",goods.Pro_f_count];
+        float wwight=goods.Pro_f_weight.doubleValue*goods.Pro_f_count.doubleValue;
+        fitweightlable.text=[NSString stringWithFormat:@"女戒:%@",[self notRounding:wwight afterPoint:2]];
+        _manMainLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_goldWeight];
+        _manjdLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_Z_count];
+        _manColorLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_f_count];
         float manfweight=goodsman.Pro_f_weight.doubleValue*goodsman.Pro_f_count.doubleValue;
-        _mancjLabel.text=[NSString stringWithFormat:@"%@",[self notRounding:manfweight afterPoint:2]];
+        _mancjLabel.text=[NSString stringWithFormat:@"男戒:%@",[self notRounding:manfweight afterPoint:2]];
         manNetText.text=@"SI";
         mamColorText.text=@"I-J";
         Commons * common=[[Commons alloc]init];
