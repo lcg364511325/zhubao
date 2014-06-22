@@ -11,7 +11,7 @@
 @interface product ()
 
 @end
- 
+
 @implementation product
 
 @synthesize primaryView;
@@ -149,7 +149,7 @@ NSString *manprice=nil;
         [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
         
     }
-
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -207,9 +207,9 @@ NSString *manprice=nil;
 //购物车
 - (IBAction)goAction1:(id)sender
 {
-//    secondShadeView.alpha=0.5;
-//    thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.height);
-//    thridaryView.hidden = NO;
+    //    secondShadeView.alpha=0.5;
+    //    thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.height);
+    //    thridaryView.hidden = NO;
 }
 
 - (IBAction)closeAction1:(id)sender
@@ -266,12 +266,9 @@ NSString *manprice=nil;
 {
     @try {
         //可以在此加代码提示用户说正在加载数据中
-//        NSString *rowString =@"正在更新数据。。。。";
-//        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
-//        [alter show];
-        
-        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-        [myDelegate showProgressBar:self.view];
+        NSString *rowString =@"正在更新数据。。。。";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+        [alter show];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // 耗时的操作（异步操作）
@@ -282,7 +279,16 @@ NSString *manprice=nil;
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 //可以在此加代码提示用户，数据已经加载完毕
-                [myDelegate stopTimer];
+                [alter dismissWithClickedButtonIndex:0 animated:YES];
+                //NSString *rowString =@"更新成功！";
+                //                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                //                [alter show];
+                AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:@"数据更新完，开始下载3d图片集。。。" delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+                [alter show];
+                
+                myDelegate.alter=alter;
+                //myDelegate.thridView=fourthView;
                 
                 //同步完数据了，则再去下载图片组
                 [getdata getAllZIPPhotos];
@@ -574,7 +580,7 @@ NSString *manprice=nil;
     NSString *textvalue=nil;
     Commons * common=[[Commons alloc]init];
     textvalue=[common getColorvalue:texturetext.text];
-
+    
     @try {
         //可以在此加代码提示用户说正在加载数据中
         pricelable.text=@"获取价格中。。。";
@@ -659,7 +665,7 @@ NSString *manprice=nil;
     NSInteger btntag=[btn tag];
     selecttype=btntag;
     if(btntag==0){
-       mianselect.hidden=NO;
+        mianselect.hidden=NO;
         colorselect.hidden=YES;
         netselect.hidden=YES;
         textureselect.hidden=YES;
@@ -1262,7 +1268,7 @@ NSString *manprice=nil;
     colortext.text=@"I-J";
     Commons * common=[[Commons alloc]init];
     texturetext.text=[common getColorname:goods.Pro_goldType];
-
+    
     sizetext.text=goods.Pro_goldsize;
     fonttext.text=nil;
     numbertext.text=@"1";
@@ -1280,16 +1286,21 @@ NSString *manprice=nil;
         for (withmouth *inlayman in inlayarryman) {
             [mainarryman addObject:inlayman.zWeight];
         }
-        _manMainLabel.text=goodsman.Pro_goldWeight;
-        _manjdLabel.text=goodsman.Pro_Z_count;
-        _manColorLabel.text=goodsman.Pro_f_count;
+        weightlable.text=[NSString stringWithFormat:@"女戒:%@",goods.Pro_goldWeight];
+        mainlable.text=[NSString stringWithFormat:@"女戒:%@",goods.Pro_Z_count];
+        fitNolable.text=[NSString stringWithFormat:@"女戒:%@",goods.Pro_f_count];
+        float wwight=goods.Pro_f_weight.doubleValue*goods.Pro_f_count.doubleValue;
+        fitweightlable.text=[NSString stringWithFormat:@"女戒:%@",[self notRounding:wwight afterPoint:2]];
+        _manMainLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_goldWeight];
+        _manjdLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_Z_count];
+        _manColorLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_f_count];
         float manfweight=goodsman.Pro_f_weight.doubleValue*goodsman.Pro_f_count.doubleValue;
-        _mancjLabel.text=[NSString stringWithFormat:@"%@",[self notRounding:manfweight afterPoint:2]];
+        _mancjLabel.text=[NSString stringWithFormat:@"男戒:%@",[self notRounding:manfweight afterPoint:2]];
         manNetText.text=@"SI";
         mamColorText.text=@"I-J";
         Commons * common=[[Commons alloc]init];
         manTextureText.text=[common getColorname:goodsman.Pro_goldType];
-
+        
         manSizeText.text=goodsman.Pro_goldsize;
         manFontText.text=nil;
         productApi *priceApi=[[productApi alloc]init];
@@ -1303,7 +1314,7 @@ NSString *manprice=nil;
     self.mainlist=mainarry;
     self.mainmanlist=mainarryman;
     if(self.mainlist.count>0)
-    maintext.text=[self.mainlist objectAtIndex:0];
+        maintext.text=[self.mainlist objectAtIndex:0];
     if (self.mainmanlist>0 && [goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
         mamMainText.text=[self.mainmanlist objectAtIndex:0];
     }
@@ -1439,30 +1450,30 @@ NSString *manprice=nil;
     
     Commons * common=[[Commons alloc]init];
     mamColorText.text=[common getColorname:goods.Pro_goldType];
-
+    
     manSizeText.text=goods.Pro_goldsize;
     //fonttext.text=nil;
     //numbertext.text=@"1";
-//    NSMutableArray *inlayarry=[[NSMutableArray alloc] init];
-//    NSMutableArray *inlayarryman=[[NSMutableArray alloc] init];
-//    NSMutableArray *mainarryman=[[NSMutableArray alloc] init];
-//    sql=[[sqlService alloc] init];
-//    if ([goods.Pro_Class isEqualToString:@"3"]) {
-//        productEntity *goodsman=[sql GetProductDetail:productnumber];
-//        inlayarryman=[sql getwithmouths:goodsman.Id];
-//        for (withmouth *inlayman in inlayarryman) {
-//            [mainarryman addObject:inlayman.zWeight];
-//        }
-//    }
-//    inlayarry=[sql getwithmouths:goods.Id];
-//    NSMutableArray *mainarry=[[NSMutableArray alloc] init];
-//    for (withmouth *inlay in inlayarry) {
-//        [mainarry addObject:inlay.zWeight];
-//    }
-//    self.mainlist=mainarry;
-//    self.mainmanlist=mainarryman;
-//    if(self.mainlist.count>0)
-//        maintext.text=[self.mainlist objectAtIndex:0];
+    //    NSMutableArray *inlayarry=[[NSMutableArray alloc] init];
+    //    NSMutableArray *inlayarryman=[[NSMutableArray alloc] init];
+    //    NSMutableArray *mainarryman=[[NSMutableArray alloc] init];
+    //    sql=[[sqlService alloc] init];
+    //    if ([goods.Pro_Class isEqualToString:@"3"]) {
+    //        productEntity *goodsman=[sql GetProductDetail:productnumber];
+    //        inlayarryman=[sql getwithmouths:goodsman.Id];
+    //        for (withmouth *inlayman in inlayarryman) {
+    //            [mainarryman addObject:inlayman.zWeight];
+    //        }
+    //    }
+    //    inlayarry=[sql getwithmouths:goods.Id];
+    //    NSMutableArray *mainarry=[[NSMutableArray alloc] init];
+    //    for (withmouth *inlay in inlayarry) {
+    //        [mainarry addObject:inlay.zWeight];
+    //    }
+    //    self.mainlist=mainarry;
+    //    self.mainmanlist=mainarryman;
+    //    if(self.mainlist.count>0)
+    //        maintext.text=[self.mainlist objectAtIndex:0];
     
 }
 
