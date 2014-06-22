@@ -6,7 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Index">
             <connections>
-                <outlet property="biglogo" destination="MZD-vj-XZx" id="tNa-W6-iRP"/>
+                <outlet property="aboutus" destination="HFT-LJ-37W" id="MEm-cX-YCb"/>
+                <outlet property="fourthView" destination="BvX-Xl-utm" id="Vba-UU-5Cj"/>
                 <outlet property="goodsview" destination="iFN-51-r1N" id="bai-ml-aOJ"/>
                 <outlet property="logoImage" destination="nEw-Ns-Qvp" id="XWP-RZ-Tp8"/>
                 <outlet property="primaryShadeView" destination="aBG-Q3-34l" id="oMz-QS-bX1"/>
@@ -26,7 +27,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pageindex.png" translatesAutoresizingMaskIntoConstraints="NO" id="YJU-bB-kqV" userLabel="Image View -背景图">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="page.png" translatesAutoresizingMaskIntoConstraints="NO" id="YJU-bB-kqV" userLabel="Image View -背景图">
                             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
@@ -34,10 +35,16 @@
                             <rect key="frame" x="20" y="17" width="70" height="70"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logoshengyu.png" translatesAutoresizingMaskIntoConstraints="NO" id="MZD-vj-XZx">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yml-Fj-nhG">
                             <rect key="frame" x="347" y="329.5" width="440" height="121"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        </imageView>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="logoshengyu" image="logoshengyu.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="aboutus:" destination="-1" eventType="touchDown" id="2Dk-tw-oKe"/>
+                            </connections>
+                        </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="2Qn-13-exQ" userLabel="Image View -选中的按钮背景">
                             <rect key="frame" x="1" y="111" width="107" height="66"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -228,6 +235,23 @@
                 <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BvX-Xl-utm">
                     <rect key="frame" x="152" y="109" width="720" height="550"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HFT-LJ-37W">
+                            <rect key="frame" x="0.0" y="0.0" width="720" height="550"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </webView>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UqM-Ja-w0S">
+                            <rect key="frame" x="682" y="0.0" width="40" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="关闭" image="close.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="closeaboutus:" destination="-1" eventType="touchDown" id="TPs-2s-zdD"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </view>
@@ -249,7 +273,7 @@
         <image name="logo.png" width="76" height="76"/>
         <image name="logoshengyu.png" width="898" height="247"/>
         <image name="magnifier.png" width="81" height="90"/>
-        <image name="pageindex.png" width="2048" height="1536"/>
+        <image name="page.png" width="2048" height="1536"/>
         <image name="ring.png" width="82" height="96"/>
         <image name="shopping_cart.png" width="1582" height="1208"/>
         <image name="shoppingcart.png" width="76" height="52"/>

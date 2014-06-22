@@ -329,6 +329,9 @@
         NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Pro_model,Pro_number,Pro_name,Pro_State,Pro_smallpic,Pro_bigpic,Pro_info,Pro_goldWeight from product where Pro_IsDel='0'" ];
         if (type1.length!=0) {
             NSString *classsql=[NSString stringWithFormat:@" and Pro_Class in (%@) ",type1];
+            if ([type1 isEqualToString:@"3"]) {
+                classsql=[classsql stringByAppendingString:@" and Pro_typeWenProId=0 "];
+            }
             querySQL=[querySQL stringByAppendingString:classsql];
         }
         if (type2.length!=0) {
@@ -425,7 +428,7 @@
         
         sqlite3_stmt *statement = nil;
         //sql语句
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Pro_model,Pro_number,Pro_name,Pro_State,Pro_smallpic,Pro_bigpic,Pro_info,Pro_goldWeight,Pro_author,Pro_Class,Pro_goldType,Pro_f_pair,Pro_hotE,Pro_Z_color,Pro_Z_weight,Pro_Z_count,Pro_f_count,Pro_f_weight,Pro_goldsize,Pro_MarketPrice,Pro_price,Pro_Type from product where Id=%@ ",pid];
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Pro_model,Pro_number,Pro_name,Pro_State,Pro_smallpic,Pro_bigpic,Pro_info,Pro_goldWeight,Pro_author,Pro_Class,Pro_goldType,Pro_f_pair,Pro_hotE,Pro_Z_color,Pro_Z_weight,Pro_Z_count,Pro_f_count,Pro_f_weight,Pro_goldsize,Pro_MarketPrice,Pro_price,Pro_Type,Pro_typeWenProId from product where Id=%@ ",pid];
         
         const char *sql = [querySQL UTF8String];
         if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
@@ -527,6 +530,11 @@
                 char * Pro_Type   = (char *)sqlite3_column_text(statement,22);
                 if(Pro_Type != nil)
                     entity.Pro_Type = [NSString stringWithUTF8String:Pro_Type];
+                
+                char * Pro_typeWenProId   = (char *)sqlite3_column_text(statement,23);
+                if(Pro_typeWenProId != nil)
+                    entity.Pro_typeWenProId = [NSString stringWithUTF8String:Pro_typeWenProId];
+                
             }
         }
         
@@ -547,7 +555,7 @@
         
         sqlite3_stmt *statement = nil;
         //sql语句
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Pro_model,Pro_number,Pro_name,Pro_State,Pro_smallpic,Pro_bigpic,Pro_info,Pro_goldWeight,Pro_author,Pro_Class,Pro_goldType,Pro_f_pair,Pro_hotE,Pro_Z_color,Pro_Z_weight,Pro_Z_count,Pro_f_count,Pro_f_weight,Pro_goldsize,Pro_MarketPrice,Pro_price,Pro_Type from product where Pro_typeWenProId=%@ ",girlid];
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Pro_model,Pro_number,Pro_name,Pro_State,Pro_smallpic,Pro_bigpic,Pro_info,Pro_goldWeight,Pro_author,Pro_Class,Pro_goldType,Pro_f_pair,Pro_hotE,Pro_Z_color,Pro_Z_weight,Pro_Z_count,Pro_f_count,Pro_f_weight,Pro_goldsize,Pro_MarketPrice,Pro_price,Pro_Type,Pro_typeWenProId from product where Pro_typeWenProId=%@ ",girlid];
         
         const char *sql = [querySQL UTF8String];
         if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
@@ -649,6 +657,10 @@
                 char * Pro_Type   = (char *)sqlite3_column_text(statement,22);
                 if(Pro_Type != nil)
                     entity.Pro_Type = [NSString stringWithUTF8String:Pro_Type];
+                
+                char * Pro_typeWenProId   = (char *)sqlite3_column_text(statement,23);
+                if(Pro_typeWenProId != nil)
+                    entity.Pro_typeWenProId = [NSString stringWithUTF8String:Pro_typeWenProId];
             }
         }
         
@@ -1658,7 +1670,7 @@
         
         sqlite3_stmt *statement = nil;
         //sql语句
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT uId,logopath,details,name,logopathsm,companycode from myinfo where code=%@ ",code];
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT uId,logopath,details,name,logopathsm,companycode from myinfo where companycode=%@ ",code];
         
         const char *sql = [querySQL UTF8String];
         if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {

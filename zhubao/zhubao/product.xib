@@ -10,6 +10,9 @@
                 <outlet property="btnseric" destination="ewn-Mg-eAd" id="tTz-aF-FT1"/>
                 <outlet property="btnstyle" destination="mJH-Ix-NVq" id="ewi-VF-KsJ"/>
                 <outlet property="btntexture" destination="zUS-YU-aFF" id="KjF-Hv-J3k"/>
+                <outlet property="button3D" destination="TRg-Hf-5hB" id="H2s-RY-J72"/>
+                <outlet property="button3dman" destination="D6t-cn-QGB" id="2E7-kj-UkW"/>
+                <outlet property="button3dwoman" destination="lJq-W6-mdf" id="kkK-Fv-GJX"/>
                 <outlet property="colorselect" destination="9Qg-bk-K1R" id="01s-5C-5LC"/>
                 <outlet property="colortext" destination="4pl-CM-hDc" id="gUX-nc-aKZ"/>
                 <outlet property="countLable" destination="FRE-oe-p86" id="hbc-Hz-HpF"/>
@@ -69,7 +72,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pageindex.png" translatesAutoresizingMaskIntoConstraints="NO" id="r9W-Ot-eV3" userLabel="Image View -背景图">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="page.png" translatesAutoresizingMaskIntoConstraints="NO" id="r9W-Ot-eV3" userLabel="Image View -背景图">
                             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
@@ -704,6 +707,26 @@
                                 <action selector="threeddAction:" destination="-1" eventType="touchDown" id="nQU-5Y-g0a"/>
                             </connections>
                         </button>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D6t-cn-QGB">
+                            <rect key="frame" x="257" y="477" width="100" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="3DMAN" image="man_exhibition.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="threeddAction:" destination="-1" eventType="touchDown" id="60i-1T-RJS"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJq-W6-mdf">
+                            <rect key="frame" x="370" y="477" width="100" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="3DWOMAN" image="women_exhibition.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="threeddAction:" destination="-1" eventType="touchDown" id="V86-vA-d7y"/>
+                            </connections>
+                        </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BkJ-Mg-2h3">
                             <rect key="frame" x="794" y="2" width="40" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1126,14 +1149,16 @@
         <image name="logo.png" width="76" height="76"/>
         <image name="magnifier.png" width="81" height="90"/>
         <image name="magnifier2.png" width="246" height="46"/>
+        <image name="man_exhibition.png" width="277" height="106"/>
         <image name="option.png" width="1830" height="238"/>
-        <image name="pageindex.png" width="2048" height="1536"/>
+        <image name="page.png" width="2048" height="1536"/>
         <image name="ring.png" width="82" height="96"/>
         <image name="shopping.png" width="400" height="110"/>
         <image name="shopping_cart.png" width="1582" height="1208"/>
         <image name="shoppingcart.png" width="76" height="52"/>
         <image name="shopround.png" width="52" height="52"/>
         <image name="submit.png" width="330" height="88"/>
+        <image name="women_exhibition.png" width="277" height="106"/>
         <image name="yellowcolor.png" width="126" height="126"/>
     </resources>
 </document>

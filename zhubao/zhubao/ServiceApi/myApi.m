@@ -69,11 +69,11 @@
                         NSString * sql1=[NSString stringWithFormat:@"insert into myinfo(uId,logopath,details,name,logopathsm,companycode)values('%@','%@','%@','%@','%@','%@')",uId,n.logopath,n.details,n.name,n.logopathsm,n.companycode];
                         
                         NSLog(@"--------------:%@",sql1);
-                        
+                        sqlser= [[sqlService alloc]init];
                         [sqlser HandleSql:sql1];
                     //}
                     
-                    return nil;
+                    return @"更新成功！";
                 }
                 else {
                     NSLog(@"无法解析的数据结构.");
