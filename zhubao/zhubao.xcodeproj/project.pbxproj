@@ -264,6 +264,7 @@
 		7CE3FFCA1941CA32002E9FAD /* LoginApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE67A193EFEDA0000E397 /* LoginApi.m */; };
 		7CEF7EFE19420F93005DF8A9 /* NoticeReportCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEF7EFC19420F93005DF8A9 /* NoticeReportCell.m */; };
 		7CEF7F0119421AC3005DF8A9 /* NoticeReportCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEF7F0019421AC3005DF8A9 /* NoticeReportCell.xib */; };
+		7CF496EF19572A8200F6222E /* YLProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF496EE19572A8200F6222E /* YLProgressBar.m */; };
 		7CF5EA3F19401B3300C63E6D /* zhubao.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 7CF5EA3E19401B3300C63E6D /* zhubao.sqlite */; };
 		7CF5EA4219401F0500C63E6D /* customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF5EA4119401F0500C63E6D /* customer.m */; };
 		7CF5EA451940203800C63E6D /* productEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF5EA441940203800C63E6D /* productEntity.m */; };
@@ -600,6 +601,8 @@
 		7CEF7EFB19420F93005DF8A9 /* NoticeReportCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeReportCell.h; sourceTree = "<group>"; };
 		7CEF7EFC19420F93005DF8A9 /* NoticeReportCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeReportCell.m; sourceTree = "<group>"; };
 		7CEF7F0019421AC3005DF8A9 /* NoticeReportCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticeReportCell.xib; sourceTree = "<group>"; };
+		7CF496ED19572A8200F6222E /* YLProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLProgressBar.h; sourceTree = "<group>"; };
+		7CF496EE19572A8200F6222E /* YLProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLProgressBar.m; sourceTree = "<group>"; };
 		7CF5EA3E19401B3300C63E6D /* zhubao.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = zhubao.sqlite; sourceTree = SOURCE_ROOT; };
 		7CF5EA4019401F0500C63E6D /* customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = customer.h; sourceTree = "<group>"; };
 		7CF5EA4119401F0500C63E6D /* customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = customer.m; sourceTree = "<group>"; };
@@ -1052,6 +1055,7 @@
 		7C1BE68F193F3C5F0000E397 /* extend */ = {
 			isa = PBXGroup;
 			children = (
+				7CF496EC19572A8200F6222E /* YLProgressBar */,
 				7CB20350194461F900FA7FD5 /* ZipArchive */,
 				7CB203311944583600FA7FD5 /* ASIHTTPRequest */,
 				7C1076C71941AF1D005187B9 /* show3Dphoto */,
@@ -1175,6 +1179,15 @@
 				2C427E3E1945620900D71776 /* ProductCell.xib */,
 			);
 			path = TableCell;
+			sourceTree = "<group>";
+		};
+		7CF496EC19572A8200F6222E /* YLProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				7CF496ED19572A8200F6222E /* YLProgressBar.h */,
+				7CF496EE19572A8200F6222E /* YLProgressBar.m */,
+			);
+			path = YLProgressBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1472,6 +1485,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CE3FFCA1941CA32002E9FAD /* LoginApi.m in Sources */,
+				7CF496EF19572A8200F6222E /* YLProgressBar.m in Sources */,
 				7C1BE680193F25D30000E397 /* login.m in Sources */,
 				7CF5EA4E194024CC00C63E6D /* updatetime.m in Sources */,
 				7C1BE6D4193F3D190000E397 /* Commons.m in Sources */,

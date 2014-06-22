@@ -296,29 +296,22 @@ NSInteger selecttable=0;
 {
     @try {
         //可以在此加代码提示用户说正在加载数据中
-        NSString *rowString =@"正在更新数据。。。。";
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
-        [alter show];
+//        NSString *rowString =@"正在更新数据。。。。";
+//        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+//        [alter show];
+        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+        [myDelegate showProgressBar:self.view];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // 耗时的操作（异步操作）
             
             AutoGetData * getdata=[[AutoGetData alloc] init];
-            [getdata getDataInsertTable:nil];
+            [getdata getDataInsertTable:0];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 //可以在此加代码提示用户，数据已经加载完毕
-                [alter dismissWithClickedButtonIndex:0 animated:YES];
-                //NSString *rowString =@"更新成功！";
-                //                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                //                [alter show];
-                AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:@"数据更新完，开始下载3d图片集。。。" delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
-                [alter show];
-                
-                myDelegate.alter=alter;
-                myDelegate.thridView=fiftharyView;
+                [myDelegate stopTimer];
                 
                 //同步完数据了，则再去下载图片组
                 [getdata getAllZIPPhotos];
