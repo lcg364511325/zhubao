@@ -21,6 +21,7 @@
 @synthesize goodsview;
 @synthesize shopcartcountButton;
 @synthesize logoImage;
+@synthesize biglogo;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -37,20 +38,37 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.navigationController setNavigationBarHidden:YES];
-    NSString *goodscount=@"100";
+     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    
+    sqlService * sql=[[sqlService alloc]init];
+    myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
+    
+    myDelegate.myinfol=[sql getMyinfo:myDelegate.entityl.uId];
+
+    NSString *goodscount=myDelegate.entityl.resultcount;
     if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
         shopcartcountButton.hidden=NO;
         [shopcartcountButton setTitle:goodscount forState:UIControlStateNormal];
     }else{
         shopcartcountButton.hidden=YES;
     }
-    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@""]];
+    NSURL *imgUrl=[NSURL URLWithString:myDelegate.myinfol.logopathsm];
     if (hasCachedImage(imgUrl)) {
         [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
     }else
     {
         [logoImage setImage:[UIImage imageNamed:@"logo"]];
         NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
+        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+        
+    }
+    NSURL *imgUrl1=[NSURL URLWithString:myDelegate.myinfol.logopath];
+    if (hasCachedImage(imgUrl1)) {
+        [biglogo setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl1)]];
+    }else
+    {
+        [biglogo setImage:[UIImage imageNamed:@"logoshengyu"]];
+        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl1,@"url",biglogo,@"imageView",nil];
         [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
         
     }
@@ -365,11 +383,21 @@
     sqlService * sql=[[sqlService alloc]init];
     NSString *successdelete=[sql deleteBuyproduct:entity.Id];
     if (successdelete) {
+        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+        sql=[[sqlService alloc]init];
+        myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
+        NSString *goodscount=myDelegate.entityl.resultcount;
+        if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+            shopcartcountButton.hidden=NO;
+            [shopcartcountButton setTitle:goodscount forState:UIControlStateNormal];
+        }else{
+            shopcartcountButton.hidden=YES;
+        }
+        
         NSString *rowString =@"删除成功！";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
-        
-        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+
         sqlService *shopcar=[[sqlService alloc] init];
         shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
         [goodsview reloadData];

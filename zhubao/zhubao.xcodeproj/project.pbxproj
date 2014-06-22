@@ -27,6 +27,8 @@
 		2C0BFCC0194863EB00844FA2 /* diamond_ring10.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCB6194863EB00844FA2 /* diamond_ring10.png */; };
 		2C14E99B193965E20084E8FE /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C14E999193965E20084E8FE /* logo.png */; };
 		2C14E99C193965E20084E8FE /* pageindex.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C14E99A193965E20084E8FE /* pageindex.png */; };
+		2C15534319547663000B22E1 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C15534119547663000B22E1 /* area.plist */; };
+		2C15534419547663000B22E1 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C15534219547663000B22E1 /* city.plist */; };
 		2C15F34D1936D31400E8935B /* diploma.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C15F34B1936D31400E8935B /* diploma.m */; };
 		2C15F34E1936D31400E8935B /* diploma.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C15F34C1936D31400E8935B /* diploma.xib */; };
 		2C15F832193708BA00E8935B /* member.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C15F830193708BA00E8935B /* member.m */; };
@@ -309,6 +311,8 @@
 		2C0BFCB6194863EB00844FA2 /* diamond_ring10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_ring10.png; sourceTree = "<group>"; };
 		2C14E999193965E20084E8FE /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		2C14E99A193965E20084E8FE /* pageindex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pageindex.png; sourceTree = "<group>"; };
+		2C15534119547663000B22E1 /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
+		2C15534219547663000B22E1 /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
 		2C15F34A1936D31400E8935B /* diploma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = diploma.h; sourceTree = "<group>"; };
 		2C15F34B1936D31400E8935B /* diploma.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = diploma.m; sourceTree = "<group>"; };
 		2C15F34C1936D31400E8935B /* diploma.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = diploma.xib; sourceTree = "<group>"; };
@@ -738,6 +742,8 @@
 		2C5C97FE19349E2100004343 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2C15534119547663000B22E1 /* area.plist */,
+				2C15534219547663000B22E1 /* city.plist */,
 				7CF945F1194E95D600E647C1 /* logo.png */,
 				7CF945F2194E95D600E647C1 /* logo@2x.png */,
 				7CF945F3194E95D600E647C1 /* logo@3x.png */,
@@ -1314,11 +1320,13 @@
 				2C3AFBCE1946946C00D3D0A2 /* yellowcolor.png in Resources */,
 				2C3AFBE81946E7F500D3D0A2 /* round.jpg in Resources */,
 				7B7FFD8D193853CA008712CB /* diamonds.png in Resources */,
+				2C15534419547663000B22E1 /* city.plist in Resources */,
 				2C2A207B193D674B00A57C00 /* magnifier2.png in Resources */,
 				2C5C980219349E2100004343 /* InfoPlist.strings in Resources */,
 				7B7FFD7D193853CA008712CB /* count.png in Resources */,
 				2C0BFCC0194863EB00844FA2 /* diamond_ring10.png in Resources */,
 				2C844E011941C8400029ED13 /* test.xib in Resources */,
+				2C15534319547663000B22E1 /* area.plist in Resources */,
 				7B7FFD93193853CA008712CB /* image1 2.png in Resources */,
 				7B7FFDA6193853CA008712CB /* shopping.png in Resources */,
 				2C3AFBD01946953600D3D0A2 /* backgroundcolor.png in Resources */,

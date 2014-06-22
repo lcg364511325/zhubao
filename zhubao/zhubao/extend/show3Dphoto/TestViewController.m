@@ -30,13 +30,13 @@
     [super viewDidLoad];
     
     //定制导航栏左按钮
-    //UIImage* image= [UIImage imageNamed:@"back"];
-    CGRect frame_1= CGRectMake(20, 40, 80, 40);
+    UIImage* image= [UIImage imageNamed:@"close"];
+    CGRect frame_1= CGRectMake(self.view.frame.size.width+50, 10, 48, 48);
     UIButton* btnBack= [[UIButton alloc] initWithFrame:frame_1];
-    //[btnBack setBackgroundImage:image forState:UIControlStateNormal];
-    [btnBack setTitle:@"返回" forState:UIControlStateNormal];
+    [btnBack setBackgroundImage:image forState:UIControlStateNormal];
+    //[btnBack setTitle:@"返回" forState:UIControlStateNormal];
     //[btnBack setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    btnBack.titleLabel.font=[UIFont systemFontOfSize:16];
+    //btnBack.titleLabel.font=[UIFont systemFontOfSize:16];
     [btnBack addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     
 	// Do any additional setup after loading the view.

@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Index">
             <connections>
+                <outlet property="biglogo" destination="MZD-vj-XZx" id="tNa-W6-iRP"/>
                 <outlet property="goodsview" destination="iFN-51-r1N" id="bai-ml-aOJ"/>
                 <outlet property="logoImage" destination="nEw-Ns-Qvp" id="XWP-RZ-Tp8"/>
                 <outlet property="primaryShadeView" destination="aBG-Q3-34l" id="oMz-QS-bX1"/>
@@ -32,6 +33,10 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="nEw-Ns-Qvp">
                             <rect key="frame" x="20" y="17" width="70" height="70"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logoshengyu.png" translatesAutoresizingMaskIntoConstraints="NO" id="MZD-vj-XZx">
+                            <rect key="frame" x="347" y="329.5" width="440" height="121"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="2Qn-13-exQ" userLabel="Image View -选中的按钮背景">
                             <rect key="frame" x="1" y="111" width="107" height="66"/>
@@ -220,6 +225,12 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BvX-Xl-utm">
+                    <rect key="frame" x="152" y="109" width="720" height="550"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -236,6 +247,7 @@
         <image name="home.png" width="68" height="81"/>
         <image name="install.png" width="54" height="57"/>
         <image name="logo.png" width="76" height="76"/>
+        <image name="logoshengyu.png" width="898" height="247"/>
         <image name="magnifier.png" width="81" height="90"/>
         <image name="pageindex.png" width="2048" height="1536"/>
         <image name="ring.png" width="82" height="96"/>

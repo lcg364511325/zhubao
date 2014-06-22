@@ -54,14 +54,8 @@ NSInteger vvvv=0;
     dipomaIndex.lineBreakMode = NSLineBreakByWordWrapping;
     dipomaIndex.hidden=YES;
     selectText.hidden=NO;
-    NSString *goodscount=@"100";
-    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-        shopcartcount.hidden=NO;
-        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
-    }else{
-        shopcartcount.hidden=YES;
-    }
-    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@""]];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    NSURL *imgUrl=[NSURL URLWithString:myDelegate.myinfol.logopathsm];
     if (hasCachedImage(imgUrl)) {
         [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
     }else
@@ -70,6 +64,14 @@ NSInteger vvvv=0;
         NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
         [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
         
+    }
+    
+    NSString *goodscount=myDelegate.entityl.resultcount;
+    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+        shopcartcount.hidden=NO;
+        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
+    }else{
+        shopcartcount.hidden=YES;
     }
     
 }
@@ -138,11 +140,21 @@ NSInteger vvvv=0;
     sqlService * sql=[[sqlService alloc]init];
     NSString *successdelete=[sql deleteBuyproduct:entity.Id];
     if (successdelete) {
+        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+        sql=[[sqlService alloc]init];
+        myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
+        NSString *goodscount=myDelegate.entityl.resultcount;
+        if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+            shopcartcount.hidden=NO;
+            [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
+        }else{
+            shopcartcount.hidden=YES;
+        }
+        
         NSString *rowString =@"删除成功！";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
-        
-        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+
         sqlService *shopcar=[[sqlService alloc] init];
         shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
         [goodsview reloadData];
