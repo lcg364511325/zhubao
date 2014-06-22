@@ -17,4 +17,9 @@
 
 + (NSString *)md5:(NSString *)str;
 
+//
+-(NSString *)getColorname:(NSString *)codevalue;
+
+-(NSString *)getColorvalue:(NSString *)name;
+
 @end

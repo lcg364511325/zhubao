@@ -92,6 +92,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *manjdLabel;
 @property (weak, nonatomic) IBOutlet UILabel *manColorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *mancjLabel;
+@property (weak, nonatomic) IBOutlet UIButton *button3D;
+@property (weak, nonatomic) IBOutlet UIButton *button3dman;
+@property (weak, nonatomic) IBOutlet UIButton *button3dwoman;
 
 - (IBAction)closeAction:(id)sender;
 - (IBAction)goAction1:(id)sender;

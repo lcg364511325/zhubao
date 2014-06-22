@@ -50,7 +50,6 @@ NSInteger i=0;
     
     [_submitlogin setTitle:@"" forState:UIControlStateNormal];
     
-    
     NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@""]];
     if (hasCachedImage(imgUrl)) {
         [logoshengyu setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];

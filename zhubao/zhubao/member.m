@@ -189,6 +189,22 @@ NSInteger selecttable=0;
     if (![myDelegate.entityl.userPass isEqualToString:@""] && myDelegate.entityl.userPass!=nil ) {
         NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
         if (![orderinfo isEqualToString:@""]) {
+            
+            sql=[[sqlService alloc]init];
+            AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+            myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
+            NSString *goodscount=myDelegate.entityl.resultcount;
+            if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+                shopcartcount.hidden=NO;
+                [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
+            }else{
+                shopcartcount.hidden=YES;
+            }
+            
+            sqlService *shopcar=[[sqlService alloc] init];
+            shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
+            [goodsview reloadData];
+            
             NSString *rowString =orderinfo;
             UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alter show];
@@ -669,6 +685,57 @@ NSInteger selecttable=0;
     NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@|%@",myDelegate.entityl.uId,@"601",Upt,apikey,Nowt,orderid]];
     NSString * surl = [NSString stringWithFormat:@"http://www.seyuu.com/order/myorder.asp?uId=%@&type=601&Upt=%@&Nowt=%@&Kstr=%@&ordid=%@",myDelegate.entityl.uId,Upt,Nowt,Kstr,orderid];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:surl]];
+}
+
+
+// 更新ui
+-(IBAction)updateUI:(id)sender
+{
+    NSString *rowString =@"正在更新数据。。。。";
+    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+    [alter show];
+    myApi *sql=[[myApi alloc]init];
+    NSString *info=[sql getMyInfo];
+    [alter dismissWithClickedButtonIndex:0 animated:YES];
+    if (info) {
+        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+        NSURL *imgUrl=[NSURL URLWithString:myDelegate.myinfol.logopathsm];
+        if (hasCachedImage(imgUrl)) {
+            [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
+        }else
+        {
+            [logoImage setImage:[UIImage imageNamed:@"logo"]];
+            NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
+            [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+            
+        }
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:info delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }else{
+        NSString *rowString =@"更新失败";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }
+    
+}
+//清除商品数据
+-(IBAction)cleargoodsdate:(id)sender
+{
+    NSString *rowString =@"正在清除商品数据。。。。";
+    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+    [alter show];
+    sqlService *sql=[[sqlService alloc]init];
+    BOOL state=[sql ClearTableDatas:@"product"];
+    [alter dismissWithClickedButtonIndex:0 animated:YES];
+    if (state) {
+        NSString *rowString =@"清除成功";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }else{
+        NSString *rowString =@"清除失败";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }
 }
 
 @end

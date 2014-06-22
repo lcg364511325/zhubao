@@ -19,9 +19,11 @@
 @synthesize primaryShadeView;
 @synthesize thridView;
 @synthesize goodsview;
+@synthesize fourthView;
 @synthesize shopcartcountButton;
 @synthesize logoImage;
 @synthesize biglogo;
+@synthesize aboutus;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -42,9 +44,10 @@
     
     sqlService * sql=[[sqlService alloc]init];
     myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
-    
-    myDelegate.myinfol=[sql getMyinfo:myDelegate.entityl.uId];
 
+    sql=[[sqlService alloc]init];
+    myDelegate.myinfol=[sql getMyinfo:myDelegate.entityl.uId];
+    
     NSString *goodscount=myDelegate.entityl.resultcount;
     if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
         shopcartcountButton.hidden=NO;
@@ -136,6 +139,19 @@
 {
     thridView.hidden=NO;
     thridView.frame=CGRectMake(750, 70, thridView.frame.size.width, thridView.frame.size.height);
+}
+//关于我们
+-(IBAction)aboutus:(id)sender
+{
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    fourthView.hidden=NO;
+    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:myDelegate.myinfol.details]];
+    [aboutus loadRequest:request];
+}
+
+-(IBAction)closeaboutus:(id)sender
+{
+    fourthView.hidden=YES;
 }
 
 //软件更新
@@ -427,6 +443,22 @@
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
     if (![orderinfo isEqualToString:@""]) {
+        
+        sql=[[sqlService alloc]init];
+        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+        myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
+        NSString *goodscount=myDelegate.entityl.resultcount;
+        if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+            shopcartcountButton.hidden=NO;
+            [shopcartcountButton setTitle:goodscount forState:UIControlStateNormal];
+        }else{
+            shopcartcountButton.hidden=YES;
+        }
+        
+        sqlService *shopcar=[[sqlService alloc] init];
+        shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
+        [goodsview reloadData];
+        
         NSString *rowString =orderinfo;
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
