@@ -13,11 +13,13 @@
                 <outlet property="button3D" destination="TRg-Hf-5hB" id="H2s-RY-J72"/>
                 <outlet property="button3dman" destination="D6t-cn-QGB" id="2E7-kj-UkW"/>
                 <outlet property="button3dwoman" destination="lJq-W6-mdf" id="kkK-Fv-GJX"/>
+                <outlet property="checkpassword" destination="RQS-Er-2bz" id="ekn-pL-752"/>
                 <outlet property="colorselect" destination="9Qg-bk-K1R" id="01s-5C-5LC"/>
                 <outlet property="colortext" destination="4pl-CM-hDc" id="gUX-nc-aKZ"/>
                 <outlet property="countLable" destination="FRE-oe-p86" id="hbc-Hz-HpF"/>
                 <outlet property="fitNolable" destination="oUw-LK-NHX" id="qn5-sT-n1f"/>
                 <outlet property="fitweightlable" destination="z7S-oE-hQl" id="lKJ-hP-Ano"/>
+                <outlet property="fivethview" destination="S2l-uc-fUt" id="MVe-GL-NEb"/>
                 <outlet property="fontText" destination="aOE-Py-StE" id="Vwk-Ln-d1o"/>
                 <outlet property="fonttext" destination="aOE-Py-StE" id="jQa-o4-DnK"/>
                 <outlet property="fourthView" destination="Yau-vH-R2D" id="jeJ-vu-FVo"/>
@@ -1075,7 +1077,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="submitorder:" destination="-1" eventType="touchDown" id="1sW-n2-het"/>
+                                <action selector="submitorder:" destination="-1" eventType="touchDown" id="dbY-7J-ccn"/>
                             </connections>
                         </button>
                     </subviews>
@@ -1127,6 +1129,47 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S2l-uc-fUt">
+                    <rect key="frame" x="412" y="309" width="200" height="150"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="backgroundcolor.png" translatesAutoresizingMaskIntoConstraints="NO" id="X8j-zo-6kP">
+                            <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="请输入密码：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FjU-b1-Mku">
+                            <rect key="frame" x="61" y="20" width="200" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RQS-Er-2bz">
+                            <rect key="frame" x="0.0" y="49" width="200" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ojQ-dT-70Q">
+                            <rect key="frame" x="14" y="100" width="100" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button" image="submit.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L2W-Rc-C4D">
+                            <rect key="frame" x="127" y="100" width="46" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="取消">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="closecheck:" destination="-1" eventType="touchDown" id="9a9-kl-PYc"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -1137,6 +1180,7 @@
         <image name="021_3.png" width="420" height="290"/>
         <image name="04.png" width="1704" height="1148"/>
         <image name="axe.png" width="87" height="95"/>
+        <image name="backgroundcolor.png" width="88" height="88"/>
         <image name="bg.png" width="218" height="136"/>
         <image name="close.png" width="79" height="79"/>
         <image name="consort.png" width="82" height="90"/>

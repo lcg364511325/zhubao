@@ -9,6 +9,7 @@
                 <outlet property="DiamondNo" destination="Ale-MI-GIP" id="GxR-bM-qZT"/>
                 <outlet property="Nakeddisplay" destination="ZZD-uq-s41" id="vgr-70-aRA"/>
                 <outlet property="chasingLable" destination="Q1s-M7-llU" id="JMp-tp-8t5"/>
+                <outlet property="checkpassword" destination="Tbe-wR-cGh" id="FKY-A1-nqE"/>
                 <outlet property="colorLable" destination="91j-VV-xmW" id="oGF-mH-5YG"/>
                 <outlet property="colorbtn" destination="tn7-Du-t9X" id="tx8-JT-zwo"/>
                 <outlet property="cutLable" destination="oSe-pR-ERH" id="53n-KF-6o3"/>
@@ -21,6 +22,7 @@
                 <outlet property="logoImage" destination="vNF-i7-p9r" id="t4V-YR-b8f"/>
                 <outlet property="modelLable" destination="Xaa-g1-Blg" id="HeW-TN-NP6"/>
                 <outlet property="modelbtn" destination="iBn-GV-7V3" id="zAV-da-L8F"/>
+                <outlet property="nakediacount" destination="d3y-jP-PY3" id="bKj-gl-IDO"/>
                 <outlet property="netLable" destination="Eg2-t9-eAX" id="3rt-ud-OwN"/>
                 <outlet property="netbtn" destination="3TH-9q-L1I" id="7K5-Ef-V1a"/>
                 <outlet property="priceLable" destination="Zkr-i8-RsH" id="Zeh-HB-Piu"/>
@@ -33,6 +35,7 @@
                 <outlet property="secondShadeView" destination="SGR-ZR-pGN" id="YjT-A7-cII"/>
                 <outlet property="secondaryView" destination="XZO-gD-InY" id="EvG-eS-rNg"/>
                 <outlet property="shopcartcount" destination="Yiv-DO-kzw" id="Azi-0J-7H1"/>
+                <outlet property="sixview" destination="Rdn-Hr-zlI" id="PNK-Te-w9B"/>
                 <outlet property="sizeLable" destination="c4P-yn-WMW" id="0eJ-Ei-oww"/>
                 <outlet property="symmetryLable" destination="0c5-eU-zHd" id="3ys-u4-9rs"/>
                 <outlet property="tableLable" destination="hOL-w4-Dbf" id="eGq-6s-zQQ"/>
@@ -990,6 +993,12 @@
                                 <outlet property="delegate" destination="-1" id="i5P-hb-92Z"/>
                             </connections>
                         </tableView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="h g g" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3y-jP-PY3">
+                            <rect key="frame" x="260" y="10.5" width="250" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -1165,7 +1174,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="submitorder:" destination="-1" eventType="touchDown" id="quy-qZ-L9a"/>
+                                <action selector="submitorder:" destination="-1" eventType="touchDown" id="n8F-Dh-b4f"/>
                             </connections>
                         </button>
                     </subviews>
@@ -1217,6 +1226,50 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rdn-Hr-zlI">
+                    <rect key="frame" x="412" y="309" width="200" height="150"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="backgroundcolor.png" translatesAutoresizingMaskIntoConstraints="NO" id="IOm-up-c2w">
+                            <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="请输入密码：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZ8-SO-zDa">
+                            <rect key="frame" x="61" y="20" width="200" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tbe-wR-cGh">
+                            <rect key="frame" x="0.0" y="49" width="200" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSu-XG-3O0">
+                            <rect key="frame" x="14" y="100" width="100" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button" image="submit.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="submitorder:" destination="-1" eventType="touchDown" id="3Qp-iH-fo5"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yiT-Hd-vKW">
+                            <rect key="frame" x="127" y="100" width="46" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="取消">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="closecheck:" destination="-1" eventType="touchDown" id="IRb-z3-VYx"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -1230,6 +1283,7 @@
         <image name="11.png" width="1680" height="1200"/>
         <image name="Reset.png" width="234" height="88"/>
         <image name="axe.png" width="87" height="95"/>
+        <image name="backgroundcolor.png" width="88" height="88"/>
         <image name="bg.png" width="218" height="136"/>
         <image name="close.png" width="79" height="79"/>
         <image name="consort.png" width="82" height="90"/>

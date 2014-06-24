@@ -28,6 +28,7 @@
 @property (retain, nonatomic) IBOutlet UIView *secondaryView;
 @property (retain, nonatomic) IBOutlet UIView *primaryShadeView;
 @property (retain, nonatomic) IBOutlet UIView *thirdaryView;
+@property (retain, nonatomic) IBOutlet UIView *fourthview;
 @property (weak, nonatomic) IBOutlet UITableView *textureselect;
 @property (strong, nonatomic) NSArray *mainlist;
 @property (weak, nonatomic) IBOutlet UITextField *texturetext;
@@ -44,6 +45,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *goodsview;
 @property (weak, nonatomic) IBOutlet UIButton *shopcartcount;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
+@property (weak, nonatomic) IBOutlet UITextField *checkpassword;
 
 
 - (IBAction)goAction:(id)sender;

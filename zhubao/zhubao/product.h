@@ -40,6 +40,7 @@
 @property (retain, nonatomic) IBOutlet UIView *thridaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondShadeView;
 @property (retain, nonatomic) IBOutlet UIView *fourthView;
+@property (retain, nonatomic) IBOutlet UIView *fivethview;
 @property (weak, nonatomic) IBOutlet UITableView *mianselect;
 @property (weak, nonatomic) IBOutlet UITableView *netselect;
 @property (weak, nonatomic) IBOutlet UITableView *colorselect;
@@ -95,6 +96,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *button3D;
 @property (weak, nonatomic) IBOutlet UIButton *button3dman;
 @property (weak, nonatomic) IBOutlet UIButton *button3dwoman;
+@property (weak, nonatomic) IBOutlet UITextField *checkpassword;
 
 - (IBAction)closeAction:(id)sender;
 - (IBAction)goAction1:(id)sender;
