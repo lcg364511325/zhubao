@@ -140,13 +140,12 @@
 -(IBAction)aboutus:(id)sender
 {
     NSString *filePath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"about.webarchive"]];
-    NSString *htmlString = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-    [aboutus loadHTMLString: htmlString baseURL: [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
-    
+    NSURL *aURL = [NSURL fileURLWithPath:filePath];
+    NSURLRequest *request = [NSURLRequest requestWithURL:aURL];
     //AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     fourthView.hidden=NO;
     //NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:myDelegate.myinfol.details]];
-    //[aboutus loadRequest:request];
+    [aboutus loadRequest:request];
 }
 
 -(IBAction)closeaboutus:(id)sender
