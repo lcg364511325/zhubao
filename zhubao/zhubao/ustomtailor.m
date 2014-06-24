@@ -61,15 +61,12 @@ NSInteger vies=0;
     self.mainlist = mainarray;
     texturetext.userInteractionEnabled=NO;
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    NSURL *imgUrl=[NSURL URLWithString:myDelegate.myinfol.logopathsm];
-    if (hasCachedImage(imgUrl)) {
-        [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
-    }else
-    {
+    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.jpg"]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
+        [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
+    }
+    else {
         [logoImage setImage:[UIImage imageNamed:@"logo"]];
-        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
-        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
-        
     }
     
     NSString *goodscount=myDelegate.entityl.resultcount;

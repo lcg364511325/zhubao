@@ -66,15 +66,13 @@ NSInteger selecttable=0;
     self.provincelist=province;
     self.Divisionlist=Divisionarray;
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    NSURL *imgUrl=[NSURL URLWithString:myDelegate.myinfol.logopathsm];
-    if (hasCachedImage(imgUrl)) {
-        [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
-    }else
-    {
+
+    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.jpg"]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
+        [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
+    }
+    else {
         [logoImage setImage:[UIImage imageNamed:@"logo"]];
-        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
-        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
-        
     }
     
     NSString *goodscount=myDelegate.entityl.resultcount;
@@ -691,17 +689,14 @@ NSInteger selecttable=0;
     NSString *info=[sql getMyInfo];
     [alter dismissWithClickedButtonIndex:0 animated:YES];
     if (info) {
-        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-        NSURL *imgUrl=[NSURL URLWithString:myDelegate.myinfol.logopathsm];
-        if (hasCachedImage(imgUrl)) {
-            [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
-        }else
-        {
-            [logoImage setImage:[UIImage imageNamed:@"logo"]];
-            NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
-            [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
-            
+        NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.jpg"]];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
+            [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
         }
+        else {
+            [logoImage setImage:[UIImage imageNamed:@"logo"]];
+        }
+        
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:info delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
     }else{

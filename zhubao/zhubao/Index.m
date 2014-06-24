@@ -54,26 +54,23 @@
     }else{
         shopcartcountButton.hidden=YES;
     }
-    NSURL *imgUrl=[NSURL URLWithString:myDelegate.myinfol.logopathsm];
-    if (hasCachedImage(imgUrl)) {
-        [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
-    }else
-    {
-        [logoImage setImage:[UIImage imageNamed:@"logo"]];
-        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
-        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
-        
+    
+    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.jpg"]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
+        [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
     }
-    NSURL *imgUrl1=[NSURL URLWithString:myDelegate.myinfol.logopath];
-    if (hasCachedImage(imgUrl1)) {
-        [biglogo setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl1)]];
-    }else
-    {
+    else {
+       [logoImage setImage:[UIImage imageNamed:@"logo"]];
+    }
+
+    NSString *logopath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopath.jpg"]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:logopath]) {
+        [biglogo setImage:[[UIImage alloc] initWithContentsOfFile:logopath]];
+    }
+    else {
         [biglogo setImage:[UIImage imageNamed:@"logoshengyu"]];
-        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl1,@"url",biglogo,@"imageView",nil];
-        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
-        
     }
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -142,10 +139,14 @@
 //关于我们
 -(IBAction)aboutus:(id)sender
 {
-    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    NSString *filePath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"about.webarchive"]];
+    NSString *htmlString = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    [aboutus loadHTMLString: htmlString baseURL: [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
+    
+    //AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     fourthView.hidden=NO;
-    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:myDelegate.myinfol.details]];
-    [aboutus loadRequest:request];
+    //NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:myDelegate.myinfol.details]];
+    //[aboutus loadRequest:request];
 }
 
 -(IBAction)closeaboutus:(id)sender

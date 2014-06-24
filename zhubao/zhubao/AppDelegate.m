@@ -458,7 +458,7 @@ UILabel *titlelabel;
 
 -(void) run{
 
-    progress = progress > 1 ? 1 : progress + 0.001;
+    progress = progress > 1 ? 1 : progress + 0.002;
     if(progress>=0.9)progress=0.9;
     //NSLog(@"progress-------------run---------%d",progress);
     [progressBarRoundedFat setProgress:progress animated:YES];

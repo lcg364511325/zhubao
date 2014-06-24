@@ -58,7 +58,6 @@
                         n.details = (NSString *)objArray[2];
                     
                         n.companycode = uId;
-                        
                         myDelegate.myinfol=n;
                         
                         sqlService *sqlser= [[sqlService alloc]init];
@@ -71,6 +70,20 @@
                         NSLog(@"--------------:%@",sql1);
                         sqlser= [[sqlService alloc]init];
                         [sqlser HandleSql:sql1];
+                    
+                    //同时去下载文件回来
+                    NSString * surl = [NSString stringWithFormat:@"%@",n.details];
+                    NSString * fileName=@"about.webarchive";//[entity.zipUrl lastPathComponent];//从路径中获得完整的文件名（带后缀）
+                    [myDelegate beginRequest:surl fileName:fileName version:@"1"];
+                    
+                    surl = [NSString stringWithFormat:@"%@",n.logopath];
+                    fileName=@"logopath.png";//[entity.zipUrl lastPathComponent];//从路径中获得完整的文件名（带后缀）
+                    [myDelegate beginRequest:surl fileName:fileName version:@"1"];
+                    
+                    surl = [NSString stringWithFormat:@"%@",n.logopathsm];
+                    fileName=@"logopathsm.png";//[entity.zipUrl lastPathComponent];//从路径中获得完整的文件名（带后缀）
+                    [myDelegate beginRequest:surl fileName:fileName version:@"1"];
+                    
                     //}
                     
                     return @"更新成功！";

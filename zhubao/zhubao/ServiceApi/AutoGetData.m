@@ -38,16 +38,16 @@ AppDelegate * app;
         [self getProduct:nowt];//同步商品数据
         
         //重新获取时间
-        //nowt=[time nowTime];
-        //[self getProductdia:nowt];//裸钻数据获取
+        nowt=[time nowTime];
+        [self getProductdia:nowt];//裸钻数据获取
         
         //重新获取时间
-        //nowt=[time nowTime];
-        //[self getproductphotos:nowt];//3D旋转ZIP套图数据获取
+        nowt=[time nowTime];
+        [self getproductphotos:nowt];//3D旋转ZIP套图数据获取
         
         //重新获取时间
-        //nowt=[time nowTime];
-        //[self getwithmouth:nowt];//镶口数据获取
+        nowt=[time nowTime];
+        [self getwithmouth:nowt];//镶口数据获取
     }
 
     //关闭数据库
@@ -537,7 +537,7 @@ AppDelegate * app;
             
             //[self getZIPPhotosData:entity.zipUrl];
             
-            if(i==5)break;
+            //if(i==5)break;
         }
         
         if(array.count<=0 || i==0){
