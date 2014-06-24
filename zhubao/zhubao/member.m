@@ -20,6 +20,7 @@
 @synthesize thridaryView;
 @synthesize fourtharyView;
 @synthesize fiftharyView;
+@synthesize sixthview;
 @synthesize selectTableView;
 @synthesize provincelist=_provincelist;
 @synthesize citylist=_citylist;
@@ -38,6 +39,8 @@
 @synthesize goodsview;
 @synthesize shopcartcount;
 @synthesize logoImage;
+@synthesize checkpassword;
+@synthesize submit;
 
 
 //判定点击来哪个tableview
@@ -180,13 +183,27 @@ NSInteger selecttable=0;
     }
     //[goodsview reloadData];
 }
+//核对密码
+-(IBAction)chenckpassword:(id)sender
+{
+    sixthview.hidden=NO;
+}
+
+//关闭核对
+-(IBAction)closecheck:(id)sender
+{
+    checkpassword.text=@"";
+    sixthview.hidden=YES;
+}
 
 //订单提交
 -(IBAction)submitorder:(id)sender
 {
     sqlService *sql=[[sqlService alloc]init];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    if (![myDelegate.entityl.userPass isEqualToString:@""] && myDelegate.entityl.userPass!=nil ) {
+    if ([[Commons md5:[NSString stringWithFormat:@"%@",checkpassword.text]] isEqualToString:myDelegate.entityl.userPass]) {
+        sixthview.hidden=YES;
+        checkpassword.text=@"";
         NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
         if (![orderinfo isEqualToString:@""]) {
             
@@ -209,6 +226,12 @@ NSInteger selecttable=0;
             UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alter show];
         }
+    }else{
+        checkpassword.text=@"";
+        NSString *rowString =@"密码不正确";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+        
     }
 }
 

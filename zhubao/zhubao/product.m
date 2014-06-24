@@ -20,6 +20,7 @@
 @synthesize thridaryView;
 @synthesize secondShadeView;
 @synthesize fourthView;
+@synthesize fivethview;
 @synthesize mianselect;
 @synthesize netselect;
 @synthesize colorselect;
@@ -65,6 +66,7 @@
 @synthesize button3D;
 @synthesize button3dman;
 @synthesize button3dwoman;
+@synthesize checkpassword;
 
 //判定点击来哪个tableview
 NSInteger selecttype=0;
@@ -1075,10 +1077,10 @@ NSString *manprice=nil;
     NSInteger btntag=[btn tag];
     NSString * serie=nil;
     if (btntag==1) {
-        serie=@"Pro_hotE=1";
+        serie=@"Pro_f_pair='ture'";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if(btntag==2){
-        serie=@"Pro_f_pair='ture'";
+        serie=@"Pro_hotE=1";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if (btntag==0){
         for (UIButton * btn4 in btnarray4) {
@@ -1515,32 +1517,55 @@ NSString *manprice=nil;
     
 }
 
+//核对密码
+-(IBAction)chenckpassword:(id)sender
+{
+    fivethview.hidden=NO;
+}
+
+//关闭核对
+-(IBAction)closecheck:(id)sender
+{
+    checkpassword.text=@"";
+    fivethview.hidden=YES;
+}
+
 //订单提交
 -(IBAction)submitorder:(id)sender
 {
     sqlService *sql=[[sqlService alloc]init];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
-    if (![orderinfo isEqualToString:@""]) {
-        
-        sql=[[sqlService alloc]init];
-        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-        myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
-        NSString *goodscount=myDelegate.entityl.resultcount;
-        if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-            shopcartcount.hidden=NO;
-            [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
-        }else{
-            shopcartcount.hidden=YES;
+    if ([[Commons md5:[NSString stringWithFormat:@"%@",checkpassword.text]] isEqualToString:myDelegate.entityl.userPass]) {
+        fivethview.hidden=YES;
+        checkpassword.text=@"";
+        NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
+        if (![orderinfo isEqualToString:@""]) {
+            
+            sql=[[sqlService alloc]init];
+            AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+            myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
+            NSString *goodscount=myDelegate.entityl.resultcount;
+            if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+                shopcartcount.hidden=NO;
+                [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
+            }else{
+                shopcartcount.hidden=YES;
+            }
+            
+            sqlService *shopcar=[[sqlService alloc] init];
+            shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
+            [goodsview reloadData];
+            
+            NSString *rowString =orderinfo;
+            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alter show];
         }
-        
-        sqlService *shopcar=[[sqlService alloc] init];
-        shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
-        [goodsview reloadData];
-        
-        NSString *rowString =orderinfo;
+    }else{
+        checkpassword.text=@"";
+        NSString *rowString =@"密码不正确";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
+        
     }
 }
 

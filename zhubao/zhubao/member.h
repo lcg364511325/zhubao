@@ -26,6 +26,7 @@
 @property (retain, nonatomic) IBOutlet UIView *thridaryView;
 @property (retain, nonatomic) IBOutlet UIView *fourtharyView;
 @property (retain, nonatomic) IBOutlet UIView *fiftharyView;
+@property (retain, nonatomic) IBOutlet UIView *sixthview;
 @property (weak, nonatomic) IBOutlet UITableView *selectTableView;
 //@property (strong, nonatomic) NSArray *provincelist;
 //@property (strong, nonatomic) NSArray *citylist;
@@ -47,6 +48,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *goodsview;
 @property (weak, nonatomic) IBOutlet UIButton *shopcartcount;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
+@property (weak, nonatomic) IBOutlet UITextField *checkpassword;
+@property (weak, nonatomic) IBOutlet UIButton *submit;
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;

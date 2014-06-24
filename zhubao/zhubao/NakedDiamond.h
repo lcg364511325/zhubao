@@ -41,6 +41,7 @@
 @property (retain, nonatomic) IBOutlet UIView *fourtharyView;
 @property (retain, nonatomic) IBOutlet UIView *thirdShadeView;
 @property (retain, nonatomic) IBOutlet UIView *fivetharyView;
+@property (retain, nonatomic) IBOutlet UIView *sixview;
 @property (weak, nonatomic) IBOutlet UITextField *weightmin;
 @property (weak, nonatomic) IBOutlet UITextField *weightmax;
 @property (weak, nonatomic) IBOutlet UITextField *pricemin;
@@ -69,6 +70,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *goodsview;
 @property (weak, nonatomic) IBOutlet UIButton *shopcartcount;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
+@property (weak, nonatomic) IBOutlet UITextField *checkpassword;
+@property (weak, nonatomic) IBOutlet UILabel *nakediacount;
 
 
 - (IBAction)goAction:(id)sender;

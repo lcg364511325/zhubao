@@ -7,10 +7,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ustomtailor">
             <connections>
                 <outlet property="cemianview" destination="MlA-i7-Gdm" id="PTF-0w-enD"/>
+                <outlet property="checkpassword" destination="12D-0I-39a" id="mgN-Ms-aHN"/>
                 <outlet property="fanmianview" destination="csc-Al-k34" id="yQC-S5-Dv3"/>
                 <outlet property="fitDiaText" destination="oRs-uU-Mxj" id="mwx-gV-VAT"/>
                 <outlet property="fitNoText" destination="Kxs-yo-4Gh" id="3JU-Y6-ngS"/>
                 <outlet property="fontText" destination="xGU-2C-vpp" id="bQc-uq-Wwz"/>
+                <outlet property="fourthview" destination="zET-3k-CVC" id="6bA-in-XIP"/>
                 <outlet property="goldweightText" destination="pj6-8F-WIE" id="4ze-fv-bkx"/>
                 <outlet property="goodsview" destination="6G8-eX-ZPW" id="P01-AQ-jdl"/>
                 <outlet property="logoImage" destination="Ywn-DR-tZN" id="CDM-35-kO7"/>
@@ -339,7 +341,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="submitorder:" destination="-1" eventType="touchDown" id="SGw-HY-cnc"/>
+                                <action selector="chenckpassword:" destination="-1" eventType="touchDown" id="B83-O6-yBl"/>
                             </connections>
                         </button>
                     </subviews>
@@ -391,6 +393,50 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zET-3k-CVC">
+                    <rect key="frame" x="412" y="309" width="200" height="150"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="backgroundcolor.png" translatesAutoresizingMaskIntoConstraints="NO" id="RYx-6t-gqb">
+                            <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="请输入密码：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Hh-V0-EPr">
+                            <rect key="frame" x="61" y="20" width="200" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="12D-0I-39a">
+                            <rect key="frame" x="0.0" y="49" width="200" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZN4-kV-7cv">
+                            <rect key="frame" x="14" y="100" width="100" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button" image="submit.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="submitorder:" destination="-1" eventType="touchDown" id="Art-JS-eFv"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="faB-wF-Lhk">
+                            <rect key="frame" x="127" y="100" width="46" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="取消">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="closecheck:" destination="-1" eventType="touchDown" id="Bcj-0K-TQj"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -402,6 +448,7 @@
         <image name="021_3.png" width="420" height="290"/>
         <image name="Reset.png" width="234" height="88"/>
         <image name="axe.png" width="87" height="95"/>
+        <image name="backgroundcolor.png" width="88" height="88"/>
         <image name="bg.png" width="218" height="136"/>
         <image name="close.png" width="79" height="79"/>
         <image name="consort.png" width="82" height="90"/>

@@ -18,6 +18,7 @@
 @synthesize secondaryView;
 @synthesize primaryShadeView;
 @synthesize thirdView;
+@synthesize fourthview;
 @synthesize DiplomaSelect;
 @synthesize selecttext;
 @synthesize dipomaNoText;
@@ -28,6 +29,7 @@
 @synthesize selectText;
 @synthesize shopcartcount;
 @synthesize logoImage;
+@synthesize checkpassword;
 
 //证书类型
 NSInteger diptype=0;
@@ -167,32 +169,55 @@ NSInteger vvvv=0;
     //[goodsview reloadData];
 }
 
+//核对密码
+-(IBAction)chenckpassword:(id)sender
+{
+    fourthview.hidden=NO;
+}
+
+//关闭核对
+-(IBAction)closecheck:(id)sender
+{
+    checkpassword.text=@"";
+    fourthview.hidden=YES;
+}
+
 //订单提交
 -(IBAction)submitorder:(id)sender
 {
     sqlService *sql=[[sqlService alloc]init];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
-    if (![orderinfo isEqualToString:@""]) {
-        
-        sql=[[sqlService alloc]init];
-        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-        myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
-        NSString *goodscount=myDelegate.entityl.resultcount;
-        if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-            shopcartcount.hidden=NO;
-            [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
-        }else{
-            shopcartcount.hidden=YES;
+    if ([[Commons md5:[NSString stringWithFormat:@"%@",checkpassword.text]] isEqualToString:myDelegate.entityl.userPass]) {
+        fourthview.hidden=YES;
+        checkpassword.text=@"";
+        NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
+        if (![orderinfo isEqualToString:@""]) {
+            
+            sql=[[sqlService alloc]init];
+            AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+            myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
+            NSString *goodscount=myDelegate.entityl.resultcount;
+            if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+                shopcartcount.hidden=NO;
+                [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
+            }else{
+                shopcartcount.hidden=YES;
+            }
+            
+            sqlService *shopcar=[[sqlService alloc] init];
+            shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
+            [goodsview reloadData];
+            
+            NSString *rowString =orderinfo;
+            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alter show];
         }
-        
-        sqlService *shopcar=[[sqlService alloc] init];
-        shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
-        [goodsview reloadData];
-        
-        NSString *rowString =orderinfo;
+    }else{
+        checkpassword.text=@"";
+        NSString *rowString =@"密码不正确";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
+        
     }
 }
 
