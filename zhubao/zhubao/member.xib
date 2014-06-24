@@ -150,7 +150,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="openorder:" destination="-1" eventType="touchDown" id="IIr-ni-7g2"/>
+                                <action selector="chenckpassword:" destination="-1" eventType="touchDown" id="3nf-d4-5k1"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rre-vX-xoC">
@@ -236,7 +236,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="chenckpassword:" destination="-1" eventType="touchDown" id="Jsg-z6-puG"/>
+                                <action selector="submitorder:" destination="-1" eventType="touchDown" id="jE1-Sk-kP4"/>
                             </connections>
                         </button>
                     </subviews>
@@ -496,7 +496,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="submitorder:" destination="-1" eventType="touchDown" id="isC-JT-xVI"/>
+                                <action selector="openorder:" destination="-1" eventType="touchDown" id="75o-PH-JZO"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F5n-v6-Onl">

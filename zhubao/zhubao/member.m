@@ -201,9 +201,6 @@ NSInteger selecttable=0;
 {
     sqlService *sql=[[sqlService alloc]init];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    if ([[Commons md5:[NSString stringWithFormat:@"%@",checkpassword.text]] isEqualToString:myDelegate.entityl.userPass]) {
-        sixthview.hidden=YES;
-        checkpassword.text=@"";
         NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
         if (![orderinfo isEqualToString:@""]) {
             
@@ -226,13 +223,6 @@ NSInteger selecttable=0;
             UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alter show];
         }
-    }else{
-        checkpassword.text=@"";
-        NSString *rowString =@"密码不正确";
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alter show];
-        
-    }
 }
 
 - (IBAction)closeAction:(id)sender
@@ -694,6 +684,7 @@ NSInteger selecttable=0;
     }
 }
 
+
 //订单页面打开
 -(IBAction)openorder:(id)sender
 {
@@ -705,9 +696,18 @@ NSInteger selecttable=0;
     NSString *Upt=@"0";
     //订单号
     NSString *orderid=@"0";
-    NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@|%@",myDelegate.entityl.uId,@"601",Upt,apikey,Nowt,orderid]];
-    NSString * surl = [NSString stringWithFormat:@"http://www.seyuu.com/order/myorder.asp?uId=%@&type=601&Upt=%@&Nowt=%@&Kstr=%@&ordid=%@",myDelegate.entityl.uId,Upt,Nowt,Kstr,orderid];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:surl]];
+    if ([[Commons md5:[NSString stringWithFormat:@"%@",checkpassword.text]] isEqualToString:myDelegate.entityl.userPass]) {
+        sixthview.hidden=YES;
+        checkpassword.text=@"";
+        NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@|%@",myDelegate.entityl.uId,@"601",Upt,apikey,Nowt,orderid]];
+        NSString * surl = [NSString stringWithFormat:@"http://www.seyuu.com/order/myorder.asp?uId=%@&type=601&Upt=%@&Nowt=%@&Kstr=%@&ordid=%@",myDelegate.entityl.uId,Upt,Nowt,Kstr,orderid];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:surl]];
+    }else{
+        checkpassword.text=nil;
+        NSString *rowString =@"请输入正确密码！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }
 }
 
 

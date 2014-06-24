@@ -383,27 +383,24 @@ NSInteger whichview=0;
     //[goodsview reloadData];
 }
 
-//核对密码
--(IBAction)chenckpassword:(id)sender
-{
-    sixview.hidden=NO;
-}
-
-//关闭核对
--(IBAction)closecheck:(id)sender
-{
-    checkpassword.text=@"";
-    sixview.hidden=YES;
-}
+////核对密码
+//-(IBAction)chenckpassword:(id)sender
+//{
+//    sixview.hidden=NO;
+//}
+//
+////关闭核对
+//-(IBAction)closecheck:(id)sender
+//{
+//    checkpassword.text=@"";
+//    sixview.hidden=YES;
+//}
 
 //订单提交
 -(IBAction)submitorder:(id)sender
 {
     sqlService *sql=[[sqlService alloc]init];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    if ([[Commons md5:[NSString stringWithFormat:@"%@",checkpassword.text]] isEqualToString:myDelegate.entityl.userPass]) {
-        sixview.hidden=YES;
-        checkpassword.text=@"";
         NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
         if (![orderinfo isEqualToString:@""]) {
             
@@ -426,13 +423,6 @@ NSInteger whichview=0;
             UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alter show];
         }
-    }else{
-        checkpassword.text=@"";
-        NSString *rowString =@"密码不正确";
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alter show];
-        
-    }
 }
 
 - (IBAction)closeAction2:(id)sender
