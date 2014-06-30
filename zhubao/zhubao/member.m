@@ -65,12 +65,13 @@ NSInteger selecttable=0;
     //NSArray *province=[[NSArray alloc] initWithObjects:@"广东",@"广西",@"河北", nil];
     NSArray *province = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"city" ofType:@"plist"]];
     
+    checkpassword.secureTextEntry = YES;
     
     self.provincelist=province;
     self.Divisionlist=Divisionarray;
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
 
-    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.jpg"]];
+    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
         [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
     }
@@ -587,6 +588,11 @@ NSInteger selecttable=0;
         //to-do
         selectTableView.hidden=YES;
     }
+    if (!CGRectContainsPoint([fiftharyView frame], pt)) {
+        //to-do
+        fiftharyView.hidden=YES;
+    }
+    
 }
 
 
@@ -691,7 +697,8 @@ NSInteger selecttable=0;
         sixthview.hidden=YES;
         checkpassword.text=@"";
         NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@|%@",myDelegate.entityl.uId,@"601",Upt,apikey,Nowt,orderid]];
-        NSString * surl = [NSString stringWithFormat:@"http://www.seyuu.com/order/myorder.asp?uId=%@&type=601&Upt=%@&Nowt=%@&Kstr=%@&ordid=%@",myDelegate.entityl.uId,Upt,Nowt,Kstr,orderid];
+        NSString * surl = [NSString stringWithFormat:@"%@/app/aiface.php?uId=%@&type=601&Upt=%@&Nowt=%@&Kstr=%@&ordid=%@",domainser,myDelegate.entityl.uId,Upt,Nowt,Kstr,orderid];
+        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:surl]];
     }else{
         checkpassword.text=nil;
@@ -712,7 +719,7 @@ NSInteger selecttable=0;
     NSString *info=[sql getMyInfo];
     [alter dismissWithClickedButtonIndex:0 animated:YES];
     if (info) {
-        NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.jpg"]];
+        NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
         if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
             [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
         }

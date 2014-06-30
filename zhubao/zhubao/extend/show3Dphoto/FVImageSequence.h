@@ -23,4 +23,6 @@
 @property (readwrite, copy) NSString *prefix;
 @property (readwrite) int numberOfImages;
 
+-(void)doRotate:(BOOL)flag;
+
 @end

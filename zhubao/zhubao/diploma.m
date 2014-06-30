@@ -58,7 +58,7 @@ NSInteger vvvv=0;
     selectText.hidden=NO;
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     
-    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.jpg"]];
+    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
         [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
     }
@@ -508,6 +508,11 @@ NSInteger vvvv=0;
         //to-do
         DiplomaSelect.hidden=YES;
     }
+    if (!CGRectContainsPoint([thirdView frame], pt)) {
+        //to-do
+        thirdView.hidden=YES;
+    }
+    
 }
 
 //证书下拉选择

@@ -61,7 +61,7 @@ NSInteger i=0;
 //        
 //    }
 //    
-    NSString *logopath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopath.jpg"]];
+    NSString *logopath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopath.png"]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:logopath]) {
         [logoshengyu setImage:[[UIImage alloc] initWithContentsOfFile:logopath]];
     }

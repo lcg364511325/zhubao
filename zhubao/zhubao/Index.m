@@ -56,23 +56,89 @@
     }else{
         shopcartcountButton.hidden=YES;
     }
+    //web标签背景色透明
+    aboutus.backgroundColor = [UIColor clearColor];
+    aboutus.opaque = NO;
+
+    //更新ui(如果已经存在的，则不再自动更新)
+    [self loadmyInfo];
     
-    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.jpg"]];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
-        [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
-    }
-    else {
-       [logoImage setImage:[UIImage imageNamed:@"logo"]];
-    }
+    
+    //设置了左右滑动
+    UISwipeGestureRecognizer *recognizer;
+    
+    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [[self view] addGestureRecognizer:recognizer];
+    
+//    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+//    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+//    [[self view] addGestureRecognizer:recognizer];
 
-    NSString *logopath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopath.jpg"]];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:logopath]) {
-        [biglogo setImage:[[UIImage alloc] initWithContentsOfFile:logopath]];
-    }
-    else {
-        [biglogo setImage:[UIImage imageNamed:@"logoshengyu"]];
-    }
+}
 
+-(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
+    
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionLeft) {
+        
+        NSLog(@"swipe left");
+        //执行程序
+        
+    }
+    
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionRight) {
+        
+        NSLog(@"swipe right");
+        //执行程序
+        [fourthView setHidden:YES];
+        [biglogo setHidden:NO];
+    }
+    
+}
+
+//更新ui
+-(void)loadmyInfo
+{
+    @try {
+        
+        NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            // 耗时的操作（异步操作）
+            
+            if (![[NSFileManager defaultManager] fileExistsAtPath:logopathsm]){
+                myApi *myapi=[[myApi alloc]init];
+                [myapi getMyInfo];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 更新界面（处理结果）
+
+                if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
+                    [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
+                }
+                else {
+                    [logoImage setImage:[UIImage imageNamed:@"logo"]];
+                }
+                
+                NSString *logopath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopath.png"]];
+                if ([[NSFileManager defaultManager] fileExistsAtPath:logopath]) {
+                    [biglogo setImage:[[UIImage alloc] initWithContentsOfFile:logopath] forState:UIControlStateNormal];
+                }
+                else {
+                    [biglogo setImage:[UIImage imageNamed:@"logoshengyu"] forState:UIControlStateNormal];
+                }
+            });
+        });
+        
+    }
+    @catch (NSException *exception) {
+        
+    }
+    @finally {
+        
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -139,7 +205,7 @@
     thridView.frame=CGRectMake(750, 70, thridView.frame.size.width, thridView.frame.size.height);
 }
 //关于我们
--(IBAction)aboutus:(id)sender
+-(IBAction)openaboutus:(id)sender
 {
     NSString *filePath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"about.webarchive"]];
     NSURL *aURL = [NSURL fileURLWithPath:filePath];
@@ -148,6 +214,9 @@
     fourthView.hidden=NO;
     //NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:myDelegate.myinfol.details]];
     [aboutus loadRequest:request];
+    
+    [fourthView setHidden:NO];
+    [biglogo setHidden:YES];
 }
 
 -(IBAction)closeaboutus:(id)sender

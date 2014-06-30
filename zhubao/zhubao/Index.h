@@ -34,11 +34,12 @@
 @property (weak, nonatomic) IBOutlet UITableView *goodsview;
 @property (weak, nonatomic) IBOutlet UIButton *shopcartcountButton;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
-@property (weak, nonatomic) IBOutlet UIImageView *biglogo;
+@property (weak, nonatomic) IBOutlet UIButton *biglogo;
 @property (weak, nonatomic) IBOutlet UIWebView *aboutus;
 @property (weak, nonatomic) IBOutlet UITextField *checkpassword;
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;
+-(IBAction)openaboutus:(id)sender;
 
 @end

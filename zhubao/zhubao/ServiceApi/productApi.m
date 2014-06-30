@@ -34,6 +34,9 @@
         
         NSString * URL = [NSString stringWithFormat:@"%@%@",domainser,surl];
         
+        NSLog(@"URL--------:%@",URL);
+        NSLog(@"params--------:%@",params);
+        
         NSMutableDictionary * dict = [DataService PostDataService:URL postDatas:(NSString*)params];//[DataService GetDataService:URL];
         
         NSError *error = nil;

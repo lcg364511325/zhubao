@@ -19,6 +19,7 @@
     //下拉菜单
     UIActionSheet *myActionSheet;
     
+    UIPopoverController *popoverController;
     
     //图片2进制路径
     NSString* filePath;

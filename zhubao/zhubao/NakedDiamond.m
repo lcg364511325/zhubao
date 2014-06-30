@@ -95,7 +95,7 @@ NSInteger whichview=0;
         shopcartcount.hidden=YES;
     }
 
-    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.jpg"]];
+    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
         [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
     }
@@ -1229,6 +1229,18 @@ NSInteger whichview=0;
         NSString *rowString =@"加入购物车失败！";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
+    }
+}
+
+//点击tableview以外得地方关闭
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint pt = [touch locationInView:self.view];
+    //点击其他地方消失
+    if (!CGRectContainsPoint([fivetharyView frame], pt)) {
+        //to-do
+        fivetharyView.hidden=YES;
     }
 }
 

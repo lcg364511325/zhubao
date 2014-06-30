@@ -63,7 +63,7 @@ NSInteger vies=0;
     self.mainlist = mainarray;
     texturetext.userInteractionEnabled=NO;
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.jpg"]];
+    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
         [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
     }
@@ -484,6 +484,11 @@ NSInteger vies=0;
         //to-do
         textureselect.hidden=YES;
     }
+    if (!CGRectContainsPoint([thirdaryView frame], pt)) {
+        //to-do
+        thirdaryView.hidden=YES;
+    }
+    
 }
 
 // 材质下拉框
@@ -665,14 +670,13 @@ NSInteger vies=0;
                     // 取消
                     return;
                 case 1:
-                    // 相机
-//                    sourceType = UIImagePickerControllerSourceTypeCamera;
+                    // 相册
                     sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                     break;
                     
                 case 2:
-                    // 相册
-                    sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    // 相机
+                    sourceType = UIImagePickerControllerSourceTypeCamera;
                     break;
             }
         }
@@ -693,8 +697,17 @@ NSInteger vies=0;
         
         imagePickerController.sourceType = sourceType;
         
-        [self presentViewController:imagePickerController animated:YES completion:^{}];
-        
+
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            
+            UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:imagePickerController];
+            popoverController = popover;
+            [popoverController presentPopoverFromRect:CGRectMake(0, 0, 300, 300) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            
+        } else {
+            [self presentViewController:imagePickerController animated:YES completion:^{}];
+        }
+
     }
 }
 

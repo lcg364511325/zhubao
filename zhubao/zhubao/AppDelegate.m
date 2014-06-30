@@ -64,6 +64,9 @@ UILabel *titlelabel;
     //[queue setQueueDidFinishSelector:@selector(queueFinished:)];
     [queue go];//启动
     
+    //设置ios不锁屏
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    
     //系统新安装未初始化
     login * lo = [[login alloc] init];
     //Index *lo = [[Index alloc] initWithNibName:@"Index" bundle:nil] ;
@@ -257,15 +260,6 @@ UILabel *titlelabel;
         [self stopProgressBar];
     }
     
-    //NSLog(@"downloadPath======:%@",downloadPath);
-    
-    //    NSString *string = [[NSString alloc]initWithContentsOfFile:downloadPath encoding:NSUTF8StringEncoding error:nil];
-    //
-    //    NSLog(@"------------- this is :%@",string);
-    //    NSArray  * array= [string componentsSeparatedByString:@"\r\n"];//换行符
-    //
-    //    //运行下载的内容（正常下是sql）
-    //    sqlService * ser=[[sqlService alloc] init];
     
     //解压文件
     ZipArchive *zip = [[ZipArchive alloc] init];
@@ -395,7 +389,7 @@ UILabel *titlelabel;
                     NSString * status=[d objectForKey:@"status"];
                     if ([status isEqualToString:@"false"]) {
                         //提交失败
-                        [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"生成订单失败" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil] show];
+                        [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"生成订单失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
                         
                         return;
                     }
@@ -409,7 +403,7 @@ UILabel *titlelabel;
                         sqlService *sqlser=[[sqlService alloc]init];
                         [sqlser ClearTableDatas:[NSString stringWithFormat:@"buyproduct where customerid=%@",entityl.uId]];
                         
-                        [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"生成订单成功" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil] show];
+                        [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"生成订单成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
                         
                         return;
                     }
@@ -441,7 +435,7 @@ UILabel *titlelabel;
         
     }
     
-    [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"生成订单失败" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil] show];
+    [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"生成订单失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
     
 }
 
@@ -451,7 +445,7 @@ UILabel *titlelabel;
     [alter dismissWithClickedButtonIndex:0 animated:YES];
     NSError *error = [request error];
 
-    [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"提交订单数据失败" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil] show];
+    [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"提交订单数据失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
     
 }
 
@@ -523,6 +517,8 @@ UILabel *titlelabel;
     @catch (NSException *exception) {
         
     }
+    
+    [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"数据更新完成" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
 }
 
 //取消定时器

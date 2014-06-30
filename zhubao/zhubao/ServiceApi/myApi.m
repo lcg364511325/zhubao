@@ -16,7 +16,7 @@
     @try {
         AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
         
-        NSString * uId=@"68";//myDelegate.entityl.uId;
+        NSString * uId=myDelegate.entityl.uId;//@"68";
         
         getNowTime * time=[[getNowTime alloc] init];
         NSString * nowt=[time nowTime];

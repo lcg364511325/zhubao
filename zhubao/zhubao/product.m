@@ -64,8 +64,8 @@
 @synthesize manSizeText;
 @synthesize manFontText;
 @synthesize button3D;
-@synthesize button3dman;
 @synthesize button3dwoman;
+@synthesize button3dman;
 @synthesize checkpassword;
 
 //判定点击来哪个tableview
@@ -142,13 +142,20 @@ NSString *manprice=nil;
         shopcartcount.hidden=YES;
     }
 
-    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.jpg"]];
+    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
         [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
     }
     else {
         [logoImage setImage:[UIImage imageNamed:@"logo"]];
     }
+    
+    //定义图片标签的点击事件
+    productimageview.userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showPhotoBrowser)];
+    [productimageview addGestureRecognizer:singleTap];
+    
+    [_showPhotos addTarget:self action:@selector(showPhotoBrowser) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -224,15 +231,69 @@ NSString *manprice=nil;
     //FVImageSequenceDemoViewController *sysmenu=[[FVImageSequenceDemoViewController alloc] init];
     UIButton *btn=(UIButton*)sender;
     NSInteger btntag=btn.tag;
-    TestViewController *sysmenu=[[TestViewController alloc] init];
+    //TestViewController *sysmenu=[[TestViewController alloc] init];
+    NSString * code=@"";
     if (btntag==1) {
-        sysmenu.code=goodsman.Pro_author;//@"3Y0012";//工厂款号
-        [self.navigationController pushViewController:sysmenu animated:NO];
+        code=goodsman.Pro_author;//@"3Y0012";//工厂款号
+        //sysmenu.code=goodsman.Pro_author;//@"3Y0012";//工厂款号
+        //[self.navigationController pushViewController:sysmenu animated:NO];
     }else{
-        sysmenu.code=goods.Pro_author;//@"3Y0012";//工厂款号
-        [self.navigationController pushViewController:sysmenu animated:NO];
+        code=goods.Pro_author;//@"3Y0012";//工厂款号
+        //sysmenu.code=goods.Pro_author;//@"3Y0012";//工厂款号
+        //[self.navigationController pushViewController:sysmenu animated:NO];
     }
     
+    NSMutableArray *imgArray=[[NSMutableArray alloc]init];
+    for(int i=1;i<60;i++){
+        NSString *strApend;
+        if(i<9)
+            strApend=@"00";
+        else
+            strApend=@"0";
+        
+        NSString *path = [NSString stringWithFormat:@"%@_%@%d.jpg", code, strApend,i];
+        //NSLog(@"%@", path);
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *dcoumentpath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+        // 解压缩文件夹路径
+        NSString* unzipPath = [dcoumentpath stringByAppendingString:@"/images"];
+        
+        //NSLog(@"---------------本地的图片:%@", [NSString stringWithFormat:@"%@/%@",unzipPath,path]);
+        
+        UIImage *img =  [[UIImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",unzipPath,path]];//[[UIImage alloc] initWithContentsOfFile:path];
+        if(img)[imgArray addObject:img];
+    }
+
+    rImageView=[[RotateImageView alloc]initWithFrame:self.view.frame];
+    rImageView.animationImages=imgArray;
+    [rImageView setUserInteractionEnabled:YES];
+    [self.view addSubview:rImageView];
+    
+    //旋转初使化
+    rImageView.numberOfImages=[imgArray count]-1;
+    [rImageView initTimer];
+    
+    UIImage* image= [UIImage imageNamed:@"close"];
+    CGRect frame_1= CGRectMake(self.view.frame.size.width-80, 30, 48, 48);
+    btnBack= [[UIButton alloc] initWithFrame:frame_1];
+    [btnBack setBackgroundImage:image forState:UIControlStateNormal];
+    [btnBack addTarget:self action:@selector(closeImageView) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btnBack];
+}
+
+-(void)rotateStart{
+    [rImageView setRotate:TRUE];
+}
+
+-(void)rotateStop{
+    [rImageView setRotate:FALSE];
+}
+
+-(void)closeImageView
+{
+    [rImageView removeFromSuperview];
+    [btnBack removeFromSuperview];
 }
 
 //设置页面跳转
@@ -612,6 +673,11 @@ NSString *manprice=nil;
 {
     UITouch *touch = [touches anyObject];
     CGPoint pt = [touch locationInView:self.view];
+    
+    if (!CGRectContainsPoint([fourthView frame], pt)) {
+        //to-do
+        fourthView.hidden=YES;
+    }
     //点击其他地方消失
     if(selecttype==0 || selecttype==5){
         if (!CGRectContainsPoint([mianselect frame], pt)) {
@@ -826,9 +892,20 @@ NSString *manprice=nil;
             [serieindex appendString:index];
         }
     }
-    sqlService *sql=[[sqlService alloc]init];
-    list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:1500];
+    
+    list = [NSMutableArray arrayWithCapacity:10];
     [productcollect reloadData];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // 耗时的操作（异步操作）
+        sqlService *sql=[[sqlService alloc]init];
+        list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:1500];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [productcollect reloadData];
+        });
+    });
+    
 }
 
 
@@ -929,9 +1006,19 @@ NSString *manprice=nil;
             [serieindex appendString:index];
         }
     }
-    sqlService *sql=[[sqlService alloc]init];
-    list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:1500];
+    
+    list = [NSMutableArray arrayWithCapacity:10];
     [productcollect reloadData];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // 耗时的操作（异步操作）
+        sqlService *sql=[[sqlService alloc]init];
+        list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:1500];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [productcollect reloadData];
+        });
+    });
 }
 
 //镶口选择
@@ -1052,9 +1139,19 @@ NSString *manprice=nil;
             [serieindex appendString:index];
         }
     }
-    sqlService *sql=[[sqlService alloc]init];
-    list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:1500];
+    
+    list = [NSMutableArray arrayWithCapacity:10];
     [productcollect reloadData];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // 耗时的操作（异步操作）
+        sqlService *sql=[[sqlService alloc]init];
+        list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:1500];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [productcollect reloadData];
+        });
+    });
 }
 
 //系列
@@ -1065,7 +1162,7 @@ NSString *manprice=nil;
     NSInteger btntag=[btn tag];
     NSString * serie=nil;
     if (btntag==1) {
-        serie=@"Pro_f_pair='ture'";
+        serie=@"Pro_f_pair='true'";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }else if(btntag==2){
         serie=@"Pro_hotE=1";
@@ -1133,15 +1230,27 @@ NSString *manprice=nil;
     NSMutableString *serieindex=[[NSMutableString alloc] init];
     for (NSString *index in seriearray) {
         if (serieindex.length!=0) {
-            [serieindex appendString:@","];
+            [serieindex appendString:@" or "];
             [serieindex appendString:index];
         }else{
             [serieindex appendString:index];
         }
     }
-    sqlService *sql=[[sqlService alloc]init];
-    list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:1500];
+    NSString * serieindexs=serieindex;
+    if([seriearray count]>1)serieindexs=[NSString stringWithFormat:@"(%@)",serieindex];
+    
+    list = [NSMutableArray arrayWithCapacity:10];
     [productcollect reloadData];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // 耗时的操作（异步操作）
+        sqlService *sql=[[sqlService alloc]init];
+        list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindexs page:1 pageSize:1500];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [productcollect reloadData];
+        });
+    });
 }
 
 
@@ -1234,8 +1343,6 @@ NSString *manprice=nil;
 //点击事件
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self hidemenlproduct];
-    
     productEntity *entity = [list objectAtIndex:[indexPath row]];
     primaryShadeView.alpha=0.5;
     secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.height);
@@ -1245,6 +1352,8 @@ NSString *manprice=nil;
     goods=[sql GetProductDetail:productnumber];
     Pro_type=goods.Pro_Type;
     //productimageview.image=[UIImage imageNamed:@"diamonds.png"];
+    
+    [self hidemenlproduct];
     
     title1lable.text=goods.Pro_name;
     modellable.text=goods.Pro_model;
@@ -1314,7 +1423,7 @@ NSString *manprice=nil;
         [self.productimageview setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
     }else
     {
-        [self.productimageview setImage:[UIImage imageNamed:@"diamonds"]];
+        [self.productimageview setImage:[UIImage imageNamed:@""]];//diamonds
         NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",self.productimageview,@"imageView",nil];
         [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
         
@@ -1368,6 +1477,32 @@ NSString *manprice=nil;
     return [NSString stringWithFormat:@"%@",roundedOunces];
 }
 
+-(BOOL)isexistsfile
+{
+    BOOL isshow=FALSE;
+    for(int i=1;i<60;i++){
+        NSString *strApend;
+        if(i<9)
+            strApend=@"00";
+        else
+            strApend=@"0";
+        
+        NSString *path = [NSString stringWithFormat:@"%@_%@%d.jpg", goods.Pro_author, strApend,i];
+        NSLog(@"%@", path);
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *dcoumentpath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+        // 解压缩文件夹路径
+        NSString* unzipPath = [dcoumentpath stringByAppendingString:@"/images"];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/%@",unzipPath,path]]) {
+            isshow=TRUE;
+            break;
+        }
+    }
+        
+    return isshow;
+}
+
 
 //隐藏对戒男戒
 -(void)hidemenlproduct{
@@ -1390,9 +1525,13 @@ NSString *manprice=nil;
     [_mancjLabel setHidden:TRUE];
     [button3dman setHidden:TRUE];
     [button3dwoman setHidden:TRUE];
-    [button3D setHidden:NO];
     
-    
+    if ([self isexistsfile]) {
+        [button3D setHidden:NO];
+    }else{
+        [button3D setHidden:TRUE];
+    }
+
 }
 //显示对戒男戒
 -(void)showmenlproduct{
@@ -1413,11 +1552,16 @@ NSString *manprice=nil;
     [_manjdLabel setHidden:NO];
     [_manColorLabel setHidden:NO];
     [_mancjLabel setHidden:NO];
-    [button3dman setHidden:NO];
-    [button3dwoman setHidden:NO];
+    
+    if ([self isexistsfile]) {
+        [button3dman setHidden:NO];
+        [button3dwoman setHidden:NO];
+    }else{
+        [button3dman setHidden:TRUE];
+        [button3dwoman setHidden:TRUE];
+    }
     [button3D setHidden:TRUE];
-    
-    
+
 }
 
 -(void)showmenlproduct:(NSString *)girlid{
@@ -1545,6 +1689,78 @@ NSString *manprice=nil;
             UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alter show];
         }
+}
+//展示图片集
+-(void)showPhotoBrowser
+{
+    NSMutableArray *photos = [[NSMutableArray alloc] init];
+    //NSMutableArray *thumbs = [[NSMutableArray alloc] init];
+    //MWPhoto *photot;
+    
+    NSArray  * array= [goods.Pro_bigpic componentsSeparatedByString:@","];
+    int count = [array count];
+    //遍历这个数组
+    for (int i = 0; i < count; i++) {
+        //NSLog(@"普通的遍历：i = %d 时的数组对象为: %@",i,[array objectAtIndex: i]);
+        NSString * patht=[NSString stringWithFormat:@"http://seyuu.com%@",[array objectAtIndex: i]];
+        [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:patht]]];
+        //[thumbs addObject:[MWPhoto photoWithURL:[NSURL URLWithString:patht]]];
+    }
+
+    self.photos = photos;
+    //self.thumbs = thumbs;
+    
+//    _selections = [NSMutableArray new];
+//    for (int i = 0; i < photos.count; i++) {
+//        [_selections addObject:[NSNumber numberWithBool:NO]];
+//    }
+    
+    // Create browser
+	MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    browser.displayActionButton = NO;
+    browser.displayNavArrows = YES;
+    browser.displaySelectionButtons = NO;
+    browser.alwaysShowControls = NO;
+    browser.zoomPhotosToFill = YES;
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
+    browser.wantsFullScreenLayout = YES;
+#endif
+    browser.enableGrid = NO;
+    browser.startOnGrid = NO;
+    browser.enableSwipeToDismiss = YES;
+    [browser setCurrentPhotoIndex:0];
+    
+    // Push
+    [self.navigationController pushViewController:browser animated:NO];
+
+}
+
+#pragma mark - MWPhotoBrowserDelegate
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return _photos.count;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < _photos.count)
+        return [_photos objectAtIndex:index];
+    return nil;
+}
+
+//- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser thumbPhotoAtIndex:(NSUInteger)index {
+//    if (index < _thumbs.count)
+//        return [_thumbs objectAtIndex:index];
+//    return nil;
+//}
+
+- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
+    //NSLog(@"Did start viewing photo at index %lu", (unsigned long)index);
+}
+
+- (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {
+    // If we subscribe to this method we must dismiss the view controller ourselves
+    //NSLog(@"Did finish modal presentation");
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
