@@ -12,33 +12,44 @@
 
 sqlService *sqlser;
 AppDelegate * app;
-UILabel * tiplabel;
 
 //同步数据到数据库里面
--(NSString *)getDataInsertTable:(UILabel *)tiplabellog
+-(NSString *)getDataInsertTable:(int)tiptable
 {
     sqlser= [[sqlService alloc]init];
 
     getNowTime * time=[[getNowTime alloc] init];
     NSString * nowt=[time nowTime];
-    tiplabel=tiplabellog;
-    if(tiplabel)[tiplabel setText:[NSString stringWithFormat:@"获取当前服务器时间%@",nowt]];
-    if(tiplabellog)[tiplabellog setText:[NSString stringWithFormat:@"获取当前服务器时间%@",nowt]];
     
-    [self getProduct:nowt];//同步商品数据
-    
-    //重新获取时间
-    nowt=[time nowTime];
-    [self getProductdia:nowt];//裸钻数据获取
-    
-    //重新获取时间
-    nowt=[time nowTime];
-    [self getproductphotos:nowt];//3D旋转ZIP套图数据获取
-    
-    //重新获取时间
-    nowt=[time nowTime];
-    [self getwithmouth:nowt];//镶口数据获取
-    
+    if (tiptable==1) {
+        [self getProduct:nowt];//同步商品数据
+        
+    }else if (tiptable==2){
+        [self getProductdia:nowt];//裸钻数据获取
+        
+    }else if (tiptable==3){
+        [self getproductphotos:nowt];//3D旋转ZIP套图数据获取
+        
+    }else if (tiptable==4){
+        [self getwithmouth:nowt];//镶口数据获取
+        
+    }else if (tiptable==0){
+        
+        [self getProduct:nowt];//同步商品数据
+        
+        //重新获取时间
+        nowt=[time nowTime];
+        [self getProductdia:nowt];//裸钻数据获取
+        
+        //重新获取时间
+        nowt=[time nowTime];
+        [self getproductphotos:nowt];//3D旋转ZIP套图数据获取
+        
+        //重新获取时间
+        nowt=[time nowTime];
+        [self getwithmouth:nowt];//镶口数据获取
+    }
+
     //关闭数据库
     [sqlser closeDB];
     
@@ -101,7 +112,6 @@ UILabel * tiplabel;
                     NSString * sql=[NSString stringWithFormat:@"insert into product(%@)values(%@)",tablekey,(NSString *)values];
                     
                     NSLog(@"--------------:%@",sql);
-                    if(tiplabel)[tiplabel setText:[NSString stringWithFormat:@"同步商品数据:%@",sql]];
                     
                     [sqlser execSql:sql];
 
@@ -214,7 +224,6 @@ UILabel * tiplabel;
                     NSString * sql=[NSString stringWithFormat:@"insert into productdia(%@)values(%@)",tablekey,(NSString *)values];
                     
                     NSLog(@"--------------:%@",sql);
-                    if(tiplabel)[tiplabel setText:[NSString stringWithFormat:@"同步裸钻数据:%@",sql]];
                     
                     [sqlser execSql:sql];
                     
@@ -326,7 +335,6 @@ UILabel * tiplabel;
                     NSString * sql=[NSString stringWithFormat:@"insert into productphotos(%@)values(%@)",tablekey,(NSString *)values];
                     
                     NSLog(@"--------------:%@",sql);
-                    if(tiplabel)[tiplabel setText:[NSString stringWithFormat:@"同步3D旋转ZIP套图数据:%@",sql]];
                     
                     [sqlser execSql:sql];
                     
@@ -440,7 +448,6 @@ UILabel * tiplabel;
                     NSString * sql=[NSString stringWithFormat:@"insert into withmouth(%@)values(%@)",tablekey,(NSString *)values];
                     
                     NSLog(@"--------------:%@",sql);
-                    if(tiplabel)[tiplabel setText:[NSString stringWithFormat:@"同步镶口数据:%@",sql]];
                     
                     [sqlser execSql:sql];
                     
@@ -534,8 +541,7 @@ UILabel * tiplabel;
         }
         
         if(array.count<=0 || i==0){
-            app.thridView.hidden=YES;
-            [app.alter dismissWithClickedButtonIndex:0 animated:YES];
+            [app stopProgressBar];
         }
 
     }@catch (NSException *exception) {

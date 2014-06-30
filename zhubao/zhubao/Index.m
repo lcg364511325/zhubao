@@ -27,7 +27,6 @@
 @synthesize aboutus;
 @synthesize checkpassword;
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -57,26 +56,89 @@
     }else{
         shopcartcountButton.hidden=YES;
     }
-    NSURL *imgUrl=[NSURL URLWithString:myDelegate.myinfol.logopathsm];
-    if (hasCachedImage(imgUrl)) {
-        [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
-    }else
-    {
-        [logoImage setImage:[UIImage imageNamed:@"logo"]];
-        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
-        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+    //web标签背景色透明
+    aboutus.backgroundColor = [UIColor clearColor];
+    aboutus.opaque = NO;
+
+    //更新ui(如果已经存在的，则不再自动更新)
+    [self loadmyInfo];
+    
+    
+    //设置了左右滑动
+    UISwipeGestureRecognizer *recognizer;
+    
+    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [[self view] addGestureRecognizer:recognizer];
+    
+//    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+//    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+//    [[self view] addGestureRecognizer:recognizer];
+
+}
+
+-(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
+    
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionLeft) {
+        
+        NSLog(@"swipe left");
+        //执行程序
         
     }
-    NSURL *imgUrl1=[NSURL URLWithString:myDelegate.myinfol.logopath];
-    if (hasCachedImage(imgUrl1)) {
-        [biglogo setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl1)]];
-    }else
-    {
-        [biglogo setImage:[UIImage imageNamed:@"logoshengyu"]];
-        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl1,@"url",biglogo,@"imageView",nil];
-        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+    
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionRight) {
+        
+        NSLog(@"swipe right");
+        //执行程序
+        [fourthView setHidden:YES];
+        [biglogo setHidden:NO];
+    }
+    
+}
+
+//更新ui
+-(void)loadmyInfo
+{
+    @try {
+        
+        NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            // 耗时的操作（异步操作）
+            
+            if (![[NSFileManager defaultManager] fileExistsAtPath:logopathsm]){
+                myApi *myapi=[[myApi alloc]init];
+                [myapi getMyInfo];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 更新界面（处理结果）
+
+                if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
+                    [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
+                }
+                else {
+                    [logoImage setImage:[UIImage imageNamed:@"logo"]];
+                }
+                
+                NSString *logopath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopath.png"]];
+                if ([[NSFileManager defaultManager] fileExistsAtPath:logopath]) {
+                    [biglogo setImage:[[UIImage alloc] initWithContentsOfFile:logopath] forState:UIControlStateNormal];
+                }
+                else {
+                    [biglogo setImage:[UIImage imageNamed:@"logoshengyu"] forState:UIControlStateNormal];
+                }
+            });
+        });
         
     }
+    @catch (NSException *exception) {
+        
+    }
+    @finally {
+        
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -143,12 +205,18 @@
     thridView.frame=CGRectMake(750, 70, thridView.frame.size.width, thridView.frame.size.height);
 }
 //关于我们
--(IBAction)aboutus:(id)sender
+-(IBAction)openaboutus:(id)sender
 {
-    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    NSString *filePath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"about.webarchive"]];
+    NSURL *aURL = [NSURL fileURLWithPath:filePath];
+    NSURLRequest *request = [NSURLRequest requestWithURL:aURL];
+    //AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     fourthView.hidden=NO;
-    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:myDelegate.myinfol.details]];
+    //NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:myDelegate.myinfol.details]];
     [aboutus loadRequest:request];
+    
+    [fourthView setHidden:NO];
+    [biglogo setHidden:YES];
 }
 
 -(IBAction)closeaboutus:(id)sender
@@ -485,31 +553,26 @@
 {
     @try {
         //可以在此加代码提示用户说正在加载数据中
-        NSString *rowString =@"正在更新数据。。。。";
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
-        [alter show];
+//        NSString *rowString =@"正在更新数据。。。。";
+//        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+//        [alter show];
         
+        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+        [myDelegate showProgressBar:self.view];
+
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // 耗时的操作（异步操作）
             
             AutoGetData * getdata=[[AutoGetData alloc] init];
-            [getdata getDataInsertTable:nil];
+            [getdata getDataInsertTable:0];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 //可以在此加代码提示用户，数据已经加载完毕
-                [alter dismissWithClickedButtonIndex:0 animated:YES];
+                //[alter dismissWithClickedButtonIndex:0 animated:YES];
                 
-                //NSString *rowString =@"更新成功！";
-//                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-//                [alter show];
-                AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:@"数据更新完，开始下载3d图片集。。。" delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
-                [alter show];
-                
-                myDelegate.alter=alter;
-                myDelegate.thridView=thridView;
-                
+                [myDelegate stopTimer];
+
                 //同步完数据了，则再去下载图片组
                 [getdata getAllZIPPhotos];
                 

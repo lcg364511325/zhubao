@@ -65,19 +65,18 @@ NSInteger selecttable=0;
     //NSArray *province=[[NSArray alloc] initWithObjects:@"广东",@"广西",@"河北", nil];
     NSArray *province = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"city" ofType:@"plist"]];
     
+    checkpassword.secureTextEntry = YES;
     
     self.provincelist=province;
     self.Divisionlist=Divisionarray;
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    NSURL *imgUrl=[NSURL URLWithString:myDelegate.myinfol.logopathsm];
-    if (hasCachedImage(imgUrl)) {
-        [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
-    }else
-    {
+
+    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
+        [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
+    }
+    else {
         [logoImage setImage:[UIImage imageNamed:@"logo"]];
-        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
-        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
-        
     }
     
     NSString *goodscount=myDelegate.entityl.resultcount;
@@ -309,29 +308,22 @@ NSInteger selecttable=0;
 {
     @try {
         //可以在此加代码提示用户说正在加载数据中
-        NSString *rowString =@"正在更新数据。。。。";
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
-        [alter show];
+//        NSString *rowString =@"正在更新数据。。。。";
+//        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+//        [alter show];
+        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+        [myDelegate showProgressBar:self.view];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // 耗时的操作（异步操作）
             
             AutoGetData * getdata=[[AutoGetData alloc] init];
-            [getdata getDataInsertTable:nil];
+            [getdata getDataInsertTable:0];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 //可以在此加代码提示用户，数据已经加载完毕
-                [alter dismissWithClickedButtonIndex:0 animated:YES];
-                //NSString *rowString =@"更新成功！";
-                //                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                //                [alter show];
-                AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:@"数据更新完，开始下载3d图片集。。。" delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
-                [alter show];
-                
-                myDelegate.alter=alter;
-                myDelegate.thridView=fiftharyView;
+                [myDelegate stopTimer];
                 
                 //同步完数据了，则再去下载图片组
                 [getdata getAllZIPPhotos];
@@ -596,6 +588,11 @@ NSInteger selecttable=0;
         //to-do
         selectTableView.hidden=YES;
     }
+    if (!CGRectContainsPoint([fiftharyView frame], pt)) {
+        //to-do
+        fiftharyView.hidden=YES;
+    }
+    
 }
 
 
@@ -700,7 +697,8 @@ NSInteger selecttable=0;
         sixthview.hidden=YES;
         checkpassword.text=@"";
         NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@|%@",myDelegate.entityl.uId,@"601",Upt,apikey,Nowt,orderid]];
-        NSString * surl = [NSString stringWithFormat:@"http://www.seyuu.com/order/myorder.asp?uId=%@&type=601&Upt=%@&Nowt=%@&Kstr=%@&ordid=%@",myDelegate.entityl.uId,Upt,Nowt,Kstr,orderid];
+        NSString * surl = [NSString stringWithFormat:@"%@/app/aiface.php?uId=%@&type=601&Upt=%@&Nowt=%@&Kstr=%@&ordid=%@",domainser,myDelegate.entityl.uId,Upt,Nowt,Kstr,orderid];
+        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:surl]];
     }else{
         checkpassword.text=nil;
@@ -721,17 +719,14 @@ NSInteger selecttable=0;
     NSString *info=[sql getMyInfo];
     [alter dismissWithClickedButtonIndex:0 animated:YES];
     if (info) {
-        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-        NSURL *imgUrl=[NSURL URLWithString:myDelegate.myinfol.logopathsm];
-        if (hasCachedImage(imgUrl)) {
-            [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
-        }else
-        {
-            [logoImage setImage:[UIImage imageNamed:@"logo"]];
-            NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
-            [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
-            
+        NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
+            [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
         }
+        else {
+            [logoImage setImage:[UIImage imageNamed:@"logo"]];
+        }
+        
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:info delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
     }else{

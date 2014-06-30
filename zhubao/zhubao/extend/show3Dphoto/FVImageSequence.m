@@ -12,6 +12,14 @@
 @implementation FVImageSequence
 @synthesize prefix, numberOfImages, extension, increment;
 
+-(void)doRotate:(BOOL)flag{
+    if(flag){
+        [self startAnimating];
+    }else{
+        [self stopAnimating];
+    }
+}
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
 	if(increment == 0)
 		increment = 1;
@@ -21,6 +29,20 @@
     CGPoint touchLocation = [touch locationInView:self];
 	
 	previous = touchLocation.x;
+    
+    [self doRotate:false];
+}
+
+-(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
+    [super touchesCancelled:touches withEvent:event];
+    
+    //[self doRotate:true];
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    [super touchesEnded:touches withEvent:event];
+    
+    [self doRotate:true];
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -63,12 +85,12 @@
     
     NSLog(@"---------------本地的图片:%@", [NSString stringWithFormat:@"%@/%@.%@",unzipPath,path,extension]);
     
-    NSData *data = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@.%@",unzipPath,path,extension]];
+    //NSData *data = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@.%@",unzipPath,path,extension]];
 	
 	//path = [[NSBundle mainBundle] pathForResource:path ofType:extension];
 	
 	
-	UIImage *img =  [UIImage imageWithData:data];//[[UIImage alloc] initWithContentsOfFile:path];
+	UIImage *img =  [[UIImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/%@.%@",unzipPath,path,extension]];//[UIImage imageWithData:data];
 	
 	[self setImage:img];
 	

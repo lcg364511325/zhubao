@@ -63,15 +63,12 @@ NSInteger vies=0;
     self.mainlist = mainarray;
     texturetext.userInteractionEnabled=NO;
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    NSURL *imgUrl=[NSURL URLWithString:myDelegate.myinfol.logopathsm];
-    if (hasCachedImage(imgUrl)) {
-        [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
-    }else
-    {
+    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
+        [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
+    }
+    else {
         [logoImage setImage:[UIImage imageNamed:@"logo"]];
-        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
-        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
-        
     }
     
     NSString *goodscount=myDelegate.entityl.resultcount;
@@ -254,31 +251,24 @@ NSInteger vies=0;
 {
     @try {
         //可以在此加代码提示用户说正在加载数据中
-        NSString *rowString =@"正在更新数据。。。。";
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
-        [alter show];
+//        NSString *rowString =@"正在更新数据。。。。";
+//        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+//        [alter show];
+        
+        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+        [myDelegate showProgressBar:self.view];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // 耗时的操作（异步操作）
             
             AutoGetData * getdata=[[AutoGetData alloc] init];
-            [getdata getDataInsertTable:nil];
+            [getdata getDataInsertTable:0];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 //可以在此加代码提示用户，数据已经加载完毕
-                [alter dismissWithClickedButtonIndex:0 animated:YES];
-                //NSString *rowString =@"更新成功！";
-                //                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                //                [alter show];
-                AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:@"数据更新完，开始下载3d图片集。。。" delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
-                [alter show];
-                
-                myDelegate.alter=alter;
-                myDelegate.thridView=thirdaryView;
-                
-                
+                [myDelegate stopTimer];
+
                 //同步完数据了，则再去下载图片组
                 [getdata getAllZIPPhotos];
                 
@@ -494,6 +484,11 @@ NSInteger vies=0;
         //to-do
         textureselect.hidden=YES;
     }
+    if (!CGRectContainsPoint([thirdaryView frame], pt)) {
+        //to-do
+        thirdaryView.hidden=YES;
+    }
+    
 }
 
 // 材质下拉框
@@ -675,14 +670,13 @@ NSInteger vies=0;
                     // 取消
                     return;
                 case 1:
-                    // 相机
-//                    sourceType = UIImagePickerControllerSourceTypeCamera;
+                    // 相册
                     sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                     break;
                     
                 case 2:
-                    // 相册
-                    sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    // 相机
+                    sourceType = UIImagePickerControllerSourceTypeCamera;
                     break;
             }
         }
@@ -703,8 +697,17 @@ NSInteger vies=0;
         
         imagePickerController.sourceType = sourceType;
         
-        [self presentViewController:imagePickerController animated:YES completion:^{}];
-        
+
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            
+            UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:imagePickerController];
+            popoverController = popover;
+            [popoverController presentPopoverFromRect:CGRectMake(0, 0, 300, 300) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            
+        } else {
+            [self presentViewController:imagePickerController animated:YES completion:^{}];
+        }
+
     }
 }
 

@@ -16,6 +16,7 @@
 #import "ASIFormDataRequest.h"
 #import "ceshi.h"
 #import "myinfo.h"
+#import "YLProgressBar.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -27,14 +28,21 @@
 
 @property(retain , nonatomic) ASINetworkQueue *queue;//下载的队列
 
-@property (strong, nonatomic) UIView *thridView;//传过来的view
-
 @property (strong, nonatomic) UIAlertView *alter;//弹出提示框
+
+@property (nonatomic, strong) YLProgressBar *progressBarRoundedFat;
 
 //是否接着开始下载
 -(void)beginRequest:(NSString *)fileurl fileName:(NSString *)fileName version:(NSString *)version;
 
 //提交订单  CPInfo商品数组  DZInfo高级定制
 -(BOOL*)submitOrder:(NSString *)CPInfo DZInfo:(NSString *)DZInfo uploadpath:(NSMutableArray *)uploadpath;
+
+//进度条提示
+-(void)showProgressBar:(UIView *)view;
+//停止进度条
+-(void)stopProgressBar;
+//取消定时器
+-(void)stopTimer;
 
 @end

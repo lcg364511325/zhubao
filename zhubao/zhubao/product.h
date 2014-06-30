@@ -18,10 +18,12 @@
 #import "ProductCell.h"
 #import "ImageCacher.h"
 #import "TestViewController.h"
+#import "RotateImageView.h"
 #import "productApi.h"
 #import "shoppingcartCell.h"
+#import "MWPhotoBrowser.h"
 
-@interface product : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate>
+@interface product : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,MWPhotoBrowserDelegate>
 {
     NSMutableArray *stylearray;
     NSMutableArray *texturearray;
@@ -32,7 +34,15 @@
     NSMutableArray *btnarray3;
     NSMutableArray *btnarray4;
     NSMutableArray *shoppingcartlist;
+    
+    NSMutableArray *_selections;
+    
+    RotateImageView *rImageView;
+    UIButton* btnBack;
 }
+
+@property (nonatomic, strong) NSMutableArray *photos;
+@property (nonatomic, strong) NSMutableArray *thumbs;
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondaryView;
@@ -97,10 +107,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *button3dman;
 @property (weak, nonatomic) IBOutlet UIButton *button3dwoman;
 @property (weak, nonatomic) IBOutlet UITextField *checkpassword;
+@property (weak, nonatomic) IBOutlet UIButton *showPhotos;
 
 - (IBAction)closeAction:(id)sender;
 - (IBAction)goAction1:(id)sender;
 - (IBAction)closeAction1:(id)sender;
 - (IBAction)threeddAction:(id)sender;
+
 
 @end

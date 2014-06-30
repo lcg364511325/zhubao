@@ -50,15 +50,23 @@ NSInteger i=0;
     
     [_submitlogin setTitle:@"" forState:UIControlStateNormal];
     
-    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@""]];
-    if (hasCachedImage(imgUrl)) {
-        [logoshengyu setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
-    }else
-    {
+//    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@""]];
+//    if (hasCachedImage(imgUrl)) {
+//        [logoshengyu setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
+//    }else
+//    {
+//        [logoshengyu setImage:[UIImage imageNamed:@"logoshengyu"]];
+//        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoshengyu,@"imageView",nil];
+//        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+//        
+//    }
+//    
+    NSString *logopath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopath.png"]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:logopath]) {
+        [logoshengyu setImage:[[UIImage alloc] initWithContentsOfFile:logopath]];
+    }
+    else {
         [logoshengyu setImage:[UIImage imageNamed:@"logoshengyu"]];
-        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoshengyu,@"imageView",nil];
-        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
-        
     }
     
     //设置此输入框可以隐藏键盘

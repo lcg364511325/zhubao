@@ -12,10 +12,15 @@
 @synthesize window = _window;
 @synthesize entityl;
 @synthesize queue;
-@synthesize thridView;
 @synthesize alter;
 @synthesize myinfol;
+float progress;
+@synthesize progressBarRoundedFat;
 int queuecount=0;
+int allcount=0;
+NSTimer *timer;
+UIView *subLayer;
+UILabel *titlelabel;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -58,6 +63,9 @@ int queuecount=0;
     [queue setShowAccurateProgress:YES];//高精度进度
     //[queue setQueueDidFinishSelector:@selector(queueFinished:)];
     [queue go];//启动
+    
+    //设置ios不锁屏
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     
     //系统新安装未初始化
     login * lo = [[login alloc] init];
@@ -185,7 +193,7 @@ int queuecount=0;
     
     [queue addOperation:request];//添加到队列，队列启动后不需重新启动
     
-    queuecount++;
+    allcount++;
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:tempPath]) {
         //NSLog(@"有了--------");
@@ -205,15 +213,19 @@ int queuecount=0;
     [request cancel];
     request=nil;
     
-    queuecount--;
+    queuecount++;
+    [self runnumber];
     
-    NSString *downloadPath=(NSString *)[request.userInfo objectForKey:@"downloadPath"];
-    NSString *version=(NSString *)[request.userInfo objectForKey:@"version"];
-    [alter setMessage:[NSString stringWithFormat:@"目前准备下载的图片组还剩:%d  商品(%@)3D图片下载失败,保存地址:%@",queuecount,version,downloadPath]];
+//    NSString *downloadPath=(NSString *)[request.userInfo objectForKey:@"downloadPath"];
+//    NSString *version=(NSString *)[request.userInfo objectForKey:@"version"];
     
-    if (queuecount<=0) {
-        thridView.hidden=YES;
-        [alter dismissWithClickedButtonIndex:0 animated:YES];
+    titlelabel.text=[NSString stringWithFormat:@"3D图片下载：%d/%d",queuecount,allcount];
+    
+//    [alter setMessage:[NSString stringWithFormat:@"目前准备下载的图片组还剩:%d  商品(%@)3D图片下载失败,保存地址:%@",queuecount,version,downloadPath]];
+//
+    
+    if (queuecount>=allcount) {
+        [self stopProgressBar];
     }
 
 }
@@ -235,26 +247,19 @@ int queuecount=0;
 {
     NSLog(@"将下载完成了!");//
     
-    queuecount--;
+    queuecount++;
+    [self runnumber];
     
     NSString *downloadPath=(NSString *)[request.userInfo objectForKey:@"downloadPath"];
-    NSString *version=(NSString *)[request.userInfo objectForKey:@"version"];
-    [alter setMessage:[NSString stringWithFormat:@"目前准备下载的图片组还剩:%d  商品(%@)3D图片下载成功,保存地址:%@",queuecount,version,downloadPath]];
+//    NSString *version=(NSString *)[request.userInfo objectForKey:@"version"];
+//    [alter setMessage:[NSString stringWithFormat:@"目前准备下载的图片组还剩:%d  商品(%@)3D图片下载成功,保存地址:%@",queuecount,version,downloadPath]];
     
-    if (queuecount<=0) {
-        thridView.hidden=YES;
-        [alter dismissWithClickedButtonIndex:0 animated:YES];
+    titlelabel.text=[NSString stringWithFormat:@"3D图片下载：%d/%d",queuecount,allcount];
+    
+    if (queuecount>=allcount) {
+        [self stopProgressBar];
     }
     
-    //NSLog(@"downloadPath======:%@",downloadPath);
-    
-    //    NSString *string = [[NSString alloc]initWithContentsOfFile:downloadPath encoding:NSUTF8StringEncoding error:nil];
-    //
-    //    NSLog(@"------------- this is :%@",string);
-    //    NSArray  * array= [string componentsSeparatedByString:@"\r\n"];//换行符
-    //
-    //    //运行下载的内容（正常下是sql）
-    //    sqlService * ser=[[sqlService alloc] init];
     
     //解压文件
     ZipArchive *zip = [[ZipArchive alloc] init];
@@ -265,7 +270,7 @@ int queuecount=0;
     // 解压缩文件夹路径
     NSString* unzipPath = [dcoumentpath stringByAppendingString:@"/images"];
     
-    NSLog(@"解压后的路径------%@",unzipPath);
+    //NSLog(@"解压后的路径------%@",unzipPath);
     
     // 开始解压缩
     if([zip UnzipOpenFile:zipFilePath])
@@ -286,9 +291,6 @@ int queuecount=0;
 {
     
     NSLog(@"全部下载完了");
-    
-    thridView.hidden=YES;
-    [alter dismissWithClickedButtonIndex:0 animated:YES];
 }
 
 //提交订单  CPInfo商品数组  DZInfo高级定制
@@ -314,9 +316,9 @@ int queuecount=0;
         
         NSString * URL = [NSString stringWithFormat:@"%@%@",domainser,surl];
         
-        NSLog(@"URL------%@",URL);
-        NSLog(@"CPInfo------%@",CPInfo);
-        NSLog(@"DZInfo------%@",DZInfo);
+//        NSLog(@"URL------%@",URL);
+//        NSLog(@"CPInfo------%@",CPInfo);
+//        NSLog(@"DZInfo------%@",DZInfo);
         
         //NSMutableDictionary * dict = [DataService PostDataService:URL postDatas:(NSString*)params];//[DataService GetDataService:URL];
         
@@ -387,7 +389,7 @@ int queuecount=0;
                     NSString * status=[d objectForKey:@"status"];
                     if ([status isEqualToString:@"false"]) {
                         //提交失败
-                        [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"生成订单失败" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil] show];
+                        [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"生成订单失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
                         
                         return;
                     }
@@ -401,7 +403,7 @@ int queuecount=0;
                         sqlService *sqlser=[[sqlService alloc]init];
                         [sqlser ClearTableDatas:[NSString stringWithFormat:@"buyproduct where customerid=%@",entityl.uId]];
                         
-                        [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"生成订单成功" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil] show];
+                        [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"生成订单成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
                         
                         return;
                     }
@@ -433,7 +435,7 @@ int queuecount=0;
         
     }
     
-    [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"生成订单失败" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil] show];
+    [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"生成订单失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
     
 }
 
@@ -443,8 +445,100 @@ int queuecount=0;
     [alter dismissWithClickedButtonIndex:0 animated:YES];
     NSError *error = [request error];
 
-    [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"提交订单数据失败" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil] show];
+    [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"提交订单数据失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
     
+}
+
+
+-(void) run{
+
+    progress = progress > 1 ? 1 : progress + 0.002;
+    if(progress>=0.9)progress=0.9;
+    //NSLog(@"progress-------------run---------%d",progress);
+    [progressBarRoundedFat setProgress:progress animated:YES];
+}
+
+-(void) runnumber{
+    
+    float dd=(queuecount*0.1)/(allcount*0.1);
+    //NSLog(@"progress--------------runnumber--------%f",dd);
+    [progressBarRoundedFat setProgress:dd animated:YES];
+}
+
+//初始化进度条
+- (void)initRoundedFatProgressBar
+{
+    progressBarRoundedFat.progressTintColor        = [UIColor colorWithRed:239/255.0f green:225/255.0f blue:13/255.0f alpha:1.0f];
+    progressBarRoundedFat.stripesOrientation       = YLProgressBarStripesOrientationLeft;
+    progressBarRoundedFat.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeProgress;
+    progressBarRoundedFat.indicatorTextLabel.font  = [UIFont fontWithName:@"Arial-BoldMT" size:15];
+}
+
+//进度条提示
+-(void)showProgressBar:(UIView *)view{
+    
+    [self showMask:view];
+    
+    CGRect frame_0= CGRectMake((view.frame.size.width/2)-60,(view.frame.size.height/2)-60, 400, 50);
+    titlelabel=[[UILabel alloc]initWithFrame:frame_0];
+    titlelabel.text=@"更新数据中...";
+    //titlelabel.center=view.center;
+    // 设置Text为粗体
+    titlelabel.font = [UIFont boldSystemFontOfSize:20];
+    // 设置字体颜色
+    titlelabel.textColor = [UIColor whiteColor];
+    // 设置背景色
+    titlelabel.backgroundColor = [UIColor clearColor];
+    [view addSubview:titlelabel];
+    
+    progress=0.01;
+    CGRect frame_1= CGRectMake(0, 0, 400, 20);
+    progressBarRoundedFat=[[YLProgressBar alloc]initWithFrame:frame_1];
+    [self initRoundedFatProgressBar];
+    [progressBarRoundedFat setProgress:progress animated:YES];
+    progressBarRoundedFat.center=view.center;
+    [view addSubview:progressBarRoundedFat];
+
+    timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(run) userInfo:nil repeats:YES];
+}
+//停止进度条
+-(void)stopProgressBar
+{
+    [subLayer removeFromSuperview];
+    [progressBarRoundedFat removeFromSuperview];
+    progressBarRoundedFat=nil;
+    [titlelabel removeFromSuperview];
+    
+    //取消定时器
+    @try {
+        [timer invalidate];
+        timer = nil;
+    }
+    @catch (NSException *exception) {
+        
+    }
+    
+    [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"数据更新完成" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+}
+
+//取消定时器
+-(void)stopTimer
+{
+    [progressBarRoundedFat setProgress:1 animated:YES];
+    
+    //取消定时器
+    [timer invalidate];
+    timer = nil;
+}
+
+//半透明遮挡层
+- (void) showMask:(UIView *)view {
+    subLayer = [[UIView alloc] init];
+    subLayer.frame = CGRectInset(view.layer.frame, 20.0f, 20.0f);
+    subLayer.backgroundColor = [UIColor blackColor];
+    subLayer.alpha = 0.3;
+    
+    [view addSubview:subLayer];
 }
 
 @end

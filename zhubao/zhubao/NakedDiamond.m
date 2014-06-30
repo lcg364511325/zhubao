@@ -94,15 +94,13 @@ NSInteger whichview=0;
     }else{
         shopcartcount.hidden=YES;
     }
-    NSURL *imgUrl=[NSURL URLWithString:myDelegate.myinfol.logopathsm];
-    if (hasCachedImage(imgUrl)) {
-        [logoImage setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
-    }else
-    {
+
+    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
+        [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
+    }
+    else {
         [logoImage setImage:[UIImage imageNamed:@"logo"]];
-        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
-        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
-        
     }
 }
 
@@ -462,29 +460,23 @@ NSInteger whichview=0;
 {
     @try {
         //可以在此加代码提示用户说正在加载数据中
-        NSString *rowString =@"正在更新数据。。。。";
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
-        [alter show];
+//        NSString *rowString =@"正在更新数据。。。。";
+//        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+//        [alter show];
+        
+        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+        [myDelegate showProgressBar:self.view];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // 耗时的操作（异步操作）
             
             AutoGetData * getdata=[[AutoGetData alloc] init];
-            [getdata getDataInsertTable:nil];
+            [getdata getDataInsertTable:0];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 //可以在此加代码提示用户，数据已经加载完毕
-                [alter dismissWithClickedButtonIndex:0 animated:YES];
-                //NSString *rowString =@"更新成功！";
-                //                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                //                [alter show];
-                AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:@"数据更新完，开始下载3d图片集。。。" delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
-                [alter show];
-                
-                myDelegate.alter=alter;
-                myDelegate.thridView=fivetharyView;
+                [myDelegate stopTimer];
                 
                 //同步完数据了，则再去下载图片组
                 [getdata getAllZIPPhotos];
@@ -1237,6 +1229,18 @@ NSInteger whichview=0;
         NSString *rowString =@"加入购物车失败！";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
+    }
+}
+
+//点击tableview以外得地方关闭
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint pt = [touch locationInView:self.view];
+    //点击其他地方消失
+    if (!CGRectContainsPoint([fivetharyView frame], pt)) {
+        //to-do
+        fivetharyView.hidden=YES;
     }
 }
 
