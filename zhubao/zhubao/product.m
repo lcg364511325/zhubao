@@ -393,43 +393,67 @@ NSString *manprice=nil;
         }
         buyproduct *goods =[shoppingcartlist objectAtIndex:[indexPath row]];
         if ([goods.producttype isEqualToString:@"3"]) {
-            cell.showImage.image=[UIImage imageNamed:@"diamond01"];
-            cell.modelLable.text=goods.diaentiy.Dia_Shape;
+            if ([goods.diaentiy.Dia_Shape isEqualToString:@"RB"]) {
+                cell.modelLable.text=@"圆形";
+                cell.showImage.image=[UIImage imageNamed:@"round.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"PE"]){
+                cell.modelLable.text=@"公主方";
+                cell.showImage.image=[UIImage imageNamed:@"princess2.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"EM"]){
+                cell.modelLable.text=@"祖母绿";
+                cell.showImage.image=[UIImage imageNamed:@"Emerald.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"RD"]){
+                cell.modelLable.text=@"雷蒂恩";
+                cell.showImage.image=[UIImage imageNamed:@"radiant.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"OL"]){
+                cell.modelLable.text=@"椭圆形";
+                cell.showImage.image=[UIImage imageNamed:@"Oval.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"MQ"]){
+                cell.modelLable.text=@"橄榄形";
+                cell.showImage.image=[UIImage imageNamed:@"marquise.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"CU"]){
+                cell.modelLable.text=@"枕形";
+                cell.showImage.image=[UIImage imageNamed:@"cushion.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"PR"]){
+                cell.modelLable.text=@"梨形";
+                cell.showImage.image=[UIImage imageNamed:@"Pear2.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"HT"]){
+                cell.modelLable.text=@"心形";
+                cell.showImage.image=[UIImage imageNamed:@"Heart.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"ASH"]){
+                cell.modelLable.text=@"镭射刑";
+                cell.showImage.image=[UIImage imageNamed:@"Asscher2.jpg"];
+            }
             if (goods.diaentiy.Dia_Lab) {
                 cell.dipLable.text=[@"证书:" stringByAppendingString:goods.diaentiy.Dia_Lab];
-            }else{
-                cell.dipLable.text=nil;
             }
             if (goods.diaentiy.Dia_ART) {
-                cell.numberLable.text=[@"编号:" stringByAppendingString:goods.diaentiy.Dia_ART];
-            }else{
-                cell.numberLable.text=nil;
+                cell.dipLable.text=[cell.dipLable.text stringByAppendingString:[NSString stringWithFormat:@"  编号:%@",goods.diaentiy.Dia_ART]];
             }
-            cell.model1Lable.text=[@"形状:" stringByAppendingString:goods.diaentiy.Dia_Shape];
+            cell.model1Lable.text=[@"形状:" stringByAppendingString:cell.modelLable.text];
             if (goods.pweight) {
-                cell.weightLable.text=[@"钻重:" stringByAppendingString:goods.pweight];
-            }else{
-                cell.weightLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  钻重:%@",goods.pweight]];
             }
             if (goods.pcolor) {
-                cell.netLable.text=[@"颜色:" stringByAppendingString:goods.pcolor];
-            }else{
-                cell.netLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  颜色:%@",goods.pcolor]];
             }
             if (goods.pvvs) {
-                cell.colorLable.text=[@"净度:" stringByAppendingString:goods.pvvs];
-            }else{
-                cell.colorLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  净度:%@",goods.pvvs]];
             }
             if (goods.diaentiy.Dia_Cut) {
-                cell.cutLable.text=[@"切工:" stringByAppendingString:goods.diaentiy.Dia_Cut];
-            }else{
-                cell.cutLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  切工:%@",goods.diaentiy.Dia_Cut]];
             }
             if (goods.diaentiy.Dia_Pol) {
-                cell.chasing.text=[@"抛光:" stringByAppendingString:goods.diaentiy.Dia_Pol];
-            }else{
-                cell.chasing.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  抛光:%@",goods.diaentiy.Dia_Pol]];
             }
             if (goods.diaentiy.Dia_Sym) {
                 cell.fluLable.text=[@"对称:" stringByAppendingString:goods.diaentiy.Dia_Sym];
@@ -438,7 +462,16 @@ NSString *manprice=nil;
             }
             cell.priceLable.text=goods.pcount;
         }else if([goods.producttype isEqualToString:@"1"] || [goods.producttype isEqualToString:@"2"]){
-            cell.showImage.image=[UIImage imageNamed:@"diamond01"];
+            NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",goods.proentiy.Pro_smallpic]];
+            if (hasCachedImage(imgUrl)) {
+                cell.showImage.image=[UIImage imageWithContentsOfFile:pathForURL(imgUrl)];
+            }else
+            {
+                cell.showImage.image=[UIImage imageNamed:@"diamonds"];
+                NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",cell.showImage,@"imageView",nil];
+                [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+                
+            }
             if (goods.proentiy.Pro_number) {
                 cell.dipLable.text=goods.proentiy.Pro_number;
             }else{
@@ -456,31 +489,21 @@ NSString *manprice=nil;
             }
             if (goods.proentiy.Pro_goldWeight) {
                 cell.model1Lable.text=[@"金重:" stringByAppendingString:goods.proentiy.Pro_goldWeight];
-            }else{
-                cell.model1Lable.text=nil;
             }
             if (goods.pgoldtype) {
-                cell.weightLable.text=[@"材质:" stringByAppendingString:goods.pgoldtype];
-            }else{
-                cell.weightLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  材质:%@",goods.pgoldtype]];
             }
             if (goods.proentiy.Pro_Z_weight) {
-                cell.colorLable.text=[@"钻重:" stringByAppendingString:goods.proentiy.Pro_Z_weight];
-            }else{
-                cell.colorLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  钻重:%@",goods.proentiy.Pro_Z_weight]];
             }
             if (goods.proentiy.Pro_f_clarity) {
-                cell.netLable.text=[@"净度:" stringByAppendingString:goods.proentiy.Pro_f_clarity];
-            }else{
-                cell.netLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  净度:%@",goods.proentiy.Pro_f_clarity]];
             }
             if (goods.proentiy.Pro_Z_color) {
-                cell.cutLable.text=[@"颜色:" stringByAppendingString:goods.proentiy.Pro_Z_color];
-            }else{
-                cell.cutLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  颜色:%@",goods.proentiy.Pro_Z_color]];
             }
             if (goods.proentiy.Pro_goldsize) {
-                cell.chasing.text=[@"尺寸:" stringByAppendingString:goods.proentiy.Pro_goldsize];
+                cell.chasing.text=[@"手寸:" stringByAppendingString:goods.proentiy.Pro_goldsize];
             }else{
                 cell.chasing.text=nil;
             }
@@ -492,40 +515,27 @@ NSString *manprice=nil;
             NSString *fullpath =goods.photos;
             UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullpath];
             [cell.showImage setImage:savedImage];
+            cell.modelLable.text=nil;
             if (goods.pgoldtype) {
                 cell.dipLable.text=[@"材质:" stringByAppendingString:goods.pgoldtype];
-            }else{
-                cell.dipLable.text=nil;
             }
             if (goods.pweight) {
-                cell.numberLable.text=[NSString stringWithFormat:@"金重:%@g",goods.pweight];
-            }else{
-                cell.numberLable.text=nil;
+                cell.dipLable.text=[cell.dipLable.text stringByAppendingString:[NSString stringWithFormat:@"  金重:%@g",goods.pweight]];
             }
             if (goods.Dia_Z_weight) {
-                cell.model1Lable.text=[NSString stringWithFormat:@"主石重:%@Ct",goods.Dia_Z_count];
-            }else{
-                cell.model1Lable.text=nil;
+                cell.model1Lable.text=[NSString stringWithFormat:@"主石重:%@Ct",goods.Dia_Z_weight];
             }
             if (goods.Dia_Z_count) {
-                cell.weightLable.text=[@"主石数:" stringByAppendingString:goods.Dia_Z_count];
-            }else{
-                cell.weightLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  主石数:%@",goods.Dia_Z_count]];
             }
             if (goods.Dia_F_weight) {
-                cell.netLable.text=[NSString stringWithFormat:@"副石重:%@Ct",goods.Dia_F_weight];
-            }else{
-                cell.netLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  副石重:%@Ct",goods.Dia_F_weight]];
             }
             if (goods.Dia_F_count) {
-                cell.colorLable.text=[@"副石数:" stringByAppendingString:goods.Dia_F_count];
-            }else{
-                cell.colorLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  副石数:%@",goods.Dia_F_count]];
             }
             if (goods.psize) {
-                cell.cutLable.text=[@"手寸:" stringByAppendingString:goods.psize];
-            }else{
-                cell.cutLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  手寸:%@",goods.psize]];
             }
             if (goods.pdetail) {
                 cell.fluLable.text=[@"刻字:" stringByAppendingString:goods.pdetail];
@@ -630,7 +640,7 @@ NSString *manprice=nil;
     productEntity *goods=[sql GetProductDetail:productnumber];
     NSString *textvalue=nil;
     Commons * common=[[Commons alloc]init];
-    textvalue=[common getColorvalue:texturetext.text];
+    textvalue=[common getGoldtypevalue:texturetext.text];
     
     @try {
         //可以在此加代码提示用户说正在加载数据中
@@ -641,8 +651,10 @@ NSString *manprice=nil;
             pricelable.text=@"获取价格中。。。";
             NSString *proprice=nil;
             productApi *priceApi=[[productApi alloc]init];
-            womanprice=[priceApi getPrice:goods.Pro_Class goldType:goods.Pro_goldType goldWeight:goods.Pro_goldWeight mDiaWeight:maintext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
+            womanprice=[priceApi getPrice:goods.Pro_Class goldType:texturetext.text goldWeight:goods.Pro_goldWeight mDiaWeight:maintext.text mDiaColor:colortext.text mVVS:nettext.text sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
             if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
+                priceApi=[[productApi alloc]init];
+                manprice=[priceApi getPrice:goodsman.Pro_Class goldType:manTextureText.text goldWeight:goodsman.Pro_goldWeight mDiaWeight:mamMainText.text mDiaColor:mamColorText.text mVVS:manNetText.text sDiaWeight:goodsman.Pro_f_weight sCount:goodsman.Pro_f_count proid:goodsman.Id];
                 proprice=[NSString stringWithFormat:@"%d",womanprice.intValue+manprice.intValue];
             }else{
                 proprice=womanprice;
@@ -1360,13 +1372,12 @@ NSString *manprice=nil;
     weightlable.text=goods.Pro_goldWeight;
     mainlable.text=goods.Pro_Z_count;
     fitNolable.text=goods.Pro_f_count;
-    float wwight=goods.Pro_f_weight.doubleValue*goods.Pro_f_count.doubleValue;
-    fitweightlable.text=[NSString stringWithFormat:@"%@",[self notRounding:wwight afterPoint:2]];
+    fitweightlable.text=[NSString stringWithFormat:@"%@",goods.Pro_f_weight];
     //maintext.text=@"111";
     nettext.text=@"SI";
     colortext.text=@"I-J";
     Commons * common=[[Commons alloc]init];
-    texturetext.text=[common getColorname:goods.Pro_goldType];
+    texturetext.text=[common getGoldtypename:goods.Pro_goldType];
     
     sizetext.text=goods.Pro_goldsize;
     fonttext.text=nil;
@@ -1393,17 +1404,14 @@ NSString *manprice=nil;
         _manMainLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_goldWeight];
         _manjdLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_Z_count];
         _manColorLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_f_count];
-        float manfweight=goodsman.Pro_f_weight.doubleValue*goodsman.Pro_f_count.doubleValue;
-        _mancjLabel.text=[NSString stringWithFormat:@"男戒:%@",[self notRounding:manfweight afterPoint:2]];
+        _mancjLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_f_weight];
         manNetText.text=@"SI";
         mamColorText.text=@"I-J";
         Commons * common=[[Commons alloc]init];
-        manTextureText.text=[common getColorname:goodsman.Pro_goldType];
+        manTextureText.text=[common getGoldtypename:goodsman.Pro_goldType];
         
         manSizeText.text=goodsman.Pro_goldsize;
         manFontText.text=nil;
-        productApi *priceApi=[[productApi alloc]init];
-        manprice=[priceApi getPrice:goodsman.Pro_Class goldType:goodsman.Pro_goldType goldWeight:goodsman.Pro_goldWeight mDiaWeight:_manMainLabel.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:goodsman.Pro_f_weight sCount:goodsman.Pro_f_count proid:goodsman.Id];
     }
     inlayarry=[sql getwithmouths:goods.Id];
     NSMutableArray *mainarry=[[NSMutableArray alloc] init];
@@ -1440,6 +1448,10 @@ NSString *manprice=nil;
             productApi *priceApi=[[productApi alloc]init];
             womanprice=[priceApi getPrice:goods.Pro_Class goldType:goods.Pro_goldType goldWeight:goods.Pro_goldWeight mDiaWeight:maintext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
             if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
+                
+                manprice=[priceApi getPrice:goodsman.Pro_Class goldType:goodsman.Pro_goldType goldWeight:goodsman.Pro_goldWeight mDiaWeight:mamMainText.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:goodsman.Pro_f_weight sCount:goodsman.Pro_f_count proid:goodsman.Id];
+                
+                
                 proprice=[NSString stringWithFormat:@"%d",womanprice.intValue+manprice.intValue];
             }else{
                 proprice=womanprice;
@@ -1583,7 +1595,7 @@ NSString *manprice=nil;
     //colortext.text=@"I-J";
     
     Commons * common=[[Commons alloc]init];
-    mamColorText.text=[common getColorname:goods.Pro_goldType];
+    mamColorText.text=[common getGoldtypename:goods.Pro_goldType];
     
     manSizeText.text=goods.Pro_goldsize;
     //fonttext.text=nil;

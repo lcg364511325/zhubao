@@ -102,6 +102,21 @@
     @try {
         
         NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
+        NSString *logopath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopath.png"]];
+        
+        if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
+            [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
+        }
+        else {
+            [logoImage setImage:[UIImage imageNamed:@"logo"]];
+        }
+
+        if ([[NSFileManager defaultManager] fileExistsAtPath:logopath]) {
+            [biglogo setImage:[[UIImage alloc] initWithContentsOfFile:logopath] forState:UIControlStateNormal];
+        }
+        else {
+            [biglogo setImage:[UIImage imageNamed:@"logoshengyu"] forState:UIControlStateNormal];
+        }
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // 耗时的操作（异步操作）
@@ -114,6 +129,8 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 // 更新界面（处理结果）
 
+                if (![[NSFileManager defaultManager] fileExistsAtPath:logopathsm]){
+                    
                 if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
                     [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
                 }
@@ -121,12 +138,13 @@
                     [logoImage setImage:[UIImage imageNamed:@"logo"]];
                 }
                 
-                NSString *logopath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopath.png"]];
+                
                 if ([[NSFileManager defaultManager] fileExistsAtPath:logopath]) {
                     [biglogo setImage:[[UIImage alloc] initWithContentsOfFile:logopath] forState:UIControlStateNormal];
                 }
                 else {
                     [biglogo setImage:[UIImage imageNamed:@"logoshengyu"] forState:UIControlStateNormal];
+                }
                 }
             });
         });
@@ -303,39 +321,25 @@
             }
             if (goods.diaentiy.Dia_Lab) {
                 cell.dipLable.text=[@"证书:" stringByAppendingString:goods.diaentiy.Dia_Lab];
-            }else{
-                cell.dipLable.text=nil;
             }
             if (goods.diaentiy.Dia_ART) {
-                cell.numberLable.text=[@"编号:" stringByAppendingString:goods.diaentiy.Dia_ART];
-            }else{
-                cell.numberLable.text=nil;
+                cell.dipLable.text=[cell.dipLable.text stringByAppendingString:[NSString stringWithFormat:@"  编号:%@",goods.diaentiy.Dia_ART]];
             }
-            cell.model1Lable.text=[@"形状:" stringByAppendingString:goods.diaentiy.Dia_Shape];
+            cell.model1Lable.text=[@"形状:" stringByAppendingString:cell.modelLable.text];
             if (goods.pweight) {
-                cell.weightLable.text=[@"钻重:" stringByAppendingString:goods.pweight];
-            }else{
-                cell.weightLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  钻重:%@",goods.pweight]];
             }
             if (goods.pcolor) {
-                cell.netLable.text=[@"颜色:" stringByAppendingString:goods.pcolor];
-            }else{
-                cell.netLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  颜色:%@",goods.pcolor]];
             }
             if (goods.pvvs) {
-                cell.colorLable.text=[@"净度:" stringByAppendingString:goods.pvvs];
-            }else{
-                cell.colorLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  净度:%@",goods.pvvs]];
             }
             if (goods.diaentiy.Dia_Cut) {
-                cell.cutLable.text=[@"切工:" stringByAppendingString:goods.diaentiy.Dia_Cut];
-            }else{
-                cell.cutLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  切工:%@",goods.diaentiy.Dia_Cut]];
             }
             if (goods.diaentiy.Dia_Pol) {
-                cell.chasing.text=[@"抛光:" stringByAppendingString:goods.diaentiy.Dia_Pol];
-            }else{
-                cell.chasing.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  抛光:%@",goods.diaentiy.Dia_Pol]];
             }
             if (goods.diaentiy.Dia_Sym) {
                 cell.fluLable.text=[@"对称:" stringByAppendingString:goods.diaentiy.Dia_Sym];
@@ -371,31 +375,21 @@
             }
             if (goods.proentiy.Pro_goldWeight) {
                 cell.model1Lable.text=[@"金重:" stringByAppendingString:goods.proentiy.Pro_goldWeight];
-            }else{
-                cell.model1Lable.text=nil;
             }
             if (goods.pgoldtype) {
-                cell.weightLable.text=[@"材质:" stringByAppendingString:goods.pgoldtype];
-            }else{
-                cell.weightLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  材质:%@",goods.pgoldtype]];
             }
             if (goods.proentiy.Pro_Z_weight) {
-                cell.colorLable.text=[@"钻重:" stringByAppendingString:goods.proentiy.Pro_Z_weight];
-            }else{
-                cell.colorLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  钻重:%@",goods.proentiy.Pro_Z_weight]];
             }
             if (goods.proentiy.Pro_f_clarity) {
-                cell.netLable.text=[@"净度:" stringByAppendingString:goods.proentiy.Pro_f_clarity];
-            }else{
-                cell.netLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  净度:%@",goods.proentiy.Pro_f_clarity]];
             }
             if (goods.proentiy.Pro_Z_color) {
-                cell.cutLable.text=[@"颜色:" stringByAppendingString:goods.proentiy.Pro_Z_color];
-            }else{
-                cell.cutLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  颜色:%@",goods.proentiy.Pro_Z_color]];
             }
             if (goods.proentiy.Pro_goldsize) {
-                cell.chasing.text=[@"尺寸:" stringByAppendingString:goods.proentiy.Pro_goldsize];
+                cell.chasing.text=[@"手寸:" stringByAppendingString:goods.proentiy.Pro_goldsize];
             }else{
                 cell.chasing.text=nil;
             }
@@ -407,40 +401,27 @@
         NSString *fullpath =goods.photos;
         UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullpath];
         [cell.showImage setImage:savedImage];
+        cell.modelLable.text=nil;
         if (goods.pgoldtype) {
             cell.dipLable.text=[@"材质:" stringByAppendingString:goods.pgoldtype];
-        }else{
-            cell.dipLable.text=nil;
         }
         if (goods.pweight) {
-            cell.numberLable.text=[NSString stringWithFormat:@"金重:%@g",goods.pweight];
-        }else{
-            cell.numberLable.text=nil;
+            cell.dipLable.text=[cell.dipLable.text stringByAppendingString:[NSString stringWithFormat:@"  金重:%@g",goods.pweight]];
         }
         if (goods.Dia_Z_weight) {
-            cell.model1Lable.text=[NSString stringWithFormat:@"主石重:%@Ct",goods.Dia_Z_count];
-        }else{
-            cell.model1Lable.text=nil;
+            cell.model1Lable.text=[NSString stringWithFormat:@"主石重:%@Ct",goods.Dia_Z_weight];
         }
         if (goods.Dia_Z_count) {
-            cell.weightLable.text=[@"主石数:" stringByAppendingString:goods.Dia_Z_count];
-        }else{
-            cell.weightLable.text=nil;
+            cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  主石数:%@",goods.Dia_Z_count]];
         }
         if (goods.Dia_F_weight) {
-            cell.netLable.text=[NSString stringWithFormat:@"副石重:%@Ct",goods.Dia_F_weight];
-        }else{
-            cell.netLable.text=nil;
+            cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  副石重:%@Ct",goods.Dia_F_weight]];
         }
         if (goods.Dia_F_count) {
-            cell.colorLable.text=[@"副石数:" stringByAppendingString:goods.Dia_F_count];
-        }else{
-            cell.colorLable.text=nil;
+            cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  副石数:%@",goods.Dia_F_count]];
         }
         if (goods.psize) {
-            cell.cutLable.text=[@"手寸:" stringByAppendingString:goods.psize];
-        }else{
-            cell.cutLable.text=nil;
+            cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  手寸:%@",goods.psize]];
         }
         if (goods.pdetail) {
             cell.fluLable.text=[@"刻字:" stringByAppendingString:goods.pdetail];

@@ -25,6 +25,9 @@
         getNowTime * time=[[getNowTime alloc] init];
         NSString * Nowt=[time nowTime];
         
+        Commons * common=[[Commons alloc]init];
+        goldType=[NSString stringWithFormat:@"%@",[common getGoldtypevalue:goldType]];
+        
         NSString * params=[NSString stringWithFormat:@"classId=%@&goldType=%@&goldWeight=%@&mDiaWeight=%@&mDiaColor=%@&mVVS=%@&sDiaWeight=%@&sCount=%@",classId,goldType,goldWeight,mDiaWeight,mDiaColor,mVVS,sDiaWeight,sCount];
         
         //Kstr=md5(uId|type|Upt|Key|Nowt)
