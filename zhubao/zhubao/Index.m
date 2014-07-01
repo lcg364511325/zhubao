@@ -121,10 +121,10 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // 耗时的操作（异步操作）
             
-            //if (![[NSFileManager defaultManager] fileExistsAtPath:logopathsm]){
+            if (![[NSFileManager defaultManager] fileExistsAtPath:logopathsm]){
                 myApi *myapi=[[myApi alloc]init];
                 [myapi getMyInfo];
-            //}
+            }
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 // 更新界面（处理结果）

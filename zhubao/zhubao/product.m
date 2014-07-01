@@ -223,6 +223,7 @@ NSString *manprice=nil;
 {
     thridaryView.hidden = YES;
     secondShadeView.alpha=0;
+    primaryShadeView.alpha=0;
 }
 
 - (IBAction)threeddAction:(id)sender
@@ -764,8 +765,10 @@ NSString *manprice=nil;
     }else if (btntag==4)
     {
         secondShadeView.alpha=0.5;
+        primaryShadeView.alpha=0.5;
         thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.width);
         thridaryView.hidden = NO;
+
         AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
         sqlService *shopcar=[[sqlService alloc] init];
         shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
