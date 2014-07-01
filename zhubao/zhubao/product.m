@@ -664,7 +664,8 @@ NSString *manprice=nil;
                 
                 if (proprice) {
                     //pricelable.text=[@"¥" stringByAppendingString:proprice];
-                    pricelable.text=[NSString stringWithFormat:@"¥%@",proprice];
+                    NSArray *price=[[NSString stringWithFormat:@"%@",proprice] componentsSeparatedByString:@"."];
+                    pricelable.text=[NSString stringWithFormat:@"¥%@",[price objectAtIndex:0]];
                 }else{
                     pricelable.text=@"暂无价格信息";
                 }
@@ -1461,7 +1462,9 @@ NSString *manprice=nil;
                 
                 if (proprice) {
                     //pricelable.text=[@"¥" stringByAppendingString:proprice];
-                    pricelable.text=[NSString stringWithFormat:@"¥%@",proprice];
+                    NSArray *price=[[NSString stringWithFormat:@"%@",proprice] componentsSeparatedByString:@"."];
+                    pricelable.text=[NSString stringWithFormat:@"¥%@",[price objectAtIndex:0]];
+                    //pricelable.text=[NSString stringWithFormat:@"¥%@",proprice];
                 }else{
                     pricelable.text=@"暂无价格信息";
                 }

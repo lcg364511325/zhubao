@@ -754,8 +754,8 @@ NSInteger selecttable=0;
             [logoImage setImage:[UIImage imageNamed:@"logo"]];
         }
         
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:info delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alter show];
+//        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:info delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//        [alter show];
     }else{
         NSString *rowString =@"更新失败";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
