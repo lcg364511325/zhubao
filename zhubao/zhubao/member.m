@@ -742,26 +742,33 @@ NSInteger selecttable=0;
     NSString *rowString =@"正在更新数据。。。。";
     UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
     [alter show];
-    myApi *sql=[[myApi alloc]init];
-    NSString *info=[sql getMyInfo];
-    [alter dismissWithClickedButtonIndex:0 animated:YES];
-    if (info) {
-        NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
-            [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
-        }
-        else {
-            [logoImage setImage:[UIImage imageNamed:@"logo"]];
-        }
-        
-//        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:info delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-//        [alter show];
-    }else{
-        NSString *rowString =@"更新失败";
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alter show];
-    }
     
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // 耗时的操作（异步操作）
+        
+        myApi *sql=[[myApi alloc]init];
+        NSString *info=[sql getMyInfo];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [alter dismissWithClickedButtonIndex:0 animated:YES];
+            if (info) {
+                AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+                NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"%@",myDelegate.myinfol.logopathsm]];
+                NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
+                [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+                
+                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:info delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alter show];
+            }else{
+                NSString *rowString =@"更新失败";
+                UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alter show];
+            }
+            
+        });
+    });
+
 }
 //清除商品数据
 -(IBAction)cleargoodsdate:(id)sender

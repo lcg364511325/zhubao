@@ -84,6 +84,10 @@ NSString * Pro_type;
 NSString *womanprice=nil;
 //男戒价格
 NSString *manprice=nil;
+//主石约重
+NSMutableArray *inlayarry;
+//男主石约重
+NSMutableArray *inlayarryman;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -586,6 +590,7 @@ NSString *manprice=nil;
         colorselect.hidden=YES;
         netselect.hidden=YES;
         textureselect.hidden=YES;
+        
     }else if(selecttype==1){
         rowString = [self.netlist objectAtIndex:[indexPath row]];
         nettext.text=rowString;
@@ -614,6 +619,7 @@ NSString *manprice=nil;
         colorselect.hidden=YES;
         netselect.hidden=YES;
         textureselect.hidden=YES;
+        
     }else if(selecttype==6){
         rowString = [self.netlist objectAtIndex:[indexPath row]];
         manNetText.text=rowString;
@@ -643,6 +649,9 @@ NSString *manprice=nil;
     Commons * common=[[Commons alloc]init];
     textvalue=[common getGoldtypevalue:texturetext.text];
     
+    NSString * weightg=[self getweightg:rowString];
+    NSString * weightman=[self getweightman:rowString];
+    
     @try {
         //可以在此加代码提示用户说正在加载数据中
         pricelable.text=@"获取价格中。。。";
@@ -652,10 +661,10 @@ NSString *manprice=nil;
             pricelable.text=@"获取价格中。。。";
             NSString *proprice=nil;
             productApi *priceApi=[[productApi alloc]init];
-            womanprice=[priceApi getPrice:goods.Pro_Class goldType:texturetext.text goldWeight:goods.Pro_goldWeight mDiaWeight:maintext.text mDiaColor:colortext.text mVVS:nettext.text sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
+            womanprice=[priceApi getPrice:goods.Pro_Class goldType:texturetext.text goldWeight:weightg mDiaWeight:maintext.text mDiaColor:colortext.text mVVS:nettext.text sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
             if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
                 priceApi=[[productApi alloc]init];
-                manprice=[priceApi getPrice:goodsman.Pro_Class goldType:manTextureText.text goldWeight:goodsman.Pro_goldWeight mDiaWeight:mamMainText.text mDiaColor:mamColorText.text mVVS:manNetText.text sDiaWeight:goodsman.Pro_f_weight sCount:goodsman.Pro_f_count proid:goodsman.Id];
+                manprice=[priceApi getPrice:goodsman.Pro_Class goldType:manTextureText.text goldWeight:weightman mDiaWeight:mamMainText.text mDiaColor:mamColorText.text mVVS:manNetText.text sDiaWeight:goodsman.Pro_f_weight sCount:goodsman.Pro_f_count proid:goodsman.Id];
                 proprice=[NSString stringWithFormat:@"%d",womanprice.intValue+manprice.intValue];
             }else{
                 proprice=womanprice;
@@ -1373,7 +1382,7 @@ NSString *manprice=nil;
     
     title1lable.text=goods.Pro_name;
     modellable.text=goods.Pro_model;
-    weightlable.text=goods.Pro_goldWeight;
+    //weightlable.text=goods.Pro_goldWeight;//约重
     mainlable.text=goods.Pro_Z_count;
     fitNolable.text=goods.Pro_f_count;
     fitweightlable.text=[NSString stringWithFormat:@"%@",goods.Pro_f_weight];
@@ -1386,10 +1395,23 @@ NSString *manprice=nil;
     sizetext.text=goods.Pro_goldsize;
     fonttext.text=nil;
     numbertext.text=@"1";
-    NSMutableArray *inlayarry=[[NSMutableArray alloc] init];
-    NSMutableArray *inlayarryman=[[NSMutableArray alloc] init];
-    NSMutableArray *mainarryman=[[NSMutableArray alloc] init];
+    inlayarry=[[NSMutableArray alloc] init];
+    inlayarryman=[[NSMutableArray alloc] init];
     sql=[[sqlService alloc] init];
+    inlayarry=[sql getwithmouths:goods.Id];
+    NSMutableArray *mainarry=[[NSMutableArray alloc] init];
+    NSString * AuWeight=nil;
+    for (withmouth *inlay in inlayarry) {
+        [mainarry addObject:inlay.zWeight];
+        if(AuWeight==nil){
+            AuWeight=inlay.AuWeight;
+            weightlable.text=inlay.AuWeight;//约重
+        }
+    }
+
+    NSMutableArray *mainarryman=[[NSMutableArray alloc] init];
+    
+    NSString * AuWeightman=nil;
     //如果是对戒，查找男戒数据
     if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
         [self showmenlproduct];
@@ -1399,13 +1421,18 @@ NSString *manprice=nil;
         inlayarryman=[sql getwithmouths:goodsman.Id];
         for (withmouth *inlayman in inlayarryman) {
             [mainarryman addObject:inlayman.zWeight];
+            if(AuWeightman==nil){
+                AuWeightman=inlayman.AuWeight;
+                _manMainLabel.text=[NSString stringWithFormat:@"男戒:%@",inlayman.AuWeight];
+            }
         }
-        weightlable.text=[NSString stringWithFormat:@"女戒:%@",goods.Pro_goldWeight];
+        
+        weightlable.text=[NSString stringWithFormat:@"女戒:%@",AuWeight];
         mainlable.text=[NSString stringWithFormat:@"女戒:%@",goods.Pro_Z_count];
         fitNolable.text=[NSString stringWithFormat:@"女戒:%@",goods.Pro_f_count];
         float wwight=goods.Pro_f_weight.doubleValue*goods.Pro_f_count.doubleValue;
         fitweightlable.text=[NSString stringWithFormat:@"女戒:%@",[self notRounding:wwight afterPoint:2]];
-        _manMainLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_goldWeight];
+        
         _manjdLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_Z_count];
         _manColorLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_f_count];
         _mancjLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_f_weight];
@@ -1417,13 +1444,10 @@ NSString *manprice=nil;
         manSizeText.text=goodsman.Pro_goldsize;
         manFontText.text=nil;
     }
-    inlayarry=[sql getwithmouths:goods.Id];
-    NSMutableArray *mainarry=[[NSMutableArray alloc] init];
-    for (withmouth *inlay in inlayarry) {
-        [mainarry addObject:inlay.zWeight];
-    }
+    
     self.mainlist=mainarry;
     self.mainmanlist=mainarryman;
+    
     if(self.mainlist.count>0)
         maintext.text=[self.mainlist objectAtIndex:0];
     if (self.mainmanlist>0 && [goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
@@ -1450,10 +1474,10 @@ NSString *manprice=nil;
             pricelable.text=@"获取价格中。。。";
             NSString *proprice=nil;
             productApi *priceApi=[[productApi alloc]init];
-            womanprice=[priceApi getPrice:goods.Pro_Class goldType:goods.Pro_goldType goldWeight:goods.Pro_goldWeight mDiaWeight:maintext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
+            womanprice=[priceApi getPrice:goods.Pro_Class goldType:goods.Pro_goldType goldWeight:AuWeight mDiaWeight:maintext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
             if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
                 
-                manprice=[priceApi getPrice:goodsman.Pro_Class goldType:goodsman.Pro_goldType goldWeight:goodsman.Pro_goldWeight mDiaWeight:mamMainText.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:goodsman.Pro_f_weight sCount:goodsman.Pro_f_count proid:goodsman.Id];
+                manprice=[priceApi getPrice:goodsman.Pro_Class goldType:goodsman.Pro_goldType goldWeight:AuWeightman mDiaWeight:mamMainText.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:goodsman.Pro_f_weight sCount:goodsman.Pro_f_count proid:goodsman.Id];
                 
                 
                 proprice=[NSString stringWithFormat:@"%d",womanprice.intValue+manprice.intValue];
@@ -1586,46 +1610,15 @@ NSString *manprice=nil;
     
     sqlService * sql=[[sqlService alloc] init];
     productEntity *goods=[sql GetProductBoyDetail:girlid];
-    //Pro_author=goods.Pro_author;
-    //Pro_type=goods.Pro_Type;
-    //productimageview.image=[UIImage imageNamed:@"diamonds.png"];
-    
+
     mamMainText.text=goods.Pro_name;
     manNetText.text=goods.Pro_model;
     manTextureText.text=goods.Pro_goldWeight;
-    //mainlable.text=goods.Pro_Z_count;
-    //fitNolable.text=goods.Pro_f_count;
-    //fitweightlable.text=goods.Pro_f_weight;
-    //maintext.text=@"111";
-    //nettext.text=@"SI";
-    //colortext.text=@"I-J";
     
     Commons * common=[[Commons alloc]init];
     mamColorText.text=[common getGoldtypename:goods.Pro_goldType];
     
     manSizeText.text=goods.Pro_goldsize;
-    //fonttext.text=nil;
-    //numbertext.text=@"1";
-    //    NSMutableArray *inlayarry=[[NSMutableArray alloc] init];
-    //    NSMutableArray *inlayarryman=[[NSMutableArray alloc] init];
-    //    NSMutableArray *mainarryman=[[NSMutableArray alloc] init];
-    //    sql=[[sqlService alloc] init];
-    //    if ([goods.Pro_Class isEqualToString:@"3"]) {
-    //        productEntity *goodsman=[sql GetProductDetail:productnumber];
-    //        inlayarryman=[sql getwithmouths:goodsman.Id];
-    //        for (withmouth *inlayman in inlayarryman) {
-    //            [mainarryman addObject:inlayman.zWeight];
-    //        }
-    //    }
-    //    inlayarry=[sql getwithmouths:goods.Id];
-    //    NSMutableArray *mainarry=[[NSMutableArray alloc] init];
-    //    for (withmouth *inlay in inlayarry) {
-    //        [mainarry addObject:inlay.zWeight];
-    //    }
-    //    self.mainlist=mainarry;
-    //    self.mainmanlist=mainarryman;
-    //    if(self.mainlist.count>0)
-    //        maintext.text=[self.mainlist objectAtIndex:0];
     
 }
 
@@ -1665,6 +1658,35 @@ NSString *manprice=nil;
         [alter show];
     }
     
+}
+//女的约重
+-(NSString *)getweightg:(NSString *)weig{
+    
+    for (withmouth *inlay in inlayarry) {
+        if ([inlay.zWeight isEqualToString:maintext.text]) {
+            if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
+                weightlable.text=[NSString stringWithFormat:@"女戒:%@",inlay.AuWeight];
+            }else{
+                weightlable.text=inlay.AuWeight;
+            }
+            return inlay.AuWeight;
+        }
+    }
+    
+    return @"";
+    
+}
+//男的约重
+-(NSString *)getweightman:(NSString *)weig{
+    
+    for (withmouth *inlayman in inlayarryman) {
+        if ([inlayman.zWeight isEqualToString:mamMainText.text]) {
+            _manMainLabel.text=[NSString stringWithFormat:@"男戒:%@",inlayman.AuWeight];
+            return inlayman.AuWeight;
+        }
+    }
+    
+    return @"";
 }
 
 //核对密码
