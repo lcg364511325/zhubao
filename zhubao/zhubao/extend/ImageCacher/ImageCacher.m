@@ -101,7 +101,7 @@ static ImageCacher *defaultCacher=nil;
     NSData *smallData=UIImageJPEGRepresentation(small, 0.02);
 
     if (smallData) {
-        //[fileManager createFileAtPath:pathForURL(aURL) contents:smallData attributes:nil];
+        [fileManager createFileAtPath:pathForURL(aURL) contents:smallData attributes:nil];
     }
     
     UIView *view=[aDic objectForKey:@"imageView"];

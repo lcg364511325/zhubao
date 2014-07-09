@@ -202,8 +202,10 @@ NSInteger i=0;
                     n.Address = result.Address;
 
                     //同时更新本的数据库用户表
-                    //sqlService *sqlser= [[sqlService alloc]init];
-                    //[sqlser updateCustomerNoApi:n];
+                    sqlService *sqlser= [[sqlService alloc]init];
+                    [sqlser HandleSql:[NSString stringWithFormat:@"delete from customer where uId=%@ ",n.uId]];
+                    sqlser= [[sqlService alloc]init];
+                    [sqlser updateCustomerNoApi:n];
 
                     //登录成功，进入系统首页
                     NSLog(@"登录成功，进入系统首页");

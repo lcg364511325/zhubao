@@ -1309,7 +1309,7 @@ NSMutableArray *inlayarryman;
         manentity.pvvs=manNetText.text;
         manentity.psize=manSizeText.text;
         manentity.pgoldtype=manTextureText.text;
-        manentity.pweight=_manMainLabel.text;
+        manentity.pweight=mamMainText.text;
         manentity.customerid=myDelegate.entityl.uId;
         manentity.pprice=manprice;
         manentity.pname=modellable.text;
@@ -1350,17 +1350,23 @@ NSMutableArray *inlayarryman;
     productEntity *entity=[list objectAtIndex:[indexPath row]];
     NSString *count=[NSString stringWithFormat:@"%lu",(unsigned long)[list count]];
     countLable.text=[[@"共有首饰" stringByAppendingString:count] stringByAppendingString:@"件"];
-    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",entity.Pro_smallpic]];
-    if (hasCachedImage(imgUrl)) {
-        cell.productImage.image=[UIImage imageWithContentsOfFile:pathForURL(imgUrl)];
-    }else
-    {
-        cell.productImage.image=[UIImage imageNamed:@"diamonds"];
-        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",cell.productImage,@"imageView",nil];
-        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
-        
-    }
     
+//    NSString *url1=pathInDocumentDirectory([NSString stringWithFormat:@"images/%@%@",entity.Pro_author,@"_001.jpg"]);
+//    if ([[NSFileManager defaultManager] fileExistsAtPath:url1]) {
+//        cell.productImage.image=[UIImage imageWithContentsOfFile:url1];
+//    }else{
+        NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",entity.Pro_smallpic]];
+        if (hasCachedImage(imgUrl)) {
+            cell.productImage.image=[UIImage imageWithContentsOfFile:pathForURL(imgUrl)];
+        }else
+        {
+            cell.productImage.image=[UIImage imageNamed:@""];
+            NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",cell.productImage,@"imageView",nil];
+            [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+            
+        }
+//    }
+
     cell.productLable.text = entity.Pro_model;
     return cell;
 }
@@ -1455,6 +1461,12 @@ NSMutableArray *inlayarryman;
     }
     
     NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",goods.Pro_smallpic]];
+    NSArray  * array= [goods.Pro_bigpic componentsSeparatedByString:@","];
+    //遍历这个数组
+    if ([array count]>0) {
+        imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",[array objectAtIndex: 0]]];
+    }
+
     if (hasCachedImage(imgUrl)) {
         [self.productimageview setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
     }else
@@ -1462,7 +1474,6 @@ NSMutableArray *inlayarryman;
         [self.productimageview setImage:[UIImage imageNamed:@""]];//diamonds
         NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",self.productimageview,@"imageView",nil];
         [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
-        
     }
     
     //获取商品价格

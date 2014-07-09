@@ -629,6 +629,8 @@ NSInteger selecttable=0;
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     sqlService *sql=[[sqlService alloc]init];
     customer *man=[sql getCustomer:myDelegate.entityl.uId];
+    if([man.Email isEqualToString:@"(null)"] || !man.Email)man.Email=@"";
+    if([man.sfUrl isEqualToString:@"(null)"] || !man.sfUrl)man.sfUrl=@"";
     man.userTrueName=companyText.text;
     man.lxrName=cusnameText.text;
     man.Phone=mobileText.text;
@@ -649,6 +651,9 @@ NSInteger selecttable=0;
     }else if ([divisionText.text isEqualToString:@"其他"]){
         man.bmName=@"6";
     }
+    sql=[[sqlService alloc]init];
+    [sql HandleSql:[NSString stringWithFormat:@"delete from customer where uId=%@ ",man.uId]];
+    sql= [[sqlService alloc]init];
     customer *updateman=[sql updateCustomer:man];
     if (updateman) {
         myDelegate.entityl.userTrueName=companyText.text;
