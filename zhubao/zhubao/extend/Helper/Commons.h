@@ -18,8 +18,8 @@
 + (NSString *)md5:(NSString *)str;
 
 //
--(NSString *)getColorname:(NSString *)codevalue;
+-(NSString *)getGoldtypename:(NSString *)codevalue;
 
--(NSString *)getColorvalue:(NSString *)name;
+-(NSString *)getGoldtypevalue:(NSString *)name;
 
 @end

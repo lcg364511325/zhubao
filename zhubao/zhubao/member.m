@@ -87,6 +87,10 @@ NSInteger selecttable=0;
         shopcartcount.hidden=YES;
     }
     
+    provinceText.userInteractionEnabled=NO;
+    cityText.userInteractionEnabled=NO;
+    divisionText.userInteractionEnabled=NO;
+    
     
 }
 
@@ -256,19 +260,32 @@ NSInteger selecttable=0;
     cityText.text=myDelegate.entityl.Cs;
     addressText.text=myDelegate.entityl.Address;
     NSString *division=nil;
-    if ([ myDelegate.entityl.bmName isEqualToString:@"1"]) {
-        division=@"办公室";
-    }else if ([ myDelegate.entityl.bmName isEqualToString:@"2"]){
-        division=@"市场部";
-    }else if ([ myDelegate.entityl.bmName isEqualToString:@"3"]){
-        division=@"采购部";
-    }else if ([ myDelegate.entityl.bmName isEqualToString:@"4"]){
-        division=@"技术部";
-    }else if ([ myDelegate.entityl.bmName isEqualToString:@"5"]){
-        division=@"人力资源";
-    }else if ([ myDelegate.entityl.bmName isEqualToString:@"6"]){
+    
+    @try {
+        if (!myDelegate.entityl.bmName) {
+            division=@"其他";
+        }else if ([ myDelegate.entityl.bmName isEqualToString:@"1"]) {
+            division=@"办公室";
+        }else if ([ myDelegate.entityl.bmName isEqualToString:@"2"]){
+            division=@"市场部";
+        }else if ([ myDelegate.entityl.bmName isEqualToString:@"3"]){
+            division=@"采购部";
+        }else if ([ myDelegate.entityl.bmName isEqualToString:@"4"]){
+            division=@"技术部";
+        }else if ([ myDelegate.entityl.bmName isEqualToString:@"5"]){
+            division=@"人力资源";
+        }else if ([ myDelegate.entityl.bmName isEqualToString:@"6"]){
+            division=@"其他";
+        }
+    }
+    @catch (NSException *exception) {
         division=@"其他";
     }
+    @finally {
+        
+    }
+    
+    
     divisionText.text=division;
 }
 
@@ -387,43 +404,67 @@ NSInteger selecttable=0;
         }
         buyproduct *goods =[shoppingcartlist objectAtIndex:[indexPath row]];
         if ([goods.producttype isEqualToString:@"3"]) {
-            cell.showImage.image=[UIImage imageNamed:@"diamond01"];
-            cell.modelLable.text=goods.diaentiy.Dia_Shape;
+            if ([goods.diaentiy.Dia_Shape isEqualToString:@"RB"]) {
+                cell.modelLable.text=@"圆形";
+                cell.showImage.image=[UIImage imageNamed:@"round.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"PE"]){
+                cell.modelLable.text=@"公主方";
+                cell.showImage.image=[UIImage imageNamed:@"princess2.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"EM"]){
+                cell.modelLable.text=@"祖母绿";
+                cell.showImage.image=[UIImage imageNamed:@"Emerald.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"RD"]){
+                cell.modelLable.text=@"雷蒂恩";
+                cell.showImage.image=[UIImage imageNamed:@"radiant.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"OL"]){
+                cell.modelLable.text=@"椭圆形";
+                cell.showImage.image=[UIImage imageNamed:@"Oval.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"MQ"]){
+                cell.modelLable.text=@"橄榄形";
+                cell.showImage.image=[UIImage imageNamed:@"marquise.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"CU"]){
+                cell.modelLable.text=@"枕形";
+                cell.showImage.image=[UIImage imageNamed:@"cushion.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"PR"]){
+                cell.modelLable.text=@"梨形";
+                cell.showImage.image=[UIImage imageNamed:@"Pear2.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"HT"]){
+                cell.modelLable.text=@"心形";
+                cell.showImage.image=[UIImage imageNamed:@"Heart.jpg"];
+            }
+            else if ([goods.diaentiy.Dia_Shape isEqualToString:@"ASH"]){
+                cell.modelLable.text=@"镭射刑";
+                cell.showImage.image=[UIImage imageNamed:@"Asscher2.jpg"];
+            }
             if (goods.diaentiy.Dia_Lab) {
                 cell.dipLable.text=[@"证书:" stringByAppendingString:goods.diaentiy.Dia_Lab];
-            }else{
-                cell.dipLable.text=nil;
             }
             if (goods.diaentiy.Dia_ART) {
-                cell.numberLable.text=[@"编号:" stringByAppendingString:goods.diaentiy.Dia_ART];
-            }else{
-                cell.numberLable.text=nil;
+                cell.dipLable.text=[cell.dipLable.text stringByAppendingString:[NSString stringWithFormat:@"  编号:%@",goods.diaentiy.Dia_ART]];
             }
-            cell.model1Lable.text=[@"形状:" stringByAppendingString:goods.diaentiy.Dia_Shape];
+            cell.model1Lable.text=[@"形状:" stringByAppendingString:cell.modelLable.text];
             if (goods.pweight) {
-                cell.weightLable.text=[@"钻重:" stringByAppendingString:goods.pweight];
-            }else{
-                cell.weightLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  钻重:%@",goods.pweight]];
             }
             if (goods.pcolor) {
-                cell.netLable.text=[@"颜色:" stringByAppendingString:goods.pcolor];
-            }else{
-                cell.netLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  颜色:%@",goods.pcolor]];
             }
             if (goods.pvvs) {
-                cell.colorLable.text=[@"净度:" stringByAppendingString:goods.pvvs];
-            }else{
-                cell.colorLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  净度:%@",goods.pvvs]];
             }
             if (goods.diaentiy.Dia_Cut) {
-                cell.cutLable.text=[@"切工:" stringByAppendingString:goods.diaentiy.Dia_Cut];
-            }else{
-                cell.cutLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  切工:%@",goods.diaentiy.Dia_Cut]];
             }
             if (goods.diaentiy.Dia_Pol) {
-                cell.chasing.text=[@"抛光:" stringByAppendingString:goods.diaentiy.Dia_Pol];
-            }else{
-                cell.chasing.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  抛光:%@",goods.diaentiy.Dia_Pol]];
             }
             if (goods.diaentiy.Dia_Sym) {
                 cell.fluLable.text=[@"对称:" stringByAppendingString:goods.diaentiy.Dia_Sym];
@@ -432,7 +473,16 @@ NSInteger selecttable=0;
             }
             cell.priceLable.text=goods.pcount;
         }else if([goods.producttype isEqualToString:@"1"] || [goods.producttype isEqualToString:@"2"]){
-            cell.showImage.image=[UIImage imageNamed:@"diamond01"];
+            NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",goods.proentiy.Pro_smallpic]];
+            if (hasCachedImage(imgUrl)) {
+                cell.showImage.image=[UIImage imageWithContentsOfFile:pathForURL(imgUrl)];
+            }else
+            {
+                cell.showImage.image=[UIImage imageNamed:@"diamonds"];
+                NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",cell.showImage,@"imageView",nil];
+                [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+                
+            }
             if (goods.proentiy.Pro_number) {
                 cell.dipLable.text=goods.proentiy.Pro_number;
             }else{
@@ -450,31 +500,21 @@ NSInteger selecttable=0;
             }
             if (goods.proentiy.Pro_goldWeight) {
                 cell.model1Lable.text=[@"金重:" stringByAppendingString:goods.proentiy.Pro_goldWeight];
-            }else{
-                cell.model1Lable.text=nil;
             }
             if (goods.pgoldtype) {
-                cell.weightLable.text=[@"材质:" stringByAppendingString:goods.pgoldtype];
-            }else{
-                cell.weightLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  材质:%@",goods.pgoldtype]];
             }
             if (goods.proentiy.Pro_Z_weight) {
-                cell.colorLable.text=[@"钻重:" stringByAppendingString:goods.proentiy.Pro_Z_weight];
-            }else{
-                cell.colorLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  钻重:%@",goods.proentiy.Pro_Z_weight]];
             }
             if (goods.proentiy.Pro_f_clarity) {
-                cell.netLable.text=[@"净度:" stringByAppendingString:goods.proentiy.Pro_f_clarity];
-            }else{
-                cell.netLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  净度:%@",goods.proentiy.Pro_f_clarity]];
             }
             if (goods.proentiy.Pro_Z_color) {
-                cell.cutLable.text=[@"颜色:" stringByAppendingString:goods.proentiy.Pro_Z_color];
-            }else{
-                cell.cutLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  颜色:%@",goods.proentiy.Pro_Z_color]];
             }
             if (goods.proentiy.Pro_goldsize) {
-                cell.chasing.text=[@"尺寸:" stringByAppendingString:goods.proentiy.Pro_goldsize];
+                cell.chasing.text=[@"手寸:" stringByAppendingString:goods.proentiy.Pro_goldsize];
             }else{
                 cell.chasing.text=nil;
             }
@@ -486,40 +526,27 @@ NSInteger selecttable=0;
             NSString *fullpath =goods.photos;
             UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullpath];
             [cell.showImage setImage:savedImage];
+            cell.modelLable.text=nil;
             if (goods.pgoldtype) {
                 cell.dipLable.text=[@"材质:" stringByAppendingString:goods.pgoldtype];
-            }else{
-                cell.dipLable.text=nil;
             }
             if (goods.pweight) {
-                cell.numberLable.text=[NSString stringWithFormat:@"金重:%@g",goods.pweight];
-            }else{
-                cell.numberLable.text=nil;
+                cell.dipLable.text=[cell.dipLable.text stringByAppendingString:[NSString stringWithFormat:@"  金重:%@g",goods.pweight]];
             }
             if (goods.Dia_Z_weight) {
-                cell.model1Lable.text=[NSString stringWithFormat:@"主石重:%@Ct",goods.Dia_Z_count];
-            }else{
-                cell.model1Lable.text=nil;
+                cell.model1Lable.text=[NSString stringWithFormat:@"主石重:%@Ct",goods.Dia_Z_weight];
             }
             if (goods.Dia_Z_count) {
-                cell.weightLable.text=[@"主石数:" stringByAppendingString:goods.Dia_Z_count];
-            }else{
-                cell.weightLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  主石数:%@",goods.Dia_Z_count]];
             }
             if (goods.Dia_F_weight) {
-                cell.netLable.text=[NSString stringWithFormat:@"副石重:%@Ct",goods.Dia_F_weight];
-            }else{
-                cell.netLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  副石重:%@Ct",goods.Dia_F_weight]];
             }
             if (goods.Dia_F_count) {
-                cell.colorLable.text=[@"副石数:" stringByAppendingString:goods.Dia_F_count];
-            }else{
-                cell.colorLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  副石数:%@",goods.Dia_F_count]];
             }
             if (goods.psize) {
-                cell.cutLable.text=[@"手寸:" stringByAppendingString:goods.psize];
-            }else{
-                cell.cutLable.text=nil;
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  手寸:%@",goods.psize]];
             }
             if (goods.pdetail) {
                 cell.fluLable.text=[@"刻字:" stringByAppendingString:goods.pdetail];
@@ -727,8 +754,8 @@ NSInteger selecttable=0;
             [logoImage setImage:[UIImage imageNamed:@"logo"]];
         }
         
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:info delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alter show];
+//        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:info delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//        [alter show];
     }else{
         NSString *rowString =@"更新失败";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];

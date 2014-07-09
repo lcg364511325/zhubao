@@ -225,7 +225,7 @@ UILabel *titlelabel;
 //
     
     if (queuecount>=allcount) {
-        [self stopProgressBar];
+        if(progressBarRoundedFat)[self stopProgressBar];
     }
 
 }
@@ -257,7 +257,7 @@ UILabel *titlelabel;
     titlelabel.text=[NSString stringWithFormat:@"3D图片下载：%d/%d",queuecount,allcount];
     
     if (queuecount>=allcount) {
-        [self stopProgressBar];
+        if(progressBarRoundedFat)[self stopProgressBar];
     }
     
     
@@ -371,7 +371,7 @@ UILabel *titlelabel;
         [alter dismissWithClickedButtonIndex:0 animated:YES];
         
         //Use when fetching text data
-        NSString *responseString = [request responseString];
+        //NSString *responseString = [request responseString];
         
         //Use when fetching binary data
         NSData *jsonData = [request responseData];
@@ -443,7 +443,7 @@ UILabel *titlelabel;
 -(void)responseFailed:(ASIHTTPRequest *)request
 {
     [alter dismissWithClickedButtonIndex:0 animated:YES];
-    NSError *error = [request error];
+    //NSError *error = [request error];
 
     [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"提交订单数据失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
     

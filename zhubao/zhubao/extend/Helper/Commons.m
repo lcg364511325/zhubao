@@ -53,7 +53,7 @@
     return true;
 }
 
--(NSString *)getColorname:(NSString *)codevalue{
+-(NSString *)getGoldtypename:(NSString *)codevalue{
     
     if ([codevalue isEqualToString:@"1"]) {
         return @"18K黄";
@@ -81,7 +81,7 @@
 }
 
 
--(NSString *)getColorvalue:(NSString *)name
+-(NSString *)getGoldtypevalue:(NSString *)name
 {
     if ([name isEqualToString:@"18K黄"]) {
         return @"1";
