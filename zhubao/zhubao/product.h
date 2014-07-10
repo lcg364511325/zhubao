@@ -109,10 +109,14 @@
 @property (weak, nonatomic) IBOutlet UITextField *checkpassword;
 @property (weak, nonatomic) IBOutlet UIButton *showPhotos;
 
+@property (weak, nonatomic) IBOutlet UIButton *settingupdate;
+@property (weak, nonatomic) IBOutlet UIButton *settinglogout;
+
 - (IBAction)closeAction:(id)sender;
 - (IBAction)goAction1:(id)sender;
 - (IBAction)closeAction1:(id)sender;
 - (IBAction)threeddAction:(id)sender;
 
+-(void)refleshBuycutData;
 
 @end

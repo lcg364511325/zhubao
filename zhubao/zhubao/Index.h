@@ -37,9 +37,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *biglogo;
 @property (weak, nonatomic) IBOutlet UIWebView *aboutus;
 @property (weak, nonatomic) IBOutlet UITextField *checkpassword;
+@property (weak, nonatomic) IBOutlet UIButton *settingupdate;
+@property (weak, nonatomic) IBOutlet UIButton *settinglogout;
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;
 -(IBAction)openaboutus:(id)sender;
+
+-(void)refleshBuycutData;
 
 @end

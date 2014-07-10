@@ -32,6 +32,8 @@
 
 @property (nonatomic, strong) YLProgressBar *progressBarRoundedFat;
 
+@property (nonatomic,assign) id <UIApplicationDelegate> mydelegate;//当前请求过来的对象
+
 //是否接着开始下载
 -(void)beginRequest:(NSString *)fileurl fileName:(NSString *)fileName version:(NSString *)version;
 

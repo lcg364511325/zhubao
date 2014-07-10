@@ -304,6 +304,11 @@ NSMutableArray *inlayarryman;
 //设置页面跳转
 -(IBAction)setup:(id)sender
 {
+    if ([[[UIDevice currentDevice]systemVersion]floatValue] >= 7.0)
+    {
+        _settingupdate.frame = CGRectMake(10, 55, _settingupdate.frame.size.width, _settingupdate.frame.size.height);
+        _settinglogout.frame = CGRectMake(10, 90, _settinglogout.frame.size.width, _settinglogout.frame.size.height);
+    }
     fourthView.hidden=NO;
     fourthView.frame=CGRectMake(750, 70, fourthView.frame.size.width, fourthView.frame.size.height);
 }
@@ -1391,7 +1396,7 @@ NSMutableArray *inlayarryman;
     //weightlable.text=goods.Pro_goldWeight;//约重
     mainlable.text=goods.Pro_Z_count;
     fitNolable.text=goods.Pro_f_count;
-    fitweightlable.text=[NSString stringWithFormat:@"%@",goods.Pro_f_weight];
+    fitweightlable.text=[NSString stringWithFormat:@"%@ ct",goods.Pro_f_weight];
     //maintext.text=@"111";
     nettext.text=@"SI";
     colortext.text=@"I-J";
@@ -1411,7 +1416,7 @@ NSMutableArray *inlayarryman;
         [mainarry addObject:inlay.zWeight];
         if(AuWeight==nil){
             AuWeight=inlay.AuWeight;
-            weightlable.text=inlay.AuWeight;//约重
+            weightlable.text=[NSString stringWithFormat:@"%@ g",inlay.AuWeight];//约重
         }
     }
 
@@ -1429,19 +1434,19 @@ NSMutableArray *inlayarryman;
             [mainarryman addObject:inlayman.zWeight];
             if(AuWeightman==nil){
                 AuWeightman=inlayman.AuWeight;
-                _manMainLabel.text=[NSString stringWithFormat:@"男戒:%@",inlayman.AuWeight];
+                _manMainLabel.text=[NSString stringWithFormat:@"男戒:%@ g",inlayman.AuWeight];
             }
         }
         
-        weightlable.text=[NSString stringWithFormat:@"女戒:%@",AuWeight];
+        weightlable.text=[NSString stringWithFormat:@"女戒:%@ g",AuWeight];
         mainlable.text=[NSString stringWithFormat:@"女戒:%@",goods.Pro_Z_count];
         fitNolable.text=[NSString stringWithFormat:@"女戒:%@",goods.Pro_f_count];
         float wwight=goods.Pro_f_weight.doubleValue*goods.Pro_f_count.doubleValue;
-        fitweightlable.text=[NSString stringWithFormat:@"女戒:%@",[self notRounding:wwight afterPoint:2]];
+        fitweightlable.text=[NSString stringWithFormat:@"女戒:%@ ct",[self notRounding:wwight afterPoint:2]];
         
         _manjdLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_Z_count];
         _manColorLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_f_count];
-        _mancjLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_f_weight];
+        _mancjLabel.text=[NSString stringWithFormat:@"男戒:%@ ct",goodsman.Pro_f_weight];
         manNetText.text=@"SI";
         mamColorText.text=@"I-J";
         Commons * common=[[Commons alloc]init];
@@ -1644,24 +1649,14 @@ NSMutableArray *inlayarryman;
     sqlService * sql=[[sqlService alloc]init];
     NSString *successdelete=[sql deleteBuyproduct:entity.Id];
     if (successdelete) {
-        sql=[[sqlService alloc]init];
-        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-        myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
-        NSString *goodscount=myDelegate.entityl.resultcount;
-        if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-            shopcartcount.hidden=NO;
-            [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
-        }else{
-            shopcartcount.hidden=YES;
-        }
+        
+        [self refleshBuycutData];
         
         NSString *rowString =@"删除成功！";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
         
-        sqlService *shopcar=[[sqlService alloc] init];
-        shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
-        [goodsview reloadData];
+        
         
     }else{
         NSString *rowString =@"删除失败！";
@@ -1676,9 +1671,9 @@ NSMutableArray *inlayarryman;
     for (withmouth *inlay in inlayarry) {
         if ([inlay.zWeight isEqualToString:maintext.text]) {
             if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
-                weightlable.text=[NSString stringWithFormat:@"女戒:%@",inlay.AuWeight];
+                weightlable.text=[NSString stringWithFormat:@"女戒:%@ g",inlay.AuWeight];
             }else{
-                weightlable.text=inlay.AuWeight;
+                weightlable.text=[NSString stringWithFormat:@"%@ g",inlay.AuWeight];
             }
             return inlay.AuWeight;
         }
@@ -1692,7 +1687,7 @@ NSMutableArray *inlayarryman;
     
     for (withmouth *inlayman in inlayarryman) {
         if ([inlayman.zWeight isEqualToString:mamMainText.text]) {
-            _manMainLabel.text=[NSString stringWithFormat:@"男戒:%@",inlayman.AuWeight];
+            _manMainLabel.text=[NSString stringWithFormat:@"男戒:%@ g",inlayman.AuWeight];
             return inlayman.AuWeight;
         }
     }
@@ -1718,23 +1713,11 @@ NSMutableArray *inlayarryman;
 {
     sqlService *sql=[[sqlService alloc]init];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    myDelegate.mydelegate=self;
         NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
         if (![orderinfo isEqualToString:@""]) {
             
-            sql=[[sqlService alloc]init];
-            AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-            myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
-            NSString *goodscount=myDelegate.entityl.resultcount;
-            if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-                shopcartcount.hidden=NO;
-                [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
-            }else{
-                shopcartcount.hidden=YES;
-            }
-            
-            sqlService *shopcar=[[sqlService alloc] init];
-            shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
-            [goodsview reloadData];
+            [self refleshBuycutData];
             
             NSString *rowString =orderinfo;
             UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
@@ -1812,6 +1795,26 @@ NSMutableArray *inlayarryman;
     // If we subscribe to this method we must dismiss the view controller ourselves
     //NSLog(@"Did finish modal presentation");
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)refleshBuycutData
+{
+    
+    sqlService *sql=[[sqlService alloc]init];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
+    NSString *goodscount=myDelegate.entityl.resultcount;
+    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+        shopcartcount.hidden=NO;
+        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
+    }else{
+        shopcartcount.hidden=YES;
+    }
+    
+    sqlService *shopcar=[[sqlService alloc] init];
+    shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
+    [goodsview reloadData];
+    
 }
 
 @end

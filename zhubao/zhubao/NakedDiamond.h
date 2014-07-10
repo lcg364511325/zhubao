@@ -72,7 +72,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 @property (weak, nonatomic) IBOutlet UITextField *checkpassword;
 @property (weak, nonatomic) IBOutlet UILabel *nakediacount;
-
+@property (weak, nonatomic) IBOutlet UIButton *settingupdate;
+@property (weak, nonatomic) IBOutlet UIButton *settinglogout;
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;
@@ -80,5 +81,7 @@
 - (IBAction)closeAction1:(id)sender;
 - (IBAction)goAction2:(id)sender;
 - (IBAction)closeAction2:(id)sender;
+
+-(void)refleshBuycutData;
 
 @end

@@ -159,25 +159,12 @@ NSInteger selecttable=0;
     sqlService * sql=[[sqlService alloc]init];
     NSString *successdelete=[sql deleteBuyproduct:entity.Id];
     if (successdelete) {
-        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-        sql=[[sqlService alloc]init];
-        myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
-        NSString *goodscount=myDelegate.entityl.resultcount;
-        if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-            shopcartcount.hidden=NO;
-            [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
-        }else{
-            shopcartcount.hidden=YES;
-        }
+        
+        [self refleshBuycutData];
         
         NSString *rowString =@"删除成功！";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
-        
-        
-        sqlService *shopcar=[[sqlService alloc] init];
-        shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
-        [goodsview reloadData];
         
     }else{
         NSString *rowString =@"删除失败！";
@@ -204,23 +191,11 @@ NSInteger selecttable=0;
 {
     sqlService *sql=[[sqlService alloc]init];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    myDelegate.mydelegate=self;
         NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
         if (![orderinfo isEqualToString:@""]) {
             
-            sql=[[sqlService alloc]init];
-            AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-            myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
-            NSString *goodscount=myDelegate.entityl.resultcount;
-            if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-                shopcartcount.hidden=NO;
-                [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
-            }else{
-                shopcartcount.hidden=YES;
-            }
-            
-            sqlService *shopcar=[[sqlService alloc] init];
-            shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
-            [goodsview reloadData];
+            [self refleshBuycutData];
             
             NSString *rowString =orderinfo;
             UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
@@ -297,6 +272,11 @@ NSInteger selecttable=0;
 //设置页面跳转
 -(IBAction)setup:(id)sender
 {
+    if ([[[UIDevice currentDevice]systemVersion]floatValue] >= 7.0)
+    {
+        _settingupdate.frame = CGRectMake(10, 55, _settingupdate.frame.size.width, _settingupdate.frame.size.height);
+        _settinglogout.frame = CGRectMake(10, 90, _settinglogout.frame.size.width, _settinglogout.frame.size.height);
+    }
      fiftharyView.hidden=NO;
     fiftharyView.frame=CGRectMake(750, 70, fiftharyView.frame.size.width, fiftharyView.frame.size.height);
 }
@@ -793,6 +773,24 @@ NSInteger selecttable=0;
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
     }
+}
+
+-(void)refleshBuycutData
+{
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    sqlService *sql=[[sqlService alloc]init];
+    myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
+    NSString *goodscount=myDelegate.entityl.resultcount;
+    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+        shopcartcount.hidden=NO;
+        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
+    }else{
+        shopcartcount.hidden=YES;
+    }
+    sqlService *shopcar=[[sqlService alloc] init];
+    shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
+    [goodsview reloadData];
+    
 }
 
 @end

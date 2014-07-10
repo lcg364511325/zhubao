@@ -543,6 +543,9 @@ AppDelegate * app;
         if(array.count<=0 || i==0){
             [app stopProgressBar];
         }
+        
+        //同步下载商品图片
+        [self getAllProductPhotos];
 
     }@catch (NSException *exception) {
         
@@ -554,6 +557,52 @@ AppDelegate * app;
     return FALSE;
 }
 
+//查询所有的商品的图片，并且下载图片(非3d图片)
+-(BOOL *)getAllProductPhotos
+{
+    @try {
+        sqlser= [[sqlService alloc]init];
+        //查询商品的图片
+        NSMutableArray * array=[sqlser GetProductList:nil type2:nil type3:nil type4:nil page:1 pageSize:1500];
+        for (id key in array){
+            productEntity * entity=(productEntity *)key;
+            
+            NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",entity.Pro_smallpic]];
+            if (hasCachedImage(imgUrl)) {
+                
+            }else
+            {
+                NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",nil,@"imageView",nil];
+                [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+                
+            }
+            
+            //下载大图
+            NSArray  * array= [entity.Pro_bigpic componentsSeparatedByString:@","];
+            int count = [array count];
+            //遍历这个数组
+            for (int i = 0; i < count; i++) {
+                NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",[array objectAtIndex: i]]];
+                if (hasCachedImage(imgUrl)) {
+                    
+                }else
+                {
+                    NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",nil,@"imageView",nil];
+                    [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+                    
+                }
+            }
+        }
+        
+    }@catch (NSException *exception) {
+        
+    }
+    @finally {
+        
+    }
+    
+    return FALSE;
+}
 
 //上载压缩文件里面的图片
 -(BOOL *)getZIPPhotosData:(NSString *)zippath

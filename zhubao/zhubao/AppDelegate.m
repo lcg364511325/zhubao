@@ -402,7 +402,9 @@ UILabel *titlelabel;
                         //清空购物车的信息
                         sqlService *sqlser=[[sqlService alloc]init];
                         [sqlser ClearTableDatas:[NSString stringWithFormat:@"buyproduct where customerid=%@",entityl.uId]];
-                        
+                        //回调方法更新
+                         [_mydelegate performSelector:@selector(refleshBuycutData)];
+
                         [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"生成订单成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
                         
                         return;
