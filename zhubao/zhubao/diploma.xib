@@ -21,6 +21,7 @@
                 <outlet property="selectText" destination="vHG-72-u9R" id="GxS-QS-TyV"/>
                 <outlet property="selecttext" destination="y1U-O6-25G" id="RVD-Gq-Dfm"/>
                 <outlet property="settinglogout" destination="2z1-vl-pi4" id="yPF-Mb-5dI"/>
+                <outlet property="settingsoftware" destination="pch-gm-YZZ" id="c1T-jb-u23"/>
                 <outlet property="settingupdate" destination="CES-pO-QEb" id="qh3-UR-cls"/>
                 <outlet property="shopcartcount" destination="HDv-eS-1t9" id="SJE-Y5-c1v"/>
                 <outlet property="thirdView" destination="1qx-Sy-Xvy" id="xbc-9W-23r"/>

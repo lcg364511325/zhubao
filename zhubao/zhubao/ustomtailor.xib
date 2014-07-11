@@ -23,6 +23,7 @@
                 <outlet property="primaryView" destination="sqs-kM-nSO" id="xN9-es-sOl"/>
                 <outlet property="secondaryView" destination="IIx-4g-o7c" id="yUE-27-wsM"/>
                 <outlet property="settinglogout" destination="p0n-Me-0KG" id="2OR-YU-99o"/>
+                <outlet property="settingsoftware" destination="rm1-l7-Apm" id="EKE-6B-lKV"/>
                 <outlet property="settingupdate" destination="L5g-3Z-Caa" id="M3g-Ah-Bfv"/>
                 <outlet property="shopcartcount" destination="9GK-Oa-E87" id="Fbg-J6-Jf5"/>
                 <outlet property="sizeText" destination="p9y-lJ-7qM" id="9Sy-h0-kJd"/>

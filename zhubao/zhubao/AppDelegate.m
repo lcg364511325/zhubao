@@ -526,11 +526,18 @@ UILabel *titlelabel;
 //取消定时器
 -(void)stopTimer
 {
-    [progressBarRoundedFat setProgress:1 animated:YES];
     
-    //取消定时器
-    [timer invalidate];
-    timer = nil;
+    @try {
+        [progressBarRoundedFat setProgress:1 animated:YES];
+        
+        //取消定时器
+        [timer invalidate];
+        timer = nil;
+    }
+    @catch (NSException *exception) {
+        
+    }
+    
 }
 
 //半透明遮挡层

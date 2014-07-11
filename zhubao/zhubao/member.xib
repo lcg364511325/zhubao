@@ -27,6 +27,7 @@
                 <outlet property="secondaryView" destination="bHf-yE-TJ2" id="Eoz-gJ-ae5"/>
                 <outlet property="selectTableView" destination="I0x-25-KIh" id="kb6-Cz-C7s"/>
                 <outlet property="settinglogout" destination="AE3-92-XRl" id="g7w-Xp-dLZ"/>
+                <outlet property="settingsoftware" destination="vjF-0E-Hb0" id="I11-B5-BBa"/>
                 <outlet property="settingupdate" destination="SkU-Nk-ZSU" id="zCw-5P-img"/>
                 <outlet property="shopcartcount" destination="v35-MX-a2M" id="AB3-Lv-EqL"/>
                 <outlet property="sixthview" destination="tFE-uM-k9p" id="PwH-Iq-HNB"/>
@@ -490,7 +491,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gpp-dg-CRJ">
-                            <rect key="frame" x="0.0" y="49" width="200" height="30"/>
+                            <rect key="frame" x="25" y="49" width="150" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <textInputTraits key="textInputTraits"/>

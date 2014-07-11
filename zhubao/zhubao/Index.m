@@ -26,6 +26,7 @@
 @synthesize biglogo;
 @synthesize aboutus;
 @synthesize checkpassword;
+UISwipeGestureRecognizer *recognizer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,22 +60,59 @@
     //web标签背景色透明
     aboutus.backgroundColor = [UIColor clearColor];
     aboutus.opaque = NO;
-
+    //[aboutus setUserInteractionEnabled: YES ];	 //是否支持交互
+    [aboutus setDelegate:self];				 //委托document.body.style.webkitTouchCallout='none'
+    [aboutus stringByEvaluatingJavaScriptFromString:@"document.body.style.webkitUserSelect='none';"];
+    // Disable callout
+    [aboutus stringByEvaluatingJavaScriptFromString:@"document.body.style.webkitTouchCallout='none';"];
+    
     //更新ui(如果已经存在的，则不再自动更新)
     [self loadmyInfo];
     
     
     //设置了左右滑动
-    UISwipeGestureRecognizer *recognizer;
+//    UISwipeGestureRecognizer *recognizer;
+//    
+//    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+//    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+//    aboutus.delegate = self;
+//    [[self view] addGestureRecognizer:recognizer];
+//    [aboutus addGestureRecognizer:recognizer];
     
-    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+     recognizer= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    recognizer.delegate=self;
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    recognizer.cancelsTouchesInView=NO;
     [[self view] addGestureRecognizer:recognizer];
     
 //    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
 //    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
 //    [[self view] addGestureRecognizer:recognizer];
+    
+//    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeftAction)];
+//    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+//    swipeLeft.delegate = self;
+//    [webView addGestureRecognizer:swipeLeft];
+}
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    return YES;
+}
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    return YES;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    // Disable user selection
+    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
+    // Disable callout
+    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
 }
 
 -(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
@@ -223,6 +261,7 @@
     {
         _settingupdate.frame = CGRectMake(10, 55, _settingupdate.frame.size.width, _settingupdate.frame.size.height);
         _settinglogout.frame = CGRectMake(10, 90, _settinglogout.frame.size.width, _settinglogout.frame.size.height);
+         _settingsoftware.frame = CGRectMake(10, 20, _settingsoftware.frame.size.width, _settingsoftware.frame.size.height);
     }
     
     thridView.hidden=NO;
@@ -535,7 +574,9 @@
                 //[alter dismissWithClickedButtonIndex:0 animated:YES];
                 
                 [myDelegate stopTimer];
-
+                
+                
+                
                 //同步完数据了，则再去下载图片组
                 [getdata getAllZIPPhotos];
                 

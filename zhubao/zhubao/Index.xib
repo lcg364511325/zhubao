@@ -18,6 +18,7 @@
                 <outlet property="primaryView" destination="rXR-Pn-ahE" id="sgS-xe-8CZ"/>
                 <outlet property="secondaryView" destination="eEh-DG-jL3" id="c3z-ll-O3P"/>
                 <outlet property="settinglogout" destination="QlF-XE-v55" id="w3k-0l-Wee"/>
+                <outlet property="settingsoftware" destination="iuX-Re-6le" id="7hF-7k-c2r"/>
                 <outlet property="settingupdate" destination="Jok-Uh-ZZn" id="h4p-uH-QS1"/>
                 <outlet property="shopcartcountButton" destination="TeR-qJ-vGr" id="fk2-Sg-vQs"/>
                 <outlet property="thridView" destination="ORn-vH-567" id="Vdk-7G-E27"/>
@@ -201,6 +202,9 @@
                             <rect key="frame" x="0.0" y="0.0" width="850" height="650"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="pVb-na-bKr"/>
+                            </connections>
                         </webView>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UqM-Ja-w0S">
                             <rect key="frame" x="682" y="0.0" width="40" height="40"/>

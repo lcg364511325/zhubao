@@ -537,7 +537,7 @@ AppDelegate * app;
             
             //[self getZIPPhotosData:entity.zipUrl];
             
-            //if(i==5)break;
+            //if(i==10)break;
         }
         
         if(array.count<=0 || i==0){
@@ -564,35 +564,49 @@ AppDelegate * app;
         sqlser= [[sqlService alloc]init];
         //查询商品的图片
         NSMutableArray * array=[sqlser GetProductList:nil type2:nil type3:nil type4:nil page:1 pageSize:1500];
-        for (id key in array){
-            productEntity * entity=(productEntity *)key;
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            // 耗时的操作（异步操作）
             
-            NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",entity.Pro_smallpic]];
-            if (hasCachedImage(imgUrl)) {
+            for (id key in array){
+                productEntity * entity=(productEntity *)key;
                 
-            }else
-            {
-                NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",nil,@"imageView",nil];
-                [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+                NSLog(@"getAllProductPhotos------:%@",entity.Pro_smallpic);
                 
-            }
-            
-            //下载大图
-            NSArray  * array= [entity.Pro_bigpic componentsSeparatedByString:@","];
-            int count = [array count];
-            //遍历这个数组
-            for (int i = 0; i < count; i++) {
-                NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",[array objectAtIndex: i]]];
+                NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",entity.Pro_smallpic]];
                 if (hasCachedImage(imgUrl)) {
                     
                 }else
                 {
                     NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",nil,@"imageView",nil];
-                    [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
-                    
+                    //[NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+                    [[ImageCacher defaultCacher] cacheImage:dic];
+                }
+                
+                //下载大图
+                NSArray  * array= [entity.Pro_bigpic componentsSeparatedByString:@","];
+                int count = [array count];
+                //遍历这个数组
+                for (int i = 0; i < count; i++) {
+                    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",[array objectAtIndex: i]]];
+                    if (hasCachedImage(imgUrl)) {
+                        
+                    }else
+                    {
+                        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",nil,@"imageView",nil];
+                        //[NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+                        [[ImageCacher defaultCacher] cacheImage:dic];
+                    }
                 }
             }
-        }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                //可以在此加代码提示用户，数据已经加载完毕
+                
+                
+            });
+        });
         
     }@catch (NSException *exception) {
         

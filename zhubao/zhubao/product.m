@@ -107,7 +107,7 @@ NSMutableArray *inlayarryman;
     //净度
     NSArray *netarray = [[NSArray alloc]initWithObjects:@"VVS",@"VS",@"SI",@"P", nil];
     //颜色
-    NSArray *colorarray = [[NSArray alloc]initWithObjects:@"D-E",@"F-G",@"H",@"I-J",@"K-L",@"M-N", nil];
+    NSArray *colorarray = [[NSArray alloc]initWithObjects:@"F-G",@"H",@"I-J",@"K-L",@"M-N", nil];
     //材质
     NSArray *texture1array = [[NSArray alloc]initWithObjects:@"18K黄",@"18K白",@"18K双色",@"18K玫瑰金",@"PT900",@"PT950",@"PD950", nil];
     self.netlist=netarray;
@@ -308,6 +308,7 @@ NSMutableArray *inlayarryman;
     {
         _settingupdate.frame = CGRectMake(10, 55, _settingupdate.frame.size.width, _settingupdate.frame.size.height);
         _settinglogout.frame = CGRectMake(10, 90, _settinglogout.frame.size.width, _settinglogout.frame.size.height);
+        _settingsoftware.frame = CGRectMake(10, 20, _settingsoftware.frame.size.width, _settingsoftware.frame.size.height);
     }
     fourthView.hidden=NO;
     fourthView.frame=CGRectMake(750, 70, fourthView.frame.size.width, fourthView.frame.size.height);
@@ -680,7 +681,7 @@ NSMutableArray *inlayarryman;
                 if (proprice) {
                     //pricelable.text=[@"¥" stringByAppendingString:proprice];
                     NSArray *price=[[NSString stringWithFormat:@"%@",proprice] componentsSeparatedByString:@"."];
-                    pricelable.text=[NSString stringWithFormat:@"¥%@",[price objectAtIndex:0]];
+                    pricelable.text=[NSString stringWithFormat:@"¥ %@",[price objectAtIndex:0]];
                 }else{
                     pricelable.text=@"暂无价格信息";
                 }
@@ -1394,8 +1395,8 @@ NSMutableArray *inlayarryman;
     title1lable.text=goods.Pro_name;
     modellable.text=goods.Pro_model;
     //weightlable.text=goods.Pro_goldWeight;//约重
-    mainlable.text=goods.Pro_Z_count;
-    fitNolable.text=goods.Pro_f_count;
+    mainlable.text=[NSString stringWithFormat:@"%@ 颗",goods.Pro_Z_count];//goods.Pro_Z_count;
+    fitNolable.text=[NSString stringWithFormat:@"%@ 颗",goods.Pro_f_count];//goods.Pro_f_count;
     fitweightlable.text=[NSString stringWithFormat:@"%@ ct",goods.Pro_f_weight];
     //maintext.text=@"111";
     nettext.text=@"SI";
@@ -1439,13 +1440,13 @@ NSMutableArray *inlayarryman;
         }
         
         weightlable.text=[NSString stringWithFormat:@"女戒:%@ g",AuWeight];
-        mainlable.text=[NSString stringWithFormat:@"女戒:%@",goods.Pro_Z_count];
-        fitNolable.text=[NSString stringWithFormat:@"女戒:%@",goods.Pro_f_count];
+        mainlable.text=[NSString stringWithFormat:@"女戒:%@ 颗",goods.Pro_Z_count];
+        fitNolable.text=[NSString stringWithFormat:@"女戒:%@ 颗",goods.Pro_f_count];
         float wwight=goods.Pro_f_weight.doubleValue*goods.Pro_f_count.doubleValue;
         fitweightlable.text=[NSString stringWithFormat:@"女戒:%@ ct",[self notRounding:wwight afterPoint:2]];
         
-        _manjdLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_Z_count];
-        _manColorLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_f_count];
+        _manjdLabel.text=[NSString stringWithFormat:@"男戒:%@ 颗",goodsman.Pro_Z_count];
+        _manColorLabel.text=[NSString stringWithFormat:@"男戒:%@ 颗",goodsman.Pro_f_count];
         _mancjLabel.text=[NSString stringWithFormat:@"男戒:%@ ct",goodsman.Pro_f_weight];
         manNetText.text=@"SI";
         mamColorText.text=@"I-J";
@@ -1506,7 +1507,7 @@ NSMutableArray *inlayarryman;
                 if (proprice) {
                     //pricelable.text=[@"¥" stringByAppendingString:proprice];
                     NSArray *price=[[NSString stringWithFormat:@"%@",proprice] componentsSeparatedByString:@"."];
-                    pricelable.text=[NSString stringWithFormat:@"¥%@",[price objectAtIndex:0]];
+                    pricelable.text=[NSString stringWithFormat:@"¥ %@",[price objectAtIndex:0]];
                     //pricelable.text=[NSString stringWithFormat:@"¥%@",proprice];
                 }else{
                     pricelable.text=@"暂无价格信息";
@@ -1737,7 +1738,14 @@ NSMutableArray *inlayarryman;
     for (int i = 0; i < count; i++) {
         //NSLog(@"普通的遍历：i = %d 时的数组对象为: %@",i,[array objectAtIndex: i]);
         NSString * patht=[NSString stringWithFormat:@"http://seyuu.com%@",[array objectAtIndex: i]];
-        [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:patht]]];
+        NSURL *imgUrl=[NSURL URLWithString:patht];
+        if (hasCachedImage(imgUrl)) {
+            [photos addObject:[MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]]];
+        }else
+        {
+            [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:patht]]];
+        }
+        
         //[thumbs addObject:[MWPhoto photoWithURL:[NSURL URLWithString:patht]]];
     }
 

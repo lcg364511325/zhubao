@@ -36,6 +36,7 @@
                 <outlet property="secondShadeView" destination="SGR-ZR-pGN" id="YjT-A7-cII"/>
                 <outlet property="secondaryView" destination="XZO-gD-InY" id="EvG-eS-rNg"/>
                 <outlet property="settinglogout" destination="qUx-4W-y2r" id="O3v-Wu-mdp"/>
+                <outlet property="settingsoftware" destination="EDj-m1-paK" id="vca-Ba-SSA"/>
                 <outlet property="settingupdate" destination="9hz-yE-DLq" id="oCd-iO-J96"/>
                 <outlet property="shopcartcount" destination="Yiv-DO-kzw" id="Azi-0J-7H1"/>
                 <outlet property="sixview" destination="Rdn-Hr-zlI" id="PNK-Te-w9B"/>

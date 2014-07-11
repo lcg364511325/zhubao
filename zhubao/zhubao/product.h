@@ -111,6 +111,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *settingupdate;
 @property (weak, nonatomic) IBOutlet UIButton *settinglogout;
+@property (weak, nonatomic) IBOutlet UIButton *settingsoftware;
 
 - (IBAction)closeAction:(id)sender;
 - (IBAction)goAction1:(id)sender;

@@ -276,6 +276,7 @@ NSInteger selecttable=0;
     {
         _settingupdate.frame = CGRectMake(10, 55, _settingupdate.frame.size.width, _settingupdate.frame.size.height);
         _settinglogout.frame = CGRectMake(10, 90, _settinglogout.frame.size.width, _settinglogout.frame.size.height);
+        _settingsoftware.frame = CGRectMake(10, 20, _settingsoftware.frame.size.width, _settingsoftware.frame.size.height);
     }
      fiftharyView.hidden=NO;
     fiftharyView.frame=CGRectMake(750, 70, fiftharyView.frame.size.width, fiftharyView.frame.size.height);
@@ -672,9 +673,19 @@ NSInteger selecttable=0;
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     sqlService *sql=[[sqlService alloc]init];
     customer *newnam=[sql getCustomer:myDelegate.entityl.uId];
+    
     if ([[Commons md5:[NSString stringWithFormat:@"%@",oldpassword.text]]  isEqualToString:myDelegate.entityl.userPass]) {
+        
+        if(![[NSString stringWithFormat:@"%@",newpassword.text] isEqualToString:[NSString stringWithFormat:@"%@",affirmpassword.text]]){
+            NSString *rowString =@"新密码输入不正确！";
+            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alter show];
+            return;
+        }
+        
         newnam.userPass=[Commons md5:[NSString stringWithFormat:@"%@",newpassword.text]];
         newnam.oldpassword=[Commons md5:[NSString stringWithFormat:@"%@",oldpassword.text]];
+        sql=[[sqlService alloc]init];
         customer *updatesuccess=[sql updateCustomerPasswrod:newnam];
         if (updatesuccess) {
             NSString *rowString =@"修改成功！";
@@ -755,8 +766,28 @@ NSInteger selecttable=0;
     });
 
 }
+//
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSLog(@" button index=%d is clicked.....", buttonIndex);
+    if (buttonIndex==1) {
+        [self docleargoodsdata];
+    }else{
+        return;
+    }
+    return;
+}
+
 //清除商品数据
 -(IBAction)cleargoodsdate:(id)sender
+{
+    
+    NSString *rowString =@"是否清除商品数据？";
+    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alter show];
+
+}
+//清除商品数据
+-(void)docleargoodsdata
 {
     NSString *rowString =@"正在清除商品数据。。。。";
     UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
@@ -765,6 +796,35 @@ NSInteger selecttable=0;
     BOOL state=[sql ClearTableDatas:@"product"];
     [alter dismissWithClickedButtonIndex:0 animated:YES];
     if (state) {
+        //删除压缩文件
+        NSString *extension = @"zip";
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        
+        NSArray *contents = [fileManager contentsOfDirectoryAtPath:documentsDirectory error:NULL];
+        NSEnumerator *e = [contents objectEnumerator];
+        NSString *filename;
+        while ((filename = [e nextObject])) {
+            
+            if ([[filename pathExtension] isEqualToString:extension]) {
+                
+                [fileManager removeItemAtPath:[documentsDirectory stringByAppendingPathComponent:filename] error:NULL];
+            }
+        }
+        //删除3d图片
+        NSString *documentsDirectoryt =[documentsDirectory stringByAppendingString:@"/images"];
+        NSArray *contentst = [fileManager contentsOfDirectoryAtPath:documentsDirectoryt error:NULL];
+        NSEnumerator *et = [contentst objectEnumerator];
+        NSString *filenamet;
+        while ((filenamet = [et nextObject])) {
+            
+            if ([[filenamet pathExtension] isEqualToString:@"jpg"]) {
+                
+                [fileManager removeItemAtPath:[documentsDirectoryt stringByAppendingPathComponent:filenamet] error:NULL];
+            }
+        }
+        
         NSString *rowString =@"清除成功";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
