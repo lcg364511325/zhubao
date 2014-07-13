@@ -158,31 +158,34 @@ UISwipeGestureRecognizer *recognizer;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // 耗时的操作（异步操作）
-            
+            bool isexists=true;
             if (![[NSFileManager defaultManager] fileExistsAtPath:logopathsm]){
                 myApi *myapi=[[myApi alloc]init];
                 [myapi getMyInfo];
+                isexists=false;
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 // 更新界面（处理结果）
 
-                if (![[NSFileManager defaultManager] fileExistsAtPath:logopathsm]){
+                if (!isexists){
                     
-                if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
-                    [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
-                }
-                else {
-                    [logoImage setImage:[UIImage imageNamed:@"logo"]];
-                }
+                    sleep(1);//等1秒再执行
+                    
+                    if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
+                        [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
+                    }
+                    else {
+                        [logoImage setImage:[UIImage imageNamed:@"logo"]];
+                    }
                 
                 
-                if ([[NSFileManager defaultManager] fileExistsAtPath:logopath]) {
-                    [biglogo setImage:[[UIImage alloc] initWithContentsOfFile:logopath] forState:UIControlStateNormal];
-                }
-                else {
-                    [biglogo setImage:[UIImage imageNamed:@"logoshengyu"] forState:UIControlStateNormal];
-                }
+                    if ([[NSFileManager defaultManager] fileExistsAtPath:logopath]) {
+                        [biglogo setImage:[[UIImage alloc] initWithContentsOfFile:logopath] forState:UIControlStateNormal];
+                    }
+                    else {
+                        [biglogo setImage:[UIImage imageNamed:@"logoshengyu"] forState:UIControlStateNormal];
+                    }
                 }
             });
         });
@@ -574,11 +577,10 @@ UISwipeGestureRecognizer *recognizer;
                 //[alter dismissWithClickedButtonIndex:0 animated:YES];
                 
                 [myDelegate stopTimer];
-                
-                
-                
+
                 //同步完数据了，则再去下载图片组
-                [getdata getAllZIPPhotos];
+                //[getdata getAllZIPPhotos];
+                [getdata getAllProductPhotos];
                 
             });
         });

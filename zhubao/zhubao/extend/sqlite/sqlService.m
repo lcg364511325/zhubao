@@ -326,7 +326,7 @@
         
         sqlite3_stmt *statement = nil;
         //sql语句
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Pro_model,Pro_number,Pro_name,Pro_State,Pro_smallpic,Pro_bigpic,Pro_info,Pro_goldWeight,Pro_author from product where Pro_IsDel='0'" ];
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Pro_model,Pro_number,Pro_name,Pro_State,Pro_smallpic,Pro_bigpic,Pro_info,Pro_goldWeight,Pro_author,Pro_addtime from product where Pro_IsDel='0'" ];
         if (type1.length!=0) {
             NSString *classsql=[NSString stringWithFormat:@" and Pro_Class in (%@) ",type1];
             if ([type1 isEqualToString:@"3"]) {
@@ -413,6 +413,10 @@
                 char * Pro_author   = (char *)sqlite3_column_text(statement,9);
                 if(Pro_author != nil)
                     entity.Pro_author = [NSString stringWithUTF8String:Pro_author];
+                
+                char * Pro_addtime   = (char *)sqlite3_column_text(statement,10);
+                if(Pro_addtime != nil)
+                    entity.Pro_addtime = [NSString stringWithUTF8String:Pro_addtime];
                 
                 
                 [array addObject:entity];

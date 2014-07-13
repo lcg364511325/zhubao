@@ -49,7 +49,20 @@ else return NO;
     
 }
 
-
+//判断是否已经缓存过这个URL，如果有则删除掉
+BOOL deleteCachedImage(NSURL *aURL){
+    
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    
+    if ([fileManager fileExistsAtPath:pathForURL(aURL)]) {
+        
+        [fileManager removeItemAtPath:pathForURL(aURL) error:nil];
+        
+        return YES;
+    }
+    else return YES;
+    
+}
 
 NSString *hashCodeForURL(NSURL *aURL)
 {

@@ -15,3 +15,5 @@ NSString *pathInCacheDirectory(NSString *fileName);
 NSString *pathForURL(NSURL *aURL);
 BOOL hasCachedImage(NSURL *aURL);
 NSString *hashCodeForURL(NSURL *aURL);
+//判断是否已经缓存过这个URL，如果有则删除掉
+BOOL deleteCachedImage(NSURL *aURL);

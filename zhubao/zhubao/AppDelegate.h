@@ -42,6 +42,8 @@
 
 //进度条提示
 -(void)showProgressBar:(UIView *)view;
+//进度条提示
+-(void)showProgressBarprocess:(NSString *)title countt:(float)countt;
 //停止进度条
 -(void)stopProgressBar;
 //取消定时器

@@ -462,8 +462,8 @@ NSInteger whichview=0;
                 [myDelegate stopTimer];
                 
                 //同步完数据了，则再去下载图片组
-                [getdata getAllZIPPhotos];
-                
+                //[getdata getAllZIPPhotos];
+                [getdata getAllProductPhotos];
             });
         });
         fivetharyView.hidden=YES;

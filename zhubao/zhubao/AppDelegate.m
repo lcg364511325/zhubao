@@ -477,6 +477,14 @@ UILabel *titlelabel;
 }
 
 //进度条提示
+-(void)showProgressBarprocess:(NSString *)title countt:(float)countt
+{
+    
+    titlelabel.text=title;
+    [progressBarRoundedFat setProgress:countt animated:YES];
+}
+
+//进度条提示
 -(void)showProgressBar:(UIView *)view{
     
     [self showMask:view];

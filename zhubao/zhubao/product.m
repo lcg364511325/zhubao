@@ -299,6 +299,8 @@ NSMutableArray *inlayarryman;
 {
     [rImageView removeFromSuperview];
     [btnBack removeFromSuperview];
+    rImageView=nil;
+    btnBack=nil;
 }
 
 //设置页面跳转
@@ -353,8 +355,8 @@ NSMutableArray *inlayarryman;
                 [myDelegate stopTimer];
                 
                 //同步完数据了，则再去下载图片组
-                [getdata getAllZIPPhotos];
-                
+                //[getdata getAllZIPPhotos];
+                [getdata getAllProductPhotos];
             });
         });
         fourthView.hidden=YES;
