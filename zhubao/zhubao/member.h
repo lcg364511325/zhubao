@@ -50,8 +50,13 @@
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 @property (weak, nonatomic) IBOutlet UITextField *checkpassword;
 @property (weak, nonatomic) IBOutlet UIButton *submit;
+@property (weak, nonatomic) IBOutlet UIButton *settingupdate;
+@property (weak, nonatomic) IBOutlet UIButton *settinglogout;
+@property (weak, nonatomic) IBOutlet UIButton *settingsoftware;
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;
+
+-(void)refleshBuycutData;
 
 @end

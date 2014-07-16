@@ -402,7 +402,9 @@ UILabel *titlelabel;
                         //清空购物车的信息
                         sqlService *sqlser=[[sqlService alloc]init];
                         [sqlser ClearTableDatas:[NSString stringWithFormat:@"buyproduct where customerid=%@",entityl.uId]];
-                        
+                        //回调方法更新
+                         [_mydelegate performSelector:@selector(refleshBuycutData)];
+
                         [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"生成订单成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
                         
                         return;
@@ -475,6 +477,14 @@ UILabel *titlelabel;
 }
 
 //进度条提示
+-(void)showProgressBarprocess:(NSString *)title countt:(float)countt
+{
+    
+    titlelabel.text=title;
+    [progressBarRoundedFat setProgress:countt animated:YES];
+}
+
+//进度条提示
 -(void)showProgressBar:(UIView *)view{
     
     [self showMask:view];
@@ -524,11 +534,18 @@ UILabel *titlelabel;
 //取消定时器
 -(void)stopTimer
 {
-    [progressBarRoundedFat setProgress:1 animated:YES];
     
-    //取消定时器
-    [timer invalidate];
-    timer = nil;
+    @try {
+        [progressBarRoundedFat setProgress:1 animated:YES];
+        
+        //取消定时器
+        [timer invalidate];
+        timer = nil;
+    }
+    @catch (NSException *exception) {
+        
+    }
+    
 }
 
 //半透明遮挡层

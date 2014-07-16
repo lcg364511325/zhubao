@@ -32,6 +32,8 @@
 
 @property (nonatomic, strong) YLProgressBar *progressBarRoundedFat;
 
+@property (nonatomic,assign) id <UIApplicationDelegate> mydelegate;//当前请求过来的对象
+
 //是否接着开始下载
 -(void)beginRequest:(NSString *)fileurl fileName:(NSString *)fileName version:(NSString *)version;
 
@@ -40,6 +42,8 @@
 
 //进度条提示
 -(void)showProgressBar:(UIView *)view;
+//进度条提示
+-(void)showProgressBarprocess:(NSString *)title countt:(float)countt;
 //停止进度条
 -(void)stopProgressBar;
 //取消定时器

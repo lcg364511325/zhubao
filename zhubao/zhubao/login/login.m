@@ -131,8 +131,8 @@ NSInteger i=0;
                 [[NSUserDefaults standardUserDefaults]setObject:locationString forKey:@"autodata"];
                 
                 //同步完数据了，则再去下载图片组
-                [getdata getAllZIPPhotos];
-                
+                //[getdata getAllZIPPhotos];
+                [getdata getAllProductPhotos];
             });
         });
     }
@@ -202,8 +202,10 @@ NSInteger i=0;
                     n.Address = result.Address;
 
                     //同时更新本的数据库用户表
-                    //sqlService *sqlser= [[sqlService alloc]init];
-                    //[sqlser updateCustomerNoApi:n];
+                    sqlService *sqlser= [[sqlService alloc]init];
+                    [sqlser HandleSql:[NSString stringWithFormat:@"delete from customer where uId=%@ ",n.uId]];
+                    sqlser= [[sqlService alloc]init];
+                    [sqlser updateCustomerNoApi:n];
 
                     //登录成功，进入系统首页
                     NSLog(@"登录成功，进入系统首页");

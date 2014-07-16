@@ -326,7 +326,7 @@
         
         sqlite3_stmt *statement = nil;
         //sql语句
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Pro_model,Pro_number,Pro_name,Pro_State,Pro_smallpic,Pro_bigpic,Pro_info,Pro_goldWeight from product where Pro_IsDel='0'" ];
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Pro_model,Pro_number,Pro_name,Pro_State,Pro_smallpic,Pro_bigpic,Pro_info,Pro_goldWeight,Pro_author,Pro_addtime from product where Pro_IsDel='0'" ];
         if (type1.length!=0) {
             NSString *classsql=[NSString stringWithFormat:@" and Pro_Class in (%@) ",type1];
             if ([type1 isEqualToString:@"3"]) {
@@ -409,6 +409,15 @@
                 char * Pro_goldWeight   = (char *)sqlite3_column_text(statement,8);
                 if(Pro_goldWeight != nil)
                     entity.Pro_goldWeight = [NSString stringWithUTF8String:Pro_goldWeight];
+                
+                char * Pro_author   = (char *)sqlite3_column_text(statement,9);
+                if(Pro_author != nil)
+                    entity.Pro_author = [NSString stringWithUTF8String:Pro_author];
+                
+                char * Pro_addtime   = (char *)sqlite3_column_text(statement,10);
+                if(Pro_addtime != nil)
+                    entity.Pro_addtime = [NSString stringWithUTF8String:Pro_addtime];
+                
                 
                 [array addObject:entity];
             }
@@ -1558,7 +1567,7 @@
         return nil;
     }
     @finally {
-        [self closeDB];
+        //[self closeDB];
     }
     
     return pid;
@@ -1570,7 +1579,12 @@
     @try {
             //先删除之前的用户信息
             //[self ClearTableDatas:[NSString stringWithFormat:@" [customer] where uId='%@'",entity.uId]];
-            
+        
+//        NSString * sql0=[NSString stringWithFormat:@"delete from customer where uId=%@ ",entity.uId];
+//        
+//        NSLog(@"--------------:%@",sql0);
+//        [self HandleSql:sql0];
+        
             NSString *tablekey=@"uId,userType,userName,userPass,userDueDate,userTrueName,sfUrl,lxrName,Sex,bmName,Email,Phone,Lxphone,Sf,Cs,Address";
             
             NSString * values =[NSString stringWithFormat:@"'%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@'",entity.uId,entity.userType,entity.userName,entity.userPass,entity.userDueDate,entity.userTrueName,entity.sfUrl,entity.lxrName,entity.Sex,entity.bmName,entity.Email,entity.Phone,entity.Lxphone,entity.Sf,entity.Cs,entity.Address];
@@ -1588,7 +1602,7 @@
         return nil;
     }
     @finally {
-        [self closeDB];
+        //[self closeDB];
     }
     
     return entity;
@@ -1605,6 +1619,10 @@
         if([api updateCustomer:entity]){
             //先删除之前的用户信息
             //[self ClearTableDatas:[NSString stringWithFormat:@" customer where uId='%@'",entity.uId]];
+//            NSString * sql0=[NSString stringWithFormat:@"delete from customer where uId=%@ ",entity.uId];
+//            
+//            NSLog(@"--------------:%@",sql0);
+//            [self HandleSql:sql0];
             
             NSString *tablekey=@"uId,userType,userName,userPass,userDueDate,userTrueName,sfUrl,lxrName,Sex,bmName,Email,Phone,Lxphone,Sf,Cs,Address";
             

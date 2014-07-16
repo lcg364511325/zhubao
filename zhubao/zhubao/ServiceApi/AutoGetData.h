@@ -25,4 +25,7 @@
 //查询所有的商品的3d图片，并且下载压缩文件里面的图片
 -(BOOL *)getAllZIPPhotos;
 
+//查询所有的商品的图片，并且下载图片(非3d图片)
+-(BOOL *)getAllProductPhotos;
+
 @end

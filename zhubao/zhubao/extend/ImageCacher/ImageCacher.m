@@ -80,8 +80,7 @@ static ImageCacher *defaultCacher=nil;
     
     //缩放倍数
     float ratio = MIN(newRect.size.width/origImageSize.width, newRect.size.height/origImageSize.height);
-    
-    
+
 
     UIGraphicsBeginImageContext(newRect.size);
     
@@ -98,10 +97,10 @@ static ImageCacher *defaultCacher=nil;
     UIImage *small = UIGraphicsGetImageFromCurrentImageContext();
 
     //压缩比例
-    NSData *smallData=UIImageJPEGRepresentation(small, 0.02);
+    NSData *smallData=UIImageJPEGRepresentation(small, 1.0);
 
     if (smallData) {
-        //[fileManager createFileAtPath:pathForURL(aURL) contents:smallData attributes:nil];
+        [fileManager createFileAtPath:pathForURL(aURL) contents:smallData attributes:nil];
     }
     
     UIView *view=[aDic objectForKey:@"imageView"];

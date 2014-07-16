@@ -26,6 +26,7 @@
 @synthesize biglogo;
 @synthesize aboutus;
 @synthesize checkpassword;
+UISwipeGestureRecognizer *recognizer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,22 +60,59 @@
     //web标签背景色透明
     aboutus.backgroundColor = [UIColor clearColor];
     aboutus.opaque = NO;
-
+    //[aboutus setUserInteractionEnabled: YES ];	 //是否支持交互
+    [aboutus setDelegate:self];				 //委托document.body.style.webkitTouchCallout='none'
+    [aboutus stringByEvaluatingJavaScriptFromString:@"document.body.style.webkitUserSelect='none';"];
+    // Disable callout
+    [aboutus stringByEvaluatingJavaScriptFromString:@"document.body.style.webkitTouchCallout='none';"];
+    
     //更新ui(如果已经存在的，则不再自动更新)
     [self loadmyInfo];
     
     
     //设置了左右滑动
-    UISwipeGestureRecognizer *recognizer;
+//    UISwipeGestureRecognizer *recognizer;
+//    
+//    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+//    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+//    aboutus.delegate = self;
+//    [[self view] addGestureRecognizer:recognizer];
+//    [aboutus addGestureRecognizer:recognizer];
     
-    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+     recognizer= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    recognizer.delegate=self;
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    recognizer.cancelsTouchesInView=NO;
     [[self view] addGestureRecognizer:recognizer];
     
 //    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
 //    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
 //    [[self view] addGestureRecognizer:recognizer];
+    
+//    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeftAction)];
+//    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+//    swipeLeft.delegate = self;
+//    [webView addGestureRecognizer:swipeLeft];
+}
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    return YES;
+}
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    return YES;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    // Disable user selection
+    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
+    // Disable callout
+    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
 }
 
 -(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
@@ -120,31 +158,34 @@
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // 耗时的操作（异步操作）
-            
+            bool isexists=true;
             if (![[NSFileManager defaultManager] fileExistsAtPath:logopathsm]){
                 myApi *myapi=[[myApi alloc]init];
                 [myapi getMyInfo];
+                isexists=false;
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 // 更新界面（处理结果）
 
-                if (![[NSFileManager defaultManager] fileExistsAtPath:logopathsm]){
+                if (!isexists){
                     
-                if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
-                    [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
-                }
-                else {
-                    [logoImage setImage:[UIImage imageNamed:@"logo"]];
-                }
+                    sleep(1);//等1秒再执行
+                    
+                    if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
+                        [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
+                    }
+                    else {
+                        [logoImage setImage:[UIImage imageNamed:@"logo"]];
+                    }
                 
                 
-                if ([[NSFileManager defaultManager] fileExistsAtPath:logopath]) {
-                    [biglogo setImage:[[UIImage alloc] initWithContentsOfFile:logopath] forState:UIControlStateNormal];
-                }
-                else {
-                    [biglogo setImage:[UIImage imageNamed:@"logoshengyu"] forState:UIControlStateNormal];
-                }
+                    if ([[NSFileManager defaultManager] fileExistsAtPath:logopath]) {
+                        [biglogo setImage:[[UIImage alloc] initWithContentsOfFile:logopath] forState:UIControlStateNormal];
+                    }
+                    else {
+                        [biglogo setImage:[UIImage imageNamed:@"logoshengyu"] forState:UIControlStateNormal];
+                    }
                 }
             });
         });
@@ -219,6 +260,13 @@
 
 -(IBAction)setup:(id)sender
 {
+    if ([[[UIDevice currentDevice]systemVersion]floatValue] >= 7.0)
+    {
+        _settingupdate.frame = CGRectMake(10, 55, _settingupdate.frame.size.width, _settingupdate.frame.size.height);
+        _settinglogout.frame = CGRectMake(10, 90, _settinglogout.frame.size.width, _settinglogout.frame.size.height);
+         _settingsoftware.frame = CGRectMake(10, 20, _settingsoftware.frame.size.width, _settingsoftware.frame.size.height);
+    }
+    
     thridView.hidden=NO;
     thridView.frame=CGRectMake(750, 70, thridView.frame.size.width, thridView.frame.size.height);
 }
@@ -450,24 +498,12 @@
     sqlService * sql=[[sqlService alloc]init];
     NSString *successdelete=[sql deleteBuyproduct:entity.Id];
     if (successdelete) {
-        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-        sql=[[sqlService alloc]init];
-        myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
-        NSString *goodscount=myDelegate.entityl.resultcount;
-        if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-            shopcartcountButton.hidden=NO;
-            [shopcartcountButton setTitle:goodscount forState:UIControlStateNormal];
-        }else{
-            shopcartcountButton.hidden=YES;
-        }
+        
+        [self refleshBuycutData];
         
         NSString *rowString =@"删除成功！";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
-
-        sqlService *shopcar=[[sqlService alloc] init];
-        shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
-        [goodsview reloadData];
         
     }else{
         NSString *rowString =@"删除失败！";
@@ -505,23 +541,11 @@
 {
     sqlService *sql=[[sqlService alloc]init];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    myDelegate.mydelegate=self;
         NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
         if (![orderinfo isEqualToString:@""]) {
             
-            sql=[[sqlService alloc]init];
-            AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-            myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
-            NSString *goodscount=myDelegate.entityl.resultcount;
-            if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-                shopcartcountButton.hidden=NO;
-                [shopcartcountButton setTitle:goodscount forState:UIControlStateNormal];
-            }else{
-                shopcartcountButton.hidden=YES;
-            }
-            
-            sqlService *shopcar=[[sqlService alloc] init];
-            shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
-            [goodsview reloadData];
+            [self refleshBuycutData];
             
             NSString *rowString =orderinfo;
             UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
@@ -555,7 +579,8 @@
                 [myDelegate stopTimer];
 
                 //同步完数据了，则再去下载图片组
-                [getdata getAllZIPPhotos];
+                //[getdata getAllZIPPhotos];
+                [getdata getAllProductPhotos];
                 
             });
         });
@@ -578,6 +603,25 @@
         //to-do
         thridView.hidden=YES;
     }
+}
+
+-(void)refleshBuycutData
+{
+    sqlService * sql=[[sqlService alloc]init];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
+    NSString *goodscount=myDelegate.entityl.resultcount;
+    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+        shopcartcountButton.hidden=NO;
+        [shopcartcountButton setTitle:goodscount forState:UIControlStateNormal];
+    }else{
+        shopcartcountButton.hidden=YES;
+    }
+    
+    sqlService *shopcar=[[sqlService alloc] init];
+    shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
+    [goodsview reloadData];
+    
 }
 
 @end

@@ -107,7 +107,7 @@ NSMutableArray *inlayarryman;
     //净度
     NSArray *netarray = [[NSArray alloc]initWithObjects:@"VVS",@"VS",@"SI",@"P", nil];
     //颜色
-    NSArray *colorarray = [[NSArray alloc]initWithObjects:@"D-E",@"F-G",@"H",@"I-J",@"K-L",@"M-N", nil];
+    NSArray *colorarray = [[NSArray alloc]initWithObjects:@"F-G",@"H",@"I-J",@"K-L",@"M-N", nil];
     //材质
     NSArray *texture1array = [[NSArray alloc]initWithObjects:@"18K黄",@"18K白",@"18K双色",@"18K玫瑰金",@"PT900",@"PT950",@"PD950", nil];
     self.netlist=netarray;
@@ -299,11 +299,19 @@ NSMutableArray *inlayarryman;
 {
     [rImageView removeFromSuperview];
     [btnBack removeFromSuperview];
+    rImageView=nil;
+    btnBack=nil;
 }
 
 //设置页面跳转
 -(IBAction)setup:(id)sender
 {
+    if ([[[UIDevice currentDevice]systemVersion]floatValue] >= 7.0)
+    {
+        _settingupdate.frame = CGRectMake(10, 55, _settingupdate.frame.size.width, _settingupdate.frame.size.height);
+        _settinglogout.frame = CGRectMake(10, 90, _settinglogout.frame.size.width, _settinglogout.frame.size.height);
+        _settingsoftware.frame = CGRectMake(10, 20, _settingsoftware.frame.size.width, _settingsoftware.frame.size.height);
+    }
     fourthView.hidden=NO;
     fourthView.frame=CGRectMake(750, 70, fourthView.frame.size.width, fourthView.frame.size.height);
 }
@@ -347,8 +355,8 @@ NSMutableArray *inlayarryman;
                 [myDelegate stopTimer];
                 
                 //同步完数据了，则再去下载图片组
-                [getdata getAllZIPPhotos];
-                
+                //[getdata getAllZIPPhotos];
+                [getdata getAllProductPhotos];
             });
         });
         fourthView.hidden=YES;
@@ -675,7 +683,7 @@ NSMutableArray *inlayarryman;
                 if (proprice) {
                     //pricelable.text=[@"¥" stringByAppendingString:proprice];
                     NSArray *price=[[NSString stringWithFormat:@"%@",proprice] componentsSeparatedByString:@"."];
-                    pricelable.text=[NSString stringWithFormat:@"¥%@",[price objectAtIndex:0]];
+                    pricelable.text=[NSString stringWithFormat:@"¥ %@",[price objectAtIndex:0]];
                 }else{
                     pricelable.text=@"暂无价格信息";
                 }
@@ -1309,7 +1317,7 @@ NSMutableArray *inlayarryman;
         manentity.pvvs=manNetText.text;
         manentity.psize=manSizeText.text;
         manentity.pgoldtype=manTextureText.text;
-        manentity.pweight=_manMainLabel.text;
+        manentity.pweight=mamMainText.text;
         manentity.customerid=myDelegate.entityl.uId;
         manentity.pprice=manprice;
         manentity.pname=modellable.text;
@@ -1350,17 +1358,23 @@ NSMutableArray *inlayarryman;
     productEntity *entity=[list objectAtIndex:[indexPath row]];
     NSString *count=[NSString stringWithFormat:@"%lu",(unsigned long)[list count]];
     countLable.text=[[@"共有首饰" stringByAppendingString:count] stringByAppendingString:@"件"];
-    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",entity.Pro_smallpic]];
-    if (hasCachedImage(imgUrl)) {
-        cell.productImage.image=[UIImage imageWithContentsOfFile:pathForURL(imgUrl)];
-    }else
-    {
-        cell.productImage.image=[UIImage imageNamed:@"diamonds"];
-        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",cell.productImage,@"imageView",nil];
-        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
-        
-    }
     
+//    NSString *url1=pathInDocumentDirectory([NSString stringWithFormat:@"images/%@%@",entity.Pro_author,@"_001.jpg"]);
+//    if ([[NSFileManager defaultManager] fileExistsAtPath:url1]) {
+//        cell.productImage.image=[UIImage imageWithContentsOfFile:url1];
+//    }else{
+        NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",entity.Pro_smallpic]];
+        if (hasCachedImage(imgUrl)) {
+            cell.productImage.image=[UIImage imageWithContentsOfFile:pathForURL(imgUrl)];
+        }else
+        {
+            cell.productImage.image=[UIImage imageNamed:@""];
+            NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",cell.productImage,@"imageView",nil];
+            [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+            
+        }
+//    }
+
     cell.productLable.text = entity.Pro_model;
     return cell;
 }
@@ -1383,9 +1397,9 @@ NSMutableArray *inlayarryman;
     title1lable.text=goods.Pro_name;
     modellable.text=goods.Pro_model;
     //weightlable.text=goods.Pro_goldWeight;//约重
-    mainlable.text=goods.Pro_Z_count;
-    fitNolable.text=goods.Pro_f_count;
-    fitweightlable.text=[NSString stringWithFormat:@"%@",goods.Pro_f_weight];
+    mainlable.text=[NSString stringWithFormat:@"%@ 颗",goods.Pro_Z_count];//goods.Pro_Z_count;
+    fitNolable.text=[NSString stringWithFormat:@"%@ 颗",goods.Pro_f_count];//goods.Pro_f_count;
+    fitweightlable.text=[NSString stringWithFormat:@"%@ ct",goods.Pro_f_weight];
     //maintext.text=@"111";
     nettext.text=@"SI";
     colortext.text=@"I-J";
@@ -1405,7 +1419,7 @@ NSMutableArray *inlayarryman;
         [mainarry addObject:inlay.zWeight];
         if(AuWeight==nil){
             AuWeight=inlay.AuWeight;
-            weightlable.text=inlay.AuWeight;//约重
+            weightlable.text=[NSString stringWithFormat:@"%@ g",inlay.AuWeight];//约重
         }
     }
 
@@ -1423,19 +1437,19 @@ NSMutableArray *inlayarryman;
             [mainarryman addObject:inlayman.zWeight];
             if(AuWeightman==nil){
                 AuWeightman=inlayman.AuWeight;
-                _manMainLabel.text=[NSString stringWithFormat:@"男戒:%@",inlayman.AuWeight];
+                _manMainLabel.text=[NSString stringWithFormat:@"男戒:%@ g",inlayman.AuWeight];
             }
         }
         
-        weightlable.text=[NSString stringWithFormat:@"女戒:%@",AuWeight];
-        mainlable.text=[NSString stringWithFormat:@"女戒:%@",goods.Pro_Z_count];
-        fitNolable.text=[NSString stringWithFormat:@"女戒:%@",goods.Pro_f_count];
+        weightlable.text=[NSString stringWithFormat:@"女戒:%@ g",AuWeight];
+        mainlable.text=[NSString stringWithFormat:@"女戒:%@ 颗",goods.Pro_Z_count];
+        fitNolable.text=[NSString stringWithFormat:@"女戒:%@ 颗",goods.Pro_f_count];
         float wwight=goods.Pro_f_weight.doubleValue*goods.Pro_f_count.doubleValue;
-        fitweightlable.text=[NSString stringWithFormat:@"女戒:%@",[self notRounding:wwight afterPoint:2]];
+        fitweightlable.text=[NSString stringWithFormat:@"女戒:%@ ct",[self notRounding:wwight afterPoint:2]];
         
-        _manjdLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_Z_count];
-        _manColorLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_f_count];
-        _mancjLabel.text=[NSString stringWithFormat:@"男戒:%@",goodsman.Pro_f_weight];
+        _manjdLabel.text=[NSString stringWithFormat:@"男戒:%@ 颗",goodsman.Pro_Z_count];
+        _manColorLabel.text=[NSString stringWithFormat:@"男戒:%@ 颗",goodsman.Pro_f_count];
+        _mancjLabel.text=[NSString stringWithFormat:@"男戒:%@ ct",goodsman.Pro_f_weight];
         manNetText.text=@"SI";
         mamColorText.text=@"I-J";
         Commons * common=[[Commons alloc]init];
@@ -1455,6 +1469,12 @@ NSMutableArray *inlayarryman;
     }
     
     NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",goods.Pro_smallpic]];
+    NSArray  * array= [goods.Pro_bigpic componentsSeparatedByString:@","];
+    //遍历这个数组
+    if ([array count]>0) {
+        imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",[array objectAtIndex: 0]]];
+    }
+
     if (hasCachedImage(imgUrl)) {
         [self.productimageview setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
     }else
@@ -1462,7 +1482,6 @@ NSMutableArray *inlayarryman;
         [self.productimageview setImage:[UIImage imageNamed:@""]];//diamonds
         NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",self.productimageview,@"imageView",nil];
         [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
-        
     }
     
     //获取商品价格
@@ -1490,7 +1509,7 @@ NSMutableArray *inlayarryman;
                 if (proprice) {
                     //pricelable.text=[@"¥" stringByAppendingString:proprice];
                     NSArray *price=[[NSString stringWithFormat:@"%@",proprice] componentsSeparatedByString:@"."];
-                    pricelable.text=[NSString stringWithFormat:@"¥%@",[price objectAtIndex:0]];
+                    pricelable.text=[NSString stringWithFormat:@"¥ %@",[price objectAtIndex:0]];
                     //pricelable.text=[NSString stringWithFormat:@"¥%@",proprice];
                 }else{
                     pricelable.text=@"暂无价格信息";
@@ -1633,24 +1652,14 @@ NSMutableArray *inlayarryman;
     sqlService * sql=[[sqlService alloc]init];
     NSString *successdelete=[sql deleteBuyproduct:entity.Id];
     if (successdelete) {
-        sql=[[sqlService alloc]init];
-        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-        myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
-        NSString *goodscount=myDelegate.entityl.resultcount;
-        if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-            shopcartcount.hidden=NO;
-            [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
-        }else{
-            shopcartcount.hidden=YES;
-        }
+        
+        [self refleshBuycutData];
         
         NSString *rowString =@"删除成功！";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
         
-        sqlService *shopcar=[[sqlService alloc] init];
-        shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
-        [goodsview reloadData];
+        
         
     }else{
         NSString *rowString =@"删除失败！";
@@ -1665,9 +1674,9 @@ NSMutableArray *inlayarryman;
     for (withmouth *inlay in inlayarry) {
         if ([inlay.zWeight isEqualToString:maintext.text]) {
             if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
-                weightlable.text=[NSString stringWithFormat:@"女戒:%@",inlay.AuWeight];
+                weightlable.text=[NSString stringWithFormat:@"女戒:%@ g",inlay.AuWeight];
             }else{
-                weightlable.text=inlay.AuWeight;
+                weightlable.text=[NSString stringWithFormat:@"%@ g",inlay.AuWeight];
             }
             return inlay.AuWeight;
         }
@@ -1681,7 +1690,7 @@ NSMutableArray *inlayarryman;
     
     for (withmouth *inlayman in inlayarryman) {
         if ([inlayman.zWeight isEqualToString:mamMainText.text]) {
-            _manMainLabel.text=[NSString stringWithFormat:@"男戒:%@",inlayman.AuWeight];
+            _manMainLabel.text=[NSString stringWithFormat:@"男戒:%@ g",inlayman.AuWeight];
             return inlayman.AuWeight;
         }
     }
@@ -1707,23 +1716,11 @@ NSMutableArray *inlayarryman;
 {
     sqlService *sql=[[sqlService alloc]init];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    myDelegate.mydelegate=self;
         NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
         if (![orderinfo isEqualToString:@""]) {
             
-            sql=[[sqlService alloc]init];
-            AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-            myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
-            NSString *goodscount=myDelegate.entityl.resultcount;
-            if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-                shopcartcount.hidden=NO;
-                [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
-            }else{
-                shopcartcount.hidden=YES;
-            }
-            
-            sqlService *shopcar=[[sqlService alloc] init];
-            shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
-            [goodsview reloadData];
+            [self refleshBuycutData];
             
             NSString *rowString =orderinfo;
             UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
@@ -1743,7 +1740,14 @@ NSMutableArray *inlayarryman;
     for (int i = 0; i < count; i++) {
         //NSLog(@"普通的遍历：i = %d 时的数组对象为: %@",i,[array objectAtIndex: i]);
         NSString * patht=[NSString stringWithFormat:@"http://seyuu.com%@",[array objectAtIndex: i]];
-        [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:patht]]];
+        NSURL *imgUrl=[NSURL URLWithString:patht];
+        if (hasCachedImage(imgUrl)) {
+            [photos addObject:[MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]]];
+        }else
+        {
+            [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:patht]]];
+        }
+        
         //[thumbs addObject:[MWPhoto photoWithURL:[NSURL URLWithString:patht]]];
     }
 
@@ -1801,6 +1805,26 @@ NSMutableArray *inlayarryman;
     // If we subscribe to this method we must dismiss the view controller ourselves
     //NSLog(@"Did finish modal presentation");
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)refleshBuycutData
+{
+    
+    sqlService *sql=[[sqlService alloc]init];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
+    NSString *goodscount=myDelegate.entityl.resultcount;
+    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+        shopcartcount.hidden=NO;
+        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
+    }else{
+        shopcartcount.hidden=YES;
+    }
+    
+    sqlService *shopcar=[[sqlService alloc] init];
+    shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
+    [goodsview reloadData];
+    
 }
 
 @end
