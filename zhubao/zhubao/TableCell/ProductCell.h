@@ -11,5 +11,6 @@
 @interface ProductCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *productImage;
 @property (weak, nonatomic) IBOutlet UILabel *productLable;
+@property (weak, nonatomic) IBOutlet UIImageView *show3dImage;
 
 @end

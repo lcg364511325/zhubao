@@ -1388,6 +1388,10 @@ NSMutableArray *inlayarryman;
             
         }
 //    }
+    cell.show3dImage.hidden=NO;
+    if (![self isexistsfile:entity.Pro_author]) {
+        cell.show3dImage.hidden=YES;
+    }
 
     cell.productLable.text = entity.Pro_model;
     return cell;
@@ -1552,7 +1556,7 @@ NSMutableArray *inlayarryman;
     return [NSString stringWithFormat:@"%@",roundedOunces];
 }
 
--(BOOL)isexistsfile
+-(BOOL)isexistsfile:(NSString *)Pro_author
 {
     BOOL isshow=FALSE;
     for(int i=1;i<60;i++){
@@ -1562,7 +1566,7 @@ NSMutableArray *inlayarryman;
         else
             strApend=@"0";
         
-        NSString *path = [NSString stringWithFormat:@"%@_%@%d.jpg", goods.Pro_author, strApend,i];
+        NSString *path = [NSString stringWithFormat:@"%@_%@%d.jpg",Pro_author, strApend,i];
         NSLog(@"%@", path);
         
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -1601,7 +1605,7 @@ NSMutableArray *inlayarryman;
     [button3dman setHidden:TRUE];
     [button3dwoman setHidden:TRUE];
     
-    if ([self isexistsfile]) {
+    if ([self isexistsfile:goods.Pro_author]) {
         [button3D setHidden:NO];
     }else{
         [button3D setHidden:TRUE];
@@ -1628,7 +1632,7 @@ NSMutableArray *inlayarryman;
     [_manColorLabel setHidden:NO];
     [_mancjLabel setHidden:NO];
     
-    if ([self isexistsfile]) {
+    if ([self isexistsfile:goods.Pro_author]) {
         [button3dman setHidden:NO];
         [button3dwoman setHidden:NO];
     }else{

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
@@ -24,13 +25,21 @@
                         <color key="textColor" red="1" green="0.8130479491" blue="0.13671125789999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="3Dshow.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZP9-zA-q6E">
+                        <rect key="frame" x="120" y="0.0" width="80" height="80"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <connections>
                 <outlet property="productImage" destination="Ujb-vQ-T0P" id="yUE-6E-Pw8"/>
                 <outlet property="productLable" destination="cvZ-gL-oUC" id="2cm-ZL-j3K"/>
+                <outlet property="show3dImage" destination="ZP9-zA-q6E" id="VtI-B4-Uid"/>
             </connections>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="3Dshow.png" width="98" height="99"/>
+    </resources>
 </document>
