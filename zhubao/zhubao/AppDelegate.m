@@ -338,6 +338,7 @@ UILabel *titlelabel;
             //NSData *imageData=UIImageJPEGRepresentation(eImage,100);
             //NSString *photoName=[NSString stringWithFormat:@"file%d.jpg",i];
             NSString * photoName=[eImage lastPathComponent];//从路径中获得完整的文件名（带后缀）
+            photoName=[NSString stringWithFormat:@"%d%@",i,photoName];
             //NSString *photoDescribe=@" ";
             //NSLog(@"photoName=%@",photoName);
             //NSLog(@"photoDescribe=%@",photoDescribe);
@@ -345,7 +346,10 @@ UILabel *titlelabel;
             NSLog(@"图片大小+++++%d",[imageData length]/1024);
             //照片content
             //[uploadImageRequest setPostValue:photoDescribe forKey:@"photoContent"];
-            [uploadImageRequest addData:imageData withFileName:photoName andContentType:@"image/jpeg" forKey:@"photoContent"];
+            //[uploadImageRequest addData:imageData withFileName:photoName andContentType:@"image/jpeg" forKey:@"photoContent"];
+            //[requset addData:imageData withFileName:[NSString stringWithFormat:@"%@_%d.png",self.TF_tel.text,ranNum] andContentType:@"image/png" forKey:[NSString stringWithFormat:@"uploadImage%d",index]];
+            
+            [uploadImageRequest addData:imageData withFileName:photoName andContentType:@"image/jpeg" forKey:[NSString stringWithFormat:@"uploadImage%d",i]];
         }
         
         [uploadImageRequest setDelegate : self ];

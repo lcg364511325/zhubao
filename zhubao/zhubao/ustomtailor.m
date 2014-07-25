@@ -79,6 +79,13 @@ NSInteger vies=0;
         shopcartcount.hidden=YES;
     }
     
+    goldweightText.keyboardType=UIKeyboardTypeNumberPad;
+    miandiaText.keyboardType=UIKeyboardTypeNumberPad;
+    mianNoText.keyboardType=UIKeyboardTypeNumberPad;
+    fitDiaText.keyboardType=UIKeyboardTypeNumberPad;
+    fitNoText.keyboardType=UIKeyboardTypeNumberPad;
+    sizeText.keyboardType=UIKeyboardTypeNumberPad;
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -498,6 +505,13 @@ NSInteger vies=0;
         [alter show];
         return;
     }
+    NSString * pgoldtypett=[NSString stringWithFormat:@"%@",texturetext.text];
+    if (!pgoldtypett || [pgoldtypett isEqualToString:@""]) {
+        NSString *rowString =@"请选择材质！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+        return;
+    }
     
     sqlService * sql=[[sqlService alloc] init];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
@@ -507,21 +521,23 @@ NSInteger vies=0;
     entity.photos=pic1;
     entity.photom=pic2;
     entity.photob=pic3;
-    if ([texturetext.text isEqualToString:@"18K黄"]) {
-        entity.pgoldtype=@"1";
-    }else if([texturetext.text isEqualToString:@"18K白"]){
-        entity.pgoldtype=@"2";
-    }else if([texturetext.text isEqualToString:@"18K双色"]){
-        entity.pgoldtype=@"3";
-    }else if([texturetext.text isEqualToString:@"18K玫瑰金"]){
-        entity.pgoldtype=@"4";
-    }else if([texturetext.text isEqualToString:@"PT900"]){
-        entity.pgoldtype=@"5";
-    }else if([texturetext.text isEqualToString:@"PT950"]){
-        entity.pgoldtype=@"6";
-    }else if([texturetext.text isEqualToString:@"PD950"]){
-        entity.pgoldtype=@"7";
-    }
+//    if ([texturetext.text isEqualToString:@"18K黄"]) {
+//        entity.pgoldtype=@"1";
+//    }else if([texturetext.text isEqualToString:@"18K白"]){
+//        entity.pgoldtype=@"2";
+//    }else if([texturetext.text isEqualToString:@"18K双色"]){
+//        entity.pgoldtype=@"3";
+//    }else if([texturetext.text isEqualToString:@"18K玫瑰金"]){
+//        entity.pgoldtype=@"4";
+//    }else if([texturetext.text isEqualToString:@"PT900"]){
+//        entity.pgoldtype=@"5";
+//    }else if([texturetext.text isEqualToString:@"PT950"]){
+//        entity.pgoldtype=@"6";
+//    }else if([texturetext.text isEqualToString:@"PD950"]){
+//        entity.pgoldtype=@"7";
+//    }
+    entity.pgoldtype=pgoldtypett;
+
     entity.pweight=goldweightText.text;
     entity.Dia_Z_weight=miandiaText.text;
     entity.Dia_Z_count=mianNoText.text;

@@ -22,5 +22,6 @@
 -(void)initTimer;
 -(void)setNextImage;
 -(void)setRotate:(BOOL)flag;
+-(void)stopTimer;
 
 @end

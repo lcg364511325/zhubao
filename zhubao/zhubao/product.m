@@ -121,6 +121,9 @@ NSMutableArray *inlayarryman;
     manNetText.userInteractionEnabled=NO;
     mamColorText.userInteractionEnabled=NO;
     manTextureText.userInteractionEnabled=NO;
+    sizeText.keyboardType=UIKeyboardTypeNumberPad;
+    manSizeText.keyboardType=UIKeyboardTypeNumberPad;
+    
     [self.productcollect registerClass:[ProductCell class] forCellWithReuseIdentifier:@"ProductCell"];
     stylearray = [[NSMutableArray alloc] init];
     texturearray = [[NSMutableArray alloc] init];
@@ -131,7 +134,8 @@ NSMutableArray *inlayarryman;
     btnarray3 = [[NSMutableArray alloc] init];
     btnarray4 = [[NSMutableArray alloc] init];
     countLable.text=nil;
-    fonttext.placeholder=@"        8到12个字符";
+    fonttext.placeholder=@"8到12个字符";
+    
     //进来时候加载全部数据
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     sqlService *sql=[[sqlService alloc]init];
@@ -297,6 +301,7 @@ NSMutableArray *inlayarryman;
 
 -(void)closeImageView
 {
+    [rImageView stopTimer];
     [rImageView removeFromSuperview];
     [btnBack removeFromSuperview];
     rImageView=nil;
@@ -919,12 +924,15 @@ NSMutableArray *inlayarryman;
     NSMutableString *serieindex=[[NSMutableString alloc] init];
     for (NSString *index in seriearray) {
         if (serieindex.length!=0) {
-            [serieindex appendString:@","];
+            [serieindex appendString:@" or "];
             [serieindex appendString:index];
         }else{
             [serieindex appendString:index];
         }
     }
+    
+    NSString * serieindexs=serieindex;
+    if([seriearray count]>1)serieindexs=[NSString stringWithFormat:@"(%@)",serieindex];
     
     list = [NSMutableArray arrayWithCapacity:10];
     [productcollect reloadData];
@@ -932,7 +940,7 @@ NSMutableArray *inlayarryman;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // 耗时的操作（异步操作）
         sqlService *sql=[[sqlService alloc]init];
-        list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:1500];
+        list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindexs page:1 pageSize:1500];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [productcollect reloadData];
@@ -1033,12 +1041,15 @@ NSMutableArray *inlayarryman;
     NSMutableString *serieindex=[[NSMutableString alloc] init];
     for (NSString *index in seriearray) {
         if (serieindex.length!=0) {
-            [serieindex appendString:@","];
+            [serieindex appendString:@" or "];
             [serieindex appendString:index];
         }else{
             [serieindex appendString:index];
         }
     }
+    
+    NSString * serieindexs=serieindex;
+    if([seriearray count]>1)serieindexs=[NSString stringWithFormat:@"(%@)",serieindex];
     
     list = [NSMutableArray arrayWithCapacity:10];
     [productcollect reloadData];
@@ -1046,7 +1057,7 @@ NSMutableArray *inlayarryman;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // 耗时的操作（异步操作）
         sqlService *sql=[[sqlService alloc]init];
-        list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:1500];
+        list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindexs page:1 pageSize:1500];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [productcollect reloadData];
@@ -1166,12 +1177,15 @@ NSMutableArray *inlayarryman;
     NSMutableString *serieindex=[[NSMutableString alloc] init];
     for (NSString *index in seriearray) {
         if (serieindex.length!=0) {
-            [serieindex appendString:@","];
+            [serieindex appendString:@" or "];
             [serieindex appendString:index];
         }else{
             [serieindex appendString:index];
         }
     }
+    
+    NSString * serieindexs=serieindex;
+    if([seriearray count]>1)serieindexs=[NSString stringWithFormat:@"(%@)",serieindex];
     
     list = [NSMutableArray arrayWithCapacity:10];
     [productcollect reloadData];
@@ -1179,7 +1193,7 @@ NSMutableArray *inlayarryman;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // 耗时的操作（异步操作）
         sqlService *sql=[[sqlService alloc]init];
-        list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindex page:1 pageSize:1500];
+        list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindexs page:1 pageSize:1500];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [productcollect reloadData];
@@ -1310,7 +1324,7 @@ NSMutableArray *inlayarryman;
     if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
         buyproduct * manentity=[[buyproduct alloc]init];
         manentity.producttype=goodsman.Pro_Type;
-        manentity.productid=productnumber;
+        manentity.productid=goodsman.Id;
         manentity.pcount=numberText.text;
         manentity.pcolor=mamColorText.text;
         manentity.pdetail=manFontText.text;
@@ -1320,7 +1334,7 @@ NSMutableArray *inlayarryman;
         manentity.pweight=mamMainText.text;
         manentity.customerid=myDelegate.entityl.uId;
         manentity.pprice=manprice;
-        manentity.pname=modellable.text;
+        manentity.pname=goodsman.Pro_model;//modellable.text;
         sql=[[sqlService alloc]init];
         successaddman=[sql addToBuyproduct:manentity];
     }

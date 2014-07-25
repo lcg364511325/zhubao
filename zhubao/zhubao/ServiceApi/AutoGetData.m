@@ -717,7 +717,7 @@ NSMutableArray * arraytt;
                         [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
                         //[[ImageCacher defaultCacher] cacheImage:dic];
                         t++;
-                        sleep(2);//等待多长时间
+                        //sleep(1);//等待多长时间
                         //[NSThread sleepForTimeInterval:0.5];
                     }
                 }
@@ -814,7 +814,6 @@ NSMutableArray * arraytt;
     @catch (NSException *exception) {
         
     }
-    
 
 }
 

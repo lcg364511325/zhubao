@@ -37,6 +37,13 @@ NSInteger i=0;
     //shengyu    222222   13428706220  111111
     [self.navigationController setNavigationBarHidden:YES];
     
+    //判断是否自动登录
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    if(myDelegate.entityl && myDelegate.entityl.uId && ![myDelegate.entityl.uId isEqualToString:@"0"] && ![myDelegate.entityl.uId isEqualToString:@""]){
+        Index *sysmenu=[[Index alloc] init];
+        [self.navigationController pushViewController:sysmenu animated:NO];
+    }
+    
     if ([[NSUserDefaults standardUserDefaults]objectForKey:@"_account"]) {
         
         _account.text=(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"_account"];

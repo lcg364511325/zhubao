@@ -40,6 +40,20 @@
     timer= [NSTimer scheduledTimerWithTimeInterval:0.08 target:self selector:@selector(setNextImage) userInfo:Nil repeats:YES];
 }
 
+-(void)stopTimer{
+    
+    //取消定时器
+    @try {
+        [timer invalidate];
+        timer = nil;
+        
+        animationImages=nil;
+    }
+    @catch (NSException *exception) {
+        
+    }
+}
+
 -(void)setNextImage{
     if(current>numberOfImages){
         current=0;

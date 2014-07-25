@@ -32,7 +32,7 @@
 @synthesize checkpassword;
 
 //证书类型
-NSInteger diptype=0;
+NSInteger diptype=-1;
 //tableview分辨
 NSInteger vvvv=0;
 
@@ -520,6 +520,27 @@ NSInteger vvvv=0;
 //0为GIA，1为NGTC，2为IGI，3为HRD，4为AGS，5为EGL
 -(IBAction)diplomasearch:(id)sender
 {
+    
+    if(diptype<0){
+        NSString *rowString =@"请选择证书类型！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+        return;
+    }
+    
+    if([[NSString stringWithFormat:@"%@",dipomaNoText.text] isEqualToString:@""]){
+        NSString *rowString =@"请输入证书编号！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+        return;
+    }
+    if([[NSString stringWithFormat:@"%@",diamondWeightText.text] isEqualToString:@""]){
+        NSString *rowString =@"请输入钻石重量！";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+        return;
+    }
+    
     if (diptype==0) {
         NSString *url=[@"https://myapps.gia.edu/ReportCheckPortal/getReportData.do?&reportno=" stringByAppendingString:dipomaNoText.text];
         url=[url stringByAppendingString:@"&weight="];

@@ -45,7 +45,8 @@
 
 //判定点击来哪个tableview
 NSInteger selecttable=0;
-
+UIWebView *orders;
+UIButton* btnBack;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -677,7 +678,7 @@ NSInteger selecttable=0;
     if ([[Commons md5:[NSString stringWithFormat:@"%@",oldpassword.text]]  isEqualToString:myDelegate.entityl.userPass]) {
         
         if(![[NSString stringWithFormat:@"%@",newpassword.text] isEqualToString:[NSString stringWithFormat:@"%@",affirmpassword.text]]){
-            NSString *rowString =@"新密码输入不正确！";
+            NSString *rowString =@"两次输入密码不一致！";
             UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alter show];
             return;
@@ -721,8 +722,22 @@ NSInteger selecttable=0;
         checkpassword.text=@"";
         NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@|%@",myDelegate.entityl.uId,@"601",Upt,apikey,Nowt,orderid]];
         NSString * surl = [NSString stringWithFormat:@"%@/app/aiface.php?uId=%@&type=601&Upt=%@&Nowt=%@&Kstr=%@&ordid=%@",domainser,myDelegate.entityl.uId,Upt,Nowt,Kstr,orderid];
+
+        //在新的view里面打开
+        CGRect frame_0= CGRectMake(20, 20, self.view.frame.size.width-40, self.view.frame.size.height-40);
+        orders =[[UIWebView alloc]initWithFrame:frame_0];
+        NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:surl]];
+        [orders loadRequest:request];
+        [self.view addSubview:orders];
         
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:surl]];
+        UIImage* image= [UIImage imageNamed:@"close"];
+        CGRect frame_1= CGRectMake(self.view.frame.size.width-50, 5, 48, 48);
+        btnBack= [[UIButton alloc] initWithFrame:frame_1];
+        [btnBack setBackgroundImage:image forState:UIControlStateNormal];
+        [btnBack addTarget:self action:@selector(goActionback:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:btnBack];
+        
+        //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:surl]];
     }else{
         checkpassword.text=nil;
         NSString *rowString =@"请输入正确密码！";
@@ -731,6 +746,13 @@ NSInteger selecttable=0;
     }
 }
 
+-(void)goActionback:(id)sender
+{
+    [orders removeFromSuperview];
+    [btnBack removeFromSuperview];
+    orders=nil;
+    btnBack=nil;
+}
 
 // 更新ui
 -(IBAction)updateUI:(id)sender
@@ -822,6 +844,21 @@ NSInteger selecttable=0;
             if ([[filenamet pathExtension] isEqualToString:@"jpg"]) {
                 
                 [fileManager removeItemAtPath:[documentsDirectoryt stringByAppendingPathComponent:filenamet] error:NULL];
+            }
+        }
+        
+        //删除大小图
+        //获取沙盒中缓存文件目录
+        NSString *cacheDirectory = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
+        cacheDirectory =[cacheDirectory stringByAppendingString:@"/com.xmly"];
+        NSArray *contentcacheDirectory = [fileManager contentsOfDirectoryAtPath:cacheDirectory error:NULL];
+        NSEnumerator *ett = [contentcacheDirectory objectEnumerator];
+        NSString *filenamett;
+        while ((filenamett = [ett nextObject])) {
+            
+            if ([[filenamett pathExtension] isEqualToString:@"jpg"]) {
+                
+                [fileManager removeItemAtPath:[cacheDirectory stringByAppendingPathComponent:filenamett] error:NULL];
             }
         }
         
