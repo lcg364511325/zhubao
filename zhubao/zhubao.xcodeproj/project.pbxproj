@@ -54,6 +54,8 @@
 		2C594C96194931F1009687E5 /* 021_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C594C95194931F1009687E5 /* 021_2.png */; };
 		2C594C981949B09D009687E5 /* 021_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C594C971949B09D009687E5 /* 021_3.png */; };
 		2C5B4D21198203400071CBFE /* 3Dshow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5B4D20198203400071CBFE /* 3Dshow.png */; };
+		2C5B4D2419820B380071CBFE /* options_sedBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5B4D2319820B380071CBFE /* options_sedBg.png */; };
+		2C5B4D26198249B20071CBFE /* textbox_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5B4D25198249B20071CBFE /* textbox_bg.png */; };
 		2C5C97F819349E2100004343 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C97F719349E2100004343 /* Foundation.framework */; };
 		2C5C97FA19349E2100004343 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C97F919349E2100004343 /* CoreGraphics.framework */; };
 		2C5C97FC19349E2100004343 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C97FB19349E2100004343 /* UIKit.framework */; };
@@ -397,6 +399,8 @@
 		2C594C95194931F1009687E5 /* 021_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 021_2.png; sourceTree = "<group>"; };
 		2C594C971949B09D009687E5 /* 021_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 021_3.png; sourceTree = "<group>"; };
 		2C5B4D20198203400071CBFE /* 3Dshow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3Dshow.png; sourceTree = "<group>"; };
+		2C5B4D2319820B380071CBFE /* options_sedBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options_sedBg.png; sourceTree = "<group>"; };
+		2C5B4D25198249B20071CBFE /* textbox_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textbox_bg.png; sourceTree = "<group>"; };
 		2C5C97F419349E2100004343 /* 盛誉珠宝.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "盛誉珠宝.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5C97F719349E2100004343 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2C5C97F919349E2100004343 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -935,6 +939,8 @@
 		7B7FFD38193853CA008712CB /* image */ = {
 			isa = PBXGroup;
 			children = (
+				2C5B4D25198249B20071CBFE /* textbox_bg.png */,
+				2C5B4D2319820B380071CBFE /* options_sedBg.png */,
 				2C5B4D20198203400071CBFE /* 3Dshow.png */,
 				2C92EF4D1956BCBB00925613 /* man_exhibition.png */,
 				2C92EF4E1956BCBB00925613 /* women_exhibition.png */,
@@ -1614,6 +1620,7 @@
 				7C1077241941AFF4005187B9 /* Seq_v04_640x378_2.jpg in Resources */,
 				7B7FFD85193853CA008712CB /* diamond04.png in Resources */,
 				7C10771A1941AFF4005187B9 /* Seq_v04_640x378_10.jpg in Resources */,
+				2C5B4D26198249B20071CBFE /* textbox_bg.png in Resources */,
 				7B7FFD7E193853CA008712CB /* data.png in Resources */,
 				2C92EF4C1956A5C800925613 /* updateUI.png in Resources */,
 				2C3AFBE01946E36100D3D0A2 /* radiant.jpg in Resources */,
@@ -1659,6 +1666,7 @@
 				2C3AFBE61946E37A00D3D0A2 /* Heart.jpg in Resources */,
 				2C3AFBDB1946E36100D3D0A2 /* cushion.jpg in Resources */,
 				7B7FFD73193853CA008712CB /* 0008.png in Resources */,
+				2C5B4D2419820B380071CBFE /* options_sedBg.png in Resources */,
 				7C10773C1941AFF4005187B9 /* Seq_v04_640x378_41.jpg in Resources */,
 				7B7FFDAE19385596008712CB /* image.png in Resources */,
 				7C10772B1941AFF4005187B9 /* Seq_v04_640x378_26.jpg in Resources */,

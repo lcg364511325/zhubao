@@ -135,12 +135,12 @@ NSMutableArray *inlayarryman;
     btnarray4 = [[NSMutableArray alloc] init];
     countLable.text=nil;
     fonttext.placeholder=@"8到12个字符";
+    manFontText.placeholder=@"8到12个字符";
     
     //进来时候加载全部数据
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     sqlService *sql=[[sqlService alloc]init];
     list=[sql GetProductList:nil type2:nil type3:nil type4:nil page:1 pageSize:1500];
-    pricelable.text=@"获取价格中。。。";
     
     NSString *goodscount=myDelegate.entityl.resultcount;
     if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
@@ -216,7 +216,6 @@ NSMutableArray *inlayarryman;
     netselect.hidden=YES;
     textureselect.hidden=YES;
     secondaryView.hidden = YES;
-    pricelable.text=@"获取价格中。。。";
 }
 
 //购物车
@@ -667,11 +666,9 @@ NSMutableArray *inlayarryman;
     
     @try {
         //可以在此加代码提示用户说正在加载数据中
-        pricelable.text=@"获取价格中。。。";
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // 耗时的操作（异步操作）
             
-            pricelable.text=@"获取价格中。。。";
             NSString *proprice=nil;
             productApi *priceApi=[[productApi alloc]init];
             womanprice=[priceApi getPrice:goods.Pro_Class goldType:texturetext.text goldWeight:weightg mDiaWeight:maintext.text mDiaColor:colortext.text mVVS:nettext.text sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
@@ -840,34 +837,34 @@ NSMutableArray *inlayarryman;
         }
         [btnarray1 removeAllObjects];
         [stylearray removeAllObjects];
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==1){
         style=@"1";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==2){
         style=@"2";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==3){
         style=@"3";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==4){
         style=@"4";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==5){
         style=@"5";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==6){
         style=@"6";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==7){
         style=@"7";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==8){
         style=@"8";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==9){
         style=@"9";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }
     if (btntag!=0) {
         [btnstyle setBackgroundImage:nil forState:UIControlStateNormal];
@@ -963,28 +960,28 @@ NSMutableArray *inlayarryman;
         }
         [btnarray2 removeAllObjects];
         [texturearray removeAllObjects];
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==1){
         texture=@"1";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==2){
         texture=@"2";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==3){
         texture=@"3";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==4){
         texture=@"4";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==5){
         texture=@"5";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==6){
         texture=@"6";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==7){
         texture=@"7";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }
     [btnarray2 addObject:btn];
     if (btntag!=0) {
@@ -1078,49 +1075,49 @@ NSMutableArray *inlayarryman;
         }
         [btnarray3 removeAllObjects];
         [inlayarray removeAllObjects];
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==1){
         inlay=@"0.00-0.02";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==2){
         inlay=@"0.03-0.07";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==3){
         inlay=@"0.08-0.12";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==4){
         inlay=@"0.13-0.17";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==5){
         inlay=@"0.18-0.22";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==6){
         inlay=@"0.23-0.28";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==7){
         inlay=@"0.29-0.39";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==8){
         inlay=@"0.40-0.49";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==9){
         inlay=@"0.50-0.59";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==10){
         inlay=@"0.60-0.69";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==11){
         inlay=@"0.70-0.69";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==12){
         inlay=@"0.80-0.69";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==13){
         inlay=@"0.90-0.69";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==14){
         inlay=@"1-100000";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }
     [btnarray3 addObject:btn];
     if (btntag!=0) {
@@ -1210,17 +1207,17 @@ NSMutableArray *inlayarryman;
     NSString * serie=nil;
     if (btntag==1) {
         serie=@"Pro_f_pair='true'";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if(btntag==2){
         serie=@"Pro_hotE=1";
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==0){
         for (UIButton * btn4 in btnarray4) {
             [btn4 setBackgroundImage:nil forState:UIControlStateNormal];
         }
         [btnarray4 removeAllObjects];
         [seriearray removeAllObjects];
-        [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }
     [btnarray4 addObject:btn];
     if (btntag!=0) {
@@ -1400,9 +1397,11 @@ NSMutableArray *inlayarryman;
 //点击事件
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    pricelable.text=@"";
     productEntity *entity = [list objectAtIndex:[indexPath row]];
     primaryShadeView.alpha=0.5;
     secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.height);
+    secondaryView.center=primaryView.center;
     secondaryView.hidden = NO;
     sqlService * sql=[[sqlService alloc] init];
     productnumber=entity.Id;
@@ -1508,7 +1507,6 @@ NSMutableArray *inlayarryman;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // 耗时的操作（异步操作）
-            pricelable.text=@"获取价格中。。。";
             NSString *proprice=nil;
             productApi *priceApi=[[productApi alloc]init];
             womanprice=[priceApi getPrice:goods.Pro_Class goldType:goods.Pro_goldType goldWeight:AuWeight mDiaWeight:maintext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
