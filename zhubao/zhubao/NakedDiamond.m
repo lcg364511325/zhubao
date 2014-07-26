@@ -151,6 +151,7 @@ NSInteger whichview=0;
     whichview=0;
     primaryShadeView.alpha=0.5;
     secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.height);
+    secondaryView.center=primaryView.center;
     secondaryView.hidden = NO;
     sqlService *product=[[sqlService alloc] init];
     //形状参数
@@ -484,7 +485,7 @@ NSInteger whichview=0;
         value=[shoppingcartlist count];
     }else{
         value=[productlist count];
-        nakediacount.text=[NSString stringWithFormat:@"共有钻石%lu颗",(unsigned long)[productlist count]];
+        nakediacount.text=[NSString stringWithFormat:@"共搜索到%lu颗钻石",(unsigned long)[productlist count]];
     }
     return value;
     //只有一组，数组数即为行数。
@@ -731,6 +732,7 @@ NSInteger whichview=0;
         //    [alter show];
         secondShadeView.alpha=0.5;
         thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.height);
+        thridaryView.center=primaryView.center;
         thridaryView.hidden = NO;
         //_productimageview.image=[UIImage imageNamed:@"10"];
         titleLable.text=[[[[[[[[[[entity.Dia_Lab stringByAppendingString:@"裸钻"] stringByAppendingString:@"    ("] stringByAppendingString:entity.Dia_Carat] stringByAppendingString:@"/"] stringByAppendingString:entity.Dia_Col] stringByAppendingString:@"/"] stringByAppendingString:entity.Dia_Clar] stringByAppendingString:@"/"] stringByAppendingString:entity.Dia_Cut] stringByAppendingString:@")"];

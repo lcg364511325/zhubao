@@ -178,6 +178,15 @@ UIButton* btnBack;
 -(IBAction)chenckpassword:(id)sender
 {
     sixthview.hidden=NO;
+    
+    
+    if ([[[UIDevice currentDevice]systemVersion]floatValue] < 7.0)
+    {
+        checkpassword.frame = CGRectMake(20, 50, checkpassword.frame.size.width, checkpassword.frame.size.height);
+        
+        _passwordsubmit.frame = CGRectMake(25, 100, _passwordsubmit.frame.size.width, _passwordsubmit.frame.size.height);
+        _passwordexit.frame = CGRectMake(200, 100, _passwordexit.frame.size.width, _passwordexit.frame.size.height);
+    }
 }
 
 //关闭核对

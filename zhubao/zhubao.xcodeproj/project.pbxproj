@@ -49,6 +49,11 @@
 		2C3AFBE51946E37A00D3D0A2 /* Emerald.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C3AFBE31946E37A00D3D0A2 /* Emerald.jpg */; };
 		2C3AFBE61946E37A00D3D0A2 /* Heart.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C3AFBE41946E37A00D3D0A2 /* Heart.jpg */; };
 		2C3AFBE81946E7F500D3D0A2 /* round.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C3AFBE71946E7F500D3D0A2 /* round.jpg */; };
+		2C3C5C851983427500630ACD /* textbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3C5C841983427500630ACD /* textbox.png */; };
+		2C3C5C881983451D00630ACD /* writetextbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3C5C871983451D00630ACD /* writetextbox.png */; };
+		2C3C5C8B198347BF00630ACD /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3C5C89198347BF00630ACD /* icon.png */; };
+		2C3C5C8C198347BF00630ACD /* M_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3C5C8A198347BF00630ACD /* M_bg.png */; };
+		2C3C5C8E1983524A00630ACD /* textboxlong.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3C5C8D1983524A00630ACD /* textboxlong.png */; };
 		2C427E3D194561CC00D71776 /* ProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C427E3C194561CC00D71776 /* ProductCell.m */; };
 		2C427E3F1945620900D71776 /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C427E3E1945620900D71776 /* ProductCell.xib */; };
 		2C594C96194931F1009687E5 /* 021_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C594C95194931F1009687E5 /* 021_2.png */; };
@@ -393,6 +398,11 @@
 		2C3AFBE31946E37A00D3D0A2 /* Emerald.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Emerald.jpg; sourceTree = "<group>"; };
 		2C3AFBE41946E37A00D3D0A2 /* Heart.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Heart.jpg; sourceTree = "<group>"; };
 		2C3AFBE71946E7F500D3D0A2 /* round.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = round.jpg; sourceTree = "<group>"; };
+		2C3C5C841983427500630ACD /* textbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textbox.png; sourceTree = "<group>"; };
+		2C3C5C871983451D00630ACD /* writetextbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writetextbox.png; sourceTree = "<group>"; };
+		2C3C5C89198347BF00630ACD /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		2C3C5C8A198347BF00630ACD /* M_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = M_bg.png; sourceTree = "<group>"; };
+		2C3C5C8D1983524A00630ACD /* textboxlong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textboxlong.png; sourceTree = "<group>"; };
 		2C427E3B194561CC00D71776 /* ProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductCell.h; sourceTree = "<group>"; };
 		2C427E3C194561CC00D71776 /* ProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCell.m; sourceTree = "<group>"; };
 		2C427E3E1945620900D71776 /* ProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCell.xib; sourceTree = "<group>"; };
@@ -939,6 +949,11 @@
 		7B7FFD38193853CA008712CB /* image */ = {
 			isa = PBXGroup;
 			children = (
+				2C3C5C8D1983524A00630ACD /* textboxlong.png */,
+				2C3C5C89198347BF00630ACD /* icon.png */,
+				2C3C5C8A198347BF00630ACD /* M_bg.png */,
+				2C3C5C871983451D00630ACD /* writetextbox.png */,
+				2C3C5C841983427500630ACD /* textbox.png */,
 				2C5B4D25198249B20071CBFE /* textbox_bg.png */,
 				2C5B4D2319820B380071CBFE /* options_sedBg.png */,
 				2C5B4D20198203400071CBFE /* 3Dshow.png */,
@@ -1653,6 +1668,7 @@
 				7C10775A1941AFF4005187B9 /* Seq_v04_640x378_69.jpg in Resources */,
 				2C0BFCBA194863EB00844FA2 /* diamond_ring04.png in Resources */,
 				7B7FFD74193853CA008712CB /* 0013.png in Resources */,
+				2C3C5C851983427500630ACD /* textbox.png in Resources */,
 				7B7FFD95193853CA008712CB /* image2.png in Resources */,
 				7C10771E1941AFF4005187B9 /* Seq_v04_640x378_14.jpg in Resources */,
 				2C5C981019349E2100004343 /* Images.xcassets in Resources */,
@@ -1667,6 +1683,7 @@
 				2C3AFBDB1946E36100D3D0A2 /* cushion.jpg in Resources */,
 				7B7FFD73193853CA008712CB /* 0008.png in Resources */,
 				2C5B4D2419820B380071CBFE /* options_sedBg.png in Resources */,
+				2C3C5C8C198347BF00630ACD /* M_bg.png in Resources */,
 				7C10773C1941AFF4005187B9 /* Seq_v04_640x378_41.jpg in Resources */,
 				7B7FFDAE19385596008712CB /* image.png in Resources */,
 				7C10772B1941AFF4005187B9 /* Seq_v04_640x378_26.jpg in Resources */,
@@ -1719,6 +1736,7 @@
 				7C10775B1941AFF4005187B9 /* Seq_v04_640x378_7.jpg in Resources */,
 				7C1077191941AFF4005187B9 /* Seq_v04_640x378_1.jpg in Resources */,
 				7C1BE6D9193F3D1A0000E397 /* CHANGELOG.md in Resources */,
+				2C3C5C8E1983524A00630ACD /* textboxlong.png in Resources */,
 				7C1077401941AFF4005187B9 /* Seq_v04_640x378_45.jpg in Resources */,
 				7B7FFD92193853CA008712CB /* home.png in Resources */,
 				2C0BFCBF194863EB00844FA2 /* diamond_ring09.png in Resources */,
@@ -1768,6 +1786,7 @@
 				2C14E99B193965E20084E8FE /* logo.png in Resources */,
 				2C5C989A1935DD7E00004343 /* ustomtailor.xib in Resources */,
 				7B7FFD9C193853CA008712CB /* option_num.png in Resources */,
+				2C3C5C8B198347BF00630ACD /* icon.png in Resources */,
 				2C0BFCBB194863EB00844FA2 /* diamond_ring05.png in Resources */,
 				2C0BFCB9194863EB00844FA2 /* diamond_ring03.png in Resources */,
 				7B7FFD91193853CA008712CB /* frame.png in Resources */,
@@ -1791,6 +1810,7 @@
 				7C1077291941AFF4005187B9 /* Seq_v04_640x378_24.jpg in Resources */,
 				7B7FFD7A193853CA008712CB /* bg.png in Resources */,
 				7C1077351941AFF4005187B9 /* Seq_v04_640x378_35.jpg in Resources */,
+				2C3C5C881983451D00630ACD /* writetextbox.png in Resources */,
 				2C3AFBDD1946E36100D3D0A2 /* Oval.jpg in Resources */,
 				7C10773A1941AFF4005187B9 /* Seq_v04_640x378_4.jpg in Resources */,
 				7B7FFD83193853CA008712CB /* diamond02.png in Resources */,

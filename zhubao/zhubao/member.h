@@ -53,6 +53,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *settingupdate;
 @property (weak, nonatomic) IBOutlet UIButton *settinglogout;
 @property (weak, nonatomic) IBOutlet UIButton *settingsoftware;
+@property (weak, nonatomic) IBOutlet UIButton *passwordsubmit;
+@property (weak, nonatomic) IBOutlet UIButton *passwordexit;
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;

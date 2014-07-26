@@ -22,6 +22,7 @@
 #import "productApi.h"
 #import "shoppingcartCell.h"
 #import "MWPhotoBrowser.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface product : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,MWPhotoBrowserDelegate>
 {
