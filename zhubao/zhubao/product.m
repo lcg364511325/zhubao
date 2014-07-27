@@ -760,28 +760,28 @@ NSMutableArray *inlayarryman;
         colorselect.hidden=YES;
         netselect.hidden=YES;
         textureselect.hidden=YES;
-        mianselect.frame=CGRectMake(544, mianselect.frame.origin.y, mianselect.frame.size.width, mianselect.frame.size.height);
+        mianselect.frame=CGRectMake(548, mianselect.frame.origin.y, mianselect.frame.size.width, mianselect.frame.size.height);
         [mianselect reloadData];
     }else if(btntag==1){
         netselect.hidden=NO;
         mianselect.hidden=YES;
         colorselect.hidden=YES;
         textureselect.hidden=YES;
-        netselect.frame=CGRectMake(544, netselect.frame.origin.y, netselect.frame.size.width, netselect.frame.size.height);
+        netselect.frame=CGRectMake(548, netselect.frame.origin.y, netselect.frame.size.width, netselect.frame.size.height);
         [netselect reloadData];
     }else if (btntag==2){
         colorselect.hidden=NO;
         mianselect.hidden=YES;
         netselect.hidden=YES;
         textureselect.hidden=YES;
-        colorselect.frame=CGRectMake(544, colorselect.frame.origin.y, colorselect.frame.size.width, colorselect.frame.size.height);
+        colorselect.frame=CGRectMake(548, colorselect.frame.origin.y, colorselect.frame.size.width, colorselect.frame.size.height);
         [colorselect reloadData];
     }else if (btntag==3){
         textureselect.hidden=NO;
         mianselect.hidden=YES;
         colorselect.hidden=YES;
         netselect.hidden=YES;
-        textureselect.frame=CGRectMake(544, textureselect.frame.origin.y, textureselect.frame.size.width, textureselect.frame.size.height);
+        textureselect.frame=CGRectMake(548, textureselect.frame.origin.y, textureselect.frame.size.width, textureselect.frame.size.height);
         [textureselect reloadData];
     }else if (btntag==4)
     {
@@ -799,28 +799,28 @@ NSMutableArray *inlayarryman;
         colorselect.hidden=YES;
         netselect.hidden=YES;
         textureselect.hidden=YES;
-        mianselect.frame=CGRectMake(544+135, mianselect.frame.origin.y, mianselect.frame.size.width, mianselect.frame.size.height);
+        mianselect.frame=CGRectMake(548+135, mianselect.frame.origin.y, mianselect.frame.size.width, mianselect.frame.size.height);
         [mianselect reloadData];
     }else if(btntag==6){
         netselect.hidden=NO;
         mianselect.hidden=YES;
         colorselect.hidden=YES;
         textureselect.hidden=YES;
-        netselect.frame=CGRectMake(544+135, netselect.frame.origin.y, netselect.frame.size.width, netselect.frame.size.height);
+        netselect.frame=CGRectMake(548+135, netselect.frame.origin.y, netselect.frame.size.width, netselect.frame.size.height);
         [netselect reloadData];
     }else if (btntag==7){
         colorselect.hidden=NO;
         mianselect.hidden=YES;
         netselect.hidden=YES;
         textureselect.hidden=YES;
-        colorselect.frame=CGRectMake(544+135, colorselect.frame.origin.y, colorselect.frame.size.width, colorselect.frame.size.height);
+        colorselect.frame=CGRectMake(548+135, colorselect.frame.origin.y, colorselect.frame.size.width, colorselect.frame.size.height);
         [colorselect reloadData];
     }else if (btntag==8){
         textureselect.hidden=NO;
         mianselect.hidden=YES;
         colorselect.hidden=YES;
         netselect.hidden=YES;
-        textureselect.frame=CGRectMake(544+135, textureselect.frame.origin.y, textureselect.frame.size.width, textureselect.frame.size.height);
+        textureselect.frame=CGRectMake(548+135, textureselect.frame.origin.y, textureselect.frame.size.width, textureselect.frame.size.height);
         [textureselect reloadData];
     }
     
