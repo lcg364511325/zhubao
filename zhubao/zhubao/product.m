@@ -67,6 +67,7 @@
 @synthesize button3dwoman;
 @synthesize button3dman;
 @synthesize checkpassword;
+@synthesize secondchildView;
 
 //判定点击来哪个tableview
 NSInteger selecttype=0;
@@ -273,7 +274,7 @@ NSMutableArray *inlayarryman;
         if(img)[imgArray addObject:img];
     }
 
-    CGRect frame_0= CGRectMake(80, 30, secondaryView.frame.size.width+20, secondaryView.frame.size.height+20);
+    CGRect frame_0= CGRectMake(80, 30, secondchildView.frame.size.width+20, secondchildView.frame.size.height+20);
     rImageView=[[RotateImageView alloc]initWithFrame:frame_0];
     rImageView.center=primaryView.center;
     rImageView.animationImages=imgArray;
@@ -1402,8 +1403,8 @@ NSMutableArray *inlayarryman;
     pricelable.text=@"";
     productEntity *entity = [list objectAtIndex:[indexPath row]];
     primaryShadeView.alpha=0.5;
-    secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.height);
-    secondaryView.center=primaryView.center;
+    //secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.height);
+    //secondaryView.center=primaryView.center;
     secondaryView.hidden = NO;
     sqlService * sql=[[sqlService alloc] init];
     productnumber=entity.Id;

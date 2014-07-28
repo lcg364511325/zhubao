@@ -40,6 +40,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *settingupdate;
 @property (weak, nonatomic) IBOutlet UIButton *settinglogout;
 @property (weak, nonatomic) IBOutlet UIButton *settingsoftware;
+@property (weak, nonatomic) IBOutlet UIView *secondchildView;
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;

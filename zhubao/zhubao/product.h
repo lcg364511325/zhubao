@@ -52,15 +52,21 @@
 @property (retain, nonatomic) IBOutlet UIView *secondShadeView;
 @property (retain, nonatomic) IBOutlet UIView *fourthView;
 @property (retain, nonatomic) IBOutlet UIView *fivethview;
+@property (weak, nonatomic) IBOutlet UIView *secondchildView;
+
+
 @property (weak, nonatomic) IBOutlet UITableView *mianselect;
 @property (weak, nonatomic) IBOutlet UITableView *netselect;
 @property (weak, nonatomic) IBOutlet UITableView *colorselect;
 @property (weak, nonatomic) IBOutlet UITableView *textureselect;
+
+
 @property (strong, nonatomic) NSArray *mainlist;
 @property (strong, nonatomic) NSArray *mainmanlist;
 @property (strong, nonatomic) NSArray *netlist;
 @property (strong, nonatomic) NSArray *colorlist;
 @property (strong, nonatomic) NSArray *texturelist;
+
 @property (weak, nonatomic) IBOutlet UITextField *maintext;
 @property (weak, nonatomic) IBOutlet UITextField *nettext;
 @property (weak, nonatomic) IBOutlet UITextField *colortext;
@@ -68,6 +74,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *sizeText;
 @property (weak, nonatomic) IBOutlet UITextField *fontText;
 @property (weak, nonatomic) IBOutlet UITextField *numberText;
+
 @property (weak, nonatomic) IBOutlet UILabel *modellable;
 @property (weak, nonatomic) IBOutlet UILabel *weightlable;
 @property (weak, nonatomic) IBOutlet UILabel *mainlable;
@@ -76,6 +83,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *sizetext;
 @property (weak, nonatomic) IBOutlet UITextField *fonttext;
 @property (weak, nonatomic) IBOutlet UITextField *numbertext;
+
 @property (weak, nonatomic) IBOutlet UILabel *title1lable;
 @property (weak, nonatomic) IBOutlet UILabel *pricelable;
 @property (weak, nonatomic) IBOutlet UIImageView *productimageview;
