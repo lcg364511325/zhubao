@@ -21,6 +21,7 @@
 @synthesize secondShadeView;
 @synthesize fourthView;
 @synthesize fivethview;
+@synthesize secondchildView;
 @synthesize mianselect;
 @synthesize netselect;
 @synthesize colorselect;
@@ -273,9 +274,8 @@ NSMutableArray *inlayarryman;
         if(img)[imgArray addObject:img];
     }
 
-    CGRect frame_0= CGRectMake(80, 30, secondaryView.frame.size.width+20, secondaryView.frame.size.height+20);
+    CGRect frame_0= CGRectMake(secondchildView.frame.origin.x, secondchildView.frame.origin.y, secondchildView.frame.size.width, secondchildView.frame.size.height);
     rImageView=[[RotateImageView alloc]initWithFrame:frame_0];
-    rImageView.center=primaryView.center;
     rImageView.animationImages=imgArray;
     [rImageView setUserInteractionEnabled:YES];
     [self.view addSubview:rImageView];
@@ -285,7 +285,7 @@ NSMutableArray *inlayarryman;
     [rImageView initTimer];
     
     UIImage* image= [UIImage imageNamed:@"close"];
-    CGRect frame_1= CGRectMake(self.view.frame.size.width-110, 85, 48, 48);
+    CGRect frame_1= CGRectMake(self.view.frame.size.width-120, 70, 48, 48);
     btnBack= [[UIButton alloc] initWithFrame:frame_1];
     [btnBack setBackgroundImage:image forState:UIControlStateNormal];
     [btnBack addTarget:self action:@selector(closeImageView) forControlEvents:UIControlEventTouchUpInside];
@@ -787,7 +787,7 @@ NSMutableArray *inlayarryman;
     {
         secondShadeView.alpha=0.5;
         primaryShadeView.alpha=0.5;
-        thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.width);
+        //thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.width);
         thridaryView.hidden = NO;
 
         AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];

@@ -241,10 +241,11 @@ UISwipeGestureRecognizer *recognizer;
     [self.navigationController pushViewController:_member animated:NO];
 }
 
+//购物车显示
 - (IBAction)goAction:(id)sender
 {
     primaryShadeView.alpha=0.5;
-    secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.width);
+    //secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.width);
     secondaryView.hidden = NO;
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     sqlService *shopcar=[[sqlService alloc] init];

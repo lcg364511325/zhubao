@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ProductCell.h"
+#import <objc/runtime.h>
 
 @interface test : UIViewController<UITextViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 

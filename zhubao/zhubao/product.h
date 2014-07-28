@@ -52,6 +52,8 @@
 @property (retain, nonatomic) IBOutlet UIView *secondShadeView;
 @property (retain, nonatomic) IBOutlet UIView *fourthView;
 @property (retain, nonatomic) IBOutlet UIView *fivethview;
+@property (weak, nonatomic) IBOutlet UIView *secondchildView;
+
 @property (weak, nonatomic) IBOutlet UITableView *mianselect;
 @property (weak, nonatomic) IBOutlet UITableView *netselect;
 @property (weak, nonatomic) IBOutlet UITableView *colorselect;

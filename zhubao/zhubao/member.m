@@ -142,7 +142,7 @@ UIButton* btnBack;
 {
     selecttable=3;
     primaryShadeView.alpha=0.5;
-    secondaryView.frame = CGRectMake(145, 90, secondaryView.frame.size.width, secondaryView.frame.size.height);
+    //secondaryView.frame = CGRectMake(145, 90, secondaryView.frame.size.width, secondaryView.frame.size.height);
     secondaryView.hidden = NO;
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     sqlService *shopcar=[[sqlService alloc] init];
@@ -222,7 +222,7 @@ UIButton* btnBack;
 //会员密码修改页面跳转
 - (IBAction)goAction1:(id)sender
 {
-    thridaryView.frame = CGRectMake(195, 90, thridaryView.frame.size.width, thridaryView.frame.size.height);
+    //thridaryView.frame = CGRectMake(195, 90, thridaryView.frame.size.width, thridaryView.frame.size.height);
     thridaryView.hidden = NO;
 }
 
@@ -234,7 +234,7 @@ UIButton* btnBack;
 //会员资料修改页面跳转
 - (IBAction)goAction2:(id)sender
 {
-    fourtharyView.frame = CGRectMake(195, 90, fourtharyView.frame.size.width, fourtharyView.frame.size.height);
+    //fourtharyView.frame = CGRectMake(195, 90, fourtharyView.frame.size.width, fourtharyView.frame.size.height);
     fourtharyView.hidden = NO;
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     companyText.text=myDelegate.entityl.userTrueName;

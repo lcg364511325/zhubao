@@ -150,8 +150,8 @@ NSInteger whichview=0;
 {
     whichview=0;
     primaryShadeView.alpha=0.5;
-    secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.height);
-    secondaryView.center=primaryView.center;
+    //secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.height);
+    //secondaryView.center=primaryView.center;
     secondaryView.hidden = NO;
     sqlService *product=[[sqlService alloc] init];
     //形状参数
@@ -308,7 +308,7 @@ NSInteger whichview=0;
 - (IBAction)goAction1:(id)sender
 {
     secondShadeView.alpha=0.5;
-    thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.height);
+    //thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.height);
     thridaryView.hidden = NO;
     titleLable.text=@"string";
     modelLable.text=@"string";
@@ -338,7 +338,7 @@ NSInteger whichview=0;
 {
     whichview=1;
     thirdShadeView.alpha=0.5;
-    fourtharyView.frame = CGRectMake(140, 95, fourtharyView.frame.size.width, fourtharyView.frame.size.height);
+    //fourtharyView.frame = CGRectMake(140, 95, fourtharyView.frame.size.width, fourtharyView.frame.size.height);
     fourtharyView.hidden = NO;
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     sqlService *shopcar=[[sqlService alloc] init];
