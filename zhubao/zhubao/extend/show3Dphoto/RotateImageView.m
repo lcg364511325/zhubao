@@ -19,7 +19,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        [self setBackgroundColor:[UIColor blackColor]];
+        [self setBackgroundColor:[UIColor whiteColor]];
         self.contentMode=UIViewContentModeScaleAspectFit;
     }
     return self;
