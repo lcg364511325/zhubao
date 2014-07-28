@@ -26,7 +26,6 @@
 @synthesize biglogo;
 @synthesize aboutus;
 @synthesize checkpassword;
-@synthesize secondchildView;
 UISwipeGestureRecognizer *recognizer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -241,12 +240,11 @@ UISwipeGestureRecognizer *recognizer;
     
     [self.navigationController pushViewController:_member animated:NO];
 }
- 
+
 - (IBAction)goAction:(id)sender
 {
     primaryShadeView.alpha=0.5;
-    //secondchildView.frame = CGRectMake(155, 110, secondchildView.frame.size.width, secondchildView.frame.size.width);
-    //secondchildView.center=secondaryView.center;
+    secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.width);
     secondaryView.hidden = NO;
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     sqlService *shopcar=[[sqlService alloc] init];
