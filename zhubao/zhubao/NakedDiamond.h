@@ -16,7 +16,7 @@
 #import "sqlService.h"
 #import "shoppingcartCell.h"
 
-@interface NakedDiamond : UIViewController
+@interface NakedDiamond : UIViewController<UIApplicationDelegate>
 {
     NSMutableArray *shapearray;
     NSMutableArray *colorarray;

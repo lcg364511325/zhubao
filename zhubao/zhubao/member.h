@@ -15,7 +15,7 @@
 #import "sqlService.h"
 #import "getNowTime.h"
 
-@interface member : UIViewController
+@interface member : UIViewController<UIApplicationDelegate>
 {
     NSMutableArray *shoppingcartlist;
 }

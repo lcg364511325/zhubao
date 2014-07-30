@@ -14,7 +14,7 @@
 #import "member.h"
 #import "shoppingcartCell.h"
 
-@interface ustomtailor : UIViewController<UITextViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface ustomtailor : UIViewController<UITextViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIApplicationDelegate>
 {
     //下拉菜单
     UIActionSheet *myActionSheet;

@@ -13,7 +13,7 @@
 #import "ustomtailor.h"
 #import "member.h"
 
-@interface diploma : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface diploma : UIViewController<UITableViewDelegate, UITableViewDataSource,UIApplicationDelegate>
 {
     NSMutableArray *shoppingcartlist;
 }

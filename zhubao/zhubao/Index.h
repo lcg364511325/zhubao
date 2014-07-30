@@ -19,8 +19,9 @@
 #import "login.h"
 #import "orderApi.h"
 #import "AutoGetData.h"
+#import "UIViewController+CWPopup.h"
 
-@interface Index : UIViewController<UIWebViewDelegate,UIGestureRecognizerDelegate>
+@interface Index : UIViewController<UIWebViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate,UIApplicationDelegate>
 {
     NSMutableArray *shoppingcartlist;
 }

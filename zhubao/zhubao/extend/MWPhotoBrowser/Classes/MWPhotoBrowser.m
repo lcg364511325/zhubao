@@ -172,7 +172,7 @@
     }
     _toolbar.barStyle = UIBarStyleBlackTranslucent;
     _toolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
-    
+
     // Toolbar Items
     if (self.displayNavArrows) {
         NSString *arrowPathFormat;
@@ -198,9 +198,16 @@
         [self.view addGestureRecognizer:swipeGesture];
     }
     
+
 	// Super
     [super viewDidLoad];
 	
+}
+
+-(void)closeImageView
+{
+    
+    
 }
 
 - (void)performLayout {
@@ -306,6 +313,7 @@
 	_pagingScrollView.contentOffset = [self contentOffsetForPageAtIndex:_currentPageIndex];
     [self tilePages];
     _performingLayout = NO;
+    
     
 }
 
@@ -555,6 +563,12 @@
 	_currentPageIndex = indexPriorToLayout;
 	_performingLayout = NO;
     
+    UIImage* image= [UIImage imageNamed:@"close"];
+    CGRect frame_1= CGRectMake(self.view.frame.size.width-30, 170, 48, 48);
+    UIButton *btnBack= [[UIButton alloc] initWithFrame:frame_1];
+    [btnBack setBackgroundImage:image forState:UIControlStateNormal];
+    [btnBack addTarget:self action:@selector(closeImageView) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btnBack];
 }
 
 #pragma mark - Rotation

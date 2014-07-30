@@ -62,6 +62,7 @@ NSInteger vies=0;
                           @"18K双色", @"18K玫瑰金", @"PT900", @"Pt950", @"PD950",nil];
     self.mainlist = mainarray;
     texturetext.userInteractionEnabled=NO;
+    texturetext.text=@"18K白";
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {

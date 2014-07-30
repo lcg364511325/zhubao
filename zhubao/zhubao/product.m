@@ -15,40 +15,16 @@
 @implementation product
 
 @synthesize primaryView;
-@synthesize secondaryView;
 @synthesize primaryShadeView;
 @synthesize thridaryView;
 @synthesize secondShadeView;
 @synthesize fourthView;
 @synthesize fivethview;
-@synthesize secondchildView;
-@synthesize mianselect;
-@synthesize netselect;
-@synthesize colorselect;
-@synthesize textureselect;
 @synthesize mainlist=_mainlist;
 @synthesize mainmanlist;
 @synthesize netlist=_netlist;
 @synthesize colorlist=_colorlist;
 @synthesize texturelist=_texturelist;
-@synthesize maintext;
-@synthesize nettext;
-@synthesize colortext;
-@synthesize texturetext;
-@synthesize sizeText;
-@synthesize fontText;
-@synthesize numberText;
-@synthesize modellable;
-@synthesize weightlable;
-@synthesize mainlable;
-@synthesize fitNolable;
-@synthesize fitweightlable;
-@synthesize sizetext;
-@synthesize fonttext;
-@synthesize numbertext;
-@synthesize title1lable;
-@synthesize pricelable;
-@synthesize productimageview;
 @synthesize productcollect;
 @synthesize countLable;
 @synthesize btnstyle;
@@ -58,37 +34,11 @@
 @synthesize goodsview;
 @synthesize shopcartcount;
 @synthesize logoImage;
-@synthesize mamMainText;
-@synthesize manNetText;
-@synthesize mamColorText;
-@synthesize manTextureText;
-@synthesize manSizeText;
-@synthesize manFontText;
-@synthesize button3D;
-@synthesize button3dwoman;
-@synthesize button3dman;
 @synthesize checkpassword;
 
-//判定点击来哪个tableview
-NSInteger selecttype=0;
-//产品id
-NSString * productnumber=nil;
+
 //查询结果
 NSMutableArray *list=nil;
-//默认商品
-productEntity *goods;
-//对戒男戒
-productEntity *goodsman;
-//商品类型
-NSString * Pro_type;
-//女戒价格
-NSString *womanprice=nil;
-//男戒价格
-NSString *manprice=nil;
-//主石约重
-NSMutableArray *inlayarry;
-//男主石约重
-NSMutableArray *inlayarryman;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -104,26 +54,6 @@ NSMutableArray *inlayarryman;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.navigationController setNavigationBarHidden:YES];
-    //主石重量
-    //净度
-    NSArray *netarray = [[NSArray alloc]initWithObjects:@"VVS",@"VS",@"SI",@"P", nil];
-    //颜色
-    NSArray *colorarray = [[NSArray alloc]initWithObjects:@"F-G",@"H",@"I-J",@"K-L",@"M-N", nil];
-    //材质
-    NSArray *texture1array = [[NSArray alloc]initWithObjects:@"18K黄",@"18K白",@"18K双色",@"18K玫瑰金",@"PT900",@"PT950",@"PD950", nil];
-    self.netlist=netarray;
-    self.colorlist=colorarray;
-    self.texturelist=texture1array;
-    maintext.userInteractionEnabled=NO;
-    nettext.userInteractionEnabled=NO;
-    colortext.userInteractionEnabled=NO;
-    texturetext.userInteractionEnabled=NO;
-    mamMainText.userInteractionEnabled=NO;
-    manNetText.userInteractionEnabled=NO;
-    mamColorText.userInteractionEnabled=NO;
-    manTextureText.userInteractionEnabled=NO;
-    sizeText.keyboardType=UIKeyboardTypeNumberPad;
-    manSizeText.keyboardType=UIKeyboardTypeNumberPad;
     
     [self.productcollect registerClass:[ProductCell class] forCellWithReuseIdentifier:@"ProductCell"];
     stylearray = [[NSMutableArray alloc] init];
@@ -135,8 +65,6 @@ NSMutableArray *inlayarryman;
     btnarray3 = [[NSMutableArray alloc] init];
     btnarray4 = [[NSMutableArray alloc] init];
     countLable.text=nil;
-    fonttext.placeholder=@"8到12个字符";
-    manFontText.placeholder=@"8到12个字符";
     
     //进来时候加载全部数据
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
@@ -158,13 +86,6 @@ NSMutableArray *inlayarryman;
     else {
         [logoImage setImage:[UIImage imageNamed:@"logo"]];
     }
-    
-    //定义图片标签的点击事件
-    productimageview.userInteractionEnabled=YES;
-    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showPhotoBrowser)];
-    [productimageview addGestureRecognizer:singleTap];
-    
-    [_showPhotos addTarget:self action:@selector(showPhotoBrowser) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -209,14 +130,13 @@ NSMutableArray *inlayarryman;
     [self.navigationController pushViewController:_member animated:NO];
 }
 
-- (IBAction)closeAction:(id)sender
+- (void)closeAction
 {
-    primaryShadeView.alpha=0;
-    mianselect.hidden=YES;
-    colorselect.hidden=YES;
-    netselect.hidden=YES;
-    textureselect.hidden=YES;
-    secondaryView.hidden = YES;
+    if (self.popupViewController != nil) {
+        [self dismissPopupViewControllerAnimated:YES completion:^{
+            NSLog(@"popup view dismissed");
+        }];
+    }
 }
 
 //购物车
@@ -234,79 +154,12 @@ NSMutableArray *inlayarryman;
     primaryShadeView.alpha=0;
 }
 
-- (IBAction)threeddAction:(id)sender
-{
-    
-    //FVImageSequenceDemoViewController *sysmenu=[[FVImageSequenceDemoViewController alloc] init];
-    UIButton *btn=(UIButton*)sender;
-    NSInteger btntag=btn.tag;
-    //TestViewController *sysmenu=[[TestViewController alloc] init];
-    NSString * code=@"";
-    if (btntag==1) {
-        code=goodsman.Pro_author;//@"3Y0012";//工厂款号
-        //sysmenu.code=goodsman.Pro_author;//@"3Y0012";//工厂款号
-        //[self.navigationController pushViewController:sysmenu animated:NO];
-    }else{
-        code=goods.Pro_author;//@"3Y0012";//工厂款号
-        //sysmenu.code=goods.Pro_author;//@"3Y0012";//工厂款号
-        //[self.navigationController pushViewController:sysmenu animated:NO];
-    }
-    
-    NSMutableArray *imgArray=[[NSMutableArray alloc]init];
-    for(int i=1;i<60;i++){
-        NSString *strApend;
-        if(i<9)
-            strApend=@"00";
-        else
-            strApend=@"0";
-        
-        NSString *path = [NSString stringWithFormat:@"%@_%@%d.jpg", code, strApend,i];
-        //NSLog(@"%@", path);
-        
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *dcoumentpath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-        // 解压缩文件夹路径
-        NSString* unzipPath = [dcoumentpath stringByAppendingString:@"/images"];
-        
-        //NSLog(@"---------------本地的图片:%@", [NSString stringWithFormat:@"%@/%@",unzipPath,path]);
-        
-        UIImage *img =  [[UIImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",unzipPath,path]];//[[UIImage alloc] initWithContentsOfFile:path];
-        if(img)[imgArray addObject:img];
-    }
-
-    CGRect frame_0= CGRectMake(secondchildView.frame.origin.x, secondchildView.frame.origin.y, secondchildView.frame.size.width, secondchildView.frame.size.height);
-    rImageView=[[RotateImageView alloc]initWithFrame:frame_0];
-    rImageView.animationImages=imgArray;
-    [rImageView setUserInteractionEnabled:YES];
-    [self.view addSubview:rImageView];
-    
-    //旋转初使化
-    rImageView.numberOfImages=[imgArray count]-1;
-    [rImageView initTimer];
-    
-    UIImage* image= [UIImage imageNamed:@"close"];
-    CGRect frame_1= CGRectMake(self.view.frame.size.width-120, 70, 48, 48);
-    btnBack= [[UIButton alloc] initWithFrame:frame_1];
-    [btnBack setBackgroundImage:image forState:UIControlStateNormal];
-    [btnBack addTarget:self action:@selector(closeImageView) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btnBack];
-}
-
 -(void)rotateStart{
     [rImageView setRotate:TRUE];
 }
 
 -(void)rotateStop{
     [rImageView setRotate:FALSE];
-}
-
--(void)closeImageView
-{
-    [rImageView stopTimer];
-    [rImageView removeFromSuperview];
-    [btnBack removeFromSuperview];
-    rImageView=nil;
-    btnBack=nil;
 }
 
 //设置页面跳转
@@ -379,30 +232,13 @@ NSMutableArray *inlayarryman;
 //tableview行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger value=0;
-    if(selecttype==0){
-        value=[_mainlist count];
-    }else if(selecttype==1 || selecttype==6){
-        value=[_netlist count];
-    }else if(selecttype==2 || selecttype==7){
-        value=[_colorlist count];
-    }else if (selecttype==3 || selecttype==8){
-        value=[_texturelist count];
-    }else if (selecttype==4)
-    {
-        value=[shoppingcartlist count];
-    }else if(selecttype==5)
-    {
-        value=[mainmanlist count];
-    }
-    return value;
+    return [shoppingcartlist count];
     //只有一组，数组数即为行数。
 }
 
 //tableview值
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (selecttype==4) {
         static NSString *TableSampleIdentifier = @"shoppingcartCell";
         
         shoppingcartCell *cell = [tableView dequeueReusableCellWithIdentifier:TableSampleIdentifier];
@@ -564,266 +400,34 @@ NSMutableArray *inlayarryman;
             cell.chasing.text=nil;
         }
         return cell;
-    }else{
-        static NSString *TableSampleIdentifier = @"TableSampleIdentifier";
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
-                                 TableSampleIdentifier];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc]
-                    initWithStyle:UITableViewCellStyleDefault
-                    reuseIdentifier:TableSampleIdentifier];
-        }
-        
-        NSUInteger row = [indexPath row];
-        if(selecttype==0){
-            cell.textLabel.text = [self.mainlist objectAtIndex:row];
-        }else if(selecttype==1 || selecttype==6){
-            cell.textLabel.text = [self.netlist objectAtIndex:row];
-        }else if(selecttype==2 || selecttype==7){
-            cell.textLabel.text = [self.colorlist objectAtIndex:row];
-        }else if (selecttype==3 || selecttype==8){
-            cell.textLabel.text = [self.texturelist objectAtIndex:row];
-        }else if (selecttype==5)
-        {
-            cell.textLabel.text=[self.mainmanlist objectAtIndex:row];
-        }
-        return cell;
-    }
+    
 }
 
 
 //点击tableview触发事件
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *rowString=nil;
-    if(selecttype==0){
-        rowString = [self.mainlist objectAtIndex:[indexPath row]];
-        maintext.text=rowString;
-        mianselect.hidden=YES;
-        colorselect.hidden=YES;
-        netselect.hidden=YES;
-        textureselect.hidden=YES;
-        
-    }else if(selecttype==1){
-        rowString = [self.netlist objectAtIndex:[indexPath row]];
-        nettext.text=rowString;
-        mianselect.hidden=YES;
-        colorselect.hidden=YES;
-        netselect.hidden=YES;
-        textureselect.hidden=YES;
-    }else if(selecttype==2){
-        rowString = [self.colorlist objectAtIndex:[indexPath row]];
-        colortext.text=rowString;
-        mianselect.hidden=YES;
-        colorselect.hidden=YES;
-        netselect.hidden=YES;
-        textureselect.hidden=YES;
-    }else if (selecttype==3){
-        rowString = [self.texturelist objectAtIndex:[indexPath row]];
-        texturetext.text=rowString;
-        mianselect.hidden=YES;
-        colorselect.hidden=YES;
-        netselect.hidden=YES;
-        textureselect.hidden=YES;
-    }else if(selecttype==5){
-        rowString = [self.mainmanlist objectAtIndex:[indexPath row]];
-        mamMainText.text=rowString;
-        mianselect.hidden=YES;
-        colorselect.hidden=YES;
-        netselect.hidden=YES;
-        textureselect.hidden=YES;
-        
-    }else if(selecttype==6){
-        rowString = [self.netlist objectAtIndex:[indexPath row]];
-        manNetText.text=rowString;
-        mianselect.hidden=YES;
-        colorselect.hidden=YES;
-        netselect.hidden=YES;
-        textureselect.hidden=YES;
-    }else if(selecttype==7){
-        rowString = [self.colorlist objectAtIndex:[indexPath row]];
-        mamColorText.text=rowString;
-        mianselect.hidden=YES;
-        colorselect.hidden=YES;
-        netselect.hidden=YES;
-        textureselect.hidden=YES;
-    }else if (selecttype==8){
-        rowString = [self.texturelist objectAtIndex:[indexPath row]];
-        manTextureText.text=rowString;
-        mianselect.hidden=YES;
-        colorselect.hidden=YES;
-        netselect.hidden=YES;
-        textureselect.hidden=YES;
-    }
-    //获取商品价格
-    sqlService * sql=[[sqlService alloc] init];
-    productEntity *goods=[sql GetProductDetail:productnumber];
-    NSString *textvalue=nil;
-    Commons * common=[[Commons alloc]init];
-    textvalue=[common getGoldtypevalue:texturetext.text];
-    
-    NSString * weightg=[self getweightg:rowString];
-    NSString * weightman=[self getweightman:rowString];
-    
-    @try {
-        //可以在此加代码提示用户说正在加载数据中
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            // 耗时的操作（异步操作）
-            
-            NSString *proprice=nil;
-            productApi *priceApi=[[productApi alloc]init];
-            womanprice=[priceApi getPrice:goods.Pro_Class goldType:texturetext.text goldWeight:weightg mDiaWeight:maintext.text mDiaColor:colortext.text mVVS:nettext.text sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
-            if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
-                priceApi=[[productApi alloc]init];
-                manprice=[priceApi getPrice:goodsman.Pro_Class goldType:manTextureText.text goldWeight:weightman mDiaWeight:mamMainText.text mDiaColor:mamColorText.text mVVS:manNetText.text sDiaWeight:goodsman.Pro_f_weight sCount:goodsman.Pro_f_count proid:goodsman.Id];
-                proprice=[NSString stringWithFormat:@"%d",womanprice.intValue+manprice.intValue];
-            }else{
-                proprice=womanprice;
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                if (proprice) {
-                    //pricelable.text=[@"¥" stringByAppendingString:proprice];
-                    NSArray *price=[[NSString stringWithFormat:@"%@",proprice] componentsSeparatedByString:@"."];
-                    pricelable.text=[NSString stringWithFormat:@"¥ %@",[price objectAtIndex:0]];
-                }else{
-                    pricelable.text=@"暂无价格信息";
-                }
-                
-            });
-        });
-    }
-    @catch (NSException *exception) {
-        
-    }
-    @finally {
-        
-    }
+   
 }
 
 //点击tableview以外的地方触发事件
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
-    CGPoint pt = [touch locationInView:self.view];
     
-    if (!CGRectContainsPoint([fourthView frame], pt)) {
-        //to-do
-        fourthView.hidden=YES;
-    }
-    //点击其他地方消失
-    if(selecttype==0 || selecttype==5){
-        if (!CGRectContainsPoint([mianselect frame], pt)) {
-            //to-do
-            mianselect.hidden=YES;
-            colorselect.hidden=YES;
-            netselect.hidden=YES;
-            textureselect.hidden=YES;
-        }
-    }else if(selecttype==1 || selecttype==6){
-        if (!CGRectContainsPoint([netselect frame], pt)) {
-            //to-do
-            mianselect.hidden=YES;
-            colorselect.hidden=YES;
-            netselect.hidden=YES;
-            textureselect.hidden=YES;
-        }
-    }else if(selecttype==2 || selecttype==7){
-        if (!CGRectContainsPoint([colorselect frame], pt)) {
-            //to-do
-            mianselect.hidden=YES;
-            colorselect.hidden=YES;
-            netselect.hidden=YES;
-            textureselect.hidden=YES;
-        }
-    }else if (selecttype==3 || selecttype==8){
-        if (!CGRectContainsPoint([textureselect frame], pt)) {
-            //to-do
-            mianselect.hidden=YES;
-            colorselect.hidden=YES;
-            netselect.hidden=YES;
-            textureselect.hidden=YES;
-        }
-    }
 }
 
 //下拉按钮执行动作
 -(IBAction)mainselect:(id)sender
 {
-    UIButton* btn = (UIButton*)sender;
-    NSInteger btntag=[btn tag];
-    selecttype=btntag;
-    if(btntag==0){
-        mianselect.hidden=NO;
-        colorselect.hidden=YES;
-        netselect.hidden=YES;
-        textureselect.hidden=YES;
-        mianselect.frame=CGRectMake(548, mianselect.frame.origin.y, mianselect.frame.size.width, mianselect.frame.size.height);
-        [mianselect reloadData];
-    }else if(btntag==1){
-        netselect.hidden=NO;
-        mianselect.hidden=YES;
-        colorselect.hidden=YES;
-        textureselect.hidden=YES;
-        netselect.frame=CGRectMake(548, netselect.frame.origin.y, netselect.frame.size.width, netselect.frame.size.height);
-        [netselect reloadData];
-    }else if (btntag==2){
-        colorselect.hidden=NO;
-        mianselect.hidden=YES;
-        netselect.hidden=YES;
-        textureselect.hidden=YES;
-        colorselect.frame=CGRectMake(548, colorselect.frame.origin.y, colorselect.frame.size.width, colorselect.frame.size.height);
-        [colorselect reloadData];
-    }else if (btntag==3){
-        textureselect.hidden=NO;
-        mianselect.hidden=YES;
-        colorselect.hidden=YES;
-        netselect.hidden=YES;
-        textureselect.frame=CGRectMake(548, textureselect.frame.origin.y, textureselect.frame.size.width, textureselect.frame.size.height);
-        [textureselect reloadData];
-    }else if (btntag==4)
-    {
-        secondShadeView.alpha=0.5;
-        primaryShadeView.alpha=0.5;
-        //thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.width);
-        thridaryView.hidden = NO;
-
-        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-        sqlService *shopcar=[[sqlService alloc] init];
-        shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
-        [goodsview reloadData];
-    }else if(btntag==5){
-        mianselect.hidden=NO;
-        colorselect.hidden=YES;
-        netselect.hidden=YES;
-        textureselect.hidden=YES;
-        mianselect.frame=CGRectMake(548+135, mianselect.frame.origin.y, mianselect.frame.size.width, mianselect.frame.size.height);
-        [mianselect reloadData];
-    }else if(btntag==6){
-        netselect.hidden=NO;
-        mianselect.hidden=YES;
-        colorselect.hidden=YES;
-        textureselect.hidden=YES;
-        netselect.frame=CGRectMake(548+135, netselect.frame.origin.y, netselect.frame.size.width, netselect.frame.size.height);
-        [netselect reloadData];
-    }else if (btntag==7){
-        colorselect.hidden=NO;
-        mianselect.hidden=YES;
-        netselect.hidden=YES;
-        textureselect.hidden=YES;
-        colorselect.frame=CGRectMake(548+135, colorselect.frame.origin.y, colorselect.frame.size.width, colorselect.frame.size.height);
-        [colorselect reloadData];
-    }else if (btntag==8){
-        textureselect.hidden=NO;
-        mianselect.hidden=YES;
-        colorselect.hidden=YES;
-        netselect.hidden=YES;
-        textureselect.frame=CGRectMake(548+135, textureselect.frame.origin.y, textureselect.frame.size.width, textureselect.frame.size.height);
-        [textureselect reloadData];
-    }
+    secondShadeView.alpha=0.5;
+    primaryShadeView.alpha=0.5;
+    //thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.width);
+    thridaryView.hidden = NO;
     
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    sqlService *shopcar=[[sqlService alloc] init];
+    shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
+    [goodsview reloadData];
 }
 
 //款式选择
@@ -1299,66 +903,6 @@ NSMutableArray *inlayarryman;
     });
 }
 
-
-//商品添加到购物车
--(IBAction)addshopcart:(id)sender{
-    sqlService * sql=[[sqlService alloc] init];
-    //productEntity *goods=[sql GetProductDetail:productnumber];
-    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    buyproduct * entity=[[buyproduct alloc]init];
-    entity.producttype=Pro_type;
-    entity.productid=productnumber;
-    entity.pcount=numberText.text;
-    entity.pcolor=colortext.text;
-    entity.pdetail=fontText.text;
-    entity.pvvs=nettext.text;
-    entity.psize=sizeText.text;
-    entity.pgoldtype=texturetext.text;
-    entity.pweight=maintext.text;
-    entity.customerid=myDelegate.entityl.uId;
-    entity.pprice=womanprice;
-    entity.pname=modellable.text;
-    buyproduct *successadd=[sql addToBuyproduct:entity];
-    buyproduct *successaddman=[[buyproduct alloc]init];
-    if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
-        buyproduct * manentity=[[buyproduct alloc]init];
-        manentity.producttype=goodsman.Pro_Type;
-        manentity.productid=goodsman.Id;
-        manentity.pcount=numberText.text;
-        manentity.pcolor=mamColorText.text;
-        manentity.pdetail=manFontText.text;
-        manentity.pvvs=manNetText.text;
-        manentity.psize=manSizeText.text;
-        manentity.pgoldtype=manTextureText.text;
-        manentity.pweight=mamMainText.text;
-        manentity.customerid=myDelegate.entityl.uId;
-        manentity.pprice=manprice;
-        manentity.pname=goodsman.Pro_model;//modellable.text;
-        sql=[[sqlService alloc]init];
-        successaddman=[sql addToBuyproduct:manentity];
-    }
-    
-    if (successadd && successaddman) {
-        sql=[[sqlService alloc]init];
-        myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
-        NSString *goodscount=myDelegate.entityl.resultcount;
-        if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-            shopcartcount.hidden=NO;
-            [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
-        }else{
-            shopcartcount.hidden=YES;
-        }
-        
-        NSString *rowString =@"成功加入购物车！";
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alter show];
-    } else{
-        NSString *rowString =@"加入购物车失败！";
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alter show];
-    }
-}
-
 //搜索结果数目
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -1399,151 +943,14 @@ NSMutableArray *inlayarryman;
 //点击事件
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    pricelable.text=@"";
     productEntity *entity = [list objectAtIndex:[indexPath row]];
-    primaryShadeView.alpha=0.5;
-    secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.height);
-    secondaryView.center=primaryView.center;
-    secondaryView.hidden = NO;
-    sqlService * sql=[[sqlService alloc] init];
-    productnumber=entity.Id;
-    goods=[sql GetProductDetail:productnumber];
-    Pro_type=goods.Pro_Type;
-    //productimageview.image=[UIImage imageNamed:@"diamonds.png"];
+    prodeuctDetail *prodeuctDetailcontroller = [[prodeuctDetail alloc] initWithNibName:@"prodeuctDetail" bundle:nil];
+    prodeuctDetailcontroller.mydelegate=self;
+    prodeuctDetailcontroller.proid=entity.Id;
     
-    [self hidemenlproduct];
-    
-    title1lable.text=goods.Pro_name;
-    modellable.text=goods.Pro_model;
-    //weightlable.text=goods.Pro_goldWeight;//约重
-    mainlable.text=[NSString stringWithFormat:@"%@ 颗",goods.Pro_Z_count];//goods.Pro_Z_count;
-    fitNolable.text=[NSString stringWithFormat:@"%@ 颗",goods.Pro_f_count];//goods.Pro_f_count;
-    fitweightlable.text=[NSString stringWithFormat:@"%@ ct",goods.Pro_f_weight];
-    //maintext.text=@"111";
-    nettext.text=@"SI";
-    colortext.text=@"I-J";
-    Commons * common=[[Commons alloc]init];
-    texturetext.text=[common getGoldtypename:goods.Pro_goldType];
-    
-    sizetext.text=goods.Pro_goldsize;
-    fonttext.text=nil;
-    numbertext.text=@"1";
-    inlayarry=[[NSMutableArray alloc] init];
-    inlayarryman=[[NSMutableArray alloc] init];
-    sql=[[sqlService alloc] init];
-    inlayarry=[sql getwithmouths:goods.Id];
-    NSMutableArray *mainarry=[[NSMutableArray alloc] init];
-    NSString * AuWeight=nil;
-    for (withmouth *inlay in inlayarry) {
-        [mainarry addObject:inlay.zWeight];
-        if(AuWeight==nil){
-            AuWeight=inlay.AuWeight;
-            weightlable.text=[NSString stringWithFormat:@"%@ g",inlay.AuWeight];//约重
-        }
-    }
-
-    NSMutableArray *mainarryman=[[NSMutableArray alloc] init];
-    
-    NSString * AuWeightman=nil;
-    //如果是对戒，查找男戒数据
-    if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
-        [self showmenlproduct];
-        sqlService * sql=[[sqlService alloc] init];
-        goodsman=[sql GetProductBoyDetail:goods.Id];
-        sql=[[sqlService alloc] init];
-        inlayarryman=[sql getwithmouths:goodsman.Id];
-        for (withmouth *inlayman in inlayarryman) {
-            [mainarryman addObject:inlayman.zWeight];
-            if(AuWeightman==nil){
-                AuWeightman=inlayman.AuWeight;
-                _manMainLabel.text=[NSString stringWithFormat:@"男戒:%@ g",inlayman.AuWeight];
-            }
-        }
-        
-        weightlable.text=[NSString stringWithFormat:@"女戒:%@ g",AuWeight];
-        mainlable.text=[NSString stringWithFormat:@"女戒:%@ 颗",goods.Pro_Z_count];
-        fitNolable.text=[NSString stringWithFormat:@"女戒:%@ 颗",goods.Pro_f_count];
-        float wwight=goods.Pro_f_weight.doubleValue*goods.Pro_f_count.doubleValue;
-        fitweightlable.text=[NSString stringWithFormat:@"女戒:%@ ct",[self notRounding:wwight afterPoint:2]];
-        
-        _manjdLabel.text=[NSString stringWithFormat:@"男戒:%@ 颗",goodsman.Pro_Z_count];
-        _manColorLabel.text=[NSString stringWithFormat:@"男戒:%@ 颗",goodsman.Pro_f_count];
-        _mancjLabel.text=[NSString stringWithFormat:@"男戒:%@ ct",goodsman.Pro_f_weight];
-        manNetText.text=@"SI";
-        mamColorText.text=@"I-J";
-        Commons * common=[[Commons alloc]init];
-        manTextureText.text=[common getGoldtypename:goodsman.Pro_goldType];
-        
-        manSizeText.text=goodsman.Pro_goldsize;
-        manFontText.text=nil;
-    }
-    
-    self.mainlist=mainarry;
-    self.mainmanlist=mainarryman;
-    
-    if(self.mainlist.count>0)
-        maintext.text=[self.mainlist objectAtIndex:0];
-    if (self.mainmanlist>0 && [goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
-        mamMainText.text=[self.mainmanlist objectAtIndex:0];
-    }
-    self.productimageview.layer.cornerRadius=12;
-    self.productimageview.layer.masksToBounds=YES;
-    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",goods.Pro_smallpic]];
-    NSArray  * array= [goods.Pro_bigpic componentsSeparatedByString:@","];
-    //遍历这个数组
-    if ([array count]>0) {
-        imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",[array objectAtIndex: 0]]];
-    }
-
-    if (hasCachedImage(imgUrl)) {
-        [self.productimageview setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
-    }else
-    {
-        [self.productimageview setImage:[UIImage imageNamed:@""]];//diamonds
-        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",self.productimageview,@"imageView",nil];
-        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
-    }
-    
-    //获取商品价格
-    @try {
-        //可以在此加代码提示用户说正在加载数据中
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            // 耗时的操作（异步操作）
-            NSString *proprice=nil;
-            productApi *priceApi=[[productApi alloc]init];
-            womanprice=[priceApi getPrice:goods.Pro_Class goldType:goods.Pro_goldType goldWeight:AuWeight mDiaWeight:maintext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
-            if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
-                
-                manprice=[priceApi getPrice:goodsman.Pro_Class goldType:goodsman.Pro_goldType goldWeight:AuWeightman mDiaWeight:mamMainText.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:goodsman.Pro_f_weight sCount:goodsman.Pro_f_count proid:goodsman.Id];
-                
-                
-                proprice=[NSString stringWithFormat:@"%d",womanprice.intValue+manprice.intValue];
-            }else{
-                proprice=womanprice;
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                if (proprice) {
-                    //pricelable.text=[@"¥" stringByAppendingString:proprice];
-                    NSArray *price=[[NSString stringWithFormat:@"%@",proprice] componentsSeparatedByString:@"."];
-                    pricelable.text=[NSString stringWithFormat:@"¥ %@",[price objectAtIndex:0]];
-                    //pricelable.text=[NSString stringWithFormat:@"¥%@",proprice];
-                }else{
-                    pricelable.text=@"暂无价格信息";
-                }
-                
-            });
-        });
-    }
-    @catch (NSException *exception) {
-        
-    }
-    @finally {
-        
-    }
-    
+    [self presentPopupViewController:prodeuctDetailcontroller animated:YES completion:^(void) {
+        NSLog(@"popup view presented");
+    }];
 }
 
 //保留小数位数
@@ -1584,83 +991,6 @@ NSMutableArray *inlayarryman;
 }
 
 
-//隐藏对戒男戒
--(void)hidemenlproduct{
-    
-    [mamMainText setHidden:TRUE];
-    [manNetText setHidden:TRUE];
-    [mamColorText setHidden:TRUE];
-    [manTextureText setHidden:TRUE];
-    [manSizeText setHidden:TRUE];
-    [manFontText setHidden:TRUE];
-    
-    [_manMainbutton setHidden:TRUE];
-    [_manjdbutton setHidden:TRUE];
-    [_manColorbutton setHidden:TRUE];
-    [_mancjbutton setHidden:TRUE];
-    
-    [_manMainLabel setHidden:TRUE];
-    [_manjdLabel setHidden:TRUE];
-    [_manColorLabel setHidden:TRUE];
-    [_mancjLabel setHidden:TRUE];
-    [button3dman setHidden:TRUE];
-    [button3dwoman setHidden:TRUE];
-    
-    if ([self isexistsfile:goods.Pro_author]) {
-        [button3D setHidden:NO];
-    }else{
-        [button3D setHidden:TRUE];
-    }
-
-}
-//显示对戒男戒
--(void)showmenlproduct{
-    
-    [mamMainText setHidden:NO];
-    [manNetText setHidden:NO];
-    [mamColorText setHidden:NO];
-    [manTextureText setHidden:NO];
-    [manSizeText setHidden:NO];
-    [manFontText setHidden:NO];
-    
-    [_manMainbutton setHidden:NO];
-    [_manjdbutton setHidden:NO];
-    [_manColorbutton setHidden:NO];
-    [_mancjbutton setHidden:NO];
-    
-    [_manMainLabel setHidden:NO];
-    [_manjdLabel setHidden:NO];
-    [_manColorLabel setHidden:NO];
-    [_mancjLabel setHidden:NO];
-    
-    if ([self isexistsfile:goods.Pro_author]) {
-        [button3dman setHidden:NO];
-        [button3dwoman setHidden:NO];
-    }else{
-        [button3dman setHidden:TRUE];
-        [button3dwoman setHidden:TRUE];
-    }
-    [button3D setHidden:TRUE];
-
-}
-
--(void)showmenlproduct:(NSString *)girlid{
-    
-    sqlService * sql=[[sqlService alloc] init];
-    productEntity *goods=[sql GetProductBoyDetail:girlid];
-
-    mamMainText.text=goods.Pro_name;
-    manNetText.text=goods.Pro_model;
-    manTextureText.text=goods.Pro_goldWeight;
-    
-    Commons * common=[[Commons alloc]init];
-    mamColorText.text=[common getGoldtypename:goods.Pro_goldType];
-    
-    manSizeText.text=goods.Pro_goldsize;
-    
-}
-
-
 //购物车删除
 -(IBAction)deleteshoppingcart:(id)sender
 {
@@ -1686,35 +1016,6 @@ NSMutableArray *inlayarryman;
         [alter show];
     }
     
-}
-//女的约重
--(NSString *)getweightg:(NSString *)weig{
-    
-    for (withmouth *inlay in inlayarry) {
-        if ([inlay.zWeight isEqualToString:maintext.text]) {
-            if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
-                weightlable.text=[NSString stringWithFormat:@"女戒:%@ g",inlay.AuWeight];
-            }else{
-                weightlable.text=[NSString stringWithFormat:@"%@ g",inlay.AuWeight];
-            }
-            return inlay.AuWeight;
-        }
-    }
-    
-    return @"";
-    
-}
-//男的约重
--(NSString *)getweightman:(NSString *)weig{
-    
-    for (withmouth *inlayman in inlayarryman) {
-        if ([inlayman.zWeight isEqualToString:mamMainText.text]) {
-            _manMainLabel.text=[NSString stringWithFormat:@"男戒:%@ g",inlayman.AuWeight];
-            return inlayman.AuWeight;
-        }
-    }
-    
-    return @"";
 }
 
 //核对密码
@@ -1745,85 +1046,6 @@ NSMutableArray *inlayarryman;
             UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alter show];
         }
-}
-//展示图片集
--(void)showPhotoBrowser
-{
-    NSMutableArray *photos = [[NSMutableArray alloc] init];
-    //NSMutableArray *thumbs = [[NSMutableArray alloc] init];
-    //MWPhoto *photot;
-    
-    NSArray  * array= [goods.Pro_bigpic componentsSeparatedByString:@","];
-    int count = [array count];
-    //遍历这个数组
-    for (int i = 0; i < count; i++) {
-        //NSLog(@"普通的遍历：i = %d 时的数组对象为: %@",i,[array objectAtIndex: i]);
-        NSString * patht=[NSString stringWithFormat:@"http://seyuu.com%@",[array objectAtIndex: i]];
-        NSURL *imgUrl=[NSURL URLWithString:patht];
-        if (hasCachedImage(imgUrl)) {
-            [photos addObject:[MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]]];
-        }else
-        {
-            [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:patht]]];
-        }
-        
-        //[thumbs addObject:[MWPhoto photoWithURL:[NSURL URLWithString:patht]]];
-    }
-
-    self.photos = photos;
-    //self.thumbs = thumbs;
-    
-//    _selections = [NSMutableArray new];
-//    for (int i = 0; i < photos.count; i++) {
-//        [_selections addObject:[NSNumber numberWithBool:NO]];
-//    }
-    
-    // Create browser
-	MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
-    browser.displayActionButton = NO;
-    browser.displayNavArrows = YES;
-    browser.displaySelectionButtons = NO;
-    browser.alwaysShowControls = NO;
-    browser.zoomPhotosToFill = YES;
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
-    browser.wantsFullScreenLayout = YES;
-#endif
-    browser.enableGrid = NO;
-    browser.startOnGrid = NO;
-    browser.enableSwipeToDismiss = YES;
-    [browser setCurrentPhotoIndex:0];
-    
-    // Push
-    [self.navigationController pushViewController:browser animated:NO];
-
-}
-
-#pragma mark - MWPhotoBrowserDelegate
-
-- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
-    return _photos.count;
-}
-
-- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
-    if (index < _photos.count)
-        return [_photos objectAtIndex:index];
-    return nil;
-}
-
-//- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser thumbPhotoAtIndex:(NSUInteger)index {
-//    if (index < _thumbs.count)
-//        return [_thumbs objectAtIndex:index];
-//    return nil;
-//}
-
-- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
-    //NSLog(@"Did start viewing photo at index %lu", (unsigned long)index);
-}
-
-- (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {
-    // If we subscribe to this method we must dismiss the view controller ourselves
-    //NSLog(@"Did finish modal presentation");
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)refleshBuycutData

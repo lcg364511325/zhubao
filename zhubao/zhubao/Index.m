@@ -244,19 +244,36 @@ UISwipeGestureRecognizer *recognizer;
 //购物车显示
 - (IBAction)goAction:(id)sender
 {
-    primaryShadeView.alpha=0.5;
-    //secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.width);
-    secondaryView.hidden = NO;
-    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    sqlService *shopcar=[[sqlService alloc] init];
-    shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
-    [goodsview reloadData];
+//    primaryShadeView.alpha=0.5;
+//    //secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.width);
+//    secondaryView.hidden = NO;
+//    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+//    sqlService *shopcar=[[sqlService alloc] init];
+//    shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
+//    [goodsview reloadData];
+    
+    
+    
+    test *samplePopupViewController = [[test alloc] initWithNibName:@"test" bundle:nil];
+    samplePopupViewController.mydelegate=self;
+    
+    [self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
+        NSLog(@"popup view presented");
+    }];
 }
 
 - (IBAction)closeAction:(id)sender
 {
     secondaryView.hidden = YES;
     primaryShadeView.alpha=0;
+}
+
+-(void)closeAc{
+    if (self.popupViewController != nil) {
+        [self dismissPopupViewControllerAnimated:YES completion:^{
+            NSLog(@"popup view dismissed");
+        }];
+    }
 }
 
 -(IBAction)setup:(id)sender
@@ -281,9 +298,17 @@ UISwipeGestureRecognizer *recognizer;
     fourthView.hidden=NO;
     //NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:myDelegate.myinfol.details]];
     [aboutus loadRequest:request];
+    aboutus.scrollView.delegate=self;
+    [aboutus.scrollView setShowsHorizontalScrollIndicator:NO];
     
     [fourthView setHidden:NO];
     [biglogo setHidden:YES];
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.x > 0)
+        scrollView.contentOffset=CGPointMake(0, scrollView.contentOffset.y);
 }
 
 -(IBAction)closeaboutus:(id)sender

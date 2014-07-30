@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "ProductCell.h"
-#import <objc/runtime.h>
+#import "AppDelegate.h"
+#import "Index.h"
 
-@interface test : UIViewController<UITextViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
-
-- (IBAction)chooseImage:(id)sender;
+@interface test : UIViewController<UITextViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIApplicationDelegate>
 
 @property (retain, nonatomic) IBOutlet UIImageView *imageView;
+
+@property (nonatomic,assign) id <UIApplicationDelegate> mydelegate;//当前请求过来的对象
 
 @end

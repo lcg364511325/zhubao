@@ -102,6 +102,13 @@ NSInteger whichview=0;
     else {
         [logoImage setImage:[UIImage imageNamed:@"logo"]];
     }
+    
+    if ([[[UIDevice currentDevice]systemVersion]floatValue]>=7.0) {
+        self.edgesForExtendedLayout=UIRectEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars=NO;
+        self.modalPresentationCapturesStatusBarAppearance=NO;
+        self.navigationController.navigationBar.translucent=NO;
+    }
 }
 
 - (void)didReceiveMemoryWarning
