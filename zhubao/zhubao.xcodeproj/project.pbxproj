@@ -35,10 +35,10 @@
 		2C15F833193708BA00E8935B /* member.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C15F831193708BA00E8935B /* member.xib */; };
 		2C20C3D81942B0E000A272A6 /* shoppingcartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C3D61942B0E000A272A6 /* shoppingcartCell.m */; };
 		2C20C3D91942B0E000A272A6 /* shoppingcartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C20C3D71942B0E000A272A6 /* shoppingcartCell.xib */; };
-		2C20E19E1986399F000C82CE /* UIViewController+CWPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C20E19D1986399F000C82CE /* UIViewController+CWPopup.m */; };
 		2C20E1A31986495B000C82CE /* prodeuctDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C20E1A11986495B000C82CE /* prodeuctDetail.m */; };
 		2C20E1A41986495B000C82CE /* prodeuctDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C20E1A21986495B000C82CE /* prodeuctDetail.xib */; };
 		2C2A207B193D674B00A57C00 /* magnifier2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C2A207A193D674B00A57C00 /* magnifier2.png */; };
+		2C2F57301988D08F00A613B2 /* UIViewController+CWPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F572F1988D08F00A613B2 /* UIViewController+CWPopup.m */; };
 		2C3AFBCE1946946C00D3D0A2 /* yellowcolor.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3AFBCC1946946C00D3D0A2 /* yellowcolor.png */; };
 		2C3AFBD01946953600D3D0A2 /* backgroundcolor.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3AFBCF1946953600D3D0A2 /* backgroundcolor.png */; };
 		2C3AFBDA1946E36100D3D0A2 /* Asscher2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C3AFBD11946E36100D3D0A2 /* Asscher2.jpg */; };
@@ -387,12 +387,12 @@
 		2C20C3D51942B0E000A272A6 /* shoppingcartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shoppingcartCell.h; sourceTree = "<group>"; };
 		2C20C3D61942B0E000A272A6 /* shoppingcartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shoppingcartCell.m; sourceTree = "<group>"; };
 		2C20C3D71942B0E000A272A6 /* shoppingcartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = shoppingcartCell.xib; sourceTree = "<group>"; };
-		2C20E19C1986399F000C82CE /* UIViewController+CWPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+CWPopup.h"; path = "../../../../../Downloads/CWPopup-master-3/CWPopup/UIViewController+CWPopup.h"; sourceTree = "<group>"; };
-		2C20E19D1986399F000C82CE /* UIViewController+CWPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+CWPopup.m"; path = "../../../../../Downloads/CWPopup-master-3/CWPopup/UIViewController+CWPopup.m"; sourceTree = "<group>"; };
 		2C20E1A01986495B000C82CE /* prodeuctDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prodeuctDetail.h; sourceTree = "<group>"; };
 		2C20E1A11986495B000C82CE /* prodeuctDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = prodeuctDetail.m; sourceTree = "<group>"; };
 		2C20E1A21986495B000C82CE /* prodeuctDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = prodeuctDetail.xib; sourceTree = "<group>"; };
 		2C2A207A193D674B00A57C00 /* magnifier2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnifier2.png; sourceTree = "<group>"; };
+		2C2F572E1988D08F00A613B2 /* UIViewController+CWPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CWPopup.h"; sourceTree = "<group>"; };
+		2C2F572F1988D08F00A613B2 /* UIViewController+CWPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CWPopup.m"; sourceTree = "<group>"; };
 		2C3AFBCC1946946C00D3D0A2 /* yellowcolor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowcolor.png; sourceTree = "<group>"; };
 		2C3AFBCF1946953600D3D0A2 /* backgroundcolor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundcolor.png; sourceTree = "<group>"; };
 		2C3AFBD11946E36100D3D0A2 /* Asscher2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Asscher2.jpg; sourceTree = "<group>"; };
@@ -828,15 +828,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2C20E19B19863988000C82CE /* Popup */ = {
-			isa = PBXGroup;
-			children = (
-				2C20E19C1986399F000C82CE /* UIViewController+CWPopup.h */,
-				2C20E19D1986399F000C82CE /* UIViewController+CWPopup.m */,
-			);
-			name = Popup;
-			sourceTree = "<group>";
-		};
 		2C20E19F1986466A000C82CE /* productDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -845,6 +836,15 @@
 				2C20E1A21986495B000C82CE /* prodeuctDetail.xib */,
 			);
 			name = productDetail;
+			sourceTree = "<group>";
+		};
+		2C2F572D1988D08E00A613B2 /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				2C2F572E1988D08F00A613B2 /* UIViewController+CWPopup.h */,
+				2C2F572F1988D08F00A613B2 /* UIViewController+CWPopup.m */,
+			);
+			path = Popup;
 			sourceTree = "<group>";
 		};
 		2C5C97EB19349E2100004343 = {
@@ -1249,7 +1249,7 @@
 		7C1BE68F193F3C5F0000E397 /* extend */ = {
 			isa = PBXGroup;
 			children = (
-				2C20E19B19863988000C82CE /* Popup */,
+				2C2F572D1988D08E00A613B2 /* Popup */,
 				7CF03BCD195BFDD900F8FBD5 /* MWPhotoBrowser */,
 				7CF496EC19572A8200F6222E /* YLProgressBar */,
 				7CB20350194461F900FA7FD5 /* ZipArchive */,
@@ -1917,6 +1917,7 @@
 				7CF03C40195BFDDB00F8FBD5 /* PSTCollectionViewItemKey.m in Sources */,
 				2C5C98631935BDA000004343 /* NakedDiamond.m in Sources */,
 				7C1BE6E2193F4C220000E397 /* AutoGetData.m in Sources */,
+				2C2F57301988D08F00A613B2 /* UIViewController+CWPopup.m in Sources */,
 				7C073F2E1948C0C2001BAF12 /* TestViewController.m in Sources */,
 				7CB203651944620D00FA7FD5 /* ioapi.c in Sources */,
 				2C5C983319349ED800004343 /* Index.m in Sources */,
@@ -1944,7 +1945,6 @@
 				2C427E3D194561CC00D71776 /* ProductCell.m in Sources */,
 				7CEF7EFE19420F93005DF8A9 /* NoticeReportCell.m in Sources */,
 				7CF03C3A195BFDDB00F8FBD5 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
-				2C20E19E1986399F000C82CE /* UIViewController+CWPopup.m in Sources */,
 				7CF03C32195BFDDB00F8FBD5 /* MWPhoto.m in Sources */,
 				7CF03C4F195BFDDB00F8FBD5 /* SDWebImageDownloader.m in Sources */,
 				7CF5EA451940203800C63E6D /* productEntity.m in Sources */,
