@@ -752,7 +752,9 @@
             NSString *classsql=[NSString stringWithFormat:@" and Dia_CertNo like '%%%@%%' ",type11];
             querySQL=[querySQL stringByAppendingString:classsql];
         }
-        querySQL=[querySQL stringByAppendingString:[NSString stringWithFormat:@"limit %d offset %d",pageSize,offsetcount]];
+        querySQL=[querySQL stringByAppendingString:[NSString stringWithFormat:@"group by Dia_CertNo limit %d offset %d",pageSize,offsetcount]];
+        
+        
         const char *sql = [querySQL UTF8String];
         if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
             //NSLog(@"Error: failed to prepare statement with message:search TB_MyDoor.");

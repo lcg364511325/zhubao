@@ -17,7 +17,6 @@
 @synthesize primaryView;
 @synthesize secondaryView;
 @synthesize primaryShadeView;
-@synthesize thridaryView;
 @synthesize secondShadeView;
 @synthesize fourtharyView;
 @synthesize thirdShadeView;
@@ -29,22 +28,6 @@
 @synthesize pricemax;
 @synthesize DiamondNo;
 @synthesize Nakeddisplay;
-@synthesize titleLable;
-@synthesize modelLable;
-@synthesize productNoLable;
-@synthesize weightLable;
-@synthesize colorLable;
-@synthesize netLable;
-@synthesize cutLable;
-@synthesize chasingLable;
-@synthesize symmetryLable;
-@synthesize depthLable;
-@synthesize tableLable;
-@synthesize sizeLable;
-@synthesize fluorescenceLable;
-@synthesize diplomaLable;
-@synthesize priceLable;
-@synthesize productimageview;
 @synthesize modelbtn;
 @synthesize colorbtn;
 @synthesize netbtn;
@@ -54,7 +37,6 @@
 @synthesize checkpassword;
 @synthesize nakediacount;
 
-NSString * nakedno=nil;
 NSInteger whichview=0;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -291,7 +273,7 @@ NSInteger whichview=0;
     }
     //编号参数
     NSString *number=DiamondNo.text;
-    productlist=[product GetProductdiaList:shape type2:weight type3:price type4:color type5:net type6:cut type7:chasing type8:symmetry type9:fluorescence type10:diploma type11:number page:1 pageSize:1500];
+    productlist=[product GetProductdiaList:shape type2:weight type3:price type4:color type5:net type6:cut type7:chasing type8:symmetry type9:fluorescence type10:diploma type11:number page:1 pageSize:20000];
     
     [Nakeddisplay reloadData];
     
@@ -310,34 +292,6 @@ NSInteger whichview=0;
     secondaryView.hidden = YES;
     nakediacount.text=@"";
     primaryShadeView.alpha=0;
-}
-
-- (IBAction)goAction1:(id)sender
-{
-    secondShadeView.alpha=0.5;
-    //thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.height);
-    thridaryView.hidden = NO;
-    titleLable.text=@"string";
-    modelLable.text=@"string";
-    productNoLable.text=@"string";
-    weightLable.text=@"string";
-    colorLable.text=@"string";
-    netLable.text=@"string";
-    cutLable.text=@"string";
-    chasingLable.text=@"string";
-    symmetryLable.text=@"string";
-    depthLable.text=@"string";
-    tableLable.text=@"string";
-    sizeLable.text=@"string";
-    fluorescenceLable.text=@"string";
-    diplomaLable.text=@"string";
-    priceLable.text=@"string";
-}
-
-- (IBAction)closeAction1:(id)sender
-{
-    thridaryView.hidden = YES;
-    secondShadeView.alpha=0;
 }
 
 //购物车
@@ -733,72 +687,13 @@ NSInteger whichview=0;
         
     }else{
         productdia *entity = [productlist objectAtIndex:[indexPath row]];
-        nakedno=entity.Id;
-        //    NSString *rowString =[NSString stringWithFormat:@"你点击了：%@",entity.Dia_CertNo];
-        //    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        //    [alter show];
-        secondShadeView.alpha=0.5;
-        thridaryView.frame = CGRectMake(140, 95, thridaryView.frame.size.width, thridaryView.frame.size.height);
-        thridaryView.center=primaryView.center;
-        thridaryView.hidden = NO;
-        //_productimageview.image=[UIImage imageNamed:@"10"];
-        titleLable.text=[[[[[[[[[[entity.Dia_Lab stringByAppendingString:@"裸钻"] stringByAppendingString:@"    ("] stringByAppendingString:entity.Dia_Carat] stringByAppendingString:@"/"] stringByAppendingString:entity.Dia_Col] stringByAppendingString:@"/"] stringByAppendingString:entity.Dia_Clar] stringByAppendingString:@"/"] stringByAppendingString:entity.Dia_Cut] stringByAppendingString:@")"];
-        if ([entity.Dia_Shape isEqualToString:@"RB"]) {
-            modelLable.text=@"圆形";
-            productimageview.image=[UIImage imageNamed:@"round.jpg"];
-        }
-        else if ([entity.Dia_Shape isEqualToString:@"PE"]){
-            modelLable.text=@"公主方";
-            productimageview.image=[UIImage imageNamed:@"princess2.jpg"];
-        }
-        else if ([entity.Dia_Shape isEqualToString:@"EM"]){
-            modelLable.text=@"祖母绿";
-            productimageview.image=[UIImage imageNamed:@"Emerald.jpg"];
-        }
-        else if ([entity.Dia_Shape isEqualToString:@"RD"]){
-            modelLable.text=@"雷蒂恩";
-            productimageview.image=[UIImage imageNamed:@"radiant.jpg"];
-        }
-        else if ([entity.Dia_Shape isEqualToString:@"OL"]){
-            modelLable.text=@"椭圆形";
-            productimageview.image=[UIImage imageNamed:@"Oval.jpg"];
-        }
-        else if ([entity.Dia_Shape isEqualToString:@"MQ"]){
-            modelLable.text=@"橄榄形";
-            productimageview.image=[UIImage imageNamed:@"marquise.jpg"];
-        }
-        else if ([entity.Dia_Shape isEqualToString:@"CU"]){
-            modelLable.text=@"枕形";
-            productimageview.image=[UIImage imageNamed:@"cushion.jpg"];
-        }
-        else if ([entity.Dia_Shape isEqualToString:@"PR"]){
-            modelLable.text=@"梨形";
-            productimageview.image=[UIImage imageNamed:@"Pear2.jpg"];
-        }
-        else if ([entity.Dia_Shape isEqualToString:@"HT"]){
-            modelLable.text=@"心形";
-            productimageview.image=[UIImage imageNamed:@"Heart.jpg"];
-        }
-        else if ([entity.Dia_Shape isEqualToString:@"ASH"]){
-            modelLable.text=@"镭射刑";
-            productimageview.image=[UIImage imageNamed:@"Asscher2.jpg"];
-        }
-        productNoLable.text=entity.Dia_CertNo;
-        weightLable.text=entity.Dia_Carat;
-        colorLable.text=entity.Dia_Col;
-        netLable.text=entity.Dia_Clar;
-        cutLable.text=entity.Dia_Cut;
-        chasingLable.text=entity.Dia_Pol;
-        symmetryLable.text=entity.Dia_Sym;
-        depthLable.text=entity.Dia_Dep;
-        tableLable.text=entity.Dia_Tab;
-        sizeLable.text=entity.Dia_Meas;
-        fluorescenceLable.text=entity.Dia_Flor;
-        diplomaLable.text=entity.Dia_Lab;
-        NSArray *price=[entity.Dia_Price componentsSeparatedByString:@"."];
-        priceLable.text=[@"¥" stringByAppendingString:[price objectAtIndex:0]];
+        NakedDiamondDetail *prodeuctDetailcontroller = [[NakedDiamondDetail alloc] initWithNibName:@"NakedDiamondDetail" bundle:nil];
+        prodeuctDetailcontroller.mydelegate=self;
+        prodeuctDetailcontroller.naid=entity.Id;
         
-        //Nakeddisplay.hidden=YES;
+        [self presentPopupViewController:prodeuctDetailcontroller animated:YES completion:^(void) {
+            NSLog(@"popup view presented");
+        }];
     }
     
 }
@@ -1200,40 +1095,6 @@ NSInteger whichview=0;
     }
 }
 
-//加入购物车
--(IBAction)addshopcart:(id)sender{
-    sqlService * sql=[[sqlService alloc]init];
-    productdia * proentity=[sql GetProductdiaDetail:nakedno];
-    buyproduct * entity=[[buyproduct alloc]init];
-    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    entity.producttype=@"3";
-    entity.productid=nakedno;
-    entity.pcount=@"1";
-    entity.pcolor=proentity.Dia_Col;
-    entity.pvvs=proentity.Dia_Clar;
-    entity.psize=proentity.Dia_Meas;
-    entity.pweight=proentity.Dia_Carat;
-    entity.customerid=myDelegate.entityl.uId;
-    entity.pprice=proentity.Dia_Price;
-    entity.pname=proentity.Dia_CertNo;
-    sql=[[sqlService alloc]init];
-    buyproduct *successadd=[sql addToBuyproduct:entity];
-    if (successadd) {
-        sql=[[sqlService alloc]init];
-        myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
-        shopcartcount.hidden=NO;
-        [shopcartcount setTitle:myDelegate.entityl.resultcount forState:UIControlStateNormal];
-        
-        NSString *rowString =@"成功加入购物车！";
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alter show];
-    } else{
-        NSString *rowString =@"加入购物车失败！";
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alter show];
-    }
-}
-
 //点击tableview以外得地方关闭
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -1264,6 +1125,15 @@ NSInteger whichview=0;
     shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
     [goodsview reloadData];
     
+}
+
+-(void)closeAction1
+{
+    if (self.popupViewController != nil) {
+        [self dismissPopupViewControllerAnimated:YES completion:^{
+            NSLog(@"popup view dismissed");
+        }];
+    }
 }
 
 @end

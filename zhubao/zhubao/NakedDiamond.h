@@ -15,6 +15,7 @@
 #import "NoticeReportCell.h"
 #import "sqlService.h"
 #import "shoppingcartCell.h"
+#import "NakedDiamondDetail.h"
 
 @interface NakedDiamond : UIViewController<UIApplicationDelegate>
 {
@@ -36,7 +37,6 @@
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondaryView;
 @property (retain, nonatomic) IBOutlet UIView *primaryShadeView;
-@property (retain, nonatomic) IBOutlet UIView *thridaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondShadeView;
 @property (retain, nonatomic) IBOutlet UIView *fourtharyView;
 @property (retain, nonatomic) IBOutlet UIView *thirdShadeView;
@@ -48,22 +48,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *pricemax;
 @property (weak, nonatomic) IBOutlet UITextField *DiamondNo;
 @property (weak, nonatomic) IBOutlet UITableView *Nakeddisplay;
-@property (weak, nonatomic) IBOutlet UIImageView *productimageview;
-@property (weak, nonatomic) IBOutlet UILabel *titleLable;
-@property (weak, nonatomic) IBOutlet UILabel *modelLable;
-@property (weak, nonatomic) IBOutlet UILabel *productNoLable;
-@property (weak, nonatomic) IBOutlet UILabel *weightLable;
-@property (weak, nonatomic) IBOutlet UILabel *colorLable;
-@property (weak, nonatomic) IBOutlet UILabel *netLable;
-@property (weak, nonatomic) IBOutlet UILabel *cutLable;
-@property (weak, nonatomic) IBOutlet UILabel *chasingLable;
-@property (weak, nonatomic) IBOutlet UILabel *symmetryLable;
-@property (weak, nonatomic) IBOutlet UILabel *depthLable;
-@property (weak, nonatomic) IBOutlet UILabel *tableLable;
-@property (weak, nonatomic) IBOutlet UILabel *sizeLable;
-@property (weak, nonatomic) IBOutlet UILabel *fluorescenceLable;
-@property (weak, nonatomic) IBOutlet UILabel *diplomaLable;
-@property (weak, nonatomic) IBOutlet UILabel *priceLable;
 @property (weak, nonatomic) IBOutlet UIButton *modelbtn;
 @property (weak, nonatomic) IBOutlet UIButton *colorbtn;
 @property (weak, nonatomic) IBOutlet UIButton *netbtn;

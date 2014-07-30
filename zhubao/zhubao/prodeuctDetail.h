@@ -60,6 +60,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titlelable;//产品标题
 @property (weak, nonatomic) IBOutlet UILabel *pricelable;//产品价格
 @property (weak, nonatomic) IBOutlet UIButton *closebutton;
+@property (weak, nonatomic) IBOutlet UILabel *kelalable;//克拉
 
 @property (strong, nonatomic) NSArray *mainlist;
 @property (strong, nonatomic) NSArray *dmainlist;

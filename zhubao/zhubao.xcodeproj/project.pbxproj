@@ -39,6 +39,8 @@
 		2C20E1A41986495B000C82CE /* prodeuctDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C20E1A21986495B000C82CE /* prodeuctDetail.xib */; };
 		2C2A207B193D674B00A57C00 /* magnifier2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C2A207A193D674B00A57C00 /* magnifier2.png */; };
 		2C2F57301988D08F00A613B2 /* UIViewController+CWPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F572F1988D08F00A613B2 /* UIViewController+CWPopup.m */; };
+		2C2F57371988E71A00A613B2 /* NakedDiamondDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F57351988E71A00A613B2 /* NakedDiamondDetail.m */; };
+		2C2F57381988E71A00A613B2 /* NakedDiamondDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C2F57361988E71A00A613B2 /* NakedDiamondDetail.xib */; };
 		2C3AFBCE1946946C00D3D0A2 /* yellowcolor.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3AFBCC1946946C00D3D0A2 /* yellowcolor.png */; };
 		2C3AFBD01946953600D3D0A2 /* backgroundcolor.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3AFBCF1946953600D3D0A2 /* backgroundcolor.png */; };
 		2C3AFBDA1946E36100D3D0A2 /* Asscher2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C3AFBD11946E36100D3D0A2 /* Asscher2.jpg */; };
@@ -393,6 +395,9 @@
 		2C2A207A193D674B00A57C00 /* magnifier2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnifier2.png; sourceTree = "<group>"; };
 		2C2F572E1988D08F00A613B2 /* UIViewController+CWPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CWPopup.h"; sourceTree = "<group>"; };
 		2C2F572F1988D08F00A613B2 /* UIViewController+CWPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CWPopup.m"; sourceTree = "<group>"; };
+		2C2F57341988E71A00A613B2 /* NakedDiamondDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDiamondDetail.h; sourceTree = "<group>"; };
+		2C2F57351988E71A00A613B2 /* NakedDiamondDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDiamondDetail.m; sourceTree = "<group>"; };
+		2C2F57361988E71A00A613B2 /* NakedDiamondDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NakedDiamondDetail.xib; sourceTree = "<group>"; };
 		2C3AFBCC1946946C00D3D0A2 /* yellowcolor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowcolor.png; sourceTree = "<group>"; };
 		2C3AFBCF1946953600D3D0A2 /* backgroundcolor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundcolor.png; sourceTree = "<group>"; };
 		2C3AFBD11946E36100D3D0A2 /* Asscher2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Asscher2.jpg; sourceTree = "<group>"; };
@@ -847,6 +852,16 @@
 			path = Popup;
 			sourceTree = "<group>";
 		};
+		2C2F57331988D13600A613B2 /* NakedDiamondDetail */ = {
+			isa = PBXGroup;
+			children = (
+				2C2F57341988E71A00A613B2 /* NakedDiamondDetail.h */,
+				2C2F57351988E71A00A613B2 /* NakedDiamondDetail.m */,
+				2C2F57361988E71A00A613B2 /* NakedDiamondDetail.xib */,
+			);
+			name = NakedDiamondDetail;
+			sourceTree = "<group>";
+		};
 		2C5C97EB19349E2100004343 = {
 			isa = PBXGroup;
 			children = (
@@ -889,6 +904,7 @@
 		2C5C97FD19349E2100004343 /* zhubao */ = {
 			isa = PBXGroup;
 			children = (
+				2C2F57331988D13600A613B2 /* NakedDiamondDetail */,
 				2C20E19F1986466A000C82CE /* productDetail */,
 				7CEF7EFA19420F70005DF8A9 /* TableCell */,
 				7C1BE68F193F3C5F0000E397 /* extend */,
@@ -1796,6 +1812,7 @@
 				7B7FFD9B193853CA008712CB /* option.png in Resources */,
 				7CF945F4194E95D600E647C1 /* logo.png in Resources */,
 				7C10771B1941AFF4005187B9 /* Seq_v04_640x378_11.jpg in Resources */,
+				2C2F57381988E71A00A613B2 /* NakedDiamondDetail.xib in Resources */,
 				7C1077331941AFF4005187B9 /* Seq_v04_640x378_33.jpg in Resources */,
 				7B7FFD90193853CA008712CB /* exhibition.png in Resources */,
 				7B7FFDAC193853CA008712CB /* vip.png in Resources */,
@@ -1913,6 +1930,7 @@
 				7C1BE6D6193F3D1A0000E397 /* WebService.m in Sources */,
 				7CB203451944583600FA7FD5 /* ASIAuthenticationDialog.m in Sources */,
 				2C01B4FA1939BBD100C08C2E /* ceshi.m in Sources */,
+				2C2F57371988E71A00A613B2 /* NakedDiamondDetail.m in Sources */,
 				7C02213C195E985B002CBB7D /* RotateImageView.m in Sources */,
 				7CF03C40195BFDDB00F8FBD5 /* PSTCollectionViewItemKey.m in Sources */,
 				2C5C98631935BDA000004343 /* NakedDiamond.m in Sources */,

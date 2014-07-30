@@ -58,6 +58,7 @@
 @synthesize pricelable;//产品价格
 @synthesize childview;//3D视图
 @synthesize closebutton;//关闭按钮
+@synthesize kelalable;
 
 @synthesize mainlist=_mainlist;
 @synthesize dmainlist=_dmainlist;
@@ -203,6 +204,8 @@ NSInteger selecttype=0;
     [show3Dman setHidden:TRUE];
     [show3Dwoman setHidden:TRUE];
     
+    [kelalable setHidden:NO];
+    
     if ([self isexistsfile:goods.Pro_author]) {
         [show3D setHidden:NO];
         
@@ -211,6 +214,7 @@ NSInteger selecttype=0;
         NSLog(@"%f和%f",addtoshopcart.frame.origin.x,addtoshopcart.frame.origin.y);
     }else{
         [show3D setHidden:TRUE];
+        addtoshopcart.frame=CGRectMake(150, 480, 180, 50);
     }
     
 }
@@ -227,19 +231,25 @@ NSInteger selecttype=0;
     [dmainselect setHidden:NO];
     [dnetselect setHidden:NO];
     [dcolorselect setHidden:NO];
-    [dtexturetext setHidden:NO];
+    [dtextureselect setHidden:NO];
     
     [dweighlable setHidden:NO];
     [dmiannanolable setHidden:NO];
     [dfitnanolable setHidden:NO];
     [dfitweighlable setHidden:NO];
     
+    [kelalable setHidden:TRUE];
+    
     if ([self isexistsfile:goods.Pro_author]) {
         [show3Dman setHidden:NO];
         [show3Dwoman setHidden:NO];
+        addtoshopcart.frame=CGRectMake(25, 480, 180, 50);
+        show3Dman.frame=CGRectMake(220, 480, 110, 50);
+        show3Dwoman.frame=CGRectMake(345, 480, 110, 50);
     }else{
         [show3Dman setHidden:TRUE];
         [show3Dwoman setHidden:TRUE];
+        addtoshopcart.frame=CGRectMake(150, 480, 180, 50);
     }
     [show3D setHidden:TRUE];
     
@@ -374,6 +384,9 @@ NSInteger selecttype=0;
     }
     self.productpic.layer.cornerRadius=12;
     self.productpic.layer.masksToBounds=YES;
+    CALayer *layer = [productpic layer];
+    layer.borderColor=[UIColor colorWithRed:133.0/255.0 green:130.0/255.0 blue:154.0/255.0 alpha:1.0].CGColor;
+    layer.borderWidth=1.0f;
     NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",goods.Pro_smallpic]];
     NSArray  * array= [goods.Pro_bigpic componentsSeparatedByString:@","];
     //遍历这个数组
@@ -860,7 +873,8 @@ NSInteger selecttype=0;
     [browser setWantsFullScreenLayout:NO];
     
     // Push
-    [self presentViewController:browser animated:NO completion:nil];
+    [self presentViewController:browser animated:YES completion:nil];
+    //[self dismissViewControllerAnimated:YES completion:nil];
     //[self.navigationController pushViewController:browser animated:NO];
     //[self presentPopupViewController:browser animated:YES completion:^(void) {
     //    NSLog(@"popup view presented");

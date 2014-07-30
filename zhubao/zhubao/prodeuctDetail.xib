@@ -30,6 +30,7 @@
                 <outlet property="fitnanolable" destination="uow-Q5-sdU" id="0AQ-Is-kih"/>
                 <outlet property="fitnaweighlable" destination="iRY-8M-H51" id="qsB-aF-vcW"/>
                 <outlet property="fonttext" destination="t5g-qb-mFr" id="55l-tF-Fl6"/>
+                <outlet property="kelalable" destination="t1b-TJ-khw" id="UBB-rf-72i"/>
                 <outlet property="mainnanolable" destination="9BU-Cj-wG1" id="9Ff-Eu-FxT"/>
                 <outlet property="mainselect" destination="9RG-c8-A6v" id="hg9-pf-oLT"/>
                 <outlet property="miantable" destination="mv2-g2-fgJ" id="gzw-Gs-acr"/>
@@ -414,6 +415,13 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
                             <color key="textColor" red="0.98038903060000004" green="0.05463073442" blue="0.097201847829999993" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="克拉" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="t1b-TJ-khw">
+                            <rect key="frame" x="681" y="255" width="42" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.68490911989795911" green="0.58673985076136148" blue="0.41868756980684591" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
