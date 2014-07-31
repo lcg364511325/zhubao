@@ -16,6 +16,7 @@
 #import "sqlService.h"
 #import "shoppingcartCell.h"
 #import "NakedDiamondDetail.h"
+#import "shopcart.h"
 
 @interface NakedDiamond : UIViewController<UIApplicationDelegate>
 {
@@ -38,7 +39,6 @@
 @property (retain, nonatomic) IBOutlet UIView *secondaryView;
 @property (retain, nonatomic) IBOutlet UIView *primaryShadeView;
 @property (retain, nonatomic) IBOutlet UIView *secondShadeView;
-@property (retain, nonatomic) IBOutlet UIView *fourtharyView;
 @property (retain, nonatomic) IBOutlet UIView *thirdShadeView;
 @property (retain, nonatomic) IBOutlet UIView *fivetharyView;
 @property (retain, nonatomic) IBOutlet UIView *sixview;
@@ -51,7 +51,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *modelbtn;
 @property (weak, nonatomic) IBOutlet UIButton *colorbtn;
 @property (weak, nonatomic) IBOutlet UIButton *netbtn;
-@property (weak, nonatomic) IBOutlet UITableView *goodsview;
 @property (weak, nonatomic) IBOutlet UIButton *shopcartcount;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 @property (weak, nonatomic) IBOutlet UITextField *checkpassword;
@@ -62,10 +61,7 @@
 
 - (IBAction)goAction:(id)sender;
 - (IBAction)closeAction:(id)sender;
-- (IBAction)goAction1:(id)sender;
-- (IBAction)closeAction1:(id)sender;
 - (IBAction)goAction2:(id)sender;
-- (IBAction)closeAction2:(id)sender;
 
 -(void)refleshBuycutData;
 

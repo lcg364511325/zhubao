@@ -12,6 +12,7 @@
 #import "NakedDiamond.h"
 #import "ustomtailor.h"
 #import "member.h"
+#import "shopcart.h"
 
 @interface diploma : UIViewController<UITableViewDelegate, UITableViewDataSource,UIApplicationDelegate>
 {
@@ -19,8 +20,6 @@
 }
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
-@property (retain, nonatomic) IBOutlet UIView *secondaryView;
-@property (retain, nonatomic) IBOutlet UIView *primaryShadeView;
 @property (retain, nonatomic) IBOutlet UIView *thirdView;
 @property (retain, nonatomic) IBOutlet UIView *fourthview;
 @property (weak, nonatomic) IBOutlet UITableView *DiplomaSelect;
@@ -28,7 +27,6 @@
 @property (strong, nonatomic) NSArray *list;
 @property (weak, nonatomic) IBOutlet UITextField *dipomaNoText;
 @property (weak, nonatomic) IBOutlet UITextField *diamondWeightText;
-@property (weak, nonatomic) IBOutlet UITableView *goodsview;
 @property (weak, nonatomic) IBOutlet UILabel *dipomaIndex;
 @property (weak, nonatomic) IBOutlet UILabel *selectText;
 @property (weak, nonatomic) IBOutlet UIButton *shopcartcount;
@@ -40,7 +38,6 @@
 
 
 - (IBAction)goAction:(id)sender;
-- (IBAction)closeAction:(id)sender;
 
 -(void)refleshBuycutData;
 

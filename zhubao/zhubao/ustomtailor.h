@@ -13,6 +13,7 @@
 #import "diploma.h"
 #import "member.h"
 #import "shoppingcartCell.h"
+#import "shopcart.h"
 
 @interface ustomtailor : UIViewController<UITextViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIApplicationDelegate>
 {
@@ -26,7 +27,6 @@
     NSMutableArray *shoppingcartlist;
 }
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
-@property (retain, nonatomic) IBOutlet UIView *secondaryView;
 @property (retain, nonatomic) IBOutlet UIView *primaryShadeView;
 @property (retain, nonatomic) IBOutlet UIView *thirdaryView;
 @property (retain, nonatomic) IBOutlet UIView *fourthview;
@@ -43,17 +43,16 @@
 @property (weak, nonatomic) IBOutlet UIImageView *zhengmianview;
 @property (weak, nonatomic) IBOutlet UIImageView *fanmianview;
 @property (weak, nonatomic) IBOutlet UIImageView *cemianview;
-@property (weak, nonatomic) IBOutlet UITableView *goodsview;
 @property (weak, nonatomic) IBOutlet UIButton *shopcartcount;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 @property (weak, nonatomic) IBOutlet UITextField *checkpassword;
+@property (weak, nonatomic) IBOutlet UIButton *texturebutton;
 
 @property (weak, nonatomic) IBOutlet UIButton *settingupdate;
 @property (weak, nonatomic) IBOutlet UIButton *settinglogout;
 @property (weak, nonatomic) IBOutlet UIButton *settingsoftware;
 
 - (IBAction)goAction:(id)sender;
-- (IBAction)closeAction:(id)sender;
 
 -(void)refleshBuycutData;
 

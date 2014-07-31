@@ -15,7 +15,6 @@
                 <outlet property="countLable" destination="FRE-oe-p86" id="hbc-Hz-HpF"/>
                 <outlet property="fivethview" destination="S2l-uc-fUt" id="MVe-GL-NEb"/>
                 <outlet property="fourthView" destination="Yau-vH-R2D" id="jeJ-vu-FVo"/>
-                <outlet property="goodsview" destination="oDv-RG-cIJ" id="Zbj-Kz-MPe"/>
                 <outlet property="logoImage" destination="dUx-sO-BI7" id="xBy-zk-crB"/>
                 <outlet property="primaryShadeView" destination="pSa-na-GF5" id="adN-VY-9Ce"/>
                 <outlet property="primaryView" destination="cHw-ci-yep" id="SnW-jH-zWj"/>
@@ -25,7 +24,6 @@
                 <outlet property="settingsoftware" destination="xBx-2J-jiJ" id="fdi-1C-iBj"/>
                 <outlet property="settingupdate" destination="uQ8-d7-gtc" id="eec-3n-Vpz"/>
                 <outlet property="shopcartcount" destination="QFd-8q-fBE" id="yEO-Le-gRg"/>
-                <outlet property="thridaryView" destination="Qdl-mF-xKw" id="KGU-xf-K8g"/>
                 <outlet property="view" destination="zhU-FC-Wwo" id="sHx-kA-oXV"/>
             </connections>
         </placeholder>
@@ -134,6 +132,9 @@
                             <state key="normal" title="100" backgroundImage="shopround.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="mainselect:" destination="-1" eventType="touchDown" id="76q-Ig-vy3"/>
+                            </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="option.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xkm-b8-chc" userLabel="Image View -分类">
                             <rect key="frame" x="110" y="73" width="914" height="119"/>
@@ -641,55 +642,6 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <view hidden="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qdl-mF-xKw">
-                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nKF-Sp-JA7">
-                            <rect key="frame" x="152" y="109" width="720" height="550"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="shopping_cart.png" translatesAutoresizingMaskIntoConstraints="NO" id="QcL-Ox-fFr">
-                                    <rect key="frame" x="-1" y="0.0" width="720" height="550"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </imageView>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="40" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oDv-RG-cIJ">
-                                    <rect key="frame" x="20" y="106" width="688" height="360"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <connections>
-                                        <outlet property="dataSource" destination="-1" id="TOc-BN-Csa"/>
-                                        <outlet property="delegate" destination="-1" id="m43-gI-OLc"/>
-                                    </connections>
-                                </tableView>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qsc-EF-idz">
-                                    <rect key="frame" x="305" y="483" width="131" height="35"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="提交" image="submit.png">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="submitorder:" destination="-1" eventType="touchDown" id="dbY-7J-ccn"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                        </view>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJl-1Z-78s">
-                            <rect key="frame" x="851" y="88" width="40" height="40"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="关闭" image="close.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="closeAction1:" destination="-1" eventType="touchDown" id="3SD-8f-vzq"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                </view>
                 <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yau-vH-R2D">
                     <rect key="frame" x="412" y="284" width="200" height="200"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -790,7 +742,6 @@
         <image name="axe.png" width="87" height="95"/>
         <image name="backgroundcolor.png" width="88" height="88"/>
         <image name="bg.png" width="218" height="136"/>
-        <image name="close.png" width="79" height="79"/>
         <image name="consort.png" width="82" height="90"/>
         <image name="count.png" width="1830" height="80"/>
         <image name="diamond.png" width="82" height="87"/>
@@ -802,7 +753,6 @@
         <image name="options_sedBg.png" width="1" height="55"/>
         <image name="page.png" width="2048" height="1536"/>
         <image name="ring.png" width="82" height="96"/>
-        <image name="shopping_cart.png" width="1582" height="1208"/>
         <image name="shoppingcart.png" width="87" height="66"/>
         <image name="shopround.png" width="52" height="52"/>
         <image name="submit.png" width="330" height="88"/>

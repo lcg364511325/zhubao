@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "shopcart.h"
 
 @interface shoppingcartCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *showImage;
@@ -21,5 +22,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *chasing;
 @property (weak, nonatomic) IBOutlet UILabel *fluLable;
 @property (weak, nonatomic) IBOutlet UILabel *priceLable;
+@property (weak, nonatomic) IBOutlet UIButton *deleteshopcart;
 
 @end

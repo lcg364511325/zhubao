@@ -12,11 +12,9 @@
                 <outlet property="checkpassword" destination="OSN-ei-uRs" id="WuU-PR-zzN"/>
                 <outlet property="fivethview" destination="LLa-ww-A4H" id="11X-lB-XEa"/>
                 <outlet property="fourthView" destination="BvX-Xl-utm" id="Vba-UU-5Cj"/>
-                <outlet property="goodsview" destination="iFN-51-r1N" id="bai-ml-aOJ"/>
                 <outlet property="logoImage" destination="nEw-Ns-Qvp" id="XWP-RZ-Tp8"/>
                 <outlet property="primaryShadeView" destination="aBG-Q3-34l" id="oMz-QS-bX1"/>
                 <outlet property="primaryView" destination="rXR-Pn-ahE" id="sgS-xe-8CZ"/>
-                <outlet property="secondaryView" destination="99b-j4-Sng" id="t9Y-tA-yo5"/>
                 <outlet property="settinglogout" destination="QlF-XE-v55" id="w3k-0l-Wee"/>
                 <outlet property="settingsoftware" destination="iuX-Re-6le" id="7hF-7k-c2r"/>
                 <outlet property="settingupdate" destination="Jok-Uh-ZZn" id="h4p-uH-QS1"/>
@@ -220,55 +218,6 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </view>
-                <view hidden="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="99b-j4-Sng">
-                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eEh-DG-jL3">
-                            <rect key="frame" x="127" y="91" width="720" height="550"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="shopping_cart.png" translatesAutoresizingMaskIntoConstraints="NO" id="mPu-mQ-FC8">
-                                    <rect key="frame" x="-1" y="0.0" width="720" height="550"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </imageView>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="40" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="iFN-51-r1N">
-                                    <rect key="frame" x="19" y="106" width="689" height="360"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <connections>
-                                        <outlet property="dataSource" destination="-1" id="Sbd-iv-4Wo"/>
-                                        <outlet property="delegate" destination="-1" id="FUs-Ly-MEa"/>
-                                    </connections>
-                                </tableView>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Pn-7d-lY1">
-                                    <rect key="frame" x="305" y="483" width="131" height="35"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="提交" image="submit.png">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="submitorder:" destination="-1" eventType="touchUpInside" id="UQz-fl-byS"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                        </view>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ee-hj-rdz">
-                            <rect key="frame" x="826" y="70" width="40" height="40"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="关闭" image="close.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="closeAction:" destination="-1" eventType="touchDown" id="zA1-hM-aXr"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                </view>
                 <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ORn-vH-567">
                     <rect key="frame" x="750" y="66" width="200" height="200"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -335,7 +284,6 @@
         <image name="magnifier.png" width="81" height="90"/>
         <image name="page.png" width="2048" height="1536"/>
         <image name="ring.png" width="82" height="96"/>
-        <image name="shopping_cart.png" width="1582" height="1208"/>
         <image name="shoppingcart.png" width="87" height="66"/>
         <image name="shopround.png" width="52" height="52"/>
         <image name="submit.png" width="330" height="88"/>

@@ -375,7 +375,7 @@ UILabel *titlelabel;
         [alter dismissWithClickedButtonIndex:0 animated:YES];
         
         //Use when fetching text data
-        //NSString *responseString = [request responseString];
+        NSString *responseString = [request responseString];
         
         //Use when fetching binary data
         NSData *jsonData = [request responseData];

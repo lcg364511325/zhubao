@@ -563,7 +563,7 @@
 	_performingLayout = NO;
     
     UIImage* image= [UIImage imageNamed:@"close"];
-    CGRect frame_1= CGRectMake(self.view.frame.size.width-152, 0, 48, 48);
+    CGRect frame_1= CGRectMake(self.view.frame.size.width-175, 0, 48, 48);
     UIButton *btnBack= [[UIButton alloc] initWithFrame:frame_1];
     [btnBack setBackgroundImage:image forState:UIControlStateNormal];
     [btnBack addTarget:self action:@selector(closeImageView) forControlEvents:UIControlEventTouchUpInside];

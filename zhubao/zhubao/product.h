@@ -21,9 +21,9 @@
 #import "TestViewController.h"
 #import "RotateImageView.h"
 #import "productApi.h"
-#import "shoppingcartCell.h"
 #import "MWPhotoBrowser.h"
 #import "prodeuctDetail.h"
+#import "shopcart.h"
 
 @interface product : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UIApplicationDelegate>
 {
@@ -48,7 +48,6 @@
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
 @property (retain, nonatomic) IBOutlet UIView *primaryShadeView;
-@property (retain, nonatomic) IBOutlet UIView *thridaryView;
 @property (retain, nonatomic) IBOutlet UIView *secondShadeView;
 @property (retain, nonatomic) IBOutlet UIView *fourthView;
 @property (retain, nonatomic) IBOutlet UIView *fivethview;
@@ -64,7 +63,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *btntexture;
 @property (weak, nonatomic) IBOutlet UIButton *btninlay;
 @property (weak, nonatomic) IBOutlet UIButton *btnseric;
-@property (weak, nonatomic) IBOutlet UITableView *goodsview;
 @property (weak, nonatomic) IBOutlet UIButton *shopcartcount;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 @property (weak, nonatomic) IBOutlet UITextField *checkpassword;
@@ -72,9 +70,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *settingupdate;
 @property (weak, nonatomic) IBOutlet UIButton *settinglogout;
 @property (weak, nonatomic) IBOutlet UIButton *settingsoftware;
-
-- (IBAction)goAction1:(id)sender;
-- (IBAction)closeAction1:(id)sender;
 
 -(void)refleshBuycutData;
 

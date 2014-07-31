@@ -449,9 +449,9 @@
         <image name="drop-down.png" width="62" height="62"/>
         <image name="exhibition.png" width="277" height="106"/>
         <image name="magnifier2.png" width="246" height="46"/>
-        <image name="man_exhibition.png" width="277" height="106"/>
+        <image name="man_exhibition.png" width="110" height="50"/>
         <image name="shopping.png" width="400" height="110"/>
-        <image name="women_exhibition.png" width="277" height="106"/>
+        <image name="women_exhibition.png" width="110" height="50"/>
         <image name="writetextbox.png" width="232" height="62"/>
     </resources>
 </document>
