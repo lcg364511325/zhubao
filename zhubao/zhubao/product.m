@@ -740,6 +740,17 @@ NSMutableArray *list=nil;
     return cell;
 }
 
+//点击tableview以外的地方触发事件
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint pt = [touch locationInView:self.view];
+    if (!CGRectContainsPoint([fourthView frame], pt)) {
+        //to-do
+        fourthView.hidden=YES;
+    }
+}
+
 //点击事件
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {

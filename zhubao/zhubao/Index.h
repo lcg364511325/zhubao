@@ -19,6 +19,8 @@
 #import "AutoGetData.h"
 #import "UIViewController+CWPopup.h"
 #import "shopcart.h"
+#import "test.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface Index : UIViewController<UIWebViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate,UIApplicationDelegate>
 {

@@ -295,6 +295,17 @@ UIButton* btnBack;
     btnBack=nil;
 }
 
+//点击tableview以外的地方触发事件
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint pt = [touch locationInView:self.view];
+    if (!CGRectContainsPoint([fiftharyView frame], pt)) {
+        //to-do
+        fiftharyView.hidden=YES;
+    }
+}
+
 // 更新ui
 -(IBAction)updateUI:(id)sender
 {

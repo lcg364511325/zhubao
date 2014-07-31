@@ -214,7 +214,13 @@ UISwipeGestureRecognizer *recognizer;
 -(IBAction)doReg1:(id)sender
 {
     NakedDiamond * _NakedDiamond = [[NakedDiamond alloc] init];
-    
+//    CATransition *transtion = [CATransition animation];
+//    transtion.duration = 0.5;
+//    [transtion setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+//    [transtion setType:kCATransitionReveal];
+//    [transtion setSubtype:kCATransitionFromTop];
+//    
+//    [_NakedDiamond.view.layer addAnimation:transtion forKey:nil];
     [self.navigationController pushViewController:_NakedDiamond animated:NO];
 }
 
