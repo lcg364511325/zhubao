@@ -486,7 +486,7 @@ NSInteger selecttype=0;
         if(img)[imgArray addObject:img];
     }
     
-    CGRect frame_0= CGRectMake(childview.frame.origin.x, childview.frame.origin.y, childview.frame.size.width, childview.frame.size.height+20);
+    CGRect frame_0= CGRectMake(childview.frame.origin.x-30, childview.frame.origin.y-30, childview.frame.size.width+90, childview.frame.size.height+120);
     rImageView=[[RotateImageView alloc]initWithFrame:frame_0];
     rImageView.animationImages=imgArray;
     [rImageView setUserInteractionEnabled:YES];
@@ -499,7 +499,7 @@ NSInteger selecttype=0;
     [rImageView initTimer];
     
     UIImage* image= [UIImage imageNamed:@"close"];
-    CGRect frame_1= CGRectMake(closebutton.frame.origin.x, closebutton.frame.origin.y, 40, 40);
+    CGRect frame_1= CGRectMake(closebutton.frame.origin.x+60, closebutton.frame.origin.y-30, 40, 40);
     btnBack= [[UIButton alloc] initWithFrame:frame_1];
     [btnBack setBackgroundImage:image forState:UIControlStateNormal];
     [btnBack addTarget:self action:@selector(closeImageView) forControlEvents:UIControlEventTouchUpInside];
