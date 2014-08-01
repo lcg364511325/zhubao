@@ -139,6 +139,14 @@ NSInteger whichview=0;
     primaryShadeView.alpha=0.5;
     //secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.height);
     //secondaryView.center=primaryView.center;
+    CATransition *transtion = [CATransition animation];
+    transtion.duration = 0.5;
+    [transtion setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    [transtion setType:kCATransitionPush];
+    [transtion setSubtype:kCATransitionFromTop];
+    
+    [secondaryView.layer addAnimation:transtion forKey:nil];
+
     secondaryView.hidden = NO;
     sqlService *product=[[sqlService alloc] init];
     //形状参数
@@ -287,6 +295,12 @@ NSInteger whichview=0;
 
 - (IBAction)closeAction:(id)sender
 {
+    CATransition *transtion = [CATransition animation];
+    transtion.duration = 0.5;
+    [transtion setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    [transtion setType:kCATransitionPush];
+    [transtion setSubtype:kCATransitionFromBottom];
+    [secondaryView.layer addAnimation:transtion forKey:nil];
     secondaryView.hidden = YES;
     nakediacount.text=@"";
     primaryShadeView.alpha=0;

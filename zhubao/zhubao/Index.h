@@ -25,6 +25,7 @@
 @interface Index : UIViewController<UIWebViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate,UIApplicationDelegate>
 {
     NSMutableArray *shoppingcartlist;
+    UIView *moveView;
 }
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
