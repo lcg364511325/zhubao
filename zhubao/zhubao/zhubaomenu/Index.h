@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "menuindex.h"
+#import "myindex.h"
 #import "product.h"
 #import "NakedDiamond.h"
 #import "ustomtailor.h"

@@ -167,6 +167,7 @@
 		7C01DAF519A4A0610075677B /* ustomtailor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C01DAE719A4A0610075677B /* ustomtailor.xib */; };
 		7C02213C195E985B002CBB7D /* RotateImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C02213B195E985B002CBB7D /* RotateImageView.m */; };
 		7C073F2E1948C0C2001BAF12 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C073F2D1948C0C2001BAF12 /* TestViewController.m */; };
+		7C07C64519D1959B006A6E2D /* page1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C07C64419D1959B006A6E2D /* page1.png */; };
 		7C09008119D105EB000C0257 /* myindex.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C09007F19D105EB000C0257 /* myindex.m */; };
 		7C09008219D105EB000C0257 /* myindex.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C09008019D105EB000C0257 /* myindex.xib */; };
 		7C1076CC1941AF44005187B9 /* FVImageSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1076C91941AF44005187B9 /* FVImageSequence.m */; };
@@ -550,6 +551,7 @@
 		7C02213B195E985B002CBB7D /* RotateImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RotateImageView.m; sourceTree = "<group>"; };
 		7C073F2C1948C0C2001BAF12 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		7C073F2D1948C0C2001BAF12 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		7C07C64419D1959B006A6E2D /* page1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page1.png; sourceTree = "<group>"; };
 		7C09007E19D105EB000C0257 /* myindex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myindex.h; sourceTree = "<group>"; };
 		7C09007F19D105EB000C0257 /* myindex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myindex.m; sourceTree = "<group>"; };
 		7C09008019D105EB000C0257 /* myindex.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = myindex.xib; sourceTree = "<group>"; };
@@ -1034,6 +1036,7 @@
 		7B7FFD38193853CA008712CB /* image */ = {
 			isa = PBXGroup;
 			children = (
+				7C07C64419D1959B006A6E2D /* page1.png */,
 				2C3C5C8D1983524A00630ACD /* textboxlong.png */,
 				2C3C5C89198347BF00630ACD /* icon.png */,
 				2C3C5C8A198347BF00630ACD /* M_bg.png */,
@@ -1871,6 +1874,7 @@
 				7B7FFD76193853CA008712CB /* 04.png in Resources */,
 				7B7FFD8F193853CA008712CB /* drop-down_select.png in Resources */,
 				7C1077441941AFF4005187B9 /* Seq_v04_640x378_49.jpg in Resources */,
+				7C07C64519D1959B006A6E2D /* page1.png in Resources */,
 				2C0BFCBE194863EB00844FA2 /* diamond_ring08.png in Resources */,
 				2C0BFCBC194863EB00844FA2 /* diamond_ring06.png in Resources */,
 				7C10774F1941AFF4005187B9 /* Seq_v04_640x378_59.jpg in Resources */,
