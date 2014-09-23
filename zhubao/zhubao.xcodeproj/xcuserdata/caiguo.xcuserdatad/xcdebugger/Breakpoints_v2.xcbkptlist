@@ -35,5 +35,51 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "zhubao/zhubaomenu/menuindex.m"
+            timestampString = "433080743.67014"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "-loadmyInfo"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[menuindex loadmyInfo]"
+                  moduleName = "&#30427;&#35465;&#29664;&#23453;"
+                  urlString = "file://localhost/Users/caiguo/Documents/zhubaonew1/zhubao/zhubao/zhubaomenu/menuindex.m"
+                  timestampString = "433082695.339966"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "34">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[menuindex loadmyInfo]"
+                  moduleName = "&#30427;&#35465;&#29664;&#23453;"
+                  urlString = "file://localhost/Users/caiguo/Documents/zhubaonew1/zhubao/zhubao/zhubaomenu/menuindex.m"
+                  timestampString = "433082695.343171"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "503">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

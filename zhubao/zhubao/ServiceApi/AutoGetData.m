@@ -588,6 +588,8 @@ NSMutableArray * arraytt;
 {
     @try {
         app=(AppDelegate *)[[UIApplication sharedApplication]delegate];
+        [app.queue cancelAllOperations];
+        //[app.queue reset];
         sqlser= [[sqlService alloc]init];
         //查询图片的压缩文件
         NSMutableArray * array=[sqlser getAllProductRAR];
@@ -607,7 +609,7 @@ NSMutableArray * arraytt;
                 //NSLog(@"------有了，不再下载");
                 
             }else {
-                NSLog(@"------没有，所以要下载");
+                NSLog(@"------没有，所以要下载--%@",surl);
                 i++;
                 //去下载
                 [app beginRequest:surl fileName:fileName version:entity.Id];
@@ -689,7 +691,7 @@ NSMutableArray * arraytt;
             for (id key in arraytt){
                 productEntity * entity=(productEntity *)key;
                 
-                NSLog(@"getAllProductPhotos------:%@",entity.Pro_smallpic);
+                //NSLog(@"getAllProductPhotos------:%@",entity.Pro_smallpic);
                 
                 NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",entity.Pro_smallpic]];
                 if (hasCachedImage(imgUrl)) {
@@ -732,8 +734,8 @@ NSMutableArray * arraytt;
                 @try {
                     [timer invalidate];
                     timer = nil;
-                    arraytt=nil;//清空数据
                     [app showProgressBarprocess:[NSString stringWithFormat:@"商品大小图片下载：%d/%d",arraytt.count,arraytt.count] countt:1.0];
+                    arraytt=nil;//清空数据
                 }
                 @catch (NSException *exception) {
                     

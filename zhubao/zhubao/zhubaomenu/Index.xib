@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Index">
             <connections>
-                <outlet property="aboutus" destination="HFT-LJ-37W" id="MEm-cX-YCb"/>
-                <outlet property="biglogo" destination="yml-Fj-nhG" id="5ZX-0q-FiP"/>
                 <outlet property="checkpassword" destination="OSN-ei-uRs" id="WuU-PR-zzN"/>
                 <outlet property="fivethview" destination="LLa-ww-A4H" id="11X-lB-XEa"/>
                 <outlet property="fourthView" destination="BvX-Xl-utm" id="Vba-UU-5Cj"/>
                 <outlet property="logoImage" destination="nEw-Ns-Qvp" id="XWP-RZ-Tp8"/>
                 <outlet property="primaryShadeView" destination="aBG-Q3-34l" id="oMz-QS-bX1"/>
                 <outlet property="primaryView" destination="rXR-Pn-ahE" id="sgS-xe-8CZ"/>
+                <outlet property="selectmenu" destination="2Qn-13-exQ" id="9DE-q0-NH3"/>
                 <outlet property="settinglogout" destination="QlF-XE-v55" id="w3k-0l-Wee"/>
                 <outlet property="settingsoftware" destination="iuX-Re-6le" id="7hF-7k-c2r"/>
                 <outlet property="settingupdate" destination="Jok-Uh-ZZn" id="h4p-uH-QS1"/>
@@ -40,16 +39,6 @@
                             <rect key="frame" x="1" y="-3" width="109" height="109"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yml-Fj-nhG">
-                            <rect key="frame" x="347" y="330" width="440" height="121"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="logoshengyu" image="logoshengyu.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="openaboutus:" destination="-1" eventType="touchDown" id="QlA-ju-4z3"/>
-                            </connections>
-                        </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="2Qn-13-exQ" userLabel="Image View -选中的按钮背景">
                             <rect key="frame" x="0.0" y="110" width="109" height="68"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -60,6 +49,9 @@
                             <state key="normal" image="home.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="doReg0:" destination="-1" eventType="touchDown" id="NWq-8f-oEp"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3PY-sB-ABP" userLabel="Button-产品展示">
                             <rect key="frame" x="35" y="190" width="38" height="45"/>
@@ -112,7 +104,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Q8-uJ-waq" userLabel="Button-购物车">
-                            <rect key="frame" x="770.5" y="33" width="45" height="38"/>
+                            <rect key="frame" x="771" y="33" width="45" height="38"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="shoppingcart.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -192,29 +184,9 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </view>
-                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BvX-Xl-utm">
-                    <rect key="frame" x="132.5" y="105" width="885" height="650"/>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BvX-Xl-utm">
+                    <rect key="frame" x="133" y="105" width="884" height="650"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <subviews>
-                        <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HFT-LJ-37W">
-                            <rect key="frame" x="-2.5" y="0.0" width="885" height="650"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="pVb-na-bKr"/>
-                            </connections>
-                        </webView>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UqM-Ja-w0S">
-                            <rect key="frame" x="682" y="0.0" width="40" height="40"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="关闭" image="close.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="closeaboutus:" destination="-1" eventType="touchDown" id="TPs-2s-zdD"/>
-                            </connections>
-                        </button>
-                    </subviews>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </view>
@@ -274,13 +246,11 @@
         <image name="axe.png" width="87" height="95"/>
         <image name="backgroundcolor.png" width="88" height="88"/>
         <image name="bg.png" width="218" height="136"/>
-        <image name="close.png" width="79" height="79"/>
         <image name="consort.png" width="82" height="90"/>
         <image name="diamond.png" width="82" height="87"/>
         <image name="home.png" width="68" height="81"/>
         <image name="install.png" width="54" height="57"/>
         <image name="logo.png" width="76" height="76"/>
-        <image name="logoshengyu.png" width="898" height="247"/>
         <image name="magnifier.png" width="81" height="90"/>
         <image name="page.png" width="2048" height="1536"/>
         <image name="ring.png" width="82" height="96"/>

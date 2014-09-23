@@ -51,8 +51,8 @@ NSInteger i=0;
         [passwordbtn setBackgroundImage:[UIImage imageNamed:@"sure"] forState:UIControlStateNormal];
         i=1;
     }else{
-        //_account.text=@"13428706220";
-        //_password.text=@"111111";
+        _account.text=@"13428706220";
+        _password.text=@"111111";
     }
     
     [_submitlogin setTitle:@"" forState:UIControlStateNormal];

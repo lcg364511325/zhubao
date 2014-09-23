@@ -21,10 +21,14 @@
 @synthesize fivethview;
 @synthesize shopcartcountButton;
 @synthesize logoImage;
-@synthesize biglogo;
-@synthesize aboutus;
 @synthesize checkpassword;
-UISwipeGestureRecognizer *recognizer;
+
+menuindex *_menuindex;
+product *_product;
+NakedDiamond *_NakedDiamond;
+ustomtailor *_ustomtailor;
+diploma *_diploma;
+member *_member;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,80 +59,33 @@ UISwipeGestureRecognizer *recognizer;
     }else{
         shopcartcountButton.hidden=YES;
     }
-    //web标签背景色透明
-    aboutus.backgroundColor = [UIColor clearColor];
-    aboutus.opaque = NO;
-    //[aboutus setUserInteractionEnabled: YES ];	 //是否支持交互
-    [aboutus setDelegate:self];				 //委托document.body.style.webkitTouchCallout='none'
-    [aboutus stringByEvaluatingJavaScriptFromString:@"document.body.style.webkitUserSelect='none';"];
-    // Disable callout
-    [aboutus stringByEvaluatingJavaScriptFromString:@"document.body.style.webkitTouchCallout='none';"];
+
+    
+    _menuindex=[[menuindex alloc] init];
+    [self addChildViewController:_menuindex];
+
+    _product=[[product alloc] init];
+    [self addChildViewController:_product];
+    
+    _NakedDiamond=[[NakedDiamond alloc] init];
+    [self addChildViewController:_NakedDiamond];
+    
+    _ustomtailor=[[ustomtailor alloc] init];
+    [self addChildViewController:_ustomtailor];
+    
+    _diploma=[[diploma alloc] init];
+    [self addChildViewController:_diploma];
+    
+    _member=[[member alloc] init];
+    [self addChildViewController:_member];
+    
+    
+    [fourthView addSubview:_menuindex.view];
+    currentViewController=_menuindex;
+    
     
     //更新ui(如果已经存在的，则不再自动更新)
     [self loadmyInfo];
-    
-    
-    //设置了左右滑动
-//    UISwipeGestureRecognizer *recognizer;
-//    
-//    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-//    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
-//    aboutus.delegate = self;
-//    [[self view] addGestureRecognizer:recognizer];
-//    [aboutus addGestureRecognizer:recognizer];
-    
-     recognizer= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-    recognizer.delegate=self;
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
-    recognizer.cancelsTouchesInView=NO;
-    [[self view] addGestureRecognizer:recognizer];
-    
-//    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-//    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
-//    [[self view] addGestureRecognizer:recognizer];
-    
-//    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeftAction)];
-//    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-//    swipeLeft.delegate = self;
-//    [webView addGestureRecognizer:swipeLeft];
-}
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
-    return YES;
-}
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-{
-    return YES;
-}
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
-{
-    return YES;
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    // Disable user selection
-    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
-    // Disable callout
-    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
-}
-
--(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
-    
-    if(recognizer.direction==UISwipeGestureRecognizerDirectionLeft) {
-        
-        NSLog(@"swipe left");
-        //执行程序
-        
-    }
-    
-    if(recognizer.direction==UISwipeGestureRecognizerDirectionRight) {
-        
-        NSLog(@"swipe right");
-        //执行程序
-        [fourthView setHidden:YES];
-        [biglogo setHidden:NO];
-    }
     
 }
 
@@ -138,20 +95,12 @@ UISwipeGestureRecognizer *recognizer;
     @try {
         
         NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
-        NSString *logopath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopath.png"]];
         
         if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
             [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
         }
         else {
             [logoImage setImage:[UIImage imageNamed:@"logo"]];
-        }
-
-        if ([[NSFileManager defaultManager] fileExistsAtPath:logopath]) {
-            [biglogo setImage:[[UIImage alloc] initWithContentsOfFile:logopath] forState:UIControlStateNormal];
-        }
-        else {
-            [biglogo setImage:[UIImage imageNamed:@"logoshengyu"] forState:UIControlStateNormal];
         }
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -176,14 +125,6 @@ UISwipeGestureRecognizer *recognizer;
                     else {
                         [logoImage setImage:[UIImage imageNamed:@"logo"]];
                     }
-                
-                
-                    if ([[NSFileManager defaultManager] fileExistsAtPath:logopath]) {
-                        [biglogo setImage:[[UIImage alloc] initWithContentsOfFile:logopath] forState:UIControlStateNormal];
-                    }
-                    else {
-                        [biglogo setImage:[UIImage imageNamed:@"logoshengyu"] forState:UIControlStateNormal];
-                    }
                 }
             });
         });
@@ -204,45 +145,129 @@ UISwipeGestureRecognizer *recognizer;
     // Dispose of any resources that can be recreated.
 }
 
+-(IBAction)doReg0:(id)sender
+{
+    if (currentViewController==_menuindex) {
+        return;
+    }
+    UIViewController *oldViewController=currentViewController;
+    _selectmenu.frame=CGRectMake(0, 110, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
+    [self transitionFromViewController:currentViewController toViewController:_menuindex duration:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+    }  completion:^(BOOL finished) {
+        if (finished) {
+            currentViewController=_menuindex;
+        }else{
+            currentViewController=oldViewController;
+        }
+    }];
+}
+
 -(IBAction)doReg:(id)sender
 {
-    product * _product = [[product alloc] init];
+    if (currentViewController==_product) {
+        return;
+    }
+    UIViewController *oldViewController=currentViewController;
+    _selectmenu.frame=CGRectMake(0, 179, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
     
-    [self.navigationController pushViewController:_product animated:NO];
+    [self transitionFromViewController:currentViewController toViewController:_product duration:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+    }  completion:^(BOOL finished) {
+        if (finished) {
+            currentViewController=_product;
+        }else{
+            currentViewController=oldViewController;
+        }
+    }];
+    
+//    product * _product = [[product alloc] init];
+//    
+//    [self.navigationController pushViewController:_product animated:NO];
 }
 
 -(IBAction)doReg1:(id)sender
 {
-    NakedDiamond * _NakedDiamond = [[NakedDiamond alloc] init];
-//    CATransition *transtion = [CATransition animation];
-//    transtion.duration = 0.5;
-//    [transtion setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-//    [transtion setType:kCATransitionReveal];
-//    [transtion setSubtype:kCATransitionFromTop];
+    if (currentViewController==_NakedDiamond) {
+        return;
+    }
+    UIViewController *oldViewController=currentViewController;
+    _selectmenu.frame=CGRectMake(0, 248, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
+    [self transitionFromViewController:currentViewController toViewController:_NakedDiamond duration:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+    }  completion:^(BOOL finished) {
+        if (finished) {
+            currentViewController=_NakedDiamond;
+        }else{
+            currentViewController=oldViewController;
+        }
+    }];
+    
+//    NakedDiamond * _NakedDiamond = [[NakedDiamond alloc] init];
 //    
-//    [_NakedDiamond.view.layer addAnimation:transtion forKey:nil];
-    [self.navigationController pushViewController:_NakedDiamond animated:NO];
+//    [self.navigationController pushViewController:_NakedDiamond animated:NO];
 }
 
 -(IBAction)doReg2:(id)sender
 {
-    ustomtailor * _ustomtailor=[[ustomtailor alloc] init];
+    if (currentViewController==_ustomtailor) {
+        return;
+    }
+    UIViewController *oldViewController=currentViewController;
+     _selectmenu.frame=CGRectMake(0, 317, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
     
-    [self.navigationController pushViewController:_ustomtailor animated:NO];
+    [self transitionFromViewController:currentViewController toViewController:_ustomtailor duration:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+    }  completion:^(BOOL finished) {
+        if (finished) {
+            currentViewController=_ustomtailor;
+        }else{
+            currentViewController=oldViewController;
+        }
+    }];
+    
+//    ustomtailor * _ustomtailor=[[ustomtailor alloc] init];
+//    
+//    [self.navigationController pushViewController:_ustomtailor animated:NO];
 }
 
 -(IBAction)doReg3:(id)sender
 {
-    diploma * _diploma = [[diploma alloc] init];
+    if (currentViewController==_diploma) {
+        return;
+    }
+    UIViewController *oldViewController=currentViewController;
+    _selectmenu.frame=CGRectMake(0, 386, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
+    [self transitionFromViewController:currentViewController toViewController:_diploma duration:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+    }  completion:^(BOOL finished) {
+        if (finished) {
+            currentViewController=_diploma;
+        }else{
+            currentViewController=oldViewController;
+        }
+    }];
     
-    [self.navigationController pushViewController:_diploma animated:NO];
+//    diploma * _diploma = [[diploma alloc] init];
+//    
+//    [self.navigationController pushViewController:_diploma animated:NO];
 }
 
 -(IBAction)doReg4:(id)sender
 {
-    member * _member = [[member alloc] init];
+    if (currentViewController==_member) {
+        return;
+    }
+    UIViewController *oldViewController=currentViewController;
+    _selectmenu.frame=CGRectMake(0, 455, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
     
-    [self.navigationController pushViewController:_member animated:NO];
+    [self transitionFromViewController:currentViewController toViewController:_member duration:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+    }  completion:^(BOOL finished) {
+        if (finished) {
+            currentViewController=_member;
+        }else{
+            currentViewController=oldViewController;
+        }
+    }];
+    
+//    member * _member = [[member alloc] init];
+//    
+//    [self.navigationController pushViewController:_member animated:NO];
 }
 
 //购物车显示
@@ -276,33 +301,7 @@ UISwipeGestureRecognizer *recognizer;
     thridView.hidden=NO;
     thridView.frame=CGRectMake(750, 70, thridView.frame.size.width, thridView.frame.size.height);
 }
-//关于我们
--(IBAction)openaboutus:(id)sender
-{
-    NSString *filePath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"about.webarchive"]];
-    NSURL *aURL = [NSURL fileURLWithPath:filePath];
-    NSURLRequest *request = [NSURLRequest requestWithURL:aURL];
-    //AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    fourthView.hidden=NO;
-    //NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:myDelegate.myinfol.details]];
-    [aboutus loadRequest:request];
-    aboutus.scrollView.delegate=self;
-    [aboutus.scrollView setShowsHorizontalScrollIndicator:NO];
-    
-    [fourthView setHidden:NO];
-    [biglogo setHidden:YES];
-}
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (scrollView.contentOffset.x > 0)
-        scrollView.contentOffset=CGPointMake(0, scrollView.contentOffset.y);
-}
-
--(IBAction)closeaboutus:(id)sender
-{
-    fourthView.hidden=YES;
-}
 
 //软件更新
 -(IBAction)updatesofeware:(id)sender
@@ -365,7 +364,7 @@ UISwipeGestureRecognizer *recognizer;
             // 耗时的操作（异步操作）
             
             AutoGetData * getdata=[[AutoGetData alloc] init];
-            [getdata getDataInsertTable:0];
+            //[getdata getDataInsertTable:0];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 

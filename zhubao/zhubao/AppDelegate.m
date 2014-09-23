@@ -188,6 +188,7 @@ UILabel *titlelabel;
     [request setNumberOfTimesToRetryOnTimeout:5];//设置请求超时时，设置重试的次数
     [request setTimeOutSeconds:60.0f];//设置超时的时间
     request.downloadProgressDelegate = self;//下载进度代理
+    request.shouldAttemptPersistentConnection=NO;
     
     [request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:downloadPath, @"downloadPath", version, @"version", nil]];//设置上下文的文件基本信息
     
@@ -316,9 +317,9 @@ UILabel *titlelabel;
         
         NSString * URL = [NSString stringWithFormat:@"%@%@",domainser,surl];
         
-//        NSLog(@"URL------%@",URL);
-//        NSLog(@"CPInfo------%@",CPInfo);
-//        NSLog(@"DZInfo------%@",DZInfo);
+        //NSLog(@"URL------%@",URL);
+        //NSLog(@"CPInfo------%@",CPInfo);
+        //NSLog(@"DZInfo------%@",DZInfo);
         
         //NSMutableDictionary * dict = [DataService PostDataService:URL postDatas:(NSString*)params];//[DataService GetDataService:URL];
         

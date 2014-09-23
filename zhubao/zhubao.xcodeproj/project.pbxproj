@@ -167,6 +167,8 @@
 		7C01DAF519A4A0610075677B /* ustomtailor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C01DAE719A4A0610075677B /* ustomtailor.xib */; };
 		7C02213C195E985B002CBB7D /* RotateImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C02213B195E985B002CBB7D /* RotateImageView.m */; };
 		7C073F2E1948C0C2001BAF12 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C073F2D1948C0C2001BAF12 /* TestViewController.m */; };
+		7C09008119D105EB000C0257 /* myindex.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C09007F19D105EB000C0257 /* myindex.m */; };
+		7C09008219D105EB000C0257 /* myindex.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C09008019D105EB000C0257 /* myindex.xib */; };
 		7C1076CC1941AF44005187B9 /* FVImageSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1076C91941AF44005187B9 /* FVImageSequence.m */; };
 		7C1076CD1941AF44005187B9 /* FVImageSequenceDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1076CB1941AF44005187B9 /* FVImageSequenceDemoViewController.m */; };
 		7C1077181941AFF4005187B9 /* Seq_v04_640x378_0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7C1076CF1941AFF3005187B9 /* Seq_v04_640x378_0.jpg */; };
@@ -260,6 +262,8 @@
 		7C1BE6DC193F3D1A0000E397 /* sqlService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE6D3193F3D190000E397 /* sqlService.m */; };
 		7C1BE6DF193F493D0000E397 /* getNowTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE6DE193F493D0000E397 /* getNowTime.m */; };
 		7C1BE6E2193F4C220000E397 /* AutoGetData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE6E1193F4C220000E397 /* AutoGetData.m */; };
+		7C67BBFE19D03DD000B0C3A0 /* menuindex.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C67BBFC19D03DD000B0C3A0 /* menuindex.m */; };
+		7C67BBFF19D03DD000B0C3A0 /* menuindex.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C67BBFD19D03DD000B0C3A0 /* menuindex.xib */; };
 		7CB203241944450000FA7FD5 /* myinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB203231944450000FA7FD5 /* myinfo.m */; };
 		7CB203261944576900FA7FD5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB203251944576900FA7FD5 /* AVFoundation.framework */; };
 		7CB203281944577700FA7FD5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB203271944577700FA7FD5 /* CFNetwork.framework */; };
@@ -546,6 +550,9 @@
 		7C02213B195E985B002CBB7D /* RotateImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RotateImageView.m; sourceTree = "<group>"; };
 		7C073F2C1948C0C2001BAF12 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		7C073F2D1948C0C2001BAF12 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		7C09007E19D105EB000C0257 /* myindex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myindex.h; sourceTree = "<group>"; };
+		7C09007F19D105EB000C0257 /* myindex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myindex.m; sourceTree = "<group>"; };
+		7C09008019D105EB000C0257 /* myindex.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = myindex.xib; sourceTree = "<group>"; };
 		7C1076C81941AF44005187B9 /* FVImageSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FVImageSequence.h; sourceTree = "<group>"; };
 		7C1076C91941AF44005187B9 /* FVImageSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FVImageSequence.m; sourceTree = "<group>"; };
 		7C1076CA1941AF44005187B9 /* FVImageSequenceDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FVImageSequenceDemoViewController.h; sourceTree = "<group>"; };
@@ -654,6 +661,9 @@
 		7C1BE6DE193F493D0000E397 /* getNowTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = getNowTime.m; sourceTree = "<group>"; };
 		7C1BE6E0193F4C220000E397 /* AutoGetData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoGetData.h; sourceTree = "<group>"; };
 		7C1BE6E1193F4C220000E397 /* AutoGetData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoGetData.m; sourceTree = "<group>"; };
+		7C67BBFB19D03DD000B0C3A0 /* menuindex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = menuindex.h; sourceTree = "<group>"; };
+		7C67BBFC19D03DD000B0C3A0 /* menuindex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = menuindex.m; sourceTree = "<group>"; };
+		7C67BBFD19D03DD000B0C3A0 /* menuindex.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = menuindex.xib; sourceTree = "<group>"; };
 		7CB203221944450000FA7FD5 /* myinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myinfo.h; sourceTree = "<group>"; };
 		7CB203231944450000FA7FD5 /* myinfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myinfo.m; sourceTree = "<group>"; };
 		7CB203251944576900FA7FD5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -1161,6 +1171,12 @@
 				7C01DAE519A4A0610075677B /* ustomtailor.h */,
 				7C01DAE619A4A0610075677B /* ustomtailor.m */,
 				7C01DAE719A4A0610075677B /* ustomtailor.xib */,
+				7C67BBFB19D03DD000B0C3A0 /* menuindex.h */,
+				7C67BBFC19D03DD000B0C3A0 /* menuindex.m */,
+				7C67BBFD19D03DD000B0C3A0 /* menuindex.xib */,
+				7C09007E19D105EB000C0257 /* myindex.h */,
+				7C09007F19D105EB000C0257 /* myindex.m */,
+				7C09008019D105EB000C0257 /* myindex.xib */,
 			);
 			path = zhubaomenu;
 			sourceTree = "<group>";
@@ -1712,6 +1728,7 @@
 				7C01DAF119A4A0610075677B /* NakedDiamond.xib in Resources */,
 				7C10772E1941AFF4005187B9 /* Seq_v04_640x378_29.jpg in Resources */,
 				7C1077261941AFF4005187B9 /* Seq_v04_640x378_21.jpg in Resources */,
+				7C09008219D105EB000C0257 /* myindex.xib in Resources */,
 				7B7FFDA8193853CA008712CB /* shoppingcart.png in Resources */,
 				2C427E3F1945620900D71776 /* ProductCell.xib in Resources */,
 				7B7FFD94193853CA008712CB /* image1.png in Resources */,
@@ -1888,6 +1905,7 @@
 				7C10772F1941AFF4005187B9 /* Seq_v04_640x378_3.jpg in Resources */,
 				7C10771F1941AFF4005187B9 /* Seq_v04_640x378_15.jpg in Resources */,
 				2C14E99B193965E20084E8FE /* logo.png in Resources */,
+				7C67BBFF19D03DD000B0C3A0 /* menuindex.xib in Resources */,
 				7C01DAEB19A4A0610075677B /* Index.xib in Resources */,
 				7B7FFD9C193853CA008712CB /* option_num.png in Resources */,
 				2C3C5C8B198347BF00630ACD /* icon.png in Resources */,
@@ -1953,6 +1971,7 @@
 				7CF03C57195BFDDB00F8FBD5 /* UIImageView+WebCache.m in Sources */,
 				7CF5EA4E194024CC00C63E6D /* updatetime.m in Sources */,
 				7CF03C53195BFDDB00F8FBD5 /* UIButton+WebCache.m in Sources */,
+				7C67BBFE19D03DD000B0C3A0 /* menuindex.m in Sources */,
 				7C01DAEE19A4A0610075677B /* member.m in Sources */,
 				7C1BE6D4193F3D190000E397 /* Commons.m in Sources */,
 				7C01DAE819A4A0610075677B /* diploma.m in Sources */,
@@ -2013,6 +2032,7 @@
 				7CF03C50195BFDDB00F8FBD5 /* SDWebImageDownloaderOperation.m in Sources */,
 				7CF5EA5A19403FCC00C63E6D /* customerApi.m in Sources */,
 				7C1BE6DA193F3D1A0000E397 /* JSONKit.m in Sources */,
+				7C09008119D105EB000C0257 /* myindex.m in Sources */,
 				7C1BE677193EFECF0000E397 /* LoginEntity.m in Sources */,
 				7CB2034B1944583700FA7FD5 /* NSHTTPCookieAdditions.m in Sources */,
 				7CF03C30195BFDDB00F8FBD5 /* MWGridCell.m in Sources */,
