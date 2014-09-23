@@ -85,6 +85,7 @@
         //entity.Pro_bigpic=pic2;
         entity.producttype=@"1";
         entity.Pro_IsDel=@"0";
+        entity.Pro_Type=@"10";
         sqlService *_sqlService=[[sqlService alloc]init];
         productEntity *info=[_sqlService saveProduct:entity];
         if (info) {

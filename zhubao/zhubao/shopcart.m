@@ -126,7 +126,7 @@
             cell.fluLable.text=nil;
         }
         cell.priceLable.text=goods.pcount;
-    }else if([goods.producttype isEqualToString:@"1"] || [goods.producttype isEqualToString:@"2"]){
+    }else if([goods.producttype isEqualToString:@"1"] || [goods.producttype isEqualToString:@"2"] || [goods.producttype isEqualToString:@"10"]){
         NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",goods.proentiy.Pro_smallpic]];
         if (hasCachedImage(imgUrl)) {
             cell.showImage.image=[UIImage imageWithContentsOfFile:pathForURL(imgUrl)];
