@@ -16,6 +16,7 @@
 #import "getNowTime.h"
 #import "memberDetailUpdate.h"
 #import "updatePassword.h"
+#import "addlocalgoods.h"
 
 @interface member : UIViewController<UIApplicationDelegate>
 {

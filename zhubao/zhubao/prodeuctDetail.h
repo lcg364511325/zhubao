@@ -13,6 +13,8 @@
 {
     UIButton* btnBack;
     RotateImageView *rImageView;
+    UIButton *deletebtn;
+    UIButton *updatebtn;
 }
 
 
