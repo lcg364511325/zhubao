@@ -255,6 +255,51 @@ NSInteger selecttype=0;
     
 }
 
+
+//自定义商品
+-(void)localgoods
+{
+    //删除按钮
+    deletebtn=[[UIButton alloc]initWithFrame:CGRectMake(325, 575, 110, 50)];
+    [deletebtn setBackgroundImage:[UIImage imageNamed:@"deleteBtn"] forState:UIControlStateNormal];
+    [deletebtn addTarget:self action:@selector(deletelocalgoods) forControlEvents:UIControlEventTouchDown];
+    
+    //更新按钮
+    updatebtn=[[UIButton alloc]initWithFrame:CGRectMake(445, 575, 110, 50)];
+    [updatebtn setBackgroundImage:[UIImage imageNamed:@"gengxinBtn"] forState:UIControlStateNormal];
+    
+    addtoshopcart.frame=CGRectMake(25, 480, 180, 50);
+    [self.view addSubview:deletebtn];
+    [self.view addSubview:updatebtn];
+    [show3D setHidden:TRUE];
+}
+
+//删除商品
+-(void)deletelocalgoods
+{
+    NSString *rowString =@"确定删除该商品？";
+    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alter show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==1) {
+        sqlService *_sqlService=[[sqlService alloc]init];
+        NSString *info=[_sqlService deleteProduct:_proid];
+        if (info) {
+            NSString *rowString =@"删除成功！";
+            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alter show];
+            [self closeDetail:nil];
+        }else{
+            NSString *rowString =@"删除失败！";
+            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alter show];
+        }
+    }
+}
+
 //保留小数位数
 -(NSString *)notRounding:(float)price afterPoint:(int)position{
     NSDecimalNumberHandler* roundingBehavior = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown scale:position raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:NO];
@@ -309,6 +354,8 @@ NSInteger selecttype=0;
     
     [self hidemenlproduct];
     
+    [self localgoods];
+    
     titlelable.text=goods.Pro_name;
     modellable.text=goods.Pro_model;
     //weightlable.text=goods.Pro_goldWeight;//约重
@@ -318,10 +365,16 @@ NSInteger selecttype=0;
     //maintext.text=@"111";
     nettext.text=@"SI";
     colortext.text=@"I-J";
-    Commons * common=[[Commons alloc]init];
-    texturetext.text=[common getGoldtypename:goods.Pro_goldType];
-    
-    sizetext.text=goods.Pro_goldsize;
+    if ([goods.producttype isEqualToString:@"1"]) {
+        texturetext.text=@"18K白";
+        sizetext.text=@"";
+    }else
+    {
+        Commons * common=[[Commons alloc]init];
+        texturetext.text=[common getGoldtypename:goods.Pro_goldType];
+        
+        sizetext.text=goods.Pro_goldsize;
+    }
     fonttext.text=nil;
     numbertext.text=@"1";
     inlayarry=[[NSMutableArray alloc] init];
@@ -337,7 +390,9 @@ NSInteger selecttype=0;
             weighlable.text=[NSString stringWithFormat:@"%@ g",inlay.AuWeight];//约重
         }
     }
-    
+    if ([goods.producttype isEqualToString:@"1"]) {
+        weighlable.text=goods.Pro_goldWeight;
+    }
     NSMutableArray *mainarryman=[[NSMutableArray alloc] init];
     
     NSString * AuWeightman=nil;
@@ -382,6 +437,9 @@ NSInteger selecttype=0;
     if (self.dmainlist>0 && [goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
         dmiantext.text=[self.dmainlist objectAtIndex:0];
     }
+    if ([goods.producttype isEqualToString:@"1"]) {
+        miantext.text=goods.Pro_Z_weight;
+    }
     self.productpic.layer.cornerRadius=12;
     self.productpic.layer.masksToBounds=YES;
     CALayer *layer = [productpic layer];
@@ -393,54 +451,62 @@ NSInteger selecttype=0;
     if ([array count]>0) {
         imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",[array objectAtIndex: 0]]];
     }
-    
-    if (hasCachedImage(imgUrl)) {
-        [self.productpic setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
+    if ([goods.producttype isEqualToString:@"1"]) {
+        self.productpic.image=[[UIImage alloc] initWithContentsOfFile:[array objectAtIndex: 0]];
     }else
     {
-        [self.productpic setImage:[UIImage imageNamed:@""]];//diamonds
-        NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",self.productpic,@"imageView",nil];
-        [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+        if (hasCachedImage(imgUrl)) {
+            [self.productpic setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
+        }else
+        {
+            [self.productpic setImage:[UIImage imageNamed:@""]];//diamonds
+            NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",self.productpic,@"imageView",nil];
+            [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+        }
     }
     
-    //获取商品价格
-    @try {
-        //可以在此加代码提示用户说正在加载数据中
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            // 耗时的操作（异步操作）
-            NSString *proprice=nil;
-            productApi *priceApi=[[productApi alloc]init];
-            womanprice=[priceApi getPrice:goods.Pro_Class goldType:goods.Pro_goldType goldWeight:AuWeight mDiaWeight:miantext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
-            if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
-                
-                manprice=[priceApi getPrice:goodsman.Pro_Class goldType:goodsman.Pro_goldType goldWeight:AuWeightman mDiaWeight:dmiantext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:goodsman.Pro_f_weight sCount:goodsman.Pro_f_count proid:goodsman.Id];
-                
-                
-                proprice=[NSString stringWithFormat:@"%d",womanprice.intValue+manprice.intValue];
-            }else{
-                proprice=womanprice;
-            }
+    if ([goods.producttype isEqualToString:@"1"]) {
+        pricelable.text=[NSString stringWithFormat:@"¥ %@",goods.Pro_price];
+    }else{
+        //获取商品价格
+        @try {
+            //可以在此加代码提示用户说正在加载数据中
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                if (proprice) {
-                    //pricelable.text=[@"¥" stringByAppendingString:proprice];
-                    NSArray *price=[[NSString stringWithFormat:@"%@",proprice] componentsSeparatedByString:@"."];
-                    pricelable.text=[NSString stringWithFormat:@"¥ %@",[price objectAtIndex:0]];
-                    //pricelable.text=[NSString stringWithFormat:@"¥%@",proprice];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                // 耗时的操作（异步操作）
+                NSString *proprice=nil;
+                productApi *priceApi=[[productApi alloc]init];
+                womanprice=[priceApi getPrice:goods.Pro_Class goldType:goods.Pro_goldType goldWeight:AuWeight mDiaWeight:miantext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
+                if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
+                    
+                    manprice=[priceApi getPrice:goodsman.Pro_Class goldType:goodsman.Pro_goldType goldWeight:AuWeightman mDiaWeight:dmiantext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:goodsman.Pro_f_weight sCount:goodsman.Pro_f_count proid:goodsman.Id];
+                    
+                    
+                    proprice=[NSString stringWithFormat:@"%d",womanprice.intValue+manprice.intValue];
                 }else{
-                    pricelable.text=@"暂无价格信息";
+                    proprice=womanprice;
                 }
                 
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    if (proprice) {
+                        //pricelable.text=[@"¥" stringByAppendingString:proprice];
+                        NSArray *price=[[NSString stringWithFormat:@"%@",proprice] componentsSeparatedByString:@"."];
+                        pricelable.text=[NSString stringWithFormat:@"¥ %@",[price objectAtIndex:0]];
+                        //pricelable.text=[NSString stringWithFormat:@"¥%@",proprice];
+                    }else{
+                        pricelable.text=@"暂无价格信息";
+                    }
+                    
+                });
             });
-        });
-    }
-    @catch (NSException *exception) {
-        
-    }
-    @finally {
-        
+        }
+        @catch (NSException *exception) {
+            
+        }
+        @finally {
+            
+        }
     }
     
 }
@@ -619,50 +685,52 @@ NSInteger selecttype=0;
         nettable.hidden=YES;
         texturetable.hidden=YES;
     }
-    //获取商品价格
-    sqlService * sql=[[sqlService alloc] init];
-    productEntity *goods=[sql GetProductDetail:productnumber];
-    NSString *textvalue=nil;
-    Commons * common=[[Commons alloc]init];
-    textvalue=[common getGoldtypevalue:texturetext.text];
-    
-    NSString * weightg=[self getweightg:rowString];
-    NSString * weightman=[self getweightman:rowString];
-    
-    @try {
-        //可以在此加代码提示用户说正在加载数据中
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            // 耗时的操作（异步操作）
-            
-            NSString *proprice=nil;
-            productApi *priceApi=[[productApi alloc]init];
-            womanprice=[priceApi getPrice:goods.Pro_Class goldType:texturetext.text goldWeight:weightg mDiaWeight:miantext.text mDiaColor:colortext.text mVVS:nettext.text sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
-            if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
-                priceApi=[[productApi alloc]init];
-                manprice=[priceApi getPrice:goodsman.Pro_Class goldType:dtexturetext.text goldWeight:weightman mDiaWeight:dmiantext.text mDiaColor:dcolortext.text mVVS:dnettext.text sDiaWeight:goodsman.Pro_f_weight sCount:goodsman.Pro_f_count proid:goodsman.Id];
-                proprice=[NSString stringWithFormat:@"%d",womanprice.intValue+manprice.intValue];
-            }else{
-                proprice=womanprice;
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
+    if (![goods.producttype isEqualToString:@"1"]) {
+        //获取商品价格
+        sqlService * sql=[[sqlService alloc] init];
+        productEntity *goods=[sql GetProductDetail:productnumber];
+        NSString *textvalue=nil;
+        Commons * common=[[Commons alloc]init];
+        textvalue=[common getGoldtypevalue:texturetext.text];
+        
+        NSString * weightg=[self getweightg:rowString];
+        NSString * weightman=[self getweightman:rowString];
+        
+        @try {
+            //可以在此加代码提示用户说正在加载数据中
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                // 耗时的操作（异步操作）
                 
-                if (proprice) {
-                    //pricelable.text=[@"¥" stringByAppendingString:proprice];
-                    NSArray *price=[[NSString stringWithFormat:@"%@",proprice] componentsSeparatedByString:@"."];
-                    pricelable.text=[NSString stringWithFormat:@"¥ %@",[price objectAtIndex:0]];
+                NSString *proprice=nil;
+                productApi *priceApi=[[productApi alloc]init];
+                womanprice=[priceApi getPrice:goods.Pro_Class goldType:texturetext.text goldWeight:weightg mDiaWeight:miantext.text mDiaColor:colortext.text mVVS:nettext.text sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
+                if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
+                    priceApi=[[productApi alloc]init];
+                    manprice=[priceApi getPrice:goodsman.Pro_Class goldType:dtexturetext.text goldWeight:weightman mDiaWeight:dmiantext.text mDiaColor:dcolortext.text mVVS:dnettext.text sDiaWeight:goodsman.Pro_f_weight sCount:goodsman.Pro_f_count proid:goodsman.Id];
+                    proprice=[NSString stringWithFormat:@"%d",womanprice.intValue+manprice.intValue];
                 }else{
-                    pricelable.text=@"暂无价格信息";
+                    proprice=womanprice;
                 }
                 
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    if (proprice) {
+                        //pricelable.text=[@"¥" stringByAppendingString:proprice];
+                        NSArray *price=[[NSString stringWithFormat:@"%@",proprice] componentsSeparatedByString:@"."];
+                        pricelable.text=[NSString stringWithFormat:@"¥ %@",[price objectAtIndex:0]];
+                    }else{
+                        pricelable.text=@"暂无价格信息";
+                    }
+                    
+                });
             });
-        });
-    }
-    @catch (NSException *exception) {
-        
-    }
-    @finally {
-        
+        }
+        @catch (NSException *exception) {
+            
+        }
+        @finally {
+            
+        }
     }
 }
 
@@ -715,12 +783,14 @@ NSInteger selecttype=0;
     NSInteger btntag=[btn tag];
     selecttype=btntag;
     if(btntag==0){
-        miantable.hidden=NO;
-        colortable.hidden=YES;
-        nettable.hidden=YES;
-        texturetable.hidden=YES;
-        miantable.frame=CGRectMake(548, miantable.frame.origin.y, miantable.frame.size.width, miantable.frame.size.height);
-        [miantable reloadData];
+        if (![goods.producttype isEqualToString:@"1"]) {
+            miantable.hidden=NO;
+            colortable.hidden=YES;
+            nettable.hidden=YES;
+            texturetable.hidden=YES;
+            miantable.frame=CGRectMake(548, miantable.frame.origin.y, miantable.frame.size.width, miantable.frame.size.height);
+            [miantable reloadData];
+        }
     }else if(btntag==1){
         nettable.hidden=NO;
         miantable.hidden=YES;
@@ -835,14 +905,20 @@ NSInteger selecttype=0;
     int count = [array count];
     //遍历这个数组
     for (int i = 0; i < count; i++) {
-        //NSLog(@"普通的遍历：i = %d 时的数组对象为: %@",i,[array objectAtIndex: i]);
-        NSString * patht=[NSString stringWithFormat:@"http://seyuu.com%@",[array objectAtIndex: i]];
-        NSURL *imgUrl=[NSURL URLWithString:patht];
-        if (hasCachedImage(imgUrl)) {
-            [photos addObject:[MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]]];
+        if ([goods.producttype isEqualToString:@"1"]) {
+            NSString *patht=[NSString stringWithFormat:@"%@",[array objectAtIndex: i]];
+            [photos addObject:[MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:patht]]];
         }else
         {
-            [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:patht]]];
+            //NSLog(@"普通的遍历：i = %d 时的数组对象为: %@",i,[array objectAtIndex: i]);
+            NSString * patht=[NSString stringWithFormat:@"http://seyuu.com%@",[array objectAtIndex: i]];
+            NSURL *imgUrl=[NSURL URLWithString:patht];
+            if (hasCachedImage(imgUrl)) {
+                [photos addObject:[MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]]];
+            }else
+            {
+                [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:patht]]];
+            }
         }
         
         //[thumbs addObject:[MWPhoto photoWithURL:[NSURL URLWithString:patht]]];

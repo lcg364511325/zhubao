@@ -19,6 +19,8 @@
 #import "myinfo.h"
 #import "withmouth.h"
 #import "orderApi.h"
+#import "orderbill.h"
+#import "orderdetail.h"
 
 @interface sqlService : NSObject
 {
@@ -111,5 +113,10 @@
 //提交当前用户的订单
 -(NSString*)saveOrder:(NSString *)customerid;
 
+//查询本地商品订单列表
+- (NSMutableArray*)GetLocalOrderList:(NSString *)uId page:(int)page pageSize:(int)pageSize;
+
+//查询本地订单详情列表
+- (NSMutableArray*)GetLocalOrderDetailList:(NSString *)orderid page:(int)page pageSize:(int)pageSize;
 
 @end

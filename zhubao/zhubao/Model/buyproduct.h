@@ -20,7 +20,7 @@
 @property (nonatomic, retain) NSString * psize;//尺寸
 @property (nonatomic, retain) NSString * pprice;//价格
 @property (nonatomic, retain) NSString * customerid;//用户id
-@property (nonatomic, retain) NSString * producttype;//旧的类型（0代表是商品，1是钻，2高级定制）新的类型 1戒托 2商品 3裸钻 9高级定制
+@property (nonatomic, retain) NSString * producttype;//旧的类型（0代表是商品，1是钻，2高级定制）新的类型 1戒托 2商品 3裸钻 9高级定制 10本地商品
 @property (nonatomic, retain) NSString * pvvs;//主石净度
 @property (nonatomic, retain) NSString * pweight;//重量
 @property (nonatomic, retain) NSString * pgoldtype;//材质

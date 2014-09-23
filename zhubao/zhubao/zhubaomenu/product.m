@@ -720,6 +720,9 @@ NSMutableArray *list=nil;
 //    if ([[NSFileManager defaultManager] fileExistsAtPath:url1]) {
 //        cell.productImage.image=[UIImage imageWithContentsOfFile:url1];
 //    }else{
+    if ([entity.producttype isEqualToString:@"1"]) {
+        cell.productImage.image=[[UIImage alloc] initWithContentsOfFile:entity.Pro_smallpic];
+    }else{
         NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",entity.Pro_smallpic]];
         if (hasCachedImage(imgUrl)) {
             cell.productImage.image=[UIImage imageWithContentsOfFile:pathForURL(imgUrl)];
@@ -730,6 +733,8 @@ NSMutableArray *list=nil;
             [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
             
         }
+    }
+    
 //    }
     cell.show3dImage.hidden=NO;
     if (![self isexistsfile:entity.Pro_author]) {

@@ -7,6 +7,7 @@
 //
 
 #import "member.h"
+#import "localorder.h"
 
 @interface member ()
 
@@ -161,6 +162,28 @@ UIButton* btnBack;
 - (IBAction)goAction2:(id)sender
 {
     memberDetailUpdate *samplePopupViewController = [[memberDetailUpdate alloc] initWithNibName:@"memberDetailUpdate" bundle:nil];
+    samplePopupViewController.mydelegate=self;
+    
+    [self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
+        NSLog(@"popup view presented");
+    }];
+}
+
+//本地商品添加页面跳转页
+- (IBAction)addlocalgoods:(id)sender
+{
+    addlocalgoods *samplePopupViewController = [[addlocalgoods alloc] initWithNibName:@"addlocalgoods" bundle:nil];
+    samplePopupViewController.mydelegate=self;
+    
+    [self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
+        NSLog(@"popup view presented");
+    }];
+}
+
+//本地商品订单列表页面跳转
+- (IBAction)localorder:(id)sender
+{
+    localorder *samplePopupViewController = [[localorder alloc] initWithNibName:@"localorder" bundle:nil];
     samplePopupViewController.mydelegate=self;
     
     [self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
