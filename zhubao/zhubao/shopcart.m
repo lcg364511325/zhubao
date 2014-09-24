@@ -285,8 +285,14 @@
     NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
     if (![orderinfo isEqualToString:@""]) {
         
-        [_mydelegate performSelector:@selector(refleshBuycutData)];
         
+        if ([orderinfo isEqualToString:@"local"]) {
+            //清空购物车的信息
+            sqlService *sqlser=[[sqlService alloc]init];
+            [sqlser ClearTableDatas:[NSString stringWithFormat:@"buyproduct where customerid=%@",myDelegate.entityl.uId]];
+            orderinfo=@"提交成功";
+        }
+        [self refleshBuycutData];
         NSString *rowString =orderinfo;
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];

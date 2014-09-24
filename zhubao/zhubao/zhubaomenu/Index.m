@@ -456,11 +456,6 @@ member *_member;
         shopcartcountButton.hidden=YES;
     }
     
-    sqlService *shopcar=[[sqlService alloc] init];
-    shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
-    shopcart *scg=[[shopcart alloc]init];
-    [scg reloadshopcart];
-    
 }
 
 @end

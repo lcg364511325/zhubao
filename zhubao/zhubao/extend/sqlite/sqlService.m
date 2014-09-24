@@ -2211,9 +2211,6 @@
                 }
             }
             
-            sqlite3_finalize(statement);
-            sqlite3_close(_database);
-            
             [CPInfo appendString:@"]}"];
             [DZInfo appendString:@"]}"];
             
@@ -2226,6 +2223,9 @@
                 
                 islocal=[self saveLocalOrder:localInfo];
             }
+            
+            sqlite3_finalize(statement);
+            sqlite3_close(_database);
 
             //如果有数据，则提交定义，否则不提交
             if(CPInfocount>0 || DZInfocount>0){
@@ -2236,6 +2236,9 @@
             }else{
                 if(!islocal){
                     return @"购物车没有可生成订单的信息";
+                }else{
+                    //
+                    return @"local";
                 }
             }
             
@@ -2294,21 +2297,21 @@
         NSLog(@"--------------:%@",sql);
         
         //保存订单表头
-        if ([self HandleSql:sql]) {
+        if ([self execSql:sql]) {
             
             int count = [localInfo count];
             //遍历这个数组 保存订单的明细商品
             for (int i = 0; i < count; i++) {
                 orderdetail * entity =[localInfo objectAtIndex: i];
                 
-                NSString * did=[NSString stringWithFormat:@"%@%@",orderid,entity.cid];
+                NSString * did=[NSString stringWithFormat:@"%@%d",orderid,i];
             tablekey=@"Id,orderid,cid,name,goldType,size,nums,Pro_model,diaColor,goldWeight,Dia_Z_weight,Dia_Z_count,Dia_F_weight,Dia_F_count,goldPrice,Pro_price,logopic";
                 
                 values =[NSString stringWithFormat:@"'%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@'",did,orderid,entity.cid,entity.name,entity.goldType,entity.size,entity.nums,entity.Pro_model,entity.diaColor,entity.goldWeight,entity.Dia_Z_weight,entity.Dia_Z_count,entity.Dia_F_weight,entity.Dia_F_count,entity.goldPrice,entity.Pro_price,entity.logopic];
                 
                 sql=[NSString stringWithFormat:@"insert into [orderdetail](%@)values(%@)",tablekey,values];
                 
-                [self HandleSql:sql];
+                [self execSql:sql];
             }
             
             return TRUE;

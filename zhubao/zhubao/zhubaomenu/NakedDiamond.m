@@ -339,22 +339,6 @@ NSInteger whichview=0;
 //    sixview.hidden=YES;
 //}
 
-//订单提交
--(IBAction)submitorder:(id)sender
-{
-    sqlService *sql=[[sqlService alloc]init];
-    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    myDelegate.mydelegate=self;
-        NSString *orderinfo=[sql saveOrder:myDelegate.entityl.uId];
-        if (![orderinfo isEqualToString:@""]) {
-            
-            [self refleshBuycutData];
-            
-            NSString *rowString =orderinfo;
-            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alter show];
-        }
-}
 
 - (IBAction)closeAction2:(id)sender
 {

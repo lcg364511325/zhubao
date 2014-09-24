@@ -349,23 +349,5 @@ NSInteger vvvv=0;
     }
 }
 
--(void)refleshBuycutData
-{
-    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    sqlService *sql=[[sqlService alloc]init];
-    myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
-    NSString *goodscount=myDelegate.entityl.resultcount;
-    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-        shopcartcount.hidden=NO;
-        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
-    }else{
-        shopcartcount.hidden=YES;
-    }
-    sqlService *shopcar=[[sqlService alloc] init];
-    shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
-    shopcart *scg=[[shopcart alloc]init];
-    [scg reloadshopcart];
-    
-}
 
 @end
