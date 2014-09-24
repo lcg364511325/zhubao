@@ -65,25 +65,25 @@ NSMutableArray *list=nil;
     countLable.text=nil;
     
     //进来时候加载全部数据
-    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+//    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     sqlService *sql=[[sqlService alloc]init];
     list=[sql GetProductList:nil type2:nil type3:nil type4:nil page:1 pageSize:1500];
     
-    NSString *goodscount=myDelegate.entityl.resultcount;
-    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-        shopcartcount.hidden=NO;
-        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
-    }else{
-        shopcartcount.hidden=YES;
-    }
-
-    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
-        [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
-    }
-    else {
-        [logoImage setImage:[UIImage imageNamed:@"logo"]];
-    }
+//    NSString *goodscount=myDelegate.entityl.resultcount;
+//    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+//        shopcartcount.hidden=NO;
+//        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
+//    }else{
+//        shopcartcount.hidden=YES;
+//    }
+//
+//    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
+//    if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
+//        [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
+//    }
+//    else {
+//        [logoImage setImage:[UIImage imageNamed:@"logo"]];
+//    }
     
 }
 

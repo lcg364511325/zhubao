@@ -52,4 +52,7 @@
 
 -(void)closesc;
 
+// 更新ui
+-(void)updateIndexUI;
+
 @end

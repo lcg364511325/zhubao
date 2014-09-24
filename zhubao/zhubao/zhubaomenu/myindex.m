@@ -28,6 +28,20 @@ UISwipeGestureRecognizer *recognizer;
     return self;
 }
 
+-(void)viewWillAppear
+{
+    NSString *logopath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopath.png"]];
+    
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:logopath]) {
+        [biglogo setImage:[[UIImage alloc] initWithContentsOfFile:logopath] forState:UIControlStateNormal];
+    }
+    else {
+        [biglogo setImage:[UIImage imageNamed:@"logoshengyu"] forState:UIControlStateNormal];
+    }
+
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -71,6 +85,8 @@ UISwipeGestureRecognizer *recognizer;
     [self loadmyInfo];
 }
 
+
+
 //更新ui
 -(void)loadmyInfo
 {
@@ -101,6 +117,8 @@ UISwipeGestureRecognizer *recognizer;
                 if (!isexists){
                     
                     sleep(1);//等1秒再执行
+                    
+                    [self.parentViewController.self performSelector:@selector(updateIndexUI)];
                     
                     if ([[NSFileManager defaultManager] fileExistsAtPath:logopath]) {
                         [biglogo setImage:[[UIImage alloc] initWithContentsOfFile:logopath] forState:UIControlStateNormal];

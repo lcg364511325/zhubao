@@ -43,25 +43,6 @@ UIButton* btnBack;
     
     checkpassword.secureTextEntry = YES;
     
-    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-
-    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
-        [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
-    }
-    else {
-        [logoImage setImage:[UIImage imageNamed:@"logo"]];
-    }
-    
-    NSString *goodscount=myDelegate.entityl.resultcount;
-    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-        shopcartcount.hidden=NO;
-        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
-    }else{
-        shopcartcount.hidden=YES;
-    }
-    
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -346,10 +327,8 @@ UIButton* btnBack;
             
             [alter dismissWithClickedButtonIndex:0 animated:YES];
             if (info) {
-                AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-                NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"%@",myDelegate.myinfol.logopathsm]];
-                NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
-                [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+                
+                 [self.parentViewController.self performSelector:@selector(updateIndexUI)];
                 
                 UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:info delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alter show];

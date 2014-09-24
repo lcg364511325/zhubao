@@ -85,7 +85,16 @@ member *_member;
     
     
     //更新ui(如果已经存在的，则不再自动更新)
-    [self loadmyInfo];
+    //[self loadmyInfo];
+    
+    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
+        [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
+    }
+    else {
+        [logoImage setImage:[UIImage imageNamed:@"logo"]];
+    }
     
 }
 
@@ -139,6 +148,24 @@ member *_member;
     
 }
 
+// 更新ui
+-(void)updateIndexUI
+{
+//    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+//    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"%@",myDelegate.myinfol.logopathsm]];
+//    NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",logoImage,@"imageView",nil];
+//    [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+    
+    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
+        [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
+    }
+    else {
+        [logoImage setImage:[UIImage imageNamed:@"logo"]];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -170,7 +197,7 @@ member *_member;
     UIViewController *oldViewController=currentViewController;
     _selectmenu.frame=CGRectMake(0, 179, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
     
-    [self transitionFromViewController:currentViewController toViewController:_product duration:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+    [self transitionFromViewController:currentViewController toViewController:_product duration:1 options:UIViewAnimationOptionAllowUserInteraction animations:^{
     }  completion:^(BOOL finished) {
         if (finished) {
             currentViewController=_product;
@@ -375,21 +402,6 @@ member *_member;
         [scg reloadshopcart];
     }
 }
-
-
-////核对密码
-//-(IBAction)chenckpassword:(id)sender
-//{
-//    fivethview.hidden=NO;
-//}
-//
-////关闭核对
-//-(IBAction)closecheck:(id)sender
-//{
-//    checkpassword.text=@"";
-//    fivethview.hidden=YES;
-//}
-
 
 //更新数据
 -(IBAction)updateProductDate:(id)sender
