@@ -127,18 +127,23 @@
         }
         cell.priceLable.text=goods.pcount;
     }else if([goods.producttype isEqualToString:@"1"] || [goods.producttype isEqualToString:@"2"] || [goods.producttype isEqualToString:@"10"]){
-        NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",goods.proentiy.Pro_smallpic]];
-        if (hasCachedImage(imgUrl)) {
-            cell.showImage.image=[UIImage imageWithContentsOfFile:pathForURL(imgUrl)];
+        if ([goods.producttype isEqualToString:@"10"]) {
+            cell.showImage.image=[[UIImage alloc] initWithContentsOfFile:goods.proentiy.Pro_smallpic];
         }else
         {
-            cell.showImage.image=[UIImage imageNamed:@"diamonds"];
-            NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",cell.showImage,@"imageView",nil];
-            [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
-            
+            NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",goods.proentiy.Pro_smallpic]];
+            if (hasCachedImage(imgUrl)) {
+                cell.showImage.image=[UIImage imageWithContentsOfFile:pathForURL(imgUrl)];
+            }else
+            {
+                cell.showImage.image=[UIImage imageNamed:@"diamonds"];
+                NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",cell.showImage,@"imageView",nil];
+                [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+                
+            }
         }
-        if (goods.proentiy.Pro_number) {
-            cell.dipLable.text=goods.proentiy.Pro_number;
+        if (goods.proentiy.Pro_model) {
+            cell.dipLable.text=goods.proentiy.Pro_model;
         }else{
             cell.dipLable.text=nil;
         }

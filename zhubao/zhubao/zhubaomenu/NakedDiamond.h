@@ -64,5 +64,6 @@
 - (IBAction)goAction2:(id)sender;
 
 -(void)refleshBuycutData;
+-(void)closesc;
 
 @end

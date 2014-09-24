@@ -29,6 +29,8 @@
     UIView *moveView;
     
     UIViewController *currentViewController;
+    NSString *url;
+    NSInteger isverson;
 }
 
 @property (retain, nonatomic) IBOutlet UIView *primaryView;
@@ -47,5 +49,7 @@
 - (IBAction)goAction:(id)sender;
 
 -(void)refleshBuycutData;
+
+-(void)closesc;
 
 @end

@@ -9,6 +9,7 @@
 #import "localorderdetail.h"
 #import "sqlService.h"
 #import "localorderglistCell.h"
+#import "localorder.h"
 
 @interface localorderdetail ()
 

@@ -806,17 +806,59 @@ NSMutableArray *list=nil;
     return isshow;
 }
 
-//核对密码
--(IBAction)chenckpassword:(id)sender
+-(void)reloaddata
 {
-    fivethview.hidden=NO;
-}
-
-//关闭核对
--(IBAction)closecheck:(id)sender
-{
-    checkpassword.text=@"";
-    fivethview.hidden=YES;
+    //款式
+    NSMutableString *styleindex=[[NSMutableString alloc] init];
+    for (NSString *index in stylearray) {
+        if (styleindex.length!=0) {
+            [styleindex appendString:@","];
+            [styleindex appendString:index];
+        }else{
+            [styleindex appendString:index];
+        }
+    }
+    //材质
+    NSMutableString *textrueindex=[[NSMutableString alloc] init];
+    for (NSString *index in texturearray) {
+        if (textrueindex.length!=0) {
+            [textrueindex appendString:@","];
+            [textrueindex appendString:index];
+        }else{
+            [textrueindex appendString:index];
+        }
+    }
+    //镶口
+    NSMutableString *inlayindex=[[NSMutableString alloc] init];
+    for (NSString *index in inlayarray) {
+        if (inlayindex.length!=0) {
+            [inlayindex appendString:@","];
+            [inlayindex appendString:index];
+        }else{
+            [inlayindex appendString:index];
+        }
+    }
+    //系列
+    NSMutableString *serieindex=[[NSMutableString alloc] init];
+    for (NSString *index in seriearray) {
+        if (serieindex.length!=0) {
+            [serieindex appendString:@" or "];
+            [serieindex appendString:index];
+        }else{
+            [serieindex appendString:index];
+        }
+    }
+    NSString * serieindexs=serieindex;
+    if([seriearray count]>1)serieindexs=[NSString stringWithFormat:@"(%@)",serieindex];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // 耗时的操作（异步操作）
+        sqlService *sql=[[sqlService alloc]init];
+        list=[sql GetProductList:styleindex type2:textrueindex type3:inlayindex type4:serieindexs page:1 pageSize:1500];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [productcollect reloadData];
+        });
+    });
 }
 
 -(void)refleshBuycutData

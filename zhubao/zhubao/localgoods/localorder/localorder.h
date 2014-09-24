@@ -16,4 +16,6 @@
 @property (nonatomic,assign) id <UIApplicationDelegate> mydelegate;
 @property (weak, nonatomic) IBOutlet UITableView *orderTView;
 
+-(void)closed;
+
 @end

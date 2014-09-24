@@ -289,9 +289,10 @@ NSInteger selecttype=0;
         NSString *info=[_sqlService deleteProduct:_proid];
         if (info) {
             NSString *rowString =@"删除成功！";
-            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alter show];
             [self closeDetail:nil];
+            [_mydelegate performSelector:@selector(reloaddata)];
         }else{
             NSString *rowString =@"删除失败！";
             UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
