@@ -62,22 +62,22 @@ NSInteger vies=0;
     self.mainlist = mainarray;
     texturetext.userInteractionEnabled=NO;
     texturetext.text=@"18K白";
-    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
-        [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
-    }
-    else {
-        [logoImage setImage:[UIImage imageNamed:@"logo"]];
-    }
-    
-    NSString *goodscount=myDelegate.entityl.resultcount;
-    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-        shopcartcount.hidden=NO;
-        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
-    }else{
-        shopcartcount.hidden=YES;
-    }
+//    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+//    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
+//    if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
+//        [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
+//    }
+//    else {
+//        [logoImage setImage:[UIImage imageNamed:@"logo"]];
+//    }
+//    
+//    NSString *goodscount=myDelegate.entityl.resultcount;
+//    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+//        shopcartcount.hidden=NO;
+//        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
+//    }else{
+//        shopcartcount.hidden=YES;
+//    }
     
     goldweightText.keyboardType=UIKeyboardTypeNumberPad;
     miandiaText.keyboardType=UIKeyboardTypeNumberPad;

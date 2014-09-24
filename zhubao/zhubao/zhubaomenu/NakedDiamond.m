@@ -65,23 +65,23 @@ NSInteger whichview=0;
     weightmax.keyboardType=UIKeyboardTypeNumberPad;
     pricemin.keyboardType=UIKeyboardTypeNumberPad;
     pricemax.keyboardType=UIKeyboardTypeNumberPad;
-    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+ //   AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     
-    NSString *goodscount=myDelegate.entityl.resultcount;
-    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-        shopcartcount.hidden=NO;
-        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
-    }else{
-        shopcartcount.hidden=YES;
-    }
-
-    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
-        [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
-    }
-    else {
-        [logoImage setImage:[UIImage imageNamed:@"logo"]];
-    }
+//    NSString *goodscount=myDelegate.entityl.resultcount;
+//    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+//        shopcartcount.hidden=NO;
+//        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
+//    }else{
+//        shopcartcount.hidden=YES;
+//    }
+//
+//    NSString *logopathsm = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopathsm.png"]];
+//    if ([[NSFileManager defaultManager] fileExistsAtPath:logopathsm]) {
+//        [logoImage setImage:[[UIImage alloc] initWithContentsOfFile:logopathsm]];
+//    }
+//    else {
+//        [logoImage setImage:[UIImage imageNamed:@"logo"]];
+//    }
     
     if ([[[UIDevice currentDevice]systemVersion]floatValue]>=7.0) {
         self.edgesForExtendedLayout=UIRectEdgeNone;
@@ -938,7 +938,7 @@ NSInteger whichview=0;
     
 }
 
--(void)closeAction
+-(void)closeAction1
 {
     if (self.popupViewController != nil) {
         [self dismissPopupViewControllerAnimated:YES completion:^{
