@@ -375,7 +375,10 @@ NSInteger selecttype=0;
     
     [self hidemenlproduct];
     
-    [self localgoods];
+    
+    if ([goods.producttype isEqualToString:@"1"]) {
+        [self localgoods];
+    }
     
     titlelable.text=goods.Pro_name;
     modellable.text=goods.Pro_model;
