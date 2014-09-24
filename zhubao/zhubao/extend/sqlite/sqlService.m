@@ -1553,9 +1553,9 @@
         
         //NSString * timesd=[self getTimeNowOT];
         
-        NSString *tablekey=@"productid,pcolor,pcount,pdetail,psize,pprice,customerid,producttype,pvvs,pweight,pgoldtype,pname,photos,photom,photob,Dia_Z_weight,Dia_Z_count,Dia_F_weight,Dia_F_count";
+        NSString *tablekey=@"productid,pcolor,pcount,pdetail,psize,pprice,customerid,producttype,pvvs,pweight,pgoldtype,pname,photos,photom,photob,Dia_Z_weight,Dia_Z_count,Dia_F_weight,Dia_F_count,pro_model";
         
-        NSString * values =[NSString stringWithFormat:@"'%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@'",entity.productid,entity.pcolor,entity.pcount,entity.pdetail,entity.psize,entity.pprice,entity.customerid,entity.producttype,entity.pvvs,entity.pweight,entity.pgoldtype,entity.pname,entity.photos,entity.photom,entity.photob,entity.Dia_Z_weight,entity.Dia_Z_count,entity.Dia_F_weight,entity.Dia_F_count];
+        NSString * values =[NSString stringWithFormat:@"'%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@'",entity.productid,entity.pcolor,entity.pcount,entity.pdetail,entity.psize,entity.pprice,entity.customerid,entity.producttype,entity.pvvs,entity.pweight,entity.pgoldtype,entity.pname,entity.photos,entity.photom,entity.photob,entity.Dia_Z_weight,entity.Dia_Z_count,entity.Dia_F_weight,entity.Dia_F_count,entity.pro_model];
         
         NSString * sql=[NSString stringWithFormat:@"insert into [buyproduct](%@)values(%@);",tablekey,values];
         
@@ -1868,7 +1868,7 @@
         
         sqlite3_stmt *statement = nil;
         //sql语句
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,productid,pcolor,pcount,pdetail,psize,pprice,customerid,producttype,pvvs,pweight,pgoldtype,photos,photom,photob,pname,Dia_Z_weight,Dia_Z_count,Dia_F_weight,Dia_F_count from buyproduct where customerid=%@ ",customerid];
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,productid,pcolor,pcount,pdetail,psize,pprice,customerid,producttype,pvvs,pweight,pgoldtype,photos,photom,photob,pname,Dia_Z_weight,Dia_Z_count,Dia_F_weight,Dia_F_count,pro_model from buyproduct where customerid=%@ ",customerid];
         
         const char *sql = [querySQL UTF8String];
         if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
@@ -1983,9 +1983,9 @@
                     
                     char * pcolor   = (char *)sqlite3_column_text(statement,2);//颜色
                     if(pcolor != nil && ![[NSString stringWithUTF8String:pcolor] isEqualToString:@"(null)"])
-                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:pcolor]];//商品数组
+                        entity.diaColor=[NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:pcolor]];//商品数组
                     else
-                        entity.diaColor=@",\"\"";
+                        entity.diaColor=@"";
                     
                     char * pname   = (char *)sqlite3_column_text(statement,15);//名称
                     if(pname != nil && ![[NSString stringWithUTF8String:pname] isEqualToString:@"(null)"])
@@ -2004,6 +2004,12 @@
                         entity.Pro_price=[NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:pprice]];//商品数组
                     else
                         entity.Pro_price=@"";
+                    
+                    char * pro_model   = (char *)sqlite3_column_text(statement,20);//价格
+                    if(pro_model != nil && ![[NSString stringWithUTF8String:pro_model] isEqualToString:@"(null)"])
+                        entity.pro_model=[NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:pro_model]];//商品数组
+                    else
+                        entity.pro_model=@"";
                     
                     
                     //有图片，则要上传
@@ -2575,6 +2581,36 @@
     }
     
     return array ;
+}
+
+//删除本地订单信息
+-(NSString*)deletelocalorder:(NSString *)oid{
+    
+    @try {
+        
+        NSString * sql=[NSString stringWithFormat:@"DELETE from [orderdetail] where orderid=%@",oid];
+        
+        NSLog(@"--------------:%@",sql);
+        
+        if ([self execSql:sql]) {
+            sql=[NSString stringWithFormat:@"DELETE from [orderbill] where Id=%@",oid];
+            if (![self HandleSql:sql]) {
+                return nil;
+            }
+        }else
+        {
+            return nil;
+        }
+        
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+    @finally {
+        //[self closeDB];
+    }
+    
+    return oid;
 }
 
 @end

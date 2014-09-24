@@ -886,6 +886,8 @@ NSInteger selecttype=0;
     entity.customerid=myDelegate.entityl.uId;
     entity.pprice=womanprice;
     entity.pname=modellable.text;
+    entity.pro_model=goods.Pro_model;
+    entity.photos=goods.Pro_smallpic;
     buyproduct *successadd=[sql addToBuyproduct:entity];
     buyproduct *successaddman=[[buyproduct alloc]init];
     if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {

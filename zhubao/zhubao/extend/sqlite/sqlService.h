@@ -122,4 +122,7 @@
 //查询本地订单详情列表
 - (NSMutableArray*)GetLocalOrderDetailList:(NSString *)orderid page:(int)page pageSize:(int)pageSize;
 
+//删除本地订单信息
+-(NSString*)deletelocalorder:(NSString *)oid;
+
 @end

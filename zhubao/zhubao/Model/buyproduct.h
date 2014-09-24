@@ -24,6 +24,7 @@
 @property (nonatomic, retain) NSString * pvvs;//主石净度
 @property (nonatomic, retain) NSString * pweight;//重量
 @property (nonatomic, retain) NSString * pgoldtype;//材质
+@property (nonatomic, retain) NSString * pro_model;//型号
 
 @property (nonatomic, retain) NSString * pname;//名称(为钻石时为：石头证书号 商品时：商品型号)
 

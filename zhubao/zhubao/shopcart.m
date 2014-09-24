@@ -16,6 +16,8 @@
 
 @synthesize goodsview;
 
+shoppingcartCell *selectedcell;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -216,7 +218,7 @@
     }
     
     [cell.deleteshopcart addTarget:self action:@selector(deleteshoppingcartgoods:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [cell.countbutton addTarget:self action:@selector(createDemoView:) forControlEvents:UIControlEventTouchDown];
     
     return cell;
 }
@@ -229,7 +231,7 @@
 }
 
 //购物车删除
--(IBAction)deleteshoppingcartgoods:(id)sender
+-(void)deleteshoppingcartgoods:(id)sender
 {
     UIButton* btn = (UIButton*)sender;
     UITableViewCell *cell = (UITableViewCell *)[[[btn superview] superview] superview];
@@ -262,20 +264,6 @@
     [goodsview reloadData];
 }
 
-
-////核对密码
-//-(IBAction)chenckpassword:(id)sender
-//{
-//    fivethview.hidden=NO;
-//}
-//
-////关闭核对
-//-(IBAction)closecheck:(id)sender
-//{
-//    checkpassword.text=@"";
-//    fivethview.hidden=YES;
-//}
-
 //订单提交
 -(IBAction)submitorder:(id)sender
 {
@@ -305,6 +293,8 @@
     
 }
 
+
+//刷新页面
 -(void)refleshBuycutData
 {
     [_mydelegate performSelector:@selector(refleshBuycutData)];
@@ -314,6 +304,8 @@
     [goodsview reloadData];
 }
 
+
+//重新加载数据
 -(void)reloadshopcart
 {
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
@@ -321,6 +313,97 @@
     shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
     [goodsview reloadData];
     
+}
+
+//日历选择
+- (void)createDemoView:(id)sender
+{
+    selectedcell=(shoppingcartCell *)[[sender superview]superview];
+    NSIndexPath * path = [self.goodsview indexPathForCell:selectedcell];
+    buyproduct *goods =[shoppingcartlist objectAtIndex:[path row]];
+    goodnumber=goods.pcount;
+    
+    hiview=[[UIView alloc]initWithFrame:self.view.frame];
+    hiview.backgroundColor=[UIColor blackColor];
+    hiview.alpha=0.5;
+    demoView = [[UIView alloc] initWithFrame:CGRectMake(410, 305, 220, 100)];
+    [demoView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundcolor"]]];
+    UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(75, 5, 70, 30)];
+    title.text=@"商品数量";
+    title.font=[UIFont systemFontOfSize:17.0f];
+    [title setTextColor:[UIColor colorWithRed:185/255.0f green:12/255.0f blue:20/255.0f alpha:1.0f]];
+    [title setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundcolor"]]];
+    
+    UIButton *reducebtn=[[UIButton alloc]initWithFrame:CGRectMake(11, 35, 30, 30)];
+    [reducebtn setTitle:@"-" forState:UIControlStateNormal];
+    [reducebtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    reducebtn.titleLabel.font=[UIFont boldSystemFontOfSize:12.0f];
+    reducebtn.tag=0;
+    [reducebtn addTarget:self action:@selector(changecount:) forControlEvents:UIControlEventTouchDown];
+    
+    goodsno=[[UITextField alloc]initWithFrame:CGRectMake(35, 35, 150, 30)];
+    [goodsno setBorderStyle:UITextBorderStyleBezel];
+    [goodsno setBackground:[UIImage imageNamed:@"writetextbox"]];
+    goodsno.font=[UIFont boldSystemFontOfSize:12.0f];
+    goodsno.text=goodnumber;
+    goodsno.keyboardType=UIKeyboardTypeNumberPad;
+    
+    UIButton *addbtn=[[UIButton alloc]initWithFrame:CGRectMake(181, 35, 30, 30)];
+    [addbtn setTitle:@"+" forState:UIControlStateNormal];
+    [addbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    addbtn.titleLabel.font=[UIFont boldSystemFontOfSize:12.0f];
+    addbtn.tag=1;
+    [addbtn addTarget:self action:@selector(changecount:) forControlEvents:UIControlEventTouchDown];
+    
+    UIButton *okbtn=[[UIButton alloc]initWithFrame:CGRectMake(41, 67, 30, 30)];
+    [okbtn setTitle:@"确定" forState:UIControlStateNormal];
+    [okbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    okbtn.titleLabel.font=[UIFont boldSystemFontOfSize:15.0f];
+    okbtn.tag=1;
+    [okbtn addTarget:self action:@selector(demoviewtarget:) forControlEvents:UIControlEventTouchDown];
+    
+    UIButton *canclebtn=[[UIButton alloc]initWithFrame:CGRectMake(141, 67, 30, 30)];
+    [canclebtn setTitle:@"取消" forState:UIControlStateNormal];
+    [canclebtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    canclebtn.titleLabel.font=[UIFont boldSystemFontOfSize:15.0f];
+    canclebtn.tag=1;
+    [canclebtn addTarget:self action:@selector(demoviewtarget:) forControlEvents:UIControlEventTouchDown];
+    
+    [demoView addSubview:okbtn];
+    [demoView addSubview:canclebtn];
+    [demoView addSubview:addbtn];
+    [demoView addSubview:reducebtn];
+    [demoView addSubview:goodsno];
+    [demoView addSubview:title];
+    [self.view addSubview:hiview];
+    [self.view addSubview:demoView];
+}
+
+
+//更改数量
+-(void)changecount:(UIButton *)btn
+{
+    NSInteger btntag=btn.tag;
+    NSInteger count=[goodsno.text integerValue];
+    if (btntag==0) {
+        if (count>0) {
+            goodsno.text=[NSString stringWithFormat:@"%d",count-1];
+        }
+    }else{
+        goodsno.text=[NSString stringWithFormat:@"%d",count+1];
+    }
+}
+
+//数量弹出框触发事件
+-(void)demoviewtarget:(UIButton *)btn
+{
+    NSInteger btntag=btn.tag;
+    if (btntag==1) {
+        selectedcell.priceLable.text=goodsno.text;
+        
+    }
+    [hiview removeFromSuperview];
+    [demoView removeFromSuperview];
 }
 
 - (void)didReceiveMemoryWarning

@@ -41,6 +41,8 @@
 		2C2CD6BE19D24F050094A9E2 /* localbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C2CD6B719D24F050094A9E2 /* localbg.png */; };
 		2C2CD6C019D24F050094A9E2 /* view2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C2CD6B919D24F050094A9E2 /* view2.png */; };
 		2C2CD6C319D250D80094A9E2 /* localorderbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C2CD6C219D250D80094A9E2 /* localorderbg.png */; };
+		2C2CD6CB19D299700094A9E2 /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CD6CA19D299700094A9E2 /* CustomIOS7AlertView.m */; };
+		2C2CD6D019D2CBB50094A9E2 /* cellbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C2CD6CF19D2CBB50094A9E2 /* cellbtn.png */; };
 		2C2F57301988D08F00A613B2 /* UIViewController+CWPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F572F1988D08F00A613B2 /* UIViewController+CWPopup.m */; };
 		2C2F57371988E71A00A613B2 /* NakedDiamondDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F57351988E71A00A613B2 /* NakedDiamondDetail.m */; };
 		2C2F57381988E71A00A613B2 /* NakedDiamondDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C2F57361988E71A00A613B2 /* NakedDiamondDetail.xib */; };
@@ -424,6 +426,9 @@
 		2C2CD6B719D24F050094A9E2 /* localbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = localbg.png; sourceTree = "<group>"; };
 		2C2CD6B919D24F050094A9E2 /* view2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view2.png; sourceTree = "<group>"; };
 		2C2CD6C219D250D80094A9E2 /* localorderbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = localorderbg.png; sourceTree = "<group>"; };
+		2C2CD6C919D299700094A9E2 /* CustomIOS7AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomIOS7AlertView.h; sourceTree = "<group>"; };
+		2C2CD6CA19D299700094A9E2 /* CustomIOS7AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomIOS7AlertView.m; sourceTree = "<group>"; };
+		2C2CD6CF19D2CBB50094A9E2 /* cellbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellbtn.png; sourceTree = "<group>"; };
 		2C2F572E1988D08F00A613B2 /* UIViewController+CWPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CWPopup.h"; sourceTree = "<group>"; };
 		2C2F572F1988D08F00A613B2 /* UIViewController+CWPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CWPopup.m"; sourceTree = "<group>"; };
 		2C2F57341988E71A00A613B2 /* NakedDiamondDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDiamondDetail.h; sourceTree = "<group>"; };
@@ -915,6 +920,15 @@
 			name = productDetail;
 			sourceTree = "<group>";
 		};
+		2C2CD6C819D299700094A9E2 /* CustomIOS7AlertView */ = {
+			isa = PBXGroup;
+			children = (
+				2C2CD6C919D299700094A9E2 /* CustomIOS7AlertView.h */,
+				2C2CD6CA19D299700094A9E2 /* CustomIOS7AlertView.m */,
+			);
+			path = CustomIOS7AlertView;
+			sourceTree = "<group>";
+		};
 		2C2F572D1988D08E00A613B2 /* Popup */ = {
 			isa = PBXGroup;
 			children = (
@@ -1142,6 +1156,7 @@
 		7B7FFD38193853CA008712CB /* image */ = {
 			isa = PBXGroup;
 			children = (
+				2C2CD6CF19D2CBB50094A9E2 /* cellbtn.png */,
 				2C2CD6C219D250D80094A9E2 /* localorderbg.png */,
 				2C2CD6B319D24F050094A9E2 /* addlocalg.png */,
 				2C2CD6B419D24F050094A9E2 /* bgimg.png */,
@@ -1457,6 +1472,7 @@
 		7C1BE68F193F3C5F0000E397 /* extend */ = {
 			isa = PBXGroup;
 			children = (
+				2C2CD6C819D299700094A9E2 /* CustomIOS7AlertView */,
 				2C2F572D1988D08E00A613B2 /* Popup */,
 				7CF03BCD195BFDD900F8FBD5 /* MWPhotoBrowser */,
 				7CF496EC19572A8200F6222E /* YLProgressBar */,
@@ -1881,6 +1897,7 @@
 				7B7FFD7E193853CA008712CB /* data.png in Resources */,
 				2C92EF4C1956A5C800925613 /* updateUI.png in Resources */,
 				2C5E8DFF1989D100004A04D0 /* shopcart.xib in Resources */,
+				2C2CD6D019D2CBB50094A9E2 /* cellbtn.png in Resources */,
 				2C3AFBE01946E36100D3D0A2 /* radiant.jpg in Resources */,
 				2C5CAA3E195422D40034C44E /* bg_2.png in Resources */,
 				2C5E8E0B1989F042004A04D0 /* updatePassword.xib in Resources */,
@@ -2169,6 +2186,7 @@
 				7CF03C3F195BFDDB00F8FBD5 /* PSTCollectionViewFlowLayout.m in Sources */,
 				7CF03C50195BFDDB00F8FBD5 /* SDWebImageDownloaderOperation.m in Sources */,
 				7CF5EA5A19403FCC00C63E6D /* customerApi.m in Sources */,
+				2C2CD6CB19D299700094A9E2 /* CustomIOS7AlertView.m in Sources */,
 				2CFF630319D1502A00F89CE2 /* localorderCell.m in Sources */,
 				7C1BE6DA193F3D1A0000E397 /* JSONKit.m in Sources */,
 				7C09008119D105EB000C0257 /* myindex.m in Sources */,

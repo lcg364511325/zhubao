@@ -17,6 +17,8 @@
 
 @implementation localorder
 
+@synthesize orderTView;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -31,6 +33,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self loaddata];
+}
+
+-(void)loaddata
+{
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     sqlService *_sqlService=[[sqlService alloc]init];
     list=[_sqlService GetLocalOrderList:myDelegate.entityl.uId page:1 pageSize:1500];
@@ -61,11 +68,13 @@
     cell.ordernoLabel.text=entity.Id;
     cell.usernameLabel.text=entity.username;
     cell.mobileLabel.text=entity.mobile;
-    cell.createdateLabel.text=entity.createdate;
+    NSArray *array=[entity.createdate componentsSeparatedByString:@" "];
+    cell.createdateLabel.text=[array objectAtIndex:0];
     cell.propriceLabel.text=entity.allprice;
     cell.inputpriceLabel.text=entity.getprice;
     cell.stateLabel.text=@"未确认";
-    [cell.checkButton addTarget:self action:@selector(addlocalgoods:) forControlEvents:UIControlEventTouchDown];
+    [cell.checkButton addTarget:self action:@selector(localorderdetail:) forControlEvents:UIControlEventTouchDown];
+    [cell.deleteButton addTarget:self action:@selector(deletelocalorder:) forControlEvents:UIControlEventTouchDown];
     
     return cell;
 }
@@ -76,18 +85,44 @@
     
 }
 
-//本地商品添加页面跳转页
-- (void)addlocalgoods:(UIButton *)btn;
+//本地订单详情页面跳转
+- (void)localorderdetail:(UIButton *)btn
 {
     UITableViewCell * cell = (UITableViewCell *)[[btn superview] superview];
      NSIndexPath * path = [self.orderTView indexPathForCell:cell];
     orderbill *entity=[list objectAtIndex:path.row];
     localorderdetail *samplePopupViewController = [[localorderdetail alloc] initWithNibName:@"localorderdetail" bundle:nil];
-    samplePopupViewController.mydelegate=self.parentViewController.self;
+    samplePopupViewController.mydelegate=self;
     samplePopupViewController.order=entity;
-    [self.parentViewController.self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
+    [self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
         NSLog(@"popup view presented");
     }];
+}
+
+//本地订单删除
+-(void)deletelocalorder:(UIButton *)btn
+{
+    
+    [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"确定删除该订单？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil] show];
+    UITableViewCell * cell = (UITableViewCell *)[[btn superview] superview];
+    NSIndexPath * path = [self.orderTView indexPathForCell:cell];
+    selectedentity=[list objectAtIndex:path.row];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==1) {
+        sqlService *_sqlService=[[sqlService alloc]init];
+        NSString *info=[_sqlService deletelocalorder:selectedentity.Id];
+        if (info) {
+            [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"删除成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+            [self loaddata];
+            [orderTView reloadData];
+            
+        }else{
+            [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"删除失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+        }
+    }
 }
 
 -(void)closed{

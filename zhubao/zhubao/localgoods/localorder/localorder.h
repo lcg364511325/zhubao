@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "orderbill.h"
 
 @interface localorder : UIViewController<UIApplicationDelegate>
 {
     NSArray *list;
+    orderbill *selectedentity;
 }
 
 @property (nonatomic,assign) id <UIApplicationDelegate> mydelegate;

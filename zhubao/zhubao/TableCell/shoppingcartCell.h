@@ -23,5 +23,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *fluLable;
 @property (weak, nonatomic) IBOutlet UILabel *priceLable;
 @property (weak, nonatomic) IBOutlet UIButton *deleteshopcart;
+@property (weak, nonatomic) IBOutlet UIButton *countbutton;
 
 @end
