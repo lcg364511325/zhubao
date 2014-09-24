@@ -375,7 +375,7 @@ NSInteger selecttype=0;
     
     [self hidemenlproduct];
     
-    
+    //本地商品加载按钮
     if ([goods.producttype isEqualToString:@"1"]) {
         [self localgoods];
     }
