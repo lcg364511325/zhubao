@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "productEntity.h"
 
 @interface addlocalgoods : UIViewController<UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
@@ -26,9 +27,11 @@
     NSString* filePath;
     NSArray *typelist;
     NSString *typevalue;
+    NSInteger isupdate;
 }
 
 @property (nonatomic,assign) id <UIApplicationDelegate> mydelegate;
+@property (retain,nonatomic) productEntity *goods;
 
 @property (weak, nonatomic) IBOutlet UIImageView *zhengmianview;
 @property (weak, nonatomic) IBOutlet UIImageView *fanmianview;
@@ -44,5 +47,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *typeText;
 @property (weak, nonatomic) IBOutlet UITableView *typeTView;
 @property (weak, nonatomic) IBOutlet UITextField *nameText;
+@property (weak, nonatomic) IBOutlet UILabel *titleText;
 
 @end

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "sqlService.h"
 
-@interface prodeuctDetail : UIViewController<MWPhotoBrowserDelegate>
+@interface prodeuctDetail : UIViewController<MWPhotoBrowserDelegate,UIApplicationDelegate>
 {
     UIButton* btnBack;
     RotateImageView *rImageView;
@@ -75,6 +75,10 @@
 @property (nonatomic, strong) NSMutableArray *photos;
 
 @property (nonatomic,assign) id <UIApplicationDelegate> mydelegate;//当前请求过来的对象
+
+-(void)closesc;
+
+-(void)showproductDetai;
 
 
 @end

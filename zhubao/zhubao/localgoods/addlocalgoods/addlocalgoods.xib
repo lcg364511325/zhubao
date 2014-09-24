@@ -17,6 +17,7 @@
                 <outlet property="modelnoText" destination="7Kg-jC-hxd" id="Qtj-Yq-1Kz"/>
                 <outlet property="nameText" destination="1Yg-u6-oAG" id="ByX-Yk-mxW"/>
                 <outlet property="priceText" destination="rRO-0K-0eB" id="GPF-af-tXy"/>
+                <outlet property="titleText" destination="pU6-pg-mvn" id="gam-Tb-sbH"/>
                 <outlet property="typeTView" destination="rwo-hf-DFm" id="UhU-rl-jDQ"/>
                 <outlet property="typeText" destination="gZN-Wx-clw" id="nXo-lu-snX"/>
                 <outlet property="view" destination="9kk-iO-4Nt" id="vga-fG-Tjo"/>

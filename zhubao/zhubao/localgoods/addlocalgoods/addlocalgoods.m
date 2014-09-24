@@ -26,6 +26,8 @@
 @synthesize typeText;
 @synthesize typeTView;
 @synthesize nameText;
+@synthesize titleText;
+@synthesize goods;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,17 +45,50 @@
     typeText.userInteractionEnabled=NO;
     
     typelist=[[NSArray alloc]initWithObjects:@"女戒",@"男戒",@"对戒",@"吊坠",@"项链",@"手链",@"手镯",@"耳环",@"耳钉", nil];
-    pic1=@"";
-    pic2=@"";
-    pic3=@"";
-    modelnoText.text=@"";
-    typeText.text=@"";
-    goldweightText.text=@"";
-    mianctText.text=@"";
-    miancountText.text=@"";
-    fitctText.text=@"";
-    fitcountText.text=@"";
-    priceText.text=@"";
+    
+    [self loaddata];
+    
+}
+
+-(void)loaddata
+{
+    if (goods) {
+        isupdate=1;
+        titleText.text=@"修改商品";
+        pic1=goods.Pro_smallpic;
+        NSArray  * array= [goods.Pro_bigpic componentsSeparatedByString:@","];
+        pic2=[array objectAtIndex:0];
+        pic3=[array objectAtIndex:1];
+        
+        self.zhengmianview.image=[UIImage imageWithContentsOfFile:pic1];
+        self.cemianview.image=[UIImage imageWithContentsOfFile:pic2];
+        self.fanmianview.image=[UIImage imageWithContentsOfFile:pic3];
+        nameText.text=goods.Pro_name;
+        modelnoText.text=goods.Pro_model;
+        goldweightText.text=goods.Pro_goldWeight;
+        mianctText.text=goods.Pro_Z_weight;
+        miancountText.text=goods.Pro_Z_count;
+        fitctText.text=goods.Pro_f_weight;
+        fitcountText.text=goods.Pro_f_count;
+        priceText.text=goods.Pro_price;
+        typevalue=goods.Pro_Class;
+        typeText.text=[typelist objectAtIndex:[typevalue integerValue]-1];
+        
+    }else
+    {
+        isupdate=0;
+        pic1=@"";
+        pic2=@"";
+        pic3=@"";
+        modelnoText.text=@"";
+        typeText.text=@"";
+        goldweightText.text=@"";
+        mianctText.text=@"";
+        miancountText.text=@"";
+        fitctText.text=@"";
+        fitcountText.text=@"";
+        priceText.text=@"";
+    }
 }
 
 -(IBAction)closeaddlocalg:(id)sender
@@ -65,34 +100,69 @@
 //保存本地商品数据
 -(IBAction)savelocalgoods:(id)sender
 {
-    if ([modelnoText.text isEqualToString:@""] || [goldweightText.text isEqualToString:@""] || [mianctText.text isEqualToString:@""] || [miancountText.text isEqualToString:@""] || [fitctText.text isEqualToString:@""] || [fitcountText.text isEqualToString:@""] ||[priceText.text isEqualToString:@""] || [pic1 isEqualToString:@""] || [pic2 isEqualToString:@""] || [pic3 isEqualToString:@""] ) {
-        [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"内容不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+    if (isupdate==1) {
+        if ([modelnoText.text isEqualToString:@""] || [goldweightText.text isEqualToString:@""] || [mianctText.text isEqualToString:@""] || [miancountText.text isEqualToString:@""] || [fitctText.text isEqualToString:@""] || [fitcountText.text isEqualToString:@""] ||[priceText.text isEqualToString:@""] || [pic1 isEqualToString:@""] || [pic2 isEqualToString:@""] || [pic3 isEqualToString:@""] ) {
+            [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"内容不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+        }else{
+            productEntity *entity=[[productEntity alloc]init];
+            entity.Id=goods.Id;
+            entity.pro_name=nameText.text;
+            entity.Pro_model=modelnoText.text;
+            entity.Pro_goldWeight=goldweightText.text;
+            entity.Pro_Z_weight=mianctText.text;
+            entity.Pro_Z_count=miancountText.text;
+            entity.Pro_f_weight=fitctText.text;
+            entity.Pro_f_count=fitcountText.text;
+            entity.Pro_price=priceText.text;
+            entity.Pro_Class=typevalue;
+            entity.Pro_smallpic=pic1;
+            entity.Pro_bigpic=[NSString stringWithFormat:@"%@,%@",pic2,pic3];
+            //entity.Pro_bigpic=pic2;
+            entity.producttype=@"1";
+            entity.Pro_IsDel=@"0";
+            entity.Pro_Type=@"10";
+            sqlService *_sqlService=[[sqlService alloc]init];
+            productEntity *info=[_sqlService updateProduct:entity];
+            if (info) {
+                [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"更新成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+                goods=info;
+                [self loaddata];
+                [_mydelegate performSelector:@selector(showproductDetai)];
+            }else
+            {
+                [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"更新失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+            }
+        }
     }else{
-        productEntity *entity=[[productEntity alloc]init];
-         NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]];
-        entity.Id=timeSp;
-        entity.pro_name=nameText.text;
-        entity.Pro_model=modelnoText.text;
-        entity.Pro_goldWeight=goldweightText.text;
-        entity.Pro_Z_weight=mianctText.text;
-        entity.Pro_Z_count=miancountText.text;
-        entity.Pro_f_weight=fitctText.text;
-        entity.Pro_f_count=fitcountText.text;
-        entity.Pro_price=priceText.text;
-        entity.Pro_Class=typevalue;
-        entity.Pro_smallpic=pic1;
-        entity.Pro_bigpic=[NSString stringWithFormat:@"%@,%@",pic2,pic3];
-        //entity.Pro_bigpic=pic2;
-        entity.producttype=@"1";
-        entity.Pro_IsDel=@"0";
-        entity.Pro_Type=@"10";
-        sqlService *_sqlService=[[sqlService alloc]init];
-        productEntity *info=[_sqlService saveProduct:entity];
-        if (info) {
-            [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"添加成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
-        }else
-        {
-            [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"添加失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+        if ([modelnoText.text isEqualToString:@""] || [goldweightText.text isEqualToString:@""] || [mianctText.text isEqualToString:@""] || [miancountText.text isEqualToString:@""] || [fitctText.text isEqualToString:@""] || [fitcountText.text isEqualToString:@""] ||[priceText.text isEqualToString:@""] || [pic1 isEqualToString:@""] || [pic2 isEqualToString:@""] || [pic3 isEqualToString:@""] ) {
+            [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"内容不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+        }else{
+            productEntity *entity=[[productEntity alloc]init];
+            NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]];
+            entity.Id=timeSp;
+            entity.pro_name=nameText.text;
+            entity.Pro_model=modelnoText.text;
+            entity.Pro_goldWeight=goldweightText.text;
+            entity.Pro_Z_weight=mianctText.text;
+            entity.Pro_Z_count=miancountText.text;
+            entity.Pro_f_weight=fitctText.text;
+            entity.Pro_f_count=fitcountText.text;
+            entity.Pro_price=priceText.text;
+            entity.Pro_Class=typevalue;
+            entity.Pro_smallpic=pic1;
+            entity.Pro_bigpic=[NSString stringWithFormat:@"%@,%@",pic2,pic3];
+            //entity.Pro_bigpic=pic2;
+            entity.producttype=@"1";
+            entity.Pro_IsDel=@"0";
+            entity.Pro_Type=@"10";
+            sqlService *_sqlService=[[sqlService alloc]init];
+            productEntity *info=[_sqlService saveProduct:entity];
+            if (info) {
+                [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"添加成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+            }else
+            {
+                [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"添加失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+            }
         }
     }
 }
