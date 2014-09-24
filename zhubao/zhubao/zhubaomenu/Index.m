@@ -23,7 +23,7 @@
 @synthesize logoImage;
 @synthesize checkpassword;
 
-menuindex *_menuindex;
+myindex *_myindex;
 product *_product;
 NakedDiamond *_NakedDiamond;
 ustomtailor *_ustomtailor;
@@ -61,8 +61,8 @@ member *_member;
     }
 
     
-    _menuindex=[[menuindex alloc] init];
-    [self addChildViewController:_menuindex];
+    _myindex=[[myindex alloc] init];
+    [self addChildViewController:_myindex];
 
     _product=[[product alloc] init];
     [self addChildViewController:_product];
@@ -80,8 +80,8 @@ member *_member;
     [self addChildViewController:_member];
     
     
-    [fourthView addSubview:_menuindex.view];
-    currentViewController=_menuindex;
+    [fourthView addSubview:_myindex.view];
+    currentViewController=_myindex;
     
     
     //更新ui(如果已经存在的，则不再自动更新)
@@ -147,15 +147,15 @@ member *_member;
 
 -(IBAction)doReg0:(id)sender
 {
-    if (currentViewController==_menuindex) {
+    if (currentViewController==_myindex) {
         return;
     }
     UIViewController *oldViewController=currentViewController;
     _selectmenu.frame=CGRectMake(0, 110, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
-    [self transitionFromViewController:currentViewController toViewController:_menuindex duration:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+    [self transitionFromViewController:currentViewController toViewController:_myindex duration:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{
     }  completion:^(BOOL finished) {
         if (finished) {
-            currentViewController=_menuindex;
+            currentViewController=_myindex;
         }else{
             currentViewController=oldViewController;
         }

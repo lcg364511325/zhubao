@@ -7,7 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "sqlService.h"
+#import "AppDelegate.h"
+#import "orderApi.h"
+#import "AutoGetData.h"
+#import "UIViewController+CWPopup.h"
+#import <QuartzCore/QuartzCore.h>
 
-@interface myindex : UIViewController
+@interface myindex : UIViewController<UIWebViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate,UIApplicationDelegate>
+{
+    
+}
+
+@property (retain, nonatomic) IBOutlet UIView *primaryView;
+@property (retain, nonatomic) IBOutlet UIView *primaryShadeView;
+@property (retain, nonatomic) IBOutlet UIView *fourthView;
+@property (weak, nonatomic) IBOutlet UIButton *biglogo;
+@property (weak, nonatomic) IBOutlet UIWebView *aboutus;
+
+-(IBAction)openaboutus:(id)sender;
 
 @end

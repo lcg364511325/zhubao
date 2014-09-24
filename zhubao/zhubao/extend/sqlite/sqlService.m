@@ -1494,6 +1494,34 @@
 
 }
 
+//修改商品
+-(productEntity*)updateProduct:(productEntity *)entity{
+    
+    @try {
+//        NSString *tablekey=@"Id,Pro_model,Pro_name,Pro_State,Pro_Class,Pro_Type,Pro_smallpic,Pro_bigpic,Pro_typeWenProId,Pro_info,Pro_lock,Pro_IsDel,Pro_author,Pro_Order,Pro_addtime,Pro_goldType,Pro_goldWeight,Pro_goldsize,Pro_goldset,Pro_FingerSize,Pro_gongfei,Pro_MarketPrice,Pro_price,Pro_OKdays,Pro_Salenums,Pro_hotA,Pro_hotB,Pro_hotC,Pro_hotD,Pro_hotE,Pro_Z_count,Pro_Z_GIA,Pro_Z_number,Pro_Z_weight,Pro_Z_color,Pro_Z_cut,Pro_Z_clarity,Pro_Z_polish,Pro_Z_pair,Pro_Z_price,Pro_f_count,Pro_F_GIA,Pro_f_number,Pro_f_weight,Pro_f_color,Pro_f_cut,Pro_f_clarity,Pro_f_polish,Pro_f_pair,Pro_f_price,Pro_D_Hand,Pro_D_Width,Pro_D_Dia,Pro_D_Bangle,Pro_D_Ear,Pro_D_Height,Pro_SmallClass,IsCaijin,Di_DiaShape,Pro_GroupSerial,Pro_FactoryNumber,Pro_domondB,Pro_domondE,Pro_ChiCun,Pro_goldWeightB,Pro_gongfeiB,Pro_zhuanti,location,zWeight,AuWeight,ptWeight,producttype";
+        
+        NSString * values =[NSString stringWithFormat:@"Pro_model='%@',Pro_name='%@',Pro_State='%@',Pro_Class='%@',Pro_Type='%@',Pro_smallpic='%@',Pro_bigpic='%@',Pro_typeWenProId='%@',Pro_info='%@',Pro_lock='%@',Pro_IsDel='%@',Pro_author='%@',Pro_Order='%@',Pro_addtime='%@',Pro_goldType='%@',Pro_goldWeight='%@',Pro_goldsize='%@',Pro_goldset='%@',Pro_FingerSize='%@',Pro_gongfei='%@',Pro_MarketPrice='%@',Pro_price='%@',Pro_OKdays='%@',Pro_Salenums='%@',Pro_hotA='%@',Pro_hotB='%@',Pro_hotC='%@',Pro_hotD='%@',Pro_hotE='%@',Pro_Z_count='%@',Pro_Z_GIA='%@',Pro_Z_number='%@',Pro_Z_weight='%@',Pro_Z_color='%@',Pro_Z_cut='%@',Pro_Z_clarity='%@',Pro_Z_polish='%@',Pro_Z_pair='%@',Pro_Z_price='%@',Pro_f_count='%@',Pro_F_GIA='%@',Pro_f_number='%@',Pro_f_weight='%@',Pro_f_color='%@',Pro_f_cut='%@',Pro_f_clarity='%@',Pro_f_polish='%@',Pro_f_pair='%@',Pro_f_price='%@',Pro_D_Hand='%@',Pro_D_Width='%@',Pro_D_Dia='%@',Pro_D_Bangle='%@',Pro_D_Ear='%@',Pro_D_Height='%@',Pro_SmallClass='%@',IsCaijin='%@',Di_DiaShape='%@',Pro_GroupSerial='%@',Pro_FactoryNumber='%@',Pro_domondB='%@',Pro_domondE='%@',Pro_ChiCun='%@',Pro_goldWeightB='%@',Pro_gongfeiB='%@',Pro_zhuanti='%@',location='%@',zWeight='%@',AuWeight='%@',ptWeight='%@',producttype='%@'",entity.Pro_model,entity.Pro_name,entity.Pro_State,entity.Pro_Class,entity.Pro_Type,entity.Pro_smallpic,entity.Pro_bigpic,entity.Pro_typeWenProId,entity.Pro_info,entity.Pro_lock,entity.Pro_IsDel,entity.Pro_author,entity.Pro_Order,entity.Pro_addtime,entity.Pro_goldType,entity.Pro_goldWeight,entity.Pro_goldsize,entity.Pro_goldset,entity.Pro_FingerSize,entity.Pro_gongfei,entity.Pro_MarketPrice,entity.Pro_price,entity.Pro_OKdays,entity.Pro_Salenums,entity.Pro_hotA,entity.Pro_hotB,entity.Pro_hotC,entity.Pro_hotD,entity.Pro_hotE,entity.Pro_Z_count,entity.Pro_Z_GIA,entity.Pro_Z_number,entity.Pro_Z_weight,entity.Pro_Z_color,entity.Pro_Z_cut,entity.Pro_Z_clarity,entity.Pro_Z_polish,entity.Pro_Z_pair,entity.Pro_Z_price,entity.Pro_f_count,entity.Pro_F_GIA,entity.Pro_f_number,entity.Pro_f_weight,entity.Pro_f_color,entity.Pro_f_cut,entity.Pro_f_clarity,entity.Pro_f_polish,entity.Pro_f_pair,entity.Pro_f_price,entity.Pro_D_Hand,entity.Pro_D_Width,entity.Pro_D_Dia,entity.Pro_D_Bangle,entity.Pro_D_Ear,entity.Pro_D_Height,entity.Pro_SmallClass,entity.IsCaijin,entity.Di_DiaShape,entity.Pro_GroupSerial,entity.Pro_FactoryNumber,entity.Pro_domondB,entity.Pro_domondE,entity.Pro_ChiCun,entity.Pro_goldWeightB,entity.Pro_gongfeiB,entity.Pro_zhuanti,entity.location,entity.zWeight,entity.AuWeight,entity.ptWeight,entity.producttype];
+        
+        NSString * sql=[NSString stringWithFormat:@" update product set %@  where Id=%@",values,entity.Id];
+        
+        NSLog(@"--------------:%@",sql);
+        
+        if (![self execSqlandClose:sql]) {
+            return nil;
+        }
+        
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+    @finally {
+        [self closeDB];
+    }
+    
+    return entity;
+    
+}
+
 //删除商品信息
 -(NSString*)deleteProduct:(NSString *)pid{
     
@@ -1850,7 +1878,8 @@
 
             NSMutableString *CPInfo=[[NSMutableString alloc] init];
             NSMutableString *DZInfo=[[NSMutableString alloc] init];
-            //NSMutableString *values=[[NSMutableString alloc] init];
+            NSMutableArray *localInfo = [NSMutableArray arrayWithCapacity:10];
+            
             NSMutableArray * uploadpath=[NSMutableArray arrayWithCapacity:10];//需要上传的图片路径
             
             [CPInfo appendString:@"{\"value\":["];//商品数组
@@ -1862,10 +1891,105 @@
             //查询结果集中一条一条的遍历所有的记录，这里的数字对应的是列值。
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 
-                char * producttype   = (char *)sqlite3_column_text(statement,8);//类型 1戒托 2商品 3裸钻 9高级定制
+                char * producttype   = (char *)sqlite3_column_text(statement,8);//类型 1戒托 2商品 3裸钻 9高级定制 10本地商品
                 NSString *  type= [NSString stringWithUTF8String:producttype];
                 
-                if ([type isEqualToString:@"9"]) {
+                //本地商品
+                if ([type isEqualToString:@"10"]) {
+                    
+                    orderdetail * entity = [[orderdetail alloc] init];
+                    
+//                    @property (nonatomic, retain) NSString * Id;
+//                    @property (nonatomic, retain) NSString * cid;//商品id
+//                    @property (nonatomic, retain) NSString * name;//商品名称
+//                    @property (nonatomic, retain) NSString * goldType;//商品款式
+//                    @property (nonatomic, retain) NSString * size;//手寸
+//                    @property (nonatomic, retain) NSString * nums;//数量
+//                    @property (nonatomic, retain) NSString * Pro_model;//型号
+//                    @property (nonatomic, retain) NSString * diaColor;//材质
+//                    @property (nonatomic, retain) NSString * goldWeight;//金重
+//                    @property (nonatomic, retain) NSString * Dia_Z_weight;//主石重
+//                    @property (nonatomic, retain) NSString * Dia_Z_count;//主石数量
+//                    @property (nonatomic, retain) NSString * Dia_F_weight;//副石重
+//                    @property (nonatomic, retain) NSString * Dia_F_count;//副石数量
+//                    @property (nonatomic, retain) NSString * goldPrice;//金价
+//                    @property (nonatomic, retain) NSString * Pro_price;//商品价格
+//                    @property (nonatomic, retain) NSString * logopic;//商品图片
+                    
+                    char * pgoldtype   = (char *)sqlite3_column_text(statement,11);//商品材质
+                    if(pgoldtype != nil && ![[NSString stringWithUTF8String:pgoldtype] isEqualToString:@"(null)"]){
+                        entity.diaColor=[self getGoldtype:[NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:pgoldtype]]];
+                    }else
+                        entity.diaColor=@"\"\"";
+                    
+                    char * pweight   = (char *)sqlite3_column_text(statement,10);//金重
+                    if(pweight != nil && ![[NSString stringWithUTF8String:pweight] isEqualToString:@"(null)"])
+                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:pweight]];
+                    else
+                        entity.diaColor=@",\"0\"";
+                    
+                    char * Dia_Z_weight   = (char *)sqlite3_column_text(statement,16);//主石重	单位克拉
+                    if(Dia_Z_weight != nil && ![[NSString stringWithUTF8String:Dia_Z_weight] isEqualToString:@"(null)"])
+                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:Dia_Z_weight]];
+                    else
+                        entity.diaColor=@",\"0\"";
+                    
+                    char * Dia_Z_count   = (char *)sqlite3_column_text(statement,17);//主石数量
+                    if(Dia_Z_count != nil && ![[NSString stringWithUTF8String:Dia_Z_count] isEqualToString:@"(null)"])
+                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:Dia_Z_count]];
+                    else
+                        entity.diaColor=@",\"0\"";
+                    
+                    char * Dia_F_weight   = (char *)sqlite3_column_text(statement,18);//副石重	单位克拉
+                    if(Dia_F_weight != nil && ![[NSString stringWithUTF8String:Dia_F_weight] isEqualToString:@"(null)"])
+                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:Dia_F_weight]];
+                    else
+                        entity.diaColor=@",\"0\"";
+                    
+                    char * Dia_F_count   = (char *)sqlite3_column_text(statement,19);//副石数量
+                    if(Dia_F_count != nil && ![[NSString stringWithUTF8String:Dia_F_count] isEqualToString:@"(null)"])
+                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:Dia_F_count]];
+                    else
+                        entity.diaColor=@",\"0\"";
+                    
+                    @try {
+                        char * psize   = (char *)sqlite3_column_text(statement,5);//手寸
+                        if(psize != nil && ![[NSString stringWithUTF8String:psize] isEqualToString:@"(null)"])
+                            entity.diaColor=[NSString stringWithFormat:@",\"%d\"",[NSString stringWithUTF8String:psize].integerValue];
+                        else
+                            entity.diaColor=@",\"0\"";
+                    }
+                    @catch (NSException *exception) {
+                        entity.diaColor=@",\"0\"";
+                    }
+                    
+                    char * pdetail   = (char *)sqlite3_column_text(statement,4);//刻字
+                    if(pdetail != nil && ![[NSString stringWithUTF8String:pdetail] isEqualToString:@"(null)"])
+                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:pdetail]];//商品数组
+                    else
+                        entity.diaColor=@",\"\"";
+                    
+                    char * pcount   = (char *)sqlite3_column_text(statement,3);//数量
+                    if(pcount != nil && ![[NSString stringWithUTF8String:pcount] isEqualToString:@"(null)"])
+                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:pcount]];//商品数组
+                    else
+                        entity.diaColor=@",\"0\"";
+                    
+                    char * pvvs   = (char *)sqlite3_column_text(statement,9);//净度
+                    if(pvvs != nil && ![[NSString stringWithUTF8String:pvvs] isEqualToString:@"(null)"])
+                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:pvvs]];//商品数组
+                    else
+                        entity.diaColor=@",\"\"";
+                    
+                    char * pcolor   = (char *)sqlite3_column_text(statement,2);//颜色
+                    if(pcolor != nil && ![[NSString stringWithUTF8String:pcolor] isEqualToString:@"(null)"])
+                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:pcolor]];//商品数组
+                    else
+                        entity.diaColor=@",\"\"";
+                    
+                    [localInfo addObject:entity];
+                    
+                }else if ([type isEqualToString:@"9"]) {
                     //说明是高级定制
                     //DZInfo数组参数 高级定制
                     //        1	Goldtype	Int	0	商品材质

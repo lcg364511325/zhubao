@@ -57,6 +57,9 @@
 //新加商品
 -(productEntity*)saveProduct:(productEntity *)entity;
 
+//修改商品
+-(productEntity*)updateProduct:(productEntity *)entity;
+
 //删除商品信息
 -(NSString*)deleteProduct:(NSString *)pid;
 
