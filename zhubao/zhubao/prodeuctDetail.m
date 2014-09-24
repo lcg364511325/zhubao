@@ -112,6 +112,14 @@ NSInteger selecttype=0;
     [watchmorepic addTarget:self action:@selector(showPhotoBrowser) forControlEvents:UIControlEventTouchUpInside];
 }
 
+-(void)closesc{
+    if (self.popupViewController != nil) {
+        [self dismissPopupViewControllerAnimated:YES completion:^{
+            NSLog(@"popup view dismissed");
+        }];
+    }
+}
+
 -(IBAction)closeDetail:(id)sender
 {
     [_mydelegate performSelector:@selector(closeAction)];
@@ -267,6 +275,7 @@ NSInteger selecttype=0;
     //更新按钮
     updatebtn=[[UIButton alloc]initWithFrame:CGRectMake(445, 575, 110, 50)];
     [updatebtn setBackgroundImage:[UIImage imageNamed:@"gengxinBtn"] forState:UIControlStateNormal];
+    [updatebtn addTarget:self action:@selector(updateloacalshop) forControlEvents:UIControlEventTouchDown];
     
     addtoshopcart.frame=CGRectMake(25, 480, 180, 50);
     [self.view addSubview:deletebtn];
@@ -289,15 +298,27 @@ NSInteger selecttype=0;
         NSString *info=[_sqlService deleteProduct:_proid];
         if (info) {
             NSString *rowString =@"删除成功！";
-            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alter show];
             [self closeDetail:nil];
+            [_mydelegate performSelector:@selector(reloaddata)];
         }else{
             NSString *rowString =@"删除失败！";
             UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alter show];
         }
     }
+}
+
+//更新商品页面跳转
+-(void)updateloacalshop
+{
+    addlocalgoods *samplePopupViewController = [[addlocalgoods alloc] initWithNibName:@"addlocalgoods" bundle:nil];
+    samplePopupViewController.mydelegate=self;
+    samplePopupViewController.goods=goods;
+    [self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
+        NSLog(@"popup view presented");
+    }];
 }
 
 //保留小数位数

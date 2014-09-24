@@ -71,6 +71,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *settinglogout;
 @property (weak, nonatomic) IBOutlet UIButton *settingsoftware;
 
+-(void)reloaddata;
+
 -(void)refleshBuycutData;
+
+- (void)closeAction;
+
+-(void)closesc;
 
 @end

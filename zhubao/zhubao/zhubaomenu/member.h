@@ -44,4 +44,6 @@
 
 -(void)refleshBuycutData;
 
+-(void)closesc;
+
 @end
