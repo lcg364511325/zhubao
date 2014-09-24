@@ -1918,74 +1918,99 @@
                     
                     char * pgoldtype   = (char *)sqlite3_column_text(statement,11);//商品材质
                     if(pgoldtype != nil && ![[NSString stringWithUTF8String:pgoldtype] isEqualToString:@"(null)"]){
-                        entity.diaColor=[self getGoldtype:[NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:pgoldtype]]];
+                        entity.goldType=[self getGoldtype:[NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:pgoldtype]]];
                     }else
-                        entity.diaColor=@"\"\"";
+                        entity.goldType=@"";
                     
                     char * pweight   = (char *)sqlite3_column_text(statement,10);//金重
                     if(pweight != nil && ![[NSString stringWithUTF8String:pweight] isEqualToString:@"(null)"])
-                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:pweight]];
+                        entity.goldWeight=[NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:pweight]];
                     else
-                        entity.diaColor=@",\"0\"";
+                        entity.goldWeight=@"0";
                     
                     char * Dia_Z_weight   = (char *)sqlite3_column_text(statement,16);//主石重	单位克拉
                     if(Dia_Z_weight != nil && ![[NSString stringWithUTF8String:Dia_Z_weight] isEqualToString:@"(null)"])
-                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:Dia_Z_weight]];
+                        entity.Dia_Z_weight=[NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:Dia_Z_weight]];
                     else
-                        entity.diaColor=@",\"0\"";
+                        entity.Dia_Z_weight=@"0";
                     
                     char * Dia_Z_count   = (char *)sqlite3_column_text(statement,17);//主石数量
                     if(Dia_Z_count != nil && ![[NSString stringWithUTF8String:Dia_Z_count] isEqualToString:@"(null)"])
-                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:Dia_Z_count]];
+                        entity.Dia_Z_count=[NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:Dia_Z_count]];
                     else
-                        entity.diaColor=@",\"0\"";
+                        entity.Dia_Z_count=@"0";
                     
                     char * Dia_F_weight   = (char *)sqlite3_column_text(statement,18);//副石重	单位克拉
                     if(Dia_F_weight != nil && ![[NSString stringWithUTF8String:Dia_F_weight] isEqualToString:@"(null)"])
-                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:Dia_F_weight]];
+                        entity.Dia_F_weight=[NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:Dia_F_weight]];
                     else
-                        entity.diaColor=@",\"0\"";
+                        entity.Dia_F_weight=@"0";
                     
                     char * Dia_F_count   = (char *)sqlite3_column_text(statement,19);//副石数量
                     if(Dia_F_count != nil && ![[NSString stringWithUTF8String:Dia_F_count] isEqualToString:@"(null)"])
-                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:Dia_F_count]];
+                        entity.Dia_F_count=[NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:Dia_F_count]];
                     else
-                        entity.diaColor=@",\"0\"";
+                        entity.Dia_F_count=@"0";
                     
                     @try {
                         char * psize   = (char *)sqlite3_column_text(statement,5);//手寸
                         if(psize != nil && ![[NSString stringWithUTF8String:psize] isEqualToString:@"(null)"])
-                            entity.diaColor=[NSString stringWithFormat:@",\"%d\"",[NSString stringWithUTF8String:psize].integerValue];
+                            entity.size=[NSString stringWithFormat:@"%d",[NSString stringWithUTF8String:psize].integerValue];
                         else
-                            entity.diaColor=@",\"0\"";
+                            entity.size=@"0";
                     }
                     @catch (NSException *exception) {
-                        entity.diaColor=@",\"0\"";
+                        entity.size=@"0";
                     }
                     
-                    char * pdetail   = (char *)sqlite3_column_text(statement,4);//刻字
-                    if(pdetail != nil && ![[NSString stringWithUTF8String:pdetail] isEqualToString:@"(null)"])
-                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:pdetail]];//商品数组
-                    else
-                        entity.diaColor=@",\"\"";
+//                    char * pdetail   = (char *)sqlite3_column_text(statement,4);//刻字
+//                    if(pdetail != nil && ![[NSString stringWithUTF8String:pdetail] isEqualToString:@"(null)"])
+//                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:pdetail]];//商品数组
+//                    else
+//                        entity.diaColor=@",\"\"";
                     
                     char * pcount   = (char *)sqlite3_column_text(statement,3);//数量
                     if(pcount != nil && ![[NSString stringWithUTF8String:pcount] isEqualToString:@"(null)"])
-                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:pcount]];//商品数组
+                        entity.nums=[NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:pcount]];//商品数组
                     else
-                        entity.diaColor=@",\"0\"";
+                        entity.nums=@"0";
                     
-                    char * pvvs   = (char *)sqlite3_column_text(statement,9);//净度
-                    if(pvvs != nil && ![[NSString stringWithUTF8String:pvvs] isEqualToString:@"(null)"])
-                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:pvvs]];//商品数组
-                    else
-                        entity.diaColor=@",\"\"";
+//                    char * pvvs   = (char *)sqlite3_column_text(statement,9);//净度
+//                    if(pvvs != nil && ![[NSString stringWithUTF8String:pvvs] isEqualToString:@"(null)"])
+//                        entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:pvvs]];//商品数组
+//                    else
+//                        entity.diaColor=@",\"\"";
                     
                     char * pcolor   = (char *)sqlite3_column_text(statement,2);//颜色
                     if(pcolor != nil && ![[NSString stringWithUTF8String:pcolor] isEqualToString:@"(null)"])
                         entity.diaColor=[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:pcolor]];//商品数组
                     else
                         entity.diaColor=@",\"\"";
+                    
+                    char * pname   = (char *)sqlite3_column_text(statement,15);//名称
+                    if(pname != nil && ![[NSString stringWithUTF8String:pname] isEqualToString:@"(null)"])
+                        entity.name=[NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:pname]];//商品数组
+                    else
+                        entity.name=@"";
+                    
+                    char * cid   = (char *)sqlite3_column_text(statement,1);//商品id
+                    if(cid != nil && ![[NSString stringWithUTF8String:cid] isEqualToString:@"(null)"])
+                        entity.cid=[NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:cid]];//商品数组
+                    else
+                        entity.cid=@"";
+                    
+                    char * pprice   = (char *)sqlite3_column_text(statement,6);//价格
+                    if(pprice != nil && ![[NSString stringWithUTF8String:pprice] isEqualToString:@"(null)"])
+                        entity.Pro_price=[NSString stringWithFormat:@"%@",[NSString stringWithUTF8String:pprice]];//商品数组
+                    else
+                        entity.Pro_price=@"";
+                    
+                    
+                    //有图片，则要上传
+                    char * photos   = (char *)sqlite3_column_text(statement,12);
+                    if(photos != nil && ![[NSString stringWithUTF8String:photos] isEqualToString:@"(null)"])
+                        entity.logopic=[NSString stringWithUTF8String:photos];
+                    
                     
                     [localInfo addObject:entity];
                     
@@ -2195,6 +2220,13 @@
             NSLog(@"CPInfo------%@",CPInfo);
             NSLog(@"DZInfo------%@",DZInfo);
             
+            //如果有本地商品，则先保存到本地订单里面
+            BOOL islocal=FALSE;
+            if([localInfo count]>0){
+                
+                islocal=[self saveLocalOrder:localInfo];
+            }
+
             //如果有数据，则提交定义，否则不提交
             if(CPInfocount>0 || DZInfocount>0){
                 //提交到接口
@@ -2202,10 +2234,9 @@
                  AppDelegate *app=(AppDelegate *)[[UIApplication sharedApplication]delegate];
                 [app submitOrder:CPInfo DZInfo:DZInfo uploadpath:uploadpath];
             }else{
-//                AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-//                [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"购物车没有可生成订单的信息" delegate:myDelegate cancelButtonTitle:@"取消" otherButtonTitles:nil, nil] show];
-                
-                return @"购物车没有可生成订单的信息";
+                if(!islocal){
+                    return @"购物车没有可生成订单的信息";
+                }
             }
             
         }
@@ -2230,6 +2261,63 @@
     
     return @"" ;
 }
+
+//保存本地订单
+- (BOOL)saveLocalOrder:(NSMutableArray *)localInfo{
+
+    if([localInfo count]>0){
+        
+        //实例化一个NSDateFormatter对象
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        //设定时间格式,这里可以设置成自己需要的格式
+        [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+        //用[NSDate date]可以获取系统当前时间
+        NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+        
+        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+        NSString * orderid=currentDateStr;
+        
+        //实例化一个NSDateFormatter对象
+        NSDateFormatter *createdate = [[NSDateFormatter alloc] init];
+        //设定时间格式,这里可以设置成自己需要的格式
+        [createdate setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        //用[NSDate date]可以获取系统当前时间
+        NSString *createdatestring = [createdate stringFromDate:[NSDate date]];
+        
+        
+        NSString *tablekey=@"Id,uId,username,mobile,phone,addr,comtents,createdate,allprice,getprice";
+        
+        NSString * values =[NSString stringWithFormat:@"'%@','%@','%@','%@','%@','%@','%@','%@','%@','%@'",orderid,myDelegate.entityl.uId,myDelegate.entityl.userName,myDelegate.entityl.Phone,myDelegate.entityl.Phone,myDelegate.entityl.Address,@"",createdatestring,@"0",@"0"];
+        
+        NSString * sql=[NSString stringWithFormat:@"insert into [orderbill](%@)values(%@)",tablekey,values];
+        
+        NSLog(@"--------------:%@",sql);
+        
+        //保存订单表头
+        if ([self HandleSql:sql]) {
+            
+            int count = [localInfo count];
+            //遍历这个数组 保存订单的明细商品
+            for (int i = 0; i < count; i++) {
+                orderdetail * entity =[localInfo objectAtIndex: i];
+                
+                NSString * did=[NSString stringWithFormat:@"%@%@",orderid,entity.cid];
+            tablekey=@"Id,orderid,cid,name,goldType,size,nums,Pro_model,diaColor,goldWeight,Dia_Z_weight,Dia_Z_count,Dia_F_weight,Dia_F_count,goldPrice,Pro_price,logopic";
+                
+                values =[NSString stringWithFormat:@"'%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@'",did,orderid,entity.cid,entity.name,entity.goldType,entity.size,entity.nums,entity.Pro_model,entity.diaColor,entity.goldWeight,entity.Dia_Z_weight,entity.Dia_Z_count,entity.Dia_F_weight,entity.Dia_F_count,entity.goldPrice,entity.Pro_price,entity.logopic];
+                
+                sql=[NSString stringWithFormat:@"insert into [orderdetail](%@)values(%@)",tablekey,values];
+                
+                [self HandleSql:sql];
+            }
+            
+            return TRUE;
+        }
+        
+    }
+    return FALSE;
+}
+
 
 //清空数据
 - (BOOL)ClearAllTableDatas{
