@@ -339,15 +339,17 @@ NSInteger vies=0;
     entity.pdetail=fontText.text;
     buyproduct *successadd=[sql addToBuyproduct:entity];
     if (successadd) {
-        sql=[[sqlService alloc]init];
-        myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
-        NSString *goodscount=myDelegate.entityl.resultcount;
-        if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-            shopcartcount.hidden=NO;
-            [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
-        }else{
-            shopcartcount.hidden=YES;
-        }
+//        sql=[[sqlService alloc]init];
+//        myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
+//        NSString *goodscount=myDelegate.entityl.resultcount;
+//        if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
+//            shopcartcount.hidden=NO;
+//            [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
+//        }else{
+//            shopcartcount.hidden=YES;
+//        }
+        
+        [self.parentViewController.self performSelector:@selector(refleshBuycutData)];
         
         NSString *rowString =@"成功加入购物车！";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];

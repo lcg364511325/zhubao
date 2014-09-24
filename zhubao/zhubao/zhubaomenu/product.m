@@ -761,10 +761,10 @@ NSMutableArray *list=nil;
 {
     productEntity *entity = [list objectAtIndex:[indexPath row]];
     prodeuctDetail *prodeuctDetailcontroller = [[prodeuctDetail alloc] initWithNibName:@"prodeuctDetail" bundle:nil];
-    prodeuctDetailcontroller.mydelegate=self;
+    prodeuctDetailcontroller.mydelegate=self.parentViewController.self;
     prodeuctDetailcontroller.proid=entity.Id;
     
-    [self presentPopupViewController:prodeuctDetailcontroller animated:YES completion:^(void) {
+    [self.parentViewController.self presentPopupViewController:prodeuctDetailcontroller animated:YES completion:^(void) {
         NSLog(@"popup view presented");
     }];
 }

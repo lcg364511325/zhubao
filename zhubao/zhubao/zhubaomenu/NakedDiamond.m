@@ -499,10 +499,10 @@ NSInteger whichview=0;
 {
         productdia *entity = [productlist objectAtIndex:[indexPath row]];
         NakedDiamondDetail *prodeuctDetailcontroller = [[NakedDiamondDetail alloc] initWithNibName:@"NakedDiamondDetail" bundle:nil];
-        prodeuctDetailcontroller.mydelegate=self;
+        prodeuctDetailcontroller.mydelegate=self.parentViewController.self;
         prodeuctDetailcontroller.naid=entity.Id;
         
-        [self presentPopupViewController:prodeuctDetailcontroller animated:YES completion:^(void) {
+        [self.parentViewController.self presentPopupViewController:prodeuctDetailcontroller animated:YES completion:^(void) {
             NSLog(@"popup view presented");
         }];
     
@@ -938,7 +938,7 @@ NSInteger whichview=0;
     
 }
 
--(void)closeAction1
+-(void)closeAction
 {
     if (self.popupViewController != nil) {
         [self dismissPopupViewControllerAnimated:YES completion:^{

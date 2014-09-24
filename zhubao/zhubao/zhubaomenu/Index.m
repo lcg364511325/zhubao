@@ -458,4 +458,13 @@ member *_member;
     
 }
 
+- (void)closeAction
+{
+    if (self.popupViewController != nil) {
+        [self dismissPopupViewControllerAnimated:YES completion:^{
+            NSLog(@"popup view dismissed");
+        }];
+    }
+}
+
 @end

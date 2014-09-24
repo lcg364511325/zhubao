@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="member">
             <connections>
                 <outlet property="checkpassword" destination="gpp-dg-CRJ" id="7pz-tp-C70"/>
-                <outlet property="fiftharyView" destination="4ga-Lu-nc3" id="gsp-c3-j29"/>
-                <outlet property="logoImage" destination="4Fq-aY-CX8" id="IvV-sw-LQh"/>
                 <outlet property="passwordexit" destination="F5n-v6-Onl" id="3fU-bz-jWu"/>
                 <outlet property="passwordsubmit" destination="2Lu-Me-7Ue" id="8wv-2D-xJo"/>
                 <outlet property="primaryShadeView" destination="YLI-q6-9sF" id="DHJ-hq-8BF"/>
                 <outlet property="primaryView" destination="EPy-8T-Lay" id="PSH-Um-Nap"/>
-                <outlet property="settinglogout" destination="AE3-92-XRl" id="g7w-Xp-dLZ"/>
-                <outlet property="settingsoftware" destination="vjF-0E-Hb0" id="I11-B5-BBa"/>
-                <outlet property="settingupdate" destination="SkU-Nk-ZSU" id="zCw-5P-img"/>
-                <outlet property="shopcartcount" destination="v35-MX-a2M" id="AB3-Lv-EqL"/>
                 <outlet property="sixthview" destination="tFE-uM-k9p" id="PwH-Iq-HNB"/>
                 <outlet property="submit" destination="2Lu-Me-7Ue" id="WBa-dF-eSQ"/>
                 <outlet property="view" destination="NGs-tk-oMz" id="NFY-Mw-2kY"/>
@@ -32,112 +26,16 @@
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="page.png" id="Ft2-1G-A7U" userLabel="Image View -背景图">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="page1.png" id="Ft2-1G-A7U" userLabel="Image View -背景图">
                             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="4Fq-aY-CX8">
-                            <rect key="frame" x="1" y="-3" width="109" height="109"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg.png" id="3sr-Tg-XVC" userLabel="Image View -选中的按钮背景">
-                            <rect key="frame" x="0.0" y="455" width="109" height="68"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sjo-Ph-VH6" userLabel="Button-HOME">
-                            <rect key="frame" x="35" y="122" width="38" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="home.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="doReg:" destination="-1" eventType="touchDown" id="muQ-ed-5FB"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uDZ-C4-k2Z" userLabel="Button-产品展示">
-                            <rect key="frame" x="35" y="190" width="38" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="ring.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="doReg1:" destination="-1" eventType="touchDown" id="GyX-69-dqF"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="u34-AW-eIk" userLabel="Button-全球裸钻">
-                            <rect key="frame" x="35" y="258" width="38" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="diamond.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="doReg2:" destination="-1" eventType="touchDown" id="JFw-eW-WcQ"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HbU-7e-ar6" userLabel="Button-高级定制">
-                            <rect key="frame" x="35" y="326" width="38" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="axe.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="doReg3:" destination="-1" eventType="touchDown" id="4lV-kF-5Q7"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="H0d-f9-Oek" userLabel="Button-证书查询">
-                            <rect key="frame" x="35" y="399" width="38" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="magnifier.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="doReg4:" destination="-1" eventType="touchDown" id="znf-zK-41Y"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Myt-YR-aHL" userLabel="Button-会员中心">
-                            <rect key="frame" x="35" y="467" width="38" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="consort.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7pm-kA-ZrM" userLabel="Button-购物车">
-                            <rect key="frame" x="771" y="33" width="45" height="38"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="shoppingcart.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="goAction:" destination="-1" eventType="touchDown" id="Zgf-Hw-ZBR"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2fH-CO-OEF" userLabel="Button-设置">
-                            <rect key="frame" x="836" y="37" width="30" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="install.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="setup:" destination="-1" eventType="touchDown" id="RPc-eD-aFN"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="v35-MX-a2M">
-                            <rect key="frame" x="797" y="28" width="23" height="23"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                            <state key="normal" title="100" backgroundImage="shopround.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="goAction:" destination="-1" eventType="touchDown" id="V1z-Ut-6fR"/>
-                            </connections>
-                        </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vip.png" id="NpU-KJ-0yw">
-                            <rect key="frame" x="360" y="220" width="421" height="200"/>
+                            <rect key="frame" x="269" y="98" width="421" height="200"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rDP-Tm-Zf1">
-                            <rect key="frame" x="137" y="492" width="200" height="108"/>
+                            <rect key="frame" x="46" y="370" width="200" height="108"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="订单查看" image="view.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -147,7 +45,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rre-vX-xoC">
-                            <rect key="frame" x="362" y="492" width="200" height="108"/>
+                            <rect key="frame" x="271" y="370" width="200" height="108"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="会员资料修改" image="revise.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -157,7 +55,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="u5K-4I-pv2">
-                            <rect key="frame" x="587" y="492" width="200" height="108"/>
+                            <rect key="frame" x="496" y="370" width="200" height="108"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="修改密码" image="password.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -167,7 +65,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5mF-TO-bTG">
-                            <rect key="frame" x="804" y="492" width="200" height="108"/>
+                            <rect key="frame" x="713" y="370" width="200" height="108"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="清除商品数据" image="data.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -177,7 +75,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZF2-MS-EJD">
-                            <rect key="frame" x="137" y="630" width="200" height="108"/>
+                            <rect key="frame" x="46" y="508" width="200" height="108"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="更新UI" image="updateUI.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -187,7 +85,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oZa-rI-id4">
-                            <rect key="frame" x="362" y="630" width="200" height="108"/>
+                            <rect key="frame" x="271" y="508" width="200" height="108"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="本地商品添加" image="addlocalg.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -197,7 +95,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="V0y-NC-FHf">
-                            <rect key="frame" x="587" y="630" width="200" height="108"/>
+                            <rect key="frame" x="496" y="508" width="200" height="108"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="本地订单查看" image="view2.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -215,56 +113,8 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <view hidden="YES" contentMode="scaleToFill" id="4ga-Lu-nc3">
-                    <rect key="frame" x="412" y="284" width="200" height="200"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="021_3.png" id="UfS-gb-J2c">
-                            <rect key="frame" x="10" y="5" width="180" height="120"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vjF-0E-Hb0">
-                            <rect key="frame" x="10" y="15" width="180" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <state key="normal" title="软件更新">
-                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="updatesofeware:" destination="-1" eventType="touchDown" id="0oE-cp-aFh"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SkU-Nk-ZSU">
-                            <rect key="frame" x="10" y="45" width="180" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <state key="normal" title="更新数据">
-                                <color key="titleColor" red="0.038544323980000003" green="0.021500545310000001" blue="0.0049901574129999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="updateProductDate:" destination="-1" eventType="touchDown" id="BpC-j5-vcl"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="AE3-92-XRl">
-                            <rect key="frame" x="10" y="75" width="180" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <state key="normal" title="退出登录">
-                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="logout:" destination="-1" eventType="touchDown" id="5c8-3k-LiK"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                </view>
                 <view hidden="YES" contentMode="scaleToFill" id="tFE-uM-k9p">
-                    <rect key="frame" x="362" y="309" width="300" height="150"/>
+                    <rect key="frame" x="282" y="202" width="300" height="150"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="M_bg.png" id="4Yt-al-jTd">
@@ -318,24 +168,12 @@
         </view>
     </objects>
     <resources>
-        <image name="021_3.png" width="420" height="290"/>
         <image name="M_bg.png" width="541" height="302"/>
         <image name="addlocalg.png" width="325" height="176"/>
-        <image name="axe.png" width="87" height="95"/>
-        <image name="bg.png" width="218" height="136"/>
-        <image name="consort.png" width="82" height="90"/>
         <image name="data.png" width="325" height="176"/>
-        <image name="diamond.png" width="82" height="87"/>
-        <image name="home.png" width="68" height="81"/>
-        <image name="install.png" width="54" height="57"/>
-        <image name="logo.png" width="76" height="76"/>
-        <image name="magnifier.png" width="81" height="90"/>
-        <image name="page.png" width="2048" height="1536"/>
+        <image name="page1.png" width="1830" height="1392"/>
         <image name="password.png" width="325" height="176"/>
         <image name="revise.png" width="325" height="176"/>
-        <image name="ring.png" width="82" height="96"/>
-        <image name="shoppingcart.png" width="87" height="66"/>
-        <image name="shopround.png" width="52" height="52"/>
         <image name="updateUI.png" width="325" height="176"/>
         <image name="view.png" width="325" height="176"/>
         <image name="view2.png" width="325" height="176"/>
