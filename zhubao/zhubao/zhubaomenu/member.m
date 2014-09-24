@@ -151,9 +151,9 @@ UIButton* btnBack;
 - (IBAction)goAction1:(id)sender
 {
     updatePassword *samplePopupViewController = [[updatePassword alloc] initWithNibName:@"updatePassword" bundle:nil];
-    samplePopupViewController.mydelegate=self;
+    samplePopupViewController.mydelegate=self.parentViewController.self;
     
-    [self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
+    [self.parentViewController.self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
         NSLog(@"popup view presented");
     }];
 }
@@ -162,9 +162,9 @@ UIButton* btnBack;
 - (IBAction)goAction2:(id)sender
 {
     memberDetailUpdate *samplePopupViewController = [[memberDetailUpdate alloc] initWithNibName:@"memberDetailUpdate" bundle:nil];
-    samplePopupViewController.mydelegate=self;
+    samplePopupViewController.mydelegate=self.parentViewController.self;
     
-    [self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
+    [self.parentViewController.self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
         NSLog(@"popup view presented");
     }];
 }
@@ -173,9 +173,9 @@ UIButton* btnBack;
 - (IBAction)addlocalgoods:(id)sender
 {
     addlocalgoods *samplePopupViewController = [[addlocalgoods alloc] initWithNibName:@"addlocalgoods" bundle:nil];
-    samplePopupViewController.mydelegate=self;
+    samplePopupViewController.mydelegate=self.parentViewController.self;
     
-    [self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
+    [self.parentViewController.self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
         NSLog(@"popup view presented");
     }];
 }
@@ -184,9 +184,9 @@ UIButton* btnBack;
 - (IBAction)localorder:(id)sender
 {
     localorder *samplePopupViewController = [[localorder alloc] initWithNibName:@"localorder" bundle:nil];
-    samplePopupViewController.mydelegate=self;
+    samplePopupViewController.mydelegate=self.parentViewController.self;
     
-    [self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
+    [self.parentViewController.self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
         NSLog(@"popup view presented");
     }];
 }
@@ -292,14 +292,14 @@ UIButton* btnBack;
         orders =[[UIWebView alloc]initWithFrame:frame_0];
         NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:surl]];
         [orders loadRequest:request];
-        [self.view addSubview:orders];
+        [self.parentViewController.self.view addSubview:orders];
         
         UIImage* image= [UIImage imageNamed:@"close"];
         CGRect frame_1= CGRectMake(self.view.frame.size.width-50, 5, 48, 48);
         btnBack= [[UIButton alloc] initWithFrame:frame_1];
         [btnBack setBackgroundImage:image forState:UIControlStateNormal];
         [btnBack addTarget:self action:@selector(goActionback:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:btnBack];
+        [self.parentViewController.self.view addSubview:btnBack];
         
         //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:surl]];
     }else{

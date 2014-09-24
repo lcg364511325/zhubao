@@ -149,7 +149,7 @@ NSString * nakedno=nil;
 
 -(IBAction)closenade:(id)sender
 {
-    [_mydelegate performSelector:@selector(closeAction1)];
+    [_mydelegate performSelector:@selector(closeAction)];
 }
 
 - (void)didReceiveMemoryWarning

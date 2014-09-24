@@ -83,9 +83,9 @@
      NSIndexPath * path = [self.orderTView indexPathForCell:cell];
     orderbill *entity=[list objectAtIndex:path.row];
     localorderdetail *samplePopupViewController = [[localorderdetail alloc] initWithNibName:@"localorderdetail" bundle:nil];
-    samplePopupViewController.mydelegate=self;
+    samplePopupViewController.mydelegate=self.parentViewController.self;
     samplePopupViewController.order=entity;
-    [self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
+    [self.parentViewController.self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
         NSLog(@"popup view presented");
     }];
 }
