@@ -21,4 +21,5 @@
 @property (nonatomic, retain) NSString * createdate;//下单时间
 @property (nonatomic, retain) NSString * allprice;//总价
 @property (nonatomic, retain) NSString * getprice;//已付款
+@property (nonatomic, retain) NSString * state;//状态(1.待确认，2.已确认，3.已付款，4.取消)
 @end

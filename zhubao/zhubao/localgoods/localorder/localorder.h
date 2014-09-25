@@ -13,6 +13,12 @@
 {
     NSArray *list;
     orderbill *selectedentity;
+    UIView *demoView;
+    UIView *hiview;
+    NSArray *btnlist;
+    NSString *statevalue;
+    UIView *getmoneyview;
+    UITextField *moneyText;
 }
 
 @property (nonatomic,assign) id <UIApplicationDelegate> mydelegate;

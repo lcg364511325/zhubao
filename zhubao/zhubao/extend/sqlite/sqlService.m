@@ -2402,7 +2402,7 @@
         
         sqlite3_stmt *statement = nil;
         //sql语句
-        NSString *querySQL =@"SELECT Id,uId,username,mobile,phone,addr,comtents,createdate,allprice,getprice from orderbill ";
+        NSString *querySQL =@"SELECT Id,uId,username,mobile,phone,addr,comtents,createdate,allprice,getprice,state from orderbill ";
         if (uId.length!=0) {
             NSString *classsql=[NSString stringWithFormat:@" where uId=%@ ",uId];
             querySQL=[querySQL stringByAppendingString:classsql];
@@ -2460,6 +2460,10 @@
                 char * getprice   = (char *)sqlite3_column_text(statement,9);
                 if(getprice != nil)
                     entity.getprice = [NSString stringWithUTF8String:getprice];
+                
+                char * state   = (char *)sqlite3_column_text(statement,10);
+                if(state != nil)
+                    entity.state = [NSString stringWithUTF8String:state];
                 
                 [array addObject:entity];
             }

@@ -19,5 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *createdateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *stateButton;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+@property (weak, nonatomic) IBOutlet UIButton *getmoneybtn;
 
 @end

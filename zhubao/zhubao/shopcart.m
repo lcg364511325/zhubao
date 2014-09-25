@@ -315,7 +315,7 @@ shoppingcartCell *selectedcell;
     
 }
 
-//日历选择
+//更改数量
 - (void)createDemoView:(id)sender
 {
     selectedcell=(shoppingcartCell *)[[sender superview]superview];

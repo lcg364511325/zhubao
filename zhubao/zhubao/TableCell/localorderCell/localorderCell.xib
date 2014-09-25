@@ -81,12 +81,20 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VRc-nG-jEO">
+                        <rect key="frame" x="449" y="7" width="46" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="checkButton" destination="8Lj-Db-aHk" id="3Ra-Ks-Aw3"/>
                 <outlet property="createdateLabel" destination="FqL-ny-lp0" id="eb7-fj-uev"/>
                 <outlet property="deleteButton" destination="Npg-E4-O7P" id="1d4-kc-IAa"/>
+                <outlet property="getmoneybtn" destination="VRc-nG-jEO" id="32A-Ub-N0M"/>
                 <outlet property="inputpriceLabel" destination="Ro6-mn-uqo" id="FSN-b6-SWr"/>
                 <outlet property="mobileLabel" destination="ix8-2p-rTm" id="xTR-qG-wTE"/>
                 <outlet property="ordernoLabel" destination="UUi-Wu-gBh" id="LeT-jr-jfK"/>
