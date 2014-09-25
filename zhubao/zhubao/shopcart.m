@@ -320,8 +320,8 @@ shoppingcartCell *selectedcell;
 {
     selectedcell=(shoppingcartCell *)[[sender superview]superview];
     NSIndexPath * path = [self.goodsview indexPathForCell:selectedcell];
-    buyproduct *goods =[shoppingcartlist objectAtIndex:[path row]];
-    goodnumber=goods.pcount;
+    selectgoods =[shoppingcartlist objectAtIndex:[path row]];
+    goodnumber=selectgoods.pcount;
     
     hiview=[[UIView alloc]initWithFrame:self.view.frame];
     hiview.backgroundColor=[UIColor blackColor];
@@ -399,7 +399,17 @@ shoppingcartCell *selectedcell;
 {
     NSInteger btntag=btn.tag;
     if (btntag==1) {
-        selectedcell.priceLable.text=goodsno.text;
+        selectgoods.pcount=goodsno.text;
+        sqlService *_sqlService=[[sqlService alloc]init];
+        NSString *info=[_sqlService updateBuyproduct:selectgoods];
+        if (!info) {
+            NSString *rowString =@"未知错误";
+            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alter show];
+        }else
+        {
+            selectedcell.priceLable.text=goodsno.text;
+        }
         
     }
     [hiview removeFromSuperview];

@@ -155,7 +155,18 @@ localorderCell *stedcell;
 -(void)changegetmoney:(UIButton *)btn
 {
     if (btn.tag==0) {
-        stedcell.inputpriceLabel.text=moneyText.text;
+        NSIndexPath * path = [orderTView indexPathForCell:stedcell];
+        orderbill *entity=[list objectAtIndex:[path row]];
+        sqlService *_sqlService=[[sqlService alloc]init];
+        NSString *info=[_sqlService updatelocalorder:@"getprice" value:moneyText.text oid:entity.Id];
+        if (info) {
+            stedcell.inputpriceLabel.text=moneyText.text;
+        }else
+        {
+            NSString *rowString =@"未知错误";
+            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alter show];
+        }
     }
     [hiview removeFromSuperview];
     [getmoneyview removeFromSuperview];
@@ -274,18 +285,31 @@ localorderCell *stedcell;
 -(void)changestate:(UIButton *)btn
 {
     if (btn.tag==0) {
-        if ([statevalue isEqualToString:@"1"]) {
-            stedcell.stateLabel.text=@"待确认";
-        }else if ([statevalue isEqualToString:@"2"])
+        
+        NSIndexPath * path = [orderTView indexPathForCell:stedcell];
+        orderbill *entity=[list objectAtIndex:[path row]];
+        sqlService *_sqlService=[[sqlService alloc]init];
+        NSString *info=[_sqlService updatelocalorder:@"state" value:statevalue oid:entity.Id];
+        if (info) {
+            if ([statevalue isEqualToString:@"1"]) {
+                stedcell.stateLabel.text=@"待确认";
+            }else if ([statevalue isEqualToString:@"2"])
+            {
+                stedcell.stateLabel.text=@"已确认";
+            }else if ([statevalue isEqualToString:@"3"])
+            {
+                stedcell.stateLabel.text=@"已付款";
+            }else if ([statevalue isEqualToString:@"4"])
+            {
+                stedcell.stateLabel.text=@"已取消";
+            }
+        }else
         {
-            stedcell.stateLabel.text=@"已确认";
-        }else if ([statevalue isEqualToString:@"3"])
-        {
-            stedcell.stateLabel.text=@"已付款";
-        }else if ([statevalue isEqualToString:@"4"])
-        {
-            stedcell.stateLabel.text=@"已取消";
+            NSString *rowString =@"未知错误";
+            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alter show];
         }
+        
     }
     [hiview removeFromSuperview];
     [demoView removeFromSuperview];

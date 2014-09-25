@@ -23,6 +23,7 @@
     NSString *goodnumber;
     UIView *demoView;
     UIView *hiview;
+    buyproduct *selectgoods;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *goodsview;

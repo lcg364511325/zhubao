@@ -1258,6 +1258,32 @@
     return gcounts;
 }
 
+
+//修改购物车
+-(NSString *)updateBuyproduct:(buyproduct *)entity{
+    
+    @try {
+        
+        NSString * sql=[NSString stringWithFormat:@" update buyproduct set pcount='%@'  where Id=%@",entity.pcount,entity.Id];
+        
+        NSLog(@"--------------:%@",sql);
+        
+        if (![self execSqlandClose:sql]) {
+            return nil;
+        }
+        
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+    @finally {
+        [self closeDB];
+    }
+    
+    return @"1";
+    
+}
+
 //查询商品的3d图片
 -(NSMutableArray*)getProductRAR:(NSString *)pid{
     
@@ -2615,6 +2641,31 @@
     }
     
     return oid;
+}
+
+//修改本地订单
+-(NSString *)updatelocalorder:(NSString *)key value:(NSString *)value oid:(NSString *)oid{
+    
+    @try {
+        
+        NSString * sql=[NSString stringWithFormat:@" update orderbill set %@='%@'  where Id=%@",key,value,oid];
+        
+        NSLog(@"--------------:%@",sql);
+        
+        if (![self execSqlandClose:sql]) {
+            return nil;
+        }
+        
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+    @finally {
+        [self closeDB];
+    }
+    
+    return @"1";
+    
 }
 
 @end
