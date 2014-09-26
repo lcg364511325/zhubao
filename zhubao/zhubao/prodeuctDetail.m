@@ -933,7 +933,10 @@ NSInteger selecttype=0;
     for (int i = 0; i < count; i++) {
         if ([goods.producttype isEqualToString:@"1"]) {
             NSString *patht=[NSString stringWithFormat:@"%@",[array objectAtIndex: i]];
-            [photos addObject:[MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:patht]]];
+            UIImage *localimg=[UIImage imageWithContentsOfFile:patht];
+            CGSize size=CGSizeMake(1300, localimg.size.height);
+            UIImage *localimg1=[self OriginImage:localimg scaleToSize:size];
+            [photos addObject:[MWPhoto photoWithImage:localimg1]];
         }else
         {
             //NSLog(@"普通的遍历：i = %d 时的数组对象为: %@",i,[array objectAtIndex: i]);
@@ -1010,6 +1013,25 @@ NSInteger selecttype=0;
     // If we subscribe to this method we must dismiss the view controller ourselves
     //NSLog(@"Did finish modal presentation");
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(UIImage*)  OriginImage:(UIImage *)image   scaleToSize:(CGSize)size
+{
+	// 创建一个bitmap的context
+	// 并把它设置成为当前正在使用的context
+	UIGraphicsBeginImageContext(size);
+	
+	// 绘制改变大小的图片
+	[image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+	
+	// 从当前context中创建一个改变大小后的图片
+	UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+	
+	// 使当前的context出堆栈
+	UIGraphicsEndImageContext();
+	
+	// 返回新的改变大小后的图片
+	return scaledImage;
 }
 
 - (void)didReceiveMemoryWarning

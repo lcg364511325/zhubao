@@ -131,4 +131,7 @@
 //修改本地订单
 -(NSString *)updatelocalorder:(NSString *)key value:(NSString *)value oid:(NSString *)oid;
 
+//查询本地商品列表
+- (NSMutableArray*)GetLocalProductList:(NSString *)type1 type2:(NSString *)type2 type3:(NSString *)type3 type4:(NSString *)type4 page:(int)page pageSize:(int)pageSize;
+
 @end

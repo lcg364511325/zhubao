@@ -66,6 +66,9 @@
 		2C3C5C8E1983524A00630ACD /* textboxlong.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3C5C8D1983524A00630ACD /* textboxlong.png */; };
 		2C427E3D194561CC00D71776 /* ProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C427E3C194561CC00D71776 /* ProductCell.m */; };
 		2C427E3F1945620900D71776 /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C427E3E1945620900D71776 /* ProductCell.xib */; };
+		2C44650F19D5426E0089AC50 /* localorderlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C44650D19D5426E0089AC50 /* localorderlist.m */; };
+		2C44651019D5426E0089AC50 /* localorderlist.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C44650E19D5426E0089AC50 /* localorderlist.xib */; };
+		2C44651319D544490089AC50 /* localring.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C44651219D544490089AC50 /* localring.png */; };
 		2C4C853C19D3B42200FAE64D /* select.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C4C853A19D3B42200FAE64D /* select.png */; };
 		2C4C853D19D3B42200FAE64D /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C4C853B19D3B42200FAE64D /* selected.png */; };
 		2C594C96194931F1009687E5 /* 021_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C594C95194931F1009687E5 /* 021_2.png */; };
@@ -457,6 +460,10 @@
 		2C427E3B194561CC00D71776 /* ProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductCell.h; sourceTree = "<group>"; };
 		2C427E3C194561CC00D71776 /* ProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCell.m; sourceTree = "<group>"; };
 		2C427E3E1945620900D71776 /* ProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCell.xib; sourceTree = "<group>"; };
+		2C44650C19D5426E0089AC50 /* localorderlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = localorderlist.h; sourceTree = "<group>"; };
+		2C44650D19D5426E0089AC50 /* localorderlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = localorderlist.m; sourceTree = "<group>"; };
+		2C44650E19D5426E0089AC50 /* localorderlist.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = localorderlist.xib; sourceTree = "<group>"; };
+		2C44651219D544490089AC50 /* localring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = localring.png; sourceTree = "<group>"; };
 		2C4C853A19D3B42200FAE64D /* select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = select.png; sourceTree = "<group>"; };
 		2C4C853B19D3B42200FAE64D /* selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selected.png; sourceTree = "<group>"; };
 		2C594C95194931F1009687E5 /* 021_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 021_2.png; sourceTree = "<group>"; };
@@ -952,6 +959,16 @@
 			name = NakedDiamondDetail;
 			sourceTree = "<group>";
 		};
+		2C44650B19D5426E0089AC50 /* localorderlist */ = {
+			isa = PBXGroup;
+			children = (
+				2C44650C19D5426E0089AC50 /* localorderlist.h */,
+				2C44650D19D5426E0089AC50 /* localorderlist.m */,
+				2C44650E19D5426E0089AC50 /* localorderlist.xib */,
+			);
+			path = localorderlist;
+			sourceTree = "<group>";
+		};
 		2C5C97EB19349E2100004343 = {
 			isa = PBXGroup;
 			children = (
@@ -1100,6 +1117,7 @@
 		2CFF62E619D127FC00F89CE2 /* localgoods */ = {
 			isa = PBXGroup;
 			children = (
+				2C44650B19D5426E0089AC50 /* localorderlist */,
 				2CFF630719D1572700F89CE2 /* localorderdetail */,
 				2CFF62F619D1477A00F89CE2 /* localorder */,
 				2CFF62E719D127FC00F89CE2 /* addlocalgoods */,
@@ -1160,6 +1178,7 @@
 		7B7FFD38193853CA008712CB /* image */ = {
 			isa = PBXGroup;
 			children = (
+				2C44651219D544490089AC50 /* localring.png */,
 				2C4C853A19D3B42200FAE64D /* select.png */,
 				2C4C853B19D3B42200FAE64D /* selected.png */,
 				2C2CD6CF19D2CBB50094A9E2 /* cellbtn.png */,
@@ -1873,6 +1892,7 @@
 				7C10772E1941AFF4005187B9 /* Seq_v04_640x378_29.jpg in Resources */,
 				7C1077261941AFF4005187B9 /* Seq_v04_640x378_21.jpg in Resources */,
 				7C09008219D105EB000C0257 /* myindex.xib in Resources */,
+				2C44651319D544490089AC50 /* localring.png in Resources */,
 				7B7FFDA8193853CA008712CB /* shoppingcart.png in Resources */,
 				2C427E3F1945620900D71776 /* ProductCell.xib in Resources */,
 				7B7FFD94193853CA008712CB /* image1.png in Resources */,
@@ -1923,6 +1943,7 @@
 				7C1077221941AFF4005187B9 /* Seq_v04_640x378_18.jpg in Resources */,
 				7B7FFD7F193853CA008712CB /* delete.png in Resources */,
 				7C10772D1941AFF4005187B9 /* Seq_v04_640x378_28.jpg in Resources */,
+				2C44651019D5426E0089AC50 /* localorderlist.xib in Resources */,
 				7B7FFD82193853CA008712CB /* diamond01.png in Resources */,
 				7C10775C1941AFF4005187B9 /* Seq_v04_640x378_70.jpg in Resources */,
 				2C20E1A41986495B000C82CE /* prodeuctDetail.xib in Resources */,
@@ -2184,6 +2205,7 @@
 				7CB203651944620D00FA7FD5 /* ioapi.c in Sources */,
 				7CF03C52195BFDDB00F8FBD5 /* SDWebImagePrefetcher.m in Sources */,
 				7CF03C34195BFDDB00F8FBD5 /* MWTapDetectingImageView.m in Sources */,
+				2C44650F19D5426E0089AC50 /* localorderlist.m in Sources */,
 				7CF03C3E195BFDDB00F8FBD5 /* PSTCollectionViewData.m in Sources */,
 				7CF03C4B195BFDDB00F8FBD5 /* NSData+ImageContentType.m in Sources */,
 				7CF03C38195BFDDB00F8FBD5 /* MBProgressHUD.m in Sources */,

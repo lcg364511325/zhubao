@@ -326,7 +326,7 @@
         
         sqlite3_stmt *statement = nil;
         //sql语句
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Pro_model,Pro_number,Pro_name,Pro_State,Pro_smallpic,Pro_bigpic,Pro_info,Pro_goldWeight,Pro_author,Pro_addtime,producttype from product where Pro_IsDel='0'" ];
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Pro_model,Pro_number,Pro_name,Pro_State,Pro_smallpic,Pro_bigpic,Pro_info,Pro_goldWeight,Pro_author,Pro_addtime,producttype from product where Pro_IsDel='0' and producttype='0'" ];
         if (type1.length!=0) {
             NSString *classsql=[NSString stringWithFormat:@" and Pro_Class in (%@) ",type1];
             if ([type1 isEqualToString:@"3"]) {
@@ -2666,6 +2666,126 @@
     
     return @"1";
     
+}
+
+//查询本地商品列表
+- (NSMutableArray*)GetLocalProductList:(NSString *)type1 type2:(NSString *)type2 type3:(NSString *)type3 type4:(NSString *)type4 page:(int)page pageSize:(int)pageSize{
+    
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:10];
+    
+    //判断数据库是否打开
+    if ([self openDB]) {
+        page=page==0?1:page;
+        int offsetcount=page*pageSize-1*pageSize;
+        
+        sqlite3_stmt *statement = nil;
+        //sql语句
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Pro_model,Pro_number,Pro_name,Pro_State,Pro_smallpic,Pro_bigpic,Pro_info,Pro_goldWeight,Pro_author,Pro_addtime,producttype from product where Pro_IsDel='0' and producttype='1'" ];
+        if (type1.length!=0) {
+            NSString *classsql=[NSString stringWithFormat:@" and Pro_Class in (%@) ",type1];
+            if ([type1 isEqualToString:@"3"]) {
+                classsql=[classsql stringByAppendingString:@" and Pro_typeWenProId=0 "];
+            }
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
+        if (type2.length!=0) {
+            NSString *classsql=[NSString stringWithFormat:@" and Pro_goldType in (%@) ",type2];
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
+        if (type3.length!=0) {
+            NSString *classsql=nil;
+            NSArray *inlayArray=[type3 componentsSeparatedByString:@","];
+            for (NSString *inlay in inlayArray) {
+                NSArray *inlayfff=[inlay componentsSeparatedByString:@"-"];
+                if (classsql) {
+                    classsql=[classsql stringByAppendingString:@" or "];
+                    classsql=[classsql stringByAppendingString:[NSString stringWithFormat:@" zWeight in (%@,%@)",[inlayfff objectAtIndex:0],[inlayfff objectAtIndex:1]]];
+                }else{
+                    classsql=[@" and exists( select * from withmouth where withmouth.Proid=product.Id and (zWeight " stringByAppendingString:[NSString stringWithFormat:@"in (%@,%@)",[inlayfff objectAtIndex:0],[inlayfff objectAtIndex:1]]];
+                }
+            }
+            if(classsql){
+                classsql=[classsql stringByAppendingString:@"))"];
+            }
+            
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
+        if (type4.length!=0) {
+            NSString *classsql=[NSString stringWithFormat:@" and %@ ",type4];
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
+        querySQL=[querySQL stringByAppendingString:[NSString stringWithFormat:@" order by Pro_Order limit %d offset %d ",pageSize,offsetcount]];
+        
+        NSLog(@"querySQL-----:%@",querySQL);
+        
+        const char *sql = [querySQL UTF8String];
+        if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
+            //NSLog(@"Error: failed to prepare statement with message:search TB_MyDoor.");
+            return NO;
+        } else {
+            
+            //查询结果集中一条一条的遍历所有的记录，这里的数字对应的是列值。
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                productEntity * entity = [[productEntity alloc] init];
+                
+                char * Id   = (char *)sqlite3_column_text(statement,0);
+                if(Id != nil)
+                    entity.Id = [NSString stringWithUTF8String:Id];
+                
+                char * Pro_model   = (char *)sqlite3_column_text(statement,1);
+                if(Pro_model != nil)
+                    entity.Pro_model = [NSString stringWithUTF8String:Pro_model];
+                
+                char * Pro_number   = (char *)sqlite3_column_text(statement,2);
+                if(Pro_number != nil)
+                    entity.Pro_number = [NSString stringWithUTF8String:Pro_number];
+                
+                char * Pro_name   = (char *)sqlite3_column_text(statement,3);
+                if(Pro_name != nil)
+                    entity.Pro_name = [NSString stringWithUTF8String:Pro_name];
+                
+                char * Pro_State   = (char *)sqlite3_column_text(statement,4);
+                if(Pro_State != nil)
+                    entity.Pro_State = [NSString stringWithUTF8String:Pro_State];
+                
+                char * Pro_smallpic   = (char *)sqlite3_column_text(statement,5);
+                if(Pro_smallpic != nil)
+                    entity.Pro_smallpic = [NSString stringWithUTF8String:Pro_smallpic];
+                
+                char * Pro_bigpic   = (char *)sqlite3_column_text(statement,6);
+                if(Pro_bigpic != nil)
+                    entity.Pro_bigpic = [NSString stringWithUTF8String:Pro_bigpic];
+                
+                char * Pro_info   = (char *)sqlite3_column_text(statement,7);
+                if(Pro_info != nil)
+                    entity.Pro_info = [NSString stringWithUTF8String:Pro_info];
+                
+                char * Pro_goldWeight   = (char *)sqlite3_column_text(statement,8);
+                if(Pro_goldWeight != nil)
+                    entity.Pro_goldWeight = [NSString stringWithUTF8String:Pro_goldWeight];
+                
+                char * Pro_author   = (char *)sqlite3_column_text(statement,9);
+                if(Pro_author != nil)
+                    entity.Pro_author = [NSString stringWithUTF8String:Pro_author];
+                
+                char * Pro_addtime   = (char *)sqlite3_column_text(statement,10);
+                if(Pro_addtime != nil)
+                    entity.Pro_addtime = [NSString stringWithUTF8String:Pro_addtime];
+                
+                char * producttype   = (char *)sqlite3_column_text(statement,11);
+                if(producttype != nil)
+                    entity.producttype = [NSString stringWithUTF8String:producttype];
+                
+                
+                [array addObject:entity];
+            }
+        }
+        
+        sqlite3_finalize(statement);
+        sqlite3_close(_database);
+    }
+    
+    return array ;
 }
 
 @end
