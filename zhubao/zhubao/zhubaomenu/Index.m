@@ -179,7 +179,7 @@ member *_member;
     }
     UIViewController *oldViewController=currentViewController;
     _selectmenu.frame=CGRectMake(0, 110, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
-    [self transitionFromViewController:currentViewController toViewController:_myindex duration:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+    [self transitionFromViewController:currentViewController toViewController:_myindex duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
     }  completion:^(BOOL finished) {
         if (finished) {
             currentViewController=_myindex;
@@ -197,7 +197,7 @@ member *_member;
     UIViewController *oldViewController=currentViewController;
     _selectmenu.frame=CGRectMake(0, 179, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
     
-    [self transitionFromViewController:currentViewController toViewController:_product duration:1 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+    [self transitionFromViewController:currentViewController toViewController:_product duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
     }  completion:^(BOOL finished) {
         if (finished) {
             currentViewController=_product;
@@ -218,7 +218,7 @@ member *_member;
     }
     UIViewController *oldViewController=currentViewController;
     _selectmenu.frame=CGRectMake(0, 248, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
-    [self transitionFromViewController:currentViewController toViewController:_NakedDiamond duration:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+    [self transitionFromViewController:currentViewController toViewController:_NakedDiamond duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
     }  completion:^(BOOL finished) {
         if (finished) {
             currentViewController=_NakedDiamond;
@@ -240,7 +240,7 @@ member *_member;
     UIViewController *oldViewController=currentViewController;
      _selectmenu.frame=CGRectMake(0, 317, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
     
-    [self transitionFromViewController:currentViewController toViewController:_ustomtailor duration:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+    [self transitionFromViewController:currentViewController toViewController:_ustomtailor duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
     }  completion:^(BOOL finished) {
         if (finished) {
             currentViewController=_ustomtailor;
@@ -261,7 +261,7 @@ member *_member;
     }
     UIViewController *oldViewController=currentViewController;
     _selectmenu.frame=CGRectMake(0, 386, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
-    [self transitionFromViewController:currentViewController toViewController:_diploma duration:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+    [self transitionFromViewController:currentViewController toViewController:_diploma duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
     }  completion:^(BOOL finished) {
         if (finished) {
             currentViewController=_diploma;
@@ -283,7 +283,7 @@ member *_member;
     UIViewController *oldViewController=currentViewController;
     _selectmenu.frame=CGRectMake(0, 455, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
     
-    [self transitionFromViewController:currentViewController toViewController:_member duration:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+    [self transitionFromViewController:currentViewController toViewController:_member duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
     }  completion:^(BOOL finished) {
         if (finished) {
             currentViewController=_member;
@@ -419,7 +419,7 @@ member *_member;
             // 耗时的操作（异步操作）
             
             AutoGetData * getdata=[[AutoGetData alloc] init];
-            //[getdata getDataInsertTable:0];
+            [getdata getDataInsertTable:0];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
@@ -434,7 +434,7 @@ member *_member;
                 
             });
         });
-        //thridView.hidden=YES;
+        thridView.hidden=YES;
     }
     @catch (NSException *exception) {
         

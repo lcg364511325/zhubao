@@ -455,7 +455,7 @@
 		2C5B4D20198203400071CBFE /* 3Dshow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3Dshow.png; sourceTree = "<group>"; };
 		2C5B4D2319820B380071CBFE /* options_sedBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options_sedBg.png; sourceTree = "<group>"; };
 		2C5B4D25198249B20071CBFE /* textbox_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textbox_bg.png; sourceTree = "<group>"; };
-		2C5C97F419349E2100004343 /* 盛誉珠宝.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "盛誉珠宝.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C5C97F419349E2100004343 /* 定制神器.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "定制神器.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5C97F719349E2100004343 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2C5C97F919349E2100004343 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2C5C97FB19349E2100004343 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -947,7 +947,7 @@
 		2C5C97F519349E2100004343 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2C5C97F419349E2100004343 /* 盛誉珠宝.app */,
+				2C5C97F419349E2100004343 /* 定制神器.app */,
 				2C5C981519349E2100004343 /* zhubaoTests.xctest */,
 			);
 			name = Products;
@@ -1772,7 +1772,7 @@
 			);
 			name = zhubao;
 			productName = zhubao;
-			productReference = 2C5C97F419349E2100004343 /* 盛誉珠宝.app */;
+			productReference = 2C5C97F419349E2100004343 /* 定制神器.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2C5C981419349E2100004343 /* zhubaoTests */ = {
@@ -2338,7 +2338,7 @@
 				INFOPLIST_FILE = "zhubao/zhubao-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				"LIBRARY_SEARCH_PATHS[arch=*]" = "";
-				PRODUCT_NAME = "盛誉珠宝";
+				PRODUCT_NAME = "定制神器";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2353,7 +2353,7 @@
 				GCC_PREFIX_HEADER = "zhubao/zhubao-Prefix.pch";
 				INFOPLIST_FILE = "zhubao/zhubao-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				PRODUCT_NAME = "盛誉珠宝";
+				PRODUCT_NAME = "定制神器";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};

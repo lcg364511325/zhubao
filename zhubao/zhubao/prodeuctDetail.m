@@ -411,12 +411,17 @@ NSInteger selecttype=0;
         [mainarry addObject:inlay.zWeight];
         if(AuWeight==nil){
             AuWeight=inlay.AuWeight;
-            weighlable.text=[NSString stringWithFormat:@"%@ g",inlay.AuWeight];//约重
         }
     }
+    
+    if(AuWeight==nil)AuWeight=goods.Pro_Z_weight;
+    
     if ([goods.producttype isEqualToString:@"1"]) {
         weighlable.text=goods.Pro_goldWeight;
+    }else{
+        weighlable.text=[NSString stringWithFormat:@"%@ g",AuWeight];//约重
     }
+    
     NSMutableArray *mainarryman=[[NSMutableArray alloc] init];
     
     NSString * AuWeightman=nil;
@@ -431,9 +436,10 @@ NSInteger selecttype=0;
             [mainarryman addObject:inlayman.zWeight];
             if(AuWeightman==nil){
                 AuWeightman=inlayman.AuWeight;
-                dweighlable.text=[NSString stringWithFormat:@"男戒:%@ g",inlayman.AuWeight];
             }
         }
+        if(AuWeightman==nil)AuWeightman=goodsman.Pro_Z_weight;
+        dweighlable.text=[NSString stringWithFormat:@"男戒:%@ g",AuWeightman];
         
         weighlable.text=[NSString stringWithFormat:@"女戒:%@ g",AuWeight];
         mainnanolable.text=[NSString stringWithFormat:@"女戒:%@ 颗",goods.Pro_Z_count];

@@ -28,7 +28,7 @@ UISwipeGestureRecognizer *recognizer;
     return self;
 }
 
--(void)viewWillAppear
+-(void)viewWillAppear:(BOOL)animated
 {
     NSString *logopath = [[Tool getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"logopath.png"]];
     
