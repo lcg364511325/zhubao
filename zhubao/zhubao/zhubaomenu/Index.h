@@ -22,6 +22,7 @@
 #import "shopcart.h"
 #import "test.h"
 #import <QuartzCore/QuartzCore.h>
+#import "localorderlist.h"
 
 @interface Index : UIViewController<UIWebViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate,UIApplicationDelegate>
 {

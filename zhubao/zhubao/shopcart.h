@@ -14,10 +14,16 @@
 #import "sqlService.h"
 #import "AppDelegate.h"
 #import "Index.h"
+#import "CustomIOS7AlertView.h"
 
-@interface shopcart : UIViewController<UIApplicationDelegate>
+@interface shopcart : UIViewController<UIApplicationDelegate,CustomIOS7AlertViewDelegate>
 {
     NSMutableArray *shoppingcartlist;
+    UITextField *goodsno;
+    NSString *goodnumber;
+    UIView *demoView;
+    UIView *hiview;
+    buyproduct *selectgoods;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *goodsview;

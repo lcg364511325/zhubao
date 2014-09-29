@@ -81,6 +81,9 @@
 //根据用户的id查询购物车的数量
 -(NSString*)getBuyproductcount:(NSString*)uid;
 
+//修改购物车商品数量
+-(NSString *)updateBuyproduct:(buyproduct *)entity;
+
 //查询商品的3d图片
 -(NSMutableArray*)getProductRAR:(NSString *)pid;
 
@@ -121,5 +124,14 @@
 
 //查询本地订单详情列表
 - (NSMutableArray*)GetLocalOrderDetailList:(NSString *)orderid page:(int)page pageSize:(int)pageSize;
+
+//删除本地订单信息
+-(NSString*)deletelocalorder:(NSString *)oid;
+
+//修改本地订单
+-(NSString *)updatelocalorder:(NSString *)key value:(NSString *)value oid:(NSString *)oid;
+
+//查询本地商品列表
+- (NSMutableArray*)GetLocalProductList:(NSString *)type1 type2:(NSString *)type2 type3:(NSString *)type3 type4:(NSString *)type4 page:(int)page pageSize:(int)pageSize;
 
 @end

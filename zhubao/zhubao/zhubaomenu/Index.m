@@ -29,6 +29,7 @@ NakedDiamond *_NakedDiamond;
 ustomtailor *_ustomtailor;
 diploma *_diploma;
 member *_member;
+localorderlist *_localorder;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -78,6 +79,9 @@ member *_member;
     
     _member=[[member alloc] init];
     [self addChildViewController:_member];
+    
+    _localorder=[[localorderlist alloc] init];
+    [self addChildViewController:_localorder];
     
     
     [fourthView addSubview:_myindex.view];
@@ -295,6 +299,28 @@ member *_member;
 //    member * _member = [[member alloc] init];
 //    
 //    [self.navigationController pushViewController:_member animated:NO];
+}
+
+-(IBAction)doReg5:(id)sender
+{
+    if (currentViewController==_localorder) {
+        return;
+    }
+    UIViewController *oldViewController=currentViewController;
+    _selectmenu.frame=CGRectMake(0, 524, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
+    
+    [self transitionFromViewController:currentViewController toViewController:_localorder duration:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+    }  completion:^(BOOL finished) {
+        if (finished) {
+            currentViewController=_localorder;
+        }else{
+            currentViewController=oldViewController;
+        }
+    }];
+    
+    //    member * _member = [[member alloc] init];
+    //
+    //    [self.navigationController pushViewController:_member animated:NO];
 }
 
 //购物车显示
