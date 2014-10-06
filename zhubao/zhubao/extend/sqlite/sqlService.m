@@ -1833,7 +1833,7 @@
         
         sqlite3_stmt *statement = nil;
         //sql语句
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Proid,zWeight,AuWeight,ptWeight,IsComm,Pro_number from withmouth where Proid=%@ ",pid];
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Proid,zWeight,AuWeight,ptWeight,IsComm,Pro_number,Model,fsweight from withmouth where Proid=%@ ",pid];
         
         const char *sql = [querySQL UTF8String];
         if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
@@ -1872,6 +1872,14 @@
                 char * Pro_number   = (char *)sqlite3_column_text(statement,6);
                 if(Pro_number != nil)
                     entity.Pro_number = [NSString stringWithUTF8String:Pro_number];
+                
+                char * Model   = (char *)sqlite3_column_text(statement,7);
+                if(Model != nil)
+                    entity.Model = [NSString stringWithUTF8String:Model];
+                
+                char * fsweight   = (char *)sqlite3_column_text(statement,8);
+                if(fsweight != nil)
+                    entity.fsweight = [NSString stringWithUTF8String:fsweight];
                 
                 [array addObject:entity];
             }
@@ -2786,6 +2794,142 @@
     }
     
     return array ;
+}
+
+//查询商品类别列表
+- (NSMutableArray*)GetProclassList:(NSString *)uId page:(int)page pageSize:(int)pageSize
+{
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:10];
+    
+    //判断数据库是否打开
+    if ([self openDB]) {
+        page=page==0?1:page;
+        int offsetcount=page*pageSize-1*pageSize;
+        
+        sqlite3_stmt *statement = nil;
+        //sql语句
+        NSString *querySQL =@"SELECT Id,name,uId from proclass ";
+        if (uId.length!=0) {
+            NSString *classsql=[NSString stringWithFormat:@" where uId=%@ ",uId];
+            querySQL=[querySQL stringByAppendingString:classsql];
+        }
+        querySQL=[querySQL stringByAppendingString:[NSString stringWithFormat:@" order by uId limit %d offset %d ",pageSize,offsetcount]];
+        
+        NSLog(@"querySQL-----:%@",querySQL);
+        
+        const char *sql = [querySQL UTF8String];
+        if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
+            //NSLog(@"Error: failed to prepare statement with message:search TB_MyDoor.");
+            return NO;
+        } else {
+            
+            //查询结果集中一条一条的遍历所有的记录，这里的数字对应的是列值。
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                proclassEntity * entity = [[proclassEntity alloc] init];
+                
+                char * Id   = (char *)sqlite3_column_text(statement,0);
+                if(Id != nil)
+                    entity.Id = [NSString stringWithUTF8String:Id];
+                
+                char * name   = (char *)sqlite3_column_text(statement,1);
+                if(name != nil)
+                    entity.name = [NSString stringWithUTF8String:name];
+                
+                char * uId   = (char *)sqlite3_column_text(statement,2);
+                if(uId != nil)
+                    entity.uId = [NSString stringWithUTF8String:uId];
+
+                [array addObject:entity];
+            }
+        }
+        
+        sqlite3_finalize(statement);
+        sqlite3_close(_database);
+    }
+    
+    return array ;
+}
+
+//删除商品类别信息
+-(NSString*)deleteProclass:(NSString *)oid
+{
+    @try {
+        
+        NSString * sql=[NSString stringWithFormat:@"DELETE from [proclass] where Id=%@",oid];
+        
+        NSLog(@"--------------:%@",sql);
+        
+        if ([self execSql:sql]) {
+                return oid;
+        }else
+        {
+            return nil;
+        }
+        
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+    @finally {
+        //[self closeDB];
+    }
+    
+    return oid;
+}
+
+//修改商品类别
+-(NSString *)updateProclass:(NSString *)key value:(NSString *)value oid:(NSString *)oid
+{
+    @try {
+        
+        NSString * sql=[NSString stringWithFormat:@" update proclass set %@='%@'  where Id=%@",key,value,oid];
+        
+        NSLog(@"--------------:%@",sql);
+        
+        if (![self execSqlandClose:sql]) {
+            return nil;
+        }
+        
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+    @finally {
+        [self closeDB];
+    }
+    
+    return @"1";
+}
+
+//新加商品类别
+-(proclassEntity*)addProclass:(proclassEntity *)entity
+{
+    
+    @try {
+        
+        NSString *tablekey=@"uId,name";
+        
+        NSString * values =[NSString stringWithFormat:@"'%@','%@'",entity.uId,entity.name];
+        
+        NSString * sql=[NSString stringWithFormat:@"insert into [proclass](%@)values(%@)",tablekey,values];
+        
+        NSLog(@"--------------:%@",sql);
+        
+        //保存商品类别
+        if ([self execSqlandClose:sql]) {
+            return entity;
+        }
+        
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+    @finally {
+        [self closeDB];
+    }
+    
+    return nil;
+    
 }
 
 @end

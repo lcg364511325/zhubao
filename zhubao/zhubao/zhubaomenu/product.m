@@ -615,7 +615,7 @@ NSMutableArray *list=nil;
         serie=@"Pro_f_pair='true'";
         [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if(btntag==2){
-        serie=@"Pro_hotE=1";
+        serie=@"Pro_hotE=1";//豪华系列 ： Pro_hotE=1
         [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==0){
         for (UIButton * btn4 in btnarray4) {

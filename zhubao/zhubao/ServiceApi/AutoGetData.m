@@ -521,7 +521,7 @@ NSMutableArray * arraytt;
                         [values appendString:[NSString stringWithFormat:@"'%@'",valuearray[j]]];
                     }
                     
-                    NSString *tablekey=@"Id,Proid,zWeight,AuWeight,ptWeight,IsComm,Pro_number";
+                    NSString *tablekey=@"Id,Proid,zWeight,AuWeight,ptWeight,IsComm,Pro_number,fsweight";
                     
                     NSString * sql=[NSString stringWithFormat:@"insert into withmouth(%@)values(%@)",tablekey,(NSString *)values];
                     

@@ -291,6 +291,12 @@
 		7C1BE6E2193F4C220000E397 /* AutoGetData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BE6E1193F4C220000E397 /* AutoGetData.m */; };
 		7C67BBFE19D03DD000B0C3A0 /* menuindex.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C67BBFC19D03DD000B0C3A0 /* menuindex.m */; };
 		7C67BBFF19D03DD000B0C3A0 /* menuindex.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C67BBFD19D03DD000B0C3A0 /* menuindex.xib */; };
+		7CA8E41D19DAA094006A6880 /* proclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA8E41B19DAA094006A6880 /* proclass.m */; };
+		7CA8E41E19DAA094006A6880 /* proclass.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CA8E41C19DAA094006A6880 /* proclass.xib */; };
+		7CA8E42019DAA105006A6880 /* proclass.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CA8E41F19DAA105006A6880 /* proclass.png */; };
+		7CA8E42619DAA5F2006A6880 /* proclassEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA8E42519DAA5F2006A6880 /* proclassEntity.m */; };
+		7CA8E43219DAA973006A6880 /* proclasslistCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA8E43019DAA973006A6880 /* proclasslistCell.m */; };
+		7CA8E43319DAA973006A6880 /* proclasslistCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CA8E43119DAA973006A6880 /* proclasslistCell.xib */; };
 		7CB203241944450000FA7FD5 /* myinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB203231944450000FA7FD5 /* myinfo.m */; };
 		7CB203261944576900FA7FD5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB203251944576900FA7FD5 /* AVFoundation.framework */; };
 		7CB203281944577700FA7FD5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB203271944577700FA7FD5 /* CFNetwork.framework */; };
@@ -727,6 +733,15 @@
 		7C67BBFB19D03DD000B0C3A0 /* menuindex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = menuindex.h; sourceTree = "<group>"; };
 		7C67BBFC19D03DD000B0C3A0 /* menuindex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = menuindex.m; sourceTree = "<group>"; };
 		7C67BBFD19D03DD000B0C3A0 /* menuindex.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = menuindex.xib; sourceTree = "<group>"; };
+		7CA8E41A19DAA094006A6880 /* proclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = proclass.h; sourceTree = "<group>"; };
+		7CA8E41B19DAA094006A6880 /* proclass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = proclass.m; sourceTree = "<group>"; };
+		7CA8E41C19DAA094006A6880 /* proclass.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = proclass.xib; sourceTree = "<group>"; };
+		7CA8E41F19DAA105006A6880 /* proclass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = proclass.png; sourceTree = "<group>"; };
+		7CA8E42419DAA5F2006A6880 /* proclassEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = proclassEntity.h; sourceTree = "<group>"; };
+		7CA8E42519DAA5F2006A6880 /* proclassEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = proclassEntity.m; sourceTree = "<group>"; };
+		7CA8E42F19DAA973006A6880 /* proclasslistCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = proclasslistCell.h; sourceTree = "<group>"; };
+		7CA8E43019DAA973006A6880 /* proclasslistCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = proclasslistCell.m; sourceTree = "<group>"; };
+		7CA8E43119DAA973006A6880 /* proclasslistCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = proclasslistCell.xib; sourceTree = "<group>"; };
 		7CB203221944450000FA7FD5 /* myinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myinfo.h; sourceTree = "<group>"; };
 		7CB203231944450000FA7FD5 /* myinfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myinfo.m; sourceTree = "<group>"; };
 		7CB203251944576900FA7FD5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -1011,6 +1026,7 @@
 		2C5C97FD19349E2100004343 /* zhubao */ = {
 			isa = PBXGroup;
 			children = (
+				7CA8E41819DAA06D006A6880 /* pro_class */,
 				2CFF62E619D127FC00F89CE2 /* localgoods */,
 				7C01DAB219A49D650075677B /* zhubaomenu */,
 				2C5E8E061989F030004A04D0 /* updatePassword */,
@@ -1178,6 +1194,7 @@
 		7B7FFD38193853CA008712CB /* image */ = {
 			isa = PBXGroup;
 			children = (
+				7CA8E41F19DAA105006A6880 /* proclass.png */,
 				2C44651219D544490089AC50 /* localring.png */,
 				2C4C853A19D3B42200FAE64D /* select.png */,
 				2C4C853B19D3B42200FAE64D /* selected.png */,
@@ -1459,6 +1476,8 @@
 				2CFF631919D18EE700F89CE2 /* orderbill.m */,
 				2CFF631B19D18FF800F89CE2 /* orderdetail.h */,
 				2CFF631C19D18FF800F89CE2 /* orderdetail.m */,
+				7CA8E42419DAA5F2006A6880 /* proclassEntity.h */,
+				7CA8E42519DAA5F2006A6880 /* proclassEntity.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1558,6 +1577,26 @@
 			path = sqlite;
 			sourceTree = "<group>";
 		};
+		7CA8E41819DAA06D006A6880 /* pro_class */ = {
+			isa = PBXGroup;
+			children = (
+				7CA8E41A19DAA094006A6880 /* proclass.h */,
+				7CA8E41B19DAA094006A6880 /* proclass.m */,
+				7CA8E41C19DAA094006A6880 /* proclass.xib */,
+			);
+			path = pro_class;
+			sourceTree = "<group>";
+		};
+		7CA8E42B19DAA8CA006A6880 /* proclassCell */ = {
+			isa = PBXGroup;
+			children = (
+				7CA8E42F19DAA973006A6880 /* proclasslistCell.h */,
+				7CA8E43019DAA973006A6880 /* proclasslistCell.m */,
+				7CA8E43119DAA973006A6880 /* proclasslistCell.xib */,
+			);
+			path = proclassCell;
+			sourceTree = "<group>";
+		};
 		7CB203311944583600FA7FD5 /* ASIHTTPRequest */ = {
 			isa = PBXGroup;
 			children = (
@@ -1613,6 +1652,7 @@
 		7CEF7EFA19420F70005DF8A9 /* TableCell */ = {
 			isa = PBXGroup;
 			children = (
+				7CA8E42B19DAA8CA006A6880 /* proclassCell */,
 				2CFF630D19D15A9100F89CE2 /* localorderglistCell */,
 				2CFF62FF19D14FFD00F89CE2 /* localorderCell */,
 				7CEF7F0019421AC3005DF8A9 /* NoticeReportCell.xib */,
@@ -1896,6 +1936,7 @@
 				7B7FFDA8193853CA008712CB /* shoppingcart.png in Resources */,
 				2C427E3F1945620900D71776 /* ProductCell.xib in Resources */,
 				7B7FFD94193853CA008712CB /* image1.png in Resources */,
+				7CA8E43319DAA973006A6880 /* proclasslistCell.xib in Resources */,
 				7C10775D1941AFF4005187B9 /* Seq_v04_640x378_71.jpg in Resources */,
 				7C1077511941AFF4005187B9 /* Seq_v04_640x378_60.jpg in Resources */,
 				2C4C853C19D3B42200FAE64D /* select.png in Resources */,
@@ -1918,6 +1959,7 @@
 				2C3AFBDC1946E36100D3D0A2 /* marquise.jpg in Resources */,
 				7B7FFDA5193853CA008712CB /* search.png in Resources */,
 				7C1077241941AFF4005187B9 /* Seq_v04_640x378_2.jpg in Resources */,
+				7CA8E42019DAA105006A6880 /* proclass.png in Resources */,
 				7B7FFD85193853CA008712CB /* diamond04.png in Resources */,
 				7C10771A1941AFF4005187B9 /* Seq_v04_640x378_10.jpg in Resources */,
 				2C5B4D26198249B20071CBFE /* textbox_bg.png in Resources */,
@@ -2022,6 +2064,7 @@
 				7C1077551941AFF4005187B9 /* Seq_v04_640x378_64.jpg in Resources */,
 				7B7FFD9D193853CA008712CB /* page.png in Resources */,
 				2C2CD6BA19D24F050094A9E2 /* addlocalg.png in Resources */,
+				7CA8E41E19DAA094006A6880 /* proclass.xib in Resources */,
 				2C5CAA3F195422D40034C44E /* bg_3.png in Resources */,
 				2C4C853D19D3B42200FAE64D /* selected.png in Resources */,
 				7C1077591941AFF4005187B9 /* Seq_v04_640x378_68.jpg in Resources */,
@@ -2156,6 +2199,7 @@
 				7C67BBFE19D03DD000B0C3A0 /* menuindex.m in Sources */,
 				7C01DAEE19A4A0610075677B /* member.m in Sources */,
 				7C1BE6D4193F3D190000E397 /* Commons.m in Sources */,
+				7CA8E42619DAA5F2006A6880 /* proclassEntity.m in Sources */,
 				7C01DAE819A4A0610075677B /* diploma.m in Sources */,
 				7CF03C4E195BFDDB00F8FBD5 /* SDWebImageDecoder.m in Sources */,
 				7CF03C44195BFDDB00F8FBD5 /* PSTGridLayoutItem.m in Sources */,
@@ -2229,6 +2273,7 @@
 				7CF5EA6019405D0D00C63E6D /* buyproduct.m in Sources */,
 				7CF03C4D195BFDDB00F8FBD5 /* SDWebImageCompat.m in Sources */,
 				7C01DAF019A4A0610075677B /* NakedDiamond.m in Sources */,
+				7CA8E41D19DAA094006A6880 /* proclass.m in Sources */,
 				2C5C980419349E2100004343 /* main.m in Sources */,
 				2C427E3D194561CC00D71776 /* ProductCell.m in Sources */,
 				7CEF7EFE19420F93005DF8A9 /* NoticeReportCell.m in Sources */,
@@ -2236,6 +2281,7 @@
 				7C01DAEA19A4A0610075677B /* Index.m in Sources */,
 				7CF03C32195BFDDB00F8FBD5 /* MWPhoto.m in Sources */,
 				7CF03C4F195BFDDB00F8FBD5 /* SDWebImageDownloader.m in Sources */,
+				7CA8E43219DAA973006A6880 /* proclasslistCell.m in Sources */,
 				7CF5EA451940203800C63E6D /* productEntity.m in Sources */,
 				7CF03C56195BFDDB00F8FBD5 /* UIImage+WebP.m in Sources */,
 				2CFF631D19D18FF800F89CE2 /* orderdetail.m in Sources */,

@@ -172,6 +172,17 @@ UIButton* btnBack;
     }];
 }
 
+//商品类别页面跳转
+- (IBAction)openproclass:(id)sender
+{
+    proclass *samplePopupViewController = [[proclass alloc] initWithNibName:@"proclass" bundle:nil];
+    samplePopupViewController.mydelegate=self.parentViewController.self;
+    
+    [self.parentViewController.self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
+        NSLog(@"popup view presented");
+    }];
+}
+
 - (void)closeAction2
 {
     if (self.popupViewController != nil) {

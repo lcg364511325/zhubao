@@ -88,12 +88,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "zhubao/extend/sqlite/sqlService.m"
-            timestampString = "433219018.951355"
+            timestampString = "433678760.021888"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2225"
-            endingLineNumber = "2225"
+            startingLineNumber = "2233"
+            endingLineNumber = "2233"
             landmarkName = "-saveOrder:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "zhubao/ServiceApi/AutoGetData.m"
+            timestampString = "433678667.755876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "528"
+            endingLineNumber = "528"
+            landmarkName = "-getwithmouth:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
