@@ -221,7 +221,7 @@ localorderlist *_localorder;
         return;
     }
     UIViewController *oldViewController=currentViewController;
-    _selectmenu.frame=CGRectMake(0, 248, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
+    _selectmenu.frame=CGRectMake(0, 317, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
     [self transitionFromViewController:currentViewController toViewController:_NakedDiamond duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
     }  completion:^(BOOL finished) {
         if (finished) {
@@ -242,7 +242,7 @@ localorderlist *_localorder;
         return;
     }
     UIViewController *oldViewController=currentViewController;
-     _selectmenu.frame=CGRectMake(0, 317, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
+     _selectmenu.frame=CGRectMake(0, 386, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
     
     [self transitionFromViewController:currentViewController toViewController:_ustomtailor duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
     }  completion:^(BOOL finished) {
@@ -264,7 +264,7 @@ localorderlist *_localorder;
         return;
     }
     UIViewController *oldViewController=currentViewController;
-    _selectmenu.frame=CGRectMake(0, 386, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
+    _selectmenu.frame=CGRectMake(0, 455, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
     [self transitionFromViewController:currentViewController toViewController:_diploma duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
     }  completion:^(BOOL finished) {
         if (finished) {
@@ -285,7 +285,7 @@ localorderlist *_localorder;
         return;
     }
     UIViewController *oldViewController=currentViewController;
-    _selectmenu.frame=CGRectMake(0, 455, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
+    _selectmenu.frame=CGRectMake(0, 524, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
     
     [self transitionFromViewController:currentViewController toViewController:_member duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
     }  completion:^(BOOL finished) {
@@ -307,7 +307,7 @@ localorderlist *_localorder;
         return;
     }
     UIViewController *oldViewController=currentViewController;
-    _selectmenu.frame=CGRectMake(0, 524, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
+    _selectmenu.frame=CGRectMake(0, 248, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
     
     [self transitionFromViewController:currentViewController toViewController:_localorder duration:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{
     }  completion:^(BOOL finished) {

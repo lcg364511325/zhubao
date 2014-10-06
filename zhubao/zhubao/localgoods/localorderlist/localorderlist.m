@@ -7,6 +7,7 @@
 //
 
 #import "localorderlist.h"
+#import "proclassEntity.h"
 
 @interface localorderlist ()
 
@@ -24,7 +25,6 @@
 @synthesize texturelist=_texturelist;
 @synthesize productcollect;
 @synthesize countLable;
-@synthesize btnstyle;
 @synthesize btntexture;
 @synthesize btninlay;
 @synthesize btnseric;
@@ -63,6 +63,65 @@ NSMutableArray *resultlist=nil;
     sqlService *sql=[[sqlService alloc]init];
     resultlist=[sql GetLocalProductList:nil type2:nil type3:nil type4:nil page:1 pageSize:1500];
     
+    //加载类别
+    [self loadproclass];
+    
+}
+
+
+//加载类别
+-(void)loadproclass
+{
+    NSMutableArray *proclassarray=[NSMutableArray arrayWithCapacity:1];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    
+    proclassEntity *entity=[[proclassEntity alloc]init];
+    entity.Id=@"0";
+    entity.name=@"全部";
+    entity.uId=myDelegate.entityl.uId;
+    [proclassarray addObject:entity];
+    
+    sqlService *_sqlService=[[sqlService alloc]init];
+    NSArray *classlist=[_sqlService GetProclassList:myDelegate.entityl.uId page:1 pageSize:1500];
+    [proclassarray addObjectsFromArray:classlist];
+    
+    int i;
+    int count=[proclassarray count];
+    UIButton *btn;
+    UIImageView *endimg;
+    UIImageView *lineimg;
+    for (i=0; i<count; i++) {
+        if (i==(count-1)) {
+            btn=[[UIButton alloc]initWithFrame:CGRectMake(58.5+i*58, 7, 57, 29.5)];
+            endimg=[[UIImageView alloc]initWithFrame:CGRectMake(btn.frame.origin.x+57, 7, 3, 29.5)];
+            endimg.image=[UIImage imageNamed:@"proclass_end"];
+            [self.view addSubview:endimg];
+        }else{
+            btn=[[UIButton alloc]initWithFrame:CGRectMake(58.5+i*58, 7, 57, 29.5)];
+            lineimg=[[UIImageView alloc]initWithFrame:CGRectMake(btn.frame.origin.x+57, 7, 1, 29.5)];
+            lineimg.image=[UIImage imageNamed:@"proclass_line"];
+            [self.view addSubview:lineimg];
+        }
+        
+        proclassEntity *dict=[proclassarray objectAtIndex:i];
+        
+        
+        btn.titleLabel.font=[UIFont boldSystemFontOfSize:12.0f];
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn setTitle:dict.name forState:UIControlStateNormal];
+        if (i==0) {
+            [btn setBackgroundImage:[UIImage imageNamed:@"proclass_sed"] forState:UIControlStateNormal];
+            btnstyle=btn;
+            btn.tag=0;
+        }else{
+            [btn setBackgroundImage:[UIImage imageNamed:@"proclass_bg"] forState:UIControlStateNormal];
+            btn.tag=[dict.Id integerValue];
+        }
+        [btn addTarget:self action:@selector(styleselect:) forControlEvents:UIControlEventTouchDown];
+        
+        [self.view addSubview:btn];
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,49 +156,24 @@ NSMutableArray *resultlist=nil;
 }
 
 //款式选择
--(IBAction)styleselect:(id)sender
+-(void)styleselect:(UIButton *)btn
 {
     countLable.text=nil;
-    UIButton* btn = (UIButton*)sender;
     NSInteger btntag=[btn tag];
     NSString * style=nil;
     if (btntag==0) {
         for (UIButton * btn1 in btnarray1) {
-            [btn1 setBackgroundImage:nil forState:UIControlStateNormal];
+            [btn1 setBackgroundImage:[UIImage imageNamed:@"proclass_bg"] forState:UIControlStateNormal];
         }
         [btnarray1 removeAllObjects];
         [stylearray removeAllObjects];
-        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
-    }else if (btntag==1){
-        style=@"1";
-        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
-    }else if (btntag==2){
-        style=@"2";
-        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
-    }else if (btntag==3){
-        style=@"3";
-        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
-    }else if (btntag==4){
-        style=@"4";
-        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
-    }else if (btntag==5){
-        style=@"5";
-        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
-    }else if (btntag==6){
-        style=@"6";
-        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
-    }else if (btntag==7){
-        style=@"7";
-        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
-    }else if (btntag==8){
-        style=@"8";
-        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
-    }else if (btntag==9){
-        style=@"9";
-        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"proclass_sed"] forState:UIControlStateNormal];
+    }else{
+        [btn setBackgroundImage:[UIImage imageNamed:@"proclass_sed"] forState:UIControlStateNormal];
+        style=[NSString stringWithFormat:@"%d",btntag];
     }
     if (btntag!=0) {
-        [btnstyle setBackgroundImage:nil forState:UIControlStateNormal];
+        [btnstyle setBackgroundImage:[UIImage imageNamed:@"proclass_bg"] forState:UIControlStateNormal];
     }
     [btnarray1 addObject:btn];
     if (style) {
@@ -151,7 +185,7 @@ NSMutableArray *resultlist=nil;
             isequal = [style isEqualToString:value];
             if (isequal) {
                 [stylearray removeObjectAtIndex:i];
-                [btn setBackgroundImage:nil forState:UIControlStateNormal];
+                [btn setBackgroundImage:[UIImage imageNamed:@"proclass_bg"] forState:UIControlStateNormal];
                 i=len;
             }
         }
@@ -722,7 +756,6 @@ NSMutableArray *resultlist=nil;
     sqlService *sql=[[sqlService alloc]init];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
-    NSString *goodscount=myDelegate.entityl.resultcount;
     
     sqlService *shopcar=[[sqlService alloc] init];
     shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];

@@ -2691,9 +2691,9 @@
         NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Pro_model,Pro_number,Pro_name,Pro_State,Pro_smallpic,Pro_bigpic,Pro_info,Pro_goldWeight,Pro_author,Pro_addtime,producttype from product where Pro_IsDel='0' and producttype='1'" ];
         if (type1.length!=0) {
             NSString *classsql=[NSString stringWithFormat:@" and Pro_Class in (%@) ",type1];
-            if ([type1 isEqualToString:@"3"]) {
-                classsql=[classsql stringByAppendingString:@" and Pro_typeWenProId=0 "];
-            }
+//            if ([type1 isEqualToString:@"3"]) {
+//                classsql=[classsql stringByAppendingString:@" and Pro_typeWenProId=0 "];
+//            }
             querySQL=[querySQL stringByAppendingString:classsql];
         }
         if (type2.length!=0) {

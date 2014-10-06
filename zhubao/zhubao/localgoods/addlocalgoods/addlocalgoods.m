@@ -9,6 +9,7 @@
 #import "addlocalgoods.h"
 #import "member.h"
 #import "sqlService.h"
+#import "proclassEntity.h"
 
 @interface addlocalgoods ()
 
@@ -44,7 +45,11 @@
     // Do any additional setup after loading the view from its nib.
     typeText.userInteractionEnabled=NO;
     
-    typelist=[[NSArray alloc]initWithObjects:@"女戒",@"男戒",@"对戒",@"吊坠",@"项链",@"手链",@"手镯",@"耳环",@"耳钉", nil];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    sqlService *_sqlService=[[sqlService alloc]init];
+    typelist=[_sqlService GetProclassList:myDelegate.entityl.uId page:1 pageSize:1500];
+    
+    //typelist=[[NSArray alloc]initWithObjects:@"女戒",@"男戒",@"对戒",@"吊坠",@"项链",@"手链",@"手镯",@"耳环",@"耳钉", nil];
     
     [self loaddata];
     
@@ -187,16 +192,18 @@
     }
     cell.textLabel.font=[UIFont boldSystemFontOfSize:12.0f];
     NSUInteger row = [indexPath row];
-    cell.textLabel.text = [typelist objectAtIndex:row];
+    proclassEntity *entity=[typelist objectAtIndex:row];
+    cell.textLabel.text = entity.name;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *rowString = [typelist objectAtIndex:[indexPath row]];
+    proclassEntity *entity=[typelist objectAtIndex:[indexPath row]];
+    NSString *rowString = entity.name;
     typeText.text=rowString;
     typeTView.hidden=YES;
-    typevalue=[NSString stringWithFormat:@"%d",[indexPath row]+1];
+    typevalue=entity.Id;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
