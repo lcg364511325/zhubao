@@ -104,6 +104,16 @@
                                 <action selector="localorder:" destination="-1" eventType="touchDown" id="xcp-LR-76M"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rxF-vI-EVG">
+                            <rect key="frame" x="713" y="508" width="200" height="108"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="商品类别" image="proclass.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="openproclass:" destination="-1" eventType="touchDown" id="CpB-HE-TYY"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -173,6 +183,7 @@
         <image name="data.png" width="325" height="176"/>
         <image name="page1.png" width="1830" height="1392"/>
         <image name="password.png" width="325" height="176"/>
+        <image name="proclass.png" width="325" height="176"/>
         <image name="revise.png" width="325" height="176"/>
         <image name="updateUI.png" width="325" height="176"/>
         <image name="view.png" width="325" height="176"/>

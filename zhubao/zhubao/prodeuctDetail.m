@@ -346,7 +346,7 @@ NSInteger selecttype=0;
         }
     }
     
-    return @"";
+    return @"0.0";
     
 }
 //男的约重
@@ -359,7 +359,49 @@ NSInteger selecttype=0;
         }
     }
     
-    return @"";
+    return @"0.0";
+}
+
+//女的副石重约重
+-(NSString *)getweightgsDiaWeight:(NSString *)weig{
+    
+    for (withmouth *inlay in inlayarry) {
+        if ([inlay.zWeight isEqualToString:miantext.text]) {
+            
+            NSString *fsweight=inlay.fsweight;
+            if(!fsweight || [fsweight isEqualToString:@"<null>"]){
+                fsweight=@"0.0";
+            }
+            
+            if(!goodsman){
+                fitnaweighlable.text=[NSString stringWithFormat:@"%@ ct",fsweight];
+            }else{
+                fitnaweighlable.text=[NSString stringWithFormat:@"女戒:%@ ct",fsweight];
+            }
+            return fsweight;
+        }
+    }
+    
+    return @"0.0";
+    
+}
+//男的副石重约重
+-(NSString *)getweightmansDiaWeight:(NSString *)weig{
+    
+    for (withmouth *inlayman in inlayarryman) {
+        if ([inlayman.zWeight isEqualToString:dmiantext.text]) {
+            
+            NSString *fsweight=inlayman.fsweight;
+            if(!fsweight || [fsweight isEqualToString:@"<null>"]){
+                fsweight=@"0.0";
+            }
+            
+            dfitweighlable.text=[NSString stringWithFormat:@"男戒:%@ ct",fsweight];
+            return fsweight;
+        }
+    }
+    
+    return @"0.0";
 }
 
 
@@ -385,7 +427,7 @@ NSInteger selecttype=0;
     //weightlable.text=goods.Pro_goldWeight;//约重
     mainnanolable.text=[NSString stringWithFormat:@"%@ 颗",goods.Pro_Z_count];//goods.Pro_Z_count;
     fitnanolable.text=[NSString stringWithFormat:@"%@ 颗",goods.Pro_f_count];//goods.Pro_f_count;
-    fitnaweighlable.text=[NSString stringWithFormat:@"%@ ct",goods.Pro_f_weight];
+    //fitnaweighlable.text=[NSString stringWithFormat:@"%@ ct",goods.Pro_f_weight];
     //maintext.text=@"111";
     nettext.text=@"SI";
     colortext.text=@"I-J";
@@ -407,19 +449,32 @@ NSInteger selecttype=0;
     inlayarry=[sql getwithmouths:goods.Id];
     NSMutableArray *mainarry=[[NSMutableArray alloc] init];
     NSString * AuWeight=nil;
+    NSString * fsweight=nil;
     for (withmouth *inlay in inlayarry) {
         [mainarry addObject:inlay.zWeight];
         if(AuWeight==nil){
             AuWeight=inlay.AuWeight;
-            weighlable.text=[NSString stringWithFormat:@"%@ g",inlay.AuWeight];//约重
+            fsweight=inlay.fsweight;
         }
     }
+    
+    if(AuWeight==nil)AuWeight=goods.Pro_Z_weight;
+    
     if ([goods.producttype isEqualToString:@"1"]) {
         weighlable.text=goods.Pro_goldWeight;
+    }else{
+        weighlable.text=[NSString stringWithFormat:@"%@ g",AuWeight];//约重
     }
+    
+    if(!fsweight || [fsweight isEqualToString:@"<null>"]){
+        fsweight=goods.Pro_f_weight;
+    }
+    fitnaweighlable.text=[NSString stringWithFormat:@"%@ ct",fsweight];
+    
     NSMutableArray *mainarryman=[[NSMutableArray alloc] init];
     
     NSString * AuWeightman=nil;
+    NSString * fsweightman=nil;
     //如果是对戒，查找男戒数据
     if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
         [self showmenlproduct];
@@ -431,19 +486,27 @@ NSInteger selecttype=0;
             [mainarryman addObject:inlayman.zWeight];
             if(AuWeightman==nil){
                 AuWeightman=inlayman.AuWeight;
-                dweighlable.text=[NSString stringWithFormat:@"男戒:%@ g",inlayman.AuWeight];
+                fsweightman=inlayman.fsweight;
             }
         }
+        if(AuWeightman==nil)AuWeightman=goodsman.Pro_Z_weight;
+        
+        if(!fsweightman || [fsweightman isEqualToString:@"<null>"]){
+            fsweightman=goodsman.Pro_f_weight;
+        }
+        
+        dweighlable.text=[NSString stringWithFormat:@"男戒:%@ g",AuWeightman];
         
         weighlable.text=[NSString stringWithFormat:@"女戒:%@ g",AuWeight];
         mainnanolable.text=[NSString stringWithFormat:@"女戒:%@ 颗",goods.Pro_Z_count];
         fitnanolable.text=[NSString stringWithFormat:@"女戒:%@ 颗",goods.Pro_f_count];
-        float wwight=goods.Pro_f_weight.doubleValue*goods.Pro_f_count.doubleValue;
-        fitnaweighlable.text=[NSString stringWithFormat:@"女戒:%@ ct",[self notRounding:wwight afterPoint:2]];
+        //float wwight=goods.Pro_f_weight.doubleValue*goods.Pro_f_count.doubleValue;
+        //fitnaweighlable.text=[NSString stringWithFormat:@"女戒:%@ ct",[self notRounding:wwight afterPoint:2]];
+        fitnaweighlable.text=[NSString stringWithFormat:@"女戒:%@ ct",fsweight];
         
         dmiannanolable.text=[NSString stringWithFormat:@"男戒:%@ 颗",goodsman.Pro_Z_count];
         dfitnanolable.text=[NSString stringWithFormat:@"男戒:%@ 颗",goodsman.Pro_f_count];
-        dfitweighlable.text=[NSString stringWithFormat:@"男戒:%@ ct",goodsman.Pro_f_weight];
+        dfitweighlable.text=[NSString stringWithFormat:@"男戒:%@ ct",fsweightman];
         dnettext.text=@"SI";
         dcolortext.text=@"I-J";
         Commons * common=[[Commons alloc]init];
@@ -500,10 +563,10 @@ NSInteger selecttype=0;
                 // 耗时的操作（异步操作）
                 NSString *proprice=nil;
                 productApi *priceApi=[[productApi alloc]init];
-                womanprice=[priceApi getPrice:goods.Pro_Class goldType:goods.Pro_goldType goldWeight:AuWeight mDiaWeight:miantext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
+                womanprice=[priceApi getPrice:goods.Pro_Class goldType:goods.Pro_goldType goldWeight:AuWeight mDiaWeight:miantext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:fsweight sCount:goods.Pro_f_count proid:goods.Id];
                 if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
                     
-                    manprice=[priceApi getPrice:goodsman.Pro_Class goldType:goodsman.Pro_goldType goldWeight:AuWeightman mDiaWeight:dmiantext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:goodsman.Pro_f_weight sCount:goodsman.Pro_f_count proid:goodsman.Id];
+                    manprice=[priceApi getPrice:goodsman.Pro_Class goldType:goodsman.Pro_goldType goldWeight:AuWeightman mDiaWeight:dmiantext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:fsweightman sCount:goodsman.Pro_f_count proid:goodsman.Id];
                     
                     
                     proprice=[NSString stringWithFormat:@"%d",womanprice.intValue+manprice.intValue];
@@ -720,6 +783,18 @@ NSInteger selecttype=0;
         NSString * weightg=[self getweightg:rowString];
         NSString * weightman=[self getweightman:rowString];
         
+        
+        //sDiaWeight副石重
+        //豪华系列 ： Pro_hotE=1
+        NSString * goodssDiaWeight=goods.Pro_f_weight;
+        if([goods.Pro_hotE isEqualToString:@"1"]){
+            goodssDiaWeight=[self getweightgsDiaWeight:rowString];
+        }
+        NSString * goodsmansDiaWeight=goodsman.Pro_f_weight;
+        if(goodsman && [goodsman.Pro_hotE isEqualToString:@"1"]){
+            goodsmansDiaWeight=[self getweightmansDiaWeight:rowString];
+        }
+        
         @try {
             //可以在此加代码提示用户说正在加载数据中
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -727,10 +802,10 @@ NSInteger selecttype=0;
                 
                 NSString *proprice=nil;
                 productApi *priceApi=[[productApi alloc]init];
-                womanprice=[priceApi getPrice:goods.Pro_Class goldType:texturetext.text goldWeight:weightg mDiaWeight:miantext.text mDiaColor:colortext.text mVVS:nettext.text sDiaWeight:goods.Pro_f_weight sCount:goods.Pro_f_count proid:goods.Id];
+                womanprice=[priceApi getPrice:goods.Pro_Class goldType:texturetext.text goldWeight:weightg mDiaWeight:miantext.text mDiaColor:colortext.text mVVS:nettext.text sDiaWeight:goodssDiaWeight sCount:goods.Pro_f_count proid:goods.Id];
                 if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
                     priceApi=[[productApi alloc]init];
-                    manprice=[priceApi getPrice:goodsman.Pro_Class goldType:dtexturetext.text goldWeight:weightman mDiaWeight:dmiantext.text mDiaColor:dcolortext.text mVVS:dnettext.text sDiaWeight:goodsman.Pro_f_weight sCount:goodsman.Pro_f_count proid:goodsman.Id];
+                    manprice=[priceApi getPrice:goodsman.Pro_Class goldType:dtexturetext.text goldWeight:weightman mDiaWeight:dmiantext.text mDiaColor:dcolortext.text mVVS:dnettext.text sDiaWeight:goodsmansDiaWeight sCount:goodsman.Pro_f_count proid:goodsman.Id];
                     proprice=[NSString stringWithFormat:@"%d",womanprice.intValue+manprice.intValue];
                 }else{
                     proprice=womanprice;

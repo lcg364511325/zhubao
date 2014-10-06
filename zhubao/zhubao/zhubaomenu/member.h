@@ -17,6 +17,7 @@
 #import "memberDetailUpdate.h"
 #import "updatePassword.h"
 #import "addlocalgoods.h"
+#import "proclass.h"
 
 @interface member : UIViewController<UIApplicationDelegate>
 {

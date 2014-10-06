@@ -21,6 +21,7 @@
 #import "orderApi.h"
 #import "orderbill.h"
 #import "orderdetail.h"
+#import "proclassEntity.h"
 
 @interface sqlService : NSObject
 {
@@ -133,5 +134,18 @@
 
 //查询本地商品列表
 - (NSMutableArray*)GetLocalProductList:(NSString *)type1 type2:(NSString *)type2 type3:(NSString *)type3 type4:(NSString *)type4 page:(int)page pageSize:(int)pageSize;
+
+
+//查询商品类别列表
+- (NSMutableArray*)GetProclassList:(NSString *)uId page:(int)page pageSize:(int)pageSize;
+
+//删除商品类别信息
+-(NSString*)deleteProclass:(NSString *)oid;
+
+//修改商品类别
+-(NSString *)updateProclass:(NSString *)key value:(NSString *)value oid:(NSString *)oid;
+
+//新加商品类别
+-(proclassEntity*)addProclass:(proclassEntity *)entity;
 
 @end
