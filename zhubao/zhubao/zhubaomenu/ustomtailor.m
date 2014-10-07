@@ -337,6 +337,7 @@ NSInteger vies=0;
     entity.Dia_F_count=fitNoText.text;
     entity.psize=sizeText.text;
     entity.pdetail=fontText.text;
+    entity.pcount=@"1";
     buyproduct *successadd=[sql addToBuyproduct:entity];
     if (successadd) {
 //        sql=[[sqlService alloc]init];

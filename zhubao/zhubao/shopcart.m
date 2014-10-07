@@ -215,6 +215,7 @@ shoppingcartCell *selectedcell;
             cell.fluLable.text=nil;
         }
         cell.chasing.text=nil;
+        cell.priceLable.text=goods.pcount;
     }
     
     [cell.deleteshopcart addTarget:self action:@selector(deleteshoppingcartgoods:) forControlEvents:UIControlEventTouchUpInside];
