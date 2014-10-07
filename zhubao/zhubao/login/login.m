@@ -7,6 +7,7 @@
 //
 
 #import "login.h"
+#import "Tool.h"
 
 @interface login ()
 
@@ -229,14 +230,18 @@ NSInteger i=0;
             
             LoginApi * service = [[LoginApi alloc] init];
             LoginEntity * result;
+            Tool *tool=[[Tool alloc]init];
+            NSString *UUID=[[NSUserDefaults standardUserDefaults]objectForKey:@"machineNO"];;
             NSString *authorizeNO=[[NSUserDefaults standardUserDefaults]objectForKey:@"authorizeNO"];
             if (authorizeNO!=nil) {
-                result = [service login:account password:password verlity:code machineNO:@"2333333" authorizeNO:authorizeNO];
+                result = [service login:account password:password verlity:code machineNO:UUID authorizeNO:authorizeNO];
             }else
             {
-                result = [service login:account password:password verlity:code machineNO:@"2333333" authorizeNO:moneyText.text];
-                if (result) {
+                UUID=[tool UUID];
+                result = [service login:account password:password verlity:code machineNO:UUID authorizeNO:moneyText.text];
+                if (!result) {
                     [[NSUserDefaults standardUserDefaults]setObject:moneyText.text forKey:@"authorizeNO"];
+                    [[NSUserDefaults standardUserDefaults]setObject:UUID forKey:@"machineNO"];
                 }
             }
             
