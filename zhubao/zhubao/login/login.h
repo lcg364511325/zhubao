@@ -16,6 +16,11 @@
 #import "myApi.h"
 
 @interface login : UIViewController<UITextFieldDelegate>
+{
+    UIView *hiview;
+    UIView *getmoneyview;
+    UITextField *moneyText;
+}
 
 
 @property (weak, nonatomic) IBOutlet UITextField *account;

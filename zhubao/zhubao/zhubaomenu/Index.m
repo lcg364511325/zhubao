@@ -309,7 +309,7 @@ localorderlist *_localorder;
     UIViewController *oldViewController=currentViewController;
     _selectmenu.frame=CGRectMake(0, 248, _selectmenu.frame.size.width, _selectmenu.frame.size.height);
     
-    [self transitionFromViewController:currentViewController toViewController:_localorder duration:1 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+    [self transitionFromViewController:currentViewController toViewController:_localorder duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
     }  completion:^(BOOL finished) {
         if (finished) {
             currentViewController=_localorder;

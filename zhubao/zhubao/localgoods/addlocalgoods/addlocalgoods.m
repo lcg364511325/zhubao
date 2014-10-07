@@ -77,7 +77,9 @@
         fitcountText.text=goods.Pro_f_count;
         priceText.text=goods.Pro_price;
         typevalue=goods.Pro_Class;
-        typeText.text=[typelist objectAtIndex:[typevalue integerValue]-1];
+        if ([typelist count]!=0) {
+            typeText.text=[typelist objectAtIndex:[typevalue integerValue]-1];
+        }
         
     }else
     {
