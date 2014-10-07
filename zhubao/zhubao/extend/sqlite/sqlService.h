@@ -79,6 +79,9 @@
 //删除购物车信息
 -(NSString*)deleteBuyproduct:(NSString *)pid;
 
+//根据产品删除购物车信息
+-(NSString*)deleteBuyproductBypid:(NSString *)pid;
+
 //根据用户的id查询购物车的数量
 -(NSString*)getBuyproductcount:(NSString*)uid;
 

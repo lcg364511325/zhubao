@@ -1637,6 +1637,30 @@
     return pid;
 }
 
+//根据产品删除购物车信息
+-(NSString*)deleteBuyproductBypid:(NSString *)pid{
+    
+    @try {
+        
+        NSString * sql=[NSString stringWithFormat:@"DELETE from [buyproduct] where productid=%@",pid];
+        
+        NSLog(@"--------------:%@",sql);
+        
+        if (![self HandleSql:sql]) {
+            return nil;
+        }
+        
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+    @finally {
+        //[self closeDB];
+    }
+    
+    return pid;
+}
+
 //更新当前用户的基本信息(不调用接口更新服务器的信息)
 -(customer*)updateCustomerNoApi:(customer *)entity{
     

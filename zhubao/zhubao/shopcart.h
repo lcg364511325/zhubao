@@ -14,9 +14,8 @@
 #import "sqlService.h"
 #import "AppDelegate.h"
 #import "Index.h"
-#import "CustomIOS7AlertView.h"
 
-@interface shopcart : UIViewController<UIApplicationDelegate,CustomIOS7AlertViewDelegate>
+@interface shopcart : UIViewController<UIApplicationDelegate>
 {
     NSMutableArray *shoppingcartlist;
     UITextField *goodsno;

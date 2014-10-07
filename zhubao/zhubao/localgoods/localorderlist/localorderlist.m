@@ -130,7 +130,7 @@ NSMutableArray *resultlist=nil;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)closeAction
+-(void)closeAction
 {
     if (self.popupViewController != nil) {
         [self dismissPopupViewControllerAnimated:YES completion:^{
@@ -651,6 +651,7 @@ NSMutableArray *resultlist=nil;
     productEntity *entity = [resultlist objectAtIndex:[indexPath row]];
     prodeuctDetail *prodeuctDetailcontroller = [[prodeuctDetail alloc] initWithNibName:@"prodeuctDetail" bundle:nil];
     prodeuctDetailcontroller.mydelegate=self.parentViewController.self;
+    prodeuctDetailcontroller.mypdelegate=self;
     prodeuctDetailcontroller.proid=entity.Id;
     
     [self.parentViewController.self presentPopupViewController:prodeuctDetailcontroller animated:YES completion:^(void) {
@@ -746,6 +747,8 @@ NSMutableArray *resultlist=nil;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [productcollect reloadData];
+            NSString *count=[NSString stringWithFormat:@"%lu",(unsigned long)[resultlist count]];
+            countLable.text=[[@"共有首饰" stringByAppendingString:count] stringByAppendingString:@"件"];
         });
     });
 }

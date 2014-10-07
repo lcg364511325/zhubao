@@ -66,7 +66,7 @@
 
 -(void)refleshBuycutData;
 
-- (void)closeAction;
+-(void)closeAction;
 
 -(void)closesc;
 
