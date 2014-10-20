@@ -376,12 +376,15 @@ UIButton* btnBack;
 //清除商品数据
 -(void)docleargoodsdata
 {
-    NSString *rowString =@"正在清除商品数据。。。。";
+    NSString *rowString =@"正在清除数据。。。。";
     UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
     [alter show];
     sqlService *sql=[[sqlService alloc]init];
     BOOL state=[sql ClearTableDatas:@"product"];
-    [alter dismissWithClickedButtonIndex:0 animated:YES];
+    
+    sql=[[sqlService alloc]init];
+    [sql ClearTableDatas:@"productdia"];//清空钻表
+    
     if (state) {
         //删除压缩文件
         NSString *extension = @"zip";
@@ -427,10 +430,15 @@ UIButton* btnBack;
             }
         }
         
+        [alter dismissWithClickedButtonIndex:0 animated:YES];
+        
         NSString *rowString =@"清除成功";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
     }else{
+        
+        [alter dismissWithClickedButtonIndex:0 animated:YES];
+        
         NSString *rowString =@"清除失败";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];

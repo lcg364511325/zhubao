@@ -1469,7 +1469,7 @@
         
         sqlite3_stmt *statement = nil;
         //sql语句
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT updatetime from updatetime where updateCode='%@' ",code];
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT updatetimevalue from updatetime where updateCode='%@' ",code];
         
         const char *sql = [querySQL UTF8String];
         if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {

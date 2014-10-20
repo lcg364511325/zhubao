@@ -23,6 +23,7 @@
 #import "test.h"
 #import <QuartzCore/QuartzCore.h>
 #import "localorderlist.h"
+#import "LoginApi.h"
 
 @interface Index : UIViewController<UIWebViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate,UIApplicationDelegate>
 {

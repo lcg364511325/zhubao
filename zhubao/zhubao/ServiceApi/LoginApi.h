@@ -25,5 +25,6 @@
 
 -(LoginEntity *)login:(NSString *)username password:(NSString *)password verlity:(NSString*)verlity machineNO:(NSString *)machineNO authorizeNO:(NSString *)authorizeNO;
 
+-(NSString *)toologintoo;
  
 @end

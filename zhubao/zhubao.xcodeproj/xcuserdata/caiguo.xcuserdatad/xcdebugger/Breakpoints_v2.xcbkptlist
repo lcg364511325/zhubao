@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "zhubao/ServiceApi/AutoGetData.m"
-            timestampString = "426946758.004185"
+            timestampString = "434544612.768695"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "-getProduct:"
             landmarkType = "5">
          </BreakpointContent>
@@ -94,22 +94,6 @@
             startingLineNumber = "2233"
             endingLineNumber = "2233"
             landmarkName = "-saveOrder:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "zhubao/ServiceApi/AutoGetData.m"
-            timestampString = "433678667.755876"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "528"
-            endingLineNumber = "528"
-            landmarkName = "-getwithmouth:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

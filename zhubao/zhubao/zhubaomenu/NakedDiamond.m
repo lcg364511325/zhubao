@@ -279,7 +279,7 @@ NSInteger whichview=0;
     }
     //编号参数
     NSString *number=DiamondNo.text;
-    productlist=[product GetProductdiaList:shape type2:weight type3:price type4:color type5:net type6:cut type7:chasing type8:symmetry type9:fluorescence type10:diploma type11:number page:1 pageSize:20000];
+    productlist=[product GetProductdiaList:shape type2:weight type3:price type4:color type5:net type6:cut type7:chasing type8:symmetry type9:fluorescence type10:diploma type11:number page:1 pageSize:40000];
     
     [Nakeddisplay reloadData];
     
