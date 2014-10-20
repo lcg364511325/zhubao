@@ -413,11 +413,15 @@ NSInteger selecttype=0;
 {
     pricelable.text=@"";
     sqlService * sql=[[sqlService alloc] init];
+    
+    //产品id
     productnumber=_proid;
     goods=[sql GetProductDetail:productnumber];
     Pro_type=goods.Pro_Type;
     //productimageview.image=[UIImage imageNamed:@"diamonds.png"];
     
+    
+    //隐藏对戒男戒
     [self hidemenlproduct];
     
     //本地商品加载按钮
@@ -425,10 +429,16 @@ NSInteger selecttype=0;
         [self localgoods];
     }
     
+    //标题
     titlelable.text=goods.Pro_name;
+    
+    //型号
     modellable.text=goods.Pro_model;
     //weightlable.text=goods.Pro_goldWeight;//约重
+    
+    //主石数
     mainnanolable.text=[NSString stringWithFormat:@"%@ 颗",goods.Pro_Z_count];//goods.Pro_Z_count;
+    //副石数   
     fitnanolable.text=[NSString stringWithFormat:@"%@ 颗",goods.Pro_f_count];//goods.Pro_f_count;
     //fitnaweighlable.text=[NSString stringWithFormat:@"%@ ct",goods.Pro_f_weight];
     //maintext.text=@"111";
@@ -453,12 +463,16 @@ NSInteger selecttype=0;
     NSMutableArray *mainarry=[[NSMutableArray alloc] init];
     NSString * AuWeight=nil;
     NSString * fsweight=nil;
-    for (withmouth *inlay in inlayarry) {
-        [mainarry addObject:inlay.zWeight];
-        if(AuWeight==nil){
-            AuWeight=inlay.AuWeight;
-            fsweight=inlay.fsweight;
+    if (inlayarry) {
+        for (withmouth *inlay in inlayarry) {
+            [mainarry addObject:inlay.zWeight];
+            if(AuWeight==nil){
+                AuWeight=inlay.AuWeight;
+                fsweight=inlay.fsweight;
+            }
         }
+    }else{
+        [mainarry addObject:@"0.00"];
     }
     
     if(AuWeight==nil)AuWeight=goods.Pro_Z_weight;
@@ -485,12 +499,17 @@ NSInteger selecttype=0;
         goodsman=[sql GetProductBoyDetail:goods.Id];
         sql=[[sqlService alloc] init];
         inlayarryman=[sql getwithmouths:goodsman.Id];
-        for (withmouth *inlayman in inlayarryman) {
-            [mainarryman addObject:inlayman.zWeight];
-            if(AuWeightman==nil){
-                AuWeightman=inlayman.AuWeight;
-                fsweightman=inlayman.fsweight;
+        if (inlayarryman) {
+            for (withmouth *inlayman in inlayarryman) {
+                [mainarryman addObject:inlayman.zWeight];
+                if(AuWeightman==nil){
+                    AuWeightman=inlayman.AuWeight;
+                    fsweightman=inlayman.fsweight;
+                }
             }
+        }else
+        {
+            [mainarryman addObject:@"0.00"];
         }
         if(AuWeightman==nil)AuWeightman=goodsman.Pro_Z_weight;
         
@@ -571,8 +590,12 @@ NSInteger selecttype=0;
                     
                     manprice=[priceApi getPrice:goodsman.Pro_Class goldType:goodsman.Pro_goldType goldWeight:AuWeightman mDiaWeight:dmiantext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:fsweightman sCount:goodsman.Pro_f_count proid:goodsman.Id];
                     
+                    if (womanprice==nil || manprice==nil) {
+                        proprice=nil;
+                    }else{
+                       proprice=[NSString stringWithFormat:@"%d",womanprice.intValue+manprice.intValue];
+                    }
                     
-                    proprice=[NSString stringWithFormat:@"%d",womanprice.intValue+manprice.intValue];
                 }else{
                     proprice=womanprice;
                 }

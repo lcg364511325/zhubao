@@ -41,6 +41,9 @@
         NSLog(@"params--------:%@",params);
         
         NSMutableDictionary * dict = [DataService PostDataService:URL postDatas:(NSString*)params];//[DataService GetDataService:URL];
+        if (!dict) {
+            return nil;
+        }
         
         NSError *error = nil;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];

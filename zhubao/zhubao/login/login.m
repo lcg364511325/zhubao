@@ -18,6 +18,7 @@
 @synthesize tipLable;
 @synthesize passwordbtn;
 @synthesize logoshengyu;
+@synthesize xymText;
 
 NSInteger i=0;
 
@@ -78,11 +79,13 @@ NSInteger i=0;
         
         _account.text=(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"_account"];
         _password.text=(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"_password"];
+        xymText.text=(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"authorizeNO"];
         [passwordbtn setBackgroundImage:[UIImage imageNamed:@"sure"] forState:UIControlStateNormal];
         i=1;
     }else{
         //_account.text=@"13428706220";
         //_password.text=@"111111";
+        //xymText.text=@"SD3591A172";
     }
     
     [_submitlogin setTitle:@"" forState:UIControlStateNormal];
@@ -182,115 +185,12 @@ NSInteger i=0;
     
 }
 
-//登录判定
--(IBAction)loginActionauthorizeNO:(id)sender
-{
-    
-        if ([[NSUserDefaults standardUserDefaults]objectForKey:@"authorizeNO"]==nil) {
-            //第一次登录 输入授权码并验证
-            hiview=[[UIView alloc]initWithFrame:self.view.frame];
-            hiview.backgroundColor=[UIColor blackColor];
-            hiview.alpha=0.5;
-            getmoneyview = [[UIView alloc] initWithFrame:CGRectMake(410, 305, 220, 100)];
-            [getmoneyview setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundcolor"]]];
-            UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(0, 5, 220, 30)];
-            title.text=@"请输入授权码";
-            title.font=[UIFont systemFontOfSize:17.0f];
-            [title setTextColor:[UIColor colorWithRed:185/255.0f green:12/255.0f blue:20/255.0f alpha:1.0f]];
-            [title setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundcolor"]]];
-            title.textAlignment=NSTextAlignmentCenter;
-    
-            moneyText=[[UITextField alloc]initWithFrame:CGRectMake(35, 35, 150, 30)];
-            [moneyText setBorderStyle:UITextBorderStyleBezel];
-            [moneyText setBackground:[UIImage imageNamed:@"writetextbox"]];
-            moneyText.font=[UIFont boldSystemFontOfSize:12.0f];
-            moneyText.keyboardType=UIKeyboardTypeNumberPad;
-    
-            UIButton *okbtn=[[UIButton alloc]initWithFrame:CGRectMake(41, 67, 30, 30)];
-            [okbtn setTitle:@"确定" forState:UIControlStateNormal];
-            [okbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            okbtn.titleLabel.font=[UIFont boldSystemFontOfSize:15.0f];
-            okbtn.tag=0;
-            [okbtn addTarget:self action:@selector(SendLoginInfo:) forControlEvents:UIControlEventTouchDown];
-    
-            UIButton *canclebtn=[[UIButton alloc]initWithFrame:CGRectMake(141, 67, 30, 30)];
-            [canclebtn setTitle:@"取消" forState:UIControlStateNormal];
-            [canclebtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            canclebtn.titleLabel.font=[UIFont boldSystemFontOfSize:15.0f];
-            canclebtn.tag=1;
-            [canclebtn addTarget:self action:@selector(SendLoginInfo:) forControlEvents:UIControlEventTouchDown];
-    
-            [getmoneyview addSubview:okbtn];
-            [getmoneyview addSubview:canclebtn];
-            [getmoneyview addSubview:moneyText];
-            [getmoneyview addSubview:title];
-            [self.view addSubview:hiview];
-            [self.view addSubview:getmoneyview];
-            
-        }else
-        {
-            //非第一次登录 直接登录
-            [self SendLoginInfo:sender];
-        }
-}
 
 //登录判定
 -(IBAction)loginAction:(id)sender
 {
-    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"authorizeNO"]==nil) {
-        //第一次登录 输入授权码并验证
-        hiview=[[UIView alloc]initWithFrame:self.view.frame];
-        hiview.backgroundColor=[UIColor blackColor];
-        hiview.alpha=0.5;
-        getmoneyview = [[UIView alloc] initWithFrame:CGRectMake(410, 305, 220, 100)];
-        [getmoneyview setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundcolor"]]];
-        UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(0, 5, 220, 30)];
-        title.text=@"请输入授权码";
-        title.font=[UIFont systemFontOfSize:17.0f];
-        [title setTextColor:[UIColor colorWithRed:185/255.0f green:12/255.0f blue:20/255.0f alpha:1.0f]];
-        [title setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundcolor"]]];
-        title.textAlignment=NSTextAlignmentCenter;
-        
-        moneyText=[[UITextField alloc]initWithFrame:CGRectMake(35, 35, 150, 30)];
-        [moneyText setBorderStyle:UITextBorderStyleBezel];
-        [moneyText setBackground:[UIImage imageNamed:@"writetextbox"]];
-        moneyText.font=[UIFont boldSystemFontOfSize:12.0f];
-        moneyText.keyboardType=UIKeyboardTypeNumberPad;
-        
-        UIButton *okbtn=[[UIButton alloc]initWithFrame:CGRectMake(41, 67, 30, 30)];
-        [okbtn setTitle:@"确定" forState:UIControlStateNormal];
-        [okbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        okbtn.titleLabel.font=[UIFont boldSystemFontOfSize:15.0f];
-        okbtn.tag=0;
-        [okbtn addTarget:self action:@selector(SendLoginInfo:) forControlEvents:UIControlEventTouchDown];
-        
-        UIButton *canclebtn=[[UIButton alloc]initWithFrame:CGRectMake(141, 67, 30, 30)];
-        [canclebtn setTitle:@"取消" forState:UIControlStateNormal];
-        [canclebtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        canclebtn.titleLabel.font=[UIFont boldSystemFontOfSize:15.0f];
-        canclebtn.tag=1;
-        [canclebtn addTarget:self action:@selector(SendLoginInfo:) forControlEvents:UIControlEventTouchDown];
-        
-        [getmoneyview addSubview:okbtn];
-        [getmoneyview addSubview:canclebtn];
-        [getmoneyview addSubview:moneyText];
-        [getmoneyview addSubview:title];
-        [self.view addSubview:hiview];
-        [self.view addSubview:getmoneyview];
-        
-    }else
-    {
-        //非第一次登录 直接登录
-        [self SendLoginInfo:sender];
-    }
-    
-}
-
-//发送到服务器端验证授权码
--(void)SendLoginInfo:(id)sender
-{
     @try {
-
+        
         UIButton *resultButton = (UIButton *)sender;
         
         if(resultButton.tag==1){
@@ -319,7 +219,7 @@ NSInteger i=0;
             }else
             {
                 UUID=[tool UUID];
-                result = [service login:account password:password verlity:code machineNO:UUID authorizeNO:moneyText.text];
+                result = [service login:account password:password verlity:code machineNO:UUID authorizeNO:xymText.text];
                 
             }
             
@@ -338,7 +238,7 @@ NSInteger i=0;
                     
                     //保存登录信息
                     if (authorizeNO==nil) {
-                        [[NSUserDefaults standardUserDefaults]setObject:moneyText.text forKey:@"authorizeNO"];
+                        [[NSUserDefaults standardUserDefaults]setObject:xymText.text forKey:@"authorizeNO"];
                         [[NSUserDefaults standardUserDefaults]setObject:UUID forKey:@"machineNO"];
                     }
                     
@@ -403,8 +303,7 @@ NSInteger i=0;
     @finally {
         
     }
-    [hiview removeFromSuperview];
-    [getmoneyview removeFromSuperview];
+    
 }
 
 //记住密码

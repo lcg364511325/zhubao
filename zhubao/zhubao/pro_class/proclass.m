@@ -116,7 +116,6 @@ proclassEntity * proclassentity;
     [moneyText setBackground:[UIImage imageNamed:@"writetextbox"]];
     moneyText.font=[UIFont boldSystemFontOfSize:12.0f];
     moneyText.text=name;
-    moneyText.keyboardType=UIKeyboardTypeNumberPad;
     
     UIButton *okbtn=[[UIButton alloc]initWithFrame:CGRectMake(41, 67, 30, 30)];
     [okbtn setTitle:@"确定" forState:UIControlStateNormal];

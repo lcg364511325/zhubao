@@ -25,6 +25,9 @@
 		2C0BFCBE194863EB00844FA2 /* diamond_ring08.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCB4194863EA00844FA2 /* diamond_ring08.png */; };
 		2C0BFCBF194863EB00844FA2 /* diamond_ring09.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCB5194863EA00844FA2 /* diamond_ring09.png */; };
 		2C0BFCC0194863EB00844FA2 /* diamond_ring10.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BFCB6194863EB00844FA2 /* diamond_ring10.png */; };
+		2C12855319F5073A0085C3D6 /* NakedDiamondResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C12855119F5073A0085C3D6 /* NakedDiamondResult.m */; };
+		2C12855419F5073A0085C3D6 /* NakedDiamondResult.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C12855219F5073A0085C3D6 /* NakedDiamondResult.xib */; };
+		2C12855619F515140085C3D6 /* xympic.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C12855519F515140085C3D6 /* xympic.png */; };
 		2C14E99B193965E20084E8FE /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C14E999193965E20084E8FE /* logo.png */; };
 		2C14E99C193965E20084E8FE /* pageindex.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C14E99A193965E20084E8FE /* pageindex.png */; };
 		2C15534319547663000B22E1 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C15534119547663000B22E1 /* area.plist */; };
@@ -424,6 +427,10 @@
 		2C0BFCB4194863EA00844FA2 /* diamond_ring08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_ring08.png; sourceTree = "<group>"; };
 		2C0BFCB5194863EA00844FA2 /* diamond_ring09.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_ring09.png; sourceTree = "<group>"; };
 		2C0BFCB6194863EB00844FA2 /* diamond_ring10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_ring10.png; sourceTree = "<group>"; };
+		2C12855019F5073A0085C3D6 /* NakedDiamondResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NakedDiamondResult.h; path = NakedDiamondResult/NakedDiamondResult.h; sourceTree = "<group>"; };
+		2C12855119F5073A0085C3D6 /* NakedDiamondResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NakedDiamondResult.m; path = NakedDiamondResult/NakedDiamondResult.m; sourceTree = "<group>"; };
+		2C12855219F5073A0085C3D6 /* NakedDiamondResult.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NakedDiamondResult.xib; path = NakedDiamondResult/NakedDiamondResult.xib; sourceTree = "<group>"; };
+		2C12855519F515140085C3D6 /* xympic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xympic.png; sourceTree = "<group>"; };
 		2C14E999193965E20084E8FE /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		2C14E99A193965E20084E8FE /* pageindex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pageindex.png; sourceTree = "<group>"; };
 		2C15534119547663000B22E1 /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
@@ -946,6 +953,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C12854E19F507090085C3D6 /* NakedDiamondResult */ = {
+			isa = PBXGroup;
+			children = (
+				2C12855019F5073A0085C3D6 /* NakedDiamondResult.h */,
+				2C12855119F5073A0085C3D6 /* NakedDiamondResult.m */,
+				2C12855219F5073A0085C3D6 /* NakedDiamondResult.xib */,
+			);
+			name = NakedDiamondResult;
+			sourceTree = "<group>";
+		};
 		2C20E19F1986466A000C82CE /* productDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -1036,6 +1053,7 @@
 		2C5C97FD19349E2100004343 /* zhubao */ = {
 			isa = PBXGroup;
 			children = (
+				2C12854E19F507090085C3D6 /* NakedDiamondResult */,
 				7CA8E41819DAA06D006A6880 /* pro_class */,
 				2CFF62E619D127FC00F89CE2 /* localgoods */,
 				7C01DAB219A49D650075677B /* zhubaomenu */,
@@ -1204,6 +1222,7 @@
 		7B7FFD38193853CA008712CB /* image */ = {
 			isa = PBXGroup;
 			children = (
+				2C12855519F515140085C3D6 /* xympic.png */,
 				2C4961E819E2863E001AE063 /* proclass_sed.png */,
 				2C4961E219E277B5001AE063 /* proclass_bg.png */,
 				2C4961E319E277B5001AE063 /* proclass_end.png */,
@@ -1960,6 +1979,7 @@
 				7B7FFD80193853CA008712CB /* diamant.png in Resources */,
 				7C1077571941AFF4005187B9 /* Seq_v04_640x378_66.jpg in Resources */,
 				2C0BFCA719483C9000844FA2 /* IMG_0001.PNG in Resources */,
+				2C12855619F515140085C3D6 /* xympic.png in Resources */,
 				7CEF7F0119421AC3005DF8A9 /* NoticeReportCell.xib in Resources */,
 				7C1077431941AFF4005187B9 /* Seq_v04_640x378_48.jpg in Resources */,
 				7B7FFD96193853CA008712CB /* import.png in Resources */,
@@ -2066,6 +2086,7 @@
 				2C01B4FB1939BBD100C08C2E /* ceshi.xib in Resources */,
 				7C01DAE919A4A0610075677B /* diploma.xib in Resources */,
 				7C1077321941AFF4005187B9 /* Seq_v04_640x378_32.jpg in Resources */,
+				2C12855419F5073A0085C3D6 /* NakedDiamondResult.xib in Resources */,
 				7B7FFDA2193853CA008712CB /* revise_password.png in Resources */,
 				7B7FFD9A193853CA008712CB /* magnifier1.png in Resources */,
 				7B7FFDAB193853CA008712CB /* view.png in Resources */,
@@ -2303,6 +2324,7 @@
 				7CF03C4F195BFDDB00F8FBD5 /* SDWebImageDownloader.m in Sources */,
 				7CA8E43219DAA973006A6880 /* proclasslistCell.m in Sources */,
 				7CF5EA451940203800C63E6D /* productEntity.m in Sources */,
+				2C12855319F5073A0085C3D6 /* NakedDiamondResult.m in Sources */,
 				7CF03C56195BFDDB00F8FBD5 /* UIImage+WebP.m in Sources */,
 				2CFF631D19D18FF800F89CE2 /* orderdetail.m in Sources */,
 				7CF03C41195BFDDB00F8FBD5 /* PSTCollectionViewLayout.m in Sources */,

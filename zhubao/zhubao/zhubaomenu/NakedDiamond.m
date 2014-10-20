@@ -7,6 +7,7 @@
 //
 
 #import "NakedDiamond.h"
+#import "NakedDiamondResult.h"
 
 @interface NakedDiamond ()
 
@@ -15,25 +16,14 @@
 @implementation NakedDiamond
 
 @synthesize primaryView;
-@synthesize secondaryView;
-@synthesize primaryShadeView;
-@synthesize secondShadeView;
-@synthesize thirdShadeView;
-@synthesize fivetharyView;
-@synthesize sixview;
 @synthesize weightmin;
 @synthesize weightmax;
 @synthesize pricemin;
 @synthesize pricemax;
 @synthesize DiamondNo;
-@synthesize Nakeddisplay;
 @synthesize modelbtn;
 @synthesize colorbtn;
 @synthesize netbtn;
-@synthesize shopcartcount;
-@synthesize logoImage;
-@synthesize checkpassword;
-@synthesize nakediacount;
 
 NSInteger whichview=0;
 
@@ -135,20 +125,6 @@ NSInteger whichview=0;
 //搜索
 - (IBAction)goAction:(id)sender
 {
-    whichview=0;
-    primaryShadeView.alpha=0.5;
-    //secondaryView.frame = CGRectMake(140, 95, secondaryView.frame.size.width, secondaryView.frame.size.height);
-    //secondaryView.center=primaryView.center;
-    CATransition *transtion = [CATransition animation];
-    transtion.duration = 0.5;
-    [transtion setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    [transtion setType:kCATransitionPush];
-    [transtion setSubtype:kCATransitionFromTop];
-    
-    [secondaryView.layer addAnimation:transtion forKey:nil];
-
-    secondaryView.hidden = NO;
-    sqlService *product=[[sqlService alloc] init];
     //形状参数
     NSMutableString *shape=[[NSMutableString alloc] init];
     for (NSString *index in shapearray) {
@@ -279,10 +255,25 @@ NSInteger whichview=0;
     }
     //编号参数
     NSString *number=DiamondNo.text;
-    productlist=[product GetProductdiaList:shape type2:weight type3:price type4:color type5:net type6:cut type7:chasing type8:symmetry type9:fluorescence type10:diploma type11:number page:1 pageSize:40000];
     
-    [Nakeddisplay reloadData];
+    NakedDiamondResult *samplePopupViewController = [[NakedDiamondResult alloc] initWithNibName:@"NakedDiamondResult" bundle:nil];
+    samplePopupViewController.shape=shape;
+    samplePopupViewController.weight=weight;
+    samplePopupViewController.price=price;
+    samplePopupViewController.color=color;
+    samplePopupViewController.net=net;
+    samplePopupViewController.cut=cut;
+    samplePopupViewController.chasing=chasing;
+    samplePopupViewController.symmetry=symmetry;
+    samplePopupViewController.fluorescence=fluorescence;
+    samplePopupViewController.diploma=diploma;
+    samplePopupViewController.number=number;
     
+    samplePopupViewController.mydelegate=self.parentViewController.self;
+    [self.parentViewController.self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
+        NSLog(@"popup view presented");
+    }];
+ 
 }
 
 //重置页面
@@ -291,19 +282,6 @@ NSInteger whichview=0;
     NakedDiamond * _NakedDiamond = [[NakedDiamond alloc] init];
     
     [self.navigationController pushViewController:_NakedDiamond animated:NO];
-}
-
-- (IBAction)closeAction:(id)sender
-{
-    CATransition *transtion = [CATransition animation];
-    transtion.duration = 0.5;
-    [transtion setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    [transtion setType:kCATransitionPush];
-    [transtion setSubtype:kCATransitionFromBottom];
-    [secondaryView.layer addAnimation:transtion forKey:nil];
-    secondaryView.hidden = YES;
-    nakediacount.text=@"";
-    primaryShadeView.alpha=0;
 }
 
 //购物车
@@ -349,28 +327,6 @@ NSInteger whichview=0;
     }
 }
 
-//设置页面跳转
--(IBAction)setup:(id)sender
-{
-    if ([[[UIDevice currentDevice]systemVersion]floatValue] >= 7.0)
-    {
-        _settingupdate.frame = CGRectMake(10, 55, _settingupdate.frame.size.width, _settingupdate.frame.size.height);
-        _settinglogout.frame = CGRectMake(10, 90, _settinglogout.frame.size.width, _settinglogout.frame.size.height);
-        _settingsoftware.frame = CGRectMake(10, 20, _settingsoftware.frame.size.width, _settingsoftware.frame.size.height);
-    }
-    fivetharyView.hidden=NO;
-    fivetharyView.frame=CGRectMake(750, 70, fivetharyView.frame.size.width, fivetharyView.frame.size.height);
-}
-
-//软件更新
--(IBAction)updatesofeware:(id)sender
-{
-    fivetharyView.hidden=YES;
-    NSString *rowString =@"当前没有最新版本！";
-    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-    [alter show];
-}
-
 //退出登录
 -(IBAction)logout:(id)sender
 {
@@ -381,132 +337,6 @@ NSInteger whichview=0;
     myDelegate.entityl=[[LoginEntity alloc]init];
 }
 
-//更新数据
--(IBAction)updateProductDate:(id)sender
-{
-    @try {
-        //可以在此加代码提示用户说正在加载数据中
-//        NSString *rowString =@"正在更新数据。。。。";
-//        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
-//        [alter show];
-        
-        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-        [myDelegate showProgressBar:self.view];
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            // 耗时的操作（异步操作）
-            
-            AutoGetData * getdata=[[AutoGetData alloc] init];
-            [getdata getDataInsertTable:0];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                //可以在此加代码提示用户，数据已经加载完毕
-                [myDelegate stopTimer];
-                
-                //同步完数据了，则再去下载图片组
-                //[getdata getAllZIPPhotos];
-                [getdata getAllProductPhotos];
-            });
-        });
-        fivetharyView.hidden=YES;
-    }
-    @catch (NSException *exception) {
-        
-    }
-    @finally {
-        
-    }
-}
-
-//初始化tableview数据
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    NSInteger value=0;
-        value=[productlist count];
-        nakediacount.text=[NSString stringWithFormat:@"共搜索到%lu颗钻石",(unsigned long)[productlist count]];
-    return value;
-    //只有一组，数组数即为行数。
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-        static NSString *TableSampleIdentifier = @"NoticeReportCell";
-        
-        NoticeReportCell *cell = [tableView dequeueReusableCellWithIdentifier:TableSampleIdentifier];
-        if (cell == nil) {
-            NSArray * nib=[[NSBundle mainBundle]loadNibNamed:@"NoticeReportCell" owner:self options:nil];
-            cell=[nib objectAtIndex:0];
-        }
-        productdia *entity =[productlist objectAtIndex:[indexPath row]];
-        if ([entity.Dia_Shape isEqualToString:@"RB"]) {
-            cell.notice.text=@"圆形";
-            cell.showimage.image=[UIImage imageNamed:@"round.jpg"];
-        }
-        else if ([entity.Dia_Shape isEqualToString:@"PE"]){
-            cell.notice.text=@"公主方";
-            cell.showimage.image=[UIImage imageNamed:@"princess2.jpg"];
-        }
-        else if ([entity.Dia_Shape isEqualToString:@"EM"]){
-            cell.notice.text=@"祖母绿";
-            cell.showimage.image=[UIImage imageNamed:@"Emerald.jpg"];
-        }
-        else if ([entity.Dia_Shape isEqualToString:@"RD"]){
-            cell.notice.text=@"雷蒂恩";
-            cell.showimage.image=[UIImage imageNamed:@"radiant.jpg"];
-        }
-        else if ([entity.Dia_Shape isEqualToString:@"OL"]){
-            cell.notice.text=@"椭圆形";
-            cell.showimage.image=[UIImage imageNamed:@"Oval.jpg"];
-        }
-        else if ([entity.Dia_Shape isEqualToString:@"MQ"]){
-            cell.notice.text=@"橄榄形";
-            cell.showimage.image=[UIImage imageNamed:@"marquise.jpg"];
-        }
-        else if ([entity.Dia_Shape isEqualToString:@"CU"]){
-            cell.notice.text=@"枕形";
-            cell.showimage.image=[UIImage imageNamed:@"cushion.jpg"];
-        }
-        else if ([entity.Dia_Shape isEqualToString:@"PR"]){
-            cell.notice.text=@"梨形";
-            cell.showimage.image=[UIImage imageNamed:@"Pear2.jpg"];
-        }
-        else if ([entity.Dia_Shape isEqualToString:@"HT"]){
-            cell.notice.text=@"心形";
-            cell.showimage.image=[UIImage imageNamed:@"Heart.jpg"];
-        }
-        else if ([entity.Dia_Shape isEqualToString:@"ASH"]){
-            cell.notice.text=@"镭射刑";
-            cell.showimage.image=[UIImage imageNamed:@"Asscher2.jpg"];
-        }
-        cell.noticeDate.text=entity.Dia_CertNo;
-        cell.tuDate.text=entity.Dia_Carat;
-        cell.Dia_Col.text=entity.Dia_Col;
-        cell.Dia_Clar.text=entity.Dia_Clar;
-        cell.Dia_Cut.text=entity.Dia_Cut;
-        NSArray *price=[entity.Dia_Price componentsSeparatedByString:@"."];
-        cell.chasinglable.text=[@"¥" stringByAppendingString:[price objectAtIndex:0]];
-        cell.Dia_Sym.text=entity.Dia_Lab;
-        cell.Dia_Lab.text=entity.Dia_Pol;
-        cell.Dia_Price.text=entity.Dia_Sym;
-        cell.teslable.text=@"查看";
-        
-        return cell;
-}
-
-//tableview点击操作，裸钻详情页面显示
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-        productdia *entity = [productlist objectAtIndex:[indexPath row]];
-        NakedDiamondDetail *prodeuctDetailcontroller = [[NakedDiamondDetail alloc] initWithNibName:@"NakedDiamondDetail" bundle:nil];
-        prodeuctDetailcontroller.mydelegate=self.parentViewController.self;
-        prodeuctDetailcontroller.naid=entity.Id;
-        
-        [self.parentViewController.self presentPopupViewController:prodeuctDetailcontroller animated:YES completion:^(void) {
-            NSLog(@"popup view presented");
-        }];
-    
-}
 
 //选择形状
 -(IBAction)shapeselect:(id)sender
@@ -905,31 +735,12 @@ NSInteger whichview=0;
     }
 }
 
-//点击tableview以外得地方关闭
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    UITouch *touch = [touches anyObject];
-    CGPoint pt = [touch locationInView:self.view];
-    //点击其他地方消失
-    if (!CGRectContainsPoint([fivetharyView frame], pt)) {
-        //to-do
-        fivetharyView.hidden=YES;
-    }
-}
-
 -(void)refleshBuycutData
 {
     
     sqlService *sql=[[sqlService alloc]init];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
-    NSString *goodscount=myDelegate.entityl.resultcount;
-    if (goodscount && ![goodscount isEqualToString:@""] && ![goodscount isEqualToString:@"0"]) {
-        shopcartcount.hidden=NO;
-        [shopcartcount setTitle:goodscount forState:UIControlStateNormal];
-    }else{
-        shopcartcount.hidden=YES;
-    }
 
     sqlService *shopcar=[[sqlService alloc] init];
     shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
