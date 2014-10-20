@@ -106,6 +106,7 @@ NSMutableArray * arraytt;
                 }
                 
                 //查询出所有的商品，然后判断时间是否需要删除当前的记录
+                sqlser= [[sqlService alloc]init];
                 NSMutableArray * arrayp=[sqlser GetProductList:nil type2:nil type3:nil type4:nil page:1 pageSize:1500];
                 sqlser= [[sqlService alloc]init];
                 
@@ -254,6 +255,7 @@ NSMutableArray * arraytt;
                 }
                 
                 //查询出所有的裸钻
+                sqlser= [[sqlService alloc]init];
                 NSMutableArray * arrayp=[sqlser GetProductdiaList:nil type2:nil type3:nil type4:nil type5:nil type6:nil type7:nil type8:nil type9:nil type10:nil type11:nil page:1 pageSize:65000];
                 sqlser= [[sqlService alloc]init];
                 
@@ -370,6 +372,7 @@ NSMutableArray * arraytt;
     
     NSString * uId=myDelegate.entityl.uId;
     NSString * Upt=[sqlser getUpdateTime:timecode];//获取上一次的更新时间
+    sqlser= [[sqlService alloc]init];
     
     //Kstr=md5(uId|type|Upt|Key|Nowt)
     NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@",uId,@"103",Upt,apikey,Nowt]];
@@ -483,6 +486,7 @@ NSMutableArray * arraytt;
     
     NSString * uId=myDelegate.entityl.uId;
     NSString * Upt=[sqlser getUpdateTime:timecode];//获取上一次的更新时间
+    sqlser= [[sqlService alloc]init];
     
     //Kstr=md5(uId|type|Upt|Key|Nowt)
     NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@",uId,@"102",Upt,apikey,Nowt]];
@@ -623,9 +627,6 @@ NSMutableArray * arraytt;
         if(array.count<=0 || i==0){
             [app stopProgressBar];
         }
-        
-        //同步下载商品图片
-        //[self getAllProductPhotos];
 
     }@catch (NSException *exception) {
         

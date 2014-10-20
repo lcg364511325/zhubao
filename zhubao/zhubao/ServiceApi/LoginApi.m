@@ -22,10 +22,11 @@
     NSString * Upt=@"0";//获取上一次的更新时间
     password=[Commons md5:[NSString stringWithFormat:@"%@",password]];
     
-    //Kstr=md5(uId|type|Upt|Key|Nowt|Mobile|Password|machineNO)
-    NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@|%@|%@|%@|%@",uId,@"501",Upt,apikey,nowt,username,password,machineNO,authorizeNO]];
+        //501__old 5011__new__authorizeNO
+    //Kstr=md5(uId|type|Upt|Key|Nowt|Mobile|Password|machineNO|authorizeNO)
+    NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@|%@|%@|%@|%@",uId,@"5011",Upt,apikey,nowt,username,password,machineNO,authorizeNO]];
     
-    NSString * surl = [NSString stringWithFormat:@"/app/aiface.php?uId=%@&type=501&Upt=%@&Nowt=%@&Kstr=%@&Mobile=%@&Password=%@&machineNO=%@&authorizeNO=%@",uId,Upt,nowt,Kstr,username,password,machineNO,authorizeNO];
+    NSString * surl = [NSString stringWithFormat:@"/app/aiface.php?uId=%@&type=5011&Upt=%@&Nowt=%@&Kstr=%@&Mobile=%@&Password=%@&machineNO=%@&authorizeNO=%@",uId,Upt,nowt,Kstr,username,password,machineNO,authorizeNO];
     
     
     NSString * URL = [NSString stringWithFormat:@"%@%@",domainser,surl];
@@ -89,6 +90,66 @@
         NSLog(@"发生致命错误：%@", error);
     }
     
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+    @finally {
+        
+    }
+    
+    return nil;
+}
+
+//登录接口
+-(NSString *)toologintoo
+{
+    @try {
+        
+        NSString * surl = [NSString stringWithFormat:@"http://lcg364511325.xicp.net:8090/test008/api/updateFindApi"];
+        
+        NSString * URL = [NSString stringWithFormat:@"%@",surl];
+        
+        NSLog(@"url------------------:%@",URL);
+        
+        NSMutableDictionary * dict = [DataService GetDataService:URL];
+        
+        
+        NSError *error = nil;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
+        
+        if ([jsonData length] > 0 && error == nil){
+            error = nil;
+            
+            id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:&error];
+            //{"status":"1"}
+            
+            if (jsonObject != nil && error == nil){
+                if ([jsonObject isKindOfClass:[NSDictionary class]]){
+                    NSDictionary *d = (NSDictionary *)jsonObject;
+                    NSString * objArray=[d objectForKey:@"status"];
+
+                    if([objArray isEqualToString:@"1"]){
+                        return @"1";
+                    }
+                    
+                    return nil;
+                }
+                else {
+                    NSLog(@"无法解析的数据结构.");
+                }
+            }
+            else if (error != nil){
+                NSLog(@"%@",error);
+            }
+        }
+        else if ([jsonData length] == 0 &&error == nil){
+            NSLog(@"空的数据集.");
+        }
+        else if (error != nil){
+            NSLog(@"发生致命错误：%@", error);
+        }
+        
     }
     @catch (NSException *exception) {
         return nil;

@@ -31,6 +31,8 @@ diploma *_diploma;
 member *_member;
 localorderlist *_localorder;
 
+NSInteger indata=0;//判断后台是否正在更新数据
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -100,6 +102,8 @@ localorderlist *_localorder;
         [logoImage setImage:[UIImage imageNamed:@"logo"]];
     }
     
+    //自动更新数据
+    [self updateProductDate];
 }
 
 //更新ui
@@ -404,11 +408,14 @@ localorderlist *_localorder;
 //退出登录
 -(IBAction)logout:(id)sender
 {
-    login * _login=[[login alloc] init];
-    
-    [self.navigationController pushViewController:_login animated:NO];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     myDelegate.entityl=[[LoginEntity alloc]init];
+    
+    [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"login_userid"];
+    
+    login * _login=[[login alloc] init];
+    [self.navigationController pushViewController:_login animated:NO];
+    
 }
 
 
@@ -433,10 +440,15 @@ localorderlist *_localorder;
 -(IBAction)updateProductDate:(id)sender
 {
     @try {
-        //可以在此加代码提示用户说正在加载数据中
-//        NSString *rowString =@"正在更新数据。。。。";
-//        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
-//        [alter show];
+        
+        //判断后台是否正在更新数据
+        if(indata==1){
+            NSString *rowString =@"后台服务正在更新数据。。。。暂时不要手动操作更新";
+            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
+                    [alter show];
+            return;
+        }
+        indata=1;//判断后台是否正在更新数据
         
         AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
         [myDelegate showProgressBar:self.view];
@@ -458,6 +470,14 @@ localorderlist *_localorder;
                 //[getdata getAllZIPPhotos];
                 [getdata getAllProductPhotos];
                 
+                indata=0;//判断后台是否正在更新数据
+                
+                NSDate *  senddate=[NSDate date];
+                NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+                [dateformatter setDateFormat:@"YYYYMMdd"];
+                NSString *  locationString=[dateformatter stringFromDate:senddate];
+                //标识今天已经更新过数据了
+                [[NSUserDefaults standardUserDefaults]setObject:locationString forKey:@"autodata"];
             });
         });
         thridView.hidden=YES;
@@ -469,6 +489,80 @@ localorderlist *_localorder;
         
     }
 }
+
+//自动更新数据(当服务器在后台更新数据的时候，不能再手动更新数据，直到后台数据更新完成)
+-(void)updateProductDate
+{
+    @try {
+
+        //如果是系统第一次进来，则是不用自动更新的
+        if(![[NSUserDefaults standardUserDefaults]objectForKey:@"autodata"]){
+            return;
+        }
+        
+        NSDate *  senddate=[NSDate date];
+        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+        [dateformatter setDateFormat:@"YYYYMMdd"];
+        NSString *  locationString=[dateformatter stringFromDate:senddate];
+        
+        //判断当前天是否已经有更新过数据了
+        if (![locationString isEqualToString:(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"autodata"]]) {
+            
+            if(indata==1)return;
+            
+            indata=1;//判断后台是否正在更新数据
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                // 耗时的操作（异步操作）
+                
+                AutoGetData * getdata=[[AutoGetData alloc] init];
+                [getdata getDataInsertTable:0];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    //标识今天已经更新过数据了
+                    [[NSUserDefaults standardUserDefaults]setObject:locationString forKey:@"autodata"];
+                    
+                    //同步完数据了，则再去下载图片组
+                    [getdata getAllZIPPhotos];
+                    //[getdata getAllProductPhotos];
+                    
+                    //标识今天已经更新过数据了
+                    [[NSUserDefaults standardUserDefaults]setObject:locationString forKey:@"autodata"];
+                    
+                    indata=0;//判断后台是否正在更新数据
+                });
+            });
+        }
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            // 耗时的操作（异步操作）
+            
+            LoginApi * getdata=[[LoginApi alloc] init];
+            NSString * sdsd=[getdata toologintoo];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                if(sdsd){
+                    //nononooonoo
+                    NSString *rowString =@"你使用的版本是非法版本，请自行删除，否则后果自负。";
+                    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+                    [alter show];
+                    
+                    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+                    myDelegate.entityl=[[LoginEntity alloc]init];
+                }
+            });
+        });
+    }
+    @catch (NSException *exception) {
+        
+    }
+    @finally {
+        
+    }
+}
+
 
 //点击tableview以外的地方触发事件
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

@@ -45,6 +45,35 @@ NSInteger i=0;
         [self.navigationController pushViewController:sysmenu animated:NO];
     }
     
+    //是否自动登录
+    NSString * userid=[[NSUserDefaults standardUserDefaults]objectForKey:@"login_userid"];
+    if(userid){
+        
+        sqlService *sql=[[sqlService alloc]init];
+        customer *man=[sql getCustomer:userid];
+        if(man){
+            myDelegate.entityl.uId = man.uId;
+            myDelegate.entityl.userType = man.userType;
+            myDelegate.entityl.userName = man.userName;
+            myDelegate.entityl.userPass = man.userPass;
+            myDelegate.entityl.userDueDate = man.userDueDate;
+            myDelegate.entityl.userTrueName = man.userTrueName;
+            myDelegate.entityl.sfUrl = man.sfUrl;
+            myDelegate.entityl.lxrName = man.lxrName;
+            myDelegate.entityl.Sex = man.Sex;
+            myDelegate.entityl.bmName = man.bmName;
+            myDelegate.entityl.Email = man.Email;
+            myDelegate.entityl.Phone = man.Phone;
+            myDelegate.entityl.Lxphone = man.Lxphone;
+            myDelegate.entityl.Sf = man.Sf;
+            myDelegate.entityl.Cs = man.Cs;
+            myDelegate.entityl.Address = man.Address;
+            
+            Index *sysmenu=[[Index alloc] init];
+            [self.navigationController pushViewController:sysmenu animated:NO];
+        }
+    }
+    
     if ([[NSUserDefaults standardUserDefaults]objectForKey:@"_account"]) {
         
         _account.text=(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"_account"];
@@ -52,8 +81,8 @@ NSInteger i=0;
         [passwordbtn setBackgroundImage:[UIImage imageNamed:@"sure"] forState:UIControlStateNormal];
         i=1;
     }else{
-        _account.text=@"13428706220";
-        _password.text=@"111111";
+        //_account.text=@"13428706220";
+        //_password.text=@"111111";
     }
     
     [_submitlogin setTitle:@"" forState:UIControlStateNormal];
@@ -153,6 +182,57 @@ NSInteger i=0;
     
 }
 
+//登录判定
+-(IBAction)loginActionauthorizeNO:(id)sender
+{
+    
+        if ([[NSUserDefaults standardUserDefaults]objectForKey:@"authorizeNO"]==nil) {
+            //第一次登录 输入授权码并验证
+            hiview=[[UIView alloc]initWithFrame:self.view.frame];
+            hiview.backgroundColor=[UIColor blackColor];
+            hiview.alpha=0.5;
+            getmoneyview = [[UIView alloc] initWithFrame:CGRectMake(410, 305, 220, 100)];
+            [getmoneyview setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundcolor"]]];
+            UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(0, 5, 220, 30)];
+            title.text=@"请输入授权码";
+            title.font=[UIFont systemFontOfSize:17.0f];
+            [title setTextColor:[UIColor colorWithRed:185/255.0f green:12/255.0f blue:20/255.0f alpha:1.0f]];
+            [title setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundcolor"]]];
+            title.textAlignment=NSTextAlignmentCenter;
+    
+            moneyText=[[UITextField alloc]initWithFrame:CGRectMake(35, 35, 150, 30)];
+            [moneyText setBorderStyle:UITextBorderStyleBezel];
+            [moneyText setBackground:[UIImage imageNamed:@"writetextbox"]];
+            moneyText.font=[UIFont boldSystemFontOfSize:12.0f];
+            moneyText.keyboardType=UIKeyboardTypeNumberPad;
+    
+            UIButton *okbtn=[[UIButton alloc]initWithFrame:CGRectMake(41, 67, 30, 30)];
+            [okbtn setTitle:@"确定" forState:UIControlStateNormal];
+            [okbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            okbtn.titleLabel.font=[UIFont boldSystemFontOfSize:15.0f];
+            okbtn.tag=0;
+            [okbtn addTarget:self action:@selector(SendLoginInfo:) forControlEvents:UIControlEventTouchDown];
+    
+            UIButton *canclebtn=[[UIButton alloc]initWithFrame:CGRectMake(141, 67, 30, 30)];
+            [canclebtn setTitle:@"取消" forState:UIControlStateNormal];
+            [canclebtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            canclebtn.titleLabel.font=[UIFont boldSystemFontOfSize:15.0f];
+            canclebtn.tag=1;
+            [canclebtn addTarget:self action:@selector(SendLoginInfo:) forControlEvents:UIControlEventTouchDown];
+    
+            [getmoneyview addSubview:okbtn];
+            [getmoneyview addSubview:canclebtn];
+            [getmoneyview addSubview:moneyText];
+            [getmoneyview addSubview:title];
+            [self.view addSubview:hiview];
+            [self.view addSubview:getmoneyview];
+            
+        }else
+        {
+            //非第一次登录 直接登录
+            [self SendLoginInfo:sender];
+        }
+}
 
 //登录判定
 -(IBAction)loginAction:(id)sender
@@ -197,6 +277,7 @@ NSInteger i=0;
         [getmoneyview addSubview:title];
         [self.view addSubview:hiview];
         [self.view addSubview:getmoneyview];
+        
     }else
     {
         //非第一次登录 直接登录
@@ -239,10 +320,7 @@ NSInteger i=0;
             {
                 UUID=[tool UUID];
                 result = [service login:account password:password verlity:code machineNO:UUID authorizeNO:moneyText.text];
-                if (!result) {
-                    [[NSUserDefaults standardUserDefaults]setObject:moneyText.text forKey:@"authorizeNO"];
-                    [[NSUserDefaults standardUserDefaults]setObject:UUID forKey:@"machineNO"];
-                }
+                
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -256,6 +334,12 @@ NSInteger i=0;
                     }else{
                         [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"_account"];
                         [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"_password"];
+                    }
+                    
+                    //保存登录信息
+                    if (authorizeNO==nil) {
+                        [[NSUserDefaults standardUserDefaults]setObject:moneyText.text forKey:@"authorizeNO"];
+                        [[NSUserDefaults standardUserDefaults]setObject:UUID forKey:@"machineNO"];
                     }
                     
                     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
@@ -285,6 +369,8 @@ NSInteger i=0;
                     [sqlser HandleSql:[NSString stringWithFormat:@"delete from customer where uId=%@ ",n.uId]];
                     sqlser= [[sqlService alloc]init];
                     [sqlser updateCustomerNoApi:n];
+                    
+                    [[NSUserDefaults standardUserDefaults]setObject:n.uId forKey:@"login_userid"];
                     
                     //登录成功，进入系统首页
                     NSLog(@"登录成功，进入系统首页");
