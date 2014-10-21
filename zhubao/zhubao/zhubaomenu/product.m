@@ -767,7 +767,7 @@ NSMutableArray *list=nil;
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     productEntity *entity = [list objectAtIndex:[indexPath row]];
-    if ([entity.Pro_Type isEqualToString:@"2"]) {
+    if (![entity.Pro_Type isEqualToString:@"2"]) {
         DHardGold *prodeuctDetailcontroller = [[DHardGold alloc] initWithNibName:@"DHardGold" bundle:nil];
         prodeuctDetailcontroller.mydelegate=self.parentViewController.self;
         prodeuctDetailcontroller.proid=entity.Id;

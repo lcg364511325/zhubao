@@ -151,12 +151,12 @@
     titlelable.text=goods.Pro_name;
     
     //型号
-    modellable.text=goods.Pro_model;
-    weighlable.text=goods.Pro_goldWeight;//约重
+    modellable.text=[NSString stringWithFormat:@"型号：%@",goods.Pro_model];
+    weighlable.text=[NSString stringWithFormat:@"约重：%@",goods.Pro_goldWeight];//约重
     
     //价格
     productApi *priceApi=[[productApi alloc]init];
-    NSString *womanprice=[priceApi getPrice:goods.Pro_Class goldType:goods.Pro_goldType goldWeight:nil mDiaWeight:nil mDiaColor:nil mVVS:nil sDiaWeight:nil sCount:goods.Pro_f_count proid:goods.Id];
+    NSString *womanprice=[priceApi getPrice:goods.Pro_Class goldType:@"5" goldWeight:nil mDiaWeight:nil mDiaColor:nil mVVS:nil sDiaWeight:nil sCount:goods.Pro_f_count proid:goods.Id];
     pricelable.text=[NSString stringWithFormat:@"%@",womanprice];
     
     if ([self isexistsfile:goods.Pro_author]) {

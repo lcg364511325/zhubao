@@ -221,24 +221,24 @@
     }
     
     //型号
-    if (![price isEqualToString:@""])
+    if (![goods.Pro_model isEqualToString:@""])
     {
         modellable.text=[NSString stringWithFormat:@"型号：%@",goods.Pro_model];
     }
     
-    if (![price isEqualToString:@""])
+    if (![goods.Pro_goldWeight isEqualToString:@""])
     {
         weighlable.text=[NSString stringWithFormat:@"约重：%@",goods.Pro_goldWeight];//约重
     }
     
     //主石数
-    if (![price isEqualToString:@""])
+    if (![goods.Pro_Z_count isEqualToString:@""])
     {
         mainnanolable.text=[NSString stringWithFormat:@"主石：%@ 颗 %@ ct",goods.Pro_Z_count,goods.Pro_Z_weight];//goods.Pro_Z_count;
     }
     
     //副石数
-    if (![price isEqualToString:@""])
+    if (![goods.Pro_f_count isEqualToString:@""])
     {
         fitnanolable.text=[NSString stringWithFormat:@"副石：%@ 颗 %@ ct",goods.Pro_f_count,goods.Pro_f_weight];//goods.Pro_f_count;
     }
@@ -276,6 +276,7 @@
     entity.pname=modellable.text;
     entity.pro_model=goods.Pro_model;
     entity.photos=goods.Pro_smallpic;
+    entity.pcount=@"1";
     buyproduct *successadd=[sql addToBuyproduct:entity];
     buyproduct *successaddman=[[buyproduct alloc]init];
     if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
