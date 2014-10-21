@@ -7,6 +7,7 @@
 //
 
 #import "product.h"
+#import "DHardGold.h"
 
 @interface product ()
 
@@ -270,6 +271,12 @@ NSMutableArray *list=nil;
         [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }else if (btntag==9){
         style=@"9";
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
+    }else if (btntag==10){
+        style=@"10";
+        [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
+    }else if (btntag==11){
+        style=@"11";
         [btn setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }
     if (btntag!=0) {
@@ -760,13 +767,23 @@ NSMutableArray *list=nil;
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     productEntity *entity = [list objectAtIndex:[indexPath row]];
-    prodeuctDetail *prodeuctDetailcontroller = [[prodeuctDetail alloc] initWithNibName:@"prodeuctDetail" bundle:nil];
-    prodeuctDetailcontroller.mydelegate=self.parentViewController.self;
-    prodeuctDetailcontroller.proid=entity.Id;
-    
-    [self.parentViewController.self presentPopupViewController:prodeuctDetailcontroller animated:YES completion:^(void) {
-        NSLog(@"popup view presented");
-    }];
+    if ([entity.Pro_Type isEqualToString:@"2"]) {
+        DHardGold *prodeuctDetailcontroller = [[DHardGold alloc] initWithNibName:@"DHardGold" bundle:nil];
+        prodeuctDetailcontroller.mydelegate=self.parentViewController.self;
+        prodeuctDetailcontroller.proid=entity.Id;
+        
+        [self.parentViewController.self presentPopupViewController:prodeuctDetailcontroller animated:YES completion:^(void) {
+            NSLog(@"popup view presented");
+        }];
+    }else{
+        prodeuctDetail *prodeuctDetailcontroller = [[prodeuctDetail alloc] initWithNibName:@"prodeuctDetail" bundle:nil];
+        prodeuctDetailcontroller.mydelegate=self.parentViewController.self;
+        prodeuctDetailcontroller.proid=entity.Id;
+        
+        [self.parentViewController.self presentPopupViewController:prodeuctDetailcontroller animated:YES completion:^(void) {
+            NSLog(@"popup view presented");
+        }];
+    }
 }
 
 //保留小数位数

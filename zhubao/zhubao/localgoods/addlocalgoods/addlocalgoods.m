@@ -65,9 +65,17 @@
         pic2=[array objectAtIndex:0];
         pic3=[array objectAtIndex:1];
         
-        self.zhengmianview.image=[UIImage imageWithContentsOfFile:pic1];
-        self.cemianview.image=[UIImage imageWithContentsOfFile:pic2];
-        self.fanmianview.image=[UIImage imageWithContentsOfFile:pic3];
+        if (![pic1 isEqualToString:@""]) {
+            self.zhengmianview.image=[UIImage imageWithContentsOfFile:pic1];
+        }
+        
+        if (![pic2 isEqualToString:@""]) {
+            self.cemianview.image=[UIImage imageWithContentsOfFile:pic2];
+        }
+        
+        if (![pic3 isEqualToString:@""]) {
+            self.fanmianview.image=[UIImage imageWithContentsOfFile:pic3];
+        }
         nameText.text=goods.Pro_name;
         modelnoText.text=goods.Pro_model;
         goldweightText.text=goods.Pro_goldWeight;
@@ -77,7 +85,7 @@
         fitcountText.text=goods.Pro_f_count;
         priceText.text=goods.Pro_price;
         typevalue=goods.Pro_Class;
-        if ([typelist count]!=0) {
+        if ([typelist count]!=0 && ![typevalue isEqualToString:@"(null)"]) {
             typeText.text=[typelist objectAtIndex:[typevalue integerValue]-1];
         }
         
@@ -108,9 +116,10 @@
 -(IBAction)savelocalgoods:(id)sender
 {
     if (isupdate==1) {
-        if ([modelnoText.text isEqualToString:@""] || [goldweightText.text isEqualToString:@""] || [mianctText.text isEqualToString:@""] || [miancountText.text isEqualToString:@""] || [fitctText.text isEqualToString:@""] || [fitcountText.text isEqualToString:@""] ||[priceText.text isEqualToString:@""] || [pic1 isEqualToString:@""] || [pic2 isEqualToString:@""] || [pic3 isEqualToString:@""] ) {
-            [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"内容不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
-        }else{
+        if ([pic1 isEqualToString:@""] && [pic2 isEqualToString:@""] && [pic3 isEqualToString:@""]) {
+            [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"请至少上传一张图片" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+        }else
+        {
             productEntity *entity=[[productEntity alloc]init];
             entity.Id=goods.Id;
             entity.pro_name=nameText.text;
@@ -140,10 +149,12 @@
                 [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"更新失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
             }
         }
+        
     }else{
-        if ([modelnoText.text isEqualToString:@""] || [goldweightText.text isEqualToString:@""] || [mianctText.text isEqualToString:@""] || [miancountText.text isEqualToString:@""] || [fitctText.text isEqualToString:@""] || [fitcountText.text isEqualToString:@""] ||[priceText.text isEqualToString:@""] || [pic1 isEqualToString:@""] || [pic2 isEqualToString:@""] || [pic3 isEqualToString:@""] ) {
-            [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"内容不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+        if ([pic1 isEqualToString:@""] && [pic2 isEqualToString:@""] && [pic3 isEqualToString:@""]) {
+            [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"请至少上传一张图片" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
         }else{
+            
             productEntity *entity=[[productEntity alloc]init];
             NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]];
             entity.Id=timeSp;
@@ -171,6 +182,7 @@
                 [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"添加失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
             }
         }
+        
     }
 }
 
@@ -264,23 +276,28 @@
     NSString *fullPath =nil;
     //记录文件
     
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]];
     if (pictag==0) {
-        [self saveImage:image withName:@"currentImage1.png"];
+        NSString *pic1name=[NSString stringWithFormat:@"%@1.png",timeSp];
+        [self saveImage:image withName:pic1name];
         
-        fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage1.png"];
+        fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:pic1name];
         pic1=fullPath;
     }
     else if (pictag==1)
     {
-        [self saveImage:image withName:@"currentImage2.png"];
+        NSString *pic2name=[NSString stringWithFormat:@"%@2.png",timeSp];
+        [self saveImage:image withName:pic2name];
         
-        fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage2.png"];
+        fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:pic2name];
         pic2=fullPath;
     }
     else if (pictag==2){
-        [self saveImage:image withName:@"currentImage3.png"];
         
-        fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage3.png"];
+        NSString *pic3name=[NSString stringWithFormat:@"%@3.png",timeSp];
+        [self saveImage:image withName:pic3name];
+        
+        fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:pic3name];
         pic3=fullPath;
     }
     

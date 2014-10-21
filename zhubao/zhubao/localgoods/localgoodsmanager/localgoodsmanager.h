@@ -1,30 +1,15 @@
 //
-//  localorderlist.h
+//  localgoodsmanager.h
 //  zhubao
 //
-//  Created by johnson on 14-9-25.
+//  Created by johnson on 14-10-21.
 //  Copyright (c) 2014年 SUNYEARS___FULLUSERNAME. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
-#import "Index.h"
-#import "NakedDiamond.h"
-#import "ustomtailor.h"
-#import "diploma.h"
-#import "member.h"
-#import "sqlService.h"
-#import "FVImageSequenceDemoViewController.h"
-#import "sqlService.h"
-#import "ImageCacher.h"
-#import "TestViewController.h"
 #import "RotateImageView.h"
-#import "productApi.h"
-#import "MWPhotoBrowser.h"
-#import "prodeuctDetail.h"
-#import "shopcart.h"
 
-@interface localorderlist : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UIApplicationDelegate>
+@interface localgoodsmanager : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UIApplicationDelegate>
 {
     NSMutableArray *stylearray;
     NSMutableArray *texturearray;
@@ -41,6 +26,8 @@
     RotateImageView *rImageView;
     UIButton* btnBack;
     UIButton *btnstyle;
+    //查询结果
+    NSMutableArray *resultlist;
 }
 
 @property (nonatomic, strong) NSMutableArray *photos;
@@ -59,6 +46,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btninlay;
 @property (weak, nonatomic) IBOutlet UIButton *btnseric;
 
+@property (nonatomic,assign) id <UIApplicationDelegate> mydelegate;//当前请求过来的对象
+
 -(void)reloaddata;
 
 -(void)refleshBuycutData;
@@ -66,6 +55,7 @@
 -(void)closeAction;
 
 -(void)closesc;
+
 
 
 @end

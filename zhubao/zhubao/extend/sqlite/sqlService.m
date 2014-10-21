@@ -318,6 +318,9 @@
 - (NSMutableArray*)GetProductList:(NSString *)type1 type2:(NSString *)type2 type3:(NSString *)type3 type4:(NSString *)type4 page:(int)page pageSize:(int)pageSize{
     
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:10];
+    NSMutableString *asql=[[NSMutableString alloc] init];
+    NSMutableArray *type1array=[[NSMutableArray alloc]initWithCapacity:5];
+    NSInteger c=0;
 
     //判断数据库是否打开
     if ([self openDB]) {
@@ -328,10 +331,50 @@
         //sql语句
         NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Pro_model,Pro_number,Pro_name,Pro_State,Pro_smallpic,Pro_bigpic,Pro_info,Pro_goldWeight,Pro_author,Pro_addtime,producttype from product where Pro_IsDel='0' and producttype='0'" ];
         if (type1.length!=0) {
-            NSString *classsql=[NSString stringWithFormat:@" and Pro_Class in (%@) ",type1];
-            if ([type1 isEqualToString:@"3"]) {
-                classsql=[classsql stringByAppendingString:@" and Pro_typeWenProId=0 "];
+            NSString *classsql=@"";
+            
+            NSArray *t1array=[type1 componentsSeparatedByString:@","];
+            [type1array addObjectsFromArray:t1array];
+            for (NSString *index in t1array) {
+                if ([index isEqualToString:@"10"]) {
+                    if (asql.length!=0) {
+                        [asql appendString:@" or "];
+                        [asql appendString:@"  Pro_f_polish='true' "];
+                    }else{
+                        [asql appendString:@"  Pro_f_polish='true' "];
+                    }
+                    [type1array removeObject:index];
+                    c++;
+                }
+                if ([index isEqualToString:@"11"]) {
+                    if (asql.length!=0) {
+                        [asql appendString:@" or "];
+                        [asql appendString:@"  Pro_Type=2 "];
+                    }else{
+                        [asql appendString:@"  Pro_Type=2 "];
+                    }
+                    [type1array removeObject:index];
+                    c++;
+                }
             }
+            
+            NSMutableString *styleindex=[[NSMutableString alloc] init];
+            for (NSString *index in type1array) {
+                if (styleindex.length!=0) {
+                    [styleindex appendString:@","];
+                    [styleindex appendString:index];
+                }else{
+                    [styleindex appendString:index];
+                }
+            }
+            
+            if (styleindex.length!=0) {
+                classsql=[classsql stringByAppendingString:[NSString stringWithFormat:@" and Pro_Class in (%@) ",styleindex]];
+                if ([styleindex isEqualToString:@"3"]) {
+                    classsql=[classsql stringByAppendingString:@" and Pro_typeWenProId=0 "];
+                }
+            }
+            
             querySQL=[querySQL stringByAppendingString:classsql];
         }
         if (type2.length!=0) {
@@ -359,6 +402,21 @@
         if (type4.length!=0) {
             NSString *classsql=[NSString stringWithFormat:@" and %@ ",type4];
             querySQL=[querySQL stringByAppendingString:classsql];
+        }
+        if (asql.length!=0) {
+            if ([type1array count]!=0) {
+                if (c>1) {
+                    querySQL=[querySQL stringByAppendingString:[NSString stringWithFormat:@" or ( %@ )",asql]];
+                }else{
+                    querySQL=[querySQL stringByAppendingString:[NSString stringWithFormat:@" or %@ ",asql]];
+                }
+            }else{
+                if (c>1) {
+                    querySQL=[querySQL stringByAppendingString:[NSString stringWithFormat:@" and ( %@ )",asql]];
+                }else{
+                    querySQL=[querySQL stringByAppendingString:[NSString stringWithFormat:@" and %@ ",asql]];
+                }
+            }
         }
         querySQL=[querySQL stringByAppendingString:[NSString stringWithFormat:@" order by Pro_Order limit %d offset %d ",pageSize,offsetcount]];
         

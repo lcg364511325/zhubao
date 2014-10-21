@@ -8,6 +8,7 @@
 
 #import "member.h"
 #import "localorder.h"
+#import "localgoodsmanager.h"
 
 @interface member ()
 
@@ -182,6 +183,18 @@ UIButton* btnBack;
         NSLog(@"popup view presented");
     }];
 }
+
+//本地商品管理
+- (IBAction)localorderlist:(id)sender
+{
+    localgoodsmanager *samplePopupViewController = [[localgoodsmanager alloc] initWithNibName:@"localgoodsmanager" bundle:nil];
+    samplePopupViewController.mydelegate=self.parentViewController.self;
+    
+    [self.parentViewController.self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
+        NSLog(@"popup view presented");
+    }];
+}
+
 
 - (void)closeAction2
 {

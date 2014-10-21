@@ -1,21 +1,21 @@
 //
-//  localorderlist.m
+//  localgoodsmanager.m
 //  zhubao
 //
-//  Created by johnson on 14-9-25.
+//  Created by johnson on 14-10-21.
 //  Copyright (c) 2014年 SUNYEARS___FULLUSERNAME. All rights reserved.
 //
 
-#import "localorderlist.h"
-#import "proclassEntity.h"
+#import "localgoodsmanager.h"
+#import "sqlService.h"
 #import "localgoodsCell.h"
 #import "localgoodsDetail.h"
 
-@interface localorderlist ()
+@interface localgoodsmanager ()
 
 @end
 
-@implementation localorderlist
+@implementation localgoodsmanager
 
 @synthesize primaryView;
 @synthesize mainlist=_mainlist;
@@ -29,9 +29,6 @@
 @synthesize btninlay;
 @synthesize btnseric;
 
-
-//查询结果
-NSMutableArray *resultlist=nil;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -77,6 +74,11 @@ NSMutableArray *resultlist=nil;
     
 }
 
+-(IBAction)closeDetail:(id)sender
+{
+    [_mydelegate performSelector:@selector(closesc)];
+}
+
 
 //加载类别
 -(void)loadproclass
@@ -101,13 +103,13 @@ NSMutableArray *resultlist=nil;
     UIImageView *lineimg;
     for (i=0; i<count; i++) {
         if (i==(count-1)) {
-            btn=[[UIButton alloc]initWithFrame:CGRectMake(58.5+i*58, 7, 57, 29.5)];
-            endimg=[[UIImageView alloc]initWithFrame:CGRectMake(btn.frame.origin.x+57, 7, 3, 29.5)];
+            btn=[[UIButton alloc]initWithFrame:CGRectMake(115.5+i*58, 27, 57, 29.5)];
+            endimg=[[UIImageView alloc]initWithFrame:CGRectMake(btn.frame.origin.x+57, 27, 3, 29.5)];
             endimg.image=[UIImage imageNamed:@"proclass_end"];
             [self.view addSubview:endimg];
         }else{
-            btn=[[UIButton alloc]initWithFrame:CGRectMake(58.5+i*58, 7, 57, 29.5)];
-            lineimg=[[UIImageView alloc]initWithFrame:CGRectMake(btn.frame.origin.x+57, 7, 1, 29.5)];
+            btn=[[UIButton alloc]initWithFrame:CGRectMake(115.5+i*58, 27, 57, 29.5)];
+            lineimg=[[UIImageView alloc]initWithFrame:CGRectMake(btn.frame.origin.x+57, 27, 1, 29.5)];
             lineimg.image=[UIImage imageNamed:@"proclass_line"];
             [self.view addSubview:lineimg];
         }
@@ -640,7 +642,7 @@ NSMutableArray *resultlist=nil;
                 cell.productImage.image=[[UIImage alloc] initWithContentsOfFile:[fullth objectAtIndex:0]];
             }else
             {
-               cell.productImage.image=[[UIImage alloc] initWithContentsOfFile:[fullth objectAtIndex:1]];
+                cell.productImage.image=[[UIImage alloc] initWithContentsOfFile:[fullth objectAtIndex:1]];
             }
             
         }
@@ -672,11 +674,12 @@ NSMutableArray *resultlist=nil;
 {
     productEntity *entity = [resultlist objectAtIndex:[indexPath row]];
     localgoodsDetail *prodeuctDetailcontroller = [[localgoodsDetail alloc] initWithNibName:@"localgoodsDetail" bundle:nil];
-    prodeuctDetailcontroller.mydelegate=self.parentViewController.self;
+    prodeuctDetailcontroller.mydelegate=self;
     prodeuctDetailcontroller.mypdelegate=self;
+    prodeuctDetailcontroller.ismember=@"1";
     prodeuctDetailcontroller.proid=entity.Id;
     
-    [self.parentViewController.self presentPopupViewController:prodeuctDetailcontroller animated:YES completion:^(void) {
+    [self presentPopupViewController:prodeuctDetailcontroller animated:YES completion:^(void) {
         NSLog(@"popup view presented");
     }];
 }
