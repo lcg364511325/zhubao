@@ -130,7 +130,20 @@ shoppingcartCell *selectedcell;
         cell.priceLable.text=goods.pcount;
     }else if([goods.producttype isEqualToString:@"1"] || [goods.producttype isEqualToString:@"2"] || [goods.producttype isEqualToString:@"10"]){
         if ([goods.producttype isEqualToString:@"10"]) {
-            cell.showImage.image=[[UIImage alloc] initWithContentsOfFile:goods.proentiy.Pro_smallpic];
+            NSString *pic1=goods.proentiy.Pro_smallpic;
+            NSArray *fullth=[goods.proentiy.Pro_bigpic componentsSeparatedByString:@","];
+            if (![pic1 isEqualToString:@""]) {
+                cell.showImage.image=[[UIImage alloc] initWithContentsOfFile:pic1];
+            }else if ([fullth count]!=0)
+            {
+                if (![[fullth objectAtIndex:0] isEqualToString:@""]) {
+                    cell.showImage.image=[[UIImage alloc] initWithContentsOfFile:[fullth objectAtIndex:0]];
+                }else
+                {
+                    cell.showImage.image=[[UIImage alloc] initWithContentsOfFile:[fullth objectAtIndex:1]];
+                }
+                
+            }
             
             if (![goods.proentiy.Pro_model isEqualToString:@"(null)"] && ![goods.proentiy.Pro_model isEqualToString:@""] && goods.proentiy.Pro_model!=nil) {
                 cell.model1Lable.text=[NSString stringWithFormat:@"型号：%@",goods.proentiy.Pro_model];
