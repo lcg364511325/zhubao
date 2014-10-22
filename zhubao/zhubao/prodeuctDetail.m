@@ -585,9 +585,11 @@ NSInteger selecttype=0;
                 // 耗时的操作（异步操作）
                 NSString *proprice=nil;
                 productApi *priceApi=[[productApi alloc]init];
+                womanw=AuWeight;
                 womanprice=[priceApi getPrice:goods.Pro_Class goldType:goods.Pro_goldType goldWeight:AuWeight mDiaWeight:miantext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:fsweight sCount:goods.Pro_f_count proid:goods.Id];
                 if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
                     
+                    manw=AuWeightman;
                     manprice=[priceApi getPrice:goodsman.Pro_Class goldType:goodsman.Pro_goldType goldWeight:AuWeightman mDiaWeight:dmiantext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:fsweightman sCount:goodsman.Pro_f_count proid:goodsman.Id];
                     
                     if (womanprice==nil || manprice==nil) {
@@ -983,7 +985,7 @@ NSInteger selecttype=0;
     entity.pvvs=nettext.text;
     entity.psize=sizetext.text;
     entity.pgoldtype=texturetext.text;
-    entity.pweight=goods.Pro_goldWeight;
+    entity.pweight=womanw;
     entity.customerid=myDelegate.entityl.uId;
     entity.pprice=womanprice;
     entity.pname=modellable.text;
@@ -1001,7 +1003,7 @@ NSInteger selecttype=0;
         manentity.pvvs=dnettext.text;
         manentity.psize=dsizetext.text;
         manentity.pgoldtype=dtexturetext.text;
-        manentity.pweight=goodsman.Pro_goldWeight;
+        manentity.pweight=manw;
         manentity.customerid=myDelegate.entityl.uId;
         manentity.pprice=manprice;
         manentity.pname=goodsman.Pro_model;//modellable.text;

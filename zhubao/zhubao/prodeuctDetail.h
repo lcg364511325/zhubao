@@ -15,6 +15,8 @@
     RotateImageView *rImageView;
     UIButton *deletebtn;
     UIButton *updatebtn;
+    NSString *womanw;
+    NSString *manw;
 }
 
 

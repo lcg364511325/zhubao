@@ -172,8 +172,8 @@ shoppingcartCell *selectedcell;
             }else{
                 cell.numberLable.text=nil;
             }
-            if (goods.proentiy.Pro_goldWeight) {
-                cell.model1Lable.text=[@"金重:" stringByAppendingString:goods.proentiy.Pro_goldWeight];
+            if (goods.pweight) {
+                cell.model1Lable.text=[@"约重:" stringByAppendingString:goods.pweight];
             }
             if (goods.pgoldtype) {
                 cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  材质:%@",goods.pgoldtype]];
