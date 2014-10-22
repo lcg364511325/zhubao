@@ -11,6 +11,7 @@
 @interface NakedDiamondResult : UIViewController<UIApplicationDelegate>
 {
     NSMutableArray * productlist;
+    NSMutableArray *shoppingcartlist;
 }
 @property (nonatomic,assign) id <UIApplicationDelegate> mydelegate;//当前请求过来的对象
 
@@ -29,6 +30,8 @@
 @property(retain , nonatomic) NSString * number;
 
 - (void)closeAction;
+
+-(void)refleshBuycutData;
 
 
 @end

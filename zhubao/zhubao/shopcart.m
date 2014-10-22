@@ -131,6 +131,19 @@ shoppingcartCell *selectedcell;
     }else if([goods.producttype isEqualToString:@"1"] || [goods.producttype isEqualToString:@"2"] || [goods.producttype isEqualToString:@"10"]){
         if ([goods.producttype isEqualToString:@"10"]) {
             cell.showImage.image=[[UIImage alloc] initWithContentsOfFile:goods.proentiy.Pro_smallpic];
+            
+            if (![goods.proentiy.Pro_model isEqualToString:@"(null)"] && ![goods.proentiy.Pro_model isEqualToString:@""] && goods.proentiy.Pro_model!=nil) {
+                cell.model1Lable.text=[NSString stringWithFormat:@"型号：%@",goods.proentiy.Pro_model];
+            }
+            
+            if (![goods.pname isEqualToString:@"(null)"] && ![goods.pname isEqualToString:@""] && goods.pname!=nil) {
+                cell.model1Lable.text=[NSString stringWithFormat:@"名称：%@",goods.pname];
+            }
+            
+            if (![goods.pweight isEqualToString:@"(null)"] && ![goods.pweight isEqualToString:@""] && goods.pweight!=nil) {
+                cell.model1Lable.text=[NSString stringWithFormat:@"金重：%@",goods.pweight];
+            }
+            
         }else
         {
             NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",goods.proentiy.Pro_smallpic]];
@@ -143,42 +156,44 @@ shoppingcartCell *selectedcell;
                 [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
                 
             }
+            
+            if (goods.proentiy.Pro_model) {
+                cell.dipLable.text=goods.proentiy.Pro_model;
+            }else{
+                cell.dipLable.text=nil;
+            }
+            if (goods.proentiy.Pro_number) {
+                cell.modelLable.text=goods.proentiy.Pro_number;
+            }else{
+                cell.modelLable.text=nil;
+            }
+            if (goods.diaentiy.Dia_ART) {
+                cell.numberLable.text=goods.diaentiy.Dia_ART;
+            }else{
+                cell.numberLable.text=nil;
+            }
+            if (goods.proentiy.Pro_goldWeight) {
+                cell.model1Lable.text=[@"金重:" stringByAppendingString:goods.proentiy.Pro_goldWeight];
+            }
+            if (goods.pgoldtype) {
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  材质:%@",goods.pgoldtype]];
+            }
+            if (goods.proentiy.Pro_Z_weight) {
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  钻重:%@",goods.proentiy.Pro_Z_weight]];
+            }
+            if (goods.proentiy.Pro_f_clarity) {
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  净度:%@",goods.proentiy.Pro_f_clarity]];
+            }
+            if (goods.proentiy.Pro_Z_color) {
+                cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  颜色:%@",goods.proentiy.Pro_Z_color]];
+            }
+            if (goods.proentiy.Pro_goldsize) {
+                cell.chasing.text=[@"手寸:" stringByAppendingString:goods.proentiy.Pro_goldsize];
+            }else{
+                cell.chasing.text=nil;
+            }
         }
-        if (goods.proentiy.Pro_model) {
-            cell.dipLable.text=goods.proentiy.Pro_model;
-        }else{
-            cell.dipLable.text=nil;
-        }
-        if (goods.proentiy.Pro_number) {
-            cell.modelLable.text=goods.proentiy.Pro_number;
-        }else{
-            cell.modelLable.text=nil;
-        }
-        if (goods.diaentiy.Dia_ART) {
-            cell.numberLable.text=goods.diaentiy.Dia_ART;
-        }else{
-            cell.numberLable.text=nil;
-        }
-        if (goods.proentiy.Pro_goldWeight) {
-            cell.model1Lable.text=[@"金重:" stringByAppendingString:goods.proentiy.Pro_goldWeight];
-        }
-        if (goods.pgoldtype) {
-            cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  材质:%@",goods.pgoldtype]];
-        }
-        if (goods.proentiy.Pro_Z_weight) {
-            cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  钻重:%@",goods.proentiy.Pro_Z_weight]];
-        }
-        if (goods.proentiy.Pro_f_clarity) {
-            cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  净度:%@",goods.proentiy.Pro_f_clarity]];
-        }
-        if (goods.proentiy.Pro_Z_color) {
-            cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  颜色:%@",goods.proentiy.Pro_Z_color]];
-        }
-        if (goods.proentiy.Pro_goldsize) {
-            cell.chasing.text=[@"手寸:" stringByAppendingString:goods.proentiy.Pro_goldsize];
-        }else{
-            cell.chasing.text=nil;
-        }
+        
         cell.fluLable.text=nil;
         cell.priceLable.text=goods.pcount;
     }

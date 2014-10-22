@@ -135,6 +135,7 @@
     productdia *entity = [productlist objectAtIndex:[indexPath row]];
     NakedDiamondDetail *prodeuctDetailcontroller = [[NakedDiamondDetail alloc] initWithNibName:@"NakedDiamondDetail" bundle:nil];
     prodeuctDetailcontroller.mydelegate=self;
+    prodeuctDetailcontroller.mypdelegate= _mydelegate;
     prodeuctDetailcontroller.naid=entity.Id;
     
     [self presentPopupViewController:prodeuctDetailcontroller animated:YES completion:^(void) {
@@ -150,6 +151,20 @@
             NSLog(@"popup view dismissed");
         }];
     }
+}
+
+-(void)refleshBuycutData
+{
+    
+    sqlService *sql=[[sqlService alloc]init];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    myDelegate.entityl.resultcount=[sql getBuyproductcount:myDelegate.entityl.uId];
+    
+    sqlService *shopcar=[[sqlService alloc] init];
+    shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
+    shopcart *scg=[[shopcart alloc]init];
+    [scg reloadshopcart];
+    
 }
 
 - (void)didReceiveMemoryWarning

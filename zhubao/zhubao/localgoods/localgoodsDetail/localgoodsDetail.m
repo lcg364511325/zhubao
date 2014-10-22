@@ -273,8 +273,22 @@
     entity.pweight=goods.Pro_goldWeight;
     entity.customerid=myDelegate.entityl.uId;
     entity.pprice=womanprice;
-    entity.pname=modellable.text;
+    entity.pname=goods.Pro_name;
     entity.pro_model=goods.Pro_model;
+    NSString *pic1=goods.Pro_smallpic;
+    NSArray *fullth=[goods.Pro_bigpic componentsSeparatedByString:@","];
+    if (![pic1 isEqualToString:@""]) {
+        entity.photos=pic1;
+    }else if ([fullth count]!=0)
+    {
+        if (![[fullth objectAtIndex:0] isEqualToString:@""]) {
+             entity.photos=[fullth objectAtIndex:0];
+        }else
+        {
+             entity.photos=[fullth objectAtIndex:1];
+        }
+        
+    }
     entity.photos=goods.Pro_smallpic;
     entity.pcount=@"1";
     buyproduct *successadd=[sql addToBuyproduct:entity];

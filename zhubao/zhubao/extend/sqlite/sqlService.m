@@ -2315,16 +2315,16 @@
                     else
                         [CPInfo appendString:@",\"0\""];
                     
-//                    char * pvvs   = (char *)sqlite3_column_text(statement,9);//净度
-//                    if(pvvs != nil && ![[NSString stringWithUTF8String:pvvs] isEqualToString:@"(null)"])
-//                        [CPInfo appendString:[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:pvvs]]];//商品数组
-//                    else
+                    char * pvvs   = (char *)sqlite3_column_text(statement,9);//净度
+                    if(pvvs != nil && ![[NSString stringWithUTF8String:pvvs] isEqualToString:@"(null)"])
+                        [CPInfo appendString:[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:pvvs]]];//商品数组
+                    else
                         [CPInfo appendString:@",\"\""];
                     
-//                    char * pcolor   = (char *)sqlite3_column_text(statement,2);//颜色
-//                    if(pcolor != nil && ![[NSString stringWithUTF8String:pcolor] isEqualToString:@"(null)"])
-//                        [CPInfo appendString:[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:pcolor]]];//商品数组
-//                    else
+                    char * pcolor   = (char *)sqlite3_column_text(statement,2);//颜色
+                    if(pcolor != nil && ![[NSString stringWithUTF8String:pcolor] isEqualToString:@"(null)"])
+                        [CPInfo appendString:[NSString stringWithFormat:@",\"%@\"",[NSString stringWithUTF8String:pcolor]]];//商品数组
+                    else
                         [CPInfo appendString:@",\"\""];
                     
                     [CPInfo appendString:@"]"];//商品数组

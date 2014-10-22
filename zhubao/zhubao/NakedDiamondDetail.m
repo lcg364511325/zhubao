@@ -135,7 +135,7 @@ NSString * nakedno=nil;
     sql=[[sqlService alloc]init];
     buyproduct *successadd=[sql addToBuyproduct:entity];
     if (successadd) {
-        [_mydelegate performSelector:@selector(refleshBuycutData)];
+        [_mypdelegate performSelector:@selector(refleshBuycutData)];
         
         NSString *rowString =@"成功加入购物车！";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
