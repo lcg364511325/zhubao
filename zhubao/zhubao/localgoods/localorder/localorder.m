@@ -81,18 +81,22 @@ localorderCell *stedcell;
     }else if ([status isEqualToString:@"2"])
     {
         statusstr=@"已确认";
-    }else if ([status isEqualToString:@"2"])
+    }else if ([status isEqualToString:@"3"])
     {
         statusstr=@"已付款";
-    }else if ([status isEqualToString:@"2"])
+    }else if ([status isEqualToString:@"4"])
     {
         statusstr=@"已取消";
     }
     cell.stateLabel.text=statusstr;
     [cell.checkButton addTarget:self action:@selector(localorderdetail:) forControlEvents:UIControlEventTouchDown];
+    cell.checkButton.tag=[indexPath row];
     [cell.deleteButton addTarget:self action:@selector(deletelocalorder:) forControlEvents:UIControlEventTouchDown];
+    cell.deleteButton.tag=[indexPath row];
     [cell.stateButton addTarget:self action:@selector(createDemoView:) forControlEvents:UIControlEventTouchDown];
+    cell.stateButton.tag=[indexPath row];
     [cell.getmoneybtn addTarget:self action:@selector(creategetmoneyview:) forControlEvents:UIControlEventTouchDown];
+    cell.getmoneybtn.tag=[indexPath row];
     
     return cell;
 }
@@ -104,11 +108,9 @@ localorderCell *stedcell;
 }
 
 //更改数量
-- (void)creategetmoneyview:(id)sender
+- (void)creategetmoneyview:(UIButton *)sender
 {
-    stedcell=(localorderCell *)[[sender superview]superview];
-    NSIndexPath * path = [orderTView indexPathForCell:stedcell];
-    orderbill *entity=[list objectAtIndex:[path row]];
+    orderbill *entity=[list objectAtIndex:sender.tag];
     
     hiview=[[UIView alloc]initWithFrame:self.view.frame];
     hiview.backgroundColor=[UIColor blackColor];
@@ -132,14 +134,14 @@ localorderCell *stedcell;
     [okbtn setTitle:@"确定" forState:UIControlStateNormal];
     [okbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     okbtn.titleLabel.font=[UIFont boldSystemFontOfSize:15.0f];
-    okbtn.tag=0;
+    okbtn.tag=sender.tag+100;
     [okbtn addTarget:self action:@selector(changegetmoney:) forControlEvents:UIControlEventTouchDown];
     
     UIButton *canclebtn=[[UIButton alloc]initWithFrame:CGRectMake(141, 67, 30, 30)];
     [canclebtn setTitle:@"取消" forState:UIControlStateNormal];
     [canclebtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     canclebtn.titleLabel.font=[UIFont boldSystemFontOfSize:15.0f];
-    canclebtn.tag=1;
+    canclebtn.tag=0;
     [canclebtn addTarget:self action:@selector(changegetmoney:) forControlEvents:UIControlEventTouchDown];
     
     [getmoneyview addSubview:okbtn];
@@ -154,13 +156,13 @@ localorderCell *stedcell;
 //更改已付金额
 -(void)changegetmoney:(UIButton *)btn
 {
-    if (btn.tag==0) {
-        NSIndexPath * path = [orderTView indexPathForCell:stedcell];
-        orderbill *entity=[list objectAtIndex:[path row]];
+    if (btn.tag!=0) {
+        orderbill *entity=[list objectAtIndex:btn.tag-100];
         sqlService *_sqlService=[[sqlService alloc]init];
         NSString *info=[_sqlService updatelocalorder:@"getprice" value:moneyText.text oid:entity.Id];
         if (info) {
-            stedcell.inputpriceLabel.text=moneyText.text;
+            [self loaddata];
+            [orderTView reloadData];
         }else
         {
             NSString *rowString =@"未知错误";
@@ -173,12 +175,9 @@ localorderCell *stedcell;
 }
 
 //更改状态
-- (void)createDemoView:(id)sender
+- (void)createDemoView:(UIButton *)sender
 {
-    stedcell=(localorderCell *)[[sender superview]superview];
-//    NSIndexPath * path = [orderTView indexPathForCell:stedcell];
-//    orderbill *entity=[list objectAtIndex:[path row]];
-    
+
     hiview=[[UIView alloc]initWithFrame:self.view.frame];
     hiview.backgroundColor=[UIColor blackColor];
     hiview.alpha=0.5;
@@ -244,14 +243,14 @@ localorderCell *stedcell;
     [okbtn setTitle:@"确定" forState:UIControlStateNormal];
     [okbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     okbtn.titleLabel.font=[UIFont boldSystemFontOfSize:15.0f];
-    okbtn.tag=0;
+    okbtn.tag=sender.tag+100;
     [okbtn addTarget:self action:@selector(changestate:) forControlEvents:UIControlEventTouchDown];
     
     UIButton *canclebtn=[[UIButton alloc]initWithFrame:CGRectMake(182, 67, 30, 30)];
     [canclebtn setTitle:@"取消" forState:UIControlStateNormal];
     [canclebtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     canclebtn.titleLabel.font=[UIFont boldSystemFontOfSize:15.0f];
-    canclebtn.tag=1;
+    canclebtn.tag=0;
     [canclebtn addTarget:self action:@selector(changestate:) forControlEvents:UIControlEventTouchDown];
     
     [demoView addSubview:okbtn];
@@ -278,31 +277,20 @@ localorderCell *stedcell;
         [btn setImage:[UIImage imageNamed:@"select"] forState:UIControlStateNormal];
     }
     [btn setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateNormal];
-    statevalue=[NSString stringWithFormat:@"%d",btn.tag];
+    statevalue=[NSString stringWithFormat:@"%ld",(long)btn.tag];
 }
 
 //更改状态
 -(void)changestate:(UIButton *)btn
 {
-    if (btn.tag==0) {
+    if (btn.tag!=0) {
         
-        NSIndexPath * path = [orderTView indexPathForCell:stedcell];
-        orderbill *entity=[list objectAtIndex:[path row]];
+        orderbill *entity=[list objectAtIndex:btn.tag-100];
         sqlService *_sqlService=[[sqlService alloc]init];
         NSString *info=[_sqlService updatelocalorder:@"state" value:statevalue oid:entity.Id];
         if (info) {
-            if ([statevalue isEqualToString:@"1"]) {
-                stedcell.stateLabel.text=@"待确认";
-            }else if ([statevalue isEqualToString:@"2"])
-            {
-                stedcell.stateLabel.text=@"已确认";
-            }else if ([statevalue isEqualToString:@"3"])
-            {
-                stedcell.stateLabel.text=@"已付款";
-            }else if ([statevalue isEqualToString:@"4"])
-            {
-                stedcell.stateLabel.text=@"已取消";
-            }
+            [self loaddata];
+            [orderTView reloadData];
         }else
         {
             NSString *rowString =@"未知错误";
@@ -318,9 +306,7 @@ localorderCell *stedcell;
 //本地订单详情页面跳转
 - (void)localorderdetail:(UIButton *)btn
 {
-    UITableViewCell * cell = (UITableViewCell *)[[btn superview] superview];
-     NSIndexPath * path = [self.orderTView indexPathForCell:cell];
-    orderbill *entity=[list objectAtIndex:path.row];
+    orderbill *entity=[list objectAtIndex:btn.tag];
     localorderdetail *samplePopupViewController = [[localorderdetail alloc] initWithNibName:@"localorderdetail" bundle:nil];
     samplePopupViewController.mydelegate=self;
     samplePopupViewController.order=entity;
@@ -334,9 +320,7 @@ localorderCell *stedcell;
 {
     
     [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"确定删除该订单？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil] show];
-    UITableViewCell * cell = (UITableViewCell *)[[btn superview] superview];
-    NSIndexPath * path = [self.orderTView indexPathForCell:cell];
-    selectedentity=[list objectAtIndex:path.row];
+    selectedentity=[list objectAtIndex:btn.tag];
 }
 
 

@@ -398,6 +398,9 @@ UIButton* btnBack;
     sql=[[sqlService alloc]init];
     [sql ClearTableDatas:@"productdia"];//清空钻表
     
+    sql=[[sqlService alloc]init];
+    [sql ClearTableDatas:@"updatetime"];//清除更新时间
+    
     if (state) {
         //删除压缩文件
         NSString *extension = @"zip";

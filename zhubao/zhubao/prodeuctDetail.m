@@ -463,7 +463,7 @@ NSInteger selecttype=0;
     NSMutableArray *mainarry=[[NSMutableArray alloc] init];
     NSString * AuWeight=nil;
     NSString * fsweight=nil;
-    if (inlayarry) {
+    if ([inlayarry count]!=0) {
         for (withmouth *inlay in inlayarry) {
             [mainarry addObject:inlay.zWeight];
             if(AuWeight==nil){
@@ -499,7 +499,7 @@ NSInteger selecttype=0;
         goodsman=[sql GetProductBoyDetail:goods.Id];
         sql=[[sqlService alloc] init];
         inlayarryman=[sql getwithmouths:goodsman.Id];
-        if (inlayarryman) {
+        if ([inlayarryman count]!=0) {
             for (withmouth *inlayman in inlayarryman) {
                 [mainarryman addObject:inlayman.zWeight];
                 if(AuWeightman==nil){
@@ -587,19 +587,25 @@ NSInteger selecttype=0;
                 productApi *priceApi=[[productApi alloc]init];
                 womanw=AuWeight;
                 womanprice=[priceApi getPrice:goods.Pro_Class goldType:goods.Pro_goldType goldWeight:AuWeight mDiaWeight:miantext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:fsweight sCount:goods.Pro_f_count proid:goods.Id];
-                if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
-                    
-                    manw=AuWeightman;
-                    manprice=[priceApi getPrice:goodsman.Pro_Class goldType:goodsman.Pro_goldType goldWeight:AuWeightman mDiaWeight:dmiantext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:fsweightman sCount:goodsman.Pro_f_count proid:goodsman.Id];
-                    
-                    if (womanprice==nil || manprice==nil) {
-                        proprice=nil;
+                float price1=[womanprice floatValue];
+                if (price1>0){
+                    if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
+                        
+                        manw=AuWeightman;
+                        manprice=[priceApi getPrice:goodsman.Pro_Class goldType:goodsman.Pro_goldType goldWeight:AuWeightman mDiaWeight:dmiantext.text mDiaColor:@"I-J" mVVS:@"SI" sDiaWeight:fsweightman sCount:goodsman.Pro_f_count proid:goodsman.Id];
+                        
+                        float price2=[manprice floatValue];
+                        if (price2>0) {
+                            proprice=[NSString stringWithFormat:@"%f",price2+price1];
+                        }else{
+                            proprice=nil;
+                        }
+                        
                     }else{
-                       proprice=[NSString stringWithFormat:@"%d",womanprice.intValue+manprice.intValue];
+                        proprice=[NSString stringWithFormat:@"%f",price1];
                     }
-                    
                 }else{
-                    proprice=womanprice;
+                    proprice=nil;
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -831,13 +837,25 @@ NSInteger selecttype=0;
                 NSString *proprice=nil;
                 productApi *priceApi=[[productApi alloc]init];
                 womanprice=[priceApi getPrice:goods.Pro_Class goldType:texturetext.text goldWeight:weightg mDiaWeight:miantext.text mDiaColor:colortext.text mVVS:nettext.text sDiaWeight:goodssDiaWeight sCount:goods.Pro_f_count proid:goods.Id];
-                if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
-                    priceApi=[[productApi alloc]init];
-                    manprice=[priceApi getPrice:goodsman.Pro_Class goldType:dtexturetext.text goldWeight:weightman mDiaWeight:dmiantext.text mDiaColor:dcolortext.text mVVS:dnettext.text sDiaWeight:goodsmansDiaWeight sCount:goodsman.Pro_f_count proid:goodsman.Id];
-                    proprice=[NSString stringWithFormat:@"%d",womanprice.intValue+manprice.intValue];
+                float price1=[womanprice floatValue];
+                if (price1>0) {
+                    if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
+                        priceApi=[[productApi alloc]init];
+                        manprice=[priceApi getPrice:goodsman.Pro_Class goldType:dtexturetext.text goldWeight:weightman mDiaWeight:dmiantext.text mDiaColor:dcolortext.text mVVS:dnettext.text sDiaWeight:goodsmansDiaWeight sCount:goodsman.Pro_f_count proid:goodsman.Id];
+                        float price2=[manprice floatValue];
+                        if (price2>0) {
+                            proprice=[NSString stringWithFormat:@"%f",price1+price2];
+                        }else{
+                            proprice=nil;
+                        }
+                        
+                    }else{
+                        proprice=[NSString stringWithFormat:@"%f",price1];
+                    }
                 }else{
-                    proprice=womanprice;
+                    proprice=nil;
                 }
+                
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     

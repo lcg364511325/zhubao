@@ -44,6 +44,9 @@ NSMutableArray *resultlist=nil;
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    for (id index in addobject) {
+        [index removeFromSuperview];
+    }
     [self loadproclass];
     //进来时候加载全部数据
     sqlService *sql=[[sqlService alloc]init];
@@ -66,6 +69,7 @@ NSMutableArray *resultlist=nil;
     btnarray2 = [[NSMutableArray alloc] init];
     btnarray3 = [[NSMutableArray alloc] init];
     btnarray4 = [[NSMutableArray alloc] init];
+    addobject=[[NSMutableArray alloc] init];
     countLable.text=nil;
     
     //进来时候加载全部数据
@@ -105,11 +109,13 @@ NSMutableArray *resultlist=nil;
             endimg=[[UIImageView alloc]initWithFrame:CGRectMake(btn.frame.origin.x+57, 7, 3, 29.5)];
             endimg.image=[UIImage imageNamed:@"proclass_end"];
             [self.view addSubview:endimg];
+            [addobject addObject:endimg];
         }else{
             btn=[[UIButton alloc]initWithFrame:CGRectMake(58.5+i*58, 7, 57, 29.5)];
             lineimg=[[UIImageView alloc]initWithFrame:CGRectMake(btn.frame.origin.x+57, 7, 1, 29.5)];
             lineimg.image=[UIImage imageNamed:@"proclass_line"];
             [self.view addSubview:lineimg];
+            [addobject addObject:lineimg];
         }
         
         proclassEntity *dict=[proclassarray objectAtIndex:i];
@@ -129,6 +135,7 @@ NSMutableArray *resultlist=nil;
         [btn addTarget:self action:@selector(styleselect:) forControlEvents:UIControlEventTouchDown];
         
         [self.view addSubview:btn];
+        [addobject addObject:btn];
         
     }
 }

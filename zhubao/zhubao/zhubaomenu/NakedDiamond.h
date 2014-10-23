@@ -31,6 +31,7 @@
     NSMutableArray * btnarray1;
     NSMutableArray * btnarray2;
     NSMutableArray * btnarray3;
+    NSMutableArray * btnarray4;
     NSMutableArray *shoppingcartlist;
 }
 

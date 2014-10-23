@@ -111,7 +111,7 @@
         cell.showimage.image=[UIImage imageNamed:@"Heart.jpg"];
     }
     else if ([entity.Dia_Shape isEqualToString:@"ASH"]){
-        cell.notice.text=@"镭射刑";
+        cell.notice.text=@"辐射刑";
         cell.showimage.image=[UIImage imageNamed:@"Asscher2.jpg"];
     }
     cell.noticeDate.text=entity.Dia_CertNo;

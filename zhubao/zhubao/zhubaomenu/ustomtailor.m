@@ -34,6 +34,9 @@
 @synthesize logoImage;
 @synthesize checkpassword;
 @synthesize texturebutton;
+@synthesize zhengmianview;
+@synthesize fanmianview;
+@synthesize cemianview;
 
 //区分图片位置
 NSInteger pictag=0;
@@ -365,7 +368,7 @@ NSInteger vies=0;
 //重置数据
 -(IBAction)resetdata:(id)sender
 {
-    texturetext.text=nil;
+    texturetext.text=@"18K白";
     goldweightText.text=nil;
     miandiaText.text=nil;
     mianNoText.text=nil;
@@ -373,6 +376,12 @@ NSInteger vies=0;
     fitNoText.text=nil;
     sizeText.text=nil;
     fontText.text=nil;
+    zhengmianview.image=[UIImage imageNamed:@"image1"];
+    fanmianview.image=[UIImage imageNamed:@"image1 2"];
+    cemianview.image=[UIImage imageNamed:@"image2"];
+    pic1=nil;
+    pic2=nil;
+    pic3=nil;
 }
 /////////////////////////////////////////以为图片上传位置/////////////////////////////////////////////////
 //选择图片

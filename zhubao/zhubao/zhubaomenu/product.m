@@ -300,6 +300,9 @@ NSMutableArray *list=nil;
             [stylearray addObject:style];
         }
     }
+    if ([stylearray count]==0) {
+        [btnstyle setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
+    }
     //款式
     NSMutableString *styleindex=[[NSMutableString alloc] init];
     for (NSString *index in stylearray) {
@@ -416,6 +419,9 @@ NSMutableArray *list=nil;
         if (!isequal) {
             [texturearray addObject:texture];
         }
+    }
+    if ([texturearray count]==0) {
+        [btntexture setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }
     //款式
     NSMutableString *styleindex=[[NSMutableString alloc] init];
@@ -553,6 +559,9 @@ NSMutableArray *list=nil;
             [inlayarray addObject:inlay];
         }
     }
+    if ([inlayarray count]==0) {
+        [btninlay setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
+    }
     //款式
     NSMutableString *styleindex=[[NSMutableString alloc] init];
     for (NSString *index in stylearray) {
@@ -652,6 +661,9 @@ NSMutableArray *list=nil;
         if (!isequal) {
             [seriearray addObject:serie];
         }
+    }
+    if ([seriearray count]==0) {
+        [btnseric setBackgroundImage:[UIImage imageNamed:@"options_sedBg"] forState:UIControlStateNormal];
     }
     //款式
     NSMutableString *styleindex=[[NSMutableString alloc] init];

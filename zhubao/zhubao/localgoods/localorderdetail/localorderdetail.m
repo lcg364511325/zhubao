@@ -82,13 +82,7 @@
     }
     orderdetail *entity=[list objectAtIndex:[indexPath row]];
     cell.typeLabel.text=[NSString stringWithFormat:@"类型:%@",entity.goldType];
-    cell.colorLabel.text=[NSString stringWithFormat:@"材质:%@",entity.diaColor];
-    cell.sizeLabel.text=[NSString stringWithFormat:@"手寸:%@",entity.size];
     cell.modelLabel.text=[NSString stringWithFormat:@"型号:%@",entity.Pro_model];
-    cell.goldwLabel.text=[NSString stringWithFormat:@"金重:%@",entity.goldWeight];
-    cell.fontLabel.text=@"刻字:";
-    cell.savemodelLabel.text=[NSString stringWithFormat:@"库存型号:%@",entity.Pro_model];
-    cell.goldpLabel.text=[NSString stringWithFormat:@"金价:%@",entity.goldPrice];
     cell.priceLabel.text=[NSString stringWithFormat:@"价格:%@",entity.Pro_price];
     cell.logoimg.image=[[UIImage alloc] initWithContentsOfFile:entity.logopic];
     

@@ -375,7 +375,7 @@ NSInteger indata=0;//判断后台是否正在更新数据
     //Kstr=md5(uId|type|Upt|Key|Nowt|cid)
     NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@",uId,@"9997",Upt,apikey,nowt]];
     
-    NSString * surl = [NSString stringWithFormat:@"/app/aifacen.php?uId=%@&type=9997&Upt=%@&Nowt=%@&Kstr=%@",uId,Upt,nowt,Kstr];
+    NSString * surl = [NSString stringWithFormat:@"/app/aiface.php?uId=%@&type=9997&Upt=%@&Nowt=%@&Kstr=%@",uId,Upt,nowt,Kstr];
     
     
     NSString * URL = [NSString stringWithFormat:@"%@%@",domainser,surl];

@@ -329,7 +329,7 @@
         
         sqlite3_stmt *statement = nil;
         //sql语句
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Pro_model,Pro_number,Pro_name,Pro_State,Pro_smallpic,Pro_bigpic,Pro_info,Pro_goldWeight,Pro_author,Pro_addtime,producttype from product where Pro_IsDel='0' and producttype='0'" ];
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT Id,Pro_model,Pro_number,Pro_name,Pro_State,Pro_smallpic,Pro_bigpic,Pro_info,Pro_goldWeight,Pro_author,Pro_addtime,producttype,Pro_Type from product where Pro_IsDel='0' and producttype='0'" ];
         if (type1.length!=0) {
             NSString *classsql=@"";
             
@@ -479,6 +479,10 @@
                 char * producttype   = (char *)sqlite3_column_text(statement,11);
                 if(producttype != nil)
                     entity.producttype = [NSString stringWithUTF8String:producttype];
+                
+                char * Pro_Type   = (char *)sqlite3_column_text(statement,12);
+                if(Pro_Type != nil)
+                    entity.Pro_Type = [NSString stringWithUTF8String:Pro_Type];
                 
                 
                 [array addObject:entity];
@@ -2130,8 +2134,16 @@
                     
                     //有图片，则要上传
                     char * photos   = (char *)sqlite3_column_text(statement,12);
-                    if(photos != nil && ![[NSString stringWithUTF8String:photos] isEqualToString:@"(null)"])
+                    char * photom   = (char *)sqlite3_column_text(statement,13);
+                    char * photob   = (char *)sqlite3_column_text(statement,14);
+                    if(photos != nil && ![[NSString stringWithUTF8String:photos] isEqualToString:@"(null)"]){
                         entity.logopic=[NSString stringWithUTF8String:photos];
+                    }else if(photom != nil && ![[NSString stringWithUTF8String:photom] isEqualToString:@"(null)"])
+                    {
+                        entity.logopic=[NSString stringWithUTF8String:photos];
+                    }else{
+                        entity.logopic=[NSString stringWithUTF8String:photob];
+                    }
                     
                     
                     [localInfo addObject:entity];

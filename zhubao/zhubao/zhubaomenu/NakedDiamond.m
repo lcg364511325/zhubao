@@ -51,6 +51,7 @@ NSInteger whichview=0;
     btnarray1 = [[NSMutableArray alloc] init];
     btnarray2 = [[NSMutableArray alloc] init];
     btnarray3 = [[NSMutableArray alloc] init];
+    btnarray4 = [[NSMutableArray alloc] init];
     weightmin.keyboardType=UIKeyboardTypeNumberPad;
     weightmax.keyboardType=UIKeyboardTypeNumberPad;
     pricemin.keyboardType=UIKeyboardTypeNumberPad;
@@ -257,6 +258,9 @@ NSInteger whichview=0;
     NSString *number=DiamondNo.text;
     
     NakedDiamondResult *samplePopupViewController = [[NakedDiamondResult alloc] initWithNibName:@"NakedDiamondResult" bundle:nil];
+    
+    samplePopupViewController.mydelegate=self.parentViewController.self;
+    
     samplePopupViewController.shape=shape;
     samplePopupViewController.weight=weight;
     samplePopupViewController.price=price;
@@ -269,7 +273,6 @@ NSInteger whichview=0;
     samplePopupViewController.diploma=diploma;
     samplePopupViewController.number=number;
     
-    samplePopupViewController.mydelegate=self.parentViewController.self;
     [self.parentViewController.self presentPopupViewController:samplePopupViewController animated:YES completion:^(void) {
         NSLog(@"popup view presented");
     }];
@@ -279,9 +282,25 @@ NSInteger whichview=0;
 //重置页面
 -(IBAction)resetview:(id)sender
 {
-    NakedDiamond * _NakedDiamond = [[NakedDiamond alloc] init];
+    [self shapeselect:modelbtn];
+    [self colorselect:colorbtn];
+    [self netselect:netbtn];
+    [cutarray removeAllObjects];
+    [chasingarray removeAllObjects];
+    [symmetryarray removeAllObjects];
+    [fluorescencearray removeAllObjects];
+    [diplomaarray removeAllObjects];
+    if ([btnarray4 count]!=0) {
+        for (UIButton* btn1 in btnarray4) {
+            [btn1 setBackgroundImage:nil forState:UIControlStateNormal];
+        }
+    }
+    weightmin.text=@"";
+    weightmax.text=@"";
+    pricemin.text=@"";
+    pricemax.text=@"";
+    DiamondNo.text=@"";
     
-    [self.navigationController pushViewController:_NakedDiamond animated:NO];
 }
 
 //购物车
@@ -565,6 +584,7 @@ NSInteger whichview=0;
         cut=@"Fair";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }
+    [btnarray4 addObject:btn];
     NSUInteger len=[cutarray count];
     NSUInteger i;
     BOOL isequal=NO;
@@ -601,6 +621,7 @@ NSInteger whichview=0;
         chasing=@"Fair";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }
+    [btnarray4 addObject:btn];
     NSUInteger len=[chasingarray count];
     NSUInteger i;
     BOOL isequal=NO;
@@ -637,6 +658,7 @@ NSInteger whichview=0;
         symmetry=@"Fair";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }
+    [btnarray4 addObject:btn];
     NSUInteger len=[symmetryarray count];
     NSUInteger i;
     BOOL isequal=NO;
@@ -676,6 +698,7 @@ NSInteger whichview=0;
         fluorescence=@"Vsl','Vst";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }
+    [btnarray4 addObject:btn];
     NSUInteger len=[fluorescencearray count];
     NSUInteger i;
     BOOL isequal=NO;
@@ -718,6 +741,7 @@ NSInteger whichview=0;
         diploma=@"Other";
         [btn setBackgroundImage:[UIImage imageNamed:@"yellowcolor"] forState:UIControlStateNormal];
     }
+    [btnarray4 addObject:btn];
     NSUInteger len=[diplomaarray count];
     NSUInteger i;
     BOOL isequal=NO;

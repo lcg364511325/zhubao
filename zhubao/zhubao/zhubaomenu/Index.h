@@ -57,4 +57,6 @@
 // 更新ui
 -(void)updateIndexUI;
 
+-(void)resetNakedDiamond;
+
 @end

@@ -29,6 +29,9 @@
 @synthesize nameText;
 @synthesize titleText;
 @synthesize goods;
+@synthesize zhengmianview;
+@synthesize fanmianview;
+@synthesize cemianview;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -86,7 +89,14 @@
         priceText.text=goods.Pro_price;
         typevalue=goods.Pro_Class;
         if ([typelist count]!=0 && ![typevalue isEqualToString:@"(null)"]) {
-            typeText.text=[typelist objectAtIndex:[typevalue integerValue]-1];
+            for (proclassEntity *entity in typelist) {
+                NSString *name=[NSString stringWithFormat:@"%@",entity.Id];
+                if ([name isEqualToString:typevalue]) {
+                    typeText.text=entity.name;
+                    break;
+                }
+            }
+            
         }
         
     }else
@@ -143,7 +153,7 @@
                 [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"更新成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
                 goods=info;
                 [self loaddata];
-                [_mydelegate performSelector:@selector(showproductDetai)];
+                
             }else
             {
                 [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"更新失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
@@ -236,6 +246,25 @@
 - (IBAction)typeselect:(id)sender
 {
     typeTView.hidden=NO;
+}
+
+//重置数据
+-(IBAction)resetdata:(id)sender
+{
+    modelnoText.text=@"";
+    goldweightText.text=@"";
+    mianctText.text=@"";
+    miancountText.text=@"";
+    fitctText.text=@"";
+    fitcountText.text=@"";
+    priceText.text=@"";
+    nameText.text=@"";
+    zhengmianview.image=[UIImage imageNamed:@"image1"];
+    fanmianview.image=[UIImage imageNamed:@"image1 2"];
+    cemianview.image=[UIImage imageNamed:@"image2"];
+    pic1=@"";
+    pic2=@"";
+    pic3=@"";
 }
 
 /////////////////////////////////////////以为图片上传位置/////////////////////////////////////////////////

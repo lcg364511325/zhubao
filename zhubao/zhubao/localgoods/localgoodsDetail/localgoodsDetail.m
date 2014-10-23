@@ -276,6 +276,20 @@
     entity.pname=goods.Pro_name;
     entity.pro_model=goods.Pro_model;
     entity.pcount=@"1";
+    NSString *pic1=goods.Pro_smallpic;
+    NSArray *fullth=[goods.Pro_bigpic componentsSeparatedByString:@","];
+    if (![pic1 isEqualToString:@""]) {
+        entity.photos=pic1;
+    }else if ([fullth count]!=0)
+    {
+        if (![[fullth objectAtIndex:0] isEqualToString:@""]) {
+            entity.photos=[fullth objectAtIndex:0];
+        }else
+        {
+            entity.photos=[fullth objectAtIndex:1];
+        }
+        
+    }
     buyproduct *successadd=[sql addToBuyproduct:entity];
     buyproduct *successaddman=[[buyproduct alloc]init];
     if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
@@ -306,31 +320,27 @@
 -(void)showPhotoBrowser
 {
     NSMutableArray *photos = [[NSMutableArray alloc] init];
+    NSMutableArray *photosh = [[NSMutableArray alloc] init];
     //NSMutableArray *thumbs = [[NSMutableArray alloc] init];
     //MWPhoto *photot;
     
     NSArray  * array= [goods.Pro_bigpic componentsSeparatedByString:@","];
-    NSInteger count = [array count];
+    for (NSString *index in array) {
+        if (![index isEqualToString:@""]) {
+            [photosh addObject:index];
+        }
+    }
+    if (![goods.Pro_smallpic isEqualToString:@""]) {
+        [photosh addObject:goods.Pro_smallpic];
+    }
+    NSInteger count = [photosh count];
     //遍历这个数组
     for (int i = 0; i < count; i++) {
-        if ([goods.producttype isEqualToString:@"1"]) {
-            NSString *patht=[NSString stringWithFormat:@"%@",[array objectAtIndex: i]];
-            UIImage *localimg=[UIImage imageWithContentsOfFile:patht];
-            CGSize size=CGSizeMake(1300, localimg.size.height);
-            UIImage *localimg1=[self OriginImage:localimg scaleToSize:size];
-            [photos addObject:[MWPhoto photoWithImage:localimg1]];
-        }else
-        {
-            //NSLog(@"普通的遍历：i = %d 时的数组对象为: %@",i,[array objectAtIndex: i]);
-            NSString * patht=[NSString stringWithFormat:@"http://seyuu.com%@",[array objectAtIndex: i]];
-            NSURL *imgUrl=[NSURL URLWithString:patht];
-            if (hasCachedImage(imgUrl)) {
-                [photos addObject:[MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]]];
-            }else
-            {
-                [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:patht]]];
-            }
-        }
+        NSString *patht=[NSString stringWithFormat:@"%@",[photosh objectAtIndex: i]];
+        UIImage *localimg=[UIImage imageWithContentsOfFile:patht];
+        CGSize size=CGSizeMake(600, localimg.size.height);
+        UIImage *localimg1=[self OriginImage:localimg scaleToSize:size];
+        [photos addObject:[MWPhoto photoWithImage:localimg1]];
         
         //[thumbs addObject:[MWPhoto photoWithURL:[NSURL URLWithString:patht]]];
     }

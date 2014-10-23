@@ -51,9 +51,18 @@ proclassEntity * proclassentity;
 
 //添加类别
 - (IBAction)addproclass:(id)sender {
-    
-    proclassentity=nil;//设为空，表示新加
-    [self creategetmoneyview:nil];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    sqlService *_sqlService=[[sqlService alloc]init];
+    list=[_sqlService GetProclassList:myDelegate.entityl.uId page:1 pageSize:1500];
+    if ([list count]>12) {
+        NSString *rowString =@"不能继续添加类别，请先删除一个类别再添加";
+        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alter show];
+    }else
+    {
+        proclassentity=nil;//设为空，表示新加
+        [self creategetmoneyview:nil];
+    }
 }
 
 
@@ -78,7 +87,9 @@ proclassEntity * proclassentity;
     cell.usernameLabel.text=entity.name;
 
     [cell.deleteButton addTarget:self action:@selector(deletelocalorder:) forControlEvents:UIControlEventTouchDown];
+    cell.deleteButton.tag=[indexPath row]+100;
     [cell.stateButton addTarget:self action:@selector(creategetmoneyview:) forControlEvents:UIControlEventTouchDown];
+    cell.stateButton.tag=[indexPath row];
     
     return cell;
 }
@@ -90,13 +101,11 @@ proclassEntity * proclassentity;
 }
 
 //更改商品类别名称
-- (void)creategetmoneyview:(id)sender
+- (void)creategetmoneyview:(UIButton *)sender
 {
     NSString * name=@"";
     if(sender){
-        stedcell=(proclasslistCell *)[[sender superview]superview];
-        NSIndexPath * path = [orderTView indexPathForCell:stedcell];
-        proclassentity=[list objectAtIndex:[path row]];
+        proclassentity=[list objectAtIndex:sender.tag];
         name=proclassentity.name;
     }
     
@@ -121,14 +130,14 @@ proclassEntity * proclassentity;
     [okbtn setTitle:@"确定" forState:UIControlStateNormal];
     [okbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     okbtn.titleLabel.font=[UIFont boldSystemFontOfSize:15.0f];
-    okbtn.tag=0;
+    okbtn.tag=sender.tag+100;
     [okbtn addTarget:self action:@selector(changegetmoney:) forControlEvents:UIControlEventTouchDown];
     
     UIButton *canclebtn=[[UIButton alloc]initWithFrame:CGRectMake(141, 67, 30, 30)];
     [canclebtn setTitle:@"取消" forState:UIControlStateNormal];
     [canclebtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     canclebtn.titleLabel.font=[UIFont boldSystemFontOfSize:15.0f];
-    canclebtn.tag=1;
+    canclebtn.tag=0;
     [canclebtn addTarget:self action:@selector(changegetmoney:) forControlEvents:UIControlEventTouchDown];
     
     [getmoneyview addSubview:okbtn];
@@ -143,14 +152,12 @@ proclassEntity * proclassentity;
 //更改类别名称或者新加类别
 -(void)changegetmoney:(UIButton *)btn
 {
-    if (btn.tag==0) {
+    if (btn.tag!=0) {
         sqlService *_sqlService=[[sqlService alloc]init];
         
         if(proclassentity){
             proclassentity.name=moneyText.text;
-            
-            NSIndexPath * path = [orderTView indexPathForCell:stedcell];
-            proclassEntity *entity=[list objectAtIndex:[path row]];
+            proclassEntity *entity=[list objectAtIndex:btn.tag-100];
             NSString *info=[_sqlService updateProclass:@"name" value:moneyText.text oid:entity.Id];
             if (info) {
                 //stedcell.usernameLabel.text=moneyText.text;
@@ -196,7 +203,7 @@ proclassEntity * proclassentity;
         [btn setImage:[UIImage imageNamed:@"select"] forState:UIControlStateNormal];
     }
     [btn setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateNormal];
-    statevalue=[NSString stringWithFormat:@"%d",btn.tag];
+    statevalue=[NSString stringWithFormat:@"%ld",(long)btn.tag];
 }
 
 
@@ -205,9 +212,7 @@ proclassEntity * proclassentity;
 {
     
     [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"确定删除该商品类别？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil] show];
-    UITableViewCell * cell = (UITableViewCell *)[[btn superview] superview];
-    NSIndexPath * path = [self.orderTView indexPathForCell:cell];
-    selectedentity=[list objectAtIndex:path.row];
+    selectedentity=[list objectAtIndex:btn.tag-100];
 }
 
 
