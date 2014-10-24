@@ -19,6 +19,10 @@
 @synthesize passwordbtn;
 @synthesize logoshengyu;
 @synthesize xymText;
+@synthesize loginbgimg;
+@synthesize anolable;
+@synthesize anopic;
+@synthesize anoText;
 
 NSInteger i=0;
 
@@ -48,6 +52,7 @@ NSInteger i=0;
     
     //是否自动登录
     NSString * userid=[[NSUserDefaults standardUserDefaults]objectForKey:@"login_userid"];
+    NSString *ano=(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"authorizeNO"];
     if(userid){
         
         sqlService *sql=[[sqlService alloc]init];
@@ -73,13 +78,19 @@ NSInteger i=0;
             Index *sysmenu=[[Index alloc] init];
             [self.navigationController pushViewController:sysmenu animated:NO];
         }
+    }else if (ano){
+        loginbgimg.image=[UIImage imageNamed:@"sloginbg"];
+        anoText.hidden=YES;
+        anolable.hidden=YES;
+        anopic.hidden=YES;
+        passwordbtn.frame=CGRectMake(passwordbtn.frame.origin.x, passwordbtn.frame.origin.y-70, passwordbtn.frame.size.width, passwordbtn.frame.size.height);
     }
     
     if ([[NSUserDefaults standardUserDefaults]objectForKey:@"_account"]) {
         
         _account.text=(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"_account"];
         _password.text=(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"_password"];
-        xymText.text=(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"authorizeNO"];
+        //xymText.text=(NSString *)[[NSUserDefaults standardUserDefaults]objectForKey:@"authorizeNO"];
         [passwordbtn setBackgroundImage:[UIImage imageNamed:@"sure"] forState:UIControlStateNormal];
         i=1;
     }else{

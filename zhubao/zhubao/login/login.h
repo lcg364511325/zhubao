@@ -31,6 +31,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *tipLable;
 @property (weak, nonatomic) IBOutlet UIButton *passwordbtn;
 @property (weak, nonatomic) IBOutlet UIImageView *logoshengyu;
+@property (weak, nonatomic) IBOutlet UIImageView *loginbgimg;
+@property (weak, nonatomic) IBOutlet UITextField *anoText;
+@property (weak, nonatomic) IBOutlet UIImageView *anopic;
+@property (weak, nonatomic) IBOutlet UILabel *anolable;
 
 - (IBAction)loginAction:(id)sender;
 
