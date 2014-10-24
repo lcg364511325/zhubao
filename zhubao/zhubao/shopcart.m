@@ -188,7 +188,7 @@ shoppingcartCell *selectedcell;
             if (goods.pweight) {
                 cell.model1Lable.text=[@"约重:" stringByAppendingString:goods.pweight];
             }
-            if (goods.pgoldtype) {
+            if (goods.pgoldtype && ![goods.pgoldtype isEqualToString:@"(null)"]) {
                 cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  材质:%@",goods.pgoldtype]];
             }
             if (goods.proentiy.Pro_Z_weight) {
@@ -347,7 +347,7 @@ shoppingcartCell *selectedcell;
 //更改数量
 - (void)createDemoView:(id)sender
 {
-    selectedcell=(shoppingcartCell *)[[sender superview]superview];
+    selectedcell=(shoppingcartCell *)[[[sender superview]superview]superview];
     NSIndexPath * path = [self.goodsview indexPathForCell:selectedcell];
     selectgoods =[shoppingcartlist objectAtIndex:[path row]];
     goodnumber=selectgoods.pcount;
@@ -437,7 +437,10 @@ shoppingcartCell *selectedcell;
             [alter show];
         }else
         {
-            selectedcell.priceLable.text=goodsno.text;
+            AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+            sqlService *shopcar=[[sqlService alloc] init];
+            shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];
+            [goodsview reloadData];
         }
         
     }

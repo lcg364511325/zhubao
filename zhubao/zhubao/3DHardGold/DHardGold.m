@@ -144,7 +144,6 @@
     productnumber=_proid;
     goods=[sql GetProductDetail:productnumber];
     Pro_type=goods.Pro_Type;
-    //productimageview.image=[UIImage imageNamed:@"diamonds.png"];
     
     
     //标题
@@ -157,7 +156,13 @@
     //价格
     productApi *priceApi=[[productApi alloc]init];
     NSString *womanprice=[priceApi getPrice:goods.Pro_Class goldType:@"5" goldWeight:nil mDiaWeight:nil mDiaColor:nil mVVS:nil sDiaWeight:nil sCount:goods.Pro_f_count proid:goods.Id];
-    pricelable.text=[NSString stringWithFormat:@"%@",womanprice];
+    NSInteger price=[womanprice integerValue];
+    if (price>0) {
+        pricelable.text=[NSString stringWithFormat:@"%ld",(long)price];
+    }else{
+        pricelable.text=@"暂无价格信息";
+    }
+    
     
     if ([self isexistsfile:goods.Pro_author]) {
         [show3D setHidden:NO];
@@ -168,6 +173,26 @@
     }else{
         [show3D setHidden:TRUE];
         addtoshopcart.frame=CGRectMake(150, 480, 180, 50);
+    }
+    
+    NSURL *imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",goods.Pro_smallpic]];
+    NSArray  * array= [goods.Pro_bigpic componentsSeparatedByString:@","];
+    //遍历这个数组
+    if ([array count]>0) {
+        imgUrl=[NSURL URLWithString:[NSString stringWithFormat:@"http://seyuu.com%@",[array objectAtIndex: 0]]];
+    }
+    if ([goods.producttype isEqualToString:@"1"]) {
+        self.productpic.image=[[UIImage alloc] initWithContentsOfFile:[array objectAtIndex: 0]];
+    }else
+    {
+        if (hasCachedImage(imgUrl)) {
+            [self.productpic setImage:[UIImage imageWithContentsOfFile:pathForURL(imgUrl)]];
+        }else
+        {
+            [self.productpic setImage:[UIImage imageNamed:@""]];//diamonds
+            NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:imgUrl,@"url",self.productpic,@"imageView",nil];
+            [NSThread detachNewThreadSelector:@selector(cacheImage:) toTarget:[ImageCacher defaultCacher] withObject:dic];
+        }
     }
     
     
@@ -245,9 +270,10 @@
     entity.pweight=goods.Pro_goldWeight;
     entity.customerid=myDelegate.entityl.uId;
     entity.pprice=womanprice;
-    entity.pname=modellable.text;
+    entity.pname=goods.Pro_model;
     entity.pro_model=goods.Pro_model;
     entity.photos=goods.Pro_smallpic;
+    entity.pcount=@"1";
     buyproduct *successadd=[sql addToBuyproduct:entity];
     buyproduct *successaddman=[[buyproduct alloc]init];
     if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
