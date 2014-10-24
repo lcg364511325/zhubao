@@ -155,7 +155,7 @@
     
     //价格
     productApi *priceApi=[[productApi alloc]init];
-    NSString *womanprice=[priceApi getPrice:goods.Pro_Class goldType:@"5" goldWeight:nil mDiaWeight:nil mDiaColor:nil mVVS:nil sDiaWeight:nil sCount:goods.Pro_f_count proid:goods.Id];
+    NSString *womanprice=[priceApi getPrice:goods.Pro_Class goldType:@"5" goldWeight:goods.Pro_goldWeight mDiaWeight:0 mDiaColor:0 mVVS:0 sDiaWeight:0 sCount:goods.Pro_f_count proid:goods.Id];
     NSInteger price=[womanprice integerValue];
     if (price>0) {
         pricelable.text=[NSString stringWithFormat:@"%ld",(long)price];
