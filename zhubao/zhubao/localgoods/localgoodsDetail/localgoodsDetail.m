@@ -48,7 +48,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
     [self showproductDetai];//加载产品数据
+    
+    //本地商品加载按钮
+    if ([goods.producttype isEqualToString:@"1"] && [ismember isEqualToString:@"1"]) {
+        [self localgoods];
+    }
+    
     [self tableviewvalue];//tableview数据
     
     selecttype=0;
@@ -63,7 +70,7 @@
 
 -(IBAction)closeDetail:(id)sender
 {
-    [_mydelegate performSelector:@selector(closeAction)];
+    [_mypdelegate performSelector:@selector(closeAction)];
 }
 
 -(void)closesc{
@@ -207,17 +214,14 @@
     Pro_type=goods.Pro_Type;
     //productimageview.image=[UIImage imageNamed:@"diamonds.png"];
     
-    //本地商品加载按钮
-    if ([goods.producttype isEqualToString:@"1"] && [ismember isEqualToString:@"1"]) {
-        [self localgoods];
-    }
-    
     //标题
     titlelable.text=goods.Pro_name;
     
     NSString *price=[NSString stringWithFormat:@"%@",goods.Pro_price];
     if ([price isEqualToString:@""]) {
         pricelable.text=@"暂无价格信息";
+    }else{
+        pricelable.text=price;
     }
     
     //型号
@@ -272,7 +276,7 @@
     entity.productid=productnumber;
     entity.pweight=goods.Pro_goldWeight;
     entity.customerid=myDelegate.entityl.uId;
-    entity.pprice=womanprice;
+    entity.pprice=pricelable.text;
     entity.pname=goods.Pro_name;
     entity.pro_model=goods.Pro_model;
     entity.pcount=@"1";

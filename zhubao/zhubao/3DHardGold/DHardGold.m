@@ -274,6 +274,7 @@
     entity.pro_model=goods.Pro_model;
     entity.photos=goods.Pro_smallpic;
     entity.pcount=@"1";
+    entity.pgoldtype=@"5";
     buyproduct *successadd=[sql addToBuyproduct:entity];
     buyproduct *successaddman=[[buyproduct alloc]init];
     if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {

@@ -2207,7 +2207,7 @@
                     @try {
                         char * psize   = (char *)sqlite3_column_text(statement,5);//手寸
                         if(psize != nil && ![[NSString stringWithUTF8String:psize] isEqualToString:@"(null)"])
-                            [DZInfo appendString:[NSString stringWithFormat:@",\"%d\"",[NSString stringWithUTF8String:psize].integerValue]];
+                            [DZInfo appendString:[NSString stringWithFormat:@",\"%ld\"",(long)[NSString stringWithUTF8String:psize].integerValue]];
                         else
                             [DZInfo appendString:@",\"0\""];
                     }
@@ -2307,7 +2307,7 @@
                     @try {
                         char * psize   = (char *)sqlite3_column_text(statement,5);//手寸
                         if(psize != nil && ![[NSString stringWithUTF8String:psize] isEqualToString:@"(null)"])
-                            [CPInfo appendString:[NSString stringWithFormat:@",\"%d\"",[NSString stringWithUTF8String:psize].integerValue]];//商品数组
+                            [CPInfo appendString:[NSString stringWithFormat:@",\"%ld\"",(long)[NSString stringWithUTF8String:psize].integerValue]];//商品数组
                         else
                             [CPInfo appendString:@",\"0\""];
                     }
@@ -2430,6 +2430,7 @@
         
         NSLog(@"--------------:%@",sql);
         
+        NSInteger allprice=0;
         //保存订单表头
         if ([self execSql:sql]) {
             
@@ -2438,6 +2439,7 @@
             for (int i = 0; i < count; i++) {
                 orderdetail * entity =[localInfo objectAtIndex: i];
                 
+                allprice=allprice+[entity.Pro_price integerValue];
                 NSString * did=[NSString stringWithFormat:@"%@%d",orderid,i];
             tablekey=@"Id,orderid,cid,name,goldType,size,nums,Pro_model,diaColor,goldWeight,Dia_Z_weight,Dia_Z_count,Dia_F_weight,Dia_F_count,goldPrice,Pro_price,logopic";
                 
@@ -2447,6 +2449,10 @@
                 
                 [self execSql:sql];
             }
+            
+            sql=[NSString stringWithFormat:@"update [orderbill] set allprice=%d where id=%@",allprice,orderid];
+            
+            [self execSql:sql];
             
             return TRUE;
         }

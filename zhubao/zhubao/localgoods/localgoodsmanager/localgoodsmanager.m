@@ -674,7 +674,7 @@
 {
     productEntity *entity = [resultlist objectAtIndex:[indexPath row]];
     localgoodsDetail *prodeuctDetailcontroller = [[localgoodsDetail alloc] initWithNibName:@"localgoodsDetail" bundle:nil];
-    prodeuctDetailcontroller.mydelegate=self;
+    prodeuctDetailcontroller.mydelegate=_mydelegate;
     prodeuctDetailcontroller.mypdelegate=self;
     prodeuctDetailcontroller.ismember=@"1";
     prodeuctDetailcontroller.proid=entity.Id;

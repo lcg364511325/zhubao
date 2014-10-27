@@ -421,23 +421,28 @@ NSInteger vies=0;
     NSString *fullPath =nil;
     //记录文件
     
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]];
     if (pictag==0) {
-        [self saveImage:image withName:@"currentImage1.png"];
+        NSString *pic1name=[NSString stringWithFormat:@"%@n1.png",timeSp];
+        [self saveImage:image withName:pic1name];
         
-        fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage1.png"];
+        fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:pic1name];
         pic1=fullPath;
     }
     else if (pictag==1)
     {
-        [self saveImage:image withName:@"currentImage2.png"];
+        NSString *pic2name=[NSString stringWithFormat:@"%@n2.png",timeSp];
+        [self saveImage:image withName:pic2name];
         
-        fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage2.png"];
+        fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:pic2name];
         pic2=fullPath;
     }
     else if (pictag==2){
-        [self saveImage:image withName:@"currentImage3.png"];
         
-        fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage3.png"];
+        NSString *pic3name=[NSString stringWithFormat:@"%@n3.png",timeSp];
+        [self saveImage:image withName:pic3name];
+        
+        fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:pic3name];
         pic3=fullPath;
     }
     

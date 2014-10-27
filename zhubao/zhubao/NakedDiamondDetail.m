@@ -95,7 +95,7 @@ NSString * nakedno=nil;
             productimageview.image=[UIImage imageNamed:@"Heart.jpg"];
         }
         else if ([entity.Dia_Shape isEqualToString:@"ASH"]){
-            modelLable.text=@"辐射刑";
+            modelLable.text=@"辐射形";
             productimageview.image=[UIImage imageNamed:@"Asscher2.jpg"];
         }
         productNoLable.text=entity.Dia_CertNo;

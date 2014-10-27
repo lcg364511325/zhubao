@@ -148,8 +148,8 @@ NSMutableArray *resultlist=nil;
 
 -(void)closeAction
 {
-    if (self.popupViewController != nil) {
-        [self dismissPopupViewControllerAnimated:YES completion:^{
+    if (self.parentViewController.self.popupViewController != nil) {
+        [self.parentViewController.self dismissPopupViewControllerAnimated:YES completion:^{
             NSLog(@"popup view dismissed");
         }];
     }
@@ -174,7 +174,7 @@ NSMutableArray *resultlist=nil;
 //款式选择
 -(void)styleselect:(UIButton *)btn
 {
-    countLable.text=nil;
+    countLable.text=@"共有首饰0件";
     NSInteger btntag=[btn tag];
     NSString * style=nil;
     if (btntag==0) {
@@ -272,7 +272,7 @@ NSMutableArray *resultlist=nil;
 //材质选择
 -(IBAction)textureselect:(id)sender
 {
-    countLable.text=nil;
+    countLable.text=@"共有首饰0件";
     UIButton* btn = (UIButton*)sender;
     NSInteger btntag=[btn tag];
     NSString *texture=nil;
@@ -387,7 +387,7 @@ NSMutableArray *resultlist=nil;
 //镶口选择
 -(IBAction)inlayselect:(id)sender
 {
-    countLable.text=nil;
+    countLable.text=@"共有首饰0件";
     UIButton* btn = (UIButton*)sender;
     NSInteger btntag=[btn tag];
     NSString *inlay=nil;
@@ -523,7 +523,7 @@ NSMutableArray *resultlist=nil;
 //系列
 -(IBAction)serie:(id)sender
 {
-    countLable.text=nil;
+    countLable.text=@"共有首饰0件";
     UIButton* btn = (UIButton*)sender;
     NSInteger btntag=[btn tag];
     NSString * serie=nil;

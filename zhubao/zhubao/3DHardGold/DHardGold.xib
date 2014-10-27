@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DHardGold">
             <connections>
                 <outlet property="addtoshopcart" destination="NhV-vL-oTP" id="hdi-Jq-1tN"/>
+                <outlet property="childview" destination="1Gy-CV-oDp" id="Tkc-aB-iK9"/>
                 <outlet property="closebutton" destination="dHG-NV-8IM" id="iV8-p4-E1Q"/>
                 <outlet property="modellable" destination="TD0-KJ-21y" id="Rzr-kQ-wgW"/>
                 <outlet property="pricelable" destination="Odp-wd-zEn" id="Hhk-eO-TL7"/>

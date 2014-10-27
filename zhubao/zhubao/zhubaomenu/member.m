@@ -24,6 +24,7 @@
 @synthesize logoImage;
 @synthesize checkpassword;
 @synthesize submit;
+@synthesize passwordexit;
 
 UIWebView *orders;
 UIButton* btnBack;
@@ -43,6 +44,12 @@ UIButton* btnBack;
     // Do any additional setup after loading the view from its nib.
     
     checkpassword.secureTextEntry = YES;
+    
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
+    submit.frame=CGRectMake(submit.frame.origin.x, submit.frame.origin.y-22, submit.frame.size.width, submit.frame.size.height);
+    passwordexit.frame=CGRectMake(passwordexit.frame.origin.x, passwordexit.frame.origin.y-22, passwordexit.frame.size.width, passwordexit.frame.size.height);
+    
+#endif
     
 }
 
@@ -111,15 +118,6 @@ UIButton* btnBack;
 -(IBAction)chenckpassword:(id)sender
 {
     sixthview.hidden=NO;
-    
-    
-//    if ([[[UIDevice currentDevice]systemVersion]floatValue] < 7.0)
-//    {
-//        checkpassword.frame = CGRectMake(20, 50, checkpassword.frame.size.width, checkpassword.frame.size.height);
-//        
-//        _passwordsubmit.frame = CGRectMake(25, 100, _passwordsubmit.frame.size.width, _passwordsubmit.frame.size.height);
-//        _passwordexit.frame = CGRectMake(200, 100, _passwordexit.frame.size.width, _passwordexit.frame.size.height);
-//    }
 }
 
 //关闭核对

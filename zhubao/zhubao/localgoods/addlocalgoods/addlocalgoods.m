@@ -153,6 +153,7 @@
                 [[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"更新成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
                 goods=info;
                 [self loaddata];
+                [_mydelegate performSelector:@selector(showproductDetai)];
                 
             }else
             {
