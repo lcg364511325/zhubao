@@ -45,11 +45,12 @@ UIButton* btnBack;
     
     checkpassword.secureTextEntry = YES;
     
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
-    submit.frame=CGRectMake(submit.frame.origin.x, submit.frame.origin.y-22, submit.frame.size.width, submit.frame.size.height);
-    passwordexit.frame=CGRectMake(passwordexit.frame.origin.x, passwordexit.frame.origin.y-22, passwordexit.frame.size.width, passwordexit.frame.size.height);
     
-#endif
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
+        submit.frame=CGRectMake(submit.frame.origin.x, submit.frame.origin.y-22, submit.frame.size.width, submit.frame.size.height);
+        passwordexit.frame=CGRectMake(passwordexit.frame.origin.x, passwordexit.frame.origin.y-22, passwordexit.frame.size.width, passwordexit.frame.size.height);
+    }
+   
     
 }
 

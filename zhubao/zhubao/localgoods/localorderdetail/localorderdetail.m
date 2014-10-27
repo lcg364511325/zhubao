@@ -81,7 +81,7 @@
         cell=[nib objectAtIndex:0];
     }
     orderdetail *entity=[list objectAtIndex:[indexPath row]];
-    cell.typeLabel.text=[NSString stringWithFormat:@"类型:%@",entity.goldType];
+    //cell.typeLabel.text=[NSString stringWithFormat:@"类型:%@",entity.goldType];
     cell.modelLabel.text=[NSString stringWithFormat:@"型号:%@",entity.Pro_model];
     cell.priceLabel.text=[NSString stringWithFormat:@"价格:%@",entity.Pro_price];
     cell.logoimg.image=[[UIImage alloc] initWithContentsOfFile:entity.logopic];
