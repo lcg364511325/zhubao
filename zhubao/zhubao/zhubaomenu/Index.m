@@ -104,6 +104,8 @@ NSInteger indata=0;//判断后台是否正在更新数据
     
     //自动更新数据
     [self updateProductDate];
+    
+    [self autoupdateverson];
 }
 
 //更新ui
@@ -402,6 +404,40 @@ NSInteger indata=0;//判断后台是否正在更新数据
         NSString *rowString =@"未知错误";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
+    }
+}
+
+-(void)autoupdateverson
+{
+    isverson=1;
+    thridView.hidden=YES;
+    getNowTime * time=[[getNowTime alloc] init];
+    NSString * nowt=[time nowTime];
+    
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    
+    NSString * uId=myDelegate.entityl.uId;
+    NSString * Upt=@"0";//获取上一次的更新时间
+    //Kstr=md5(uId|type|Upt|Key|Nowt|cid)
+    NSString * Kstr=[Commons md5:[NSString stringWithFormat:@"%@|%@|%@|%@|%@",uId,@"9997",Upt,apikey,nowt]];
+    
+    NSString * surl = [NSString stringWithFormat:@"/app/aiface.php?uId=%@&type=9997&Upt=%@&Nowt=%@&Kstr=%@",uId,Upt,nowt,Kstr];
+    
+    
+    NSString * URL = [NSString stringWithFormat:@"%@%@",domainser,surl];
+    NSMutableDictionary * dict = [DataService GetDataService:URL];
+    NSString *status=[NSString stringWithFormat:@"%@",[dict objectForKey:@"status"]];
+    if ([status isEqualToString:@"true"]) {
+        NSArray *versoninfo=[[dict objectForKey:@"result"] objectAtIndex:0];
+        url=[NSString stringWithFormat:@"%@",[versoninfo objectAtIndex:0]];
+        NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+        NSString *oldappVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+        NSString *newappVersion=[NSString stringWithFormat:@"%@",[versoninfo objectAtIndex:2]];
+        if (![oldappVersion isEqualToString:newappVersion]) {
+            NSString *rowString =[NSString stringWithFormat:@"更新内容：%@",[versoninfo objectAtIndex:1]];
+            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"发现新版本%@,是否升级？",newappVersion] message:rowString delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            [alter show];
+        }
     }
 }
 
