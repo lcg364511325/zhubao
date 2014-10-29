@@ -556,7 +556,7 @@ UILabel *titlelabel;
 //半透明遮挡层
 - (void) showMask:(UIView *)view {
     subLayer = [[UIView alloc] init];
-    subLayer.frame = CGRectInset(view.layer.frame, 20.0f, 20.0f);
+    subLayer.frame = view.layer.frame;
     subLayer.backgroundColor = [UIColor blackColor];
     subLayer.alpha = 0.3;
     

@@ -155,7 +155,7 @@
     
     //价格
     productApi *priceApi=[[productApi alloc]init];
-    NSString *womanprice=[priceApi getPrice:goods.Pro_Class goldType:@"5" goldWeight:goods.Pro_goldWeight mDiaWeight:0 mDiaColor:0 mVVS:0 sDiaWeight:0 sCount:goods.Pro_f_count proid:goods.Id];
+    NSString *womanprice=[priceApi getPrice:goods.Pro_Class goldType:@"9" goldWeight:goods.Pro_goldWeight mDiaWeight:@"0" mDiaColor:@"0" mVVS:@"0" sDiaWeight:@"0" sCount:goods.Pro_f_count proid:goods.Id];
     NSInteger price=[womanprice integerValue];
     if (price>0) {
         pricelable.text=[NSString stringWithFormat:@"%ld",(long)price];
@@ -265,7 +265,7 @@
     //productEntity *goods=[sql GetProductDetail:productnumber];
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     buyproduct * entity=[[buyproduct alloc]init];
-    entity.producttype=Pro_type;
+    entity.producttype=@"1";
     entity.productid=productnumber;
     entity.pweight=goods.Pro_goldWeight;
     entity.customerid=myDelegate.entityl.uId;
@@ -274,7 +274,7 @@
     entity.pro_model=goods.Pro_model;
     entity.photos=goods.Pro_smallpic;
     entity.pcount=@"1";
-    entity.pgoldtype=@"5";
+    entity.pgoldtype=@"9";
     buyproduct *successadd=[sql addToBuyproduct:entity];
     buyproduct *successaddman=[[buyproduct alloc]init];
     if ([goods.Pro_Class isEqualToString:@"3"] && [goods.Pro_typeWenProId isEqualToString:@"0"]) {
