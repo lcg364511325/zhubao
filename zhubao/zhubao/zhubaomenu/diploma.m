@@ -302,50 +302,59 @@ NSInteger vvvv=0;
         [alter show];
         return;
     }
-    
-    if([[NSString stringWithFormat:@"%@",dipomaNoText.text] isEqualToString:@""]){
-        NSString *rowString =@"请输入证书编号！";
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alter show];
-        return;
+    NSString *dno=dipomaNoText.text;
+    NSString *dw=diamondWeightText.text;
+    if (![self isnull:dno]) {
+        dno=@"";
     }
-    if([[NSString stringWithFormat:@"%@",diamondWeightText.text] isEqualToString:@""]){
-        NSString *rowString =@"请输入钻石重量！";
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alter show];
-        return;
+    if (![self isnull:dw]) {
+        dw=@"";
     }
     
     if (diptype==0) {
-        NSString *url=[@"https://myapps.gia.edu/ReportCheckPortal/getReportData.do?&reportno=" stringByAppendingString:dipomaNoText.text];
-        url=[url stringByAppendingString:@"&weight="];
-        url=[url stringByAppendingString:diamondWeightText.text];
+        
+        NSString *url=[NSString stringWithFormat:@"https://myapps.gia.edu/ReportCheckPortal/getReportData.do?&reportno=%@&weight=%@",dno,dw];
+        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        
     }else if (diptype==1){
-        NSString *url=[@"HTTP://seyuu.com/Unrelated/TurnTongtc.asp?reportno=" stringByAppendingString:dipomaNoText.text];
-        url=[url stringByAppendingString:@"&weight="];
-        url=[url stringByAppendingString:diamondWeightText.text];
+        
+        NSString *url=[NSString stringWithFormat:@"HTTP://seyuu.com/Unrelated/TurnTongtc.asp?reportno=%@&weight=%@",dno,dw];
+        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        
     }else if (diptype==2){
-        NSString *url=[@"HTTP://seyuu.com/Unrelated/TurnToIGI.asp?reportno=" stringByAppendingString:dipomaNoText.text];
-        url=[url stringByAppendingString:@"&weight="];
-        url=[url stringByAppendingString:diamondWeightText.text];
+        NSString *url=[NSString stringWithFormat:@"HTTP://seyuu.com/Unrelated/TurnToIGI.asp?reportno=%@&weight=%@",dno,dw];
+        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        
     }else if (diptype==3){
-        NSString *url=[@"http://www.hrdantwerplink.be/?record_number=" stringByAppendingString:dipomaNoText.text];
-        url=[url stringByAppendingString:@"&weight="];
-        url=[url stringByAppendingString:diamondWeightText.text];
-        url=[url stringByAppendingString:@"&L="];
+        
+        NSString *url=[NSString stringWithFormat:@"http://www.hrdantwerplink.be/?record_number=%@&weight=%@&L=",dno,dw];
+        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        
     }else if (diptype==4){
-        NSString *url=[@"http://agslab.com/reportTypes/dqr.php?StoneID=" stringByAppendingString:dipomaNoText.text];
-        url=[url stringByAppendingString:@"&Weight="];
-        url=[url stringByAppendingString:diamondWeightText.text];
-        url=[url stringByAppendingString:@"&D=1"];
+        
+        NSString *url=[NSString stringWithFormat:@"http://agslab.com/reportTypes/dqr.php?StoneID=%@&Weight=%@&D=1",dno,dw];
+        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        
     }else if (diptype==5){
-        NSString *url=[@"http://www.eglusa.com/oresults/SearchPage3.php?st_num=" stringByAppendingString:dipomaNoText.text];
+        
+        NSString *url=[NSString stringWithFormat:@"http://www.eglusa.com/oresults/SearchPage3.php?st_num=%@",dno];
+        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }
+}
+
+
+-(BOOL)isnull:(NSString *)str
+{
+    if (str && ![str isEqualToString:@""] && ![str isEqualToString:@"(null)"]) {
+        return true;
+    }else{
+        return  false;
     }
 }
 

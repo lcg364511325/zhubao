@@ -79,14 +79,38 @@
         if (![pic3 isEqualToString:@""]) {
             self.fanmianview.image=[UIImage imageWithContentsOfFile:pic3];
         }
-        nameText.text=goods.Pro_name;
-        modelnoText.text=goods.Pro_model;
-        goldweightText.text=goods.Pro_goldWeight;
-        mianctText.text=goods.Pro_Z_weight;
-        miancountText.text=goods.Pro_Z_count;
-        fitctText.text=goods.Pro_f_weight;
-        fitcountText.text=goods.Pro_f_count;
-        priceText.text=goods.Pro_price;
+        
+        if ([self isnull:goods.Pro_name]) {
+            nameText.text=goods.Pro_name;
+        }
+        if ([self isnull:goods.Pro_model]) {
+            modelnoText.text=goods.Pro_model;
+        }
+        
+        if ([self isnull:goods.Pro_goldWeight]) {
+            goldweightText.text=goods.Pro_goldWeight;
+        }
+        
+        if ([self isnull:goods.Pro_Z_weight]) {
+            mianctText.text=goods.Pro_Z_weight;
+        }
+        
+        if ([self isnull:goods.Pro_Z_count]) {
+            miancountText.text=goods.Pro_Z_count;
+        }
+        
+        if ([self isnull:goods.Pro_f_weight]) {
+            fitctText.text=goods.Pro_f_weight;
+        }
+        
+        if ([self isnull:goods.Pro_f_count]) {
+            fitcountText.text=goods.Pro_f_count;
+        }
+        
+        if ([self isnull:goods.Pro_price]) {
+            priceText.text=goods.Pro_price;
+        }
+        
         typevalue=goods.Pro_Class;
         if ([typelist count]!=0 && ![typevalue isEqualToString:@"(null)"]) {
             for (proclassEntity *entity in typelist) {
@@ -409,6 +433,15 @@
             [self presentViewController:imagePickerController animated:YES completion:^{}];
         }
         
+    }
+}
+
+-(BOOL)isnull:(NSString *)str
+{
+    if (str && ![str isEqualToString:@""] && ![str isEqualToString:@"(null)"]) {
+        return  true;
+    }else{
+        return false;
     }
 }
 

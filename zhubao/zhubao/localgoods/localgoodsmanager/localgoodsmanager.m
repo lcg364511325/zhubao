@@ -665,7 +665,9 @@
         cell.show3dImage.hidden=YES;
     }
     
-    cell.productLable.text = entity.Pro_model;
+    if (entity.Pro_model && ![entity.Pro_model isEqualToString:@""] && ![entity.Pro_model isEqualToString:@"(null)"]) {
+        cell.productLable.text = entity.Pro_model;
+    }
     return cell;
 }
 

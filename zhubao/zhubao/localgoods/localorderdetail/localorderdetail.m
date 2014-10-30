@@ -61,7 +61,22 @@
     createtimeLabel.text=[NSString stringWithFormat:@"下单时间:%@",order.createdate];
     allmoneyLabel.text=[NSString stringWithFormat:@"金额:%@",order.allprice];
     getpriceLabel.text=[NSString stringWithFormat:@"已付:%@",order.getprice];
-    stateLbel.text=@"状态:待确认";
+    
+    NSString *state=order.state;
+    NSString *statusstr;
+    if ([state isEqualToString:@"1"]) {
+        statusstr=@"待确认";
+    }else if ([state isEqualToString:@"2"])
+    {
+        statusstr=@"已确认";
+    }else if ([state isEqualToString:@"3"])
+    {
+        statusstr=@"已付款";
+    }else if ([state isEqualToString:@"4"])
+    {
+        statusstr=@"已取消";
+    }
+    stateLbel.text=statusstr;
 }
 
 //初始化tableview数据

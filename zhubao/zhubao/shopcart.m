@@ -216,28 +216,28 @@ shoppingcartCell *selectedcell;
         UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullpath];
         [cell.showImage setImage:savedImage];
         cell.modelLable.text=nil;
-        if (goods.pgoldtype) {
+        if ([self isnull:goods.pgoldtype]) {
             cell.dipLable.text=[@"材质:" stringByAppendingString:goods.pgoldtype];
         }
-        if (goods.pweight) {
+        if ([self isnull:goods.pweight]) {
             cell.dipLable.text=[cell.dipLable.text stringByAppendingString:[NSString stringWithFormat:@"  金重:%@g",goods.pweight]];
         }
-        if (goods.Dia_Z_weight) {
+        if ([self isnull:goods.Dia_Z_weight]) {
             cell.model1Lable.text=[NSString stringWithFormat:@"主石重:%@Ct",goods.Dia_Z_weight];
         }
-        if (goods.Dia_Z_count) {
+        if ([self isnull:goods.Dia_Z_count]) {
             cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  主石数:%@",goods.Dia_Z_count]];
         }
-        if (goods.Dia_F_weight) {
+        if ([self isnull:goods.Dia_F_weight]) {
             cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  副石重:%@Ct",goods.Dia_F_weight]];
         }
-        if (goods.Dia_F_count) {
+        if ([self isnull:goods.Dia_F_count]) {
             cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  副石数:%@",goods.Dia_F_count]];
         }
-        if (goods.psize) {
+        if ([self isnull:goods.psize]) {
             cell.model1Lable.text=[cell.model1Lable.text stringByAppendingString:[NSString stringWithFormat:@"  手寸:%@",goods.psize]];
         }
-        if (goods.pdetail) {
+        if ([self isnull:goods.pdetail]) {
             cell.fluLable.text=[@"刻字:" stringByAppendingString:goods.pdetail];
         }else{
             cell.fluLable.text=nil;
@@ -247,7 +247,9 @@ shoppingcartCell *selectedcell;
     }
     
     [cell.deleteshopcart addTarget:self action:@selector(deleteshoppingcartgoods:) forControlEvents:UIControlEventTouchUpInside];
+    cell.deleteshopcart.tag=[indexPath row];
     [cell.countbutton addTarget:self action:@selector(createDemoView:) forControlEvents:UIControlEventTouchDown];
+    cell.countbutton.tag=[indexPath row];
     
     return cell;
 }
@@ -263,9 +265,7 @@ shoppingcartCell *selectedcell;
 -(void)deleteshoppingcartgoods:(id)sender
 {
     UIButton* btn = (UIButton*)sender;
-    UITableViewCell *cell = (UITableViewCell *)[[[btn superview] superview] superview];
-    NSIndexPath *indexPath = [goodsview indexPathForCell:cell];
-    buyproduct *entity = [shoppingcartlist objectAtIndex:[indexPath row]];
+    buyproduct *entity = [shoppingcartlist objectAtIndex:btn.tag];
     sqlService * sql=[[sqlService alloc]init];
     NSString *successdelete=[sql deleteBuyproduct:entity.Id];
     if (successdelete) {
@@ -347,9 +347,8 @@ shoppingcartCell *selectedcell;
 //更改数量
 - (void)createDemoView:(id)sender
 {
-    selectedcell=(shoppingcartCell *)[[[sender superview]superview]superview];
-    NSIndexPath * path = [self.goodsview indexPathForCell:selectedcell];
-    selectgoods =[shoppingcartlist objectAtIndex:[path row]];
+    UIButton* btn = (UIButton*)sender;
+    selectgoods =[shoppingcartlist objectAtIndex:btn.tag];
     goodnumber=selectgoods.pcount;
     
     hiview=[[UIView alloc]initWithFrame:self.view.frame];
@@ -446,6 +445,15 @@ shoppingcartCell *selectedcell;
     }
     [hiview removeFromSuperview];
     [demoView removeFromSuperview];
+}
+
+-(BOOL)isnull:(NSString *)str
+{
+    if (str && ![str isEqualToString:@""] && ![str isEqualToString:@"(null)"]) {
+        return true;
+    }else{
+        return false;
+    }
 }
 
 - (void)didReceiveMemoryWarning

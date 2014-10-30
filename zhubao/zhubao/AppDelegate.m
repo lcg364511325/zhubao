@@ -299,7 +299,7 @@ UILabel *titlelabel;
     
     @try {
 
-        alter = [[UIAlertView alloc] initWithTitle:@"提示" message:@"提交订单中..." delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        alter = [[UIAlertView alloc] initWithTitle:@"提示" message:@"提交订单中..." delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
         [alter show];
         
         NSString * uId=entityl.uId;

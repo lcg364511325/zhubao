@@ -215,34 +215,36 @@
     //productimageview.image=[UIImage imageNamed:@"diamonds.png"];
     
     //标题
-    titlelable.text=goods.Pro_name;
+    if ([self isnull:goods.Pro_name]) {
+        titlelable.text=goods.Pro_name;
+    }
     
     NSString *price=[NSString stringWithFormat:@"%@",goods.Pro_price];
-    if ([price isEqualToString:@""]) {
+    if (![self isnull:price]) {
         pricelable.text=@"暂无价格信息";
     }else{
         pricelable.text=price;
     }
     
     //型号
-    if (![goods.Pro_model isEqualToString:@""])
+    if ([self isnull:goods.Pro_model])
     {
         modellable.text=[NSString stringWithFormat:@"型号：%@",goods.Pro_model];
     }
     
-    if (![goods.Pro_goldWeight isEqualToString:@""])
+    if ([self isnull:goods.Pro_goldWeight])
     {
-        weighlable.text=[NSString stringWithFormat:@"约重：%@",goods.Pro_goldWeight];//约重
+        weighlable.text=[NSString stringWithFormat:@"约重：%@g",goods.Pro_goldWeight];//约重
     }
     
     //主石数
-    if (![goods.Pro_Z_count isEqualToString:@""])
+    if ([self isnull:goods.Pro_Z_count])
     {
         mainnanolable.text=[NSString stringWithFormat:@"主石：%@ 颗 %@ ct",goods.Pro_Z_count,goods.Pro_Z_weight];//goods.Pro_Z_count;
     }
     
     //副石数
-    if (![goods.Pro_f_count isEqualToString:@""])
+    if ([self isnull:goods.Pro_f_count])
     {
         fitnanolable.text=[NSString stringWithFormat:@"副石：%@ 颗 %@ ct",goods.Pro_f_count,goods.Pro_f_weight];//goods.Pro_f_count;
     }
@@ -317,6 +319,15 @@
         NSString *rowString =@"加入购物车失败！";
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alter show];
+    }
+}
+
+-(BOOL)isnull:(NSString *)str
+{
+    if (str && ![str isEqualToString:@""] && ![str isEqualToString:@"(null)"]) {
+        return true;
+    }else{
+        return false;
     }
 }
 
