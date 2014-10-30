@@ -784,9 +784,9 @@
             NSString *classsql=nil;
             NSArray *weight=[type3 componentsSeparatedByString:@","];
             if ([weight count]==2) {
-                classsql=[NSString stringWithFormat:@" and Dia_Price between '%@' and '%@' ",[weight objectAtIndex:0],[weight objectAtIndex:1]];
+                classsql=[NSString stringWithFormat:@" and cast(REPLACE(Dia_Price,',','') as double) between %@ and %@ ",[weight objectAtIndex:0],[weight objectAtIndex:1]];
             }else{
-                classsql=[NSString stringWithFormat:@" and Dia_Price>=%@ ",[weight objectAtIndex:0]];
+                classsql=[NSString stringWithFormat:@" and cast(REPLACE(Dia_Price,',','')>=%@ ",[weight objectAtIndex:0]];
             }
             querySQL=[querySQL stringByAppendingString:classsql];
         }

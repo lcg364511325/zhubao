@@ -212,7 +212,16 @@ shoppingcartCell *selectedcell;
     }
     else if ([goods.producttype isEqualToString:@"9"])
     {
-        NSString *fullpath =goods.photos;
+        NSString *fullpath;
+        if ([self isnull:goods.photos]) {
+            fullpath =goods.photos;
+        }else if ([self isnull:goods.photob])
+        {
+            fullpath =goods.photob;
+        }else
+        {
+            fullpath =goods.photom;
+        }
         UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullpath];
         [cell.showImage setImage:savedImage];
         cell.modelLable.text=nil;
@@ -264,29 +273,34 @@ shoppingcartCell *selectedcell;
 //购物车删除
 -(void)deleteshoppingcartgoods:(id)sender
 {
+    
     UIButton* btn = (UIButton*)sender;
-    buyproduct *entity = [shoppingcartlist objectAtIndex:btn.tag];
-    sqlService * sql=[[sqlService alloc]init];
-    NSString *successdelete=[sql deleteBuyproduct:entity.Id];
-    if (successdelete) {
-        
-        [_mydelegate performSelector:@selector(refleshBuycutData)];
-        
-        NSString *rowString =@"删除成功！";
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alter show];
-        
-    }else{
-        NSString *rowString =@"删除失败！";
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alter show];
-    }
-    //[goodsview reloadData];
+    entity1 = [shoppingcartlist objectAtIndex:btn.tag];
+    NSString *rowString =@"是否删除该商品?";
+    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alter show];
 }
 
 //alertview响应事件
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    if (buttonIndex==1) {
+        sqlService * sql=[[sqlService alloc]init];
+        NSString *successdelete=[sql deleteBuyproduct:entity1.Id];
+        if (successdelete) {
+            
+            [_mydelegate performSelector:@selector(refleshBuycutData)];
+            
+            NSString *rowString =@"删除成功！";
+            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alter show];
+            
+        }else{
+            NSString *rowString =@"删除失败！";
+            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:@"提示" message:rowString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alter show];
+        }
+    }
     AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
     sqlService *shopcar=[[sqlService alloc] init];
     shoppingcartlist=[shopcar GetBuyproductList:myDelegate.entityl.uId];

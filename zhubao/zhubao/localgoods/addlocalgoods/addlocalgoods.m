@@ -56,6 +56,13 @@
     
     [self loaddata];
     
+    goldweightText.keyboardType=UIKeyboardTypeNumberPad;
+    mianctText.keyboardType=UIKeyboardTypeNumberPad;
+    miancountText.keyboardType=UIKeyboardTypeNumberPad;
+    fitctText.keyboardType=UIKeyboardTypeNumberPad;
+    fitcountText.keyboardType=UIKeyboardTypeNumberPad;
+    priceText.keyboardType=UIKeyboardTypeNumberPad;
+    
 }
 
 -(void)loaddata
@@ -72,12 +79,12 @@
             self.zhengmianview.image=[UIImage imageWithContentsOfFile:pic1];
         }
         
-        if (![pic2 isEqualToString:@""]) {
-            self.cemianview.image=[UIImage imageWithContentsOfFile:pic2];
+        if (![pic3 isEqualToString:@""]) {
+            self.cemianview.image=[UIImage imageWithContentsOfFile:pic3];
         }
         
-        if (![pic3 isEqualToString:@""]) {
-            self.fanmianview.image=[UIImage imageWithContentsOfFile:pic3];
+        if (![pic2 isEqualToString:@""]) {
+            self.fanmianview.image=[UIImage imageWithContentsOfFile:pic2];
         }
         
         if ([self isnull:goods.Pro_name]) {

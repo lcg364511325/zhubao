@@ -23,6 +23,7 @@
     UIView *demoView;
     UIView *hiview;
     buyproduct *selectgoods;
+    buyproduct *entity1;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *goodsview;
