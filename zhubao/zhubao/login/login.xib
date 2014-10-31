@@ -9,7 +9,6 @@
             <connections>
                 <outlet property="account" destination="50C-IR-ifK" id="SCj-XU-xgu"/>
                 <outlet property="anoText" destination="v1t-a4-v7U" id="ax9-a8-Rry"/>
-                <outlet property="anolable" destination="Zhg-cX-HFI" id="F4P-BM-ne9"/>
                 <outlet property="anopic" destination="YpR-Il-ull" id="lPl-Ed-yvc"/>
                 <outlet property="loginbgimg" destination="fRG-3L-7cp" id="sK2-3s-WbU"/>
                 <outlet property="logoshengyu" destination="GFm-dN-LRw" id="uK0-F0-Yqa"/>
@@ -36,6 +35,10 @@
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoshengyu.png" id="GFm-dN-LRw">
                             <rect key="frame" x="337" y="151" width="350" height="96"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xympic.png" id="YpR-Il-ull">
+                            <rect key="frame" x="284" y="501" width="31" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" background="user_bg.png" id="50C-IR-ifK">
@@ -85,17 +88,6 @@
                             <color key="textColor" red="0.5468560062713721" green="0.94986942998603341" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="授权码：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zhg-cX-HFI">
-                            <rect key="frame" x="276" y="474" width="69" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xympic.png" id="YpR-Il-ull">
-                            <rect key="frame" x="284" y="501" width="31" height="33"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
                     </subviews>
                 </scrollView>
             </subviews>
