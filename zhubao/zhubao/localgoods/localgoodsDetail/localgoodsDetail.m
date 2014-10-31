@@ -282,6 +282,10 @@
     entity.pname=goods.Pro_name;
     entity.pro_model=goods.Pro_model;
     entity.pcount=@"1";
+    entity.Dia_Z_count=goods.Pro_Z_count;
+    entity.Dia_Z_weight=goods.Pro_Z_weight;
+    entity.Dia_F_count=goods.Pro_f_count;
+    entity.Dia_F_weight=goods.Pro_f_weight;
     NSString *pic1=goods.Pro_smallpic;
     NSArray *fullth=[goods.Pro_bigpic componentsSeparatedByString:@","];
     if (![pic1 isEqualToString:@""]) {

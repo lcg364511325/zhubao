@@ -97,8 +97,17 @@
     }
     orderdetail *entity=[list objectAtIndex:[indexPath row]];
     //cell.typeLabel.text=[NSString stringWithFormat:@"类型:%@",entity.goldType];
-    cell.modelLabel.text=[NSString stringWithFormat:@"型号:%@",entity.Pro_model];
-    cell.priceLabel.text=[NSString stringWithFormat:@"价格:%@",entity.Pro_price];
+    cell.modelLabel.text=[NSString stringWithFormat:@"型号：%@ 约重：%@ 价格：%@",entity.Pro_model,entity.goldWeight,entity.Pro_price];
+    
+    if (![entity.Dia_Z_count isEqualToString:@""]) {
+        cell.typeLabel.text=[NSString stringWithFormat:@"主石：%@颗 %@ct",entity.Dia_Z_count,entity.Dia_Z_weight];
+    }
+    
+    if (![entity.Dia_F_count isEqualToString:@""]) {
+        cell.priceLabel.text=[NSString stringWithFormat:@"副石：%@颗 %@ct",entity.Dia_F_count,entity.Dia_F_weight];
+    }
+    
+    
     cell.logoimg.image=[[UIImage alloc] initWithContentsOfFile:entity.logopic];
     
     return cell;
